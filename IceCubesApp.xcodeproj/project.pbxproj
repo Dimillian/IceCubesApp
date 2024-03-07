@@ -101,6 +101,10 @@
 		9FFF677C299B7B2C00FE700A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677B299B7B2C00FE700A /* Notifications */; };
 		9FFF6780299B7D2B00FE700A /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677F299B7D2B00FE700A /* DesignSystem */; };
 		9FFF6782299B7D3A00FE700A /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF6781299B7D3A00FE700A /* Account */; };
+		B039C36D2B8CE14E00DEDCED /* RSParser in Frameworks */ = {isa = PBXBuildFile; productRef = B039C36C2B8CE14E00DEDCED /* RSParser */; };
+		B039C3702B8CE4DE00DEDCED /* RSParser in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B039C36C2B8CE14E00DEDCED /* RSParser */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B039C37D2B935E3100DEDCED /* RSS in Frameworks */ = {isa = PBXBuildFile; productRef = B039C37C2B935E3100DEDCED /* RSS */; };
+		B0BAE1CA2B9720FC005432FF /* RSSTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0BAE1C92B9720FC005432FF /* RSSTab.swift */; };
 		C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */; };
 		D08A9C3529956CFA00204A4A /* SwipeActionsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9C3429956CFA00204A4A /* SwipeActionsSettingsView.swift */; };
 		DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */; };
@@ -151,6 +155,17 @@
 				9FAD859229743F7400496AB1 /* IceCubesShareExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B039C3712B8CE4DE00DEDCED /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B039C3702B8CE4DE00DEDCED /* RSParser in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -243,7 +258,9 @@
 		9FE0346A2ADD59AC00529EA8 /* MediaUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MediaUI; path = Packages/MediaUI; sourceTree = "<group>"; };
 		9FE151A5293C90F900E9683D /* IconSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconSelectorView.swift; sourceTree = "<group>"; };
 		9FE3DB55296FEF5800628CB0 /* AppAccount */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppAccount; path = Packages/AppAccount; sourceTree = "<group>"; };
+		B039C37B2B935CBF00DEDCED /* RSS */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = RSS; path = Packages/RSS; sourceTree = "<group>"; };
 		B0BAB49E29B3D7A9008F54D7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		B0BAE1C92B9720FC005432FF /* RSSTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSTab.swift; sourceTree = "<group>"; };
 		C4CBB90B298A0DA3007E1707 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C4FBCF6F298FD88A0015DF22 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSettingsView.swift; sourceTree = "<group>"; };
@@ -307,10 +324,12 @@
 				9F7335EA2966B3F800AFF0BA /* Conversations in Frameworks */,
 				9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */,
 				9F398AA92935FFDB00A889F2 /* Account in Frameworks */,
+				B039C36D2B8CE14E00DEDCED /* RSParser in Frameworks */,
 				9FBFE64E292A72BD00C250E9 /* Network in Frameworks */,
 				9FD542E72962D2FF0045321A /* Lists in Frameworks */,
 				9F398AAB2935FFDB00A889F2 /* Models in Frameworks */,
 				9F5E581929545BE700A53960 /* Env in Frameworks */,
+				B039C37D2B935E3100DEDCED /* RSS in Frameworks */,
 				9F2A540A29699705009B2D7C /* ReceiptParser in Frameworks */,
 				DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */,
 				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
@@ -424,6 +443,7 @@
 		9FAE4AC9293783A200772766 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				B0BAE1C92B9720FC005432FF /* RSSTab.swift */,
 				9F0811402B14869F0020F85E /* TagGroup */,
 				9F7335F02967607A00AFF0BA /* Timeline */,
 				9FE151A4293C90EA00E9683D /* Settings */,
@@ -468,6 +488,7 @@
 				9F55C68E295598F900F94077 /* Explore */,
 				9F5E581729545B5500A53960 /* Env */,
 				9F398AA32935F90100A889F2 /* Models */,
+				B039C37B2B935CBF00DEDCED /* RSS */,
 				9FC2A3892B49D10000DFD1C1 /* StatusKit */,
 				9FE0346A2ADD59AC00529EA8 /* MediaUI */,
 				9F29553D292B67B600E0E81B /* Network */,
@@ -624,6 +645,7 @@
 				9FBFE636292A715500C250E9 /* Frameworks */,
 				9FBFE637292A715500C250E9 /* Resources */,
 				9F2A5421296AB631009B2D7C /* Embed Foundation Extensions */,
+				B039C3712B8CE4DE00DEDCED /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -650,6 +672,8 @@
 				DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */,
 				9FC2A38A2B49D19A00DFD1C1 /* StatusKit */,
 				9FE4CCAA2B4C848A00DA5F13 /* GiphyUISDK */,
+				B039C36C2B8CE14E00DEDCED /* RSParser */,
+				B039C37C2B935E3100DEDCED /* RSS */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* Ice Cubes.app */;
@@ -731,6 +755,7 @@
 				9F2A540829699705009B2D7C /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				9FE4CCA92B4C848A00DA5F13 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */,
+				B039C36B2B8CE14E00DEDCED /* XCRemoteSwiftPackageReference "RSParser" */,
 			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
@@ -843,6 +868,7 @@
 				9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */,
 				9F398AA62935FE8A00A889F2 /* AppRegistry.swift in Sources */,
 				9F15D6002B3D6A850008C220 /* NavigationTab.swift in Sources */,
+				B0BAE1CA2B9720FC005432FF /* RSSTab.swift in Sources */,
 				9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */,
 				9F4A48192976B21900A1A038 /* ProfileTab.swift in Sources */,
 				9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */,
@@ -1123,6 +1149,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = "";
 			};
 			name = Debug;
 		};
@@ -1182,6 +1209,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = "";
 			};
 			name = Release;
 		};
@@ -1439,6 +1467,14 @@
 				minimumVersion = 2.2.7;
 			};
 		};
+		B039C36B2B8CE14E00DEDCED /* XCRemoteSwiftPackageReference "RSParser" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Ranchero-Software/RSParser";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
 		DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
@@ -1580,6 +1616,15 @@
 		9FFF6781299B7D3A00FE700A /* Account */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Account;
+		};
+		B039C36C2B8CE14E00DEDCED /* RSParser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B039C36B2B8CE14E00DEDCED /* XCRemoteSwiftPackageReference "RSParser" */;
+			productName = RSParser;
+		};
+		B039C37C2B935E3100DEDCED /* RSS */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RSS;
 		};
 		DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */ = {
 			isa = XCSwiftPackageProductDependency;

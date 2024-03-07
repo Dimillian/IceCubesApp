@@ -82,6 +82,15 @@
       }
     },
     {
+      "identity" : "rsparser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Ranchero-Software/RSParser",
+      "state" : {
+        "revision" : "d5b50ff78905ebfaf26dd698e0e5d3ed8269dd9b",
+        "version" : "2.0.3"
+      }
+    },
+    {
       "identity" : "sfsafesymbols",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SFSafeSymbols/SFSafeSymbols",

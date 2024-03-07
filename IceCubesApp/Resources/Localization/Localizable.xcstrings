@@ -38978,6 +38978,15 @@
         }
       }
     },
+    "rss.item.url.unavailable" : {
+
+    },
+    "rss.item.url.unavailable.action.OK" : {
+
+    },
+    "rss.item.url.unavailable.message" : {
+
+    },
     "see-more" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -74098,6 +74107,9 @@
           }
         }
       }
+    },
+    "tab.rss" : {
+
     },
     "tab.settings" : {
       "localizations" : {

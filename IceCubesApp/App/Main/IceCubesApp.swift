@@ -10,6 +10,7 @@ import RevenueCat
 import StatusKit
 import SwiftUI
 import Timeline
+import RSS
 
 @main
 struct IceCubesApp: App {
@@ -34,7 +35,9 @@ struct IceCubesApp: App {
 
   var body: some Scene {
     appScene
+      .environment(\.managedObjectContext, RSSDataController.shared.container.viewContext)
     otherScenes
+      .environment(\.managedObjectContext, RSSDataController.shared.container.viewContext)
   }
 
   func setNewClientsInEnv(client: Client) {

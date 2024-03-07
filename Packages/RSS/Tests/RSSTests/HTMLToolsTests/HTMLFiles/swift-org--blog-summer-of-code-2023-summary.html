@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Swift.org - Swift Summer of Code 2023 Summary</title>
+  
+  <meta name="author" content="Apple Inc." />
+  <meta name="viewport" content="width=device-width initial-scale=1" />
+  
+  <meta name="description" content="The Swift project regularly participates in Google Summer of Code in order to help people new to the open source ecosystem dip their toes in contributing to Swift and its growing ecosystem.
+">
+  
+  <link rel="license" href="/LICENSE.txt" />
+  <link rel="stylesheet" media="all" href="/assets/stylesheets/application.css" />
+  <link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48 64x64" type="image/vnd.microsoft.icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png" />
+  <link rel="mask-icon" href="/assets/images/icon-swift.svg" color="#F05339" />
+  
+
+  
+  <link rel="canonical" href="https://swift.org/blog/summer-of-code-2023-summary/" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@SwiftLang" />
+  
+  <meta name="twitter:title" content="Swift Summer of Code 2023 Summary" />
+  <meta name="twitter:description" content="The Swift project regularly participates in Google Summer of Code in order to help people new to the open source ecosystem dip their toes in contributing to Swift and its growing ecosystem.
+" />
+  
+
+  <meta property="og:site_name" content="Swift.org" />
+  <meta property="og:image" content="https://swift.org/apple-touch-icon-180x180.png" />
+  
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Swift Summer of Code 2023 Summary" />
+  <meta property="og:url" content="https://swift.org/blog/summer-of-code-2023-summary/" />
+  <meta property="og:description" content="The Swift project regularly participates in Google Summer of Code in order to help people new to the open source ecosystem dip their toes in contributing to Swift and its growing ecosystem.
+" />
+  <meta property="article:published_time" content="2024-02-13T06:00:00-04:00" />
+  <meta property="article:modified_time" content="2024-03-02T07:00:07-04:00" />
+  
+</head>
+
+<body>
+
+<script src="/assets/javascripts/color-scheme-toggle.js"></script>
+<header class="site-navigation">
+  <div class="wrapper">
+    <h1 id="logo">
+      <a href="/" title="Swift.org">
+        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 191.186 59.391"><path fill="#F05138" d="M59.387 16.45a82.463 82.463 0 0 0-.027-1.792c-.035-1.301-.112-2.614-.343-3.9-.234-1.307-.618-2.523-1.222-3.71a12.464 12.464 0 0 0-5.453-5.452C51.156.992 49.941.609 48.635.374c-1.288-.232-2.6-.308-3.902-.343a85.714 85.714 0 0 0-1.792-.027C42.23 0 41.52 0 40.813 0H18.578c-.71 0-1.419 0-2.128.004-.597.004-1.195.01-1.792.027-.325.009-.651.02-.978.036-.978.047-1.959.133-2.924.307-.98.176-1.908.436-2.811.81A12.503 12.503 0 0 0 3.89 3.89a12.46 12.46 0 0 0-2.294 3.158C.992 8.235.61 9.45.374 10.758c-.231 1.286-.308 2.599-.343 3.9a85.767 85.767 0 0 0-.027 1.792C-.001 17.16 0 17.869 0 18.578v22.235c0 .71 0 1.418.004 2.128.004.597.01 1.194.027 1.791.035 1.302.112 2.615.343 3.901.235 1.307.618 2.523 1.222 3.71a12.457 12.457 0 0 0 5.453 5.453c1.186.603 2.401.986 3.707 1.22 1.287.232 2.6.31 3.902.344.597.016 1.195.023 1.793.027.709.005 1.417.004 2.127.004h22.235c.709 0 1.418 0 2.128-.004.597-.004 1.194-.011 1.792-.027 1.302-.035 2.614-.112 3.902-.343 1.306-.235 2.521-.618 3.707-1.222a12.461 12.461 0 0 0 5.453-5.452c.604-1.187.987-2.403 1.222-3.71.231-1.286.308-2.6.343-3.9.016-.598.023-1.194.027-1.792.004-.71.004-1.419.004-2.129V18.578c0-.71 0-1.419-.004-2.128z"/><path fill="#FFF" d="m47.06 36.66-.004-.004c.066-.224.134-.446.191-.675 2.465-9.821-3.55-21.432-13.731-27.546 4.461 6.048 6.434 13.374 4.681 19.78-.156.571-.344 1.12-.552 1.653-.225-.148-.51-.316-.89-.527 0 0-10.127-6.252-21.103-17.312-.288-.29 5.852 8.777 12.822 16.14-3.284-1.843-12.434-8.5-18.227-13.802.712 1.187 1.558 2.33 2.489 3.43C17.573 23.932 23.882 31.5 31.44 37.314c-5.31 3.25-12.814 3.502-20.285.003a30.646 30.646 0 0 1-5.193-3.098c3.162 5.058 8.033 9.423 13.96 11.97 7.07 3.039 14.1 2.833 19.336.05l-.004.007c.024-.016.055-.032.08-.047.214-.116.428-.234.636-.358 2.516-1.306 7.485-2.63 10.152 2.559.654 1.27 2.041-5.46-3.061-11.74z"/><path id="logotype" d="M81.93 38.542c.465 4.12 4.394 6.822 9.852 6.822 5.185 0 8.924-2.701 8.924-6.44 0-3.22-2.265-5.185-7.478-6.495l-5.048-1.282c-7.26-1.801-10.534-5.077-10.534-10.48 0-6.658 5.813-11.27 14.082-11.27 8.022 0 13.726 4.639 13.917 11.325h-5.32c-.41-4.093-3.74-6.604-8.734-6.604-4.94 0-8.378 2.538-8.378 6.249 0 2.892 2.13 4.612 7.369 5.95l4.202 1.09c8.133 1.993 11.462 5.159 11.462 10.863 0 7.259-5.759 11.816-14.928 11.816-8.514 0-14.327-4.53-14.763-11.543h5.376zM140.049 49.43h-5.35l-6.249-21.776h-.109L122.12 49.43h-5.348l-7.914-28.518h5.184l5.513 22.896h.11l6.221-22.896h5.021l6.277 22.896h.11l5.512-22.896h5.13L140.05 49.43zM151.39 13.244c0-1.718 1.419-3.11 3.138-3.11 1.746 0 3.165 1.392 3.165 3.11 0 1.72-1.419 3.139-3.165 3.139a3.157 3.157 0 0 1-3.139-3.139zm.545 7.669h5.213V49.43h-5.213V20.913zM191.186 25.116v-4.204h-5.513v-6.821h-5.185v6.821h-9.964v-2.51c.027-2.538 1.01-3.603 3.357-3.603.764 0 1.528.083 2.156.192v-4.094a18.193 18.193 0 0 0-2.756-.218c-5.568 0-7.915 2.32-7.915 7.642v2.591h-3.983v4.204h3.983V49.43h5.185V25.116H180.488v16.838c0 5.512 2.101 7.64 7.559 7.64 1.174 0 2.51-.082 3.111-.218v-4.257c-.355.055-1.392.137-1.965.137-2.428 0-3.52-1.147-3.52-3.712V25.116h5.513z"/></svg>
+
+      </a>
+    </h1>
+
+    <nav role="navigation">
+      <ul class="navigation-links">
+        
+          <li class="nav-item">
+            <span>
+              
+                <a href="/getting-started/">Get Started</a>
+              
+              
+            </span>
+            
+          </li>
+        
+          <li class="nav-item">
+            <span>
+              
+                <a href="/blog/">Blog</a>
+              
+              
+            </span>
+            
+          </li>
+        
+          <li class="nav-item">
+            <span>
+              
+                <a href="/documentation/">Documentation</a>
+              
+              
+            </span>
+            
+          </li>
+        
+          <li class="nav-item">
+            <span>
+              
+                <a href="/packages/">Packages</a>
+              
+              
+            </span>
+            
+          </li>
+        
+          <li class="nav-item">
+            <span>
+              
+                <a href="/community/">Community</a>
+              
+              
+                <i>&#9663;</i>
+              
+            </span>
+            
+              <ul class="nav-submenu" role="menu">
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/community/" role="menuitem">Overview</a>
+                    </li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/swift-evolution/" role="menuitem">Swift Evolution</a>
+                    </li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/diversity/" role="menuitem">Diversity</a>
+                    </li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/mentorship/" role="menuitem">Mentorship</a>
+                    </li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/contributing/" role="menuitem">Contributing</a>
+                    </li>
+                  
+                
+                  
+                  <li class="nav-section">Workgroups</li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/contributor-experience-workgroup/" role="menuitem">Contributor Experience</a>
+                    </li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/sswg/" role="menuitem">Server</a>
+                    </li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/website/" role="menuitem">Website</a>
+                    </li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/language-steering-group/" role="menuitem">Language Steering Group</a>
+                    </li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/cxx-interop-workgroup/" role="menuitem">C++ Interoperability</a>
+                    </li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/documentation-workgroup/" role="menuitem">Documentation</a>
+                    </li>
+                  
+                
+                  
+                  <li class="nav-section">Governance</li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/code-of-conduct/" role="menuitem">Code of Conduct</a>
+                    </li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/legal/license.html" role="menuitem">License</a>
+                    </li>
+                  
+                
+                  
+                    
+                    <li role="presentation">
+                    
+                      <a href="/support/security.html" role="menuitem">Security</a>
+                    </li>
+                  
+                
+              </ul>
+            
+          </li>
+        
+
+        <li class="cta">
+          <a href="/install">Download</span></a>
+        </li>
+      </ul>
+      <button id="menu-toggle" class="menu-item menu-toggle open" aria-expanded="false" aria-label="Toggle Navigation Menu"></button>
+    </nav>
+  </div>
+
+  <nav class="mobile-navigation" role="navigation">
+    <ul class="mobile-navigation-links">
+      
+        <li class="nav-item">
+          <div class="link-container">
+            
+              <a href="/getting-started/">Get Started</a>
+              
+            
+            
+          </div>
+          
+        </li>
+      
+        <li class="nav-item">
+          <div class="link-container">
+            
+              <a href="/blog/">Blog</a>
+              
+            
+            
+          </div>
+          
+        </li>
+      
+        <li class="nav-item">
+          <div class="link-container">
+            
+              <a href="/documentation/">Documentation</a>
+              
+            
+            
+          </div>
+          
+        </li>
+      
+        <li class="nav-item">
+          <div class="link-container">
+            
+              <a href="/packages/">Packages</a>
+              
+            
+            
+          </div>
+          
+        </li>
+      
+        <li class="nav-item">
+          <div class="link-container">
+            
+              <a href="/community/">Community</a>
+              
+            
+            
+              <button class="section-toggle" aria-expanded="false" aria-label="Toggle Community Section">
+                &#9663;
+              </button>
+            
+          </div>
+          
+            <ul class="section-menu">
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/community/">Overview</a>
+                  </li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/swift-evolution/">Swift Evolution</a>
+                  </li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/diversity/">Diversity</a>
+                  </li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/mentorship/">Mentorship</a>
+                  </li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/contributing/">Contributing</a>
+                  </li>
+                
+              
+                
+                  <li class="nav-section">Workgroups</li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/contributor-experience-workgroup/">Contributor Experience</a>
+                  </li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/sswg/">Server</a>
+                  </li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/website/">Website</a>
+                  </li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/language-steering-group/">Language Steering Group</a>
+                  </li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/cxx-interop-workgroup/">C++ Interoperability</a>
+                  </li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/documentation-workgroup/">Documentation</a>
+                  </li>
+                
+              
+                
+                  <li class="nav-section">Governance</li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/code-of-conduct/">Code of Conduct</a>
+                  </li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/legal/license.html">License</a>
+                  </li>
+                
+              
+                
+                  
+                    <li>
+                  
+                    <a href="/support/security.html">Security</a>
+                  </li>
+                
+              
+            </ul>
+          
+        </li>
+      
+
+      <li class="cta">
+        <a href="/install">Download <span>5.9.2</span></a>
+      </li>
+    </ul>
+  </nav>
+ </header>
+
+<main role="main">
+<article class="post">
+  <header>
+    <h1>Swift Summer of Code 2023 Summary</h1>
+
+    <time pubdate datetime="2024-02-13T06:00:00-04:00">February 13, 2024</time>
+    <div class="authors">
+  
+    
+    
+      <div class="byline">
+        
+          <img src="https://www.gravatar.com/avatar/03cb20b97f6a14701c24c4e088b6af87?s=64&d=mp" alt="Konrad ‘ktoso’ Malawski"/>
+        
+        <span class="author">
+          
+            <a href="https://github.com/ktoso/" rel="nofollow" title="Konrad ‘ktoso’ Malawski (@ktoso) on GitHub">Konrad ‘ktoso’ Malawski</a>
+          
+        </span>
+      </div>
+      
+      
+        <div class="about">Konrad Malawski is a member of a team developing foundational server-side Swift libraries at Apple, with focus on distributed systems and concurrency.</div>
+      
+    
+  
+    
+    
+      <div class="byline">
+        
+          <img src="https://www.gravatar.com/avatar/3b34dbe9f3870b0e9bf1f4cb0750fa3d?s=64&d=mp" alt="Franz Busch"/>
+        
+        <span class="author">
+          
+            <a href="https://github.com/FranzBusch/" rel="nofollow" title="Franz Busch (@FranzBusch) on GitHub">Franz Busch</a>
+          
+        </span>
+      </div>
+      
+      
+        <div class="about">Franz Busch is a member of a team developing foundational server-side Swift libraries at Apple, and is a member of the SSWG.</div>
+      
+    
+  
+    
+    
+      <div class="byline">
+        
+          <img src="https://www.github.com/ahoppen.png?size=64" alt="Alex Hoppen"/>
+        
+        <span class="author">
+          
+            <a href="https://github.com/ahoppen/" rel="nofollow" title="Alex Hoppen (@ahoppen) on GitHub">Alex Hoppen</a>
+          
+        </span>
+      </div>
+      
+      
+        <div class="about">Alex Hoppen works on the Swift team at Apple, focusing on parsing-related technologies like SourceKit, swift-syntax and code completion.</div>
+      
+    
+  
+    
+    
+      <div class="byline">
+        
+          <img src="https://www.github.com/xedin.png?size=64" alt="Pavel Yaskevich"/>
+        
+        <span class="author">
+          
+            <a href="https://github.com/xedin/" rel="nofollow" title="Pavel Yaskevich (@xedin) on GitHub">Pavel Yaskevich</a>
+          
+        </span>
+      </div>
+      
+      
+        <div class="about">Pavel Yaskevich works on the Swift team at Apple, focusing on semantic analysis.</div>
+      
+    
+  
+</div>
+  </header>
+
+  <p>The Swift project regularly participates in <a href="https://summerofcode.withgoogle.com">Google Summer of Code</a> in order to help people new to the open source ecosystem dip their toes in contributing to Swift and its growing ecosystem.</p>
+
+<p>During the 2023 edition of the program, we ran three projects, all of which completed their assigned projects successfully.</p>
+
+<p>The projects in this edition were:</p>
+
+<ul>
+  <li>Swift Memcache Library</li>
+  <li>Incremental Parsing in SwiftParser</li>
+  <li>Key Path Inference and Diagnostic Improvements</li>
+</ul>
+
+<p>We’d like to extend our sincere thanks to the participants and mentors who poured their time and passion into these projects, and use this post to highlight their work to the wider community. Below, each project is described in a small summary.</p>
+
+<p>Let’s take a look at each project, in the words of the mentees and mentors themselves:</p>
+
+<h3 id="swift-memcache">Swift Memcache</h3>
+
+<ul>
+  <li>Mentee: <a href="https://github.com/dkz2">Delkhaz Ibrahimi</a></li>
+  <li>Mentor: <a href="https://github.com/FranzBusch">Franz Busch</a></li>
+</ul>
+
+<p>The goal of the project was to develop a native <a href="https://memcached.org">Memcached</a> connection abstraction for the Swift on Server ecosystem. This connection was implemented using <code class="language-plaintext highlighter-rouge">SwiftNIO,</code> offers native Swift Concurrency APIs and integrates well with the rest of the server ecosystem. The benefit of using Swift Concurrency for building such client is that it can make use of <a href="https://developer.apple.com/videos/play/wwdc2023/10170/">structured concurrency</a> which brings cancellation, executor awareness, and simple integration with <a href="https://github.com/apple/swift-distributed-tracing">distributed tracing</a> in the future.</p>
+
+<p>The focus during the project was implementing the Memcache <a href="https://github.com/memcached/memcached/wiki/MetaCommands">meta command protocol</a> and offering basic <code class="language-plaintext highlighter-rouge">get</code> and <code class="language-plaintext highlighter-rouge">set</code> functionalities.</p>
+
+<p>Below is a short example how the new <code class="language-plaintext highlighter-rouge">MemcacheConnection</code> type can be used to <code class="language-plaintext highlighter-rouge">set</code> and <code class="language-plaintext highlighter-rouge">get</code> a value for a given key:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Instantiate a new MemcacheConnection with host, port, and event loop group</span>
+<span class="k">let</span> <span class="nv">memcacheConnection</span> <span class="o">=</span> <span class="kt">MemcacheConnection</span><span class="p">(</span><span class="nv">host</span><span class="p">:</span> <span class="s">"127.0.0.1"</span><span class="p">,</span> <span class="nv">port</span><span class="p">:</span> <span class="mi">11211</span><span class="p">,</span> <span class="nv">eventLoopGroup</span><span class="p">:</span> <span class="o">.</span><span class="n">singleton</span><span class="p">)</span>
+
+<span class="c1">// Initialize the service group</span>
+<span class="k">let</span> <span class="nv">serviceGroup</span> <span class="o">=</span> <span class="kt">ServiceGroup</span><span class="p">(</span><span class="nv">services</span><span class="p">:</span> <span class="p">[</span><span class="n">memcacheConnection</span><span class="p">],</span> <span class="nv">logger</span><span class="p">:</span> <span class="n">logger</span><span class="p">)</span>
+
+<span class="k">try</span> <span class="k">await</span> <span class="nf">withThrowingTaskGroup</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="kt">Void</span><span class="o">.</span><span class="k">self</span><span class="p">)</span> <span class="p">{</span> <span class="n">group</span> <span class="k">in</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">addTask</span> <span class="p">{</span> <span class="k">try</span> <span class="k">await</span> <span class="n">serviceGroup</span><span class="o">.</span><span class="nf">run</span><span class="p">()</span> <span class="p">}</span>
+    
+    <span class="c1">// Set a value for a key.</span>
+    <span class="k">let</span> <span class="nv">setValue</span> <span class="o">=</span> <span class="s">"bar"</span>
+    <span class="k">try</span> <span class="k">await</span> <span class="n">memcacheConnection</span><span class="o">.</span><span class="nf">set</span><span class="p">(</span><span class="s">"foo"</span><span class="p">,</span> <span class="nv">value</span><span class="p">:</span> <span class="n">setValue</span><span class="p">)</span>
+    
+    <span class="c1">// Get the value for a key.</span>
+    <span class="c1">// Specify the expected type for the value returned from Memcache.</span>
+    <span class="k">let</span> <span class="nv">getValue</span> <span class="o">=</span> <span class="k">try</span> <span class="k">await</span> <span class="n">memcacheConnection</span><span class="o">.</span><span class="nf">get</span><span class="p">(</span><span class="s">"foo"</span><span class="p">,</span> <span class="nv">as</span><span class="p">:</span> <span class="kt">String</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>After finishing the foundational work to implement the <code class="language-plaintext highlighter-rouge">get</code> and <code class="language-plaintext highlighter-rouge">set</code> commands, support for <code class="language-plaintext highlighter-rouge">delete</code>, <code class="language-plaintext highlighter-rouge">append</code>, <code class="language-plaintext highlighter-rouge">prepend</code>, <code class="language-plaintext highlighter-rouge">increment</code> and <code class="language-plaintext highlighter-rouge">decrement</code> was added. Lastly, support for checking and updating the time-to-live for keys was added.</p>
+
+<p>The new <code class="language-plaintext highlighter-rouge">MemcacheConnection</code> type lays the ground work to implement a higher-level <code class="language-plaintext highlighter-rouge">MemcacheClient</code> that offers additional functionality such as connection pooling, retries, key distribution across nodes and more. However, implementing such a client was out of scope for this year’s GSoC project.</p>
+
+<p>If you’d like to learn more about this project and Delkhaz’s experience, see <a href="https://forums.swift.org/t/gsoc-2023-swift-memcache-gsoc-project-kickoff/64932">this thread</a> on the Swift forums.</p>
+
+<h3 id="implement-incremental-re-parsing-in-swiftparser">Implement Incremental Re-Parsing in SwiftParser</h3>
+
+<ul>
+  <li>Mentee: <a href="https://github.com/StevenWong12">Ziyang Huang</a></li>
+  <li>Mentor: <a href="https://github.com/ahoppen">Alex Hoppen</a></li>
+</ul>
+
+<p>This project aimed to improve the performance of the <a href="https://github.com/apple/swift-syntax/tree/main/Sources/SwiftParser">SwiftParser</a> for scenarios like editor syntax highlighting, where minor edits are applied to the file. By adding incremental parsing and re-using parts of the syntax tree that remain unchanged, large performance improvements can be made.</p>
+
+<p>The most challenging part of this project was to make sure we parse the source files correctly. Considering the code snippet below:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">foo</span><span class="p">()</span> <span class="p">{}</span>
+<span class="nv">someLabel</span><span class="p">:</span> <span class="k">switch</span> <span class="n">x</span> <span class="p">{</span>
+    <span class="k">default</span><span class="p">:</span> <span class="k">break</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This source is parsed as a <code class="language-plaintext highlighter-rouge">FunctionCallExprSyntax</code> and a <code class="language-plaintext highlighter-rouge">LabeledStmtSyntax</code>. When we remove the “<code class="language-plaintext highlighter-rouge">switch x</code>” part of this code, a naïve implementation could reuse <code class="language-plaintext highlighter-rouge">foo() {}</code> as a function call since the edit didn’t touch it. But this is not correct since the <code class="language-plaintext highlighter-rouge">someLabel</code> block now became a labeled trailing closure of <code class="language-plaintext highlighter-rouge">foo() {}</code>.</p>
+
+<p>To solve this problem, we collect some additional information for every syntax node during the initial parse to mark the potentially affected range for each node. That information is used to correctly re-parse the <code class="language-plaintext highlighter-rouge">foo()</code> function call and include <code class="language-plaintext highlighter-rouge">someLabel</code> as a labeled trailing closure in the call.</p>
+
+<p>The implementation speeds up parsing by about <strong>10x</strong> when we parse source incrementally while <strong>only incurring a 2~3% of performance loss</strong> during normal parsing.</p>
+
+<p>If you’d like to read more about this project and Ziyang’s experience in his own words, head over to <a href="https://forums.swift.org/t/gsoc-2023-my-gsoc-experience/67340">his GSoC experience post</a> on the Swift forums.</p>
+
+<h3 id="key-path-inference-and-diagnostic-improvements">Key Path Inference and Diagnostic Improvements</h3>
+
+<ul>
+  <li>Mentee: <a href="https://github.com/amritpan">Amritpan Kaur</a></li>
+  <li>Mentor: <a href="https://github.com/xedin?tab=repositories">Pavel Yaskevich</a></li>
+</ul>
+
+<p>This project was focused on performance and diagnostic improvements to type-checking of key path literal expressions as well as improvements to new features such as keypaths-as-functions introduced to the language by <a href="https://github.com/apple/swift-evolution/blob/main/proposals/0249-key-path-literal-function-expressions.md">SE-0249</a>.</p>
+
+<p>During compilation, the key path expression root and value were type-checked sequentially to resolve a key path type from this context. However, the design of the type-checker’s evaluation of key path component types, their relationships to each other, and key path capabilities results in hard to understand compiler errors and even failures to type-check some valid Swift code.</p>
+
+<p>Some of the problems with this approach can be illustrated by the following code example:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">struct</span> <span class="kt">User</span> <span class="p">{</span>
+  <span class="k">var</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">Name</span>
+<span class="p">}</span>
+<span class="kd">struct</span> <span class="kt">Name</span> <span class="p">{</span>
+  <span class="k">let</span> <span class="nv">firstName</span><span class="p">:</span> <span class="kt">String</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">test</span><span class="p">(</span><span class="nv">_</span><span class="p">:</span> <span class="kt">WritableKeyPath</span><span class="o">&lt;</span><span class="kt">User</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="nf">test</span><span class="p">(\</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">firstName</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The compiler produces the following error:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">error</span><span class="p">:</span> <span class="n">key</span> <span class="n">path</span> <span class="n">value</span> <span class="n">type</span> <span class="err">'</span><span class="kt">WritableKeyPath</span><span class="o">&lt;</span><span class="kt">User</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span><span class="err">'</span> <span class="n">cannot</span> <span class="n">be</span> <span class="n">converted</span> <span class="n">to</span> <span class="n">contextual</span> <span class="n">type</span> <span class="err">'</span><span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">User</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span><span class="err">'</span>
+<span class="nf">test</span><span class="p">(\</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">firstName</span><span class="p">)</span>
+     <span class="o">^</span>
+</code></pre></div></div>
+
+<p>There are multiple issues with this error diagnostic: contextual type is actually <code class="language-plaintext highlighter-rouge">WritableKeyPath</code>  and key path should be inferred as read-only, the source information is lost and the compiler is unenable to point out a problem with an argument to a call to the function <code class="language-plaintext highlighter-rouge">test</code>.</p>
+
+<p>To address these and other issues, we explored a different design for key path literal expression type-checking: infer the root type of the key path first and propagate that information to the components and infer capability based on the components before setting the type for the key path expression. This made it a lot easier to diagnose contextual type failures and support previously failing conversions. This approach improves the performance as well because the literal is resolved only if the context expects a key path and root type is either provided by the developer explicitly or is able to be inferred from the context.</p>
+
+<p>With the new approach implemented the compiler now produces the following diagnostic:</p>
+
+<div class="language-swift highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">error</span><span class="p">:</span> <span class="n">cannot</span> <span class="n">convert</span> <span class="n">value</span> <span class="n">of</span> <span class="n">type</span> <span class="err">'</span><span class="kt">KeyPath</span><span class="o">&lt;</span><span class="kt">User</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span><span class="err">'</span> <span class="n">to</span> <span class="n">expected</span> <span class="n">argument</span> <span class="n">type</span> <span class="err">'</span><span class="kt">WritableKeyPath</span><span class="o">&lt;</span><span class="kt">User</span><span class="p">,</span> <span class="kt">String</span><span class="o">&gt;</span><span class="err">'</span>
+<span class="nf">test</span><span class="p">(\</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">firstName</span><span class="p">)</span>
+     <span class="o">^</span>
+</code></pre></div></div>
+
+<p>If you’d like to learn more about the details of this project, we recommend having a look at this excellent and <a href="https://forums.swift.org/t/key-path-inference-and-diagnostic-improvements-an-update/69632">very detailed writeup written by Amritpan</a> on the forums.</p>
+
+<h2 id="mentee-impressions">Mentee Impressions</h2>
+
+<p>It’s great to see what projects our GSoC participants accomplished this year! Even better though is seeing participants enjoy their time working with the Swift project, as a big part of Summer of Code is giving mentees (and mentors) a space to grow and learn about open source development.</p>
+
+<p>Here are a few impressions of the mentees about their experience:</p>
+
+<p><strong>Delkhaz (Swift Memcache):</strong></p>
+
+<blockquote>
+  <p>As we wrap up this technical update, it’s a bittersweet moment for me to share that my formal journey as a Google Summer of Code student has reached its conclusion, but what an incredible journey it’s been. This transformative experience has enriched my understanding of open source development and honed my skills as a developer. I want to extend a heartfelt thank you to everyone who has been a part of this adventure with me.</p>
+
+  <p>While this chapter may be closing, I’m thrilled to announce that I will remain actively involved in the project. I’m particularly excited about contributing toward taking this project to its v1 or production stage. So, this isn’t a goodbye; it’s just the beginning of a new chapter. Looking forward to staying in touch and continuing this journey with all of you.</p>
+
+  <p>Special thanks are in order for my mentor Franz, for his exceptional mentorship during my time in the program. His wisdom and insights in our weekly sessions have been nothing short of transformative for me as a developer. Whether it was navigating the complexities of open-source contributions or striving for the highest standards in our API development, Franz’s guidance has been indispensable. I’ve gained a multifaceted understanding of software development thanks to his continued support. I couldn’t have asked for a more impactful mentorship experience, and for that, I am deeply grateful.</p>
+</blockquote>
+
+<p><strong>Ziyang (Implement Incremental Re-Parsing in SwiftParser):</strong></p>
+
+<blockquote>
+  <p>After measurement, our implementation speed up parsing about 10 times when we parse source incrementally while only bring 2~3% of performance loss to normal parsing. 🎉 🎉</p>
+
+  <p>I also bring this feature to sourcekit-lsp and swift-stress-tester, it is really exciting to see my work can be actually put into use.</p>
+
+  <p>Special thanks to my mentor Alex for the quick response, detailed reviews and inspiring ideas.</p>
+</blockquote>
+
+<p><strong>Amritpan (Key Path inference and diagnostic improvements):</strong></p>
+
+<blockquote>
+  <p>I enjoyed working on this project this year, primarily because it was a challenge that allowed me to deepen my understanding of the solver implementation, utilize improvements I made last year to the debug output, and make more impactful changes to the compiler codebase.</p>
+
+  <p>Refactoring the debug output last year helped me understand how the various pieces of information that the type checker collected were then evaluated to assign types from context. Taking a look at key path expression type checking failures revealed some of the fallibilities of the constraint system and solver and how various design decision choices could solve certain issues while causing others.</p>
+
+</blockquote>
+
+<p>We hope this writeup inspires you to either apply to work with us or become a mentor on the Swift project in a future!</p>
+
+<p>We are always looking for ideas, mentors, and general input about how we can make Swift’s ecosystem more inclusive and easier to participate in. If you have some ideas, would like to become a mentor in future editions, or if you’re just curious about other project ideas that were floated during previous editions, visit the <a href="https://forums.swift.org/c/development/gsoc/98">dedicated GSoC category</a> on the Swift forums. You can also check out <a href="https://www.swift.org/blog/swift-summer-of-code-2022-summary/">last year’s GSoC summary blog post</a>, where we highlighted last year’s projects.</p>
+
+<p>If you’re interested in participating as a mentee, keep an eye on the official <a href="https://summerofcode.withgoogle.com/">GSoC schedule</a> and on the Swift forum’s <a href="https://forums.swift.org/c/development/gsoc/98">GSoC category</a>.</p>
+
+
+  
+  <footer>
+    <nav>
+      
+      <a href="/blog/swift-openapi-generator-1.0/" rel="prev" title="Previous: Swift OpenAPI Generator 1.0 Released">Swift OpenAPI Generator 1.0 Released</a>
+      
+
+      
+      <a href="/blog/mlx-swift/" rel="next" title="Next: On-device ML research with MLX and Swift">On-device ML research with MLX and Swift</a>
+      
+    </nav>
+  </footer>
+  
+</article>
+</main>
+
+
+
+<footer role="contentinfo">
+  <div class="footer-content">
+    
+  <p>Except where otherwise noted, all content on this blog is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International license</a>.</p>
+
+    <p class="copyright">Copyright © 2024 Apple Inc. All rights reserved.</p>
+    <p class="trademark">Swift and the Swift logo are trademarks of Apple Inc.</p>
+    <p class="privacy">
+      <a href="//www.apple.com/privacy/privacy-policy/">Privacy Policy</a>
+      <a href="//www.apple.com/legal/privacy/en-ww/cookies/">Cookies</a>
+    </p>
+  </div>
+  <div class="footer-other">
+    <form
+      class="color-scheme-toggle"
+      role="radiogroup"
+      tabindex="0"
+      id="color-scheme-toggle"
+    >
+      <legend class="visuallyhidden">Color scheme preference</legend>
+      <label for="scheme-light">
+        <input id="scheme-light" type="radio" name="color-scheme-preference" value="light">
+        <span class="color-scheme-toggle-label">Light</span>
+      </label>
+      <label for="scheme-dark">
+        <input id="scheme-dark" type="radio" name="color-scheme-preference" value="dark">
+        <span class="color-scheme-toggle-label">Dark</span>
+      </label>
+      <label for="scheme-auto" id="scheme-auto-wrapper">
+        <input id="scheme-auto" type="radio" name="color-scheme-preference" value="auto">
+        <span class="color-scheme-toggle-label">Auto</span>
+      </label>
+    </form>
+    <aside>
+      <a href="https://twitter.com/swiftlang" rel="nofollow" title="Follow @SwiftLang on Twitter"><i class="twitter"></i></a>
+      <a href="/atom.xml" title="Subscribe to Site Updates"><i class="feed"></i></a>
+    </aside>
+  </div>
+</footer>
+
+
+<script src="/assets/javascripts/application.js"></script>
+<!-- metrics -->
+<script>
+    /* RSID: */
+    var s_account="awdswiftorg"
+</script>
+
+<script src="https://developer.apple.com/assets/metrics/scripts/analytics.js"></script>
+<script>
+    s.pageName= AC && AC.Tracking && AC.Tracking.pageName();
+
+    /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+    var s_code=s.t();if(s_code)document.write(s_code)
+</script>
+
+<!-- /metrics -->
+</body>
+</html>

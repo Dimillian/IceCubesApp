@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23D60" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+    <entity name="RSSAuthor" representedClassName="RSSAuthor" syncable="YES" codeGenerationType="class">
+        <attribute name="avatarURL" optional="YES" attributeType="URI"/>
+        <attribute name="displayName" optional="YES" attributeType="String"/>
+        <attribute name="email" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="URI"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="URI"/>
+        <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RSSFeed" inverseName="authors" inverseEntity="RSSFeed"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RSSItem" inverseName="authors" inverseEntity="RSSItem"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="RSSFeed" representedClassName="RSSFeed" syncable="YES" codeGenerationType="class">
+        <attribute name="expired" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="faviconURL" optional="YES" attributeType="URI"/>
+        <attribute name="feedDescription" optional="YES" attributeType="String"/>
+        <attribute name="feedURL" optional="YES" attributeType="URI"/>
+        <attribute name="homePageURL" optional="YES" attributeType="URI"/>
+        <attribute name="iconURL" optional="YES" attributeType="URI"/>
+        <attribute name="nextURL" optional="YES" attributeType="URI"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="authors" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RSSAuthor" inverseName="feed" inverseEntity="RSSAuthor"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RSSItem" inverseName="feed" inverseEntity="RSSItem"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="feedURL"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="RSSItem" representedClassName="RSSItem" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="language" optional="YES" attributeType="String"/>
+        <attribute name="previewImageHeight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="previewImageURL" optional="YES" attributeType="URI"/>
+        <attribute name="previewImageWidth" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="summary" optional="YES" attributeType="String"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="uniqueID" optional="YES" attributeType="String"/>
+        <attribute name="url" optional="YES" attributeType="URI"/>
+        <relationship name="authors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RSSAuthor" inverseName="items" inverseEntity="RSSAuthor"/>
+        <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RSSFeed" inverseName="items" inverseEntity="RSSFeed"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RSSTag" inverseName="items" inverseEntity="RSSTag"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="uniqueID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="RSSTag" representedClassName="RSSTag" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RSSItem" inverseName="tags" inverseEntity="RSSItem"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+</model>

@@ -25,8 +25,24 @@ final class HTMLStringTests: XCTestCase {
   func testHTMLStringInit() throws {
     let decoder = JSONDecoder()
 
+    let complexContent = "\"" + """
+      <code>some View</code>
+      """
+      .replacingOccurrences(of: "\"", with: "\\\"")
+      .replacingOccurrences(of: "\n", with: "\\n")
+      .replacingOccurrences(of: "<code>", with: "`")
+      .replacingOccurrences(of: "</code>", with: "`")
+    + "\""
+    var htmlString = try decoder.decode(HTMLString.self, from: Data(complexContent.utf8))
+    XCTAssertEqual("This is a test", htmlString.asRawText)
+    XCTAssertEqual("<p>This is a test</p>", htmlString.htmlValue)
+    XCTAssertEqual("This is a test", htmlString.asMarkdown)
+    XCTAssertEqual(0, htmlString.statusesURLs.count)
+    XCTAssertEqual(0, htmlString.links.count)
+
+
     let basicContent = "\"<p>This is a test</p>\""
-    var htmlString = try decoder.decode(HTMLString.self, from: Data(basicContent.utf8))
+    htmlString = try decoder.decode(HTMLString.self, from: Data(basicContent.utf8))
     XCTAssertEqual("This is a test", htmlString.asRawText)
     XCTAssertEqual("<p>This is a test</p>", htmlString.htmlValue)
     XCTAssertEqual("This is a test", htmlString.asMarkdown)

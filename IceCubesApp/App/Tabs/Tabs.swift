@@ -3,12 +3,14 @@ import DesignSystem
 import Explore
 import Foundation
 import StatusKit
+import RSS
 import SwiftUI
+import Env
 
 @MainActor
 enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
   case timeline, notifications, mentions, explore, messages, settings, other
-  case trending, federated, local
+  case trending, federated, local, rss
   case profile
   case bookmarks
   case favorites
@@ -74,8 +76,15 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
       VStack {}
     case .other:
       EmptyView()
+    case .rss:
+      // FIXME: open in web view
+      RSSTab()
+        .withSafariRouter()
+        .environment(Self.routerPath)
     }
   }
+
+  private static let routerPath = RouterPath()
 
   @ViewBuilder
   var label: some View {
@@ -100,6 +109,8 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
       Label("tab.settings", systemImage: iconName)
     case .profile:
       Label("tab.profile", systemImage: iconName)
+    case .rss:
+      Label("tab.rss", systemImage: iconName)
     case .bookmarks:
       Label("accessibility.tabs.profile.picker.bookmarks", systemImage: iconName)
     case .favorites:
@@ -153,6 +164,8 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
       "newspaper"
     case .other:
       ""
+    case .rss:
+      "dot.radiowaves.up.forward"
     }
   }
 }
@@ -170,6 +183,7 @@ class SidebarTabs {
       .init(tab: .trending, enabled: true),
       .init(tab: .federated, enabled: true),
       .init(tab: .local, enabled: true),
+      .init(tab: .rss, enabled: true),
       .init(tab: .notifications, enabled: true),
       .init(tab: .mentions, enabled: true),
       .init(tab: .messages, enabled: true),

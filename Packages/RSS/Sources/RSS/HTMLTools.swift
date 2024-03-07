@@ -1,0 +1,137 @@
+//
+//  HTMLTools.swift
+//  IceCubesApp
+//
+//  Created by Duong Thai on 02/03/2024.
+//
+
+import RSParser
+import SwiftSoup
+
+public enum HTMLTools {
+  static func convert(_ html: String, baseURL _: URL?, withMedia: Bool = false) -> NSAttributedString? {
+    let string = if withMedia {
+      html
+    } else {
+      html.replacing(
+        /(<img.*?>|<video.*?<\/video>|<iframe.*?<\/iframe>)/,
+        with: { _ in "" }
+      )
+    }
+
+    let data = Data(string.utf8)
+    return try? NSAttributedString(
+      data: data,
+      options: [
+        .documentType: NSAttributedString.DocumentType.html,
+        .characterEncoding: String.Encoding.utf8.rawValue,
+      ],
+      documentAttributes: nil
+    )
+  }
+
+  public static func getFaviconOf(html: String, sourceURL: URL) -> URL? {
+    let pattern = MetadataPattern.favicon
+    guard let match = html.firstMatch(of: pattern),
+          let string = NonEmptyString(String(match.1)),
+          let url = URL(string: string.string)
+    else { return nil }
+
+    if url.host() != nil {
+      return url
+    } else if let host = sourceURL.host() {
+      return URL(string: "https://" + host + url.absoluteString)
+    } else {
+      return nil
+    }
+  }
+
+  public static func getIconOf(html: String, sourceURL: URL) -> URL? {
+    let pattern = MetadataPattern.icon
+    let matches = html.matches(of: pattern)
+    let icons: [Icon] = matches
+      .compactMap {
+        guard let url = URL(string: String($0.1)) else { return nil }
+
+        guard let d_w = Double(String($0.2)) else { return nil }
+        let width = CGFloat(d_w)
+
+        guard let h_w = Double(String($0.3)) else { return nil }
+        let height = CGFloat(h_w)
+
+        return Icon(url: url, with: width, height: height)
+      }
+      .sorted { $0.with > $1.with }
+
+    return icons.first?.url
+  }
+
+  public static func getTitleOf(html: String) -> NonEmptyString? {
+    let pattern = MetadataPattern.title
+    guard let match = html.firstMatch(of: pattern) else { return nil }
+    return NonEmptyString(String(match.1))
+  }
+
+  public static func getContentTypeOf(html: String) -> NonEmptyString? {
+    let pattern = MetadataPattern.type
+    guard let match = html.firstMatch(of: pattern) else { return nil }
+    return NonEmptyString(String(match.1))
+  }
+
+  public static func getPreviewImageOf(html: String) -> URL? {
+    let pattern = MetadataPattern.image
+    guard let match = html.firstMatch(of: pattern),
+          let string = NonEmptyString(String(match.1)),
+          let url = URL(string: string.string)
+    else { return nil }
+
+    return url
+  }
+
+  public static func getURLOf(html: String) -> URL? {
+    let pattern = MetadataPattern.url
+    guard let match = html.firstMatch(of: pattern),
+          let url = URL(string: String(match.1))
+    else { return nil }
+
+    return url
+  }
+
+  public static func getSiteNameOf(html: String) -> NonEmptyString? {
+    let pattern = MetadataPattern.siteName
+    guard let match = html.firstMatch(of: pattern) else { return nil }
+    return NonEmptyString(String(match.1))
+  }
+
+  public static func getFirstImageOf(html: String) -> URL? {
+    guard let match = html.firstMatch(of: /<img[\s\S]+?src="(.+?)"/) else { return nil }
+    return URL(string: String(match.1))
+  }
+}
+
+private struct Icon {
+  let url: URL
+  let with: CGFloat
+  let height: CGFloat
+}
+
+private enum MetadataPattern {
+  static let favicon = /<link[\s\S]*?rel=\".*?icon\"[\s\S]+?href=\"(.+?)\"/
+  static let icon = /<link[\s\S]*?rel=\".*?icon\"[\s\S]+?href=\"(.+?)\".+?sizes=\"(\d+?)x(\d+?)"/
+  static let title = /<meta[\s\S]*?property=\"og:title\" content=\"(.+?)\"/
+  static let type = /<meta[\s\S]*?property=\"og:type\" content=\"(.+?)\"/
+  static let image = /<meta[\s\S]*?property=\"og:image\" content=\"(.+?)\"/
+  static let url = /<meta[\s\S]*?property=\"og:url\" content=\"(.+?)\"/
+  static let siteName = /<meta[\s\S]*?property=\"og:site_name\" content=\"(.+?)\"/
+}
+
+public struct NonEmptyString {
+  let string: String
+
+  init?(_ string: String) {
+    let trimmed = string.trimmingCharacters(in: .whitespacesAndNewlines)
+    if trimmed.isEmpty { return nil } else { self.string = trimmed }
+  }
+}
+
+extension ParsedItem: @unchecked Sendable {} // checked
