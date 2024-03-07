@@ -11,6 +11,7 @@ import SwiftSoup
 import DesignSystem
 import RSS
 import Env
+import Network
 
 @MainActor
 public struct RSSTab: View {
@@ -20,17 +21,18 @@ public struct RSSTab: View {
   @Environment(\.managedObjectContext) private var moContext
   @State private var isLoading = true
 
-  @Environment(RouterPath.self) private var routerPath
+  @Environment(Client.self) private var client
+  @State private var routerPath = RouterPath()
   @State private var showAlert = false
 
   public init() {}
 
   public var body: some View {
     NavigationStack {
-      if isLoading {
-        ProgressView()
-      } else {
-        List {
+      List {
+        if isLoading {
+          ProgressView()
+        } else {
           ForEach(items) { item in
             Button(action: {
               if let url = item.url {
@@ -48,8 +50,14 @@ public struct RSSTab: View {
               Text("rss.item.url.unavailable.message")
             }
           }
+          .listStyle(PlainListStyle())
         }
-        .listStyle(PlainListStyle())
+      }
+      .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+      .toolbar {
+        if client.isAuth {
+          ToolbarTab(routerPath: $routerPath)
+        }
       }
     }
     // TODO: remove this
@@ -109,5 +117,7 @@ public struct RSSTab: View {
 
       isLoading = false
     }
+    .withSafariRouter()
+    .environment(routerPath)
   }
 }

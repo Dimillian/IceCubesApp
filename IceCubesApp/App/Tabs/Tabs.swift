@@ -78,8 +78,6 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
       EmptyView()
     case .rss:
       RSSTab()
-        .withSafariRouter()
-        .environment(Self.routerPath)
     }
   }
 
