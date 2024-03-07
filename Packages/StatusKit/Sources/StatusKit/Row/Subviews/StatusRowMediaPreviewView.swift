@@ -67,7 +67,11 @@ public struct StatusRowMediaPreviewView: View {
           }
           .padding(.bottom, scrollBottomPadding)
         }
-        .scrollClipDisabled()
+        // This replaces scrollClipDisabled, which would overlay
+        // images over swipe actions.
+        // See https://github.com/Dimillian/IceCubesApp/issues/1845
+        .padding(.horizontal, .layoutPadding * -1)
+        .contentMargins(.horizontal, .layoutPadding)
       }
     }
   }
