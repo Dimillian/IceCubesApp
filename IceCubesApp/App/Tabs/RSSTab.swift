@@ -20,8 +20,8 @@ public struct RSSTab: View {
   @Environment(\.managedObjectContext) private var moContext
   @State private var isLoading = true
 
+  @Environment(RouterPath.self) private var routerPath
   @State private var showAlert = false
-  @State private var routerPath = RouterPath()
 
   public init() {}
 
@@ -31,15 +31,15 @@ public struct RSSTab: View {
         ProgressView()
       } else {
         List {
-          ForEach(items) { i in
+          ForEach(items) { item in
             Button(action: {
-              if let url = i.url {
+              if let url = item.url {
                 _ = routerPath.handle(url: url)
               } else {
                 showAlert = true
               }
             }, label: {
-              RSSItemView(i)
+              RSSItemView(item)
             })
             .buttonStyle(.plain)
             .alert("rss.item.url.unavailable", isPresented: $showAlert) {
@@ -61,8 +61,9 @@ public struct RSSTab: View {
 
       let feedURLs = [
         "https://www.swift.org/atom.xml",
+        "https://www.computerenhance.com/feed",
         "https://wadetregaskis.com/feed",
-        "https://121clicks.com/feed",
+//        "https://121clicks.com/feed",
         "https://iso.500px.com/feed/",
       ]
 

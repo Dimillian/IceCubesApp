@@ -77,7 +77,6 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
     case .other:
       EmptyView()
     case .rss:
-      // FIXME: open in web view
       RSSTab()
         .withSafariRouter()
         .environment(Self.routerPath)
