@@ -74100,7 +74100,14 @@
       }
     },
     "tab.rss" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RSS"
+          }
+        }
+      }
     },
     "tab.settings" : {
       "localizations" : {

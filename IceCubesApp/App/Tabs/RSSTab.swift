@@ -37,6 +37,8 @@ public struct RSSTab: View {
           }
         }
       }
+      .navigationTitle("tab.rss")
+      .navigationBarTitleDisplayMode(.inline)
       .listStyle(PlainListStyle())
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
       .toolbar {
