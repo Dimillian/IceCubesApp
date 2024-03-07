@@ -39,7 +39,7 @@ extension ParsedItem {
         .trimmingCharacters(in: .whitespacesAndNewlines)
     } else if
     let contentHTML = self.contentHTML,
-        let contentHTML = HTMLTools.convert(contentHTML, baseURL: self.getRSSURL())?.string
+        let contentHTML = RSSTools.convert(contentHTML, baseURL: self.getRSSURL())?.string
     {
       contentHTML
         .replacingOccurrences(of: "\n\n", with: "\n")
@@ -63,7 +63,7 @@ extension ParsedItem {
       (url: imageURL, size: image.size)
     } else if
       let contentHTML = self.contentHTML,
-      let imageURL = HTMLTools.getFirstImageOf(html: contentHTML),
+      let imageURL = RSSTools.getFirstImageOf(html: contentHTML),
       let imageData = try? Data(contentsOf: imageURL),
       let image = UIImage(data: imageData)
     {

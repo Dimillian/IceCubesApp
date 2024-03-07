@@ -1,14 +1,14 @@
 //
-//  HTMLTools.swift
+//  RSSTools.swift
 //  IceCubesApp
 //
 //  Created by Duong Thai on 02/03/2024.
 //
 
 import RSParser
-import SwiftSoup
+import CoreData
 
-public enum HTMLTools {
+public enum RSSTools {
   static func convert(_ html: String, baseURL _: URL?, withMedia: Bool = false) -> NSAttributedString? {
     let string = if withMedia {
       html
@@ -107,6 +107,57 @@ public enum HTMLTools {
     guard let match = html.firstMatch(of: /<img[\s\S]+?src="(.+?)"/) else { return nil }
     return URL(string: String(match.1))
   }
+
+  public static func getFeedData(from feedURL: URL) async -> RSSFeed.SendableData? {
+    guard
+      let data = try? Data(contentsOf: feedURL),
+      let feed = try? FeedParser.parse(ParserData(url: feedURL.absoluteString, data: data))
+    else { return nil }
+
+    return RSSFeed.SendableData(parsedFeed: feed, sourceURL: feedURL)
+  }
+
+  public static func getFeedsData(from feedURLs: [URL]) async -> [RSSFeed.SendableData] {
+    return await Task<[RSSFeed.SendableData], Never>.detached(priority: .userInitiated, operation: {
+      return await withTaskGroup(of: RSSFeed.SendableData?.self) { taskGroup in
+        for url in feedURLs {
+          taskGroup.addTask {
+            return await getFeedData(from: url)
+          }
+        }
+
+        var _feeds = [RSSFeed.SendableData]()
+        for await f in taskGroup {
+          if let f { _feeds.append(f) }
+        }
+
+        return _feeds
+      }
+    }).value
+  }
+
+  @MainActor
+  public static func load(feedURLs: [URL], into context: NSManagedObjectContext) async {
+    let sendableFeeds = await RSSTools.getFeedsData(from: feedURLs)
+
+    let feedPairs = sendableFeeds.compactMap {
+      (feed: RSSFeed(context: context, sendableData: $0), sendableFeed: $0)
+    }
+
+    for pair in feedPairs {
+      let sendableFeed = pair.sendableFeed
+      let sendableItems = await Task.detached {
+        await sendableFeed.getSendableItemData()
+      }.value
+
+      let items = sendableItems.compactMap {
+        RSSItem(context: context, sendableData: $0)
+      }
+
+      pair.feed.items = NSSet(array: items)
+    }
+  }
+  
 }
 
 private struct Icon {

@@ -39,8 +39,8 @@ extension RSSFeed {
            let pageData = try? Data(contentsOf: pageURL),
            let pageHTML = String(bytes: pageData, encoding: .utf8)
         {
-          self.enhancedIconURL = HTMLTools.getIconOf(html: pageHTML, sourceURL: pageURL)
-          self.enhancedFaviconURL = HTMLTools.getFaviconOf(html: pageHTML, sourceURL: pageURL)
+          self.enhancedIconURL = RSSTools.getIconOf(html: pageHTML, sourceURL: pageURL)
+          self.enhancedFaviconURL = RSSTools.getFaviconOf(html: pageHTML, sourceURL: pageURL)
         } else {
           self.enhancedIconURL = nil
           self.enhancedFaviconURL = nil
@@ -54,14 +54,36 @@ extension RSSFeed {
     private var parsedItems: [ParsedItem] { Array(self.parsedFeed.items) }
 
     public func getSendableItemData() async -> [RSSItem.SendableData] {
-
       return await withTaskGroup(of: RSSItem.SendableData?.self) { taskGroup in
+        var accumulatedItems = [RSSItem.SendableData]()
 
-        let threshold = 5
+        for item in parsedItems {
+          taskGroup.addTask {
+            await Task.detached(priority: .userInitiated) {
+              RSSItem.SendableData(
+                parsedItem: item,
+                feedURL: self.sourceURL,
+                feedAuthors: self.parsedFeed.authors ?? []
+              )
+            }.value
+          }
+        }
 
-        let subArrays = stride(from: 0, to: parsedItems.count, by: threshold)
+        for await i in taskGroup {
+          if let i {
+            accumulatedItems.append(i)
+          }
+        }
+
+        return accumulatedItems
+      }
+    }
+
+    public func getSendableItemData(concurrentTaskThreshold: Int) async -> [RSSItem.SendableData] {
+      return await withTaskGroup(of: RSSItem.SendableData?.self) { taskGroup in
+        let subArrays = stride(from: 0, to: parsedItems.count, by: concurrentTaskThreshold)
           .map {
-            parsedItems[$0..<min($0 + threshold, parsedItems.count)]
+            parsedItems[$0..<min($0 + concurrentTaskThreshold, parsedItems.count)]
           }
 
         var accumulatedItems = [RSSItem.SendableData]()

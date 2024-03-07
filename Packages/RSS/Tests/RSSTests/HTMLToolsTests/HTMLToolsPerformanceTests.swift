@@ -25,12 +25,12 @@ final class HTMLToolsPerformanceTests: XCTestCase {
     let content = Self.getStringFrom(fileName: fileName)
 
     measure {
-      _ = HTMLTools.getTitleOf(html: content)!.string
-      _ = HTMLTools.getContentTypeOf(html: content)!.string
-      _ = HTMLTools.getPreviewImageOf(html: content)!
-      _ = HTMLTools.getURLOf(html: content)!
-      _ = HTMLTools.getFaviconOf(html: content, sourceURL: sourceURL)!
-      _ = HTMLTools.getSiteNameOf(html: content)!.string
+      _ = RSSTools.getTitleOf(html: content)!.string
+      _ = RSSTools.getContentTypeOf(html: content)!.string
+      _ = RSSTools.getPreviewImageOf(html: content)!
+      _ = RSSTools.getURLOf(html: content)!
+      _ = RSSTools.getFaviconOf(html: content, sourceURL: sourceURL)!
+      _ = RSSTools.getSiteNameOf(html: content)!.string
     }
   }
 
@@ -39,7 +39,7 @@ final class HTMLToolsPerformanceTests: XCTestCase {
     let content = Self.getStringFrom(fileName: fileName)
 
     measure {
-      _ = HTMLTools.convert(content, baseURL: nil)
+      _ = RSSTools.convert(content, baseURL: nil)
     }
   }
 
@@ -48,7 +48,7 @@ final class HTMLToolsPerformanceTests: XCTestCase {
     let content = Self.getStringFrom(fileName: fileName)
 
     measure {
-      _ = HTMLTools.convert(content, baseURL: nil, withMedia: true)
+      _ = RSSTools.convert(content, baseURL: nil, withMedia: true)
     }
   }
 

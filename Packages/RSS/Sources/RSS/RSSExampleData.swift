@@ -162,7 +162,7 @@ Fatal error: Something bad happened!: file MagicFile/0274-magic-file.swift, line
 """
 
   @MainActor
-  static let content: NSAttributedString = HTMLTools.convert(Self.htmlString, baseURL: URL(string: "https://swift.org"))!
+  static let content: NSAttributedString = RSSTools.convert(Self.htmlString, baseURL: URL(string: "https://swift.org"))!
 
   static let feed: ParsedFeed = {
     let filePath = URL(string: #filePath)!
