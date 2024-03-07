@@ -23,7 +23,6 @@ public struct RSSTab: View {
 
   @Environment(Client.self) private var client
   @State private var routerPath = RouterPath()
-  @State private var showAlert = false
 
   public init() {}
 
@@ -34,25 +33,11 @@ public struct RSSTab: View {
           ProgressView()
         } else {
           ForEach(items) { item in
-            Button(action: {
-              if let url = item.url {
-                _ = routerPath.handle(url: url)
-              } else {
-                showAlert = true
-              }
-            }, label: {
               RSSItemView(item)
-            })
-            .buttonStyle(.plain)
-            .alert("rss.item.url.unavailable", isPresented: $showAlert) {
-              Button("rss.item.url.unavailable.action.OK") { showAlert = false }
-            } message: {
-              Text("rss.item.url.unavailable.message")
-            }
           }
-          .listStyle(PlainListStyle())
         }
       }
+      .listStyle(PlainListStyle())
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
       .toolbar {
         if client.isAuth {
