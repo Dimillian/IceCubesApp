@@ -17067,6 +17067,23 @@
         }
       }
     },
+    "account.movedto.redirect-%@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Umgezogen nach %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Moved To %@"
+          }
+        }
+      }
+    },
     "account.post.pinned" : {
       "extractionState" : "manual",
       "localizations" : {
