@@ -2,7 +2,7 @@ import Combine
 import UIKit
 
 @Observable
-public class SceneDelegate: NSObject, UIWindowSceneDelegate, Sendable {
+@MainActor public class SceneDelegate: NSObject, UIWindowSceneDelegate, Sendable {
   public var window: UIWindow?
   #if os(visionOS)
     public private(set) var windowWidth: CGFloat = 0
@@ -47,12 +47,12 @@ public class SceneDelegate: NSObject, UIWindowSceneDelegate, Sendable {
   }
 
   private static var observedSceneDelegate: Set<SceneDelegate> = []
-  private static let observer = Task {
+  private static let observer = Task { @MainActor in
     while true {
       try? await Task.sleep(for: .seconds(0.1))
       for delegate in observedSceneDelegate {
         #if os(visionOS)
-          let newWidth = delegate.window?.bounds.size.width ?? 0
+        let newWidth = delegate.window?.bounds.size.width ?? 0
           if delegate.windowWidth != newWidth {
             delegate.windowWidth = newWidth
           }

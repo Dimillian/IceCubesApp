@@ -2,6 +2,7 @@ import DesignSystem
 import Env
 import SwiftUI
 
+@MainActor
 struct SidebarEntriesSettingsView: View {
   @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var userPreferences

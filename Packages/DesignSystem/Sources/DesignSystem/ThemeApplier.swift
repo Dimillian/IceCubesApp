@@ -4,7 +4,7 @@ import SwiftUI
 #endif
 
 public extension View {
-  func applyTheme(_ theme: Theme) -> some View {
+  @MainActor func applyTheme(_ theme: Theme) -> some View {
     modifier(ThemeApplier(theme: theme))
   }
 }

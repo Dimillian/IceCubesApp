@@ -2,6 +2,7 @@ import DesignSystem
 import SwiftUI
 import Env
 
+@MainActor
 public struct TimelineContentFilterView: View {
   @Environment(Theme.self) private var theme
   @Environment(CurrentInstance.self) private var currentInstance

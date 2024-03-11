@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 public struct NextPageView: View {
   @State private var isLoadingNextPage: Bool = false
   @State private var showRetry: Bool = false

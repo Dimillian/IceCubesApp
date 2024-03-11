@@ -371,6 +371,7 @@ public struct AccountDetailView: View {
 }
 
 extension View {
+  @MainActor 
   func applyAccountDetailsRowStyle(theme: Theme) -> some View {
     listRowInsets(.init())
       .listRowSeparator(.hidden)

@@ -14,7 +14,7 @@ actor TimelineDatasource {
   }
 
   func getFiltered() async -> [Status] {
-    let contentFilter = TimelineContentFilter.shared
+    let contentFilter = await TimelineContentFilter.shared
     let showReplies = await contentFilter.showReplies
     let showBoosts = await contentFilter.showBoosts
     let showThreads = await contentFilter.showThreads

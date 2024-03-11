@@ -7,6 +7,7 @@ import Observation
 import StatusKit
 import SwiftUI
 
+@MainActor
 @Observable class DisplaySettingsLocalValues {
   var tintColor = Theme.shared.tintColor
   var primaryBackgroundColor = Theme.shared.primaryBackgroundColor
