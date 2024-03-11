@@ -145,7 +145,7 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     bot = try container.decode(Bool.self, forKey: .bot)
     discoverable = try container.decodeIfPresent(Bool.self, forKey: .discoverable)
     moved = try container.decodeIfPresent(Account.self, forKey: .moved)
-      
+
     if let displayName, !displayName.isEmpty {
       cachedDisplayName = .init(stringValue: displayName)
     } else {

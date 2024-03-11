@@ -154,8 +154,8 @@ public struct NotificationsListView: View {
     case let .display(notifications, nextPageState):
       if notifications.isEmpty {
         PlaceholderView(iconName: "bell.slash",
-                  title: "notifications.empty.title",
-                  message: "notifications.empty.message")
+                        title: "notifications.empty.title",
+                        message: "notifications.empty.message")
         #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
         #endif

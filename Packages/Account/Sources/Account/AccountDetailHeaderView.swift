@@ -322,7 +322,7 @@ struct AccountDetailHeaderView: View {
       .foregroundColor(.accentColor)
     }
   }
-  
+
   @ViewBuilder
   private func makeNoteView(_ note: String) -> some View {
     VStack(alignment: .leading, spacing: 4) {

@@ -52,7 +52,7 @@ import UIKit
       try? await Task.sleep(for: .seconds(0.1))
       for delegate in observedSceneDelegate {
         #if os(visionOS)
-        let newWidth = delegate.window?.bounds.size.width ?? 0
+          let newWidth = delegate.window?.bounds.size.width ?? 0
           if delegate.windowWidth != newWidth {
             delegate.windowWidth = newWidth
           }

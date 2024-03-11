@@ -2,7 +2,7 @@ import Combine
 import SwiftUI
 
 @MainActor
-@Observable 
+@Observable
 public final class Theme {
   final class ThemeStorage {
     enum ThemeKey: String {
