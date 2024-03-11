@@ -63,7 +63,7 @@ extension ParsedItem {
       (url: imageURL, size: image.size)
     } else if
       let contentHTML = self.contentHTML,
-      let imageURL = RSSTools.getFirstImageOf(html: contentHTML),
+      let imageURL = RSSTools.getFirstImageOf(html: contentHTML, baseURL: self.getRSSURL()),
       let imageData = try? Data(contentsOf: imageURL),
       let image = UIImage(data: imageData)
     {

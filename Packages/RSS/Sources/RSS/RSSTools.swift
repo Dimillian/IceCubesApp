@@ -103,9 +103,18 @@ public enum RSSTools {
     return NonEmptyString(String(match.1))
   }
 
-  public static func getFirstImageOf(html: String) -> URL? {
-    guard let match = html.firstMatch(of: /<img[\s\S]+?src="(.+?)"/) else { return nil }
-    return URL(string: String(match.1))
+  public static func getFirstImageOf(html: String, baseURL: URL?) -> URL? {
+    guard let match = html.firstMatch(of: /<img[\s\S]+?src="(.+?)"/),
+          let url =  URL(string: String(match.1))
+    else { return nil }
+
+    return if url.host != nil {
+      url
+    } else if let host = baseURL?.host() {
+      URL(string: "https://\(host)\(url.absoluteString)")
+    } else {
+      nil
+    }
   }
 
   public static func getFeedData(from feedURL: URL) async -> RSSFeed.SendableData? {
