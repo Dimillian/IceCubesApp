@@ -12,6 +12,7 @@ import DesignSystem
 import RSS
 import Env
 import Network
+import AppAccount
 
 @MainActor
 public struct RSSTab: View {
@@ -40,6 +41,10 @@ public struct RSSTab: View {
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
       .toolbar {
         if client.isAuth {
+          ToolbarItem(placement: .navigationBarLeading) {
+            AppAccountsSelectorView(routerPath: routerPath)
+          }
+
           ToolbarItem(placement: .navigationBarTrailing) {
             Button {
               Task { @MainActor in
