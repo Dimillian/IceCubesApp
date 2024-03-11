@@ -61,6 +61,7 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
   public let source: Source?
   public let bot: Bool
   public let discoverable: Bool?
+  public let moved: Account?
 
   public var haveAvatar: Bool {
     avatar.lastPathComponent != "missing.png"
@@ -70,7 +71,7 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     header.lastPathComponent != "missing.png"
   }
 
-  public init(id: String, username: String, displayName: String?, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil) {
+  public init(id: String, username: String, displayName: String?, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil, moved: Account? = nil) {
     self.id = id
     self.username = username
     self.displayName = displayName
@@ -90,6 +91,7 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     self.source = source
     self.bot = bot
     self.discoverable = discoverable
+    self.moved = moved
 
     if let displayName, !displayName.isEmpty {
       cachedDisplayName = .init(stringValue: displayName)
@@ -118,6 +120,7 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     case source
     case bot
     case discoverable
+    case moved
   }
 
   public init(from decoder: Decoder) throws {
@@ -141,6 +144,8 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     source = try container.decodeIfPresent(Account.Source.self, forKey: .source)
     bot = try container.decode(Bool.self, forKey: .bot)
     discoverable = try container.decodeIfPresent(Bool.self, forKey: .discoverable)
+    moved = try container.decodeIfPresent(Account.self, forKey: .moved)
+      
     if let displayName, !displayName.isEmpty {
       cachedDisplayName = .init(stringValue: displayName)
     } else {

@@ -207,6 +207,7 @@ struct AccountDetailHeaderView: View {
             .foregroundStyle(.secondary)
             .textSelection(.enabled)
             .accessibilityRespondsToUserInteraction(false)
+          movedToView
           joinedAtView
         }
         .accessibilityElement(children: .contain)
@@ -311,6 +312,17 @@ struct AccountDetailHeaderView: View {
     }
   }
 
+  @ViewBuilder
+  private var movedToView: some View {
+    if let movedTo = viewModel.account?.moved {
+      Button("account.movedto.redirect-\("@\(movedTo.acct)")") {
+        routerPath.navigate(to: .accountDetailWithAccount(account: movedTo))
+      }
+      .font(.scaledCallout)
+      .foregroundColor(.accentColor)
+    }
+  }
+  
   @ViewBuilder
   private func makeNoteView(_ note: String) -> some View {
     VStack(alignment: .leading, spacing: 4) {
