@@ -31881,6 +31881,9 @@
         }
       }
     },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "list.edit.isExclusive" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -38974,6 +38977,105 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "檢舉嘟文"
+          }
+        }
+      }
+    },
+    "rss.addNewFeed.action.add" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
+          }
+        }
+      }
+    },
+    "rss.addNewFeed.feedPreview.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feed Preview"
+          }
+        }
+      }
+    },
+    "rss.addNewFeed.input.downloading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading..."
+          }
+        }
+      }
+    },
+    "rss.addNewFeed.input.invalidURL" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The feed's URL is invalid. Fix it or try with a new one."
+          }
+        }
+      }
+    },
+    "rss.addNewFeed.input.noData" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is no feed data at this URL. Fix it or try with a new one."
+          }
+        }
+      }
+    },
+    "rss.addNewFeed.input.waiting" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waiting..."
+          }
+        }
+      }
+    },
+    "rss.addNewFeed.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add New Feed"
+          }
+        }
+      }
+    },
+    "rss.addNewFeed.url.textField.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL"
+          }
+        }
+      }
+    },
+    "rss.addNewFeed.url.textField.placeholder" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Put feed's URL here."
           }
         }
       }

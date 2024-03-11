@@ -22,7 +22,7 @@ public struct RSSAddNewFeed: View {
       Form {
         Section("rss.addNewFeed.url.textField.label") {
           VStack(alignment: .leading) {
-            TextField("rss.addNewFeed.url.textField.label", text: $urlString)
+            TextField("rss.addNewFeed.url.textField.placeholder", text: $urlString)
             IndicatorView(state: $state)
           }
         }
