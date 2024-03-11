@@ -59,7 +59,7 @@ extension RSSFeed {
 
         for item in parsedItems {
           taskGroup.addTask {
-            await Task.detached(priority: .userInitiated) {
+            await Task.detached {
               RSSItem.SendableData(
                 parsedItem: item,
                 feedURL: self.sourceURL,
@@ -90,7 +90,7 @@ extension RSSFeed {
         for s in subArrays {
           for item in s {
             taskGroup.addTask {
-              await Task.detached(priority: .userInitiated) {
+              await Task.detached {
                 RSSItem.SendableData(
                   parsedItem: item,
                   feedURL: self.sourceURL,

@@ -11,6 +11,7 @@ import Models
 import StatusKit
 import SwiftUI
 import Timeline
+import RSS
 
 @MainActor
 extension View {
@@ -146,6 +147,8 @@ extension View {
       case .accountFiltersList:
         FiltersListView()
           .withEnvironments()
+      case .addNewRSSFeed:
+        RSSAddNewFeed()
       }
     }
   }

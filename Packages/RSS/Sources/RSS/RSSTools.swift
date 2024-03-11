@@ -118,7 +118,7 @@ public enum RSSTools {
   }
 
   public static func getFeedsData(from feedURLs: [URL]) async -> [RSSFeed.SendableData] {
-    return await Task<[RSSFeed.SendableData], Never>.detached(priority: .userInitiated, operation: {
+    return await Task<[RSSFeed.SendableData], Never>.detached {
       return await withTaskGroup(of: RSSFeed.SendableData?.self) { taskGroup in
         for url in feedURLs {
           taskGroup.addTask {
@@ -133,11 +133,11 @@ public enum RSSTools {
 
         return _feeds
       }
-    }).value
+    }.value
   }
 
   @MainActor
-  public static func load(feedURLs: [URL], into context: NSManagedObjectContext) async {
+  public static func load(feedURLs: [URL], into context: NSManagedObjectContext) async -> [RSSFeed] {
     let sendableFeeds = await RSSTools.getFeedsData(from: feedURLs)
 
     let feedPairs = sendableFeeds.compactMap {
@@ -156,8 +156,30 @@ public enum RSSTools {
 
       pair.feed.items = NSSet(array: items)
     }
+
+    return feedPairs.map { $0.feed }
   }
   
+  @MainActor
+  public static func load(feedURL: URL, into context: NSManagedObjectContext) async -> RSSFeed? {
+    let sendableFeed = await Task.detached {
+      await RSSTools.getFeedData(from: feedURL)
+    }.value
+
+    guard let sendableFeed else { return nil }
+
+    let rssFeed = RSSFeed(context: context, sendableData: sendableFeed)
+
+    let sendableItems = await Task.detached {
+      await sendableFeed.getSendableItemData()
+    }.value
+
+    let rssItems = sendableItems.compactMap {
+      RSSItem(context: context, sendableData: $0)
+    }
+    rssFeed.items = NSSet(array: rssItems)
+    return rssFeed
+  }
 }
 
 private struct Icon {
@@ -167,13 +189,27 @@ private struct Icon {
 }
 
 private enum MetadataPattern {
-  static let favicon = /<link[\s\S]*?rel=\".*?icon\"[\s\S]+?href=\"(.+?)\"/
-  static let icon = /<link[\s\S]*?rel=\".*?icon\"[\s\S]+?href=\"(.+?)\".+?sizes=\"(\d+?)x(\d+?)"/
-  static let title = /<meta[\s\S]*?property=\"og:title\" content=\"(.+?)\"/
-  static let type = /<meta[\s\S]*?property=\"og:type\" content=\"(.+?)\"/
-  static let image = /<meta[\s\S]*?property=\"og:image\" content=\"(.+?)\"/
-  static let url = /<meta[\s\S]*?property=\"og:url\" content=\"(.+?)\"/
-  static let siteName = /<meta[\s\S]*?property=\"og:site_name\" content=\"(.+?)\"/
+  static var favicon: Regex<(Substring, Substring)> {
+    /<link[\s\S]*?rel=\".*?icon\"[\s\S]+?href=\"(.+?)\"/
+  }
+  static var icon: Regex<(Substring, Substring, Substring, Substring)> {
+    /<link[\s\S]*?rel=\".*?icon\"[\s\S]+?href=\"(.+?)\".+?sizes=\"(\d+?)x(\d+?)"/
+  }
+  static var title: Regex<(Substring, Substring)> {
+    /<meta[\s\S]*?property=\"og:title\" content=\"(.+?)\"/
+  }
+  static var type: Regex<(Substring, Substring)> {
+    /<meta[\s\S]*?property=\"og:type\" content=\"(.+?)\"/
+  }
+  static var image: Regex<(Substring, Substring)> {
+    /<meta[\s\S]*?property=\"og:image\" content=\"(.+?)\"/
+  }
+  static var url: Regex<(Substring, Substring)> {
+    /<meta[\s\S]*?property=\"og:url\" content=\"(.+?)\"/
+  }
+  static var siteName: Regex<(Substring, Substring)> {
+    /<meta[\s\S]*?property=\"og:site_name\" content=\"(.+?)\"/
+  }
 }
 
 public struct NonEmptyString {

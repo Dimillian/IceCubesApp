@@ -7,6 +7,7 @@
 
 import CoreData
 
+@MainActor
 public class RSSDataController {
   private static let modelName = "RSSModel"
 
@@ -32,5 +33,6 @@ public class RSSDataController {
         fatalError("Core Data failed to load Persistent Stores:\(error.localizedDescription)")
       }
     }
+    self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
   }
 }

@@ -26,7 +26,7 @@
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
         <relationship name="authors" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RSSAuthor" inverseName="feed" inverseEntity="RSSAuthor"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RSSItem" inverseName="feed" inverseEntity="RSSItem"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="RSSItem" inverseName="feed" inverseEntity="RSSItem"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="feedURL"/>
@@ -34,14 +34,14 @@
         </uniquenessConstraints>
     </entity>
     <entity name="RSSItem" representedClassName="RSSItem" syncable="YES" codeGenerationType="class">
-        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="language" optional="YES" attributeType="String"/>
         <attribute name="previewImageHeight" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="previewImageURL" optional="YES" attributeType="URI"/>
         <attribute name="previewImageWidth" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="summary" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
-        <attribute name="uniqueID" optional="YES" attributeType="String"/>
+        <attribute name="summary" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+        <attribute name="uniqueID" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="URI"/>
         <relationship name="authors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RSSAuthor" inverseName="items" inverseEntity="RSSAuthor"/>
         <relationship name="feed" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="RSSFeed" inverseName="items" inverseEntity="RSSFeed"/>

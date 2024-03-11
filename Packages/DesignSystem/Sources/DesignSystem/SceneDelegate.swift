@@ -50,7 +50,7 @@ public class SceneDelegate: NSObject, UIWindowSceneDelegate, Sendable {
   private static let observer = Task {
     while true {
       try? await Task.sleep(for: .seconds(0.1))
-      for delegate in observedSceneDelegate {
+      for delegate in await observedSceneDelegate {
         #if os(visionOS)
           let newWidth = delegate.window?.bounds.size.width ?? 0
           if delegate.windowWidth != newWidth {
@@ -61,12 +61,12 @@ public class SceneDelegate: NSObject, UIWindowSceneDelegate, Sendable {
             delegate.windowHeight = newHeight
           }
         #else
-          let newWidth = delegate.window?.bounds.size.width ?? UIScreen.main.bounds.size.width
-          if delegate.windowWidth != newWidth {
+        let newWidth = await delegate.window?.bounds.size.width ?? UIScreen.main.bounds.size.width
+        if await delegate.windowWidth != newWidth {
             delegate.windowWidth = newWidth
           }
-          let newHeight = delegate.window?.bounds.size.height ?? UIScreen.main.bounds.size.height
-          if delegate.windowHeight != newHeight {
+        let newHeight = await delegate.window?.bounds.size.height ?? UIScreen.main.bounds.size.height
+        if await delegate.windowHeight != newHeight {
             delegate.windowHeight = newHeight
           }
         #endif

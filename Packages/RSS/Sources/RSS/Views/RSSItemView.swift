@@ -14,7 +14,7 @@ import Env
 public struct RSSItemView: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
-  private let viewModel: RSSItem
+  @ObservedObject private var viewModel: RSSItem
   @State private var showAlert = false
 
   private var contentPadding: CGFloat {

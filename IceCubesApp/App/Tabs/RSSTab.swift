@@ -22,6 +22,7 @@ public struct RSSTab: View {
   @State private var isLoading = true
 
   @Environment(Client.self) private var client
+  @Environment(UserPreferences.self) private var userPreferences
   @State private var routerPath = RouterPath()
 
   public init() {}
@@ -29,13 +30,9 @@ public struct RSSTab: View {
   public var body: some View {
     NavigationStack {
       List {
-        if isLoading {
-          ProgressView()
-        } else {
           ForEach(items) { item in
             RSSItemView(item)
           }
-        }
       }
       .navigationTitle("tab.rss")
       .navigationBarTitleDisplayMode(.inline)
@@ -43,27 +40,25 @@ public struct RSSTab: View {
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
       .toolbar {
         if client.isAuth {
-          ToolbarTab(routerPath: $routerPath)
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+              Task { @MainActor in
+                routerPath.presentedSheet = SheetDestination.addNewRSSFeed
+                HapticManager.shared.fireHaptic(.buttonPress)
+              }
+            } label: {
+              Image(systemName: "plus")
+                .accessibilityLabel("accessibility.tabs.timeline.new-post.label")
+                .accessibilityInputLabels([
+                  LocalizedStringKey("accessibility.tabs.timeline.new-post.label"),
+                  LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel1"),
+                  LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2"),
+                ])
+                .offset(y: -2)
+            }
+          }
         }
       }
-    }
-    // TODO: remove this
-    .onDisappear {
-      for f in items { moContext.delete(f) }
-    }
-    .task {
-      isLoading = true
-
-      let feedURLs = [
-        "https://www.swift.org/atom.xml",
-        "https://www.computerenhance.com/feed",
-        "https://wadetregaskis.com/feed",
-        "https://iso.500px.com/feed/",
-      ].compactMap { URL(string: $0) }
-
-      await RSSTools.load(feedURLs: feedURLs, into: moContext)
-
-      isLoading = false
     }
     .withSafariRouter()
     .environment(routerPath)
