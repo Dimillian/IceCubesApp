@@ -189,6 +189,30 @@ public enum RSSTools {
     rssFeed.items = NSSet(array: rssItems)
     return rssFeed
   }
+
+  @MainActor
+  public static func load(feedURL: URL) async -> RSSFeed? {
+    let sendableFeed = await Task.detached {
+      await RSSTools.getFeedData(from: feedURL)
+    }.value
+
+    guard let sendableFeed else { return nil }
+
+    let backgroundContext = RSSDataController.shared.backgroundContext
+    let sendableItems = await Task.detached {
+      await sendableFeed.getSendableItemData()
+    }.value
+
+    return await backgroundContext.perform {
+      let rssFeed = RSSFeed(context: backgroundContext, sendableData: sendableFeed)
+
+      let rssItems = sendableItems.compactMap {
+        RSSItem(context: backgroundContext, sendableData: $0)
+      }
+      rssFeed.items = NSSet(array: rssItems)
+      return rssFeed
+    }
+  }
 }
 
 private struct Icon {

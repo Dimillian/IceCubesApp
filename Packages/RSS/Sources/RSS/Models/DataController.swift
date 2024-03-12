@@ -12,6 +12,8 @@ public class RSSDataController {
   private static let modelName = "RSSModel"
 
   public let container: NSPersistentContainer
+  public var viewContext: NSManagedObjectContext { container.viewContext }
+  public let backgroundContext: NSManagedObjectContext
   public static let shared = RSSDataController()
 
   private init() {
@@ -34,5 +36,7 @@ public class RSSDataController {
       }
     }
     self.container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
+    self.backgroundContext = container.newBackgroundContext()
+    self.backgroundContext.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
   }
 }

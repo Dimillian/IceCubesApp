@@ -13,6 +13,7 @@ import RSS
 import Env
 import Network
 import AppAccount
+import CoreData
 
 @MainActor
 public struct RSSTab: View {
@@ -39,6 +40,10 @@ public struct RSSTab: View {
       .navigationBarTitleDisplayMode(.inline)
       .listStyle(PlainListStyle())
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+      .onReceive(NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)) { notification in
+        let userInfo = notification.userInfo ?? [:]
+        NSManagedObjectContext.mergeChanges(fromRemoteContextSave: userInfo, into: [moContext])
+      }
       .toolbar {
         if client.isAuth {
           ToolbarItem(placement: .navigationBarLeading) {

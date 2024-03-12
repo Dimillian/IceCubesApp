@@ -9,7 +9,6 @@ import SwiftUI
 import CoreData
 
 public struct RSSAddNewFeed: View {
-  @Environment(\.managedObjectContext) private var moContext
   @Environment(\.dismiss) private var dismiss
 
   @State private var state: MachineState = .emptyInput
@@ -35,7 +34,7 @@ public struct RSSAddNewFeed: View {
         ToolbarItem(placement: .topBarLeading) {
           Button {
             dismiss()
-            moContext.rollback()
+            feed?.managedObjectContext?.rollback()
           } label: {
             Image(systemName: "xmark")
           }
@@ -44,7 +43,7 @@ public struct RSSAddNewFeed: View {
         ToolbarItem(placement: .topBarTrailing) {
           Button("rss.addNewFeed.action.add") {
             dismiss()
-            try? moContext.save()
+            try? feed?.managedObjectContext?.save()
           }
         }
       }
@@ -55,10 +54,10 @@ public struct RSSAddNewFeed: View {
         switch state {
         case .downloading(let url):
           downloadingTask?.cancel()
-          moContext.rollback()
+          feed?.managedObjectContext?.rollback()
 
           downloadingTask = Task {
-            let rssFeed = await RSSTools.load(feedURL: url, into: moContext)
+            let rssFeed = await RSSTools.load(feedURL: url)
             if Task.isCancelled { return }
             if let rssFeed { self.state = .downloaded(feed: rssFeed, url: url) }
             else { self.state = .noData(url: url) }
@@ -67,10 +66,10 @@ public struct RSSAddNewFeed: View {
           self.feed = feed
         default:
           downloadingTask?.cancel()
-          moContext.rollback()
+          feed?.managedObjectContext?.rollback()
         }
       }
-      .onDisappear { moContext.rollback() }
+      .onDisappear { feed?.managedObjectContext?.rollback() }
     }
   }
 
