@@ -53,7 +53,6 @@ public struct RSSFeedView: View {
       HStack {
         Button {
           feed.isShowing.toggle()
-          feed.managedObjectContext?.refreshAllObjects()
         } label: {
           Image(systemName: "eye")
             .foregroundColor(Color(UIColor.secondaryLabel))

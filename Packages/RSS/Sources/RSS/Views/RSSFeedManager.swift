@@ -53,6 +53,7 @@ public struct RSSFeedManager: View {
         ToolbarItem(placement: .topBarTrailing) {
           Button("rss.rssFeedManager.action.done") {
             dismiss()
+            moContext.refreshAllObjects()
             try? moContext.save()
           }
         }
