@@ -74211,36 +74211,6 @@
         }
       }
     },
-    "tab.rss.contentUnavailableView.action.goToRSSManager" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Go to RSS Manager"
-          }
-        }
-      }
-    },
-    "tab.rss.contentUnavailableView.description" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "You can go to RSS Manager to manage content, or add a new feed."
-          }
-        }
-      }
-    },
-    "tab.rss.contentUnavailableView.title" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "No Content"
-          }
-        }
-      }
-    },
     "tab.settings" : {
       "localizations" : {
         "be" : {

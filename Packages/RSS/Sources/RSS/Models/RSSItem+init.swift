@@ -8,7 +8,7 @@
 import CoreData
 
 extension RSSItem {
-  public convenience init?(
+  convenience init?(
     context: NSManagedObjectContext,
     sendableData: RSSItem.SendableData
   ) {
@@ -42,7 +42,7 @@ extension RSSItem {
     self.tags = NSSet(set: sendableData.parsedItem.tags ?? [])
   }
 
-  public var authorsAsString: String? {
+  var authorsAsString: String? {
     if authors?.allObjects.isEmpty ?? true {
       nil
     } else {

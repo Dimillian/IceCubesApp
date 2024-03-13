@@ -9,7 +9,7 @@ import CoreData
 import RSParser
 
 extension RSSAuthor {
-  public convenience init?(
+  convenience init?(
     context: NSManagedObjectContext,
     parsedAuthor: ParsedAuthor,
     feedURL: URL

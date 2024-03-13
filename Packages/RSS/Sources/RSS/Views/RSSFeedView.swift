@@ -8,7 +8,7 @@
 import SwiftUI
 import DesignSystem
 
-public struct RSSFeedView: View {
+struct RSSFeedView: View {
   @ObservedObject private var feed: RSSFeed
   @Environment(Theme.self) private var theme
 
@@ -27,7 +27,7 @@ public struct RSSFeedView: View {
     : AvatarView.FrameConfig.status.width + .statusColumnsSpacing
   }
 
-  public var body: some View {
+  var body: some View {
     VStack(alignment: .leading, spacing: .statusComponentSpacing) {
       headerView()
       VStack(alignment: .leading, spacing: theme.lineSpacing) {

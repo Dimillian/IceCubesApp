@@ -8,7 +8,7 @@
 import RSParser
 import CoreData
 
-public enum RSSTools {
+enum RSSTools {
   static func convert(_ html: String, baseURL _: URL?, withMedia: Bool = false) -> NSAttributedString? {
     let string = if withMedia {
       html
@@ -30,7 +30,7 @@ public enum RSSTools {
     )
   }
 
-  public static func getFaviconOf(html: String, sourceURL: URL) -> URL? {
+  static func getFaviconOf(html: String, sourceURL: URL) -> URL? {
     let pattern = MetadataPattern.favicon
     guard let match = html.firstMatch(of: pattern),
           let string = NonEmptyString(String(match.1)),
@@ -46,7 +46,7 @@ public enum RSSTools {
     }
   }
 
-  public static func getIconOf(html: String, sourceURL: URL) -> URL? {
+  static func getIconOf(html: String, sourceURL: URL) -> URL? {
     let pattern = MetadataPattern.icon
     let matches = html.matches(of: pattern)
     let icons: [Icon] = matches
@@ -66,19 +66,19 @@ public enum RSSTools {
     return icons.first?.url
   }
 
-  public static func getTitleOf(html: String) -> NonEmptyString? {
+  static func getTitleOf(html: String) -> NonEmptyString? {
     let pattern = MetadataPattern.title
     guard let match = html.firstMatch(of: pattern) else { return nil }
     return NonEmptyString(String(match.1))
   }
 
-  public static func getContentTypeOf(html: String) -> NonEmptyString? {
+  static func getContentTypeOf(html: String) -> NonEmptyString? {
     let pattern = MetadataPattern.type
     guard let match = html.firstMatch(of: pattern) else { return nil }
     return NonEmptyString(String(match.1))
   }
 
-  public static func getPreviewImageOf(html: String) -> URL? {
+  static func getPreviewImageOf(html: String) -> URL? {
     let pattern = MetadataPattern.image
     guard let match = html.firstMatch(of: pattern),
           let string = NonEmptyString(String(match.1)),
@@ -88,7 +88,7 @@ public enum RSSTools {
     return url
   }
 
-  public static func getURLOf(html: String) -> URL? {
+  static func getURLOf(html: String) -> URL? {
     let pattern = MetadataPattern.url
     guard let match = html.firstMatch(of: pattern),
           let url = URL(string: String(match.1))
@@ -97,13 +97,13 @@ public enum RSSTools {
     return url
   }
 
-  public static func getSiteNameOf(html: String) -> NonEmptyString? {
+  static func getSiteNameOf(html: String) -> NonEmptyString? {
     let pattern = MetadataPattern.siteName
     guard let match = html.firstMatch(of: pattern) else { return nil }
     return NonEmptyString(String(match.1))
   }
 
-  public static func getFirstImageOf(html: String, baseURL: URL?) -> URL? {
+  static func getFirstImageOf(html: String, baseURL: URL?) -> URL? {
     guard let match = html.firstMatch(of: /<img[\s\S]+?src="(.+?)"/),
           let url =  URL(string: String(match.1))
     else { return nil }
@@ -117,7 +117,7 @@ public enum RSSTools {
     }
   }
 
-  public static func getFeedData(from feedURL: URL) async -> RSSFeed.SendableData? {
+  static func getFeedData(from feedURL: URL) async -> RSSFeed.SendableData? {
     guard
       let data = try? Data(contentsOf: feedURL),
       let feed = try? FeedParser.parse(ParserData(url: feedURL.absoluteString, data: data))
@@ -126,7 +126,7 @@ public enum RSSTools {
     return RSSFeed.SendableData(parsedFeed: feed, sourceURL: feedURL)
   }
 
-  public static func getFeedsData(from feedURLs: [URL]) async -> [RSSFeed.SendableData] {
+  static func getFeedsData(from feedURLs: [URL]) async -> [RSSFeed.SendableData] {
     return await Task<[RSSFeed.SendableData], Never>.detached {
       return await withTaskGroup(of: RSSFeed.SendableData?.self) { taskGroup in
         for url in feedURLs {
@@ -146,7 +146,7 @@ public enum RSSTools {
   }
 
   @MainActor
-  public static func load(feedURLs: [URL], into context: NSManagedObjectContext) async -> [RSSFeed] {
+  static func load(feedURLs: [URL], into context: NSManagedObjectContext) async -> [RSSFeed] {
     let sendableFeeds = await RSSTools.getFeedsData(from: feedURLs)
 
     let feedPairs = sendableFeeds.compactMap {
@@ -170,7 +170,7 @@ public enum RSSTools {
   }
   
   @MainActor
-  public static func load(feedURL: URL, into context: NSManagedObjectContext) async -> RSSFeed? {
+  static func load(feedURL: URL, into context: NSManagedObjectContext) async -> RSSFeed? {
     let sendableFeed = await Task.detached {
       await RSSTools.getFeedData(from: feedURL)
     }.value
@@ -191,7 +191,7 @@ public enum RSSTools {
   }
 
   @MainActor
-  public static func load(feedURL: URL) async -> RSSFeed? {
+  static func load(feedURL: URL) async -> RSSFeed? {
     let sendableFeed = await Task.detached {
       await RSSTools.getFeedData(from: feedURL)
     }.value

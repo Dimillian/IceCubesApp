@@ -11,7 +11,7 @@ import DesignSystem
 import Env
 
 @MainActor
-public struct RSSItemView: View {
+struct RSSItemView: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
   @ObservedObject private var viewModel: RSSItem
@@ -23,11 +23,11 @@ public struct RSSItemView: View {
     : AvatarView.FrameConfig.status.width + .statusColumnsSpacing
   }
 
-  public init(_ viewModel: RSSItem) {
+  init(_ viewModel: RSSItem) {
     self.viewModel = viewModel
   }
 
-  public var body: some View {
+  var body: some View {
     Button(action: {
       if let url = viewModel.url {
         _ = routerPath.handle(url: url)

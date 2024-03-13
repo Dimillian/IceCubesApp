@@ -9,12 +9,12 @@ import RSParser
 
 extension RSSFeed {
   public struct SendableData: Sendable {
-    public let parsedFeed: ParsedFeed
-    public let sourceURL : URL
-    public let enhancedIconURL : URL?
-    public let enhancedFaviconURL : URL?
+    let parsedFeed: ParsedFeed
+    let sourceURL : URL
+    let enhancedIconURL : URL?
+    let enhancedFaviconURL : URL?
 
-    public init(parsedFeed: ParsedFeed, sourceURL: URL) {
+    init(parsedFeed: ParsedFeed, sourceURL: URL) {
       self.parsedFeed = parsedFeed
       self.sourceURL = sourceURL
 
@@ -53,7 +53,7 @@ extension RSSFeed {
 
     private var parsedItems: [ParsedItem] { Array(self.parsedFeed.items) }
 
-    public func getSendableItemData() async -> [RSSItem.SendableData] {
+    func getSendableItemData() async -> [RSSItem.SendableData] {
       return await withTaskGroup(of: RSSItem.SendableData?.self) { taskGroup in
         var accumulatedItems = [RSSItem.SendableData]()
 
@@ -79,7 +79,7 @@ extension RSSFeed {
       }
     }
 
-    public func getSendableItemData(concurrentTaskThreshold: Int) async -> [RSSItem.SendableData] {
+    func getSendableItemData(concurrentTaskThreshold: Int) async -> [RSSItem.SendableData] {
       return await withTaskGroup(of: RSSItem.SendableData?.self) { taskGroup in
         let subArrays = stride(from: 0, to: parsedItems.count, by: concurrentTaskThreshold)
           .map {

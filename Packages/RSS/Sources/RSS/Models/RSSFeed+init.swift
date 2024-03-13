@@ -9,7 +9,7 @@ import CoreData
 import RSParser
 
 extension RSSFeed {
-  public convenience init(
+  convenience init(
     context: NSManagedObjectContext,
     sendableData: RSSFeed.SendableData
   ) {

@@ -7,7 +7,7 @@
 
 import RSParser
 
-public enum RSSFeedType: String, Codable {
+enum RSSFeedType: String, Codable {
   case rss
   case atom
   case jsonFeed

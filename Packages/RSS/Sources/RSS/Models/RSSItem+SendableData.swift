@@ -10,7 +10,7 @@ import RSParser
 import SwiftUI
 
 extension RSSItem {
-  public struct SendableData: Sendable {
+  struct SendableData: Sendable {
     let parsedItem: ParsedItem
     let feedURL: URL
     let feedAuthors: Set<ParsedAuthor>
