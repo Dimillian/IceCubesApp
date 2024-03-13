@@ -149,6 +149,9 @@ extension View {
           .withEnvironments()
       case .addNewRSSFeed:
         RSSAddNewFeed()
+      case .rssFeedManager:
+        RSSFeedManager()
+          .withEnvironments()
       }
     }
   }

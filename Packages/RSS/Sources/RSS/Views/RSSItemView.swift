@@ -1,5 +1,5 @@
 //
-//  SwiftUIView.swift
+//  RSSItemView.swift
 //
 //
 //  Created by Duong Thai on 03/03/2024.

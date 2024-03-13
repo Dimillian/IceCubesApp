@@ -17,7 +17,8 @@ import CoreData
 
 @MainActor
 public struct RSSTab: View {
-  @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)])
+  @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)],
+                predicate: NSPredicate(format: "feed.isShowing == TRUE"))
   private var items: FetchedResults<RSSItem>
 
   @Environment(\.managedObjectContext) private var moContext
@@ -53,18 +54,22 @@ public struct RSSTab: View {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button {
               Task { @MainActor in
+                routerPath.presentedSheet = SheetDestination.rssFeedManager
+                HapticManager.shared.fireHaptic(.buttonPress)
+              }
+            } label: {
+              Image(systemName: "list.bullet.rectangle.portrait")
+            }
+          }
+
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+              Task { @MainActor in
                 routerPath.presentedSheet = SheetDestination.addNewRSSFeed
                 HapticManager.shared.fireHaptic(.buttonPress)
               }
             } label: {
               Image(systemName: "plus")
-                .accessibilityLabel("accessibility.tabs.timeline.new-post.label")
-                .accessibilityInputLabels([
-                  LocalizedStringKey("accessibility.tabs.timeline.new-post.label"),
-                  LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel1"),
-                  LocalizedStringKey("accessibility.tabs.timeline.new-post.inputLabel2"),
-                ])
-                .offset(y: -2)
             }
           }
         }

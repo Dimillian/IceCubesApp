@@ -71,6 +71,7 @@ public enum SheetDestination: Identifiable, Hashable {
   case accountEditInfo
   case accountFiltersList
   case addNewRSSFeed
+  case rssFeedManager
 
   public var id: String {
     switch self {
@@ -107,6 +108,8 @@ public enum SheetDestination: Identifiable, Hashable {
       "accountFiltersList"
     case .addNewRSSFeed:
       "addNewRSSFeed"
+    case .rssFeedManager:
+      "rssFeedManager"
     }
   }
 }

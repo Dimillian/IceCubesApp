@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23D60" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22757" systemVersion="23E214" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithSwiftData="YES" userDefinedModelVersionIdentifier="">
     <entity name="RSSAuthor" representedClassName="RSSAuthor" syncable="YES" codeGenerationType="class">
         <attribute name="avatarURL" optional="YES" attributeType="URI"/>
         <attribute name="displayName" optional="YES" attributeType="String"/>
@@ -19,9 +19,10 @@
         <attribute name="expired" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="faviconURL" optional="YES" attributeType="URI"/>
         <attribute name="feedDescription" optional="YES" attributeType="String"/>
-        <attribute name="feedURL" optional="YES" attributeType="URI"/>
+        <attribute name="feedURL" attributeType="URI"/>
         <attribute name="homePageURL" optional="YES" attributeType="URI"/>
         <attribute name="iconURL" optional="YES" attributeType="URI"/>
+        <attribute name="isShowing" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="nextURL" optional="YES" attributeType="URI"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>

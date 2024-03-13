@@ -51,5 +51,6 @@ extension RSSFeed {
     }
 
     self.expired = sendableData.parsedFeed.expired
+    self.isShowing = true
   }
 }
