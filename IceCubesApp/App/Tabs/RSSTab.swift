@@ -26,16 +26,76 @@ public struct RSSTab: View {
 
   @Environment(Client.self) private var client
   @Environment(UserPreferences.self) private var userPreferences
+  @Environment(Theme.self) private var theme
   @State private var routerPath = RouterPath()
 
   public init() {}
 
+  @ToolbarContentBuilder
+  private func makeToolbarItems() -> some ToolbarContent {
+    if client.isAuth {
+      ToolbarItem(placement: .navigationBarLeading) {
+        AppAccountsSelectorView(routerPath: routerPath)
+      }
+      
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button {
+          Task { @MainActor in
+            routerPath.presentedSheet = SheetDestination.rssFeedManager
+            HapticManager.shared.fireHaptic(.buttonPress)
+          }
+        } label: {
+          Image(systemName: "list.bullet.rectangle.portrait")
+        }
+      }
+      
+      ToolbarItem(placement: .navigationBarTrailing) {
+        Button {
+          Task { @MainActor in
+            routerPath.presentedSheet = SheetDestination.addNewRSSFeed
+            HapticManager.shared.fireHaptic(.buttonPress)
+          }
+        } label: {
+          Image(systemName: "plus")
+        }
+      }
+    }
+  }
+
+  private func makeContentUnavailableView() -> some View {
+    ContentUnavailableView {
+      Label("tab.rss.contentUnavailableView.title", systemImage: "dot.radiowaves.up.forward")
+    } description: {
+      Text("tab.rss.contentUnavailableView.description")
+    } actions: {
+      Button {
+        Task { @MainActor in
+          routerPath.presentedSheet = SheetDestination.rssFeedManager
+          HapticManager.shared.fireHaptic(.buttonPress)
+        }
+      } label: {
+        Text("tab.rss.contentUnavailableView.action.goToRSSManager")
+      }
+      .buttonStyle(.borderedProminent)
+    }
+  }
+
+  private func makeItemList() -> some View {
+    List {
+      ForEach(items) { item in
+        RSSItemView(item)
+      }
+    }
+  }
+
   public var body: some View {
     NavigationStack {
-      List {
-          ForEach(items) { item in
-            RSSItemView(item)
-          }
+      Group {
+        if items.isEmpty {
+          makeContentUnavailableView()
+        } else {
+          makeItemList()
+        }
       }
       .navigationTitle("tab.rss")
       .navigationBarTitleDisplayMode(.inline)
@@ -46,33 +106,7 @@ public struct RSSTab: View {
         NSManagedObjectContext.mergeChanges(fromRemoteContextSave: userInfo, into: [moContext])
       }
       .toolbar {
-        if client.isAuth {
-          ToolbarItem(placement: .navigationBarLeading) {
-            AppAccountsSelectorView(routerPath: routerPath)
-          }
-
-          ToolbarItem(placement: .navigationBarTrailing) {
-            Button {
-              Task { @MainActor in
-                routerPath.presentedSheet = SheetDestination.rssFeedManager
-                HapticManager.shared.fireHaptic(.buttonPress)
-              }
-            } label: {
-              Image(systemName: "list.bullet.rectangle.portrait")
-            }
-          }
-
-          ToolbarItem(placement: .navigationBarTrailing) {
-            Button {
-              Task { @MainActor in
-                routerPath.presentedSheet = SheetDestination.addNewRSSFeed
-                HapticManager.shared.fireHaptic(.buttonPress)
-              }
-            } label: {
-              Image(systemName: "plus")
-            }
-          }
-        }
+        makeToolbarItems()
       }
     }
     .withSafariRouter()
