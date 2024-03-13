@@ -22,6 +22,10 @@ public struct RSSAddNewFeed: View {
         Section("rss.addNewFeed.url.textField.label") {
           VStack(alignment: .leading) {
             TextField("rss.addNewFeed.url.textField.placeholder", text: $urlString)
+              .autocorrectionDisabled()
+              .textInputAutocapitalization(.never)
+              .keyboardType(.URL)
+            
             IndicatorView(state: $state)
           }
         }
