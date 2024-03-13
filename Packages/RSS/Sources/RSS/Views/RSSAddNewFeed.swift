@@ -16,6 +16,9 @@ public struct RSSAddNewFeed: View {
   @State private var feed: RSSFeed? = nil
   @State private var downloadingTask: Task<(), Never>? = nil
 
+  public enum Context { case manager, sheet }
+  let context: Context
+
   public var body: some View {
     NavigationStack {
       Form {
@@ -35,12 +38,14 @@ public struct RSSAddNewFeed: View {
       .navigationTitle("rss.addNewFeed.title")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
-        ToolbarItem(placement: .topBarLeading) {
-          Button {
-            dismiss()
-            feed?.managedObjectContext?.rollback()
-          } label: {
-            Image(systemName: "xmark")
+        if self.context == .sheet {
+          ToolbarItem(placement: .topBarLeading) {
+            Button {
+              dismiss()
+              feed?.managedObjectContext?.rollback()
+            } label: {
+              Image(systemName: "xmark")
+            }
           }
         }
 
@@ -77,7 +82,9 @@ public struct RSSAddNewFeed: View {
     }
   }
 
-  public init() {}
+  public init(context: Context = .sheet) {
+    self.context = context
+  }
 
   private struct IndicatorView: View {
     @Binding var state: MachineState

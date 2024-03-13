@@ -7,12 +7,15 @@
 
 import SwiftUI
 import DesignSystem
+import Env
 
 public struct RSSFeedManager: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(\.managedObjectContext) private var moContext
   @FetchRequest(sortDescriptors: [SortDescriptor(\.title, order: .reverse)])
   private var feeds: FetchedResults<RSSFeed>
+
+  @State private var routerPath = RouterPath()
 
   public var body: some View {
     NavigationStack{
@@ -36,6 +39,14 @@ public struct RSSFeedManager: View {
             moContext.rollback()
           } label: {
             Image(systemName: "xmark")
+          }
+        }
+
+        ToolbarItem(placement: .navigationBarTrailing) {
+          NavigationLink {
+            RSSAddNewFeed(context: .manager)
+          } label: {
+            Image(systemName: "plus")
           }
         }
 
