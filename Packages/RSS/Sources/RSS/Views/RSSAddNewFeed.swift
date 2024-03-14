@@ -153,18 +153,7 @@ public struct RSSAddNewFeed: View {
             RSSItemView(item)
           }
         }
-        .task {
-          items = ((feed.items?.allObjects as? [RSSItem]) ?? [])
-            .sorted { i0, i1 in
-              if let d0 = i0.date,
-                 let d1 = i1.date
-              {
-                d0 > d1
-              } else {
-                false
-              }
-            }
-        }
+        .task { items = feed.toRSSItems().sorted { $0.date > $1.date } }
       }
     }
   }

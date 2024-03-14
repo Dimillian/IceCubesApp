@@ -15,9 +15,10 @@ import AppAccount
 import CoreData
 
 public struct RSSTabContentView: View {
-  @FetchRequest(sortDescriptors: [SortDescriptor(\.date, order: .reverse)],
-                predicate: NSPredicate(format: "feed.isShowing == TRUE"))
-  private var items: FetchedResults<RSSItem>
+  @FetchRequest(sortDescriptors: [],
+                predicate: NSPredicate(format: "isShowing == true"))
+  private var feeds: FetchedResults<RSSFeed>
+  private var items: [RSSItem] { feeds.toRSSItems().sorted { $0.date > $1.date } }
 
   @Environment(\.managedObjectContext) private var moContext
   @State private var isLoading = true
@@ -27,6 +28,25 @@ public struct RSSTabContentView: View {
   @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
 
+  public var body: some View {
+    NavigationStack {
+      Group {
+        if items.isEmpty {
+          makeContentUnavailableView()
+        } else {
+          makeItemList()
+        }
+      }
+      .navigationTitle("tab.rss")
+      .navigationBarTitleDisplayMode(.inline)
+      .listStyle(PlainListStyle())
+      .toolbar { makeToolbarItems() }
+      .onReceive(NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)) { notification in
+        let userInfo = notification.userInfo ?? [:]
+        NSManagedObjectContext.mergeChanges(fromRemoteContextSave: userInfo, into: [moContext])
+      }
+    }
+  }
 
   public init() {}
 
@@ -87,25 +107,4 @@ public struct RSSTabContentView: View {
     }
   }
 
-  public var body: some View {
-    NavigationStack {
-      Group {
-        if items.isEmpty {
-          makeContentUnavailableView()
-        } else {
-          makeItemList()
-        }
-      }
-      .navigationTitle("tab.rss")
-      .navigationBarTitleDisplayMode(.inline)
-      .listStyle(PlainListStyle())
-      .onReceive(NotificationCenter.default.publisher(for: .NSManagedObjectContextDidSave)) { notification in
-        let userInfo = notification.userInfo ?? [:]
-        NSManagedObjectContext.mergeChanges(fromRemoteContextSave: userInfo, into: [moContext])
-      }
-      .toolbar {
-        makeToolbarItems()
-      }
-    }
-  }
 }

@@ -13,12 +13,9 @@ struct RSSFeedView: View {
   @Environment(Theme.self) private var theme
 
   private var items: ArraySlice<RSSItem> {
-    ((feed.items?.allObjects as? [RSSItem]) ?? [])
-      .sorted { i0, i1 in
-        if let d0 = i0.date,
-           let d1 = i1.date
-        { d0 > d1 } else { false }
-      }.prefix(5)
+    feed.toRSSItems()
+      .sorted { $0.date > $1.date }
+      .prefix(5)
   }
 
   private var contentPadding: CGFloat {
