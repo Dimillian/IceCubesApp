@@ -17174,8 +17174,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "移到 %@"
           }
         },
         "zh-Hant" : {
