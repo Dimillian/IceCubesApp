@@ -213,6 +213,86 @@ enum RSSTools {
       return rssFeed
     }
   }
+
+  @MainActor
+  static func update(feedURL: URL) async {
+    /*
+     * TODO: use task local
+     */
+
+    let request: NSFetchRequest<RSSFeed> = {
+      let request = RSSFeed.fetchRequest()
+      request.fetchLimit = 1
+      request.predicate = NSPredicate(format: "%K = %@",
+                                      #keyPath(RSSFeed.feedURL),
+                                      feedURL as CVarArg)
+      request.relationshipKeyPathsForPrefetching = ["items"]
+      return request
+    }()
+
+    let context = RSSDataController.shared.backgroundContext
+    guard let feed = (try? context.fetch(request))?.first else { return }
+
+    let itemIDs = feed.toRSSItems().compactMap { $0.uniqueID! }
+    print(feed)
+
+    if Task.isCancelled { return }
+
+    let sendableFeed = await Task.detached {
+      await RSSTools.getFeedData(from: feedURL)
+    }.value
+    if Task.isCancelled { return }
+
+    guard let sendableFeed else { return }
+
+    let sendableItems = await Task.detached {
+      await sendableFeed.getSendableItemData()
+    }.value
+    if Task.isCancelled { return }
+
+    let items: [RSSItem] = sendableItems.compactMap {
+      if itemIDs.contains($0.parsedItem.uniqueID) { nil }
+      else { RSSItem(context: context, sendableData: $0) }
+    }
+    if Task.isCancelled { return }
+
+    for item in items { item.feed = feed }
+
+    do {
+      try context.save()
+      print("Auto-updated for \(feedURL.absoluteString): Saved \(items.count) item(s).")
+    } catch {
+      print(error.localizedDescription)
+    }
+  }
+
+  final class AutoUpdater {
+    private let feedURLs: [URL]
+    private let autoUpdatingTask: Task<Void, Never>
+
+    init(feedURLs: [URL]) {
+      self.feedURLs = feedURLs
+      self.autoUpdatingTask = Task.detached {
+        print("Updating feed(s)' URL(s): \(feedURLs)")
+        await withTaskGroup(of: Void.self) { taskGroup in
+          for url in feedURLs {
+            taskGroup.addTask {
+              repeat {
+                await RSSTools.update(feedURL: url)
+                try? await Task.sleep(for: .seconds(30*60))
+              } while !Task.isCancelled
+              print("The auto-updating task for \(url.absoluteString) has been canceled.")
+            }
+          }
+        }
+      }
+    }
+
+    deinit {
+      print("deinit task")
+      autoUpdatingTask.cancel()
+    }
+  }
 }
 
 private struct Icon {

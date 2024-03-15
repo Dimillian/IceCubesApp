@@ -21,7 +21,7 @@ public struct RSSTabContentView: View {
   private var items: [RSSItem] { feeds.toRSSItems().sorted { $0.date > $1.date } }
 
   @Environment(\.managedObjectContext) private var moContext
-  @State private var isLoading = true
+  @State private var autoUpdater: RSSTools.AutoUpdater? = nil
 
   @Environment(Client.self) private var client
   @Environment(UserPreferences.self) private var userPreferences
@@ -46,6 +46,18 @@ public struct RSSTabContentView: View {
         NSManagedObjectContext.mergeChanges(fromRemoteContextSave: userInfo, into: [moContext])
       }
     }
+    .task {
+      // WARNING: DON'T REMOVE, THIS CODE IS FOR TESTING PURPOSE.
+      //        try? await Task.sleep(for: .seconds(5))
+      //        let _context = RSSDataController.shared.viewContext
+      //        for item in feeds.toRSSItems() { _context.delete(item) }
+      //        try! _context.save()
+
+      autoUpdater = RSSTools.AutoUpdater(feedURLs: feeds.compactMap { $0.feedURL })
+    }
+    // FIXME: Why doesn't `AutoUpdater.deinit` never call?
+    //        This code triggers `AutoUpdater.deinit`.
+    .onDisappear { autoUpdater = nil }
   }
 
   public init() {}
@@ -106,5 +118,4 @@ public struct RSSTabContentView: View {
       }
     }
   }
-
 }
