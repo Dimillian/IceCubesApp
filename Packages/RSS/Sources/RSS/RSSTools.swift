@@ -191,7 +191,7 @@ enum RSSTools {
   }
 
   @MainActor
-  static func load(feedURL: URL) async -> RSSFeed? {
+  static func load(feedURL: URL) async -> Void? {
     let sendableFeed = await Task.detached {
       await RSSTools.getFeedData(from: feedURL)
     }.value
@@ -203,15 +203,31 @@ enum RSSTools {
       await sendableFeed.getSendableItemData()
     }.value
 
-    return await backgroundContext.perform {
-      let rssFeed = RSSFeed(context: backgroundContext, sendableData: sendableFeed)
+    let rssFeed = RSSFeed(context: backgroundContext, sendableData: sendableFeed)
 
-      let rssItems = sendableItems.compactMap {
-        RSSItem(context: backgroundContext, sendableData: $0)
-      }
-      rssFeed.items = NSSet(array: rssItems)
-      return rssFeed
+    let rssItems = sendableItems.compactMap {
+      RSSItem(context: backgroundContext, sendableData: $0)
     }
+    for item in rssItems { item.feed = rssFeed }
+
+    return try? backgroundContext.save()
+  }
+
+  @MainActor
+  static func fetchFeed(url: URL) async -> RSSFeed? {
+    let request: NSFetchRequest<RSSFeed> = {
+      let request = RSSFeed.fetchRequest()
+      request.fetchLimit = 1
+      request.predicate = NSPredicate(format: "%K = %@",
+                                      #keyPath(RSSFeed.feedURL),
+                                      url as CVarArg)
+      request.relationshipKeyPathsForPrefetching = ["items"]
+      return request
+    }()
+
+    let context = RSSDataController.shared.viewContext
+    guard let feed = (try? context.fetch(request))?.first else { return nil }
+    return feed
   }
 
   @MainActor

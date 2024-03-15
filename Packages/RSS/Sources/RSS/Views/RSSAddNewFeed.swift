@@ -66,10 +66,14 @@ public struct RSSAddNewFeed: View {
           feed?.managedObjectContext?.rollback()
 
           downloadingTask = Task {
-            let rssFeed = await RSSTools.load(feedURL: url)
+            guard let _ = await RSSTools.load(feedURL: url),
+                  let rssFeed = await RSSTools.fetchFeed(url: url)
+            else {
+              self.state = .noData(url: url)
+              return
+            }
             if Task.isCancelled { return }
-            if let rssFeed { self.state = .downloaded(feed: rssFeed, url: url) }
-            else { self.state = .noData(url: url) }
+            self.state = .downloaded(feed: rssFeed, url: url)
           }
         case .downloaded(let feed, _):
           self.feed = feed
