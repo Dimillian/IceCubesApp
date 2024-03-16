@@ -31,7 +31,7 @@ struct RSSFeedView: View {
         if let feedDescription = feed.feedDescription {
           Text(feedDescription)
         }
-        Text("rss.rssFeedManager.latestItemsSection.label")
+        Text("rss.feed.latestItemsSection.label")
           .font(.scaledFootnote)
           .fontWeight(.bold)
           .lineLimit(1)

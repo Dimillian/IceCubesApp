@@ -39080,6 +39080,149 @@
         }
       }
     },
+    "rss.feed.latestItemsSection.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Latest items"
+          }
+        }
+      }
+    },
+    "rss.item.url.unavailable" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL Unavailable"
+          }
+        }
+      }
+    },
+    "rss.item.url.unavailable.action.OK" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
+    },
+    "rss.item.url.unavailable.message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This item has no URL."
+          }
+        }
+      }
+    },
+    "rss.manager.contentUnavailableView.action.addNewFeed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add New Feed"
+          }
+        }
+      }
+    },
+    "rss.manager.contentUnavailableView.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have not added any feed."
+          }
+        }
+      }
+    },
+    "rss.manager.contentUnavailableView.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Feed Yet."
+          }
+        }
+      }
+    },
+    "rss.rssFeedManager.action.done" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        }
+      }
+    },
+    "rss.rssFeedManager.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feed Manager"
+          }
+        }
+      }
+    },
+    "rss.tab.contentUnavailableView.action.addNewFeed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add New Feed"
+          }
+        }
+      }
+    },
+    "rss.tab.contentUnavailableView.action.goToRSSManager" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to Feed Manager"
+          }
+        }
+      }
+    },
+    "rss.tab.contentUnavailableView.description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is no item to display. You can go to Feed Manager to manage the content or add a new feed."
+          }
+        }
+      }
+    },
+    "rss.tab.contentUnavailableView.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No item."
+          }
+        }
+      }
+    },
     "see-more" : {
       "extractionState" : "manual",
       "localizations" : {
