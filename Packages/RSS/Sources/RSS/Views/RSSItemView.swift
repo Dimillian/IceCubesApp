@@ -14,7 +14,7 @@ import Env
 struct RSSItemView: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
-  @ObservedObject private var viewModel: RSSItem
+  @ObservedObject private var item: RSSItem
   @State private var showAlert = false
 
   @State private var isRead: Bool // A workaround because SwiftUI doesn't animate on Core Data model changes.
@@ -26,7 +26,7 @@ struct RSSItemView: View {
   }
 
   init(_ viewModel: RSSItem) {
-    self.viewModel = viewModel
+    self.item = viewModel
     self._isRead = State(initialValue: viewModel.isRead)
   }
 
@@ -37,7 +37,7 @@ struct RSSItemView: View {
       VStack(alignment: .leading, spacing: .statusComponentSpacing) {
         headerView()
         bodyView()
-        actionsView(url: viewModel.url)
+        actionsView(url: item.url)
       }
     }
   }
@@ -46,26 +46,26 @@ struct RSSItemView: View {
   private func collapsedView() -> some View {
       HStack {
         Button(action: {
-          if let url = viewModel.url {
+          if let url = item.url {
             _ = routerPath.handle(url: url)
           } else {
             showAlert = true
           }
         }, label: {
           HStack {
-            AvatarView(viewModel.feed?.iconURL ?? viewModel.feed?.faviconURL, config: .list)
+            AvatarView(item.feed?.iconURL ?? item.feed?.faviconURL, config: .list)
               .hoverEffect()
               .opacity(0.5)
               .frame(width: AvatarView.FrameConfig.status.width)
             
             VStack(alignment: .leading, spacing: 2) {
-              Text(viewModel.title ?? "no title")
+              Text(item.title ?? "no title")
                 .foregroundColor(.secondary)
                 .font(.scaledFootnote)
                 .fontWeight(.semibold)
                 .lineLimit(1)
               
-              Text(viewModel.date ?? .now, style: .offset)
+              Text(item.date ?? .now, style: .offset)
                 .font(.caption2)
                 .foregroundStyle(.secondary)
                 .lineLimit(1)
@@ -85,14 +85,14 @@ struct RSSItemView: View {
         withAnimation {
           do {
             // MOVING `withAnimation` INTO HERE WILL DISABLE ANIMATIONS
-            viewModel.isRead = false
-            try viewModel.managedObjectContext?.save()
+            item.isRead = false
+            try item.managedObjectContext?.save()
           } catch {
             debugPrint("Failed to save `RSSItem.isRead`.")
-            viewModel.managedObjectContext?.refresh(viewModel, mergeChanges: false)
+            item.managedObjectContext?.refresh(item, mergeChanges: false)
           }
 
-          isRead = viewModel.isRead
+          isRead = item.isRead
         }
       } label: {
         Image(systemName: "eye")
@@ -105,7 +105,7 @@ struct RSSItemView: View {
 
   @ViewBuilder
   private func actionsView(url: URL?) -> some View {
-    if let url = viewModel.url {
+    if let url = item.url {
       HStack {
         Button {
           routerPath.presentedSheet = .quoteLinkStatusEditor(link: url)
@@ -119,8 +119,8 @@ struct RSSItemView: View {
 
         ShareLink(
           item: url,
-          subject: Text(viewModel.title ?? ""),
-          message: Text(viewModel.summary ?? "")
+          subject: Text(item.title ?? ""),
+          message: Text(item.summary ?? "")
         ) {
           Image(systemName: "square.and.arrow.up")
             .foregroundColor(Color(UIColor.secondaryLabel))
@@ -133,14 +133,14 @@ struct RSSItemView: View {
           withAnimation {
             do {
               // MOVING `withAnimation` INTO HERE WIll DISABLE ANIMATIONS
-              viewModel.isRead = true
-              try viewModel.managedObjectContext?.save()
+              item.isRead = true
+              try item.managedObjectContext?.save()
             } catch {
               debugPrint("Failed to save `RSSItem.isRead`.")
-              viewModel.managedObjectContext?.refresh(viewModel, mergeChanges: false)
+              item.managedObjectContext?.refresh(item, mergeChanges: false)
             }
 
-            isRead = viewModel.isRead
+            isRead = item.isRead
           }
         } label: {
           Image(systemName: "eye")
@@ -164,13 +164,13 @@ struct RSSItemView: View {
 
   private func headerView() -> some View {
     HStack {
-      AvatarView(viewModel.feed?.iconURL ?? viewModel.feed?.faviconURL, config: .status)
+      AvatarView(item.feed?.iconURL ?? item.feed?.faviconURL, config: .status)
         .hoverEffect()
 
       HStack(alignment: .bottom) {
         VStack(alignment: .leading, spacing: 2) {
           HStack(spacing: 2) {
-            Text(viewModel.feed?.feedURL?.host() ?? "")
+            Text(item.feed?.feedURL?.host() ?? "")
               .foregroundColor(theme.labelColor)
             Image(systemName: "dot.radiowaves.up.forward")
               .foregroundColor(theme.tintColor)
@@ -179,7 +179,7 @@ struct RSSItemView: View {
           .fontWeight(.semibold)
           .lineLimit(1)
 
-          Text(viewModel.authorsAsString ?? viewModel.feed?.feedURL?.host() ?? "")
+          Text(item.authorsAsString ?? item.feed?.feedURL?.host() ?? "")
             .font(.scaledFootnote)
             .foregroundStyle(.secondary)
             .lineLimit(1)
@@ -187,7 +187,7 @@ struct RSSItemView: View {
 
         Spacer()
 
-        Text(viewModel.date ?? .now, style: .offset)
+        Text(item.date ?? .now, style: .offset)
           .font(.scaledFootnote)
           .foregroundStyle(.secondary)
           .lineLimit(1)
@@ -198,7 +198,7 @@ struct RSSItemView: View {
 
   private func bodyView() -> some View {
     Button(action: {
-      if let url = viewModel.url {
+      if let url = item.url {
         _ = routerPath.handle(url: url)
       } else {
         showAlert = true
@@ -206,19 +206,19 @@ struct RSSItemView: View {
     }, label: {
       VStack(alignment: .leading, spacing: .statusComponentSpacing) {
         if
-          let previewImageURL = viewModel.previewImageURL
+          let previewImageURL = item.previewImageURL
         {
-          let width = viewModel.previewImageWidth
-          let height = viewModel.previewImageHeight
+          let width = item.previewImageWidth
+          let height = item.previewImageHeight
           RSSPreviewImage(url: previewImageURL, originalSize: CGSize(width: width, height: height))
         }
 
-        Text(viewModel.title ?? "no title")
+        Text(item.title ?? "no title")
           .font(.scaledHeadline)
           .lineLimit(2)
           .padding(.vertical, .statusComponentSpacing)
 
-        Text(viewModel.summary ?? "")
+        Text(item.summary ?? "")
           .font(.scaledBody)
           .lineSpacing(CGFloat(theme.lineSpacing))
           .lineLimit(10)
