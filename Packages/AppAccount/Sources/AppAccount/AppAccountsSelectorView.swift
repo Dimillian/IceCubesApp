@@ -33,11 +33,11 @@ public struct AppAccountsSelectorView: View {
 
   public init(routerPath: RouterPath,
               accountCreationEnabled: Bool = true,
-              avatarConfig: AvatarView.FrameConfig = .badge)
+              avatarConfig: AvatarView.FrameConfig? = nil)
   {
     self.routerPath = routerPath
     self.accountCreationEnabled = accountCreationEnabled
-    self.avatarConfig = avatarConfig
+    self.avatarConfig = avatarConfig ?? .badge
   }
 
   public var body: some View {

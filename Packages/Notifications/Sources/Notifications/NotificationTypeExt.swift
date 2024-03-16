@@ -67,6 +67,7 @@ extension Models.Notification.NotificationType {
     }
   }
 
+  @MainActor
   func tintColor(isPrivate: Bool) -> Color {
     if isPrivate {
       return Color.orange.opacity(0.80)

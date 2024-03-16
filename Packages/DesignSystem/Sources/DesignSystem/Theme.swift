@@ -1,8 +1,10 @@
 import Combine
 import SwiftUI
 
-@Observable public class Theme {
-  class ThemeStorage {
+@MainActor
+@Observable
+public final class Theme {
+  final class ThemeStorage {
     enum ThemeKey: String {
       case colorScheme, tint, label, primaryBackground, secondaryBackground
       case avatarPosition2, avatarShape2, statusActionsDisplay, statusDisplayStyle

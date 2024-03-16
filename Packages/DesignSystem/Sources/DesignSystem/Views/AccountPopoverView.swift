@@ -4,6 +4,7 @@ import Nuke
 import NukeUI
 import SwiftUI
 
+@MainActor
 struct AccountPopoverView: View {
   let account: Account
   let theme: Theme // using `@Environment(Theme.self) will crash the SwiftUI preview

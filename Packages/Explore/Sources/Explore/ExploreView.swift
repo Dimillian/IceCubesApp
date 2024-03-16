@@ -33,8 +33,8 @@ public struct ExploreView: View {
           if let results = viewModel.results[viewModel.searchQuery] {
             if results.isEmpty, !viewModel.isSearching {
               PlaceholderView(iconName: "magnifyingglass",
-                        title: "explore.search.empty.title",
-                        message: "explore.search.empty.message")
+                              title: "explore.search.empty.title",
+                              message: "explore.search.empty.message")
                 .listRowBackground(theme.secondaryBackgroundColor)
                 .listRowSeparator(.hidden)
             } else {
@@ -54,8 +54,8 @@ public struct ExploreView: View {
           }
         } else if viewModel.allSectionsEmpty {
           PlaceholderView(iconName: "magnifyingglass",
-                    title: "explore.search.title",
-                    message: "explore.search.message-\(client.server)")
+                          title: "explore.search.title",
+                          message: "explore.search.message-\(client.server)")
           #if !os(visionOS)
             .listRowBackground(theme.secondaryBackgroundColor)
           #endif

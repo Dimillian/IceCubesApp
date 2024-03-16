@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 public struct NextPageView: View {
   @State private var isLoadingNextPage: Bool = false
   @State private var showRetry: Bool = false
@@ -51,13 +52,10 @@ public struct NextPageView: View {
   }
 }
 
-
 #Preview {
   List {
     Text("Item 1")
-    NextPageView {
-      
-    }
+    NextPageView {}
   }
   .listStyle(.plain)
 }

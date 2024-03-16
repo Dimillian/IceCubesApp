@@ -42,11 +42,11 @@ public enum SheetDestination: Identifiable, Hashable {
   public static func == (lhs: SheetDestination, rhs: SheetDestination) -> Bool {
     lhs.id == rhs.id
   }
-  
+
   public func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
-  
+
   case newStatusEditor(visibility: Models.Visibility)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)

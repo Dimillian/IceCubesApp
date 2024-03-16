@@ -167,6 +167,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
   }
 }
 
+@MainActor
 @Observable
 class SidebarTabs {
   struct SidedebarTab: Hashable, Codable {
@@ -213,6 +214,7 @@ class SidebarTabs {
   }
 }
 
+@MainActor
 @Observable
 class iOSTabs {
   enum TabEntries: String {

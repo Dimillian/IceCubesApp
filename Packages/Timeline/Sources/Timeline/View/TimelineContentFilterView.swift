@@ -1,7 +1,8 @@
 import DesignSystem
-import SwiftUI
 import Env
+import SwiftUI
 
+@MainActor
 public struct TimelineContentFilterView: View {
   @Environment(Theme.self) private var theme
   @Environment(CurrentInstance.self) private var currentInstance
@@ -31,7 +32,7 @@ public struct TimelineContentFilterView: View {
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
       #endif
-      
+
       Section {
         if currentInstance.isFiltersSupported {
           Button {
