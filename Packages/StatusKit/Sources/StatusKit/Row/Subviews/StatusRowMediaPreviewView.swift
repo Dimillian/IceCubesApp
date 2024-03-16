@@ -67,7 +67,6 @@ public struct StatusRowMediaPreviewView: View {
           }
           .padding(.bottom, scrollBottomPadding)
         }
-        .scrollClipDisabled()
       }
     }
   }
