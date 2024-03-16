@@ -17,6 +17,8 @@ struct RSSItemView: View {
   @ObservedObject private var viewModel: RSSItem
   @State private var showAlert = false
 
+  @State private var isRead: Bool // A workaround because SwiftUI doesn't animate on Core Data model changes.
+
   private var contentPadding: CGFloat {
     theme.avatarPosition == .top
     ? 0
@@ -25,27 +27,79 @@ struct RSSItemView: View {
 
   init(_ viewModel: RSSItem) {
     self.viewModel = viewModel
+    self._isRead = State(initialValue: viewModel.isRead)
   }
 
   var body: some View {
-    Button(action: {
-      if let url = viewModel.url {
-        _ = routerPath.handle(url: url)
-      } else {
-        showAlert = true
-      }
-    }, label: {
+    if isRead {
+      collapsedView()
+    } else {
       VStack(alignment: .leading, spacing: .statusComponentSpacing) {
         headerView()
         bodyView()
         actionsView(url: viewModel.url)
       }
-    })
-    .buttonStyle(.plain)
-    .alert("rss.item.url.unavailable", isPresented: $showAlert) {
-      Button("rss.item.url.unavailable.action.OK") { showAlert = false }
-    } message: {
-      Text("rss.item.url.unavailable.message")
+    }
+  }
+
+  @ViewBuilder
+  private func collapsedView() -> some View {
+      HStack {
+        Button(action: {
+          if let url = viewModel.url {
+            _ = routerPath.handle(url: url)
+          } else {
+            showAlert = true
+          }
+        }, label: {
+          HStack {
+            AvatarView(viewModel.feed?.iconURL ?? viewModel.feed?.faviconURL, config: .list)
+              .hoverEffect()
+              .opacity(0.5)
+              .frame(width: AvatarView.FrameConfig.status.width)
+            
+            VStack(alignment: .leading, spacing: 2) {
+              Text(viewModel.title ?? "no title")
+                .foregroundColor(.secondary)
+                .font(.scaledFootnote)
+                .fontWeight(.semibold)
+                .lineLimit(1)
+              
+              Text(viewModel.date ?? .now, style: .offset)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+            }
+            
+            Spacer()
+          }
+        })
+        .buttonStyle(.plain)
+        .alert("rss.item.url.unavailable", isPresented: $showAlert) {
+          Button("rss.item.url.unavailable.action.OK") { showAlert = false }
+        } message: {
+          Text("rss.item.url.unavailable.message")
+        }
+
+      Button {
+        withAnimation {
+          do {
+            // MOVING `withAnimation` INTO HERE WILL DISABLE ANIMATIONS
+            viewModel.isRead = false
+            try viewModel.managedObjectContext?.save()
+          } catch {
+            debugPrint("Failed to save `RSSItem.isRead`.")
+            viewModel.managedObjectContext?.refresh(viewModel, mergeChanges: false)
+          }
+
+          isRead = viewModel.isRead
+        }
+      } label: {
+        Image(systemName: "eye")
+          .foregroundColor(.secondary)
+          .font(.scaledFootnote)
+          .padding(EdgeInsets(top: 6, leading: 8, bottom: 6, trailing: 0))
+      }
     }
   }
 
@@ -74,6 +128,28 @@ struct RSSItemView: View {
             .padding(.horizontal, 8)
             .contentShape(Rectangle())
         }
+
+        Button {
+          withAnimation {
+            do {
+              // MOVING `withAnimation` INTO HERE WIll DISABLE ANIMATIONS
+              viewModel.isRead = true
+              try viewModel.managedObjectContext?.save()
+            } catch {
+              debugPrint("Failed to save `RSSItem.isRead`.")
+              viewModel.managedObjectContext?.refresh(viewModel, mergeChanges: false)
+            }
+
+            isRead = viewModel.isRead
+          }
+        } label: {
+          Image(systemName: "eye")
+            .foregroundColor(Color(UIColor.secondaryLabel))
+            .padding(.vertical, 6)
+            .padding(.horizontal, 8)
+            .contentShape(Rectangle())
+        }
+        .zIndex(1)
       }
       .padding(.leading, contentPadding)
       .buttonStyle(.borderless)
@@ -89,8 +165,6 @@ struct RSSItemView: View {
   private func headerView() -> some View {
     HStack {
       AvatarView(viewModel.feed?.iconURL ?? viewModel.feed?.faviconURL, config: .status)
-        .accessibility(addTraits: .isButton)
-        .contentShape(Circle())
         .hoverEffect()
 
       HStack(alignment: .bottom) {
@@ -123,26 +197,40 @@ struct RSSItemView: View {
   }
 
   private func bodyView() -> some View {
-    VStack(alignment: .leading, spacing: .statusComponentSpacing) {
-      if
-        let previewImageURL = viewModel.previewImageURL
-      {
-        let width = viewModel.previewImageWidth
-        let height = viewModel.previewImageHeight
-        RSSPreviewImage(url: previewImageURL, originalSize: CGSize(width: width, height: height))
+    Button(action: {
+      if let url = viewModel.url {
+        _ = routerPath.handle(url: url)
+      } else {
+        showAlert = true
       }
+    }, label: {
+      VStack(alignment: .leading, spacing: .statusComponentSpacing) {
+        if
+          let previewImageURL = viewModel.previewImageURL
+        {
+          let width = viewModel.previewImageWidth
+          let height = viewModel.previewImageHeight
+          RSSPreviewImage(url: previewImageURL, originalSize: CGSize(width: width, height: height))
+        }
 
-      Text(viewModel.title ?? "no title")
-        .font(.scaledHeadline)
-        .lineLimit(2)
-        .padding(.vertical, .statusComponentSpacing)
+        Text(viewModel.title ?? "no title")
+          .font(.scaledHeadline)
+          .lineLimit(2)
+          .padding(.vertical, .statusComponentSpacing)
 
-      Text(viewModel.summary ?? "")
-        .font(.scaledBody)
-        .lineSpacing(CGFloat(theme.lineSpacing))
-        .lineLimit(10)
+        Text(viewModel.summary ?? "")
+          .font(.scaledBody)
+          .lineSpacing(CGFloat(theme.lineSpacing))
+          .lineLimit(10)
+      }
+      .padding(.leading, contentPadding)
+    })
+    .buttonStyle(.plain)
+    .alert("rss.item.url.unavailable", isPresented: $showAlert) {
+      Button("rss.item.url.unavailable.action.OK") { showAlert = false }
+    } message: {
+      Text("rss.item.url.unavailable.message")
     }
-    .padding(.leading, contentPadding)
   }
 }
 

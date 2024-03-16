@@ -33,7 +33,7 @@ public struct AvatarView: View {
     self.config = config
   }
 
-  public struct FrameConfig: Equatable {
+  public struct FrameConfig: Equatable, Sendable {
     public let size: CGSize
     public var width: CGFloat { size.width }
     public var height: CGFloat { size.height }

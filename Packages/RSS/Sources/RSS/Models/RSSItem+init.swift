@@ -40,6 +40,7 @@ extension RSSItem {
       .getRSSAuthors(context: context, feedAuthors: sendableData.feedAuthors, feedURL: sendableData.feedURL)
 
     self.tags = NSSet(set: sendableData.parsedItem.tags ?? [])
+    self.isRead = false
   }
 
   var authorsAsString: String? {
