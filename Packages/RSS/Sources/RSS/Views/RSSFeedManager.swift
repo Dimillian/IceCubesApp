@@ -19,14 +19,11 @@ public struct RSSFeedManager: View {
 
   public var body: some View {
     NavigationStack{
-      List {
-        ForEach(feeds) { feed in
-          RSSFeedView(feed)
-        }
-        .onDelete { indices in
-          for index in indices {
-            moContext.delete(feeds[index])
-          }
+      Group {
+        if feeds.isEmpty {
+          makeContentUnavailableView()
+        } else {
+          makeFeedList()
         }
       }
       .listStyle(PlainListStyle())
@@ -63,6 +60,34 @@ public struct RSSFeedManager: View {
   }
 
   public init() {}
+
+  private func makeContentUnavailableView() -> some View {
+    ContentUnavailableView {
+      Label("rss.manager.contentUnavailableView.title", systemImage: "dot.radiowaves.up.forward")
+    } description: {
+      Text("rss.manager.contentUnavailableView.description")
+    } actions: {
+      NavigationLink {
+        RSSAddNewFeed(context: .manager)
+      } label: {
+        Text("rss.manager.contentUnavailableView.action.addNewFeed")
+      }
+      .buttonStyle(.borderedProminent)
+    }
+  }
+
+  private func makeFeedList() -> some View {
+    List {
+      ForEach(feeds) { feed in
+        RSSFeedView(feed)
+      }
+      .onDelete { indices in
+        for index in indices {
+          moContext.delete(feeds[index])
+        }
+      }
+    }
+  }
 }
 
 #Preview {
