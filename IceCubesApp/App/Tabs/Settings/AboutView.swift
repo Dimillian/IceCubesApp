@@ -90,6 +90,8 @@ struct AboutView: View {
         • [RevenueCat](https://github.com/RevenueCat/purchases-ios)
 
         • [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)
+        
+        • [RSParser](https://github.com/Ranchero-Software/RSParser)
         """)
         .multilineTextAlignment(.leading)
         .font(.scaledSubheadline)
