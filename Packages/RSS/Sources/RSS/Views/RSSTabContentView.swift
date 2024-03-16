@@ -95,9 +95,9 @@ public struct RSSTabContentView: View {
 
   private func makeContentUnavailableView() -> some View {
     ContentUnavailableView {
-      Label("tab.rss.contentUnavailableView.title", systemImage: "dot.radiowaves.up.forward")
+      Label("rss.tab.contentUnavailableView.title", systemImage: "dot.radiowaves.up.forward")
     } description: {
-      Text("tab.rss.contentUnavailableView.description")
+      Text("rss.tab.contentUnavailableView.description")
     } actions: {
       Button {
         Task { @MainActor in
@@ -105,7 +105,17 @@ public struct RSSTabContentView: View {
           HapticManager.shared.fireHaptic(.buttonPress)
         }
       } label: {
-        Text("tab.rss.contentUnavailableView.action.goToRSSManager")
+        Text("rss.tab.contentUnavailableView.action.goToRSSManager")
+      }
+      .buttonStyle(.borderedProminent)
+
+      Button {
+        Task { @MainActor in
+          routerPath.presentedSheet = SheetDestination.addNewRSSFeed
+          HapticManager.shared.fireHaptic(.buttonPress)
+        }
+      } label: {
+        Text("rss.tab.contentUnavailableView.action.addNewFeed")
       }
       .buttonStyle(.borderedProminent)
     }
