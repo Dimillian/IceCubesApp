@@ -66,9 +66,15 @@ public struct RSSAddNewFeed: View {
           feed?.managedObjectContext?.rollback()
 
           downloadingTask = Task {
+            if let _ = await RSSTools.fetchFeed(url: url) {
+              self.state = .urlExists
+              return
+            }
+
             guard let _ = await RSSTools.load(feedURL: url),
                   let rssFeed = await RSSTools.fetchFeed(url: url)
             else {
+              if Task.isCancelled { return }
               self.state = .noData(url: url)
               return
             }
@@ -100,10 +106,12 @@ public struct RSSAddNewFeed: View {
       switch state {
       case .emptyInput, .downloaded:
         EmptyView()
-      case .invalidURL, .noData:
+      case .invalidURL, .urlExists, .noData:
         Text({
           if case .noData = state {
             "rss.addNewFeed.input.noData"
+          } else if case .urlExists = state {
+            "rss.addNewFeed.input.urlExists"
           } else {
             "rss.addNewFeed.input.invalidURL"
           }
@@ -133,6 +141,7 @@ public struct RSSAddNewFeed: View {
                 withAnimation(.easeInOut(duration: 0.5)) {
                   opacity = opacity == 1 ? 0 : 1
                 }
+                if Task.isCancelled { return }
 
                 waitingDuration += 0.5
               }
@@ -169,6 +178,7 @@ public struct RSSAddNewFeed: View {
     case downloading(url: URL)
     case downloaded(feed: RSSFeed, url: URL)
     case noData(url: URL)
+    case urlExists
 
     func receive(urlString: String) -> MachineState {
       if urlString.isEmpty {

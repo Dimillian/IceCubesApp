@@ -39155,6 +39155,17 @@
         }
       }
     },
+    "rss.addNewFeed.input.urlExists" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This URL already exists."
+          }
+        }
+      }
+    },
     "rss.addNewFeed.input.waiting" : {
       "extractionState" : "manual",
       "localizations" : {
