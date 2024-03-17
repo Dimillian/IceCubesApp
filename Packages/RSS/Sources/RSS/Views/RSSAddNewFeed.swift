@@ -42,7 +42,10 @@ public struct RSSAddNewFeed: View {
           ToolbarItem(placement: .topBarLeading) {
             Button {
               dismiss()
-              feed?.managedObjectContext?.rollback()
+              if let feed {
+                feed.managedObjectContext?.delete(feed)
+                try? feed.managedObjectContext?.save()
+              }
             } label: {
               Image(systemName: "xmark")
             }
@@ -63,7 +66,10 @@ public struct RSSAddNewFeed: View {
         switch state {
         case .downloading(let url):
           downloadingTask?.cancel()
-          feed?.managedObjectContext?.rollback()
+          if let feed {
+            feed.managedObjectContext?.delete(feed)
+            try? feed.managedObjectContext?.save()
+          }
 
           downloadingTask = Task {
             if let _ = await RSSTools.fetchFeed(url: url) {
