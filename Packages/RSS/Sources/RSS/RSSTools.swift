@@ -192,25 +192,24 @@ enum RSSTools {
 
   @MainActor
   static func load(feedURL: URL) async -> Void? {
-    let sendableFeed = await Task.detached {
-      await RSSTools.getFeedData(from: feedURL)
+    await Task<()?, Never>.detached {
+      guard
+        let sendableFeed = await RSSTools.getFeedData(from: feedURL)
+      else { return nil }
+
+      let context = await RSSDataController.shared.container.newBackgroundContext()
+      context.mergePolicy = NSMergePolicy.mergeByPropertyStoreTrump
+      let sendableItems = await sendableFeed.getSendableItemData()
+
+      let rssFeed = RSSFeed(context: context, sendableData: sendableFeed)
+
+      let rssItems = sendableItems.compactMap {
+        RSSItem(context: context, sendableData: $0)
+      }
+      for item in rssItems { item.feed = rssFeed }
+
+      return try? context.save()
     }.value
-
-    guard let sendableFeed else { return nil }
-
-    let backgroundContext = RSSDataController.shared.backgroundContext
-    let sendableItems = await Task.detached {
-      await sendableFeed.getSendableItemData()
-    }.value
-
-    let rssFeed = RSSFeed(context: backgroundContext, sendableData: sendableFeed)
-
-    let rssItems = sendableItems.compactMap {
-      RSSItem(context: backgroundContext, sendableData: $0)
-    }
-    for item in rssItems { item.feed = rssFeed }
-
-    return try? backgroundContext.save()
   }
 
   @MainActor

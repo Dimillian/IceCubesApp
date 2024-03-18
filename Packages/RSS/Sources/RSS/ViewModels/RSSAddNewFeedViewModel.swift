@@ -10,59 +10,89 @@ import SwiftUI
 @MainActor
 @Observable
 final class RSSAddNewFeedViewModel {
-  var feed: RSSFeed? = nil
   var state: FormState = .emptyInput {
     didSet {
-      transitionTask?.cancel()
-      if let feed {
-        feed.managedObjectContext?.delete(feed)
-        try? feed.managedObjectContext?.save()
-      }
+      self.cleanForTransitioning(from: oldValue, to: state)
 
       switch self.state {
-      case .waiting(let url):
-        transitionTask = Task {
-          try? await Task.sleep(for: .seconds(3))
-
-          if Task.isCancelled { return }
-          self.state = .downloading(url: url)
-        }
-      case .downloading(let url):
-        transitionTask = Task {
-          if let _ = await RSSTools.fetchFeed(url: url) {
-            if Task.isCancelled { return }
-            self.state = .urlExists
-            return
-          }
-
-          guard let _ = await RSSTools.load(feedURL: url),
-                let rssFeed = await RSSTools.fetchFeed(url: url)
-          else {
-            if Task.isCancelled { return }
-            self.state = .noData(url: url)
-            return
-          }
-          if Task.isCancelled { return }
-          self.state = .downloaded(feed: rssFeed, url: url)
-        }
-      case .downloaded(let feed, _):
-        self.feed = feed
+      case .waiting(_):
+        transitioningTask = createWaitingTask()
+      case .downloading(_):
+        transitioningTask = createDownloadingTask()
       default:
         return
       }
     }
   }
 
-  var items: [RSSItem] {
-    feed?.toRSSItems().sorted { $0.date > $1.date }
-    ?? []
-  }
-
   @ObservationIgnored
-  private var transitionTask: Task<(), Never>? = nil
+  private var transitioningTask: Task<(), Never>? = nil
 
   func receive(urlString: String) {
     self.state = self.state.receive(urlString: urlString)
+  }
+
+  func deleteFeed(url: URL) {
+    Task {
+      if let feed = await RSSTools.fetchFeed(url: url) {
+        feed.managedObjectContext?.delete(feed)
+        try? feed.managedObjectContext?.save()
+      }
+    }
+  }
+
+  func deleteFeed() {
+    Task { [state = self.state] in
+      if case let .downloaded(url) = state,
+         let feed = await RSSTools.fetchFeed(url: url)
+      {
+        feed.managedObjectContext?.delete(feed)
+        try? feed.managedObjectContext?.save()
+      }
+    }
+  }
+
+  private func cleanForTransitioning(from oldState: FormState, to newState: FormState) {
+    transitioningTask?.cancel()
+    if case let .downloaded(url) = oldState,
+       newState != .saved
+    { self.deleteFeed(url: url) }
+  }
+
+  private func createWaitingTask() -> Task<(), Never>? {
+    if case let .waiting(url) = state {
+      Task {
+        try? await Task.sleep(for: .seconds(0.2))
+
+        if Task.isCancelled { return }
+        self.state = .downloading(url: url)
+      }
+    } else {
+      nil
+    }
+  }
+
+  private func createDownloadingTask() -> Task<(), Never>? {
+    if case let .downloading(url) = state {
+      Task {
+        if let _ = await RSSTools.fetchFeed(url: url) {
+          if Task.isCancelled { return }
+          self.state = .urlExists
+          return
+        }
+
+        guard let _ = await RSSTools.load(feedURL: url)
+        else {
+          if Task.isCancelled { return }
+          self.state = .noData(url: url)
+          return
+        }
+        if Task.isCancelled { return }
+        self.state = .downloaded(url: url)
+      }
+    } else {
+      nil
+    }
   }
 }
 
@@ -71,9 +101,10 @@ enum FormState: Equatable {
   case invalidURL(string: String)
   case waiting(url: URL)
   case downloading(url: URL)
-  case downloaded(feed: RSSFeed, url: URL)
+  case downloaded(url: URL)
   case noData(url: URL)
   case urlExists
+  case saved
 
   func receive(urlString: String) -> FormState {
     if urlString.isEmpty {

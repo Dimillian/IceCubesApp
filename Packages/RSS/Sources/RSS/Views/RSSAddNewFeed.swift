@@ -32,7 +32,9 @@ public struct RSSAddNewFeed: View {
           }
         }
 
-        FeedPreview(formVM.items)
+        FeedPreview(formState: formVM.state)
+          .id(UUID()) // A WORKAROUND TO DISABLE FORM CACHING TO MAKE ANIMATION CONSISTENT.
+
       }
       .navigationTitle("rss.addNewFeed.title")
       .navigationBarTitleDisplayMode(.inline)
@@ -41,10 +43,7 @@ public struct RSSAddNewFeed: View {
           ToolbarItem(placement: .topBarLeading) {
             Button {
               dismiss()
-              if let feed = formVM.feed {
-                feed.managedObjectContext?.delete(feed)
-                try? feed.managedObjectContext?.save()
-              }
+              formVM.deleteFeed()
             } label: {
               Image(systemName: "xmark")
             }
@@ -53,12 +52,17 @@ public struct RSSAddNewFeed: View {
 
         ToolbarItem(placement: .topBarTrailing) {
           Button("rss.addNewFeed.action.add") {
+            formVM.state = .saved
             dismiss()
-            try? formVM.feed?.managedObjectContext?.save()
           }
         }
       }
-      .onDisappear { formVM.feed?.managedObjectContext?.rollback() }
+      .onAppear {
+        if context == .manager {
+          try? RSSDataController.shared.viewContext.save()
+        }
+      }
+      .onDisappear { formVM.deleteFeed() }
     }
   }
 
@@ -106,7 +110,7 @@ private enum IndicatorState: Equatable {
 
   init(_ formState: FormState) {
     switch formState {
-    case .emptyInput, .downloaded(feed: _, url: _):
+    case .emptyInput, .downloaded(_), .saved:
       self = .empty
     case .invalidURL(_):
       self = .warning(message: "rss.addNewFeed.input.invalidURL")
@@ -123,19 +127,30 @@ private enum IndicatorState: Equatable {
 }
 
 private struct FeedPreview: View {
-  private var items: [RSSItem] = []
-
-  init(_ items: [RSSItem]) {
-    self.items = items
-  }
+  @FetchRequest private var items: FetchedResults<RSSItem>
+  @State private var yOffset: CGFloat = 1000
 
   var body: some View {
     if !items.isEmpty {
       Section("rss.addNewFeed.feedPreview.label") {
-        List(items) { item in
+        List(items, id: \.uniqueID) { item in
           RSSItemView(item)
         }
       }
+      .offset(x: 0, y: yOffset)
+      .onAppear {
+        withAnimation(.easeInOut) { yOffset = 0 }
+      }
     }
+  }
+
+  init(formState: FormState) {
+    let urlString = if case let .downloaded(url) = formState { url.absoluteString } else { "" }
+    self._items = FetchRequest(
+      sortDescriptors: [SortDescriptor(\.date, order: .reverse)],
+      predicate: NSPredicate(format: "%K = %@",
+                             #keyPath(RSSItem.feed.feedURL.absoluteString),
+                             urlString as CVarArg),
+      animation: .easeInOut)
   }
 }
