@@ -10,29 +10,44 @@ import SwiftUI
 @MainActor
 @Observable
 final class RSSAddNewFeedViewModel {
-  var state: FormState = .emptyInput {
-    didSet {
-      self.cleanForTransitioning(from: oldValue, to: state)
 
-      switch self.state {
-      case .waiting(_):
-        transitioningTask = createWaitingTask()
-      case .downloading(_):
-        transitioningTask = createDownloadingTask()
-      default:
-        return
-      }
-    }
+  // MARK: - interface
+  private(set) var state: FormState = .emptyInput {
+    didSet { self.transition(from: oldValue, to: state) }
   }
 
-  @ObservationIgnored
-  private var transitioningTask: Task<(), Never>? = nil
+  // MARK: - UI actions
 
   func receive(urlString: String) {
     self.state = self.state.receive(urlString: urlString)
   }
 
-  func deleteFeed(url: URL) {
+  func save() {
+    let context = RSSDataController.shared.viewContext
+    if context.hasChanges { try? context.save() }
+  }
+
+  func dismiss() {
+    self.deleteFeed()
+    self.dismissAction?()
+  }
+
+  func done() {
+    self.state = .saved
+  }
+
+  func setDismissAction(_ action: DismissAction) {
+    self.dismissAction = action
+  }
+
+  // MARK: - private
+
+  private var dismissAction: DismissAction? = nil
+
+  @ObservationIgnored
+  private var transitioningTask: Task<(), Never>? = nil
+
+  private func deleteFeed(url: URL) {
     Task {
       if let feed = await RSSTools.fetchFeed(url: url) {
         feed.managedObjectContext?.delete(feed)
@@ -41,7 +56,7 @@ final class RSSAddNewFeedViewModel {
     }
   }
 
-  func deleteFeed() {
+  private func deleteFeed() {
     Task { [state = self.state] in
       if case let .downloaded(url) = state,
          let feed = await RSSTools.fetchFeed(url: url)
@@ -52,11 +67,39 @@ final class RSSAddNewFeedViewModel {
     }
   }
 
-  private func cleanForTransitioning(from oldState: FormState, to newState: FormState) {
+  private func transition(from oldState: FormState, to newState: FormState) {
+    print("transition: \(oldState) -> \(newState)\n----")
+
     transitioningTask?.cancel()
-    if case let .downloaded(url) = oldState,
-       newState != .saved
-    { self.deleteFeed(url: url) }
+
+    switch oldState {
+    case .downloaded(let oldURL):
+      switch newState {
+      case .waiting(_):
+        self.deleteFeed(url: oldURL)
+        self.transitioningTask = createWaitingTask()
+      case .downloading(_):
+        self.deleteFeed(url: oldURL)
+        self.transitioningTask = createDownloadingTask()
+      case .saved:
+        dismissAction?()
+      case .downloaded(_):
+        return
+      default:
+        self.deleteFeed(url: oldURL)
+      }
+    case .saved:
+      return
+    default:
+      switch newState {
+      case .waiting(_):
+        self.transitioningTask = createWaitingTask()
+      case .downloading(_):
+        self.transitioningTask = createDownloadingTask()
+      default:
+        return
+      }
+    }
   }
 
   private func createWaitingTask() -> Task<(), Never>? {

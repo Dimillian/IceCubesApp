@@ -11,9 +11,10 @@ import CoreData
 @MainActor
 public struct RSSAddNewFeed: View {
   @Environment(\.dismiss) private var dismiss
-  @State private var formVM = RSSAddNewFeedViewModel()
   @State private var urlString = ""
   let context: UIContext
+
+  @State private var formVM = RSSAddNewFeedViewModel()
 
   public var body: some View {
     NavigationStack {
@@ -42,8 +43,7 @@ public struct RSSAddNewFeed: View {
         if self.context == .sheet {
           ToolbarItem(placement: .topBarLeading) {
             Button {
-              dismiss()
-              formVM.deleteFeed()
+              formVM.dismiss()
             } label: {
               Image(systemName: "xmark")
             }
@@ -52,17 +52,18 @@ public struct RSSAddNewFeed: View {
 
         ToolbarItem(placement: .topBarTrailing) {
           Button("rss.addNewFeed.action.add") {
-            formVM.state = .saved
-            dismiss()
+            formVM.done()
           }
+          .disabled({
+            if case .downloaded(_) = formVM.state { false } else { true }
+          }())
         }
       }
       .onAppear {
-        if context == .manager {
-          try? RSSDataController.shared.viewContext.save()
-        }
+        if context == .manager { formVM.save() }
+        formVM.setDismissAction(dismiss)
       }
-      .onDisappear { formVM.deleteFeed() }
+      .onDisappear { formVM.dismiss() }
     }
   }
 
