@@ -1,0 +1,35 @@
+name: Validate Code
+
+on:
+  pull_request:
+    types: [synchronize, opened, reopened, labeled, unlabeled, edited]
+
+jobs:
+  main:
+    name: Review, Lint, Verify
+    runs-on: macOS-latest
+    steps:
+      - name: git checkout
+        uses: actions/checkout@v3
+
+      - name: ruby versions
+        run: |
+          ruby --version
+          gem --version
+          bundler --version
+
+      - name: ruby setup
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+          bundler-cache: true
+
+      # additional steps here, if needed
+
+      - name: Clone SwiftPolyglot
+        run: git clone https://github.com/appdecostudio/SwiftPolyglot.git
+
+      - name: validate translations
+        run: |
+          swift build --package-path ./SwiftPolyglot --configuration release
+          swift run --package-path ./SwiftPolyglot swiftpolyglot "en,eu,be,ca,zh-Hans,zh-Hant,nl,en-GB,fr,de,it,ja,ko,nb,pl,pt-BR,es,tr,uk"
