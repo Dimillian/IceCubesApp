@@ -1,4 +1,4 @@
-name: Validate Code
+name: Validate Translations
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
 
 jobs:
   main:
-    name: Review, Lint, Verify
+    name: Validate Translations
     runs-on: macOS-latest
     steps:
       - name: git checkout
@@ -27,9 +27,9 @@ jobs:
       # additional steps here, if needed
 
       - name: Clone SwiftPolyglot
-        run: git clone https://github.com/appdecostudio/SwiftPolyglot.git
+        run: git clone https://github.com/appdecostudio/SwiftPolyglot.git --branch 0.2.0
 
-      - name: validate translations
+      - name: Build and Run SwiftPolyglot
         run: |
           swift build --package-path ./SwiftPolyglot --configuration release
           swift run --package-path ./SwiftPolyglot swiftpolyglot "en,eu,be,ca,zh-Hans,zh-Hant,nl,en-GB,fr,de,it,ja,ko,nb,pl,pt-BR,es,tr,uk"
