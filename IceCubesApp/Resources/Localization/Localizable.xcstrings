@@ -14304,7 +14304,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "提醒：全域設定會凌駕這些設定"
           }
         }
       }
@@ -19318,7 +19318,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "重複標籤"
           }
         }
       }
@@ -19436,7 +19436,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "最少需要選擇兩個標籤"
           }
         }
       }
@@ -19554,7 +19554,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "查無此圖示"
           }
         }
       }
@@ -19791,7 +19791,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "名稱空白"
           }
         }
       }
@@ -19909,7 +19909,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "未選擇圖示"
           }
         }
       }
@@ -32114,7 +32114,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "把嘟文排除在首頁外"
           }
         }
       }
@@ -32233,7 +32233,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show replies to"
+            "value" : "顯示回文"
           }
         }
       }
@@ -32352,7 +32352,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
+            "value" : "名稱"
           }
         }
       }
@@ -32471,7 +32471,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any followed user"
+            "value" : "任何跟隨的用戶"
           }
         }
       }
@@ -32590,7 +32590,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Members of the list"
+            "value" : "本列表的成員"
           }
         }
       }
@@ -32709,7 +32709,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one"
+            "value" : "不顯示"
           }
         }
       }
@@ -33186,7 +33186,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "List settings"
+            "value" : "列表設定"
           }
         }
       }
@@ -33424,7 +33424,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search users"
+            "value" : "搜尋用戶"
           }
         }
       }
@@ -42400,7 +42400,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Require Alt Text to Post"
+            "value" : "要求嘟文含圖片描述文字"
           }
         }
       }
@@ -67013,7 +67013,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your settings require alt text on all media before posting"
+            "value" : "您設定嘟文必須含圖片描述文字"
           }
         }
       }
@@ -67608,7 +67608,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ALT"
+            "value" : "描述"
           }
         }
       }
