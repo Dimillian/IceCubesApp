@@ -84,7 +84,7 @@ import SwiftUI
   private var tabTask: Task<Void, Never>?
 
   private(set) var statuses: [Status] = []
-  
+
   var boosts: [Status] = []
 
   /// When coming from a URL like a mention tap in a status.
@@ -151,7 +151,7 @@ import SwiftUI
     self.familiarFollowers = familiarFollowers?.first?.accounts ?? []
   }
 
-  func fetchNewestStatuses(pullToRefresh: Bool) async {
+  func fetchNewestStatuses(pullToRefresh _: Bool) async {
     guard let client else { return }
     do {
       statusesState = .loading
@@ -166,7 +166,7 @@ import SwiftUI
                                                          pinned: nil))
       StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
       if selectedTab == .boosts {
-        boosts = statuses.filter{ $0.reblog != nil }
+        boosts = statuses.filter { $0.reblog != nil }
       }
       if selectedTab == .statuses {
         pinned =
@@ -197,17 +197,17 @@ import SwiftUI
     case .statuses, .replies, .boosts, .media:
       guard let lastId = statuses.last?.id else { return }
       let newStatuses: [Status] =
-      try await client.get(endpoint: Accounts.statuses(id: accountId,
-                                                       sinceId: lastId,
-                                                       tag: nil,
-                                                       onlyMedia: selectedTab == .media,
-                                                       excludeReplies: selectedTab != .replies,
-                                                       excludeReblogs: selectedTab != .boosts,
-                                                       pinned: nil))
+        try await client.get(endpoint: Accounts.statuses(id: accountId,
+                                                         sinceId: lastId,
+                                                         tag: nil,
+                                                         onlyMedia: selectedTab == .media,
+                                                         excludeReplies: selectedTab != .replies,
+                                                         excludeReblogs: selectedTab != .boosts,
+                                                         pinned: nil))
       statuses.append(contentsOf: newStatuses)
       if selectedTab == .boosts {
-        let newBoosts = statuses.filter{ $0.reblog != nil }
-        self.boosts.append(contentsOf: newBoosts)
+        let newBoosts = statuses.filter { $0.reblog != nil }
+        boosts.append(contentsOf: newBoosts)
       }
       StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
       if selectedTab == .boosts {
@@ -253,7 +253,8 @@ import SwiftUI
     if let event = event as? StreamEventUpdate {
       if event.status.account.id == currentAccount.account?.id {
         if (event.status.inReplyToId == nil && selectedTab == .statuses) ||
-            (event.status.inReplyToId != nil && selectedTab == .replies) {
+          (event.status.inReplyToId != nil && selectedTab == .replies)
+        {
           statuses.insert(event.status, at: 0)
           statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
         }

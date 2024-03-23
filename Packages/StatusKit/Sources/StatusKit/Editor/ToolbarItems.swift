@@ -1,8 +1,8 @@
+import DesignSystem
 import Env
 import Models
 import StoreKit
 import SwiftUI
-import DesignSystem
 
 extension StatusEditor {
   @MainActor
@@ -10,7 +10,7 @@ extension StatusEditor {
     @State private var isLanguageConfirmPresented = false
     @State private var isDismissAlertPresented: Bool = false
     @State private var isDraftsSheetDisplayed: Bool = false
-    
+
     let mainSEVM: ViewModel
     let focusedSEVM: ViewModel
     let followUpSEVMs: [ViewModel]
@@ -18,7 +18,7 @@ extension StatusEditor {
     @Environment(\.modelContext) private var context
     @Environment(UserPreferences.self) private var preferences
     @Environment(Theme.self) private var theme
-    
+
     #if targetEnvironment(macCatalyst)
       @Environment(\.dismissWindow) private var dismissWindow
     #else
@@ -45,7 +45,7 @@ extension StatusEditor {
           }
         }
       }
-        
+
       ToolbarItem(placement: .navigationBarTrailing) {
         Button {
           Task {
@@ -160,7 +160,7 @@ extension StatusEditor {
         EmptyView()
       }
     }
-    
+
     private var draftsListView: some View {
       DraftsListView(selectedDraft: .init(get: {
         nil

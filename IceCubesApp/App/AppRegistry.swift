@@ -140,6 +140,12 @@ extension View {
           .presentationDetents([.medium])
           .presentationBackground(.thinMaterial)
           .withEnvironments()
+      case .accountEditInfo:
+        EditAccountView()
+          .withEnvironments()
+      case .accountFiltersList:
+        FiltersListView()
+          .withEnvironments()
       }
     }
   }

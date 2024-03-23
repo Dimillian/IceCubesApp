@@ -1,5 +1,5 @@
-import SwiftUI
 import Models
+import SwiftUI
 
 enum DisplayType {
   case image

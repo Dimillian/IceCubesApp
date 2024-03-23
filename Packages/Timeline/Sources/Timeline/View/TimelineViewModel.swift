@@ -11,7 +11,7 @@ import SwiftUI
   var statusesState: StatusesState = .loading
   var timeline: TimelineFilter = .federated {
     willSet {
-      if timeline == .home && newValue != .resume {
+      if timeline == .home, newValue != .resume {
         saveMarker()
       }
     }
@@ -19,17 +19,17 @@ import SwiftUI
       timelineTask?.cancel()
       timelineTask = Task {
         await handleLatestOrResume(oldValue)
-        
+
         if oldValue != timeline {
           await reset()
           pendingStatusesObserver.pendingStatuses = []
           tag = nil
         }
-        
+
         guard !Task.isCancelled else {
           return
         }
-        
+
         await fetchNewestStatuses(pullToRefresh: false)
         switch timeline {
         case let .hashtag(tag, _):
@@ -51,10 +51,10 @@ import SwiftUI
   private var isCacheEnabled: Bool {
     canFilterTimeline && timeline.supportNewestPagination
   }
-  
+
   @ObservationIgnored
   private var visibileStatuses: [Status] = []
-  
+
   private var canStreamEvents: Bool = true {
     didSet {
       if canStreamEvents {
@@ -62,7 +62,7 @@ import SwiftUI
       }
     }
   }
-  
+
   @ObservationIgnored
   var canFilterTimeline: Bool = true
 
@@ -92,7 +92,7 @@ import SwiftUI
   let pendingStatusesObserver: TimelineUnreadStatusesObserver = .init()
   var scrollToIndexAnimated: Bool = false
   var marker: Marker.Content?
-  
+
   init() {
     pendingStatusesObserver.scrollToIndex = { [weak self] index in
       self?.scrollToIndexAnimated = true
@@ -113,7 +113,7 @@ import SwiftUI
   func reset() async {
     await datasource.reset()
   }
-  
+
   private func handleLatestOrResume(_ oldValue: TimelineFilter) async {
     if timeline == .latest || timeline == .resume {
       await clearCache(filter: oldValue)
@@ -204,7 +204,7 @@ extension TimelineViewModel: StatusesFetcher {
       await fetchNewestStatuses(pullToRefresh: false)
     }
   }
-  
+
   func refreshTimelineContentFilter() async {
     timelineTask?.cancel()
     let statuses = await datasource.getFiltered()
@@ -212,7 +212,7 @@ extension TimelineViewModel: StatusesFetcher {
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     }
   }
-  
+
   func fetchStatuses(from: Marker.Content) async throws {
     guard let client else { return }
     statusesState = .loading
@@ -231,7 +231,7 @@ extension TimelineViewModel: StatusesFetcher {
     withAnimation {
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     }
-    
+
     await fetchNewestStatuses(pullToRefresh: false)
   }
 
@@ -355,7 +355,7 @@ extension TimelineViewModel: StatusesFetcher {
 
     // High chance the user is scrolled to the top.
     // We need to update the statuses state, and then scroll to the previous top most status.
-    if let topStatus, visibileStatuses.contains(where: { $0.id == topStatus.id}), scrollToTopVisible {
+    if let topStatus, visibileStatuses.contains(where: { $0.id == topStatus.id }), scrollToTopVisible {
       pendingStatusesObserver.disableUpdate = true
       let statuses = await datasource.getFiltered()
       statusesState = .display(statuses: statuses,
@@ -416,7 +416,7 @@ extension TimelineViewModel: StatusesFetcher {
   enum NextPageError: Error {
     case internalError
   }
-  
+
   func fetchNextPage() async throws {
     let statuses = await datasource.get()
     guard let client, let lastId = statuses.last?.id else { throw NextPageError.internalError }
@@ -424,7 +424,6 @@ extension TimelineViewModel: StatusesFetcher {
                                                                                  maxId: lastId,
                                                                                  minId: nil,
                                                                                  offset: statuses.count))
-
 
     await datasource.append(contentOf: newStatuses)
     StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
@@ -436,7 +435,7 @@ extension TimelineViewModel: StatusesFetcher {
   func statusDidAppear(status: Status) {
     pendingStatusesObserver.removeStatus(status: status)
     visibileStatuses.insert(status, at: 0)
-    
+
     if let client, timeline.supportNewestPagination {
       Task {
         await cache.setLatestSeenStatuses(visibileStatuses, for: client, filter: timeline.id)
@@ -450,6 +449,7 @@ extension TimelineViewModel: StatusesFetcher {
 }
 
 // MARK: - MARKER
+
 extension TimelineViewModel {
   func fetchMarker() async -> Marker.Content? {
     guard let client else {
@@ -462,14 +462,14 @@ extension TimelineViewModel {
       return nil
     }
   }
-  
+
   func saveMarker() {
     guard timeline == .home, let client else { return }
     Task {
       guard let id = await cache.getLatestSeenStatus(for: client, filter: timeline.id)?.first else { return }
       do {
         let _: Marker = try await client.post(endpoint: Markers.markHome(lastReadId: id))
-      } catch { }
+      } catch {}
     }
   }
 }

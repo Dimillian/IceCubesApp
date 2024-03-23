@@ -65,17 +65,17 @@ public struct TimelineView: View {
         .environment(\.defaultMinListRowHeight, 1)
         .listStyle(.plain)
         #if !os(visionOS)
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
+          .scrollContentBackground(.hidden)
+          .background(theme.primaryBackgroundColor)
         #endif
-        .introspect(.list, on: .iOS(.v17)) { (collectionView: UICollectionView) in
-          DispatchQueue.main.async {
-            self.collectionView = collectionView
+          .introspect(.list, on: .iOS(.v17)) { (collectionView: UICollectionView) in
+            DispatchQueue.main.async {
+              self.collectionView = collectionView
+            }
+            prefetcher.viewModel = viewModel
+            collectionView.isPrefetchingEnabled = true
+            collectionView.prefetchDataSource = prefetcher
           }
-          prefetcher.viewModel = viewModel
-          collectionView.isPrefetchingEnabled = true
-          collectionView.prefetchDataSource = prefetcher
-        }
         if viewModel.timeline.supportNewestPagination {
           TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver)
         }
@@ -147,19 +147,20 @@ public struct TimelineView: View {
         }
       }
     }
-    .onChange(of: account.lists, { _, lists in
+    .onChange(of: account.lists) { _, lists in
       guard client.isAuth else { return }
       switch timeline {
       case let .list(list):
         if let accountList = lists.first(where: { $0.id == list.id }),
-            list.id == accountList.id,
-           accountList.title != list.title {
+           list.id == accountList.id,
+           accountList.title != list.title
+        {
           timeline = .list(list: accountList)
         }
       default:
         break
       }
-    })
+    }
     .onChange(of: timeline) { oldValue, newValue in
       switch newValue {
       case let .remoteLocal(server, _):
@@ -203,7 +204,7 @@ public struct TimelineView: View {
       case .background:
         wasBackgrounded = true
         viewModel.saveMarker()
-        
+
       default:
         break
       }

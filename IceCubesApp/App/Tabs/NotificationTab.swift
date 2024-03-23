@@ -21,7 +21,7 @@ struct NotificationsTab: View {
   @Environment(PushNotificationsService.self) private var pushNotificationsService
   @State private var routerPath = RouterPath()
   @State private var scrollToTopSignal: Int = 0
-  
+
   @Binding var selectedTab: Tab
   @Binding var popToRootTab: Tab
 
@@ -60,9 +60,9 @@ struct NotificationsTab: View {
         }
       }
     }
-    .onChange(of: selectedTab, { _, newValue in
+    .onChange(of: selectedTab) { _, _ in
       clearNotifications()
-    })
+    }
     .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
       if let newValue, let type = newValue.notification.supportedType {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

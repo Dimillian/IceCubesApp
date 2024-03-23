@@ -1,8 +1,8 @@
 import DesignSystem
 import Models
+import Network
 import StatusKit
 import SwiftUI
-import Network
 
 public struct TrendingLinksListView: View {
   @Environment(Theme.self) private var theme
@@ -19,9 +19,9 @@ public struct TrendingLinksListView: View {
       ForEach(links) { card in
         StatusRowCardView(card: card)
           .environment(\.isCompact, true)
-          #if !os(visionOS)
+        #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
-          #endif
+        #endif
           .padding(.vertical, 8)
       }
       NextPageView {

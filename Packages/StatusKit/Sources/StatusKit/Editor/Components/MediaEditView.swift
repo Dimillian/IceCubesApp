@@ -171,5 +171,4 @@ extension StatusEditor {
       return translation?.content.asRawText
     }
   }
-
 }

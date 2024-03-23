@@ -1,17 +1,17 @@
-import SwiftUI
-import SwiftData
-import Models
-import Env
 import DesignSystem
+import Env
+import Models
+import SwiftData
+import SwiftUI
 
 struct TagsGroupSettingView: View {
   @Environment(\.modelContext) private var context
-  
+
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
-  
+
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
-  
+
   var body: some View {
     Form {
       ForEach(tagGroups) { group in
@@ -41,10 +41,10 @@ struct TagsGroupSettingView: View {
     .navigationTitle("timeline.filter.tag-groups")
     .scrollContentBackground(.hidden)
     #if !os(visionOS)
-    .background(theme.secondaryBackgroundColor)
+      .background(theme.secondaryBackgroundColor)
     #endif
-    .toolbar {
-      EditButton()
-    }
+      .toolbar {
+        EditButton()
+      }
   }
 }

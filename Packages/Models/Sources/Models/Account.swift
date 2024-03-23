@@ -61,6 +61,7 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
   public let source: Source?
   public let bot: Bool
   public let discoverable: Bool?
+  public let moved: Account?
 
   public var haveAvatar: Bool {
     avatar.lastPathComponent != "missing.png"
@@ -70,7 +71,7 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     header.lastPathComponent != "missing.png"
   }
 
-  public init(id: String, username: String, displayName: String?, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil) {
+  public init(id: String, username: String, displayName: String?, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil, moved: Account? = nil) {
     self.id = id
     self.username = username
     self.displayName = displayName
@@ -90,14 +91,15 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     self.source = source
     self.bot = bot
     self.discoverable = discoverable
-    
+    self.moved = moved
+
     if let displayName, !displayName.isEmpty {
-      self.cachedDisplayName = .init(stringValue: displayName)
+      cachedDisplayName = .init(stringValue: displayName)
     } else {
-      self.cachedDisplayName = .init(stringValue: "@\(username)")
+      cachedDisplayName = .init(stringValue: "@\(username)")
     }
   }
-  
+
   public enum CodingKeys: CodingKey {
     case id
     case username
@@ -118,33 +120,36 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     case source
     case bot
     case discoverable
+    case moved
   }
-  
+
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.id = try container.decode(String.self, forKey: .id)
-    self.username = try container.decode(String.self, forKey: .username)
-    self.displayName = try container.decodeIfPresent(String.self, forKey: .displayName)
-    self.avatar = try container.decode(URL.self, forKey: .avatar)
-    self.header = try container.decode(URL.self, forKey: .header)
-    self.acct = try container.decode(String.self, forKey: .acct)
-    self.note = try container.decode(HTMLString.self, forKey: .note)
-    self.createdAt = try container.decode(ServerDate.self, forKey: .createdAt)
-    self.followersCount = try container.decodeIfPresent(Int.self, forKey: .followersCount)
-    self.followingCount = try container.decodeIfPresent(Int.self, forKey: .followingCount)
-    self.statusesCount = try container.decodeIfPresent(Int.self, forKey: .statusesCount)
-    self.lastStatusAt = try container.decodeIfPresent(String.self, forKey: .lastStatusAt)
-    self.fields = try container.decode([Account.Field].self, forKey: .fields)
-    self.locked = try container.decode(Bool.self, forKey: .locked)
-    self.emojis = try container.decode([Emoji].self, forKey: .emojis)
-    self.url = try container.decodeIfPresent(URL.self, forKey: .url)
-    self.source = try container.decodeIfPresent(Account.Source.self, forKey: .source)
-    self.bot = try container.decode(Bool.self, forKey: .bot)
-    self.discoverable = try container.decodeIfPresent(Bool.self, forKey: .discoverable)
+    id = try container.decode(String.self, forKey: .id)
+    username = try container.decode(String.self, forKey: .username)
+    displayName = try container.decodeIfPresent(String.self, forKey: .displayName)
+    avatar = try container.decode(URL.self, forKey: .avatar)
+    header = try container.decode(URL.self, forKey: .header)
+    acct = try container.decode(String.self, forKey: .acct)
+    note = try container.decode(HTMLString.self, forKey: .note)
+    createdAt = try container.decode(ServerDate.self, forKey: .createdAt)
+    followersCount = try container.decodeIfPresent(Int.self, forKey: .followersCount)
+    followingCount = try container.decodeIfPresent(Int.self, forKey: .followingCount)
+    statusesCount = try container.decodeIfPresent(Int.self, forKey: .statusesCount)
+    lastStatusAt = try container.decodeIfPresent(String.self, forKey: .lastStatusAt)
+    fields = try container.decode([Account.Field].self, forKey: .fields)
+    locked = try container.decode(Bool.self, forKey: .locked)
+    emojis = try container.decode([Emoji].self, forKey: .emojis)
+    url = try container.decodeIfPresent(URL.self, forKey: .url)
+    source = try container.decodeIfPresent(Account.Source.self, forKey: .source)
+    bot = try container.decode(Bool.self, forKey: .bot)
+    discoverable = try container.decodeIfPresent(Bool.self, forKey: .discoverable)
+    moved = try container.decodeIfPresent(Account.self, forKey: .moved)
+
     if let displayName, !displayName.isEmpty {
-      self.cachedDisplayName = .init(stringValue: displayName)
+      cachedDisplayName = .init(stringValue: displayName)
     } else {
-      self.cachedDisplayName = .init(stringValue: "@\(username)")
+      cachedDisplayName = .init(stringValue: "@\(username)")
     }
   }
 

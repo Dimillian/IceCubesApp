@@ -1,13 +1,13 @@
-import SwiftUI
-import Models
 import Env
+import Models
+import SwiftUI
 
 struct TimelineTagGroupheaderView: View {
   @Environment(RouterPath.self) private var routerPath
-  
+
   @Binding var group: TagGroup?
   @Binding var timeline: TimelineFilter
-  
+
   var body: some View {
     if let group {
       TimelineHeaderView {

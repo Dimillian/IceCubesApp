@@ -1,8 +1,10 @@
 import Combine
 import SwiftUI
 
-@Observable public class Theme {
-  class ThemeStorage {
+@MainActor
+@Observable
+public final class Theme {
+  final class ThemeStorage {
     enum ThemeKey: String {
       case colorScheme, tint, label, primaryBackground, secondaryBackground
       case avatarPosition2, avatarShape2, statusActionsDisplay, statusDisplayStyle
@@ -69,10 +71,10 @@ import SwiftUI
       }
     }
   }
-  
+
   public enum StatusActionSecondary: String, CaseIterable {
     case share, bookmark
-    
+
     public var description: LocalizedStringKey {
       switch self {
       case .share:
@@ -167,12 +169,14 @@ import SwiftUI
   public var tintColor: Color {
     didSet {
       themeStorage.tintColor = tintColor
+      computeContrastingTintColor()
     }
   }
 
   public var primaryBackgroundColor: Color {
     didSet {
       themeStorage.primaryBackgroundColor = primaryBackgroundColor
+      computeContrastingTintColor()
     }
   }
 
@@ -185,6 +189,31 @@ import SwiftUI
   public var labelColor: Color {
     didSet {
       themeStorage.labelColor = labelColor
+      computeContrastingTintColor()
+    }
+  }
+
+  public private(set) var contrastingTintColor: Color
+
+  // set contrastingTintColor to either labelColor or primaryBackgroundColor, whichever contrasts
+  // better against the tintColor
+  private func computeContrastingTintColor() {
+    func luminance(_ color: Color.Resolved) -> Float {
+      return 0.299 * color.red + 0.587 * color.green + 0.114 * color.blue
+    }
+
+    let resolvedTintColor = tintColor.resolve(in: .init())
+    let resolvedLabelColor = labelColor.resolve(in: .init())
+    let resolvedPrimaryBackgroundColor = primaryBackgroundColor.resolve(in: .init())
+
+    let tintLuminance = luminance(resolvedTintColor)
+    let labelLuminance = luminance(resolvedLabelColor)
+    let primaryBackgroundLuminance = luminance(resolvedPrimaryBackgroundColor)
+
+    if abs(tintLuminance - labelLuminance) > abs(tintLuminance - primaryBackgroundLuminance) {
+      contrastingTintColor = labelColor
+    } else {
+      contrastingTintColor = primaryBackgroundColor
     }
   }
 
@@ -217,7 +246,7 @@ import SwiftUI
       themeStorage.statusDisplayStyle = statusDisplayStyle
     }
   }
-  
+
   public var statusActionSecondary: StatusActionSecondary {
     didSet {
       themeStorage.statusActionSecondary = statusActionSecondary
@@ -273,7 +302,7 @@ import SwiftUI
     chosenFontData = nil
     statusActionSecondary = .share
   }
-  
+
   private init() {
     isThemePreviouslySet = themeStorage.isThemePreviouslySet
     selectedScheme = themeStorage.selectedScheme
@@ -281,6 +310,7 @@ import SwiftUI
     primaryBackgroundColor = themeStorage.primaryBackgroundColor
     secondaryBackgroundColor = themeStorage.secondaryBackgroundColor
     labelColor = themeStorage.labelColor
+    contrastingTintColor = .red // real work done in computeContrastingTintColor()
     avatarPosition = themeStorage.avatarPosition
     avatarShape = themeStorage.avatarShape
     storedSet = themeStorage.storedSet
@@ -293,6 +323,8 @@ import SwiftUI
     chosenFontData = themeStorage.chosenFontData
     statusActionSecondary = themeStorage.statusActionSecondary
     selectedSet = storedSet
+
+    computeContrastingTintColor()
   }
 
   public static var allColorSet: [ColorSet] {
@@ -310,7 +342,7 @@ import SwiftUI
       ConstellationLight(),
       ConstellationDark(),
       ThreadsLight(),
-      ThreadsDark()
+      ThreadsDark(),
     ]
   }
 

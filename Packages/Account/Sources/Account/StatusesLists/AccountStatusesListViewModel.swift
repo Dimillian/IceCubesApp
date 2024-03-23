@@ -1,15 +1,15 @@
-import SwiftUI
-import Models
-import StatusKit
-import Network
 import Env
+import Models
+import Network
+import StatusKit
+import SwiftUI
 
 @MainActor
 @Observable
 public class AccountStatusesListViewModel: StatusesFetcher {
-  public enum Mode  {
+  public enum Mode {
     case bookmarks, favorites
-    
+
     var title: LocalizedStringKey {
       switch self {
       case .bookmarks:
@@ -18,7 +18,7 @@ public class AccountStatusesListViewModel: StatusesFetcher {
         "accessibility.tabs.profile.picker.favorites"
       }
     }
-    
+
     func endpoint(sinceId: String?) -> Endpoint {
       switch self {
       case .bookmarks:
@@ -28,19 +28,19 @@ public class AccountStatusesListViewModel: StatusesFetcher {
       }
     }
   }
-  
+
   let mode: Mode
   public var statusesState: StatusesState = .loading
   var statuses: [Status] = []
   var nextPage: LinkHandler?
-  
+
   var client: Client?
-  
+
   init(mode: Mode) {
     self.mode = mode
   }
-  
-  public func fetchNewestStatuses(pullToRefresh: Bool) async {
+
+  public func fetchNewestStatuses(pullToRefresh _: Bool) async {
     guard let client else { return }
     statusesState = .loading
     do {
@@ -52,7 +52,7 @@ public class AccountStatusesListViewModel: StatusesFetcher {
       statusesState = .error(error: error)
     }
   }
-  
+
   public func fetchNextPage() async throws {
     guard let client, let nextId = nextPage?.maxId else { return }
     var newStatuses: [Status] = []
@@ -62,12 +62,8 @@ public class AccountStatusesListViewModel: StatusesFetcher {
     statusesState = .display(statuses: statuses,
                              nextPageState: nextPage?.maxId != nil ? .hasNextPage : .none)
   }
-  
-  public func statusDidAppear(status: Status) {
-    
-  }
-  
-  public func statusDidDisappear(status: Status) {
-    
-  }
+
+  public func statusDidAppear(status _: Status) {}
+
+  public func statusDidDisappear(status _: Status) {}
 }

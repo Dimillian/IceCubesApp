@@ -207,6 +207,7 @@ struct AccountDetailHeaderView: View {
             .foregroundStyle(.secondary)
             .textSelection(.enabled)
             .accessibilityRespondsToUserInteraction(false)
+          movedToView
           joinedAtView
         }
         .accessibilityElement(children: .contain)
@@ -312,6 +313,17 @@ struct AccountDetailHeaderView: View {
   }
 
   @ViewBuilder
+  private var movedToView: some View {
+    if let movedTo = viewModel.account?.moved {
+      Button("account.movedto.redirect-\("@\(movedTo.acct)")") {
+        routerPath.navigate(to: .accountDetailWithAccount(account: movedTo))
+      }
+      .font(.scaledCallout)
+      .foregroundColor(.accentColor)
+    }
+  }
+
+  @ViewBuilder
   private func makeNoteView(_ note: String) -> some View {
     VStack(alignment: .leading, spacing: 4) {
       Text("account.relation.note.label")
@@ -372,15 +384,15 @@ struct AccountDetailHeaderView: View {
       .accessibilityElement(children: .contain)
       .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
       #if os(visionOS)
-      .background(Material.thick)
+        .background(Material.thick)
       #else
-      .background(theme.secondaryBackgroundColor)
+        .background(theme.secondaryBackgroundColor)
       #endif
-      .cornerRadius(4)
-      .overlay(
-        RoundedRectangle(cornerRadius: 4)
-          .stroke(.gray.opacity(0.35), lineWidth: 1)
-      )
+        .cornerRadius(4)
+        .overlay(
+          RoundedRectangle(cornerRadius: 4)
+            .stroke(.gray.opacity(0.35), lineWidth: 1)
+        )
     }
   }
 }

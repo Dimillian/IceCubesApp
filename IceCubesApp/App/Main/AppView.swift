@@ -17,29 +17,29 @@ struct AppView: View {
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
-  
+
   @Environment(\.openWindow) var openWindow
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-  
+
   @Binding var selectedTab: Tab
   @Binding var appRouterPath: RouterPath
-  
+
   @State var popToRootTab: Tab = .other
   @State var iosTabs = iOSTabs.shared
   @State var sidebarTabs = SidebarTabs.shared
-  
+
   var body: some View {
     #if os(visionOS)
-    tabBarView
-    #else
-    if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
-      sidebarView
-    } else {
       tabBarView
-    }
+    #else
+      if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
+        sidebarView
+      } else {
+        tabBarView
+      }
     #endif
   }
-  
+
   var availableTabs: [Tab] {
     guard appAccountsManager.currentClient.isAuth else {
       return Tab.loggedOutTab()
@@ -49,7 +49,7 @@ struct AppView: View {
     } else if UIDevice.current.userInterfaceIdiom == .vision {
       return Tab.visionOSTab()
     }
-    return sidebarTabs.tabs.map{ $0.tab }
+    return sidebarTabs.tabs.map { $0.tab }
   }
 
   var tabBarView: some View {
@@ -58,9 +58,9 @@ struct AppView: View {
     }, set: { newTab in
       if newTab == .post {
         #if os(visionOS)
-        openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
+          openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
         #else
-        appRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+          appRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
         #endif
         return
       }
@@ -104,40 +104,40 @@ struct AppView: View {
     }
     return 0
   }
-  
+
   #if !os(visionOS)
-  var sidebarView: some View {
-    SideBarView(selectedTab: $selectedTab,
-                popToRootTab: $popToRootTab,
-                tabs: availableTabs)
-    {
-      HStack(spacing: 0) {
-        TabView(selection: $selectedTab) {
-          ForEach(availableTabs) { tab in
-            tab
-              .makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
-              .tabItem {
-                tab.label
-              }
-              .tag(tab)
+    var sidebarView: some View {
+      SideBarView(selectedTab: $selectedTab,
+                  popToRootTab: $popToRootTab,
+                  tabs: availableTabs)
+      {
+        HStack(spacing: 0) {
+          TabView(selection: $selectedTab) {
+            ForEach(availableTabs) { tab in
+              tab
+                .makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
+                .tabItem {
+                  tab.label
+                }
+                .tag(tab)
+            }
+          }
+          .introspect(.tabView, on: .iOS(.v17)) { (tabview: UITabBarController) in
+            tabview.tabBar.isHidden = horizontalSizeClass == .regular
+            tabview.customizableViewControllers = []
+            tabview.moreNavigationController.isNavigationBarHidden = true
+          }
+          if horizontalSizeClass == .regular,
+             appAccountsManager.currentClient.isAuth,
+             userPreferences.showiPadSecondaryColumn
+          {
+            Divider().edgesIgnoringSafeArea(.all)
+            notificationsSecondaryColumn
           }
         }
-        .introspect(.tabView, on: .iOS(.v17)) { (tabview: UITabBarController) in
-          tabview.tabBar.isHidden = horizontalSizeClass == .regular
-          tabview.customizableViewControllers = []
-          tabview.moreNavigationController.isNavigationBarHidden = true
-        }
-        if horizontalSizeClass == .regular,
-           appAccountsManager.currentClient.isAuth,
-           userPreferences.showiPadSecondaryColumn
-        {
-          Divider().edgesIgnoringSafeArea(.all)
-          notificationsSecondaryColumn
-        }
       }
+      .environment(appRouterPath)
     }
-    .environment(appRouterPath)
-  }
   #endif
 
   var notificationsSecondaryColumn: some View {

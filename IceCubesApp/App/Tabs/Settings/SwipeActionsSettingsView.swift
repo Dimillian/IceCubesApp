@@ -49,7 +49,7 @@ struct SwipeActionsSettingsView: View {
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
       #endif
-      
+
       Section {
         Picker(selection: $userPreferences.swipeActionsIconStyle, label: Text("settings.swipeactions.icon-style")) {
           ForEach(UserPreferences.SwipeActionsIconStyle.allCases, id: \.rawValue) { style in
@@ -70,8 +70,8 @@ struct SwipeActionsSettingsView: View {
     }
     .navigationTitle("settings.swipeactions.navigation-title")
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
     #endif
   }
 

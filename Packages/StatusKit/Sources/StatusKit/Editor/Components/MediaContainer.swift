@@ -13,5 +13,4 @@ extension StatusEditor {
     let mediaAttachment: MediaAttachment?
     let error: Error?
   }
-
 }

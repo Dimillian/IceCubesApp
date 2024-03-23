@@ -1,8 +1,8 @@
 import Models
 import Network
 import Observation
-import SwiftUI
 import OSLog
+import SwiftUI
 
 public enum AccountsListMode {
   case following(accountId: String), followers(accountId: String)
@@ -49,7 +49,7 @@ public enum AccountsListMode {
   var state = State.loading
   var totalCount: Int?
   var accountId: String?
-  
+
   var searchQuery: String = ""
 
   private var nextPageId: String?
@@ -125,7 +125,7 @@ public enum AccountsListMode {
                      relationships: relationships,
                      nextPageState: link?.maxId != nil ? .hasNextPage : .none)
   }
-  
+
   func search() async {
     guard let client, !searchQuery.isEmpty else { return }
     do {
@@ -144,8 +144,6 @@ public enum AccountsListMode {
                          relationships: relationships,
                          nextPageState: .none)
       }
-    } catch {
-      
-    }
+    } catch {}
   }
 }

@@ -24,7 +24,7 @@ extension NotificationService {
     var _plaintext: Data?
     do {
       _plaintext = try AES.GCM.open(sealedBox, using: key)
-    } catch { }
+    } catch {}
     guard let plaintext = _plaintext else {
       return nil
     }

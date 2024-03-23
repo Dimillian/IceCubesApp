@@ -1,28 +1,28 @@
 import DesignSystem
 import EmojiText
 import Foundation
-import SwiftUI
 import Models
 import SwiftData
+import SwiftUI
 
 extension StatusEditor {
-  
   @MainActor
   struct AutoCompleteView: View {
     @Environment(\.modelContext) var context
-    
+
     @Environment(Theme.self) var theme
-    
+
     var viewModel: ViewModel
-    
+
     @State private var isTagSuggestionExpanded: Bool = false
-    
+
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
 
     var body: some View {
       if !viewModel.mentionsSuggestions.isEmpty ||
-          !viewModel.tagsSuggestions.isEmpty ||
-          (viewModel.showRecentsTagsInline && !recentTags.isEmpty)  {
+        !viewModel.tagsSuggestions.isEmpty ||
+        (viewModel.showRecentsTagsInline && !recentTags.isEmpty)
+      {
         VStack {
           HStack {
             ScrollView(.horizontal, showsIndicators: false) {

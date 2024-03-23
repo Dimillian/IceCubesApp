@@ -4,7 +4,7 @@ import SwiftUI
 #endif
 
 public extension View {
-  func applyTheme(_ theme: Theme) -> some View {
+  @MainActor func applyTheme(_ theme: Theme) -> some View {
     modifier(ThemeApplier(theme: theme))
   }
 }
@@ -77,17 +77,15 @@ struct ThemeApplier: ViewModifier {
     }
 
     private func setWindowUserInterfaceStyle(_ userInterfaceStyle: UIUserInterfaceStyle) {
-      allWindows()
-        .forEach {
-          $0.overrideUserInterfaceStyle = userInterfaceStyle
-        }
+      for window in allWindows() {
+        window.overrideUserInterfaceStyle = userInterfaceStyle
+      }
     }
 
     private func setWindowTint(_ color: Color) {
-      allWindows()
-        .forEach {
-          $0.tintColor = UIColor(color)
-        }
+      for window in allWindows() {
+        window.tintColor = UIColor(color)
+      }
     }
 
     private func setBarsColor(_ color: Color) {

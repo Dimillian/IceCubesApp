@@ -9,7 +9,7 @@ IceCubesApp is an open-source application for accessing the decentralized social
 
 You can connect to any Mastodon instance, browse your timeline, interact with other users, and post updates and media.
 
-It's multiplatform and works on iOS, macOS, iPadOS, and soon visionOS.
+It's multiplatform and works on iOS, macOS, iPadOS, and visionOS.
 It has a dedicated UI with a sidebar on macOS and iPadOS.
 
 ## Features

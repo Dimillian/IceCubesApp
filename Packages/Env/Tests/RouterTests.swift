@@ -1,7 +1,7 @@
 @testable import Env
-import XCTest
-import SwiftUI
 import Network
+import SwiftUI
+import XCTest
 
 @MainActor
 final class RouterTests: XCTestCase {
@@ -11,14 +11,14 @@ final class RouterTests: XCTestCase {
     _ = router.handle(url: url)
     XCTAssertTrue(router.path.isEmpty)
   }
-  
+
   func testRouterTagsURL() {
     let router = RouterPath()
     let url = URL(string: "https://mastodon.social/tags/test")!
     _ = router.handle(url: url)
     XCTAssertTrue(router.path.first == .hashTag(tag: "test", account: nil))
   }
-  
+
   func testRouterLocalStatusURL() {
     let router = RouterPath()
     let client = Client(server: "mastodon.social",
@@ -29,7 +29,7 @@ final class RouterTests: XCTestCase {
     _ = router.handle(url: url)
     XCTAssertTrue(router.path.first == .statusDetail(id: "1010384"))
   }
-  
+
   func testRouterRemoteStatusURL() {
     let router = RouterPath()
     let client = Client(server: "mastodon.social",
@@ -40,7 +40,7 @@ final class RouterTests: XCTestCase {
     _ = router.handle(url: url)
     XCTAssertTrue(router.path.first == .remoteStatusDetail(url: url))
   }
-  
+
   func testRouteRandomURL() {
     let router = RouterPath()
     let url = URL(string: "https://theweb.com/test/test/one")!

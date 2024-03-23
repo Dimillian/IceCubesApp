@@ -28,26 +28,26 @@ struct AboutView: View {
     List {
       Section {
         #if !targetEnvironment(macCatalyst) && !os(visionOS)
-        HStack {
-          Spacer()
-          Image(uiImage: .init(named: "AppIconAlternate0")!)
-            .resizable()
-            .frame(width: 50, height: 50)
-            .cornerRadius(4)
-          Image(uiImage: .init(named: "AppIconAlternate4")!)
-            .resizable()
-            .frame(width: 50, height: 50)
-            .cornerRadius(4)
-          Image(uiImage: .init(named: "AppIconAlternate17")!)
-            .resizable()
-            .frame(width: 50, height: 50)
-            .cornerRadius(4)
-          Image(uiImage: .init(named: "AppIconAlternate23")!)
-            .resizable()
-            .frame(width: 50, height: 50)
-            .cornerRadius(4)
-          Spacer()
-        }
+          HStack {
+            Spacer()
+            Image(uiImage: .init(named: "AppIconAlternate0")!)
+              .resizable()
+              .frame(width: 50, height: 50)
+              .cornerRadius(4)
+            Image(uiImage: .init(named: "AppIconAlternate4")!)
+              .resizable()
+              .frame(width: 50, height: 50)
+              .cornerRadius(4)
+            Image(uiImage: .init(named: "AppIconAlternate17")!)
+              .resizable()
+              .frame(width: 50, height: 50)
+              .cornerRadius(4)
+            Image(uiImage: .init(named: "AppIconAlternate23")!)
+              .resizable()
+              .frame(width: 50, height: 50)
+              .cornerRadius(4)
+            Spacer()
+          }
         #endif
         Link(destination: URL(string: "https://github.com/Dimillian/IceCubesApp/blob/main/PRIVACY.MD")!) {
           Label("settings.support.privacy-policy", systemImage: "lock")
@@ -107,14 +107,14 @@ struct AboutView: View {
     }
     .listStyle(.insetGrouped)
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
     #endif
-    .navigationTitle(Text("settings.about.title"))
-    .navigationBarTitleDisplayMode(.large)
-    .environment(\.openURL, OpenURLAction { url in
-      routerPath.handle(url: url)
-    })
+      .navigationTitle(Text("settings.about.title"))
+      .navigationBarTitleDisplayMode(.large)
+      .environment(\.openURL, OpenURLAction { url in
+        routerPath.handle(url: url)
+      })
   }
 
   @ViewBuilder

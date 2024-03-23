@@ -33,11 +33,11 @@ public struct AppAccountsSelectorView: View {
 
   public init(routerPath: RouterPath,
               accountCreationEnabled: Bool = true,
-              avatarConfig: AvatarView.FrameConfig = .badge)
+              avatarConfig: AvatarView.FrameConfig? = nil)
   {
     self.routerPath = routerPath
     self.accountCreationEnabled = accountCreationEnabled
-    self.avatarConfig = avatarConfig
+    self.avatarConfig = avatarConfig ?? .badge
   }
 
   public var body: some View {
@@ -97,11 +97,11 @@ public struct AppAccountsSelectorView: View {
           }
           addAccountButton
           #if os(visionOS)
-            .foregroundStyle(theme.labelColor)
+          .foregroundStyle(theme.labelColor)
           #endif
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
 
         if accountCreationEnabled {
@@ -134,7 +134,7 @@ public struct AppAccountsSelectorView: View {
       .environment(routerPath)
     }
   }
-  
+
   private var addAccountButton: some View {
     Button {
       isPresented = false
@@ -158,7 +158,7 @@ public struct AppAccountsSelectorView: View {
       Label("tab.settings", systemImage: "gear")
     }
   }
-  
+
   private var supportButton: some View {
     Button {
       isPresented = false
@@ -170,7 +170,7 @@ public struct AppAccountsSelectorView: View {
       Label("settings.app.support", systemImage: "wand.and.stars")
     }
   }
-  
+
   private var aboutButton: some View {
     Button {
       isPresented = false

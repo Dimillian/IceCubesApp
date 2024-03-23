@@ -7,10 +7,9 @@ import Network
 import PhotosUI
 import SwiftUI
 
-extension StatusEditor {
-  
+public extension StatusEditor {
   @MainActor
-  @Observable public class ViewModel: NSObject, Identifiable {
+  @Observable class ViewModel: NSObject, Identifiable {
     public let id = UUID()
 
     var mode: Mode
@@ -90,7 +89,7 @@ extension StatusEditor {
     var postingProgress: Double = 0.0
     var postingTimer: Timer?
     var isPosting: Bool = false
-    
+
     var mediaPickers: [PhotosPickerItem] = [] {
       didSet {
         if mediaPickers.count > 4 {
@@ -130,17 +129,18 @@ extension StatusEditor {
     var shouldDisablePollButton: Bool {
       !mediaContainers.isEmpty
     }
-      
+
     var allMediaHasDescription: Bool {
-        var everyMediaHasAltText: Bool = true;
-        mediaContainers.forEach { mediaContainer in
-            if (((mediaContainer.mediaAttachment?.description) == nil) ||
-                mediaContainer.mediaAttachment?.description?.count == 0) {
-                everyMediaHasAltText = false
-            }
+      var everyMediaHasAltText = true
+      for mediaContainer in mediaContainers {
+        if ((mediaContainer.mediaAttachment?.description) == nil) ||
+          mediaContainer.mediaAttachment?.description?.count == 0
+        {
+          everyMediaHasAltText = false
         }
-        
-        return everyMediaHasAltText;
+      }
+
+      return everyMediaHasAltText
     }
 
     var shouldDisplayDismissWarning: Bool {
@@ -200,12 +200,12 @@ extension StatusEditor {
     func postStatus() async -> Status? {
       guard let client else { return nil }
       do {
-        if (!allMediaHasDescription && UserPreferences.shared.appRequireAltText) {
+        if !allMediaHasDescription && UserPreferences.shared.appRequireAltText {
           throw PostError.missingAltText
         }
-          
+
         if postingTimer == nil {
-          Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { timer in
+          Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
             Task { @MainActor in
               if self.postingProgress < 100 {
                 self.postingProgress += 0.5
@@ -245,21 +245,21 @@ extension StatusEditor {
             StreamWatcher.shared.emmitEditEvent(for: postStatus)
           }
         }
-        
+
         postingTimer?.invalidate()
         postingTimer = nil
-        
+
         withAnimation {
           postingProgress = 99.0
         }
         try await Task.sleep(for: .seconds(0.5))
         HapticManager.shared.fireHaptic(.notification(.success))
-        
+
         if hasExplicitlySelectedLanguage, let selectedLanguage {
           preferences?.markLanguageAsSelected(isoCode: selectedLanguage)
         }
         isPosting = false
-        
+
         return postStatus
       } catch {
         if let error = error as? Models.ServerError {
@@ -267,8 +267,8 @@ extension StatusEditor {
           showPostingErrorAlert = true
         }
         if let postError = error as? PostError {
-            postingError = postError.description
-            showPostingErrorAlert = true
+          postingError = postError.description
+          showPostingErrorAlert = true
         }
         isPosting = false
         HapticManager.shared.fireHaptic(.notification(.error))
@@ -614,9 +614,10 @@ extension StatusEditor {
 
     private func resetAutoCompletion() {
       if !tagsSuggestions.isEmpty ||
-          !mentionsSuggestions.isEmpty ||
-          currentSuggestionRange != nil ||
-          showRecentsTagsInline {
+        !mentionsSuggestions.isEmpty ||
+        currentSuggestionRange != nil ||
+        showRecentsTagsInline
+      {
         withAnimation {
           tagsSuggestions = []
           mentionsSuggestions = []
@@ -838,7 +839,7 @@ extension StatusEditor {
                   error: nil
                 )
               }
-            } catch { }
+            } catch {}
           }
           try? await Task.sleep(for: .seconds(5))
         } while !Task.isCancelled
@@ -859,7 +860,7 @@ extension StatusEditor {
             mediaAttachment: media,
             error: nil
           )
-        } catch { }
+        } catch {}
       }
     }
 

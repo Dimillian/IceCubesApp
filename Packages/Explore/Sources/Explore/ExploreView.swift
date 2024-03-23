@@ -32,9 +32,9 @@ public struct ExploreView: View {
         } else if !viewModel.searchQuery.isEmpty {
           if let results = viewModel.results[viewModel.searchQuery] {
             if results.isEmpty, !viewModel.isSearching {
-              EmptyView(iconName: "magnifyingglass",
-                        title: "explore.search.empty.title",
-                        message: "explore.search.empty.message")
+              PlaceholderView(iconName: "magnifyingglass",
+                              title: "explore.search.empty.title",
+                              message: "explore.search.empty.message")
                 .listRowBackground(theme.secondaryBackgroundColor)
                 .listRowSeparator(.hidden)
             } else {
@@ -53,12 +53,12 @@ public struct ExploreView: View {
             .id(UUID())
           }
         } else if viewModel.allSectionsEmpty {
-          EmptyView(iconName: "magnifyingglass",
-                    title: "explore.search.title",
-                    message: "explore.search.message-\(client.server)")
-            #if !os(visionOS)
+          PlaceholderView(iconName: "magnifyingglass",
+                          title: "explore.search.title",
+                          message: "explore.search.message-\(client.server)")
+          #if !os(visionOS)
             .listRowBackground(theme.secondaryBackgroundColor)
-            #endif
+          #endif
             .listRowSeparator(.hidden)
         } else {
           quickAccessView
@@ -94,32 +94,32 @@ public struct ExploreView: View {
       }
       .listStyle(.plain)
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
       #endif
-      .navigationTitle("explore.navigation-title")
-      .navigationBarTitleDisplayMode(.inline)
-      .searchable(text: $viewModel.searchQuery,
-                  isPresented: $viewModel.isSearchPresented,
-                  placement: .navigationBarDrawer(displayMode: .always),
-                  prompt: Text("explore.search.prompt"))
-      .searchScopes($viewModel.searchScope) {
-        ForEach(ExploreViewModel.SearchScope.allCases, id: \.self) { scope in
-          Text(scope.localizedString)
-        }
-      }
-      .task(id: viewModel.searchQuery) {
-        await viewModel.search()
-      }
-      .onChange(of: scrollToTopSignal) {
-        if viewModel.scrollToTopVisible {
-          viewModel.isSearchPresented.toggle()
-        } else {
-          withAnimation {
-            proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+        .navigationTitle("explore.navigation-title")
+        .navigationBarTitleDisplayMode(.inline)
+        .searchable(text: $viewModel.searchQuery,
+                    isPresented: $viewModel.isSearchPresented,
+                    placement: .navigationBarDrawer(displayMode: .always),
+                    prompt: Text("explore.search.prompt"))
+        .searchScopes($viewModel.searchScope) {
+          ForEach(ExploreViewModel.SearchScope.allCases, id: \.self) { scope in
+            Text(scope.localizedString)
           }
         }
-      }
+        .task(id: viewModel.searchQuery) {
+          await viewModel.search()
+        }
+        .onChange(of: scrollToTopSignal) {
+          if viewModel.scrollToTopVisible {
+            viewModel.isSearchPresented.toggle()
+          } else {
+            withAnimation {
+              proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+            }
+          }
+        }
     }
   }
 
@@ -148,9 +148,9 @@ public struct ExploreView: View {
     .scrollIndicators(.never)
     .listRowInsets(EdgeInsets())
     #if !os(visionOS)
-    .listRowBackground(theme.secondaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
     #endif
-    .listRowSeparator(.hidden)
+      .listRowSeparator(.hidden)
   }
 
   private var loadingView: some View {
@@ -159,9 +159,9 @@ public struct ExploreView: View {
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
         .allowsHitTesting(false)
-        #if !os(visionOS)
+      #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
-        #endif
+      #endif
     }
   }
 
@@ -172,13 +172,13 @@ public struct ExploreView: View {
         ForEach(results.accounts) { account in
           if let relationship = results.relationships.first(where: { $0.id == account.id }) {
             AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
-              #if !os(visionOS)
+            #if !os(visionOS)
               .listRowBackground(theme.primaryBackgroundColor)
-              #else
+            #else
               .listRowBackground(RoundedRectangle(cornerRadius: 8)
-                   .foregroundStyle(.background).hoverEffect())
+                .foregroundStyle(.background).hoverEffect())
               .listRowHoverEffectDisabled()
-              #endif
+            #endif
           }
         }
       }
@@ -187,13 +187,13 @@ public struct ExploreView: View {
       Section("explore.section.tags") {
         ForEach(results.hashtags) { tag in
           TagRowView(tag: tag)
-            #if !os(visionOS)
+          #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
-            #else
+          #else
             .listRowBackground(RoundedRectangle(cornerRadius: 8)
-                 .foregroundStyle(.background).hoverEffect())
+              .foregroundStyle(.background).hoverEffect())
             .listRowHoverEffectDisabled()
-            #endif
+          #endif
             .padding(.vertical, 4)
         }
       }
@@ -202,13 +202,13 @@ public struct ExploreView: View {
       Section("explore.section.posts") {
         ForEach(results.statuses) { status in
           StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
-            #if !os(visionOS)
+          #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
-            #else
+          #else
             .listRowBackground(RoundedRectangle(cornerRadius: 8)
-                 .foregroundStyle(.background).hoverEffect())
+              .foregroundStyle(.background).hoverEffect())
             .listRowHoverEffectDisabled()
-            #endif
+          #endif
             .padding(.vertical, 8)
         }
       }
@@ -222,13 +222,13 @@ public struct ExploreView: View {
       { account in
         if let relationship = viewModel.suggestedAccountsRelationShips.first(where: { $0.id == account.id }) {
           AccountsListRow(viewModel: .init(account: account, relationShip: relationship))
-            #if !os(visionOS)
+          #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
-            #else
+          #else
             .listRowBackground(RoundedRectangle(cornerRadius: 8)
-                 .foregroundStyle(.background).hoverEffect())
+              .foregroundStyle(.background).hoverEffect())
             .listRowHoverEffectDisabled()
-            #endif
+          #endif
         }
       }
       NavigationLink(value: RouterDestination.accountsList(accounts: viewModel.suggestedAccounts)) {
@@ -239,7 +239,7 @@ public struct ExploreView: View {
       .listRowBackground(theme.primaryBackgroundColor)
       #else
       .listRowBackground(RoundedRectangle(cornerRadius: 8)
-           .foregroundStyle(.background).hoverEffect())
+        .foregroundStyle(.background).hoverEffect())
       .listRowHoverEffectDisabled()
       #endif
     }
@@ -251,13 +251,13 @@ public struct ExploreView: View {
         .prefix(upTo: viewModel.trendingTags.count > 5 ? 5 : viewModel.trendingTags.count))
       { tag in
         TagRowView(tag: tag)
-          #if !os(visionOS)
+        #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
-          #else
+        #else
           .listRowBackground(RoundedRectangle(cornerRadius: 8)
-               .foregroundStyle(.background).hoverEffect())
+            .foregroundStyle(.background).hoverEffect())
           .listRowHoverEffectDisabled()
-          #endif
+        #endif
           .padding(.vertical, 4)
       }
       NavigationLink(value: RouterDestination.tagsList(tags: viewModel.trendingTags)) {
@@ -268,7 +268,7 @@ public struct ExploreView: View {
       .listRowBackground(theme.primaryBackgroundColor)
       #else
       .listRowBackground(RoundedRectangle(cornerRadius: 8)
-           .foregroundStyle(.background).hoverEffect())
+        .foregroundStyle(.background).hoverEffect())
       .listRowHoverEffectDisabled()
       #endif
     }
@@ -280,13 +280,13 @@ public struct ExploreView: View {
         .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count))
       { status in
         StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
-          #if !os(visionOS)
+        #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
-          #else
+        #else
           .listRowBackground(RoundedRectangle(cornerRadius: 8)
-               .foregroundStyle(.background).hoverEffect())
+            .foregroundStyle(.background).hoverEffect())
           .listRowHoverEffectDisabled()
-          #endif
+        #endif
           .padding(.vertical, 8)
       }
 
@@ -298,7 +298,7 @@ public struct ExploreView: View {
       .listRowBackground(theme.primaryBackgroundColor)
       #else
       .listRowBackground(RoundedRectangle(cornerRadius: 8)
-           .foregroundStyle(.background).hoverEffect())
+        .foregroundStyle(.background).hoverEffect())
       .listRowHoverEffectDisabled()
       #endif
     }
@@ -311,13 +311,13 @@ public struct ExploreView: View {
       { card in
         StatusRowCardView(card: card)
           .environment(\.isCompact, true)
-          #if !os(visionOS)
+        #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
-          #else
+        #else
           .listRowBackground(RoundedRectangle(cornerRadius: 8)
-               .foregroundStyle(.background).hoverEffect())
+            .foregroundStyle(.background).hoverEffect())
           .listRowHoverEffectDisabled()
-          #endif
+        #endif
           .padding(.vertical, 8)
       }
 
@@ -329,7 +329,7 @@ public struct ExploreView: View {
       .listRowBackground(theme.primaryBackgroundColor)
       #else
       .listRowBackground(RoundedRectangle(cornerRadius: 8)
-           .foregroundStyle(.background).hoverEffect())
+        .foregroundStyle(.background).hoverEffect())
       .listRowHoverEffectDisabled()
       #endif
     }

@@ -15,14 +15,14 @@ public struct ServerDate: Codable, Hashable, Equatable, Sendable {
                                                                                   relativeTo: Date())
     } else {
       return Duration.seconds(-date.timeIntervalSinceNow).formatted(.units(width: .narrow,
-                                                                     maximumUnitCount: 1))
+                                                                           maximumUnitCount: 1))
     }
   }
 
   public var shortDateFormatted: String {
     DateFormatterCache.shared.createdAtShortDateFormatted.string(from: asDate)
   }
-  
+
   private static let calendar = Calendar(identifier: .gregorian)
 
   public init() {
@@ -41,7 +41,7 @@ public struct ServerDate: Codable, Hashable, Equatable, Sendable {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       asDate = try container.decode(Date.self, forKey: .asDate)
     }
-    
+
     let aDay: TimeInterval = 60 * 60 * 24
     isOlderThanADay = Date().timeIntervalSince(asDate) >= aDay
   }

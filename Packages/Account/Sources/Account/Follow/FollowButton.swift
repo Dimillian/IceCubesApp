@@ -4,8 +4,8 @@ import Foundation
 import Models
 import Network
 import Observation
-import SwiftUI
 import OSLog
+import SwiftUI
 
 @MainActor
 @Observable public class FollowButtonViewModel {

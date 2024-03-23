@@ -2,10 +2,11 @@ import DesignSystem
 import Env
 import SwiftUI
 
+@MainActor
 struct SidebarEntriesSettingsView: View {
   @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var userPreferences
-  
+
   @State private var sidebarTabs = SidebarTabs.shared
 
   var body: some View {
@@ -28,11 +29,11 @@ struct SidebarEntriesSettingsView: View {
     .environment(\.editMode, .constant(.active))
     .navigationTitle("settings.general.sidebarEntries")
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
     #endif
   }
-  
+
   func move(from source: IndexSet, to destination: Int) {
     sidebarTabs.tabs.move(fromOffsets: source, toOffset: destination)
   }

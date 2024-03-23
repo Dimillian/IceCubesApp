@@ -1,7 +1,7 @@
 import DesignSystem
 import Env
 #if !os(visionOS) && !DEBUG
-import GiphyUISDK
+  import GiphyUISDK
 #endif
 import Models
 import NukeUI
@@ -29,47 +29,47 @@ extension StatusEditor {
     var body: some View {
       @Bindable var viewModel = focusedSEVM
       #if os(visionOS)
-      HStack {
-        contentView
-          .buttonStyle(.borderless)
-      }
-      .frame(width: 32)
-      .padding(16)
-      .glassBackgroundEffect()
-      .cornerRadius(8)
-      .padding(.trailing, 78)
+        HStack {
+          contentView
+            .buttonStyle(.borderless)
+        }
+        .frame(width: 32)
+        .padding(16)
+        .glassBackgroundEffect()
+        .cornerRadius(8)
+        .padding(.trailing, 78)
       #else
-      Divider()
-      HStack {
-        contentView
-      }
-      .frame(height: 20)
-      .padding(.vertical, 12)
-      .background(.ultraThickMaterial)
+        Divider()
+        HStack {
+          contentView
+        }
+        .frame(height: 20)
+        .padding(.vertical, 12)
+        .background(.ultraThickMaterial)
       #endif
     }
 
     @ViewBuilder
     private var contentView: some View {
       #if os(visionOS)
-      VStack(spacing: 8) {
-        actionsView
-      }
-      #else
-      ViewThatFits {
-        HStack(alignment: .center, spacing: 16) {
+        VStack(spacing: 8) {
           actionsView
         }
-        .padding(.horizontal, .layoutPadding)
-        
-        ScrollView(.horizontal) {
+      #else
+        ViewThatFits {
           HStack(alignment: .center, spacing: 16) {
             actionsView
           }
           .padding(.horizontal, .layoutPadding)
+
+          ScrollView(.horizontal) {
+            HStack(alignment: .center, spacing: 16) {
+              actionsView
+            }
+            .padding(.horizontal, .layoutPadding)
+          }
+          .scrollIndicators(.hidden)
         }
-        .scrollIndicators(.hidden)
-      }
       #endif
     }
 
@@ -96,11 +96,11 @@ extension StatusEditor {
         }
 
         #if !os(visionOS)
-        Button {
-          isGIFPickerPresented = true
-        } label: {
-          Label("GIPHY", systemImage: "party.popper")
-        }
+          Button {
+            isGIFPickerPresented = true
+          } label: {
+            Label("GIPHY", systemImage: "party.popper")
+          }
         #endif
       } label: {
         if viewModel.isMediasLoading {
@@ -135,31 +135,30 @@ extension StatusEditor {
       .sheet(isPresented: $isGIFPickerPresented, content: {
         #if !os(visionOS) && !DEBUG
           #if targetEnvironment(macCatalyst)
-          NavigationStack {
-            giphyView
-            .toolbar {
-              ToolbarItem(placement: .topBarLeading) {
-                Button {
-                  isGIFPickerPresented = false
-                } label: {
-                  Image(systemName: "xmark.circle")
+            NavigationStack {
+              giphyView
+                .toolbar {
+                  ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                      isGIFPickerPresented = false
+                    } label: {
+                      Image(systemName: "xmark.circle")
+                    }
+                  }
                 }
-              }
             }
-          }
-          .presentationDetents([.medium, .large])
-          #else
-          giphyView
             .presentationDetents([.medium, .large])
+          #else
+            giphyView
+              .presentationDetents([.medium, .large])
           #endif
         #else
-        EmptyView()
+          EmptyView()
         #endif
       })
       .accessibilityLabel("accessibility.editor.button.attach-photo")
       .disabled(viewModel.showPoll)
 
-      
       Button {
         // all SEVM have the same visibility value
         followUpSEVMs.append(ViewModel(mode: .new(visibility: focusedSEVM.visibility)))
@@ -167,7 +166,7 @@ extension StatusEditor {
         Image(systemName: "arrowshape.turn.up.left.circle.fill")
       }
       .disabled(!canAddNewSEVM)
-      
+
       if !viewModel.customEmojiContainer.isEmpty {
         Button {
           isCustomEmojisSheetDisplay = true
@@ -187,20 +186,19 @@ extension StatusEditor {
           }
         }
       }
-      
-      
+
       if preferences.isOpenAIEnabled {
         AIMenu.disabled(!viewModel.canPost)
       }
-      
+
       Spacer()
-      
+
       Button {
         viewModel.insertStatusText(text: "@")
       } label: {
         Image(systemName: "at")
       }
-      
+
       Button {
         viewModel.insertStatusText(text: "#")
       } label: {
@@ -223,19 +221,19 @@ extension StatusEditor {
     }
 
     #if !os(visionOS) && !DEBUG
-    @ViewBuilder
-    private var giphyView: some View {
-      @Bindable var viewModel = focusedSEVM
-      GifPickerView { url in
-        GPHCache.shared.downloadAssetData(url) { data, _ in
-          guard let data else { return }
-          viewModel.processGIFData(data: data)
+      @ViewBuilder
+      private var giphyView: some View {
+        @Bindable var viewModel = focusedSEVM
+        GifPickerView { url in
+          GPHCache.shared.downloadAssetData(url) { data, _ in
+            guard let data else { return }
+            viewModel.processGIFData(data: data)
+          }
+          isGIFPickerPresented = false
+        } onShouldDismissGifPicker: {
+          isGIFPickerPresented = false
         }
-        isGIFPickerPresented = false
-      } onShouldDismissGifPicker: {
-        isGIFPickerPresented = false
       }
-    }
     #endif
 
     private var AIMenu: some View {
@@ -268,7 +266,5 @@ extension StatusEditor {
         }
       }
     }
-
   }
-
 }

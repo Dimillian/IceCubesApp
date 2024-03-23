@@ -2,10 +2,10 @@ import AVFoundation
 import Foundation
 import UIKit
 
-extension StatusEditor {
-  public actor Compressor {
-    public init() { }
-    
+public extension StatusEditor {
+  actor Compressor {
+    public init() {}
+
     enum CompressorError: Error {
       case noData
     }
@@ -106,5 +106,4 @@ extension StatusEditor {
       }
     }
   }
-
 }

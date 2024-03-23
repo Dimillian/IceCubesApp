@@ -24,7 +24,7 @@ struct TranslationSettingsView: View {
         #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
         #endif
-        
+
         if apiKey.isEmpty {
           Section {
             Link(destination: URL(string: "https://www.deepl.com/pro-api")!) {
@@ -41,13 +41,13 @@ struct TranslationSettingsView: View {
     }
     .navigationTitle("settings.translation.navigation-title")
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
     #endif
-    .onChange(of: apiKey) {
-      writeNewValue()
-    }
-    .onAppear(perform: updatePrefs)
+      .onChange(of: apiKey) {
+        writeNewValue()
+      }
+      .onAppear(perform: updatePrefs)
   }
 
   @ViewBuilder

@@ -74,18 +74,18 @@ public struct FiltersListView: View {
       .navigationTitle("filter.filters")
       .navigationBarTitleDisplayMode(.inline)
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
       #endif
-      .task {
-        do {
-          isLoading = true
-          filters = try await client.get(endpoint: ServerFilters.filters, forceVersion: .v2)
-          isLoading = false
-        } catch {
-          isLoading = false
+        .task {
+          do {
+            isLoading = true
+            filters = try await client.get(endpoint: ServerFilters.filters, forceVersion: .v2)
+            isLoading = false
+          } catch {
+            isLoading = false
+          }
         }
-      }
     }
   }
 

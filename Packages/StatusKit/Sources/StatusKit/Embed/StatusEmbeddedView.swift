@@ -36,17 +36,17 @@ public struct StatusEmbeddedView: View {
     }
     .padding(8)
     #if os(visionOS)
-    .background(Material.thickMaterial)
+      .background(Material.thickMaterial)
     #else
-    .background(theme.secondaryBackgroundColor)
+      .background(theme.secondaryBackgroundColor)
     #endif
-    .cornerRadius(4)
-    .overlay(
-      RoundedRectangle(cornerRadius: 4)
-        .stroke(.gray.opacity(0.35), lineWidth: 1)
-    )
-    .padding(.top, 8)
-    .accessibilityElement(children: .combine)
+      .cornerRadius(4)
+      .overlay(
+        RoundedRectangle(cornerRadius: 4)
+          .stroke(.gray.opacity(0.35), lineWidth: 1)
+      )
+      .padding(.top, 8)
+      .accessibilityElement(children: .combine)
   }
 
   private func makeAccountView(account: Account) -> some View {

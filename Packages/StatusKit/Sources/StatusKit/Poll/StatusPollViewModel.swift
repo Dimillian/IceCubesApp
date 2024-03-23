@@ -35,7 +35,7 @@ import SwiftUI
         votes = poll.ownVotes ?? []
         showResults = true
       }
-    } catch { }
+    } catch {}
   }
 
   public func handleSelection(_ pollIndex: Int) {

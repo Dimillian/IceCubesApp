@@ -1,12 +1,12 @@
+import Models
+import Network
 @testable import Timeline
 import XCTest
-import Network
-import Models
 
 @MainActor
 final class TimelineViewModelTests: XCTestCase {
   var subject = TimelineViewModel()
-  
+
   override func setUp() async throws {
     subject = TimelineViewModel()
     let client = Client(server: "localhost")
@@ -15,7 +15,7 @@ final class TimelineViewModelTests: XCTestCase {
     subject.isTimelineVisible = true
     subject.timelineTask?.cancel()
   }
-  
+
   func testStreamEventInsertNewStatus() async throws {
     let isEmpty = await subject.datasource.isEmpty
     XCTAssertTrue(isEmpty)
@@ -26,7 +26,7 @@ final class TimelineViewModelTests: XCTestCase {
     count = await subject.datasource.count()
     XCTAssertTrue(count == 2)
   }
-  
+
   func testStreamEventInsertDuplicateStatus() async throws {
     let isEmpty = await subject.datasource.isEmpty
     XCTAssertTrue(isEmpty)
@@ -38,7 +38,7 @@ final class TimelineViewModelTests: XCTestCase {
     count = await subject.datasource.count()
     XCTAssertTrue(count == 1)
   }
-  
+
   func testStreamEventRemove() async throws {
     let isEmpty = await subject.datasource.isEmpty
     XCTAssertTrue(isEmpty)
@@ -50,7 +50,7 @@ final class TimelineViewModelTests: XCTestCase {
     count = await subject.datasource.count()
     XCTAssertTrue(count == 0)
   }
-  
+
   func testStreamEventUpdateStatus() async throws {
     var status = Status.placeholder()
     let isEmpty = await subject.datasource.isEmpty
@@ -65,9 +65,9 @@ final class TimelineViewModelTests: XCTestCase {
                    editedAt: status.editedAt,
                    reblog: status.reblog,
                    mediaAttachments: status.mediaAttachments,
-                   mentions: status.mentions, 
+                   mentions: status.mentions,
                    repliesCount: status.repliesCount,
-                   reblogsCount: status.reblogsCount, 
+                   reblogsCount: status.reblogsCount,
                    favouritesCount: status.favouritesCount,
                    card: status.card,
                    favourited: status.favourited,

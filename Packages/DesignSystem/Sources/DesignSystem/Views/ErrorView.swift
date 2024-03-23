@@ -42,3 +42,9 @@ public struct ErrorView: View {
     }
   }
 }
+
+#Preview {
+  ErrorView(title: "Error",
+            message: "Error loading. Please try again",
+            buttonTitle: "Retry") {}
+}

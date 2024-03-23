@@ -23,13 +23,13 @@ public struct StatusRowMediaPreviewView: View {
     self.sensitive = sensitive
   }
 
-#if targetEnvironment(macCatalyst)
-  private var showsScrollIndicators: Bool { attachments.count > 1 }
-  private var scrollBottomPadding: CGFloat?
-#else
-  private var showsScrollIndicators: Bool = false
-  private var scrollBottomPadding: CGFloat? = 0
-#endif
+  #if targetEnvironment(macCatalyst)
+    private var showsScrollIndicators: Bool { attachments.count > 1 }
+    private var scrollBottomPadding: CGFloat?
+  #else
+    private var showsScrollIndicators: Bool = false
+    private var scrollBottomPadding: CGFloat? = 0
+  #endif
 
   private var imageMaxHeight: CGFloat {
     if isCompact {
@@ -49,9 +49,9 @@ public struct StatusRowMediaPreviewView: View {
       if attachments.count == 1 {
         FeaturedImagePreView(
           attachment: attachments[0],
-          maxSize: imageMaxHeight == 300 
-          ? nil
-          : CGSize(width: imageMaxHeight, height: imageMaxHeight),
+          maxSize: imageMaxHeight == 300
+            ? nil
+            : CGSize(width: imageMaxHeight, height: imageMaxHeight),
           sensitive: sensitive
         )
         .accessibilityElement(children: .ignore)
@@ -80,7 +80,7 @@ public struct StatusRowMediaPreviewView: View {
         imageMaxHeight: imageMaxHeight,
         displayData: data
       )
-      .onTapGesture { 
+      .onTapGesture {
         if let index = attachments.firstIndex(where: { $0.id == attachement.id }) {
           tabAction(for: index)
         }
@@ -212,7 +212,7 @@ struct BlurOverLay: View {
                   .matchedGeometryEffect(id: "eye", in: buttonSpace)
               }
               .lineLimit(1)
-              .foregroundColor(theme.labelColor)
+              .foregroundColor(theme.contrastingTintColor)
             } else {
               Image(systemName: "eye.slash")
                 .transition(.opacity)
@@ -279,23 +279,23 @@ struct AltTextButton: View {
       .padding(EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7))
       .background(.thinMaterial)
       #if os(visionOS)
-      .clipShape(Capsule())
+        .clipShape(Capsule())
       #endif
-      .cornerRadius(4)
-      .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
-      .alert(
-        "status.editor.media.image-description",
-        isPresented: $isDisplayingAlert
-      ) {
-        Button("alert.button.ok", action: {})
-      } message: {
-        Text(text)
-      }
-      .frame(
-        maxWidth: .infinity,
-        maxHeight: .infinity,
-        alignment: .bottomTrailing
-      )
+        .cornerRadius(4)
+        .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
+        .alert(
+          "status.editor.media.image-description",
+          isPresented: $isDisplayingAlert
+        ) {
+          Button("alert.button.ok", action: {})
+        } message: {
+          Text(text)
+        }
+        .frame(
+          maxWidth: .infinity,
+          maxHeight: .infinity,
+          alignment: .bottomTrailing
+        )
     }
   }
 }
@@ -438,9 +438,9 @@ private struct FeaturedImagePreView: View {
               RoundedRectangle(cornerRadius: 10)
                 .stroke(.gray.opacity(0.35), lineWidth: 1)
             )
-            #if os(visionOS)
+          #if os(visionOS)
             .hoverEffect()
-            #endif
+          #endif
         }
       }
       .overlay {
@@ -468,7 +468,7 @@ private struct FeaturedImagePreView: View {
       self.maxSize = maxSize
     }
 
-    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) -> CGSize {
       guard !subviews.isEmpty else { return CGSize.zero }
 
       if let maxSize { return maxSize }
@@ -476,7 +476,7 @@ private struct FeaturedImagePreView: View {
       return calculateSize(proposal)
     }
 
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) {
       guard let view = subviews.first else { return }
 
       let size = if let maxSize { maxSize } else { calculateSize(proposal) }

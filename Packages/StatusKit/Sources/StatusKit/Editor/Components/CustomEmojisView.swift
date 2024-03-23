@@ -1,17 +1,16 @@
 import DesignSystem
 import Env
-import SwiftUI
 import Models
 import NukeUI
+import SwiftUI
 
 extension StatusEditor {
-  
   @MainActor
   struct CustomEmojisView: View {
     @Environment(\.dismiss) private var dismiss
-    
+
     @Environment(Theme.self) private var theme
-        
+
     var viewModel: ViewModel
 
     var body: some View {

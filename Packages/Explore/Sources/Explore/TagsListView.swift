@@ -15,9 +15,9 @@ public struct TagsListView: View {
     List {
       ForEach(tags) { tag in
         TagRowView(tag: tag)
-          #if !os(visionOS)
+        #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
-          #endif
+        #endif
           .padding(.vertical, 4)
       }
     }

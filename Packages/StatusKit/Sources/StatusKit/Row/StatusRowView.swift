@@ -28,12 +28,12 @@ public struct StatusRowView: View {
   private let context: Context
 
   public init(viewModel: StatusRowViewModel, context: Context = .timeline) {
-    self._viewModel = .init(initialValue: viewModel)
+    _viewModel = .init(initialValue: viewModel)
     self.context = context
   }
 
   var contextMenu: some View {
-    StatusRowContextMenu(viewModel: viewModel, 
+    StatusRowContextMenu(viewModel: viewModel,
                          showTextForSelection: $showSelectableText,
                          isBlockConfirmationPresented: $isBlockConfirmationPresented)
   }
@@ -75,11 +75,13 @@ public struct StatusRowView: View {
             if !isCompact,
                theme.avatarPosition == .leading
             {
-              Button {
-                viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
-              } label: {
-                AvatarView(viewModel.finalStatus.account.avatar)
-              }
+              AvatarView(viewModel.finalStatus.account.avatar)
+                .accessibility(addTraits: .isButton)
+                .contentShape(Circle())
+                .hoverEffect()
+                .onTapGesture {
+                  viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
+                }
             }
             VStack(alignment: .leading, spacing: .statusComponentSpacing) {
               if !isCompact {
@@ -97,8 +99,9 @@ public struct StatusRowView: View {
                   }
                 }
               if !reasons.contains(.placeholder),
-                  viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
-                 !isInCaptureMode {
+                 viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
+                 !isInCaptureMode
+              {
                 StatusRowActionsView(isBlockConfirmationPresented: $isBlockConfirmationPresented,
                                      viewModel: viewModel)
                   .tint(isFocused ? theme.tintColor : .gray)
@@ -194,13 +197,14 @@ public struct StatusRowView: View {
       )
     })
     .confirmationDialog("",
-                        isPresented: $isBlockConfirmationPresented) {
+                        isPresented: $isBlockConfirmationPresented)
+    {
       Button("account.action.block", role: .destructive) {
         Task {
           do {
             let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
             viewModel.authorRelationship = try await client.post(endpoint: Accounts.block(id: operationAccount.id))
-          } catch { }
+          } catch {}
         }
       }
     }
@@ -329,3 +333,25 @@ public struct StatusRowView: View {
   }
 }
 
+#Preview {
+  List {
+    StatusRowView(viewModel:
+      .init(status: .placeholder(),
+            client: .init(server: ""),
+            routerPath: RouterPath()),
+      context: .timeline)
+    StatusRowView(viewModel:
+      .init(status: .placeholder(),
+            client: .init(server: ""),
+            routerPath: RouterPath()),
+      context: .timeline)
+    StatusRowView(viewModel:
+      .init(status: .placeholder(),
+            client: .init(server: ""),
+            routerPath: RouterPath()),
+      context: .timeline)
+  }
+  .listStyle(.plain)
+  .withPreviewsEnv()
+  .environment(Theme.shared)
+}

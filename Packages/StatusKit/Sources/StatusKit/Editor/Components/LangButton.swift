@@ -1,19 +1,18 @@
 import DesignSystem
 import Env
-import SwiftUI
 import Models
+import SwiftUI
 
 extension StatusEditor {
-  
   @MainActor
   struct LangButton: View {
     @Environment(Theme.self) private var theme
     @Environment(CurrentInstance.self) private var currentInstance
     @Environment(UserPreferences.self) private var preferences
-    
+
     @State private var isLanguageSheetDisplayed: Bool = false
     @State private var languageSearch: String = ""
-    
+
     var viewModel: ViewModel
 
     var body: some View {
@@ -39,7 +38,7 @@ extension StatusEditor {
         languageSheetView
       }
     }
-    
+
     private var languageSheetView: some View {
       NavigationStack {
         List {
@@ -68,7 +67,7 @@ extension StatusEditor {
         .background(theme.secondaryBackgroundColor)
       }
     }
-    
+
     @ViewBuilder
     private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View {
       if let nativeName, let name {
@@ -100,7 +99,7 @@ extension StatusEditor {
         }
       }
     }
-    
+
     private var recentlyUsedLanguages: [Language] {
       preferences.recentlyUsedLanguages.compactMap { isoCode in
         Language.allAvailableLanguages.first { $0.isoCode == isoCode }

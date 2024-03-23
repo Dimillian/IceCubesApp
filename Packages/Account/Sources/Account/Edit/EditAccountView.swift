@@ -2,8 +2,8 @@ import DesignSystem
 import Env
 import Models
 import Network
-import SwiftUI
 import NukeUI
+import SwiftUI
 
 @MainActor
 public struct EditAccountView: View {
@@ -13,8 +13,8 @@ public struct EditAccountView: View {
   @Environment(UserPreferences.self) private var userPrefs
 
   @State private var viewModel = EditAccountViewModel()
-  
-  public init() { }
+
+  public init() {}
 
   public var body: some View {
     NavigationStack {
@@ -31,24 +31,24 @@ public struct EditAccountView: View {
       }
       .environment(\.editMode, .constant(.active))
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
-      .scrollDismissesKeyboard(.immediately)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
+        .scrollDismissesKeyboard(.immediately)
       #endif
-      .navigationTitle("account.edit.navigation-title")
-      .navigationBarTitleDisplayMode(.inline)
-      .toolbar {
-        toolbarContent
-      }
-      .alert("account.edit.error.save.title",
-             isPresented: $viewModel.saveError,
-             actions: {
-               Button("alert.button.ok", action: {})
-             }, message: { Text("account.edit.error.save.message") })
-      .task {
-        viewModel.client = client
-        await viewModel.fetchAccount()
-      }
+        .navigationTitle("account.edit.navigation-title")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+          toolbarContent
+        }
+        .alert("account.edit.error.save.title",
+               isPresented: $viewModel.saveError,
+               actions: {
+                 Button("alert.button.ok", action: {})
+               }, message: { Text("account.edit.error.save.message") })
+        .task {
+          viewModel.client = client
+          await viewModel.fetchAccount()
+        }
     }
   }
 
@@ -64,7 +64,7 @@ public struct EditAccountView: View {
     .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
-  
+
   private var imagesSection: some View {
     Section {
       ZStack(alignment: .center) {

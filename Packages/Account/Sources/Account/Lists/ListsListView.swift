@@ -1,14 +1,14 @@
 import DesignSystem
+import Env
 import Models
 import SwiftUI
-import Env
 
 public struct ListsListView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Theme.self) private var theme
 
   public init() {}
-  
+
   public var body: some View {
     List {
       ForEach(currentAccount.lists) { list in
@@ -43,4 +43,3 @@ public struct ListsListView: View {
     .navigationBarTitleDisplayMode(.inline)
   }
 }
-

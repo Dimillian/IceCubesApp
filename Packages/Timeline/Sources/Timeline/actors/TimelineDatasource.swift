@@ -1,6 +1,6 @@
+import Env
 import Foundation
 import Models
-import Env
 
 actor TimelineDatasource {
   private var statuses: [Status] = []
@@ -12,25 +12,26 @@ actor TimelineDatasource {
   func get() -> [Status] {
     statuses
   }
-  
+
   func getFiltered() async -> [Status] {
-    let contentFilter = TimelineContentFilter.shared
+    let contentFilter = await TimelineContentFilter.shared
     let showReplies = await contentFilter.showReplies
     let showBoosts = await contentFilter.showBoosts
     let showThreads = await contentFilter.showThreads
     let showQuotePosts = await contentFilter.showQuotePosts
     return statuses.filter { status in
       if status.isHidden ||
-          !showReplies && status.inReplyToId != nil && status.inReplyToAccountId != status.account.id  ||
-          !showBoosts && status.reblog != nil ||
-          !showThreads && status.inReplyToAccountId == status.account.id ||
-          !showQuotePosts && !status.content.statusesURLs.isEmpty {
+        !showReplies && status.inReplyToId != nil && status.inReplyToAccountId != status.account.id ||
+        !showBoosts && status.reblog != nil ||
+        !showThreads && status.inReplyToAccountId == status.account.id ||
+        !showQuotePosts && !status.content.statusesURLs.isEmpty
+      {
         return false
       }
       return true
     }
   }
-  
+
   func count() -> Int {
     statuses.count
   }

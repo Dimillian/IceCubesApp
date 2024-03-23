@@ -61,20 +61,20 @@ struct EditTagGroupView: View {
       )
       .navigationBarTitleDisplayMode(.inline)
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
-      .scrollDismissesKeyboard(.interactively)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
+        .scrollDismissesKeyboard(.interactively)
       #endif
-      .toolbar {
-        CancelToolbarItem()
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button("action.save", action: { save() })
-            .disabled(!tagGroup.isValid)
+        .toolbar {
+          CancelToolbarItem()
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button("action.save", action: { save() })
+              .disabled(!tagGroup.isValid)
+          }
         }
-      }
-      .onAppear {
-        focusedField = .title
-      }
+        .onAppear {
+          focusedField = .title
+        }
     }
   }
 

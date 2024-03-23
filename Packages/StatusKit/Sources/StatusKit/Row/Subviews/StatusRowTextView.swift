@@ -7,7 +7,7 @@ import SwiftUI
 struct StatusRowTextView: View {
   @Environment(Theme.self) private var theme
   @Environment(\.isStatusFocused) private var isFocused
-  
+
   @Environment(StatusDataController.self) private var statusDataController
 
   var viewModel: StatusRowViewModel

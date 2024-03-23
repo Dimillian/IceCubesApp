@@ -1,20 +1,20 @@
 import DesignSystem
+import Env
 import Models
 import SwiftUI
-import Env
 
 public struct FollowedTagsListView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Theme.self) private var theme
 
   public init() {}
-  
+
   public var body: some View {
     List(currentAccount.tags) { tag in
       TagRowView(tag: tag)
-        #if !os(visionOS)
+      #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
-        #endif
+      #endif
         .padding(.vertical, 4)
     }
     .task {
@@ -32,4 +32,3 @@ public struct FollowedTagsListView: View {
     .navigationBarTitleDisplayMode(.inline)
   }
 }
-
