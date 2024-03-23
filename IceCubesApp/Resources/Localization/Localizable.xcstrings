@@ -17180,8 +17180,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "轉移到 %@"
           }
         }
       }
