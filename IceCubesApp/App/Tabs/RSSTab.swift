@@ -18,5 +18,6 @@ public struct RSSTab: View {
       .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
       .withSafariRouter()
       .environment(routerPath)
+      .environment(\.managedObjectContext, RSSDataController.shared.container.viewContext)
   }
 }

@@ -149,9 +149,11 @@ extension View {
           .withEnvironments()
       case .addNewRSSFeed:
         RSSAddNewFeed()
+          .environment(\.managedObjectContext, RSSDataController.shared.container.viewContext)
       case .rssFeedManager:
         RSSFeedManager()
           .withEnvironments()
+          .environment(\.managedObjectContext, RSSDataController.shared.container.viewContext)
       }
     }
   }
