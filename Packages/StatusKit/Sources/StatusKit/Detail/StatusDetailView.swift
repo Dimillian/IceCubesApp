@@ -152,9 +152,7 @@ public struct StatusDetailView: View {
               message: "status.error.message",
               buttonTitle: "action.retry")
     {
-      Task {
-        await viewModel.fetch()
-      }
+      _ = await viewModel.fetch()
     }
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)

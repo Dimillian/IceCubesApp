@@ -38,9 +38,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
                 message: "status.error.loading.message",
                 buttonTitle: "action.retry")
       {
-        Task {
-          await fetcher.fetchNewestStatuses(pullToRefresh: false)
-        }
+        await fetcher.fetchNewestStatuses(pullToRefresh: false)
       }
       .listRowBackground(theme.primaryBackgroundColor)
       .listRowSeparator(.hidden)

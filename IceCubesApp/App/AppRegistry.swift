@@ -11,6 +11,7 @@ import Models
 import StatusKit
 import SwiftUI
 import Timeline
+import Notifications
 
 @MainActor
 extension View {
@@ -63,6 +64,12 @@ extension View {
         TrendingLinksListView(cards: cards)
       case let .tagsList(tags):
         TagsListView(tags: tags)
+      case .notificationsRequests:
+        NotificationsRequestsListView()
+      case let .notificationForAccount(accountId):
+        NotificationsListView(lockedType: nil ,
+                              lockedAccountId: accountId,
+                              scrollToTopSignal: .constant(0))
       }
     }
   }

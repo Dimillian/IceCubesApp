@@ -23,6 +23,8 @@ public enum RouterDestination: Hashable {
   case trendingTimeline
   case trendingLinks(cards: [Card])
   case tagsList(tags: [Tag])
+  case notificationsRequests
+  case notificationForAccount(accountId: String)
 }
 
 public enum WindowDestinationEditor: Hashable, Codable {

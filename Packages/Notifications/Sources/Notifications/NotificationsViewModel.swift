@@ -39,6 +39,8 @@ import SwiftUI
   private let filterKey = "notification-filter"
   var state: State = .loading
   var isLockedType: Bool = false
+  var lockedAccountId: String? = nil
+  var policy: Models.NotificationsPolicy?
   var selectedType: Models.Notification.NotificationType? {
     didSet {
       guard oldValue != selectedType,
@@ -82,11 +84,16 @@ import SwiftUI
       var nextPageState: State.PagingState = .hasNextPage
       if consolidatedNotifications.isEmpty {
         state = .loading
-        let notifications: [Models.Notification] =
-          try await client.get(endpoint: Notifications.notifications(minId: nil,
-                                                                     maxId: nil,
-                                                                     types: queryTypes,
-                                                                     limit: Constants.notificationLimit))
+        let notifications: [Models.Notification]
+        if let lockedAccountId {
+          notifications = try await client.get(endpoint: Notifications.notificationsForAccount(accountId: lockedAccountId,
+                                                                                               maxId: nil))
+        } else {
+          notifications = try await client.get(endpoint: Notifications.notifications(minId: nil,
+                                                                                     maxId: nil,
+                                                                                     types: queryTypes,
+                                                                                     limit: Constants.notificationLimit))
+        }
         consolidatedNotifications = await notifications.consolidated(selectedType: selectedType)
         markAsRead()
         nextPageState = notifications.count < Constants.notificationLimit ? .none : .hasNextPage
@@ -119,7 +126,7 @@ import SwiftUI
   }
 
   private func fetchNewPages(minId: String, maxPages: Int) async -> [Models.Notification] {
-    guard let client else { return [] }
+    guard let client, lockedAccountId == nil else { return [] }
     var pagesLoaded = 0
     var allNotifications: [Models.Notification] = []
     var latestMinId = minId
@@ -146,11 +153,17 @@ import SwiftUI
   func fetchNextPage() async throws {
     guard let client else { return }
     guard let lastId = consolidatedNotifications.last?.notificationIds.last else { return }
-    let newNotifications: [Models.Notification] =
-      try await client.get(endpoint: Notifications.notifications(minId: nil,
-                                                                 maxId: lastId,
-                                                                 types: queryTypes,
-                                                                 limit: Constants.notificationLimit))
+    let newNotifications: [Models.Notification]
+    if let lockedAccountId {
+      newNotifications =
+      try await client.get(endpoint: Notifications.notificationsForAccount(accountId: lockedAccountId, maxId: lastId))
+    } else {
+      newNotifications =
+        try await client.get(endpoint: Notifications.notifications(minId: nil,
+                                                                   maxId: lastId,
+                                                                   types: queryTypes,
+                                                                   limit: Constants.notificationLimit))
+    }
     await consolidatedNotifications.append(contentsOf: newNotifications.consolidated(selectedType: selectedType))
     if consolidatedNotifications.contains(where: { $0.type == .follow_request }) {
       await currentAccount?.fetchFollowerRequests()
@@ -167,13 +180,18 @@ import SwiftUI
       } catch {}
     }
   }
+  
+  func fetchPolicy() async {
+    policy = try? await client?.get(endpoint: Notifications.policy)
+  }
 
   func handleEvent(event: any StreamEvent) {
     Task {
       // Check if the event is a notification,
       // if it is not already in the list,
       // and if it can be shown (no selected type or the same as the received notification type)
-      if let event = event as? StreamEventNotification,
+      if lockedAccountId == nil,
+         let event = event as? StreamEventNotification,
          !consolidatedNotifications.flatMap(\.notificationIds).contains(event.notification.id),
          selectedType == nil || selectedType?.rawValue == event.notification.type
       {

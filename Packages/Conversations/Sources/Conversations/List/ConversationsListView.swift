@@ -56,9 +56,7 @@ public struct ConversationsListView: View {
                         message: "conversations.error.message",
                         buttonTitle: "conversations.error.button")
               {
-                Task {
-                  await viewModel.fetchConversations()
-                }
+                await viewModel.fetchConversations()
               }
             }
 

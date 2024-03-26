@@ -34,6 +34,10 @@ import Observation
   public var isEditAltTextSupported: Bool {
     version >= 4.1
   }
+  
+  public var isNotificationsFilterSupported: Bool {
+    version >= 4.3
+  }
 
   private init() {}
 

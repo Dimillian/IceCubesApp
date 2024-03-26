@@ -7,18 +7,26 @@ import SwiftUI
 @MainActor
 public struct NotificationsListView: View {
   @Environment(\.scenePhase) private var scenePhase
+  
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var account
+  @Environment(CurrentInstance.self) private var currentInstance
+  
   @State private var viewModel = NotificationsViewModel()
+  @State private var isNotificationsPolicyPresented: Bool = false
   @Binding var scrollToTopSignal: Int
 
   let lockedType: Models.Notification.NotificationType?
+  let lockedAccountId: String?
 
-  public init(lockedType: Models.Notification.NotificationType?, scrollToTopSignal: Binding<Int>) {
+  public init(lockedType: Models.Notification.NotificationType? = nil,
+              lockedAccountId: String? = nil,
+              scrollToTopSignal: Binding<Int>) {
     self.lockedType = lockedType
+    self.lockedAccountId = lockedAccountId
     _scrollToTopSignal = scrollToTopSignal
   }
 
@@ -27,6 +35,9 @@ public struct NotificationsListView: View {
       List {
         scrollToTopView
         topPaddingView
+        if lockedAccountId == nil, let summary = viewModel.policy?.summary {
+          NotificationsHeaderFilteredView(filteredNotifications: summary)
+        }
         notificationsView
       }
       .id(account.account?.id)
@@ -58,7 +69,7 @@ public struct NotificationsListView: View {
       }
     }
     .toolbar {
-      if lockedType == nil {
+      if lockedType == nil && lockedAccountId == nil {
         ToolbarTitleMenu {
           Button {
             viewModel.selectedType = nil
@@ -83,25 +94,39 @@ public struct NotificationsListView: View {
               }
             }
           }
+          if currentInstance.isNotificationsFilterSupported {
+            Divider()
+            Button {
+              isNotificationsPolicyPresented = true
+            } label: {
+              Label("notifications.content-filter.title", systemImage: "line.3.horizontal.decrease")
+            }
+          }
         }
       }
+    }
+    .sheet(isPresented: $isNotificationsPolicyPresented) {
+      NotificationsPolicyView()
     }
     .navigationBarTitleDisplayMode(.inline)
     #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-      .onAppear {
+    .onAppear {
         viewModel.client = client
         viewModel.currentAccount = account
         if let lockedType {
           viewModel.isLockedType = true
           viewModel.selectedType = lockedType
+        } else if let lockedAccountId {
+          viewModel.lockedAccountId = lockedAccountId
         } else {
           viewModel.loadSelectedType()
         }
         Task {
           await viewModel.fetchNotifications()
+          await viewModel.fetchPolicy()
         }
       }
       .refreshable {
@@ -203,9 +228,7 @@ public struct NotificationsListView: View {
                 message: "notifications.error.message",
                 buttonTitle: "action.retry")
       {
-        Task {
-          await viewModel.fetchNotifications()
-        }
+        await viewModel.fetchNotifications()
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
