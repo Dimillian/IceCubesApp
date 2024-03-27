@@ -34706,8 +34706,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "新账户"
           }
         },
         "zh-Hant" : {
@@ -34825,8 +34825,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "没有关注你的人"
           }
         },
         "zh-Hant" : {
@@ -34944,8 +34944,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "你没有关注的人"
           }
         },
         "zh-Hant" : {
@@ -35063,8 +35063,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : ""
+            "state" : "translated",
+            "value" : "不请自来的提及"
           }
         },
         "zh-Hant" : {
@@ -35182,8 +35182,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "已过滤的通知"
           }
         },
         "zh-Hant" : {
@@ -35301,8 +35301,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "通知过滤"
           }
         },
         "zh-Hant" : {
@@ -35420,8 +35420,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "通知过滤范围"
           }
         },
         "zh-Hant" : {
