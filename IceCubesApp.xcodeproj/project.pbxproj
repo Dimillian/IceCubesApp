@@ -724,6 +724,7 @@
 				be,
 				uk,
 				"zh-Hant",
+				ru,
 			);
 			mainGroup = 9FBFE630292A715500C250E9;
 			packageReferences = (
