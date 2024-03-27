@@ -34826,7 +34826,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "没有关注你的人"
+            "value" : "未关注你的人"
           }
         },
         "zh-Hant" : {
@@ -34945,7 +34945,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "你没有关注的人"
+            "value" : "你未关注的人"
           }
         },
         "zh-Hant" : {
