@@ -17120,8 +17120,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "Spostato a %@"
           }
         },
         "ja" : {
@@ -34652,8 +34652,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "Nuovi account"
           }
         },
         "ja" : {
@@ -34771,8 +34771,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "Persone che non ti seguono"
           }
         },
         "ja" : {
@@ -34890,8 +34890,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "Persone che non segui"
           }
         },
         "ja" : {
@@ -35009,8 +35009,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "Messaggi diretti non approvati"
           }
         },
         "ja" : {
@@ -35128,8 +35128,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "Notifiche filtrate"
           }
         },
         "ja" : {
@@ -35247,8 +35247,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "Filtro notifiche"
           }
         },
         "ja" : {
@@ -35366,8 +35366,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "Filtra le notifiche da…"
           }
         },
         "ja" : {
