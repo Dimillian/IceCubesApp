@@ -17108,8 +17108,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "%@(e)ra aldatu da"
           }
         },
         "fr" : {
@@ -34640,8 +34640,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "Kontu berriak"
           }
         },
         "fr" : {
@@ -34759,8 +34759,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "Jarraitzen ez dizun jendea"
           }
         },
         "fr" : {
@@ -34878,8 +34878,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "Jarraitzen ez duzun jendea"
           }
         },
         "fr" : {
@@ -34997,8 +34997,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "Eskatu gabeko aipamen pribatuak"
           }
         },
         "fr" : {
@@ -35116,8 +35116,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "Iragazitako jakinarazpenak"
           }
         },
         "fr" : {
@@ -35235,8 +35235,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "Jakinarazpenen iragazkiak"
           }
         },
         "fr" : {
@@ -35354,8 +35354,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "Baztertu hauen jakinarazpenak…"
           }
         },
         "fr" : {
