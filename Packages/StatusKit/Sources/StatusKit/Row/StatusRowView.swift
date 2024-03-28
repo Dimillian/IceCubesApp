@@ -83,33 +83,33 @@ public struct StatusRowView: View {
                   viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
                 }
             }
-            VStack(alignment: .leading, spacing: .statusComponentSpacing) {
-              if !isCompact {
-                StatusRowHeaderView(viewModel: viewModel)
+            if !isCompact {
+              StatusRowHeaderView(viewModel: viewModel)
+            }
+          }
+          VStack(alignment: .leading, spacing: .statusComponentSpacing) {
+            StatusRowContentView(viewModel: viewModel)
+              .contentShape(Rectangle())
+              .onTapGesture {
+                guard !isFocused else { return }
+                viewModel.navigateToDetail()
               }
-              StatusRowContentView(viewModel: viewModel)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                  guard !isFocused else { return }
-                  viewModel.navigateToDetail()
+              .accessibilityActions {
+                if isFocused, viewModel.showActions {
+                  accessibilityActions
                 }
-                .accessibilityActions {
-                  if isFocused, viewModel.showActions {
-                    accessibilityActions
-                  }
-                }
-              if !reasons.contains(.placeholder),
-                 viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
-                 !isInCaptureMode
-              {
-                StatusRowActionsView(isBlockConfirmationPresented: $isBlockConfirmationPresented,
-                                     viewModel: viewModel)
-                  .tint(isFocused ? theme.tintColor : .gray)
               }
+            if !reasons.contains(.placeholder),
+               viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
+               !isInCaptureMode
+            {
+              StatusRowActionsView(isBlockConfirmationPresented: $isBlockConfirmationPresented,
+                                   viewModel: viewModel)
+                .tint(isFocused ? theme.tintColor : .gray)
+            }
 
-              if isFocused, !isCompact {
-                StatusRowDetailView(viewModel: viewModel)
-              }
+            if isFocused, !isCompact {
+              StatusRowDetailView(viewModel: viewModel)
             }
           }
         }
