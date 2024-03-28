@@ -70,26 +70,54 @@ public struct EditAccountView: View {
       ZStack(alignment: .center) {
         if let header = viewModel.header {
           ZStack(alignment: .topLeading) {
-            LazyImage(url: header) { state in
-              if let image = state.image {
-                image
+            if let previewHeaderData = viewModel.temporaryHeaderData {
+              if let uiImage = UIImage(data: previewHeaderData) {
+                Image(uiImage: uiImage)
                   .resizable()
                   .aspectRatio(contentMode: .fill)
                   .frame(height: 150)
                   .clipShape(RoundedRectangle(cornerRadius: 8))
                   .clipped()
-              } else {
-                RoundedRectangle(cornerRadius: 8)
-                  .foregroundStyle(theme.primaryBackgroundColor)
                   .frame(height: 150)
               }
+            } else {
+              LazyImage(url: header) { state in
+                if let image = state.image {
+                  image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(height: 150)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .clipped()
+                } else {
+                  RoundedRectangle(cornerRadius: 8)
+                    .foregroundStyle(theme.primaryBackgroundColor)
+                    .frame(height: 150)
+                }
+              }
+              .frame(height: 150)
             }
-            .frame(height: 150)
           }
         }
         if let avatar = viewModel.avatar {
           ZStack(alignment: .bottomLeading) {
-            AvatarView(avatar, config: .account)
+            if let previewAvatarData = viewModel.temporaryAvatarData {
+              if let uiImage = UIImage(data: previewAvatarData) {
+                let config = AvatarView.FrameConfig.account
+                // Image from data because don't have URL.
+                Image(uiImage: uiImage)
+                  .resizable()
+                  .aspectRatio(contentMode: .fill)
+                  .frame(width: config.width, height: config.height)
+                  .clipShape(RoundedRectangle(cornerRadius: config.width / 2))
+                  .overlay(
+                    RoundedRectangle(cornerRadius: config.width / 2)
+                      .stroke(.primary.opacity(0.25), lineWidth: 1)
+                  )
+              }
+            } else {
+              AvatarView(avatar, config: .account)
+            }
             Menu {
               Button("account.edit.avatar") {
                 viewModel.isChangingAvatar = true

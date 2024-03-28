@@ -42,6 +42,11 @@ import SwiftUI
 
   var isChangingAvatar: Bool = false
   var isChangingHeader: Bool = false
+    
+  // New images picked.
+  // Store until profile saved.
+  var temporaryAvatarData: Data?
+  var temporaryHeaderData: Data?
 
   var isLoading: Bool = true
   var isSaving: Bool = false
@@ -53,11 +58,10 @@ import SwiftUI
         Task {
           if let data = await getItemImageData(item: item) {
             if isChangingAvatar {
-              _ = await uploadAvatar(data: data)
+              temporaryAvatarData = data
             } else if isChangingHeader {
-              _ = await uploadHeader(data: data)
+              temporaryHeaderData = data
             }
-            await fetchAccount()
             isChangingAvatar = false
             isChangingHeader = false
             mediaPickers = []
@@ -92,6 +96,19 @@ import SwiftUI
   func save() async {
     isSaving = true
     do {
+      // Upload new images
+      if let temporaryAvatarData {
+        _ = await uploadAvatar(data: temporaryAvatarData)
+      }
+      if let temporaryHeaderData {
+         _ = await uploadHeader(data: temporaryHeaderData)
+      }
+      // Clear preview data to show fetched avatar and header
+      temporaryAvatarData = nil
+      temporaryHeaderData = nil
+      // Fetch account to set header and avatar
+      await fetchAccount()
+        
       let data = UpdateCredentialsData(displayName: displayName,
                                        note: note,
                                        source: .init(privacy: postPrivacy, sensitive: isSensitive),
