@@ -34616,8 +34616,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "Neuen Konten"
           }
         },
         "en" : {
@@ -34735,8 +34735,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "Leuten, die dir nicht folgen"
           }
         },
         "en" : {
@@ -34854,8 +34854,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "Leuten, denen du nicht folgst"
           }
         },
         "en" : {
@@ -34973,8 +34973,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "Unerwünschte private Erwähnungen"
           }
         },
         "en" : {
@@ -35092,8 +35092,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "Gefilterte Mitteilungen"
           }
         },
         "en" : {
@@ -35211,8 +35211,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "Mitteilungsfilter"
           }
         },
         "en" : {
@@ -35330,8 +35330,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "Filtern von Mitteilungen von…"
           }
         },
         "en" : {
