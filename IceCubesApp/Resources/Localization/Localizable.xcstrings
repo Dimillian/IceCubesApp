@@ -9199,7 +9199,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld yeni gönderi"
                 }
               },
@@ -12547,7 +12547,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld gönderi"
                 }
               },
@@ -12900,7 +12900,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld alan"
                 }
               },
@@ -17921,8 +17921,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "%@(e)ra aldatu da"
           }
         },
         "fr" : {
@@ -17933,8 +17933,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "Spostato a %@"
           }
         },
         "ja" : {
@@ -17981,8 +17981,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "%@ Konumuna Taşındı"
           }
         },
         "uk" : {
@@ -36305,8 +36305,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "Neuen Konten"
           }
         },
         "en" : {
@@ -36329,8 +36329,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "Kontu berriak"
           }
         },
         "fr" : {
@@ -36341,8 +36341,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "Nuovi account"
           }
         },
         "ja" : {
@@ -36389,8 +36389,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "Yeni hesaplar"
           }
         },
         "uk" : {
@@ -36401,8 +36401,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "新账户"
           }
         },
         "zh-Hant" : {
@@ -36430,8 +36430,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "Leuten, die dir nicht folgen"
           }
         },
         "en" : {
@@ -36454,8 +36454,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "Jarraitzen ez dizun jendea"
           }
         },
         "fr" : {
@@ -36466,8 +36466,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "Persone che non ti seguono"
           }
         },
         "ja" : {
@@ -36514,8 +36514,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "Seni takip etmeyen kişiler"
           }
         },
         "uk" : {
@@ -36526,8 +36526,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "未关注你的人"
           }
         },
         "zh-Hant" : {
@@ -36555,8 +36555,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "Leuten, denen du nicht folgst"
           }
         },
         "en" : {
@@ -36579,8 +36579,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "Jarraitzen ez duzun jendea"
           }
         },
         "fr" : {
@@ -36591,8 +36591,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "Persone che non segui"
           }
         },
         "ja" : {
@@ -36639,8 +36639,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "Takip etmediğin kişiler"
           }
         },
         "uk" : {
@@ -36651,8 +36651,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "你未关注的人"
           }
         },
         "zh-Hant" : {
@@ -36680,8 +36680,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "Unerwünschte private Erwähnungen"
           }
         },
         "en" : {
@@ -36704,8 +36704,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "Eskatu gabeko aipamen pribatuak"
           }
         },
         "fr" : {
@@ -36716,8 +36716,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "Messaggi diretti non approvati"
           }
         },
         "ja" : {
@@ -36764,8 +36764,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "İstenmeyen özel bahsetmeler"
           }
         },
         "uk" : {
@@ -36776,8 +36776,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : ""
+            "state" : "translated",
+            "value" : "不请自来的提及"
           }
         },
         "zh-Hant" : {
@@ -36805,8 +36805,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "Gefilterte Mitteilungen"
           }
         },
         "en" : {
@@ -36829,8 +36829,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "Iragazitako jakinarazpenak"
           }
         },
         "fr" : {
@@ -36841,8 +36841,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "Notifiche filtrate"
           }
         },
         "ja" : {
@@ -36889,8 +36889,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "Filtrelenmiş bildirimler"
           }
         },
         "uk" : {
@@ -36901,8 +36901,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "已过滤的通知"
           }
         },
         "zh-Hant" : {
@@ -36930,8 +36930,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "Mitteilungsfilter"
           }
         },
         "en" : {
@@ -36954,8 +36954,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "Jakinarazpenen iragazkiak"
           }
         },
         "fr" : {
@@ -36966,8 +36966,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "Filtro notifiche"
           }
         },
         "ja" : {
@@ -37014,8 +37014,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "Bildirim Filtresi"
           }
         },
         "uk" : {
@@ -37026,8 +37026,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "通知过滤"
           }
         },
         "zh-Hant" : {
@@ -37055,8 +37055,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "Filtern von Mitteilungen von…"
           }
         },
         "en" : {
@@ -37079,8 +37079,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "Baztertu hauen jakinarazpenak…"
           }
         },
         "fr" : {
@@ -37091,8 +37091,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "Filtra le notifiche da…"
           }
         },
         "ja" : {
@@ -37139,8 +37139,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "Bu kişiden gelen bildirimleri filtrele..."
           }
         },
         "uk" : {
@@ -37151,8 +37151,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "通知过滤范围"
           }
         },
         "zh-Hant" : {
@@ -73462,7 +73462,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld oy"
                 }
               },
@@ -76558,7 +76558,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld yükseltme"
                 }
               },
@@ -76911,7 +76911,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld favori"
                 }
               },
@@ -77258,7 +77258,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld cevap"
                 }
               },
@@ -79477,7 +79477,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld bahsetme"
                 }
               },
@@ -83177,8 +83177,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@arg1@ katılımcı tarafından %#@arg2@ yeni gönderiler"
+            "state" : "translated",
+            "value" : "%#@arg1@ katılımcı tarafından %#@arg2@ yeni gönderi"
           },
           "substitutions" : {
             "arg1" : {
@@ -83188,14 +83188,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "Son %arg gönderi"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "Son %arg gönderi"
                     }
                   }
                 }
@@ -83208,14 +83208,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg katılımcı"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg katılımcı"
                     }
                   }
                 }
@@ -83909,7 +83909,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld kişi konuşuyor"
                 }
               },
