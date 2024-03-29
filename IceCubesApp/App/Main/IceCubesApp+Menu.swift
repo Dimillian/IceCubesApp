@@ -54,5 +54,11 @@ extension IceCubesApp {
       }
       .keyboardShortcut("l", modifiers: .shift)
     }
+    CommandGroup(replacing: .help) {
+      Button("menu.help.github") {
+        let url = URL(string: "https://github.com/Dimillian/IceCubesApp/issues")!
+        UIApplication.shared.open(url)
+      }
+    }
   }
 }
