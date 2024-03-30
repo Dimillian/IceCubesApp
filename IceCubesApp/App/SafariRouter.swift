@@ -31,7 +31,7 @@ private struct SafariRouter: ViewModifier {
         // Open external URL (from icecubesapp://)
         let urlString = url.absoluteString.replacingOccurrences(of: AppInfo.scheme, with: "https://")
         guard let url = URL(string: urlString), url.host != nil else { return }
-        _ = routerPath.handle(url: url)
+        _ = routerPath.handleDeepLink(url: url)
       }
       .onAppear {
         routerPath.urlHandler = { url in
