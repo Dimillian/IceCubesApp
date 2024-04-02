@@ -15,6 +15,12 @@
             "value" : ""
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8593,8 +8599,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld publicaciones nuevas"
+                  "state" : "translated",
+                  "value" : "%lld publicación nueva"
                 }
               },
               "other" : {
@@ -11797,8 +11803,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld publicaciones"
+                  "state" : "translated",
+                  "value" : "%lld publicación"
                 }
               },
               "other" : {
@@ -12150,8 +12156,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld campos"
+                  "state" : "translated",
+                  "value" : "%lld campo"
                 }
               },
               "other" : {
@@ -17102,8 +17108,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "Movido A %@"
           }
         },
         "eu" : {
@@ -34632,8 +34638,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "Cuentas nuevas"
           }
         },
         "eu" : {
@@ -34751,8 +34757,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "Personas que no te siguen"
           }
         },
         "eu" : {
@@ -34870,8 +34876,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "Personas que no sigues"
           }
         },
         "eu" : {
@@ -34989,8 +34995,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "Menciones privadas no solicitadas"
           }
         },
         "eu" : {
@@ -35108,8 +35114,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "Notificaciones filtradas"
           }
         },
         "eu" : {
@@ -35227,8 +35233,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "Filtro de notificaciones"
           }
         },
         "eu" : {
@@ -35346,8 +35352,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "Ocultar notificaciones de..."
           }
         },
         "eu" : {
@@ -69851,8 +69857,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld votos"
+                  "state" : "translated",
+                  "value" : "%lld voto"
                 }
               },
               "other" : {
@@ -72791,8 +72797,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld boosts"
+                  "state" : "translated",
+                  "value" : "%lld boost"
                 }
               },
               "other" : {
@@ -73144,8 +73150,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld favoritos"
+                  "state" : "translated",
+                  "value" : "%lld favorito"
                 }
               },
               "other" : {
@@ -73497,8 +73503,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld respuestas"
+                  "state" : "translated",
+                  "value" : "%lld respuesta"
                 }
               },
               "other" : {
@@ -75620,8 +75626,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld menciones"
+                  "state" : "translated",
+                  "value" : "%lld mención"
                 }
               },
               "other" : {
@@ -78384,7 +78390,7 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Saltar al más reciente"
           }
         },
@@ -78854,7 +78860,7 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "%#@arg1@ publicaciones recientes de %#@arg2@ participantes"
           },
           "substitutions" : {
@@ -78865,14 +78871,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg publicación reciente"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg publicaciones recientes"
                     }
                   }
                 }
@@ -78885,14 +78891,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participante"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participantes"
                     }
                   }
                 }
@@ -79842,14 +79848,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : ""
+                  "state" : "translated",
+                  "value" : "%lld persona hablando"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : ""
+                  "state" : "translated",
+                  "value" : "%lld personas hablando"
                 }
               }
             }
