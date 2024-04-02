@@ -79,7 +79,7 @@ struct IceCubesApp: App {
   }
 }
 
-class AppDelegate: NSObject, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_: UIApplication,
                    didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
   {
@@ -112,5 +112,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
       configuration.delegateClass = SceneDelegate.self
     }
     return configuration
+  }
+
+  override func buildMenu(with builder: UIMenuBuilder) {
+    super.buildMenu(with: builder)
+    builder.remove(menu: .document)
+    builder.remove(menu: .toolbar)
+    builder.remove(menu: .sidebar)
   }
 }
