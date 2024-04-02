@@ -171,19 +171,58 @@ public enum SheetDestination: Identifiable, Hashable {
         await navigateToAccountFrom(acct: acct, url: url)
       }
       return .handled
-    } else if let client,
-              client.isAuth,
-              client.hasConnection(with: url),
-              let id = Int(url.lastPathComponent)
-    {
-      if url.absoluteString.contains(client.server) {
-        navigate(to: .statusDetail(id: String(id)))
-      } else {
-        navigate(to: .remoteStatusDetail(url: url))
-      }
-      return .handled
     }
     return urlHandler?(url) ?? .systemAction
+  }
+  
+  public func handleDeepLink(url: URL) -> OpenURLAction.Result {
+    guard let client,
+          client.isAuth,
+          let id = Int(url.lastPathComponent) else {
+      return urlHandler?(url) ?? .systemAction
+    }
+    // First check whether we already know that the client's server federates with the server this post is on
+    if client.hasConnection(with: url) {
+      navigateToStatus(url: url, id: id)
+      return .handled
+    }
+    Task {
+      // Client does not currently report a federation relationship, but that doesn't mean none exists
+      // Ensure client is aware of all peers its server federates with so it can give a meaningful answer to hasConnection(with:)
+      do {
+        let connections: [String] = try await client.get(endpoint: Instances.peers)
+        client.addConnections(connections)
+      } catch {
+        handlerOrDefault(url: url)
+        return
+      }
+      
+      guard client.hasConnection(with: url) else {
+        handlerOrDefault(url: url)
+        return
+      }
+      
+      navigateToStatus(url: url, id: id)
+    }
+    
+    return .handled
+  }
+  
+  private func navigateToStatus(url: URL, id: Int) {
+    guard let client else { return }
+    if url.absoluteString.contains(client.server) {
+      navigate(to: .statusDetail(id: String(id)))
+    } else {
+      navigate(to: .remoteStatusDetail(url: url))
+    }
+  }
+  
+  private func handlerOrDefault(url: URL) {
+    if let urlHandler {
+      _ = urlHandler(url)
+    } else {
+      UIApplication.shared.open(url)
+    }
   }
 
   public func navigateToAccountFrom(acct: String, url: URL) async {
