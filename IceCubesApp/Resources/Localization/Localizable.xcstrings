@@ -17156,8 +17156,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "Przeniesione do %@"
           }
         },
         "pt-BR" : {
@@ -34686,8 +34686,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "Nowe konta"
           }
         },
         "pt-BR" : {
@@ -34805,8 +34805,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "Osoby, które Cię nie obserwują"
           }
         },
         "pt-BR" : {
@@ -34924,8 +34924,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "Osoby, których nie obserwujesz"
           }
         },
         "pt-BR" : {
@@ -35043,8 +35043,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "Niechciane prywatne wzmianki"
           }
         },
         "pt-BR" : {
@@ -35162,8 +35162,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "Powiadomienia filtrowane"
           }
         },
         "pt-BR" : {
@@ -35281,8 +35281,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "Filtr powiadomień"
           }
         },
         "pt-BR" : {
@@ -35400,8 +35400,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "Odfiltruj powiadomienia od …"
           }
         },
         "pt-BR" : {
@@ -39070,7 +39070,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Wszystkie komunikaty"
+            "value" : "Wszystkie powiadomienia"
           }
         },
         "pt-BR" : {
