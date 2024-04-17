@@ -54,6 +54,7 @@ public struct StatusRowMediaPreviewView: View {
             : CGSize(width: imageMaxHeight, height: imageMaxHeight),
           sensitive: sensitive
         )
+        .padding(.horizontal, .layoutPadding)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(Self.accessibilityLabel(for: attachments[0]))
         .accessibilityAddTraits([.isButton, .isImage])
@@ -66,10 +67,11 @@ public struct StatusRowMediaPreviewView: View {
             }
           }
           .padding(.bottom, scrollBottomPadding)
+          .padding(.horizontal, .layoutPadding)
         }
-        .scrollClipDisabled()
       }
     }
+    .padding(.horizontal, -1 * .layoutPadding)
   }
 
   @ViewBuilder
