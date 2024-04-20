@@ -39,9 +39,14 @@ extension StatusEditor {
                     viewModel.insertStatusText(text: " :\(emoji.shortcode): ")
                   }
                 }
-                .padding(.horizontal, 8)
+                .padding(.horizontal, 16)
               } header: {
                 Text(container.categoryName)
+                  .font(.scaledHeadline)
+                  .bold()
+                  .foregroundStyle(Color.secondary)
+                  .frame(maxWidth: .infinity, alignment: .leading)
+                  .padding(.horizontal, 16)
               }
             }
           }
