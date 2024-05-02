@@ -90,6 +90,9 @@ extension View {
       case let .prefilledStatusEditor(text, visibility):
         StatusEditor.MainView(mode: .new(text: text, visibility: visibility))
           .withEnvironments()
+      case let .imageURL(urls, visibility):
+        StatusEditor.MainView(mode: .imageURL(urls: urls, visibility: visibility))
+          .withEnvironments()
       case let .editStatusEditor(status):
         StatusEditor.MainView(mode: .edit(status: status))
           .withEnvironments()

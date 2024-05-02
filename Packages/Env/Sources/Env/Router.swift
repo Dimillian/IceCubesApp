@@ -54,6 +54,7 @@ public enum SheetDestination: Identifiable, Hashable {
 
   case newStatusEditor(visibility: Models.Visibility)
   case prefilledStatusEditor(text: String, visibility: Models.Visibility)
+  case imageURL(urls: [URL], visibility: Models.Visibility)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
@@ -80,7 +81,7 @@ public enum SheetDestination: Identifiable, Hashable {
   public var id: String {
     switch self {
     case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor,
-        .mentionStatusEditor, .quoteLinkStatusEditor, .prefilledStatusEditor:
+        .mentionStatusEditor, .quoteLinkStatusEditor, .prefilledStatusEditor, .imageURL:
       "statusEditor"
     case .listCreate:
       "listCreate"

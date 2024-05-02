@@ -20514,6 +20514,9 @@
         }
       }
     },
+    "Bookmarks" : {
+
+    },
     "conversations.action.delete" : {
       "comment" : "MARK: Package: Conversations",
       "extractionState" : "manual",
@@ -26423,6 +26426,9 @@
         }
       }
     },
+    "Explore & Trending" : {
+
+    },
     "explore.navigation-title" : {
       "comment" : "MARK: Package: Explore",
       "extractionState" : "manual",
@@ -28446,6 +28452,12 @@
           }
         }
       }
+    },
+    "Favorites" : {
+
+    },
+    "Federated Timeline" : {
+
     },
     "filter.action.hide" : {
       "extractionState" : "manual",
@@ -30709,6 +30721,18 @@
         }
       }
     },
+    "Followed Tags" : {
+
+    },
+    "Home Timeline" : {
+
+    },
+    "Image" : {
+
+    },
+    "Image to post on Mastodon" : {
+
+    },
     "instance.info.domains" : {
       "comment" : "MARK: Instances",
       "localizations" : {
@@ -32958,6 +32982,9 @@
         }
       }
     },
+    "Lists" : {
+
+    },
     "lists.add-remove-%@" : {
       "comment" : "MARK: Package: Lists",
       "extractionState" : "manual",
@@ -33911,6 +33938,12 @@
         }
       }
     },
+    "Local Timeline" : {
+
+    },
+    "Mentions" : {
+
+    },
     "menu.font" : {
       "localizations" : {
         "be" : {
@@ -34619,6 +34652,12 @@
           }
         }
       }
+    },
+    "New post" : {
+
+    },
+    "Notifications" : {
+
     },
     "notifications-others-count %lld" : {
       "extractionState" : "manual",
@@ -39701,6 +39740,15 @@
         }
       }
     },
+    "Open Ice Cubes" : {
+
+    },
+    "Open on a tab" : {
+
+    },
+    "Open the app on a specific tab" : {
+
+    },
     "placeholder.loading.long" : {
       "localizations" : {
         "be" : {
@@ -39937,10 +39985,25 @@
         }
       }
     },
+    "Post a status" : {
+
+    },
+    "Post an image to Mastodon" : {
+
+    },
     "Post content" : {
 
     },
-    "Post to Mastodon" : {
+    "Post images" : {
+
+    },
+    "Post status to Mastodon" : {
+
+    },
+    "Private Messages" : {
+
+    },
+    "Profile" : {
 
     },
     "report.action.send" : {
@@ -40416,6 +40479,12 @@
           }
         }
       }
+    },
+    "Selected tab" : {
+
+    },
+    "Settings" : {
+
     },
     "settings.about.built-with" : {
       "localizations" : {
@@ -74592,6 +74661,9 @@
         }
       }
     },
+    "Tab" : {
+
+    },
     "tab.explore" : {
       "comment" : "MARK: Tabs",
       "localizations" : {
@@ -80114,6 +80186,12 @@
         }
       }
     },
+    "Trending Links" : {
+
+    },
+    "Trending Timeline" : {
+
+    },
     "trending-tag-people-talking %lld" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -80473,7 +80551,10 @@
         }
       }
     },
-    "Use Ice Cubes to post text to Mastodon" : {
+    "Use Ice Cubes to post a status to Mastodon" : {
+
+    },
+    "Use Ice Cubes to post a status with an image to Mastodon" : {
 
     }
   },

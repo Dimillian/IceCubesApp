@@ -2,10 +2,10 @@ import Foundation
 import AppIntents
 
 struct PostIntent: AppIntent {
-  static let title: LocalizedStringResource = "Post to Mastodon"
+  static let title: LocalizedStringResource = "Post status to Mastodon"
   static var description: IntentDescription {
     get {
-      "Use Ice Cubes to post text to Mastodon"
+      "Use Ice Cubes to post a status to Mastodon"
     }
   }
   static let openAppWhenRun: Bool = true

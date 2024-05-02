@@ -4,6 +4,7 @@ import Explore
 import Foundation
 import StatusKit
 import SwiftUI
+import AppIntents
 
 @MainActor
 enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
