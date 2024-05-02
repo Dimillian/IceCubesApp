@@ -20515,7 +20515,14 @@
       }
     },
     "Bookmarks" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laster-markak"
+          }
+        }
+      }
     },
     "conversations.action.delete" : {
       "comment" : "MARK: Package: Conversations",
@@ -26427,7 +26434,14 @@
       }
     },
     "Explore & Trending" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arakatu eta Joerak"
+          }
+        }
+      }
     },
     "explore.navigation-title" : {
       "comment" : "MARK: Package: Explore",
@@ -28454,10 +28468,24 @@
       }
     },
     "Favorites" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gogokoak"
+          }
+        }
+      }
     },
     "Federated Timeline" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denbora-lerro federatua"
+          }
+        }
+      }
     },
     "filter.action.hide" : {
       "extractionState" : "manual",
@@ -30722,16 +30750,44 @@
       }
     },
     "Followed Tags" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jarraitutako traolak"
+          }
+        }
+      }
     },
     "Home Timeline" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hasiera"
+          }
+        }
+      }
     },
     "Image" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Irudia"
+          }
+        }
+      }
     },
     "Image to post on Mastodon" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonen argitaratzeko irudia"
+          }
+        }
+      }
     },
     "instance.info.domains" : {
       "comment" : "MARK: Instances",
@@ -32983,7 +33039,14 @@
       }
     },
     "Lists" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zerrendak"
+          }
+        }
+      }
     },
     "lists.add-remove-%@" : {
       "comment" : "MARK: Package: Lists",
@@ -33939,10 +34002,24 @@
       }
     },
     "Local Timeline" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denbora-lerro lokala"
+          }
+        }
+      }
     },
     "Mentions" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aipamenak"
+          }
+        }
+      }
     },
     "menu.font" : {
       "localizations" : {
@@ -34654,10 +34731,24 @@
       }
     },
     "New post" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidalketa berria"
+          }
+        }
+      }
     },
     "Notifications" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jakinarazpenak"
+          }
+        }
+      }
     },
     "notifications-others-count %lld" : {
       "extractionState" : "manual",
@@ -39741,13 +39832,34 @@
       }
     },
     "Open Ice Cubes" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ireki Ice Cubes"
+          }
+        }
+      }
     },
     "Open on a tab" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ireki erlaitz batean"
+          }
+        }
+      }
     },
     "Open the app on a specific tab" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ireki aplikazioa erlaitz zehatz batean"
+          }
+        }
+      }
     },
     "placeholder.loading.long" : {
       "localizations" : {
@@ -39986,25 +40098,74 @@
       }
     },
     "Post a status" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu egoera bat"
+          }
+        }
+      }
     },
     "Post an image to Mastodon" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu irudi bat Mastodonen"
+          }
+        }
+      }
     },
     "Post content" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu edukia"
+          }
+        }
+      }
     },
     "Post images" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu irudiak"
+          }
+        }
+      }
     },
     "Post status to Mastodon" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu egoera Mastodonen"
+          }
+        }
+      }
     },
     "Private Messages" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mezu pribatuak"
+          }
+        }
+      }
     },
     "Profile" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profila"
+          }
+        }
+      }
     },
     "report.action.send" : {
       "localizations" : {
@@ -40481,10 +40642,24 @@
       }
     },
     "Selected tab" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hautatutako erlaitza"
+          }
+        }
+      }
     },
     "Settings" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ezarpenak"
+          }
+        }
+      }
     },
     "settings.about.built-with" : {
       "localizations" : {
@@ -74662,7 +74837,14 @@
       }
     },
     "Tab" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erlaitza"
+          }
+        }
+      }
     },
     "tab.explore" : {
       "comment" : "MARK: Tabs",
@@ -80187,10 +80369,24 @@
       }
     },
     "Trending Links" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gori-gorian dauden estekak"
+          }
+        }
+      }
     },
     "Trending Timeline" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Joeren denbora-lerroa"
+          }
+        }
+      }
     },
     "trending-tag-people-talking %lld" : {
       "extractionState" : "manual",
@@ -80552,10 +80748,24 @@
       }
     },
     "Use Ice Cubes to post a status to Mastodon" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erabili Ice Cubes egoera bat Mastodonen argitaratzeko"
+          }
+        }
+      }
     },
     "Use Ice Cubes to post a status with an image to Mastodon" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erabili Ice Cubes irudi bat duen egoera bat Mastodonen argitaratzeko"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
