@@ -10,7 +10,7 @@ struct PostIntent: AppIntent {
   }
   static let openAppWhenRun: Bool = true
   
-  @Parameter(title: "Post content")
+  @Parameter(title: "Post content", inputConnectionBehavior: .connectToPreviousIntentResult)
   var content: String?
   
   func perform() async throws -> some IntentResult {
