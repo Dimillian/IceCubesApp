@@ -8,6 +8,7 @@ public enum AccountsListMode {
   case following(accountId: String), followers(accountId: String)
   case favoritedBy(statusId: String), rebloggedBy(statusId: String)
   case accountsList(accounts: [Account])
+  case blocked, muted
 
   var title: LocalizedStringKey {
     switch self {
@@ -21,6 +22,10 @@ public enum AccountsListMode {
       "account.boosted-by"
     case .accountsList:
       ""
+    case .blocked:
+      "account.blocked"
+    case .muted:
+      "account.muted"
     }
   }
 }
@@ -84,6 +89,12 @@ public enum AccountsListMode {
       case let .accountsList(accounts):
         self.accounts = accounts
         link = nil
+        
+      case .blocked:
+        (accounts, link) = try await client.getWithLink(endpoint: Accounts.blockList)
+        
+      case .muted:
+        (accounts, link) = try await client.getWithLink(endpoint: Accounts.muteList)
       }
       nextPageId = link?.maxId
       relationships = try await client.get(endpoint:
@@ -114,7 +125,14 @@ public enum AccountsListMode {
     case .accountsList:
       newAccounts = []
       link = nil
+      
+    case .blocked:
+      (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.blockList)
+      
+    case .muted:
+      (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.muteList)
     }
+    
     accounts.append(contentsOf: newAccounts)
     let newRelationships: [Relationship] =
       try await client.get(endpoint: Accounts.relationships(ids: newAccounts.map(\.id)))

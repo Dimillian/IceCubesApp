@@ -70,6 +70,10 @@ extension View {
         NotificationsListView(lockedType: nil ,
                               lockedAccountId: accountId,
                               scrollToTopSignal: .constant(0))
+      case .blockedAccounts:
+        AccountsListView(mode: .blocked)
+      case .mutedAccounts:
+        AccountsListView(mode: .muted)
       }
     }
   }

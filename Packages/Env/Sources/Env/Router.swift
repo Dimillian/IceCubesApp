@@ -25,6 +25,8 @@ public enum RouterDestination: Hashable {
   case tagsList(tags: [Tag])
   case notificationsRequests
   case notificationForAccount(accountId: String)
+  case blockedAccounts
+  case mutedAccounts
 }
 
 public enum WindowDestinationEditor: Hashable, Codable {

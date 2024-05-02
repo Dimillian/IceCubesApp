@@ -52,6 +52,9 @@ public struct AccountsListView: View {
       searchableList
     } else {
       standardList
+        .refreshable {
+          await viewModel.fetch()
+        }
     }
   }
 

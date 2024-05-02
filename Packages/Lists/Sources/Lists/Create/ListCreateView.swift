@@ -39,6 +39,7 @@ public struct ListCreateView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .toolbar {
+        CancelToolbarItem()
         ToolbarItem {
           Button {
             Task {

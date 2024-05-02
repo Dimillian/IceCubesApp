@@ -326,6 +326,21 @@ public struct AccountDetailView: View {
 
           if let account = viewModel.account {
             Divider()
+            
+            Button {
+              routerPath.navigate(to: .blockedAccounts)
+            } label: {
+              Label("account.blocked", systemImage: "person.crop.circle.badge.xmark")
+            }
+
+            
+            Button {
+              routerPath.navigate(to: .mutedAccounts)
+            } label: {
+              Label("account.muted", systemImage: "person.crop.circle.badge.moon")
+            }
+            
+            Divider()
 
             Button {
               if let url = URL(string: "https://mastometrics.com/auth/login?username=\(account.acct)@\(client.server)&instance=\(client.server)&auto=true") {
