@@ -31,6 +31,7 @@ public enum RouterDestination: Hashable {
 
 public enum WindowDestinationEditor: Hashable, Codable {
   case newStatusEditor(visibility: Models.Visibility)
+  case prefilledStatusEditor(text: String, visibility: Models.Visibility)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
@@ -52,6 +53,7 @@ public enum SheetDestination: Identifiable, Hashable {
   }
 
   case newStatusEditor(visibility: Models.Visibility)
+  case prefilledStatusEditor(text: String, visibility: Models.Visibility)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
@@ -78,7 +80,7 @@ public enum SheetDestination: Identifiable, Hashable {
   public var id: String {
     switch self {
     case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor,
-         .mentionStatusEditor, .quoteLinkStatusEditor:
+        .mentionStatusEditor, .quoteLinkStatusEditor, .prefilledStatusEditor:
       "statusEditor"
     case .listCreate:
       "listCreate"

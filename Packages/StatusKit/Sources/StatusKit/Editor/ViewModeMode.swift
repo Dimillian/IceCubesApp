@@ -5,7 +5,7 @@ import UIKit
 public extension StatusEditor.ViewModel {
   enum Mode {
     case replyTo(status: Status)
-    case new(visibility: Models.Visibility)
+    case new(text: String?, visibility: Models.Visibility)
     case edit(status: Status)
     case quote(status: Status)
     case quoteLink(link: URL)

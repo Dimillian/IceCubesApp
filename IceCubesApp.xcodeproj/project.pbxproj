@@ -42,6 +42,8 @@
 		9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4629506F6600B3281A /* NotificationTab.swift */; };
 		9F35DB4A29506FA100B3281A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9F35DB4929506FA100B3281A /* Notifications */; };
 		9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4B2952005C00B3281A /* MessagesTab.swift */; };
+		9F37BDDB2BE36E22007F28AD /* PostIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F37BDDA2BE36E22007F28AD /* PostIntent.swift */; };
+		9F37BDDD2BE37193007F28AD /* AppIntentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F37BDDC2BE37193007F28AD /* AppIntentService.swift */; };
 		9F38A7332ACEA26100DBCD66 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F38A7322ACEA26100DBCD66 /* Localizable.xcstrings */; };
 		9F38A7342ACEA26100DBCD66 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F38A7322ACEA26100DBCD66 /* Localizable.xcstrings */; };
 		9F38A7352ACEA26100DBCD66 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F38A7322ACEA26100DBCD66 /* Localizable.xcstrings */; };
@@ -196,6 +198,8 @@
 		9F35DB4629506F6600B3281A /* NotificationTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTab.swift; sourceTree = "<group>"; };
 		9F35DB4829506F7F00B3281A /* Notifications */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Notifications; path = Packages/Notifications; sourceTree = "<group>"; };
 		9F35DB4B2952005C00B3281A /* MessagesTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTab.swift; sourceTree = "<group>"; };
+		9F37BDDA2BE36E22007F28AD /* PostIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostIntent.swift; sourceTree = "<group>"; };
+		9F37BDDC2BE37193007F28AD /* AppIntentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntentService.swift; sourceTree = "<group>"; };
 		9F38A7322ACEA26100DBCD66 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		9F398AA32935F90100A889F2 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = Packages/Models; sourceTree = "<group>"; };
 		9F398AA52935FE8A00A889F2 /* AppRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRegistry.swift; sourceTree = "<group>"; };
@@ -349,6 +353,15 @@
 			path = IceCubesNotifications;
 			sourceTree = "<group>";
 		};
+		9F37BDD92BE36E08007F28AD /* IceCubesAppIntents */ = {
+			isa = PBXGroup;
+			children = (
+				9F37BDDA2BE36E22007F28AD /* PostIntent.swift */,
+				9F37BDDC2BE37193007F28AD /* AppIntentService.swift */,
+			);
+			path = IceCubesAppIntents;
+			sourceTree = "<group>";
+		};
 		9F398AB429360A5800A889F2 /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,6 +467,7 @@
 				DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */,
 				9F7D939529800B0300EE6B7A /* IceCubesApp-release.xcconfig */,
 				9FBFE63B292A715500C250E9 /* IceCubesApp */,
+				9F37BDD92BE36E08007F28AD /* IceCubesAppIntents */,
 				E9DF41FD29830FEC0003AAD2 /* IceCubesActionExtension */,
 				9F2A5417296AB631009B2D7C /* IceCubesNotifications */,
 				9FAD858929743F7400496AB1 /* IceCubesShareExtension */,
@@ -828,6 +842,8 @@
 				9F15D6042B3DC2180008C220 /* NavigationSheet.swift in Sources */,
 				9FA6FD6229C04A8800E2312C /* TranslationSettingsView.swift in Sources */,
 				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
+				9F37BDDB2BE36E22007F28AD /* PostIntent.swift in Sources */,
+				9F37BDDD2BE37193007F28AD /* AppIntentService.swift in Sources */,
 				9FAD85CF2975B68900496AB1 /* SideBarView.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
 				9FC14EF42B494D940006CEE1 /* RemoteTimelinesSettingView.swift in Sources */,

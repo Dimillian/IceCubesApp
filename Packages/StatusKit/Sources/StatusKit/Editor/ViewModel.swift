@@ -301,7 +301,11 @@ public extension StatusEditor {
 
     func prepareStatusText() {
       switch mode {
-      case let .new(visibility):
+      case let .new(text, visibility):
+        if let text {
+          statusText = .init(string: text)
+          selectedRange = .init(location: text.utf16.count, length: 0)
+        }
         self.visibility = visibility
       case let .shareExtension(items):
         itemsProvider = items
@@ -557,7 +561,7 @@ public extension StatusEditor {
          !statusText.string.contains(url.absoluteString)
       {
         embeddedStatus = nil
-        mode = .new(visibility: visibility)
+        mode = .new(text: nil, visibility: visibility)
       }
     }
 

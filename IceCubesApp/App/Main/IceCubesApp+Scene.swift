@@ -2,6 +2,7 @@ import Env
 import MediaUI
 import StatusKit
 import SwiftUI
+import AppIntents
 
 extension IceCubesApp {
   var appScene: some Scene {
@@ -22,6 +23,7 @@ extension IceCubesApp {
         .environment(theme)
         .environment(watcher)
         .environment(pushNotificationsService)
+        .environment(appIntentService)
         .environment(\.isSupporter, isSupporter)
         .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
           MediaUIView(selectedAttachment: selectedMediaAttachment,
@@ -45,6 +47,12 @@ extension IceCubesApp {
             } else {
               selectedTab = .notifications
             }
+          }
+        }
+        .onChange(of: appIntentService.handledIntent) { _, _ in
+          if let intent = appIntentService.handledIntent?.intent {
+            handleIntent(intent)
+            appIntentService.handledIntent = nil
           }
         }
         .withModelContainer()
@@ -74,7 +82,9 @@ extension IceCubesApp {
       Group {
         switch destination.wrappedValue {
         case let .newStatusEditor(visibility):
-          StatusEditor.MainView(mode: .new(visibility: visibility))
+          StatusEditor.MainView(mode: .new(text: nil, visibility: visibility))
+        case let .prefilledStatusEditor(text, visibility):
+          StatusEditor.MainView(mode: .new(text: text, visibility: visibility))
         case let .editStatusEditor(status):
           StatusEditor.MainView(mode: .edit(status: status))
         case let .quoteStatusEditor(status):
@@ -114,5 +124,17 @@ extension IceCubesApp {
     }
     .defaultSize(width: 1200, height: 1000)
     .windowResizability(.contentMinSize)
+  }
+  
+  private func handleIntent(_ intent: any AppIntent) {
+    if let postIntent = appIntentService.handledIntent?.intent as? PostIntent {
+      #if os(visionOS) || os(macOS)
+      openWindow(value: WindowDestinationEditor.prefilledStatusEditor(text: postIntent.content ?? "",
+                                                                      visibility: userPreferences.postVisibility))
+      #else
+      appRouterPath.presentedSheet = .prefilledStatusEditor(text: postIntent.content ?? "",
+                                                            visibility: userPreferences.postVisibility)
+      #endif
+    }
   }
 }

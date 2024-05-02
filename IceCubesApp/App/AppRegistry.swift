@@ -85,7 +85,10 @@ extension View {
         StatusEditor.MainView(mode: .replyTo(status: status))
           .withEnvironments()
       case let .newStatusEditor(visibility):
-        StatusEditor.MainView(mode: .new(visibility: visibility))
+        StatusEditor.MainView(mode: .new(text: nil, visibility: visibility))
+          .withEnvironments()
+      case let .prefilledStatusEditor(text, visibility):
+        StatusEditor.MainView(mode: .new(text: text, visibility: visibility))
           .withEnvironments()
       case let .editStatusEditor(status):
         StatusEditor.MainView(mode: .edit(status: status))

@@ -39937,6 +39937,12 @@
         }
       }
     },
+    "Post content" : {
+
+    },
+    "Post to Mastodon" : {
+
+    },
     "report.action.send" : {
       "localizations" : {
         "be" : {
@@ -80466,6 +80472,9 @@
           }
         }
       }
+    },
+    "Use Ice Cubes to post text to Mastodon" : {
+
     }
   },
   "version" : "1.0"
