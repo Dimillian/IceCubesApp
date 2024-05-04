@@ -7,14 +7,14 @@ import SwiftUI
 @MainActor
 public struct NotificationsListView: View {
   @Environment(\.scenePhase) private var scenePhase
-  
+
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var account
   @Environment(CurrentInstance.self) private var currentInstance
-  
+
   @State private var viewModel = NotificationsViewModel()
   @State private var isNotificationsPolicyPresented: Bool = false
   @Binding var scrollToTopSignal: Int
@@ -24,7 +24,8 @@ public struct NotificationsListView: View {
 
   public init(lockedType: Models.Notification.NotificationType? = nil,
               lockedAccountId: String? = nil,
-              scrollToTopSignal: Binding<Int>) {
+              scrollToTopSignal: Binding<Int>)
+  {
     self.lockedType = lockedType
     self.lockedAccountId = lockedAccountId
     _scrollToTopSignal = scrollToTopSignal
@@ -113,7 +114,7 @@ public struct NotificationsListView: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-    .onAppear {
+      .onAppear {
         viewModel.client = client
         viewModel.currentAccount = account
         if let lockedType {

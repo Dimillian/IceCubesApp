@@ -1,50 +1,50 @@
-import SwiftUI
-import Network
 import DesignSystem
 import Models
+import Network
+import SwiftUI
 
 @MainActor
 struct NotificationsPolicyView: View {
   @Environment(\.dismiss) private var dismiss
-  
+
   @Environment(Client.self) private var client
   @Environment(Theme.self) private var theme
-  
+
   @State private var policy: NotificationsPolicy?
   @State private var isUpdating: Bool = false
-  
+
   var body: some View {
     NavigationStack {
       Form {
         Section("notifications.content-filter.title-inline") {
           Toggle(isOn: .init(get: { policy?.filterNotFollowing == true },
                              set: { newValue in
-            policy?.filterNotFollowing = newValue
-            Task { await updatePolicy() }
-          }), label: {
-            Text("notifications.content-filter.peopleYouDontFollow")
-          })
+                               policy?.filterNotFollowing = newValue
+                               Task { await updatePolicy() }
+                             }), label: {
+              Text("notifications.content-filter.peopleYouDontFollow")
+            })
           Toggle(isOn: .init(get: { policy?.filterNotFollowers == true },
                              set: { newValue in
-            policy?.filterNotFollowers = newValue
-            Task { await updatePolicy() }
-          }), label: {
-            Text("notifications.content-filter.peopleNotFollowingYou")
-          })
+                               policy?.filterNotFollowers = newValue
+                               Task { await updatePolicy() }
+                             }), label: {
+              Text("notifications.content-filter.peopleNotFollowingYou")
+            })
           Toggle(isOn: .init(get: { policy?.filterNewAccounts == true },
                              set: { newValue in
-            policy?.filterNewAccounts = newValue
-            Task { await updatePolicy() }
-          }), label: {
-            Text("notifications.content-filter.newAccounts")
-          })
+                               policy?.filterNewAccounts = newValue
+                               Task { await updatePolicy() }
+                             }), label: {
+              Text("notifications.content-filter.newAccounts")
+            })
           Toggle(isOn: .init(get: { policy?.filterPrivateMentions == true },
                              set: { newValue in
-            policy?.filterPrivateMentions = newValue
-            Task { await updatePolicy() }
-          }), label: {
-            Text("notifications.content-filter.privateMentions")
-          })
+                               policy?.filterPrivateMentions = newValue
+                               Task { await updatePolicy() }
+                             }), label: {
+              Text("notifications.content-filter.privateMentions")
+            })
         }
         #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
@@ -63,7 +63,7 @@ struct NotificationsPolicyView: View {
     .presentationDetents([.medium])
     .presentationBackground(.thinMaterial)
   }
-  
+
   private func getPolicy() async {
     defer {
       isUpdating = false
@@ -75,7 +75,7 @@ struct NotificationsPolicyView: View {
       dismiss()
     }
   }
-  
+
   private func updatePolicy() async {
     if let policy {
       defer {
@@ -84,7 +84,7 @@ struct NotificationsPolicyView: View {
       do {
         isUpdating = true
         self.policy = try await client.put(endpoint: Notifications.putPolicy(policy: policy))
-      } catch { }
+      } catch {}
     }
   }
 }

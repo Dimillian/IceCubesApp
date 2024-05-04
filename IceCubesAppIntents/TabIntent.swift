@@ -1,5 +1,5 @@
-import Foundation
 import AppIntents
+import Foundation
 
 enum TabEnum: String, AppEnum, Sendable {
   case timeline, notifications, mentions, explore, messages, settings
@@ -12,13 +12,11 @@ enum TabEnum: String, AppEnum, Sendable {
   case lists
   case links
 
-  static var typeDisplayName: LocalizedStringResource {
-    get { "Tab" }
-  }
-  
+  static var typeDisplayName: LocalizedStringResource { "Tab" }
+
   static let typeDisplayRepresentation: TypeDisplayRepresentation = "Tab"
-  
-  nonisolated static var caseDisplayRepresentations: [TabEnum : DisplayRepresentation] {
+
+  nonisolated static var caseDisplayRepresentations: [TabEnum: DisplayRepresentation] {
     [.timeline: .init(title: "Home Timeline"),
      .trending: .init(title: "Trending Timeline"),
      .federated: .init(title: "Federated Timeline"),
@@ -34,44 +32,43 @@ enum TabEnum: String, AppEnum, Sendable {
      .followedTags: .init(title: "Followed Tags"),
      .lists: .init(title: "Lists"),
      .links: .init(title: "Trending Links"),
-     .post: .init(title: "New post"),
-    ]
+     .post: .init(title: "New post")]
   }
-  
+
   var toAppTab: Tab {
     switch self {
     case .timeline:
-        .timeline
+      .timeline
     case .notifications:
-        .notifications
+      .notifications
     case .mentions:
-        .mentions
+      .mentions
     case .explore:
-        .explore
+      .explore
     case .messages:
-        .messages
+      .messages
     case .settings:
-        .settings
+      .settings
     case .trending:
-        .trending
+      .trending
     case .federated:
-        .federated
+      .federated
     case .local:
-        .local
+      .local
     case .profile:
-        .profile
+      .profile
     case .bookmarks:
-        .bookmarks
+      .bookmarks
     case .favorites:
-        .favorites
+      .favorites
     case .post:
-        .post
+      .post
     case .followedTags:
-        .followedTags
+      .followedTags
     case .lists:
-        .lists
+      .lists
     case .links:
-        .links
+      .links
     }
   }
 }
@@ -79,15 +76,14 @@ enum TabEnum: String, AppEnum, Sendable {
 struct TabIntent: AppIntent {
   static let title: LocalizedStringResource = "Open on a tab"
   static var description: IntentDescription {
-    get {
-      "Open the app on a specific tab"
-    }
+    "Open the app on a specific tab"
   }
+
   static let openAppWhenRun: Bool = true
-  
+
   @Parameter(title: "Selected tab")
   var tab: TabEnum
-  
+
   @MainActor
   func perform() async throws -> some IntentResult {
     AppIntentService.shared.handledIntent = .init(intent: self)

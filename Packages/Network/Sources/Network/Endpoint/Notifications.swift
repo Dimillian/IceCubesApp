@@ -33,7 +33,7 @@ public enum Notifications: Endpoint {
       "notifications/clear"
     }
   }
-  
+
   public var jsonValue: (any Encodable)? {
     switch self {
     case let .putPolicy(policy):

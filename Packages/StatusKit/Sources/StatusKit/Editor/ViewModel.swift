@@ -313,7 +313,7 @@ public extension StatusEditor {
         processItemsProvider(items: items)
       case let .imageURL(urls, visibility):
         Task {
-          for container in  await Self.makeImageContainer(from: urls) {
+          for container in await Self.makeImageContainer(from: urls) {
             prepareToPost(for: container)
           }
         }
@@ -746,16 +746,16 @@ public extension StatusEditor {
         error: nil
       )
     }
-    
+
     private static func makeImageContainer(from urls: [URL]) async -> [MediaContainer] {
       var containers: [MediaContainer] = []
-      
+
       for url in urls {
         let compressor = Compressor()
 
         if let compressedData = await compressor.compressImageFrom(url: url),
-           let image = UIImage(data: compressedData) {
-         
+           let image = UIImage(data: compressedData)
+        {
           containers.append(MediaContainer(
             id: UUID().uuidString,
             image: image,
@@ -766,7 +766,7 @@ public extension StatusEditor {
           ))
         }
       }
-      
+
       return containers
     }
 

@@ -8,10 +8,10 @@ import LinkPresentation
 import Lists
 import MediaUI
 import Models
+import Notifications
 import StatusKit
 import SwiftUI
 import Timeline
-import Notifications
 
 @MainActor
 extension View {
@@ -67,7 +67,7 @@ extension View {
       case .notificationsRequests:
         NotificationsRequestsListView()
       case let .notificationForAccount(accountId):
-        NotificationsListView(lockedType: nil ,
+        NotificationsListView(lockedType: nil,
                               lockedAccountId: accountId,
                               scrollToTopSignal: .constant(0))
       case .blockedAccounts:

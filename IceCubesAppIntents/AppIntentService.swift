@@ -1,5 +1,5 @@
-import SwiftUI
 import AppIntents
+import SwiftUI
 
 @Observable
 public class AppIntentService: @unchecked Sendable {
@@ -7,19 +7,19 @@ public class AppIntentService: @unchecked Sendable {
     static func == (lhs: AppIntentService.HandledIntent, rhs: AppIntentService.HandledIntent) -> Bool {
       lhs.id == rhs.id
     }
-    
+
     let id: String
     let intent: any AppIntent
-    
+
     init(intent: any AppIntent) {
-      self.id = UUID().uuidString
+      id = UUID().uuidString
       self.intent = intent
     }
   }
-  
+
   public static let shared = AppIntentService()
-  
+
   var handledIntent: HandledIntent?
-  
-  private init() { }
+
+  private init() {}
 }
