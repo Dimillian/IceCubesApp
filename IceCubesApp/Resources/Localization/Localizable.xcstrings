@@ -307,6 +307,9 @@
         }
       }
     },
+    "%@" : {
+
+    },
     "%@ add-tag-groups.edit.tags.field.warning.search-results.already-selected" : {
       "localizations" : {
         "be" : {
@@ -660,6 +663,9 @@
           }
         }
       }
+    },
+    "%@ was posted on Mastodon" : {
+
     },
     "%@© 2024 Thomas Ricouard" : {
       "localizations" : {
@@ -8853,6 +8859,9 @@
           }
         }
       }
+    },
+    "Account" : {
+
     },
     "account.action.add-remove-list" : {
       "comment" : "MARK: Package: Account",
@@ -20394,6 +20403,9 @@
         }
       }
     },
+    "An error occured while posting to Mastodon, please try again." : {
+
+    },
     "app-account.button.add" : {
       "comment" : "MARK: Package: AppAccount",
       "extractionState" : "manual",
@@ -20514,6 +20526,9 @@
         }
       }
     },
+    "AppAccount" : {
+
+    },
     "Bookmarks" : {
       "localizations" : {
         "de" : {
@@ -20523,6 +20538,12 @@
           }
         }
       }
+    },
+    "Compose a status" : {
+
+    },
+    "Content of the post to be sent to Mastodon" : {
+
     },
     "conversations.action.delete" : {
       "comment" : "MARK: Package: Conversations",
@@ -30759,6 +30780,9 @@
         }
       }
     },
+    "Followers Only" : {
+
+    },
     "Home Timeline" : {
       "localizations" : {
         "de" : {
@@ -40098,6 +40122,7 @@
       }
     },
     "Post a status" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -40106,6 +40131,9 @@
           }
         }
       }
+    },
+    "Post a status with an image" : {
+
     },
     "Post an image to Mastodon" : {
       "localizations" : {
@@ -40128,6 +40156,7 @@
       }
     },
     "Post images" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -40146,6 +40175,12 @@
           }
         }
       }
+    },
+    "Post visibility" : {
+
+    },
+    "Private" : {
+
     },
     "Private Messages" : {
       "localizations" : {
@@ -40166,6 +40201,12 @@
           }
         }
       }
+    },
+    "Public" : {
+
+    },
+    "Quiet Public" : {
+
     },
     "report.action.send" : {
       "localizations" : {
@@ -40650,6 +40691,15 @@
           }
         }
       }
+    },
+    "Send a text status" : {
+
+    },
+    "Send a text status to Mastodon using Ice Cubes" : {
+
+    },
+    "Send text status to Mastodon" : {
+
     },
     "Settings" : {
       "localizations" : {
@@ -80766,6 +80816,12 @@
           }
         }
       }
+    },
+    "Visibility" : {
+
+    },
+    "Visibility of your post" : {
+
     }
   },
   "version" : "1.0"

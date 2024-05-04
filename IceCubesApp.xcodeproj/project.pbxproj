@@ -66,6 +66,7 @@
 		9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7335EE29674F7100AFF0BA /* QuickLook.framework */; };
 		9F7335F22967608F00AFF0BA /* AddRemoteTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F12967608F00AFF0BA /* AddRemoteTimelineView.swift */; };
 		9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */; };
+		9F7788C02BE63935004E6BEF /* InlinePostIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7788BF2BE63935004E6BEF /* InlinePostIntent.swift */; };
 		9F7D93942980063100EE6B7A /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9F7D93932980063100EE6B7A /* AppAccount */; };
 		9F7D939A29805DBD00EE6B7A /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D939929805DBD00EE6B7A /* AccountSettingView.swift */; };
 		9FA6FD6229C04A8800E2312C /* TranslationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA6FD6129C04A8800E2312C /* TranslationSettingsView.swift */; };
@@ -224,6 +225,7 @@
 		9F7335EE29674F7100AFF0BA /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS16.2.sdk/System/Library/Frameworks/QuickLook.framework; sourceTree = DEVELOPER_DIR; };
 		9F7335F12967608F00AFF0BA /* AddRemoteTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRemoteTimelineView.swift; sourceTree = "<group>"; };
 		9F7335F82968576500AFF0BA /* DisplaySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplaySettingsView.swift; sourceTree = "<group>"; };
+		9F7788BF2BE63935004E6BEF /* InlinePostIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlinePostIntent.swift; sourceTree = "<group>"; };
 		9F7D939529800B0300EE6B7A /* IceCubesApp-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "IceCubesApp-release.xcconfig"; sourceTree = "<group>"; };
 		9F7D939929805DBD00EE6B7A /* AccountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingView.swift; sourceTree = "<group>"; };
 		9FA6FD6129C04A8800E2312C /* TranslationSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationSettingsView.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 				9F37BDDE2BE37C35007F28AD /* TabIntent.swift */,
 				9F37BDE02BE38646007F28AD /* PostImageIntent.swift */,
 				9F37BDE22BE393A7007F28AD /* AppShortcuts.swift */,
+				9F7788BF2BE63935004E6BEF /* InlinePostIntent.swift */,
 			);
 			path = IceCubesAppIntents;
 			sourceTree = "<group>";
@@ -855,6 +858,7 @@
 				9F37BDDD2BE37193007F28AD /* AppIntentService.swift in Sources */,
 				9F37BDE12BE38646007F28AD /* PostImageIntent.swift in Sources */,
 				9F37BDDF2BE37C35007F28AD /* TabIntent.swift in Sources */,
+				9F7788C02BE63935004E6BEF /* InlinePostIntent.swift in Sources */,
 				9FAD85CF2975B68900496AB1 /* SideBarView.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
 				9FC14EF42B494D940006CEE1 /* RemoteTimelinesSettingView.swift in Sources */,
