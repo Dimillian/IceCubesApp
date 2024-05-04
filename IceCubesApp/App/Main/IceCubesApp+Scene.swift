@@ -137,7 +137,7 @@ extension IceCubesApp {
       #endif
     } else if let tabIntent = appIntentService.handledIntent?.intent as? TabIntent {
       selectedTab = tabIntent.tab.toAppTab
-    } else if let imageIntent = appIntentService.handledIntent?.intent as? PostPhotoIntent,
+    } else if let imageIntent = appIntentService.handledIntent?.intent as? PostImageIntent,
               let urls = imageIntent.images?.compactMap({ $0.fileURL }) {
       appRouterPath.presentedSheet = .imageURL(urls: urls,
                                                visibility: userPreferences.postVisibility)

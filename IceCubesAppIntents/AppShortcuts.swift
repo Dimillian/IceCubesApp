@@ -22,7 +22,7 @@ struct AppShortcuts: AppShortcutsProvider {
       systemImageName: "cube"
     )
     AppShortcut(
-      intent: PostPhotoIntent(),
+      intent: PostImageIntent(),
       phrases: [
         "Post images \(\.$images) in \(.applicationName)",
         "Send photos \(\.$images) with \(.applicationName)",

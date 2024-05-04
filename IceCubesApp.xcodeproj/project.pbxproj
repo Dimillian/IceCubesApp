@@ -45,7 +45,7 @@
 		9F37BDDB2BE36E22007F28AD /* PostIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F37BDDA2BE36E22007F28AD /* PostIntent.swift */; };
 		9F37BDDD2BE37193007F28AD /* AppIntentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F37BDDC2BE37193007F28AD /* AppIntentService.swift */; };
 		9F37BDDF2BE37C35007F28AD /* TabIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F37BDDE2BE37C35007F28AD /* TabIntent.swift */; };
-		9F37BDE12BE38646007F28AD /* PostPhotoIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F37BDE02BE38646007F28AD /* PostPhotoIntent.swift */; };
+		9F37BDE12BE38646007F28AD /* PostImageIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F37BDE02BE38646007F28AD /* PostImageIntent.swift */; };
 		9F37BDE32BE393A7007F28AD /* AppShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F37BDE22BE393A7007F28AD /* AppShortcuts.swift */; };
 		9F38A7332ACEA26100DBCD66 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F38A7322ACEA26100DBCD66 /* Localizable.xcstrings */; };
 		9F38A7342ACEA26100DBCD66 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 9F38A7322ACEA26100DBCD66 /* Localizable.xcstrings */; };
@@ -204,7 +204,7 @@
 		9F37BDDA2BE36E22007F28AD /* PostIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostIntent.swift; sourceTree = "<group>"; };
 		9F37BDDC2BE37193007F28AD /* AppIntentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntentService.swift; sourceTree = "<group>"; };
 		9F37BDDE2BE37C35007F28AD /* TabIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabIntent.swift; sourceTree = "<group>"; };
-		9F37BDE02BE38646007F28AD /* PostPhotoIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostPhotoIntent.swift; sourceTree = "<group>"; };
+		9F37BDE02BE38646007F28AD /* PostImageIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostImageIntent.swift; sourceTree = "<group>"; };
 		9F37BDE22BE393A7007F28AD /* AppShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppShortcuts.swift; sourceTree = "<group>"; };
 		9F38A7322ACEA26100DBCD66 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		9F398AA32935F90100A889F2 /* Models */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Models; path = Packages/Models; sourceTree = "<group>"; };
@@ -365,7 +365,7 @@
 				9F37BDDA2BE36E22007F28AD /* PostIntent.swift */,
 				9F37BDDC2BE37193007F28AD /* AppIntentService.swift */,
 				9F37BDDE2BE37C35007F28AD /* TabIntent.swift */,
-				9F37BDE02BE38646007F28AD /* PostPhotoIntent.swift */,
+				9F37BDE02BE38646007F28AD /* PostImageIntent.swift */,
 				9F37BDE22BE393A7007F28AD /* AppShortcuts.swift */,
 			);
 			path = IceCubesAppIntents;
@@ -853,7 +853,7 @@
 				9F35DB4C2952005C00B3281A /* MessagesTab.swift in Sources */,
 				9F37BDDB2BE36E22007F28AD /* PostIntent.swift in Sources */,
 				9F37BDDD2BE37193007F28AD /* AppIntentService.swift in Sources */,
-				9F37BDE12BE38646007F28AD /* PostPhotoIntent.swift in Sources */,
+				9F37BDE12BE38646007F28AD /* PostImageIntent.swift in Sources */,
 				9F37BDDF2BE37C35007F28AD /* TabIntent.swift in Sources */,
 				9FAD85CF2975B68900496AB1 /* SideBarView.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,

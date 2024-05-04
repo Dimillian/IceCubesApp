@@ -1,7 +1,7 @@
 import Foundation
 import AppIntents
 
-struct PostPhotoIntent: AppIntent {
+struct PostImageIntent: AppIntent {
   static let title: LocalizedStringResource = "Post an image to Mastodon"
   static var description: IntentDescription {
     get {
