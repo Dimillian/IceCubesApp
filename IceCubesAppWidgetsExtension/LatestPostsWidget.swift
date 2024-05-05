@@ -49,13 +49,9 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
         if statuses.count >= 1 {
           statuses = statuses.prefix(upTo: 1).map{ $0 }
         }
-      case .systemLarge:
+      case .systemLarge, .systemExtraLarge:
         if statuses.count >= 4 {
           statuses = statuses.prefix(upTo: 4).map{ $0 }
-        }
-      case .systemExtraLarge:
-        if statuses.count >= 6 {
-          statuses = statuses.prefix(upTo: 6).map{ $0 }
         }
       default:
         break
@@ -119,12 +115,9 @@ struct LatestPostsWidgetView : View {
   var body: some View {
     VStack(alignment: .leading, spacing: 8) {
       headerView
-      ForEach(entry.statuses) { status in
-        VStack(spacing: 4) {
+      VStack(alignment: .leading, spacing: 16) {
+        ForEach(entry.statuses) { status in
           makeStatusView(status)
-          if entry.statuses.last?.id != status.id {
-            Divider()
-          }
         }
       }
       Spacer()
@@ -153,13 +146,14 @@ struct LatestPostsWidgetView : View {
             .font(.body)
             .lineLimit(contentLineLimit)
             .fixedSize(horizontal: false, vertical: true)
+            .padding(.leading, 20)
         }
       })
     }
   }
   
   private func makeStatusHeaderView(_ status: Status) -> some View {
-    HStack(spacing: 4) {
+    HStack(alignment: .center, spacing: 4) {
       if let image = entry.images[status.account.avatar] {
         Image(uiImage: image)
           .resizable()
