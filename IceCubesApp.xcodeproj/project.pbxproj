@@ -261,7 +261,6 @@
 		9F7788D32BE652B2004E6BEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F7788D72BE652B2004E6BEF /* IceCubesAppWidgetsExtensionExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesAppWidgetsExtensionExtension.entitlements; sourceTree = "<group>"; };
 		9F7788E72BE65533004E6BEF /* AppAccountEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAccountEntity.swift; sourceTree = "<group>"; };
-		9F7788EB2BE65689004E6BEF /* IceCubesAppWidgetsExtensionExtensionDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesAppWidgetsExtensionExtensionDebug.entitlements; sourceTree = "<group>"; };
 		9F7788EC2BE78D75004E6BEF /* TimelineFilterEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineFilterEntity.swift; sourceTree = "<group>"; };
 		9F7D939529800B0300EE6B7A /* IceCubesApp-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "IceCubesApp-release.xcconfig"; sourceTree = "<group>"; };
 		9F7D939929805DBD00EE6B7A /* AccountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingView.swift; sourceTree = "<group>"; };
@@ -472,6 +471,7 @@
 		9F7788CA2BE652B1004E6BEF /* IceCubesAppWidgetsExtension */ = {
 			isa = PBXGroup;
 			children = (
+				9F7788D72BE652B2004E6BEF /* IceCubesAppWidgetsExtensionExtension.entitlements */,
 				9F7788CB2BE652B1004E6BEF /* IceCubesAppWidgetsExtensionBundle.swift */,
 				9F7788CD2BE652B1004E6BEF /* LatestPostsWidget.swift */,
 				9F7788CF2BE652B1004E6BEF /* IceCubesWidgetConfigurationIntent.swift */,
@@ -542,8 +542,6 @@
 		9FBFE630292A715500C250E9 = {
 			isa = PBXGroup;
 			children = (
-				9F7788EB2BE65689004E6BEF /* IceCubesAppWidgetsExtensionExtensionDebug.entitlements */,
-				9F7788D72BE652B2004E6BEF /* IceCubesAppWidgetsExtensionExtension.entitlements */,
 				DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */,
 				9F7D939529800B0300EE6B7A /* IceCubesApp-release.xcconfig */,
 				9FBFE63B292A715500C250E9 /* IceCubesApp */,
@@ -1159,7 +1157,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = IceCubesAppWidgetsExtensionExtensionDebug.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IceCubesAppWidgetsExtension/IceCubesAppWidgetsExtensionExtension.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
@@ -1195,7 +1193,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = IceCubesAppWidgetsExtensionExtension.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IceCubesAppWidgetsExtension/IceCubesAppWidgetsExtensionExtension.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";

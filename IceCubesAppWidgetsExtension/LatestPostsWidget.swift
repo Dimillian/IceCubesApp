@@ -85,6 +85,7 @@ struct LatestPostsWidgetView : View {
       ForEach(entry.statuses) { status in
         makeStatusView(status)
       }
+      Spacer()
     }
     .frame(maxWidth: .infinity)
   }
