@@ -73,7 +73,7 @@
 		9F7788CE2BE652B1004E6BEF /* LatestPostsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7788CD2BE652B1004E6BEF /* LatestPostsWidget.swift */; };
 		9F7788D02BE652B1004E6BEF /* IceCubesWidgetConfigurationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7788CF2BE652B1004E6BEF /* IceCubesWidgetConfigurationIntent.swift */; };
 		9F7788D22BE652B2004E6BEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F7788D12BE652B2004E6BEF /* Assets.xcassets */; };
-		9F7788D62BE652B2004E6BEF /* IceCubesAppWidgetsExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9F7788C52BE652B1004E6BEF /* IceCubesAppWidgetsExtensionExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9F7788D62BE652B2004E6BEF /* IceCubesAppWidgetsExtensionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9F7788C52BE652B1004E6BEF /* IceCubesAppWidgetsExtensionExtension.appex */; platformFilters = (ios, maccatalyst, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9F7788DE2BE6543D004E6BEF /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9F7788DD2BE6543D004E6BEF /* Account */; };
 		9F7788E02BE6543D004E6BEF /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9F7788DF2BE6543D004E6BEF /* AppAccount */; };
 		9F7788E22BE6543D004E6BEF /* Env in Frameworks */ = {isa = PBXBuildFile; productRef = 9F7788E12BE6543D004E6BEF /* Env */; };
@@ -1033,6 +1033,10 @@
 		};
 		9F7788D52BE652B2004E6BEF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilters = (
+				ios,
+				maccatalyst,
+			);
 			target = 9F7788C42BE652B1004E6BEF /* IceCubesAppWidgetsExtensionExtension */;
 			targetProxy = 9F7788D42BE652B2004E6BEF /* PBXContainerItemProxy */;
 		};
