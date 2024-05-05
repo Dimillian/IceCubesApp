@@ -308,7 +308,14 @@
       }
     },
     "%@" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        }
+      }
     },
     "%@ add-tag-groups.edit.tags.field.warning.search-results.already-selected" : {
       "localizations" : {
@@ -665,7 +672,14 @@
       }
     },
     "%@ was posted on Mastodon" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ wurde auf Mastodon veröffentlicht"
+          }
+        }
+      }
     },
     "%@© 2024 Thomas Ricouard" : {
       "localizations" : {
@@ -8861,7 +8875,14 @@
       }
     },
     "Account" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konto"
+          }
+        }
+      }
     },
     "account.action.add-remove-list" : {
       "comment" : "MARK: Package: Account",
@@ -20404,7 +20425,14 @@
       }
     },
     "An error occured while posting to Mastodon, please try again." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein Fehler ist beim Veröffentlichen auf Mastodon aufgetreten, bitte versuch es noch mal."
+          }
+        }
+      }
     },
     "app-account.button.add" : {
       "comment" : "MARK: Package: AppAccount",
@@ -20527,7 +20555,14 @@
       }
     },
     "AppAccount" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppAccount"
+          }
+        }
+      }
     },
     "Bookmarks" : {
       "localizations" : {
@@ -20540,10 +20575,24 @@
       }
     },
     "Compose a status" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einen Status schreiben"
+          }
+        }
+      }
     },
     "Content of the post to be sent to Mastodon" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inhalt des Beitrags, der an Mastodon gesendet werden soll"
+          }
+        }
+      }
     },
     "conversations.action.delete" : {
       "comment" : "MARK: Package: Conversations",
@@ -30781,7 +30830,14 @@
       }
     },
     "Followers Only" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nur Leute, die dir folgen"
+          }
+        }
+      }
     },
     "Home Timeline" : {
       "localizations" : {
@@ -40133,7 +40189,14 @@
       }
     },
     "Post a status with an image" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einen Status mit einem Bild veröffentlichen"
+          }
+        }
+      }
     },
     "Post an image to Mastodon" : {
       "localizations" : {
@@ -40177,10 +40240,24 @@
       }
     },
     "Post visibility" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sichtbarkeit des Beitrags"
+          }
+        }
+      }
     },
     "Private" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privat"
+          }
+        }
+      }
     },
     "Private Messages" : {
       "localizations" : {
@@ -40203,10 +40280,24 @@
       }
     },
     "Public" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Öffentlich"
+          }
+        }
+      }
     },
     "Quiet Public" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Still öffentlich"
+          }
+        }
+      }
     },
     "report.action.send" : {
       "localizations" : {
@@ -40693,13 +40784,34 @@
       }
     },
     "Send a text status" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einen Textstatus senden"
+          }
+        }
+      }
     },
     "Send a text status to Mastodon using Ice Cubes" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mithilfe von Ice Cubes einen Textstatus an Mastodon senden"
+          }
+        }
+      }
     },
     "Send text status to Mastodon" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Textstatus an Mastodon senden"
+          }
+        }
+      }
     },
     "Settings" : {
       "localizations" : {
@@ -80818,10 +80930,24 @@
       }
     },
     "Visibility" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sichtbarkeit"
+          }
+        }
+      }
     },
     "Visibility of your post" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sichtbarkeit deines Beitrags"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"
