@@ -27,21 +27,13 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
   }
   
   private func timeline(for configuration: LatestPostsWidgetConfiguration, context: Context) async -> Timeline<PostsWidgetEntry> {
-    guard let account = configuration.account, let timeline = configuration.timeline else {
-      return Timeline(entries: [.init(date: Date(),
-                                      timeline: .home,
-                                      statuses: [], 
-                                      images: [:])],
-               policy: .atEnd)
-    }
-    
     do {
-      let statuses = await loadStatuses(for: timeline.timeline,
-                                  account: account,
-                                  widgetFamily: context.family)
+      let statuses = await loadStatuses(for: configuration.timeline.timeline,
+                                        account: configuration.account,
+                                        widgetFamily: context.family)
       let images = try await loadImages(urls: statuses.map{ $0.account.avatar } )
       return Timeline(entries: [.init(date: Date(),
-                                        timeline: timeline.timeline,
+                                        timeline: configuration.timeline.timeline,
                                         statuses: statuses,
                                         images: images)], policy: .atEnd)
     } catch {

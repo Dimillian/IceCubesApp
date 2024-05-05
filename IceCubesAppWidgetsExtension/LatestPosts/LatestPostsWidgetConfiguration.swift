@@ -6,10 +6,10 @@ struct LatestPostsWidgetConfiguration: WidgetConfigurationIntent {
   static let description = IntentDescription("Choose the account and timeline for this widget")
   
   @Parameter(title: "Account")
-  var account: AppAccountEntity?
+  var account: AppAccountEntity
   
   @Parameter(title: "Timeline")
-  var timeline: TimelineFilterEntity?
+  var timeline: TimelineFilterEntity
 }
 
 extension LatestPostsWidgetConfiguration {
