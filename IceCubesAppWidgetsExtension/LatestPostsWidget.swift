@@ -7,16 +7,21 @@ import Timeline
 
 struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
   func placeholder(in context: Context) -> LatestPostWidgetEntry {
-    .init(date: Date(), configuration: IceCubesWidgetConfigurationIntent(), timeline: .home, statuses: [
-      .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()
-    ])
+    .init(date: Date(), 
+          configuration: IceCubesWidgetConfigurationIntent(),
+          timeline: .home, 
+          statuses: [.placeholder(), .placeholder()],
+          images: [:])
   }
   
   func snapshot(for configuration: IceCubesWidgetConfigurationIntent, in context: Context) async -> LatestPostWidgetEntry {
     if let entry = await timeline(for: configuration, context: context).entries.first {
       return entry
     }
-    return .init(date: Date(), configuration: configuration, timeline: .home, statuses: [])
+    return .init(date: Date(),
+                 configuration: configuration,
+                 timeline: .home, statuses: [],
+                 images: [:])
   }
   
   func timeline(for configuration: IceCubesWidgetConfigurationIntent, in context: Context) async -> Timeline<LatestPostWidgetEntry> {
@@ -28,7 +33,8 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
       return Timeline(entries: [.init(date: Date(),
                                       configuration: configuration, 
                                       timeline: .home,
-                                      statuses: [])],
+                                      statuses: [], 
+                                      images: [:])],
                policy: .atEnd)
     }
     let client = Client(server: account.account.server, oauthToken: account.account.oauthToken)
@@ -44,24 +50,46 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
           statuses = statuses.prefix(upTo: 2).map{ $0 }
         }
       case .systemLarge:
-        if statuses.count >= 4 {
-          statuses = statuses.prefix(upTo: 4).map{ $0 }
+        if statuses.count >= 5 {
+          statuses = statuses.prefix(upTo: 5).map{ $0 }
         }
       case .systemExtraLarge:
-        if statuses.count >= 6 {
-          statuses = statuses.prefix(upTo: 6).map{ $0 }
+        if statuses.count >= 8 {
+          statuses = statuses.prefix(upTo: 8).map{ $0 }
         }
       default:
         break
       }
+      let images = try await loadImages(urls: statuses.map{ $0.account.avatar })
       return Timeline(entries: [.init(date: Date(), configuration: configuration,
                                       timeline: timeline.timeline,
-                                      statuses: statuses)], policy: .atEnd)
+                                      statuses: statuses,
+                                      images: images)], policy: .atEnd)
     } catch {
       return Timeline(entries: [.init(date: Date(), 
                                       configuration: configuration,
                                       timeline: .home,
-                                      statuses: [])], policy: .atEnd)
+                                      statuses: [],
+                                      images: [:])], policy: .atEnd)
+    }
+  }
+  
+  private func loadImages(urls: [URL]) async throws -> [URL: UIImage] {
+    try await withThrowingTaskGroup(of: (URL, UIImage?).self) { group in
+      for url in urls {
+        group.addTask {
+          let response = try await URLSession.shared.data(from: url)
+          return (url, UIImage(data: response.0))
+        }
+      }
+      
+      var images: [URL: UIImage] = [:]
+      
+      for try await (url, image) in group {
+        images[url] = image
+      }
+      
+      return images
     }
   }
 }
@@ -71,6 +99,7 @@ struct LatestPostWidgetEntry: TimelineEntry {
   let configuration: IceCubesWidgetConfigurationIntent
   let timeline: TimelineFilter
   let statuses: [Status]
+  let images: [URL: UIImage]
 }
 
 struct LatestPostsWidgetView : View {
@@ -106,22 +135,37 @@ struct LatestPostsWidgetView : View {
     if let url = URL(string: status.url ?? "") {
       Link(destination: url, label: {
         VStack(alignment: .leading, spacing: 4) {
-          HStack(spacing: 0) {
-            Text(status.account.safeDisplayName)
-            Text(" @")
-            Text(status.account.username)
-            Spacer()
-          }
-          .font(.subheadline)
-          .fontWeight(.semibold)
-          .foregroundStyle(.secondary)
-          .lineLimit(1)
-          
+          makeStatusHeaderView(status)
           Text(status.content.asRawText)
             .font(.body)
             .lineLimit(2)
         }
       })
+    }
+  }
+  
+  private func makeStatusHeaderView(_ status: Status) -> some View {
+    HStack(spacing: 4) {
+      if let image = entry.images[status.account.avatar] {
+        Image(uiImage: image)
+          .resizable()
+          .frame(width: 16, height: 16)
+          .clipShape(Circle())
+      } else {
+        Circle()
+          .foregroundStyle(.secondary)
+          .frame(width: 16, height: 16)
+      }
+      HStack(spacing: 0) {
+        Text(status.account.safeDisplayName)
+        Text(" @")
+        Text(status.account.username)
+        Spacer()
+      }
+      .font(.subheadline)
+      .fontWeight(.semibold)
+      .foregroundStyle(.secondary)
+      .lineLimit(1)
     }
   }
 }
@@ -149,5 +193,6 @@ struct LatestPostsWidget: Widget {
   LatestPostWidgetEntry(date: .now, 
                         configuration: .previewAccount,
                         timeline: .home,
-                        statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()])
+                        statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
+                        images: [:])
 }
