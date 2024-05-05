@@ -3,7 +3,7 @@ import Models
 import Network
 import SwiftUI
 
-public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
+public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable, Sendable {
   case local, federated, trending
 
   public func localizedTitle() -> LocalizedStringKey {
@@ -29,7 +29,7 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
   }
 }
 
-public enum TimelineFilter: Hashable, Equatable, Identifiable {
+public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
   case tagGroup(title: String, tags: [String], symbolName: String?)

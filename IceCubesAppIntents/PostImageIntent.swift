@@ -3,10 +3,7 @@ import Foundation
 
 struct PostImageIntent: AppIntent {
   static let title: LocalizedStringResource = "Post an image to Mastodon"
-  static var description: IntentDescription {
-    "Use Ice Cubes to post a status with an image to Mastodon"
-  }
-
+  static let description: IntentDescription = "Use Ice Cubes to compose a post with an image to Mastodon"
   static let openAppWhenRun: Bool = true
 
   @Parameter(title: "Image",

@@ -20539,7 +20539,10 @@
         }
       }
     },
-    "Compose a status" : {
+    "Compose a post" : {
+
+    },
+    "Compose a post to Mastodon" : {
 
     },
     "Content of the post to be sent to Mastodon" : {
@@ -40167,6 +40170,7 @@
       }
     },
     "Post status to Mastodon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -40692,13 +40696,13 @@
         }
       }
     },
-    "Send a text status" : {
+    "Send a post" : {
 
     },
-    "Send a text status to Mastodon using Ice Cubes" : {
+    "Send a text post to Mastodon with Ice Cubes" : {
 
     },
-    "Send text status to Mastodon" : {
+    "Send post to Mastodon" : {
 
     },
     "Settings" : {
@@ -80418,6 +80422,9 @@
         }
       }
     },
+    "TimelineFilter" : {
+
+    },
     "Trending Links" : {
       "localizations" : {
         "de" : {
@@ -80797,7 +80804,14 @@
         }
       }
     },
+    "Use Ice Cubes to compose a post for Mastodon" : {
+
+    },
+    "Use Ice Cubes to compose a post with an image to Mastodon" : {
+
+    },
     "Use Ice Cubes to post a status to Mastodon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -80808,6 +80822,7 @@
       }
     },
     "Use Ice Cubes to post a status with an image to Mastodon" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {

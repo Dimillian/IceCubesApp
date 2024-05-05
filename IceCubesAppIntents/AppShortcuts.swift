@@ -8,16 +8,16 @@ struct AppShortcuts: AppShortcutsProvider {
         "Post \(\.$content) in \(.applicationName)",
         "Post a status on Mastodon with \(.applicationName)",
       ],
-      shortTitle: "Compose a status",
+      shortTitle: "Compose a post",
       systemImageName: "square.and.pencil"
     )
     AppShortcut(
       intent: InlinePostIntent(),
       phrases: [
-        "Write a status with \(.applicationName)",
-        "Send on Status on Mastodon with \(.applicationName)",
+        "Write a post with \(.applicationName)",
+        "Send on post on Mastodon with \(.applicationName)",
       ],
-      shortTitle: "Send a text status",
+      shortTitle: "Send a post",
       systemImageName: "square.and.pencil"
     )
     AppShortcut(
