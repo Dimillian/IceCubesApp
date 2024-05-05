@@ -752,7 +752,7 @@ public extension StatusEditor {
 
       for url in urls {
         let compressor = Compressor()
-
+        _ = url.startAccessingSecurityScopedResource()
         if let compressedData = await compressor.compressImageFrom(url: url),
            let image = UIImage(data: compressedData)
         {
@@ -765,6 +765,8 @@ public extension StatusEditor {
             error: nil
           ))
         }
+        
+        url.stopAccessingSecurityScopedResource()
       }
 
       return containers
