@@ -122,7 +122,7 @@
 		9FE6A42E2BD043A90055D388 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE6A42D2BD043A90055D388 /* RevenueCat */; };
 		9FF2FB622BE7F5D5001560CE /* HashtagPostsWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2FB602BE7F5A7001560CE /* HashtagPostsWidget.swift */; };
 		9FF2FB632BE7F5D9001560CE /* HashtagPostsWidgetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2FB5E2BE7F56F001560CE /* HashtagPostsWidgetConfiguration.swift */; };
-		9FF2FB672BE7F816001560CE /* LastestPostsUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2FB652BE7F805001560CE /* LastestPostsUI.swift */; };
+		9FF2FB672BE7F816001560CE /* PostsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2FB652BE7F805001560CE /* PostsWidgetView.swift */; };
 		9FF2FB6A2BE7F84E001560CE /* SharedUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2FB682BE7F842001560CE /* SharedUtils.swift */; };
 		9FFF677C299B7B2C00FE700A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677B299B7B2C00FE700A /* Notifications */; };
 		9FFF6780299B7D2B00FE700A /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677F299B7D2B00FE700A /* DesignSystem */; };
@@ -296,7 +296,7 @@
 		9FE3DB55296FEF5800628CB0 /* AppAccount */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppAccount; path = Packages/AppAccount; sourceTree = "<group>"; };
 		9FF2FB5E2BE7F56F001560CE /* HashtagPostsWidgetConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagPostsWidgetConfiguration.swift; sourceTree = "<group>"; };
 		9FF2FB602BE7F5A7001560CE /* HashtagPostsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagPostsWidget.swift; sourceTree = "<group>"; };
-		9FF2FB652BE7F805001560CE /* LastestPostsUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastestPostsUI.swift; sourceTree = "<group>"; };
+		9FF2FB652BE7F805001560CE /* PostsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsWidgetView.swift; sourceTree = "<group>"; };
 		9FF2FB682BE7F842001560CE /* SharedUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedUtils.swift; sourceTree = "<group>"; };
 		B0BAB49E29B3D7A9008F54D7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C4CBB90B298A0DA3007E1707 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -662,7 +662,7 @@
 		9FF2FB642BE7F7FA001560CE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				9FF2FB652BE7F805001560CE /* LastestPostsUI.swift */,
+				9FF2FB652BE7F805001560CE /* PostsWidgetView.swift */,
 				9FF2FB682BE7F842001560CE /* SharedUtils.swift */,
 			);
 			path = Shared;
@@ -988,7 +988,7 @@
 				9F7788EE2BE78D7B004E6BEF /* TimelineFilterEntity.swift in Sources */,
 				9F7788CC2BE652B1004E6BEF /* IceCubesAppWidgetsExtensionBundle.swift in Sources */,
 				9F7788D02BE652B1004E6BEF /* LatestPostsWidgetConfiguration.swift in Sources */,
-				9FF2FB672BE7F816001560CE /* LastestPostsUI.swift in Sources */,
+				9FF2FB672BE7F816001560CE /* PostsWidgetView.swift in Sources */,
 				9FF2FB632BE7F5D9001560CE /* HashtagPostsWidgetConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

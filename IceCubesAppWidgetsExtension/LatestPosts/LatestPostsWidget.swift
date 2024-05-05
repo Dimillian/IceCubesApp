@@ -6,14 +6,14 @@ import Models
 import Timeline
 
 struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
-  func placeholder(in context: Context) -> LatestPostWidgetEntry {
+  func placeholder(in context: Context) -> PostsWidgetEntry {
     .init(date: Date(),
           timeline: .home, 
           statuses: [.placeholder()],
           images: [:])
   }
   
-  func snapshot(for configuration: LatestPostsWidgetConfiguration, in context: Context) async -> LatestPostWidgetEntry {
+  func snapshot(for configuration: LatestPostsWidgetConfiguration, in context: Context) async -> PostsWidgetEntry {
     if let entry = await timeline(for: configuration, context: context).entries.first {
       return entry
     }
@@ -22,11 +22,11 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
                  images: [:])
   }
   
-  func timeline(for configuration: LatestPostsWidgetConfiguration, in context: Context) async -> Timeline<LatestPostWidgetEntry> {
+  func timeline(for configuration: LatestPostsWidgetConfiguration, in context: Context) async -> Timeline<PostsWidgetEntry> {
     await timeline(for: configuration, context: context)
   }
   
-  private func timeline(for configuration: LatestPostsWidgetConfiguration, context: Context) async -> Timeline<LatestPostWidgetEntry> {
+  private func timeline(for configuration: LatestPostsWidgetConfiguration, context: Context) async -> Timeline<PostsWidgetEntry> {
     guard let account = configuration.account, let timeline = configuration.timeline else {
       return Timeline(entries: [.init(date: Date(),
                                       timeline: .home,
@@ -80,7 +80,7 @@ struct LatestPostsWidget: Widget {
     AppIntentConfiguration(kind: kind,
                            intent: LatestPostsWidgetConfiguration.self,
                            provider: LatestPostsWidgetProvider()) { entry in
-      LatestPostsWidgetView(entry: entry)
+      PostsWidgetView(entry: entry)
         .containerBackground(Color("WidgetBackground").gradient, for: .widget)
     }
     .configurationDisplayName("Latest posts")
@@ -93,7 +93,7 @@ struct LatestPostsWidget: Widget {
 #Preview(as: .systemMedium) {
   LatestPostsWidget()
 } timeline: {
-  LatestPostWidgetEntry(date: .now, 
+  PostsWidgetEntry(date: .now, 
                         timeline: .home,
                         statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
                         images: [:])

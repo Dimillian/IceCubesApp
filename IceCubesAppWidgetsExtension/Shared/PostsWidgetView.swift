@@ -5,14 +5,14 @@ import DesignSystem
 import Models
 import Timeline
 
-struct LatestPostWidgetEntry: TimelineEntry {
+struct PostsWidgetEntry: TimelineEntry {
   let date: Date
   let timeline: TimelineFilter
   let statuses: [Status]
   let images: [URL: UIImage]
 }
 
-struct LatestPostsWidgetView : View {
+struct PostsWidgetView : View {
   var entry: LatestPostsWidgetProvider.Entry
   
   @Environment(\.widgetFamily) var family

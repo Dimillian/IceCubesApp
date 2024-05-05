@@ -6,14 +6,14 @@ import Models
 import Timeline
 
 struct HashtagPostsWidgetProvider: AppIntentTimelineProvider {
-  func placeholder(in context: Context) -> LatestPostWidgetEntry {
+  func placeholder(in context: Context) -> PostsWidgetEntry {
     .init(date: Date(),
           timeline: .hashtag(tag: "Mastodon", accountId: nil),
           statuses: [.placeholder()],
           images: [:])
   }
   
-  func snapshot(for configuration: HashtagPostsWidgetConfiguration, in context: Context) async -> LatestPostWidgetEntry {
+  func snapshot(for configuration: HashtagPostsWidgetConfiguration, in context: Context) async -> PostsWidgetEntry {
     if let entry = await timeline(for: configuration, context: context).entries.first {
       return entry
     }
@@ -23,11 +23,11 @@ struct HashtagPostsWidgetProvider: AppIntentTimelineProvider {
                  images: [:])
   }
   
-  func timeline(for configuration: HashtagPostsWidgetConfiguration, in context: Context) async -> Timeline<LatestPostWidgetEntry> {
+  func timeline(for configuration: HashtagPostsWidgetConfiguration, in context: Context) async -> Timeline<PostsWidgetEntry> {
     await timeline(for: configuration, context: context)
   }
   
-  private func timeline(for configuration: HashtagPostsWidgetConfiguration, context: Context) async -> Timeline<LatestPostWidgetEntry> {
+  private func timeline(for configuration: HashtagPostsWidgetConfiguration, context: Context) async -> Timeline<PostsWidgetEntry> {
     guard let account = configuration.account, let hashgtag = configuration.hashgtag else {
       return Timeline(entries: [.init(date: Date(),
                                       timeline: .hashtag(tag: "Mastodon", accountId: nil),
@@ -61,7 +61,7 @@ struct HashtagPostsWidget: Widget {
     AppIntentConfiguration(kind: kind,
                            intent: HashtagPostsWidgetConfiguration.self,
                            provider: HashtagPostsWidgetProvider()) { entry in
-      LatestPostsWidgetView(entry: entry)
+      PostsWidgetView(entry: entry)
         .containerBackground(Color("WidgetBackground").gradient, for: .widget)
     }
     .configurationDisplayName("Hashtag timeline")
@@ -74,7 +74,7 @@ struct HashtagPostsWidget: Widget {
 #Preview(as: .systemMedium) {
   HashtagPostsWidget()
 } timeline: {
-  LatestPostWidgetEntry(date: .now,
+  PostsWidgetEntry(date: .now,
                         timeline: .hashtag(tag: "Matodon", accountId: nil),
                         statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
                         images: [:])
