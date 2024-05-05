@@ -1,0 +1,100 @@
+import WidgetKit
+import SwiftUI
+import Network
+import DesignSystem
+import Models
+import Timeline
+
+struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
+  func placeholder(in context: Context) -> LatestPostWidgetEntry {
+    .init(date: Date(),
+          timeline: .home, 
+          statuses: [.placeholder()],
+          images: [:])
+  }
+  
+  func snapshot(for configuration: LatestPostsWidgetConfiguration, in context: Context) async -> LatestPostWidgetEntry {
+    if let entry = await timeline(for: configuration, context: context).entries.first {
+      return entry
+    }
+    return .init(date: Date(),
+                 timeline: .home, statuses: [],
+                 images: [:])
+  }
+  
+  func timeline(for configuration: LatestPostsWidgetConfiguration, in context: Context) async -> Timeline<LatestPostWidgetEntry> {
+    await timeline(for: configuration, context: context)
+  }
+  
+  private func timeline(for configuration: LatestPostsWidgetConfiguration, context: Context) async -> Timeline<LatestPostWidgetEntry> {
+    guard let account = configuration.account, let timeline = configuration.timeline else {
+      return Timeline(entries: [.init(date: Date(),
+                                      timeline: .home,
+                                      statuses: [], 
+                                      images: [:])],
+               policy: .atEnd)
+    }
+    
+    do {
+      let statuses = await loadStatuses(for: timeline.timeline,
+                                  account: account,
+                                  widgetFamily: context.family)
+      let images = try await loadImages(urls: statuses.map{ $0.account.avatar } )
+      return Timeline(entries: [.init(date: Date(),
+                                        timeline: timeline.timeline,
+                                        statuses: statuses,
+                                        images: images)], policy: .atEnd)
+    } catch {
+      return Timeline(entries: [.init(date: Date(),
+                                      timeline: .home,
+                                      statuses: [],
+                                      images: [:])],
+               policy: .atEnd)
+    }
+  }
+  
+  private func loadImages(urls: [URL]) async throws -> [URL: UIImage] {
+    try await withThrowingTaskGroup(of: (URL, UIImage?).self) { group in
+      for url in urls {
+        group.addTask {
+          let response = try await URLSession.shared.data(from: url)
+          return (url, UIImage(data: response.0))
+        }
+      }
+      
+      var images: [URL: UIImage] = [:]
+      
+      for try await (url, image) in group {
+        images[url] = image
+      }
+      
+      return images
+    }
+  }
+}
+
+struct LatestPostsWidget: Widget {
+  let kind: String = "LatestPostsWidget"
+  
+  var body: some WidgetConfiguration {
+    AppIntentConfiguration(kind: kind,
+                           intent: LatestPostsWidgetConfiguration.self,
+                           provider: LatestPostsWidgetProvider()) { entry in
+      LatestPostsWidgetView(entry: entry)
+        .containerBackground(Color("WidgetBackground").gradient, for: .widget)
+    }
+    .configurationDisplayName("Latest posts")
+    .description("Show the latest post for the selected timeline")
+    .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge])
+  }
+}
+
+
+#Preview(as: .systemMedium) {
+  LatestPostsWidget()
+} timeline: {
+  LatestPostWidgetEntry(date: .now, 
+                        timeline: .home,
+                        statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
+                        images: [:])
+}

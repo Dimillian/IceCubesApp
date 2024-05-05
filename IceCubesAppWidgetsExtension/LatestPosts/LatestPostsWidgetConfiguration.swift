@@ -1,7 +1,7 @@
 import WidgetKit
 import AppIntents
 
-struct IceCubesWidgetConfigurationIntent: WidgetConfigurationIntent {
+struct LatestPostsWidgetConfiguration: WidgetConfigurationIntent {
   static let title: LocalizedStringResource = "Configuration"
   static let description = IntentDescription("Choose the account and timeline for this widget")
   
@@ -12,9 +12,9 @@ struct IceCubesWidgetConfigurationIntent: WidgetConfigurationIntent {
   var timeline: TimelineFilterEntity?
 }
 
-extension IceCubesWidgetConfigurationIntent {
-  static var previewAccount: IceCubesWidgetConfigurationIntent {
-    let intent = IceCubesWidgetConfigurationIntent()
+extension LatestPostsWidgetConfiguration {
+  static var previewAccount: LatestPostsWidgetConfiguration {
+    let intent = LatestPostsWidgetConfiguration()
     intent.account = .init(account: .init(server: "Test", accountName: "Test account"))
     intent.timeline = .init(timeline: .home)
     return intent
