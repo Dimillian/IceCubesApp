@@ -21,7 +21,7 @@ struct PostsWidgetView : View {
   var contentLineLimit: Int {
     switch family {
     case .systemSmall, .systemMedium:
-      return 4
+      return 5
     default:
       return 2
     }
@@ -29,10 +29,8 @@ struct PostsWidgetView : View {
   var body: some View {
     VStack(alignment: .leading, spacing: 8) {
       headerView
-      VStack(alignment: .leading, spacing: 16) {
-        ForEach(entry.statuses) { status in
-          makeStatusView(status)
-        }
+      ForEach(entry.statuses) { status in
+        makeStatusView(status)
       }
       Spacer()
     }
@@ -57,7 +55,7 @@ struct PostsWidgetView : View {
         VStack(alignment: .leading, spacing: 2) {
           makeStatusHeaderView(status)
           Text(status.content.asSafeMarkdownAttributedString)
-            .font(.body)
+            .font(.footnote)
             .lineLimit(contentLineLimit)
             .fixedSize(horizontal: false, vertical: true)
             .padding(.leading, 20)
@@ -89,7 +87,7 @@ struct PostsWidgetView : View {
         }
         Spacer()
       }
-      .font(.subheadline)
+      .font(.footnote)
       .fontWeight(.semibold)
       .lineLimit(1)
     }

@@ -23,8 +23,8 @@ func loadStatuses(for timeline: TimelineFilter,
         statuses = statuses.prefix(upTo: 1).map{ $0 }
       }
     case .systemLarge, .systemExtraLarge:
-      if statuses.count >= 4 {
-        statuses = statuses.prefix(upTo: 4).map{ $0 }
+      if statuses.count >= 5 {
+        statuses = statuses.prefix(upTo: 5).map{ $0 }
       }
     default:
       break
