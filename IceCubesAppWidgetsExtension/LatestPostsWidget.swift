@@ -171,16 +171,18 @@ struct LatestPostsWidgetView : View {
           .frame(width: 16, height: 16)
       }
       HStack(spacing: 0) {
+        Text(status.account.safeDisplayName)
+          .foregroundStyle(.primary)
         if family != .systemSmall {
-          Text(status.account.safeDisplayName)
+          Text(" @")
+            .foregroundStyle(.tertiary)
+          Text(status.account.username)
+            .foregroundStyle(.tertiary)
         }
-        Text(" @")
-        Text(status.account.username)
         Spacer()
       }
       .font(.subheadline)
       .fontWeight(.semibold)
-      .foregroundStyle(.secondary)
       .lineLimit(1)
     }
   }
