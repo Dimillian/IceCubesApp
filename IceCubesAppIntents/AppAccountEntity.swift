@@ -1,13 +1,12 @@
-import AppIntents
 import AppAccount
+import AppIntents
 import Env
 import Foundation
 import Models
 import Network
 
-
-extension IntentDescription: @unchecked Sendable { }
-extension TypeDisplayRepresentation: @unchecked Sendable { }
+extension IntentDescription: @unchecked Sendable {}
+extension TypeDisplayRepresentation: @unchecked Sendable {}
 
 public struct AppAccountEntity: Identifiable, AppEntity {
   public var id: String { account.id }
@@ -24,8 +23,8 @@ public struct AppAccountEntity: Identifiable, AppEntity {
 }
 
 public struct DefaultAppAccountEntityQuery: EntityQuery {
-  public init() { }
-  
+  public init() {}
+
   public func entities(for identifiers: [AppAccountEntity.ID]) async throws -> [AppAccountEntity] {
     return await AppAccountsManager.shared.availableAccounts.filter { account in
       identifiers.contains { id in

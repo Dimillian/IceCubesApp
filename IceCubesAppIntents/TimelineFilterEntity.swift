@@ -1,5 +1,5 @@
-import AppIntents
 import AppAccount
+import AppIntents
 import Env
 import Foundation
 import Models
@@ -21,14 +21,14 @@ public struct TimelineFilterEntity: Identifiable, AppEntity {
 }
 
 public struct DefaultTimelineEntityQuery: EntityQuery {
-  public init() { }
-  
-  public func entities(for identifiers: [TimelineFilter.ID]) async throws -> [TimelineFilterEntity] {
-    [.home, .trending, .federated, .local].map{ .init(timeline: $0) }
+  public init() {}
+
+  public func entities(for _: [TimelineFilter.ID]) async throws -> [TimelineFilterEntity] {
+    [.home, .trending, .federated, .local].map { .init(timeline: $0) }
   }
 
   public func suggestedEntities() async throws -> [TimelineFilterEntity] {
-    [.home, .trending, .federated, .local].map{ .init(timeline: $0) }
+    [.home, .trending, .federated, .local].map { .init(timeline: $0) }
   }
 
   public func defaultResult() async -> TimelineFilterEntity? {

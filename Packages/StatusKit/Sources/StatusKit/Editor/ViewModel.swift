@@ -765,7 +765,7 @@ public extension StatusEditor {
             error: nil
           ))
         }
-        
+
         url.stopAccessingSecurityScopedResource()
       }
 

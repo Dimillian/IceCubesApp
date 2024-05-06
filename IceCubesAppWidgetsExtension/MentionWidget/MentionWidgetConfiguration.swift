@@ -1,10 +1,10 @@
-import WidgetKit
 import AppIntents
+import WidgetKit
 
 struct MentionsWidgetConfiguration: WidgetConfigurationIntent {
   static let title: LocalizedStringResource = "Configuration"
   static let description = IntentDescription("Choose the account for this widget")
-  
+
   @Parameter(title: "Account")
   var account: AppAccountEntity
 }

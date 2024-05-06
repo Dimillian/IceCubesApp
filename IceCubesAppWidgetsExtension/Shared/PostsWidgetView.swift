@@ -1,9 +1,9 @@
-import WidgetKit
-import SwiftUI
-import Network
 import DesignSystem
 import Models
+import Network
+import SwiftUI
 import Timeline
+import WidgetKit
 
 struct PostsWidgetEntry: TimelineEntry {
   let date: Date
@@ -12,12 +12,12 @@ struct PostsWidgetEntry: TimelineEntry {
   let images: [URL: UIImage]
 }
 
-struct PostsWidgetView : View {
+struct PostsWidgetView: View {
   var entry: LatestPostsWidgetProvider.Entry
-  
+
   @Environment(\.widgetFamily) var family
   @Environment(\.redactionReasons) var redacted
-  
+
   var contentLineLimit: Int {
     switch family {
     case .systemSmall, .systemMedium:
@@ -26,6 +26,7 @@ struct PostsWidgetView : View {
       return 2
     }
   }
+
   var body: some View {
     VStack(alignment: .leading, spacing: 8) {
       headerView
@@ -36,7 +37,7 @@ struct PostsWidgetView : View {
     }
     .frame(maxWidth: .infinity)
   }
-  
+
   private var headerView: some View {
     HStack {
       Text(entry.title)
@@ -47,7 +48,7 @@ struct PostsWidgetView : View {
     .fontWeight(.bold)
     .foregroundStyle(Color("AccentColor"))
   }
-  
+
   @ViewBuilder
   private func makeStatusView(_ status: Status) -> some View {
     if let url = URL(string: status.url ?? "") {
@@ -63,7 +64,7 @@ struct PostsWidgetView : View {
       })
     }
   }
-  
+
   private func makeStatusHeaderView(_ status: Status) -> some View {
     HStack(alignment: .center, spacing: 4) {
       if let image = entry.images[status.account.avatar] {
