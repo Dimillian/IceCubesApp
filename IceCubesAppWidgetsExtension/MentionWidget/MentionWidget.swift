@@ -67,7 +67,7 @@ struct MentionsWidget: Widget {
     }
     .configurationDisplayName("Mentions")
     .description("Show the latest mentions for the selected account.")
-    .supportedFamilies([.systemSmall, .systemMedium, .systemLarge, .systemExtraLarge])
+    .supportedFamilies([.systemLarge, .systemExtraLarge])
   }
 }
 
