@@ -8,7 +8,7 @@ import Timeline
 struct HashtagPostsWidgetProvider: AppIntentTimelineProvider {
   func placeholder(in context: Context) -> PostsWidgetEntry {
     .init(date: Date(),
-          timeline: .hashtag(tag: "Mastodon", accountId: nil),
+          title: "#Mastodon",
           statuses: [.placeholder()],
           images: [:])
   }
@@ -18,7 +18,7 @@ struct HashtagPostsWidgetProvider: AppIntentTimelineProvider {
       return entry
     }
     return .init(date: Date(),
-                 timeline: .hashtag(tag: "Mastodon", accountId: nil),
+                 title: "#Mastodon",
                  statuses: [],
                  images: [:])
   }
@@ -29,18 +29,18 @@ struct HashtagPostsWidgetProvider: AppIntentTimelineProvider {
   
   private func timeline(for configuration: HashtagPostsWidgetConfiguration, context: Context) async -> Timeline<PostsWidgetEntry> {
     do {
-      let statuses = await loadStatuses(for: .hashtag(tag: configuration.hashgtag, accountId: nil),
+      let timeline: TimelineFilter = .hashtag(tag: configuration.hashgtag, accountId: nil)
+      let statuses = await loadStatuses(for: timeline,
                                         account: configuration.account,
                                         widgetFamily: context.family)
       let images = try await loadImages(urls: statuses.map{ $0.account.avatar } )
       return Timeline(entries: [.init(date: Date(),
-                                        timeline: .hashtag(tag: configuration.hashgtag,
-                                                           accountId: nil),
+                                        title: timeline.title,
                                         statuses: statuses,
                                         images: images)], policy: .atEnd)
     } catch {
       return Timeline(entries: [.init(date: Date(),
-                                      timeline: .hashtag(tag: "Mastodon", accountId: nil),
+                                      title: "#Mastodon",
                                       statuses: [],
                                       images: [:])],
                policy: .atEnd)
@@ -69,7 +69,7 @@ struct HashtagPostsWidget: Widget {
   HashtagPostsWidget()
 } timeline: {
   PostsWidgetEntry(date: .now,
-                        timeline: .hashtag(tag: "Matodon", accountId: nil),
+                        title: "#Mastodon",
                         statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
                         images: [:])
 }

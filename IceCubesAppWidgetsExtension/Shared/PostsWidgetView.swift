@@ -7,7 +7,7 @@ import Timeline
 
 struct PostsWidgetEntry: TimelineEntry {
   let date: Date
-  let timeline: TimelineFilter
+  let title: String
   let statuses: [Status]
   let images: [URL: UIImage]
 }
@@ -39,7 +39,7 @@ struct PostsWidgetView : View {
   
   private var headerView: some View {
     HStack {
-      Text(entry.timeline.title)
+      Text(entry.title)
       Spacer()
       Image(systemName: "cube")
     }

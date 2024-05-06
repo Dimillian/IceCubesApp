@@ -124,6 +124,8 @@
 		9FF2FB632BE7F5D9001560CE /* HashtagPostsWidgetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2FB5E2BE7F56F001560CE /* HashtagPostsWidgetConfiguration.swift */; };
 		9FF2FB672BE7F816001560CE /* PostsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2FB652BE7F805001560CE /* PostsWidgetView.swift */; };
 		9FF2FB6A2BE7F84E001560CE /* SharedUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2FB682BE7F842001560CE /* SharedUtils.swift */; };
+		9FF2FB702BE8AE9D001560CE /* MentionWidgetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2FB6E2BE8AE9B001560CE /* MentionWidgetConfiguration.swift */; };
+		9FF2FB712BE8AEA0001560CE /* MentionWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FF2FB6C2BE8AE90001560CE /* MentionWidget.swift */; };
 		9FFF677C299B7B2C00FE700A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677B299B7B2C00FE700A /* Notifications */; };
 		9FFF6780299B7D2B00FE700A /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677F299B7D2B00FE700A /* DesignSystem */; };
 		9FFF6782299B7D3A00FE700A /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF6781299B7D3A00FE700A /* Account */; };
@@ -298,6 +300,8 @@
 		9FF2FB602BE7F5A7001560CE /* HashtagPostsWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashtagPostsWidget.swift; sourceTree = "<group>"; };
 		9FF2FB652BE7F805001560CE /* PostsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsWidgetView.swift; sourceTree = "<group>"; };
 		9FF2FB682BE7F842001560CE /* SharedUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedUtils.swift; sourceTree = "<group>"; };
+		9FF2FB6C2BE8AE90001560CE /* MentionWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionWidget.swift; sourceTree = "<group>"; };
+		9FF2FB6E2BE8AE9B001560CE /* MentionWidgetConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionWidgetConfiguration.swift; sourceTree = "<group>"; };
 		B0BAB49E29B3D7A9008F54D7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C4CBB90B298A0DA3007E1707 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C4FBCF6F298FD88A0015DF22 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -479,9 +483,10 @@
 		9F7788CA2BE652B1004E6BEF /* IceCubesAppWidgetsExtension */ = {
 			isa = PBXGroup;
 			children = (
+				9FF2FB6B2BE8AE78001560CE /* MentionWidget */,
 				9FF2FB642BE7F7FA001560CE /* Shared */,
 				9FF2FB5D2BE7F559001560CE /* HashtagPostsWidget */,
-				9FF2FB5C2BE7F549001560CE /* LatestPosts */,
+				9FF2FB5C2BE7F549001560CE /* LatestPostsWidget */,
 				9F7788D72BE652B2004E6BEF /* IceCubesAppWidgetsExtensionExtension.entitlements */,
 				9F7788CB2BE652B1004E6BEF /* IceCubesAppWidgetsExtensionBundle.swift */,
 				9F7788D12BE652B2004E6BEF /* Assets.xcassets */,
@@ -641,13 +646,13 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		9FF2FB5C2BE7F549001560CE /* LatestPosts */ = {
+		9FF2FB5C2BE7F549001560CE /* LatestPostsWidget */ = {
 			isa = PBXGroup;
 			children = (
 				9F7788CD2BE652B1004E6BEF /* LatestPostsWidget.swift */,
 				9F7788CF2BE652B1004E6BEF /* LatestPostsWidgetConfiguration.swift */,
 			);
-			path = LatestPosts;
+			path = LatestPostsWidget;
 			sourceTree = "<group>";
 		};
 		9FF2FB5D2BE7F559001560CE /* HashtagPostsWidget */ = {
@@ -666,6 +671,15 @@
 				9FF2FB682BE7F842001560CE /* SharedUtils.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		9FF2FB6B2BE8AE78001560CE /* MentionWidget */ = {
+			isa = PBXGroup;
+			children = (
+				9FF2FB6C2BE8AE90001560CE /* MentionWidget.swift */,
+				9FF2FB6E2BE8AE9B001560CE /* MentionWidgetConfiguration.swift */,
+			);
+			path = MentionWidget;
 			sourceTree = "<group>";
 		};
 		E9B576C029743F2A00BCE646 /* Localization */ = {
@@ -982,11 +996,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FF2FB622BE7F5D5001560CE /* HashtagPostsWidget.swift in Sources */,
+				9FF2FB712BE8AEA0001560CE /* MentionWidget.swift in Sources */,
 				9F7788EA2BE65585004E6BEF /* AppAccountEntity.swift in Sources */,
 				9FF2FB6A2BE7F84E001560CE /* SharedUtils.swift in Sources */,
 				9F7788CE2BE652B1004E6BEF /* LatestPostsWidget.swift in Sources */,
 				9F7788EE2BE78D7B004E6BEF /* TimelineFilterEntity.swift in Sources */,
 				9F7788CC2BE652B1004E6BEF /* IceCubesAppWidgetsExtensionBundle.swift in Sources */,
+				9FF2FB702BE8AE9D001560CE /* MentionWidgetConfiguration.swift in Sources */,
 				9F7788D02BE652B1004E6BEF /* LatestPostsWidgetConfiguration.swift in Sources */,
 				9FF2FB672BE7F816001560CE /* PostsWidgetView.swift in Sources */,
 				9FF2FB632BE7F5D9001560CE /* HashtagPostsWidgetConfiguration.swift in Sources */,

@@ -8,7 +8,7 @@ import Timeline
 struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
   func placeholder(in context: Context) -> PostsWidgetEntry {
     .init(date: Date(),
-          timeline: .home, 
+          title: "Home",
           statuses: [.placeholder()],
           images: [:])
   }
@@ -18,7 +18,8 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
       return entry
     }
     return .init(date: Date(),
-                 timeline: .home, statuses: [],
+                 title: configuration.timeline.timeline.title,
+                 statuses: [],
                  images: [:])
   }
   
@@ -33,12 +34,12 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
                                         widgetFamily: context.family)
       let images = try await loadImages(urls: statuses.map{ $0.account.avatar } )
       return Timeline(entries: [.init(date: Date(),
-                                        timeline: configuration.timeline.timeline,
+                                      title: configuration.timeline.timeline.title,
                                         statuses: statuses,
                                         images: images)], policy: .atEnd)
     } catch {
       return Timeline(entries: [.init(date: Date(),
-                                      timeline: .home,
+                                      title: configuration.timeline.timeline.title,
                                       statuses: [],
                                       images: [:])],
                policy: .atEnd)
@@ -86,7 +87,7 @@ struct LatestPostsWidget: Widget {
   LatestPostsWidget()
 } timeline: {
   PostsWidgetEntry(date: .now, 
-                        timeline: .home,
-                        statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
-                        images: [:])
+                   title: "Mastodon",
+                   statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
+                   images: [:])
 }
