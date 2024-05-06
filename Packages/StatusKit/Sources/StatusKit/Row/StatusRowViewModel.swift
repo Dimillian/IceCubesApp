@@ -31,6 +31,15 @@ import SwiftUI
   var translation: Translation?
   var isLoadingTranslation: Bool = false
   var showDeleteAlert: Bool = false
+  var showAppleTranslation = false
+  var preferredTranslationType = TranslationType.useServerIfPossible {
+    didSet {
+      if oldValue != preferredTranslationType {
+        translation = nil
+        showAppleTranslation = false
+      }
+    }
+  }
 
   private(set) var actionsAccountsFetched: Bool = false
   var favoriters: [Account] = []
@@ -297,10 +306,16 @@ import SwiftUI
   }
 
   func translate(userLang: String) async {
+    updatePreferredTranslation()
+    if preferredTranslationType == .useApple {
+      showAppleTranslation = true
+      return
+    }
+
     withAnimation {
       isLoadingTranslation = true
     }
-    if !alwaysTranslateWithDeepl {
+    if preferredTranslationType != .useDeepl {
       do {
         // We first use instance translation API if available.
         let translation: Translation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
@@ -342,8 +357,14 @@ import SwiftUI
     DeepLUserAPIHandler.readIfAllowed()
   }
 
-  var alwaysTranslateWithDeepl: Bool {
-    DeepLUserAPIHandler.shouldAlwaysUseDeepl
+  func updatePreferredTranslation() {
+    if DeepLUserAPIHandler.shouldAlwaysUseDeepl {
+      preferredTranslationType = .useDeepl
+    } else if UserPreferences.shared.preferredTranslationType == .useApple {
+      preferredTranslationType = .useApple
+    } else {
+      preferredTranslationType = .useServerIfPossible
+    }
   }
 
   func fetchRemoteStatus() async -> Bool {

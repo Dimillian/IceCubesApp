@@ -2,6 +2,7 @@ import DesignSystem
 import Env
 import Models
 import SwiftUI
+import Translation
 
 @MainActor
 struct StatusRowTranslateView: View {
@@ -35,7 +36,8 @@ struct StatusRowTranslateView: View {
     }
   }
 
-  var body: some View {
+  @ViewBuilder
+  var translateButton: some View {
     if !isInCaptureMode,
        !isCompact,
        let userLang = preferences.serverPreferences?.postLanguage,
@@ -54,8 +56,26 @@ struct StatusRowTranslateView: View {
       }
       .buttonStyle(.borderless)
     }
+  }
 
-    if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
+  @ViewBuilder
+  var generalTranslateButton: some View {
+    if #available(iOS 17.4, *) {
+      @Bindable var viewModel = viewModel
+      translateButton
+        .translationPresentation(isPresented: $viewModel.showAppleTranslation, text: viewModel.finalStatus.content.asRawText)
+    } else {
+      translateButton
+    }
+  }
+
+  var body: some View {
+    generalTranslateButton
+      .onChange(of: preferences.preferredTranslationType) { _, _ in
+        _ = viewModel.updatePreferredTranslation()
+      }
+
+    if let translation = viewModel.translation, !viewModel.isLoadingTranslation, preferences.preferredTranslationType != .useApple {
       GroupBox {
         VStack(alignment: .leading, spacing: 4) {
           Text(translation.content.asSafeMarkdownAttributedString)

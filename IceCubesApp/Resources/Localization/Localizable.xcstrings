@@ -59867,6 +59867,7 @@
       }
     },
     "settings.translation.always-deepl" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -60573,6 +60574,9 @@
           }
         }
       }
+    },
+    "settings.translation.preferred-translation-type" : {
+
     },
     "settings.translation.user-api-key" : {
       "localizations" : {

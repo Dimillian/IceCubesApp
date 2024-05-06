@@ -11,8 +11,8 @@ struct TranslationSettingsView: View {
 
   var body: some View {
     Form {
-      deepLToggle
-      if preferences.alwaysUseDeepl {
+      translationSelector
+      if preferences.preferredTranslationType == .useDeepl {
         Section("settings.translation.user-api-key") {
           deepLPicker
           SecureField("settings.translation.user-api-key", text: $apiKey)
@@ -51,10 +51,12 @@ struct TranslationSettingsView: View {
   }
 
   @ViewBuilder
-  private var deepLToggle: some View {
+  private var translationSelector: some View {
     @Bindable var preferences = preferences
-    Toggle(isOn: $preferences.alwaysUseDeepl) {
-      Text("settings.translation.always-deepl")
+    Picker("settings.translation.preferred-translation-type", selection: $preferences.preferredTranslationType) {
+      ForEach(TranslationType.allCases, id: \.self) { type in
+        Text(type.rawValue).tag(type)
+      }
     }
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
@@ -80,6 +82,9 @@ struct TranslationSettingsView: View {
     } footer: {
       Text("settings.translation.auto-detect-post-language-footer")
     }
+    #if !os(visionOS)
+    .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 
   private func writeNewValue() {

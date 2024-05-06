@@ -24,7 +24,7 @@ public enum DeepLUserAPIHandler {
   }
 
   public static func readIfAllowed() -> String? {
-    guard UserPreferences.shared.alwaysUseDeepl else { return nil }
+    guard UserPreferences.shared.preferredTranslationType == .useDeepl else { return nil }
 
     return readValue()
   }
@@ -35,7 +35,11 @@ public enum DeepLUserAPIHandler {
   }
 
   public static func deactivateToggleIfNoKey() {
-    UserPreferences.shared.alwaysUseDeepl = shouldAlwaysUseDeepl
+    if UserPreferences.shared.preferredTranslationType == .useDeepl {
+      if readValue() == nil {
+        UserPreferences.shared.preferredTranslationType = .useServerIfPossible
+      }
+    }
   }
 
   public static var shouldAlwaysUseDeepl: Bool {
