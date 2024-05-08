@@ -26160,6 +26160,23 @@
         }
       }
     },
+    "enum.translation-type.use-server-if-possible" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Instanz"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instance"
+          }
+        }
+      }
+    },
     "env.poll-vote-frequency.multiple" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -59866,121 +59883,18 @@
         }
       }
     },
-    "settings.translation.always-deepl" : {
-      "extractionState" : "stale",
+    "settings.translation.api-key-still-stored" : {
       "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always Translate using DeepL"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always Translate using DeepL"
-          }
-        },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Immer mit DeepL übersetzen"
+            "state" : "needs_review",
+            "value" : "Der DeepL-API-Schlüssel ist noch gespeichert!"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Always Translate using DeepL"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always Translate using DeepL"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traducir siempre con DeepL"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Itzuli beti DeepL erabiliz"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Always Translate using DeepL"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Traduci sempre con DeepL"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DeepLを使用して常に翻訳する"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "항상 DeepL을 통해 번역"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oversett alltid med DeepL"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vertaal altijd met DeepL"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Zawsze tłumacz przy pomocy DeepL"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sempre traduzir utilizando DeepL"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Her Zaman DeepL kullanarak Çevir"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Завжди перекладати за допомогою DeepL"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "总是使用 DeepL 翻译"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "一概用 DeepL 翻譯"
+            "value" : "The DeepL API Key is still stored!"
           }
         }
       }
@@ -60461,122 +60375,135 @@
       "localizations" : {
         "be" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "This feature requires a DeepL API key"
           }
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "This feature requires a DeepL API key"
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Für diese Funktion ist ein DeepL-API-Schlüssel erforderlich."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This feature requires a DeepL API key"
+            "value" : "This feature requires a DeepL API Key"
           }
         },
         "en-GB" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "This feature requires a DeepL API key"
           }
         },
         "es" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Esta funcionalidad requiere una clave API de DeepL"
           }
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Ezaugarri honek DeepL API gako bat behar du"
           }
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "This feature requires a DeepL API key"
           }
         },
         "it" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Questa funzione richiede una chiave API DeepL"
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "この機能には DeepL APIキーが必要です"
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "이 기능을 사용하려면 DeepL에서 발급받은 API 키가 있어야 합니다."
           }
         },
         "nb" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Denne funksjonen krever en DeepL API-nøkkel"
           }
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Deze functionaliteit vereist een DeepL API-sleutel"
           }
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Ta funkcja wymaga klucza DeepL API"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Esta funcionalidade requer uma chave de API DeepL"
           }
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Bu özellik bir DeepL API anahtarı gerektirir"
           }
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Ця функція потребує ключа DeepL API key"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "该功能需要 DeepL API 密钥"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "本功能需有 DeepL API 密鑰"
           }
         }
       }
     },
     "settings.translation.preferred-translation-type" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übersetzungs-Service"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Translation Service"
+          }
+        }
+      }
     },
     "settings.translation.user-api-key" : {
       "localizations" : {

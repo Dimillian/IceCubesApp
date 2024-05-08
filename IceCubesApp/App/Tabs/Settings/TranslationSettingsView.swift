@@ -54,7 +54,7 @@ struct TranslationSettingsView: View {
     @Bindable var preferences = preferences
     Picker("settings.translation.preferred-translation-type", selection: $preferences.preferredTranslationType) {
       ForEach(TranslationType.allCases, id: \.self) { type in
-        Text(type.rawValue).tag(type)
+        Text(type.description).tag(type)
       }
     }
     #if !os(visionOS)
