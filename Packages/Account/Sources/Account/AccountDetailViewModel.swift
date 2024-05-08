@@ -280,7 +280,7 @@ import SwiftUI
       isLoadingTranslation = true
     }
 
-    let userAPIKey = DeepLUserAPIHandler.readIfAllowed()
+    let userAPIKey = DeepLUserAPIHandler.readKeyIfAllowed()
     let userAPIFree = UserPreferences.shared.userDeeplAPIFree
     let deeplClient = DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIFree)
 

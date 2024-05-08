@@ -23,26 +23,30 @@ public enum DeepLUserAPIHandler {
     }
   }
 
-  public static func readIfAllowed() -> String? {
+  public static func readKeyIfAllowed() -> String? {
     guard UserPreferences.shared.preferredTranslationType == .useDeepl else { return nil }
 
-    return readValue()
+    return readKeyInternal()
   }
 
-  private static func readValue() -> String? {
+  public static func readKey() -> String {
+    return readKeyInternal() ?? ""
+  }
+  
+  private static func readKeyInternal() -> String? {
     keychain.synchronizable = true
     return keychain.get(key)
   }
 
   public static func deactivateToggleIfNoKey() {
     if UserPreferences.shared.preferredTranslationType == .useDeepl {
-      if readValue() == nil {
+      if readKeyInternal() == nil {
         UserPreferences.shared.preferredTranslationType = .useServerIfPossible
       }
     }
   }
 
   public static var shouldAlwaysUseDeepl: Bool {
-    readIfAllowed() != nil
+    readKeyIfAllowed() != nil
   }
 }

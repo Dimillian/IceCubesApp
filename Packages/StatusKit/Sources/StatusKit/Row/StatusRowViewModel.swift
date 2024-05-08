@@ -354,7 +354,7 @@ import SwiftUI
   }
 
   private var userAPIKey: String? {
-    DeepLUserAPIHandler.readIfAllowed()
+    DeepLUserAPIHandler.readKeyIfAllowed()
   }
 
   func updatePreferredTranslation() {

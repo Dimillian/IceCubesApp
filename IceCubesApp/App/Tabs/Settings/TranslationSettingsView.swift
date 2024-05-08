@@ -18,9 +18,6 @@ struct TranslationSettingsView: View {
           SecureField("settings.translation.user-api-key", text: $apiKey)
             .textContentType(.password)
         }
-        .onAppear {
-          readValue()
-        }
         #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
         #endif
@@ -37,6 +34,7 @@ struct TranslationSettingsView: View {
           #endif
         }
       }
+      backgroundAPIKey
       autoDetectSection
     }
     .navigationTitle("settings.translation.navigation-title")
@@ -48,6 +46,7 @@ struct TranslationSettingsView: View {
         writeNewValue()
       }
       .onAppear(perform: updatePrefs)
+      .onAppear(perform: readValue)
   }
 
   @ViewBuilder
@@ -86,6 +85,27 @@ struct TranslationSettingsView: View {
     .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
+  
+  @ViewBuilder
+  private var backgroundAPIKey: some View {
+    if preferences.preferredTranslationType != .useDeepl,
+       !apiKey.isEmpty {
+      Section {
+        Text("settings.translation.api-key-still-stored")
+        Button(role: .destructive) {
+          withAnimation {
+            writeNewValue(value: "")
+            readValue()
+          }
+        } label: {
+          Text("action.delete")
+        }
+      }
+      #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+      #endif
+    }
+  }
 
   private func writeNewValue() {
     writeNewValue(value: apiKey)
@@ -96,11 +116,7 @@ struct TranslationSettingsView: View {
   }
 
   private func readValue() {
-    if let apiKey = DeepLUserAPIHandler.readIfAllowed() {
-      self.apiKey = apiKey
-    } else {
-      apiKey = ""
-    }
+    apiKey = DeepLUserAPIHandler.readKey()
   }
 
   private func updatePrefs() {
