@@ -20574,7 +20574,7 @@
         }
       }
     },
-    "Compose a status" : {
+    "Compose a post" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -40783,7 +40783,7 @@
         }
       }
     },
-    "Send a text status" : {
+    "Send a post" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -40793,7 +40793,7 @@
         }
       }
     },
-    "Send a text status to Mastodon using Ice Cubes" : {
+    "Send a text post to Mastodon with Ice Cubes" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -40803,7 +40803,7 @@
         }
       }
     },
-    "Send text status to Mastodon" : {
+    "Send post to Mastodon" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {

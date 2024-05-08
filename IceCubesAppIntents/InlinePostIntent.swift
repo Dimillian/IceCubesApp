@@ -33,48 +33,13 @@ enum PostVisibility: String, AppEnum {
   }
 }
 
-struct AppAccountWrapper: Identifiable, AppEntity {
-  var id: String { account.id }
-
-  let account: AppAccount
-
-  static var defaultQuery = DefaultAppAccountQuery()
-
-  static var typeDisplayRepresentation: TypeDisplayRepresentation = "AppAccount"
-
-  var displayRepresentation: DisplayRepresentation {
-    DisplayRepresentation(title: "\(account.accountName ?? account.server)")
-  }
-}
-
-struct DefaultAppAccountQuery: EntityQuery {
-  func entities(for identifiers: [AppAccountWrapper.ID]) async throws -> [AppAccountWrapper] {
-    return await AppAccountsManager.shared.availableAccounts.filter { account in
-      identifiers.contains { id in
-        id == account.id
-      }
-    }.map { AppAccountWrapper(account: $0) }
-  }
-
-  func suggestedEntities() async throws -> [AppAccountWrapper] {
-    await AppAccountsManager.shared.availableAccounts.map { .init(account: $0) }
-  }
-
-  func defaultResult() async -> AppAccountWrapper? {
-    await .init(account: AppAccountsManager.shared.currentAccount)
-  }
-}
-
 struct InlinePostIntent: AppIntent {
-  static let title: LocalizedStringResource = "Send text status to Mastodon"
-  static var description: IntentDescription {
-    "Send a text status to Mastodon using Ice Cubes"
-  }
-
+  static let title: LocalizedStringResource = "Send post to Mastodon"
+  static let description: IntentDescription = "Send a text post to Mastodon with Ice Cubes"
   static let openAppWhenRun: Bool = false
 
   @Parameter(title: "Account", requestValueDialog: IntentDialog("Account"))
-  var account: AppAccountWrapper
+  var account: AppAccountEntity
 
   @Parameter(title: "Post visibility", requestValueDialog: IntentDialog("Visibility of your post"))
   var visibility: PostVisibility

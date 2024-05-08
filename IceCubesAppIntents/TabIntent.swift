@@ -75,10 +75,7 @@ enum TabEnum: String, AppEnum, Sendable {
 
 struct TabIntent: AppIntent {
   static let title: LocalizedStringResource = "Open on a tab"
-  static var description: IntentDescription {
-    "Open the app on a specific tab"
-  }
-
+  static let description: IntentDescription = "Open the app on a specific tab"
   static let openAppWhenRun: Bool = true
 
   @Parameter(title: "Selected tab")
