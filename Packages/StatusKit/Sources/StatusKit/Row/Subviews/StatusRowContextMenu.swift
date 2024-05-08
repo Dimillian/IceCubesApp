@@ -31,7 +31,7 @@ struct StatusRowContextMenu: View {
     }
 
     if statusDataController.isReblogged {
-      return Label("status.action.unboost", image: "Rocket.fill")
+      return Label("status.action.unboost", image: "Rocket.Fill")
     }
     return Label("status.action.boost", image: "Rocket")
   }
