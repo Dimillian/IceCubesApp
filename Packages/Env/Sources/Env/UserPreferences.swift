@@ -25,7 +25,7 @@ import SwiftUI
     @AppStorage("app_require_alt_text") public var appRequireAltText = false
     @AppStorage("autoplay_video") public var autoPlayVideo = true
     @AppStorage("mute_video") public var muteVideo = true
-    @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
+    @AppStorage("preferred_translation_type") public var preferredTranslationType = TranslationType.useServerIfPossible
     @AppStorage("user_deepl_api_free") public var userDeeplAPIFree = true
     @AppStorage("auto_detect_post_language") public var autoDetectPostLanguage = true
 
@@ -63,7 +63,15 @@ import SwiftUI
     
     @AppStorage("sidebar_expanded") public var isSidebarExpanded: Bool = false
 
-    init() {}
+    init() {
+      let sharedDefault = UserDefaults.standard
+      if let alwaysUseDeepl = (sharedDefault.object(forKey: "always_use_deepl") as? Bool) {
+        if alwaysUseDeepl {
+          preferredTranslationType = .useDeepl
+        }
+        sharedDefault.removeObject(forKey: "always_use_deepl")
+      }
+    }
   }
 
   public static let sharedDefault = UserDefaults(suiteName: "group.com.thomasricouard.IceCubesApp")
