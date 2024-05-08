@@ -288,6 +288,7 @@ struct AltTextButton: View {
           isPresented: $isDisplayingAlert
         ) {
           Button("alert.button.ok", action: {})
+          Button("status.action.copy-text", action: { UIPasteboard.general.string = text })
         } message: {
           Text(text)
         }
