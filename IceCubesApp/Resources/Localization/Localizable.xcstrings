@@ -314,6 +314,12 @@
             "state" : "translated",
             "value" : "%@"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
         }
       }
     },
@@ -677,6 +683,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ wurde auf Mastodon veröffentlicht"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ is geplaatst op Mastodon"
           }
         }
       }
@@ -7410,7 +7422,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bot-account"
+            "value" : "Botaccount"
           }
         },
         "pl" : {
@@ -8361,7 +8373,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opstellen"
+            "value" : "Nieuwe post"
           }
         },
         "pl" : {
@@ -8745,8 +8757,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld nieuwe posts"
+                  "state" : "translated",
+                  "value" : "%lld nieuwe post"
                 }
               },
               "other" : {
@@ -8880,6 +8892,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Konto"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account"
           }
         }
       }
@@ -11574,8 +11592,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Blocked accounts"
+            "state" : "translated",
+            "value" : "Geblokkeerde accounts"
           }
         },
         "pl" : {
@@ -12078,8 +12096,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld posts"
+                  "state" : "translated",
+                  "value" : "%lld post"
                 }
               },
               "other" : {
@@ -12431,8 +12449,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld velden"
+                  "state" : "translated",
+                  "value" : "%lld veld"
                 }
               },
               "other" : {
@@ -16089,7 +16107,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lid geworden"
+            "value" : "Lid sinds"
           }
         },
         "pl" : {
@@ -17299,8 +17317,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "Verplaatst naar %@"
           }
         },
         "pl" : {
@@ -17418,8 +17436,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Muted accounts"
+            "state" : "translated",
+            "value" : "Gedempte accounts"
           }
         },
         "pl" : {
@@ -18408,6 +18426,125 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "備註："
+          }
+        }
+      }
+    },
+    "action.cancel" : {
+      "comment" : "MARK: Common strings",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel·la"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulla"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キャンセル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuleer"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anuluj"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İptal Et"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відміна"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
           }
         }
       }
@@ -20311,6 +20448,12 @@
             "state" : "translated",
             "value" : "Ein Fehler ist beim Veröffentlichen auf Mastodon aufgetreten, bitte versuch es noch mal."
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er is een fout opgetreden tijdens het plaatsen van de post op Mastodon, probeer het opnieuw."
+          }
         }
       }
     },
@@ -20441,6 +20584,12 @@
             "state" : "translated",
             "value" : "AppAccount"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppAccount"
+          }
         }
       }
     },
@@ -20450,6 +20599,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lesezeichen"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bladwijzers"
           }
         },
         "zh-Hans" : {
@@ -20467,6 +20622,12 @@
             "state" : "translated",
             "value" : "Einen Beitrag verfassen"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieuwe post"
+          }
         }
       }
     },
@@ -20477,6 +20638,12 @@
             "state" : "translated",
             "value" : "Einen Beitrag für Mastodon verfassen"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieuwe post voor Mastodon"
+          }
         }
       }
     },
@@ -20486,6 +20653,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inhalt des Beitrags, der an Mastodon gesendet werden soll"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inhoud van de post die naar Mastodon wordt gestuurd"
           }
         }
       }
@@ -26407,6 +26580,12 @@
             "value" : "Erkunden & Trends"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ontdekken & Trending"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28447,6 +28626,12 @@
             "value" : "Favoriten"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorieten"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28461,6 +28646,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Föderierte Timeline"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gefedereerde tijdlijn"
           }
         },
         "zh-Hans" : {
@@ -30741,6 +30932,12 @@
             "value" : "Gefolgte Tags"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gevolgde hashtags"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30756,6 +30953,12 @@
             "state" : "translated",
             "value" : "Nur Leute, die dir folgen"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alleen volgers"
+          }
         }
       }
     },
@@ -30765,6 +30968,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eigene Timeline"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
           }
         },
         "zh-Hans" : {
@@ -30783,6 +30992,12 @@
             "value" : "Bild"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afbeelding"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30797,6 +31012,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bild zum Veröffentlichen auf Mastodon"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afbeelding om te plaatsen op Mastodon"
           }
         },
         "zh-Hans" : {
@@ -33064,6 +33285,12 @@
             "value" : "Listen"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lijsten"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34033,6 +34260,12 @@
             "value" : "Lokale Timeline"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokale tijdlijn"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34047,6 +34280,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erwähnungen"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vermeldingen"
           }
         },
         "zh-Hans" : {
@@ -34774,6 +35013,12 @@
             "value" : "Neuer Beitrag"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieuwe post"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34788,6 +35033,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Benachrichtigungen"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen"
           }
         },
         "zh-Hans" : {
@@ -35216,8 +35467,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "Nieuwe accounts"
           }
         },
         "pl" : {
@@ -35335,8 +35586,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "Personen die je niet volgen"
           }
         },
         "pl" : {
@@ -35454,8 +35705,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "Personen die je niet volgt"
           }
         },
         "pl" : {
@@ -35497,7 +35748,6 @@
       }
     },
     "notifications.content-filter.privateMentions" : {
-      "extractionState" : "manual",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -35573,8 +35823,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "Ongevraagde privévermeldingen"
           }
         },
         "pl" : {
@@ -35692,8 +35942,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "Gefilterde meldingen"
           }
         },
         "pl" : {
@@ -35811,8 +36061,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "Meldingsfilter"
           }
         },
         "pl" : {
@@ -35930,8 +36180,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "Filter meldingen van…"
           }
         },
         "pl" : {
@@ -39887,6 +40137,12 @@
             "value" : "Ice Cubes öffnen"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Ice Cubes"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39903,6 +40159,12 @@
             "value" : "Mit einem Tab öffnen"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open een tab"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39917,6 +40179,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Die App in einem vorgegebenen Tab öffnen"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open de app op een specifieke tab"
           }
         },
         "zh-Hans" : {
@@ -40164,12 +40432,17 @@
       }
     },
     "Post a status" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einen Status veröffentlichen"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plaats een bericht"
           }
         },
         "zh-Hans" : {
@@ -40187,6 +40460,12 @@
             "state" : "translated",
             "value" : "Einen Status mit einem Bild veröffentlichen"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plaats een bericht met een afbeelding"
+          }
         }
       }
     },
@@ -40196,6 +40475,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ein Bild auf Mastodon veröffentlichen"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plaats een afbeelding op Mastodon"
           }
         },
         "zh-Hans" : {
@@ -40214,6 +40499,12 @@
             "value" : "Inhalt veröffentlichen"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Postinhoud"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40223,12 +40514,17 @@
       }
     },
     "Post images" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bilder veröffentlichen"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post afbeeldingen"
           }
         },
         "zh-Hans" : {
@@ -40240,12 +40536,17 @@
       }
     },
     "Post status to Mastodon" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Status auf Mastodon veröffentlichen"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plaats een bericht op Mastodon"
           }
         },
         "zh-Hans" : {
@@ -40263,6 +40564,12 @@
             "state" : "translated",
             "value" : "Sichtbarkeit des Beitrags"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zichtbaarheid"
+          }
         }
       }
     },
@@ -40273,6 +40580,12 @@
             "state" : "translated",
             "value" : "Privat"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privé"
+          }
         }
       }
     },
@@ -40282,6 +40595,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Private Nachrichten"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Directe berichten"
           }
         },
         "zh-Hans" : {
@@ -40300,6 +40619,12 @@
             "value" : "Profil"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profiel"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40315,6 +40640,12 @@
             "state" : "translated",
             "value" : "Öffentlich"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Openbaar"
+          }
         }
       }
     },
@@ -40324,6 +40655,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Still öffentlich"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minder openbaar"
           }
         }
       }
@@ -40810,6 +41147,12 @@
             "value" : "Ausgewählter Tab"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geselecteerde tab"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40825,6 +41168,12 @@
             "state" : "translated",
             "value" : "Einen Beitrag senden"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verstuur een post"
+          }
         }
       }
     },
@@ -40834,6 +41183,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einen Textbeitrag mit Ice Cubes an Mastodon senden"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verstuur een tekstpost naar Mastodon met Ice Cubes"
           }
         }
       }
@@ -40845,6 +41200,12 @@
             "state" : "translated",
             "value" : "Beitrag an Mastodon senden"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verstuur post naar Mastodon"
+          }
         }
       }
     },
@@ -40854,6 +41215,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einstellungen"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instellingen"
           }
         },
         "zh-Hans" : {
@@ -50615,7 +50982,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "Tabaanpassingen"
           }
         },
         "pl" : {
@@ -59117,7 +59484,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vijfde tabblad"
+            "value" : "Vijfde tab"
           }
         },
         "pl" : {
@@ -59235,7 +59602,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eerste tabblad"
+            "value" : "Eerste tab"
           }
         },
         "pl" : {
@@ -59353,7 +59720,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vierde tabblad"
+            "value" : "Vierde tab"
           }
         },
         "pl" : {
@@ -59471,7 +59838,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tweede tabblad"
+            "value" : "Tweede tab"
           }
         },
         "pl" : {
@@ -59589,7 +59956,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Derde tabblad"
+            "value" : "Derde tab"
           }
         },
         "pl" : {
@@ -70528,8 +70895,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "Verberg resultaten"
           }
         },
         "pl" : {
@@ -70794,8 +71161,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld stemmen"
+                  "state" : "translated",
+                  "value" : "%lld stem"
                 }
               },
               "other" : {
@@ -72159,8 +72526,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "Toon resultaten"
           }
         },
         "pl" : {
@@ -73734,8 +74101,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld boosts"
+                  "state" : "translated",
+                  "value" : "%lld boost"
                 }
               },
               "other" : {
@@ -74087,8 +74454,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld favorieten"
+                  "state" : "translated",
+                  "value" : "%lld favoriet"
                 }
               },
               "other" : {
@@ -74440,8 +74807,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld antwoorden"
+                  "state" : "translated",
+                  "value" : "%lld antwoord"
                 }
               },
               "other" : {
@@ -75047,6 +75414,12 @@
             "value" : "Tab"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tab"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -75487,7 +75860,7 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "Vermeldingen"
           }
         },
         "pl" : {
@@ -75958,8 +76331,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
+            "state" : "translated",
+            "value" : "Profiel (%@)"
           }
         },
         "pl" : {
@@ -76697,8 +77070,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld vermeldingen"
+                  "state" : "translated",
+                  "value" : "%lld vermelding"
                 }
               },
               "other" : {
@@ -79377,8 +79750,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Spring naar meest recent"
+            "state" : "translated",
+            "value" : "Ververs"
           }
         },
         "pl" : {
@@ -80117,8 +80490,8 @@
         },
         "nl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@arg1@ recente posts van %#@arg2@ deelnemers"
+            "state" : "translated",
+            "value" : "%#@arg1@ van %#@arg2@"
           },
           "substitutions" : {
             "arg1" : {
@@ -80128,14 +80501,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg recente post"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg recente posts"
                     }
                   }
                 }
@@ -80148,14 +80521,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg deelnemer"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg deelnemers"
                     }
                   }
                 }
@@ -80702,6 +81075,12 @@
             "state" : "translated",
             "value" : "TimelineFilter"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tijdlijnfilter"
+          }
         }
       }
     },
@@ -80711,6 +81090,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Links im Trend"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trending links"
           }
         },
         "zh-Hans" : {
@@ -80727,6 +81112,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Timeline im Trend"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trending tijdlijn"
           }
         },
         "zh-Hans" : {
@@ -80961,14 +81352,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld people talking"
+                  "state" : "translated",
+                  "value" : "%lld persoon praat"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld people talking"
+                  "state" : "translated",
+                  "value" : "%lld personen praten"
                 }
               }
             }
@@ -81103,6 +81494,12 @@
             "state" : "translated",
             "value" : "Ice Cubes verwenden, um einen Beitrag für Mastodon zu verfassen"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebruik Ice Cubes om een nieuwe post voor Mastodon op te stellen"
+          }
         }
       }
     },
@@ -81113,16 +81510,27 @@
             "state" : "translated",
             "value" : "Ice Cubes verwenden, um einen Beitrag mit einem Bild für Mastodon zu verfassen"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebruik Ice Cubes om een nieuwe post met afbeelding voor Mastodon op te stellen"
+          }
         }
       }
     },
     "Use Ice Cubes to post a status to Mastodon" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ice Cubes benutzen, um einen Status auf Mastodon zu veröffentlichen"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebruik Ice Cubes om een bericht te plaatsen op Mastodon"
           }
         },
         "zh-Hans" : {
@@ -81134,7 +81542,6 @@
       }
     },
     "Use Ice Cubes to post a status with an image to Mastodon" : {
-      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -81142,130 +81549,16 @@
             "value" : "Ice Cubes benutzen, um einen Status mit einem Bild auf Mastodon zu veröffentlichen"
           }
         },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebruik Ice Cubes om een bericht met een afbeelding te plaatsen op Mastodon"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "使用 Ice Cubes 向 Mastodon 发布带有图片的状态"
-          }
-        }
-      }
-    },
-     "action.cancel" : {
-      "comment" : "MARK: Common strings",
-      "extractionState" : "stale",
-      "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Скасаваць"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel·la"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abbrechen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utzi"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Annuler"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Annulla"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "キャンセル"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "취소"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Annuleer"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anuluj"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "İptal Et"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Відміна"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
           }
         }
       }
@@ -81277,6 +81570,12 @@
             "state" : "translated",
             "value" : "Sichtbarkeit"
           }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zichtbaarheid"
+          }
         }
       }
     },
@@ -81286,6 +81585,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sichtbarkeit deines Beitrags"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zichtbaarheid van je post"
           }
         }
       }
