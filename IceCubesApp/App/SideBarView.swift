@@ -75,6 +75,7 @@ struct SideBarView<Content: View>: View {
         .offset(x: 2, y: -2)
     }
     .buttonStyle(.borderedProminent)
+    .help(Tab.post.title)
   }
 
   private func makeAccountButton(account: AppAccount, showBadge: Bool) -> some View {
@@ -102,10 +103,19 @@ struct SideBarView<Content: View>: View {
         }
       }
     }
+    .help(accountButtonTitle(accountName: account.accountName))
     .frame(width: .sidebarWidth, height: 50)
     .padding(.vertical, 8)
     .background(selectedTab == .profile && account.id == appAccounts.currentAccount.id ?
       theme.secondaryBackgroundColor : .clear)
+  }
+
+  private func accountButtonTitle(accountName: String?) -> LocalizedStringKey {
+    if let accountName {
+      "tab.profile-account-\(accountName)"
+    } else {
+      Tab.profile.title
+    }
   }
 
   private var tabsView: some View {
@@ -132,6 +142,7 @@ struct SideBarView<Content: View>: View {
         } label: {
           makeIconForTab(tab: tab)
         }
+        .help(tab.title)
       }
     }
   }
