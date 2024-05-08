@@ -32,6 +32,10 @@ actor TimelineDatasource {
     }
   }
 
+  func count() -> Int {
+    statuses.count
+  }
+
   func reset() {
     statuses = []
   }
@@ -46,6 +50,10 @@ actor TimelineDatasource {
 
   func set(_ statuses: [Status]) {
     self.statuses = statuses
+  }
+
+  func append(_ status: Status) {
+    statuses.append(status)
   }
 
   func append(contentOf: [Status]) {
