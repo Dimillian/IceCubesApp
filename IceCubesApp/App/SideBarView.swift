@@ -35,15 +35,23 @@ struct SideBarView<Content: View>: View {
   }
 
   private func makeIconForTab(tab: Tab) -> some View {
-    ZStack(alignment: .topTrailing) {
-      SideBarIcon(systemIconName: tab.iconName,
-                  isSelected: tab == selectedTab)
-      let badge = badgeFor(tab: tab)
-      if badge > 0 {
-        makeBadgeView(count: badge)
+    HStack {
+      ZStack(alignment: .topTrailing) {
+        SideBarIcon(systemIconName: tab.iconName,
+                    isSelected: tab == selectedTab)
+        let badge = badgeFor(tab: tab)
+        if badge > 0 {
+          makeBadgeView(count: badge)
+        }
+      }
+      if userPreferences.isSidebarExpanded {
+        Text(tab.title)
+          .font(.headline)
+          .foregroundColor(tab == selectedTab ? theme.tintColor : theme.labelColor)
+          .frame(maxWidth: .infinity, alignment: .leading)
       }
     }
-    .frame(width: .sidebarWidth - 24, height: 50)
+    .frame(width: (userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth) - 24, height: 50)
     .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear,
                 in: RoundedRectangle(cornerRadius: 8))
   }
@@ -92,8 +100,17 @@ struct SideBarView<Content: View>: View {
       }
     } label: {
       ZStack(alignment: .topTrailing) {
-        AppAccountView(viewModel: .init(appAccount: account, isCompact: true),
-                       isParentPresented: .constant(false))
+        if userPreferences.isSidebarExpanded {
+          AppAccountView(viewModel: .init(appAccount: account, 
+                                          isCompact: false,
+                                          isInSettings: false),
+                         isParentPresented: .constant(false))
+        } else {
+          AppAccountView(viewModel: .init(appAccount: account, 
+                                          isCompact: true,
+                                          isInSettings: false),
+                         isParentPresented: .constant(false))
+        }
         if showBadge,
            let token = account.oauthToken,
            let notificationsCount = userPreferences.notificationsCount[token],
@@ -102,9 +119,10 @@ struct SideBarView<Content: View>: View {
           makeBadgeView(count: notificationsCount)
         }
       }
+      .padding(.leading, userPreferences.isSidebarExpanded ? 16 : 0)
     }
     .help(accountButtonTitle(accountName: account.accountName))
-    .frame(width: .sidebarWidth, height: 50)
+    .frame(width: userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth, height: 50)
     .padding(.vertical, 8)
     .background(selectedTab == .profile && account.id == appAccounts.currentAccount.id ?
       theme.secondaryBackgroundColor : .clear)
@@ -166,15 +184,22 @@ struct SideBarView<Content: View>: View {
             }
           }
         }
-        .frame(width: .sidebarWidth)
+        .frame(width: userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth)
         .scrollContentBackground(.hidden)
         .background(.thinMaterial)
         .safeAreaInset(edge: .bottom, content: {
-          HStack {
+          HStack(spacing: 16) {
             postButton
               .padding(.vertical, 24)
+              .padding(.leading, userPreferences.isSidebarExpanded ? 18 : 0)
+            if userPreferences.isSidebarExpanded {
+              Text("menu.new-post")
+                .font(.subheadline)
+                .foregroundColor(theme.labelColor)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }
           }
-          .frame(width: .sidebarWidth)
+          .frame(width: userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth)
           .background(.thinMaterial)
         })
         Divider().edgesIgnoringSafeArea(.all)
@@ -207,6 +232,7 @@ private struct SideBarIcon: View {
           self.isHovered = isHovered
         }
       }
+      .frame(width: 50, height: 40)
   }
 }
 
