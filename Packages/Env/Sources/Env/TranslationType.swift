@@ -10,9 +10,9 @@ public enum TranslationType: String, CaseIterable {
       case .useServerIfPossible:
         "enum.translation-type.use-server-if-possible"
       case .useDeepl:
-        "DeepL"
+        "enum.translation-type.deepl"
       case .useApple:
-        "Apple Translate"
+        "enum.translation-type.apple"
     }
   }
 }
