@@ -193,7 +193,11 @@ import SwiftUI
     }
   }
 
-  public var preferredTranslationType: TranslationType
+  public var preferredTranslationType: TranslationType {
+    didSet {
+      storage.preferredTranslationType = preferredTranslationType
+    }
+  }
 
   public var userDeeplAPIFree: Bool {
     didSet {
@@ -486,7 +490,7 @@ import SwiftUI
     appDefaultPostsSensitive = storage.appDefaultPostsSensitive
     appRequireAltText = storage.appRequireAltText
     autoPlayVideo = storage.autoPlayVideo
-    preferredTranslationType = .useServerIfPossible
+    preferredTranslationType = storage.preferredTranslationType
     userDeeplAPIFree = storage.userDeeplAPIFree
     autoDetectPostLanguage = storage.autoDetectPostLanguage
     inAppBrowserReaderView = storage.inAppBrowserReaderView
