@@ -65,7 +65,9 @@ struct StatusRowTranslateView: View {
   var body: some View {
     generalTranslateButton
       .onChange(of: preferences.preferredTranslationType) { _, _ in
-        _ = viewModel.updatePreferredTranslation()
+        withAnimation {
+          _ = viewModel.updatePreferredTranslation()
+        }
       }
 
     if let translation = viewModel.translation, !viewModel.isLoadingTranslation, preferences.preferredTranslationType != .useApple {
