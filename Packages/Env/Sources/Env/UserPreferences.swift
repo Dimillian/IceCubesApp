@@ -64,6 +64,10 @@ import SwiftUI
     @AppStorage("sidebar_expanded") public var isSidebarExpanded: Bool = false
 
     init() {
+      prepareTranslationType()
+    }
+    
+    private func prepareTranslationType() {
       let sharedDefault = UserDefaults.standard
       if let alwaysUseDeepl = (sharedDefault.object(forKey: "always_use_deepl") as? Bool) {
         if alwaysUseDeepl {
@@ -71,10 +75,16 @@ import SwiftUI
         }
         sharedDefault.removeObject(forKey: "always_use_deepl")
       }
+#if canImport(_Translation_SwiftUI)
       if #unavailable(iOS 17.4),
          preferredTranslationType == .useApple {
         preferredTranslationType = .useServerIfPossible
       }
+#else
+      if preferredTranslationType == .useApple {
+        preferredTranslationType = .useServerIfPossible
+      }
+#endif
     }
   }
 

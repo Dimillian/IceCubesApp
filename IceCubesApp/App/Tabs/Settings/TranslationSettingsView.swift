@@ -53,12 +53,8 @@ struct TranslationSettingsView: View {
   private var translationSelector: some View {
     @Bindable var preferences = preferences
     Picker("settings.translation.preferred-translation-type", selection: $preferences.preferredTranslationType) {
-      ForEach(TranslationType.allCases, id: \.self) { type in
-        if #available(iOS 17.4, *) {
-          Text(type.description).tag(type)
-        } else if type != .useApple {
-          Text(type.description).tag(type)
-        }
+      ForEach(allTTCases, id: \.self) { type in
+        Text(type.description).tag(type)
       }
     }
     #if !os(visionOS)
@@ -66,6 +62,23 @@ struct TranslationSettingsView: View {
     #endif
   }
 
+  var allTTCases: [TranslationType] {
+    TranslationType.allCases.filter { type in
+      if type != .useApple {
+        return true
+      }
+      #if canImport(_Translation_SwiftUI)
+      if #available(iOS 17.4, *) {
+        return true
+      } else {
+        return false
+      }
+      #else
+      return false
+      #endif
+    }
+  }
+  
   @ViewBuilder
   private var deepLPicker: some View {
     @Bindable var preferences = preferences
