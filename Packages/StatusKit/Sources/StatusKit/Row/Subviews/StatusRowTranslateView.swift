@@ -2,7 +2,6 @@ import DesignSystem
 import Env
 import Models
 import SwiftUI
-import Translation
 
 @MainActor
 struct StatusRowTranslateView: View {
@@ -60,13 +59,7 @@ struct StatusRowTranslateView: View {
 
   @ViewBuilder
   var generalTranslateButton: some View {
-    if #available(iOS 17.4, *) {
-      @Bindable var viewModel = viewModel
-      translateButton
-        .translationPresentation(isPresented: $viewModel.showAppleTranslation, text: viewModel.finalStatus.content.asRawText)
-    } else {
-      translateButton
-    }
+    translateButton
   }
 
   var body: some View {

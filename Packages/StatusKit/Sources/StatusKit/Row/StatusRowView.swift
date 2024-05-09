@@ -5,6 +5,7 @@ import Foundation
 import Models
 import Network
 import SwiftUI
+import Translation
 
 @MainActor
 public struct StatusRowView: View {
@@ -219,6 +220,7 @@ public struct StatusRowView: View {
       StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,
                                                          client: viewModel.client)
     )
+    .addTranslateView(isPresented: $viewModel.showAppleTranslation, text: viewModel.finalStatus.content.asRawText)
   }
 
   @ViewBuilder
@@ -354,4 +356,14 @@ public struct StatusRowView: View {
   .listStyle(.plain)
   .withPreviewsEnv()
   .environment(Theme.shared)
+}
+
+extension View {
+    func addTranslateView(isPresented: Binding<Bool>, text: String) -> some View {
+        if #available(iOS 17.4, *) {
+            return self.translationPresentation(isPresented: isPresented, text: text)
+        } else {
+            return self
+        }
+    }
 }
