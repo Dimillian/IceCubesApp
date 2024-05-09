@@ -71,6 +71,10 @@ import SwiftUI
         }
         sharedDefault.removeObject(forKey: "always_use_deepl")
       }
+      if #unavailable(iOS 17.4),
+         preferredTranslationType == .useApple {
+        preferredTranslationType = .useServerIfPossible
+      }
     }
   }
 

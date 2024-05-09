@@ -54,7 +54,11 @@ struct TranslationSettingsView: View {
     @Bindable var preferences = preferences
     Picker("settings.translation.preferred-translation-type", selection: $preferences.preferredTranslationType) {
       ForEach(TranslationType.allCases, id: \.self) { type in
-        Text(type.description).tag(type)
+        if #available(iOS 17.4, *) {
+          Text(type.description).tag(type)
+        } else if type != .useApple {
+          Text(type.description).tag(type)
+        }
       }
     }
     #if !os(visionOS)
