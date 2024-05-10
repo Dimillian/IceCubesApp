@@ -75898,8 +75898,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
+            "state" : "translated",
+            "value" : "Profil (%@)"
           }
         },
         "en" : {
