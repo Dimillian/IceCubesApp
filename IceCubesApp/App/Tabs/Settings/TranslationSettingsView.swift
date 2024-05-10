@@ -68,17 +68,17 @@ struct TranslationSettingsView: View {
         return true
       }
       #if canImport(_Translation_SwiftUI)
-      if #available(iOS 17.4, *) {
-        return true
-      } else {
-        return false
-      }
+        if #available(iOS 17.4, *) {
+          return true
+        } else {
+          return false
+        }
       #else
-      return false
+        return false
       #endif
     }
   }
-  
+
   @ViewBuilder
   private var deepLPicker: some View {
     @Bindable var preferences = preferences
@@ -102,11 +102,12 @@ struct TranslationSettingsView: View {
     .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
-  
+
   @ViewBuilder
   private var backgroundAPIKey: some View {
     if preferences.preferredTranslationType != .useDeepl,
-       !apiKey.isEmpty {
+       !apiKey.isEmpty
+    {
       Section {
         Text("settings.translation.api-key-still-stored")
         Button(role: .destructive) {

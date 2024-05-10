@@ -6,17 +6,17 @@ import Models
 import Network
 import SwiftUI
 #if canImport(_Translation_SwiftUI)
-import Translation
+  import Translation
 
-extension View {
-  func addTranslateView(isPresented: Binding<Bool>, text: String) -> some View {
-    if #available(iOS 17.4, *) {
-      return self.translationPresentation(isPresented: isPresented, text: text)
-    } else {
-      return self
+  extension View {
+    func addTranslateView(isPresented: Binding<Bool>, text: String) -> some View {
+      if #available(iOS 17.4, *) {
+        return self.translationPresentation(isPresented: isPresented, text: text)
+      } else {
+        return self
+      }
     }
   }
-}
 #endif
 
 @MainActor
@@ -232,9 +232,9 @@ public struct StatusRowView: View {
       StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,
                                                          client: viewModel.client)
     )
-#if canImport(_Translation_SwiftUI)
+    #if canImport(_Translation_SwiftUI)
     .addTranslateView(isPresented: $viewModel.showAppleTranslation, text: viewModel.finalStatus.content.asRawText)
-#endif
+    #endif
   }
 
   @ViewBuilder

@@ -7,12 +7,12 @@ public enum TranslationType: String, CaseIterable {
 
   public var description: LocalizedStringKey {
     switch self {
-      case .useServerIfPossible:
-        "enum.translation-type.use-server-if-possible"
-      case .useDeepl:
-        "enum.translation-type.deepl"
-      case .useApple:
-        "enum.translation-type.apple"
+    case .useServerIfPossible:
+      "enum.translation-type.use-server-if-possible"
+    case .useDeepl:
+      "enum.translation-type.deepl"
+    case .useApple:
+      "enum.translation-type.apple"
     }
   }
 }

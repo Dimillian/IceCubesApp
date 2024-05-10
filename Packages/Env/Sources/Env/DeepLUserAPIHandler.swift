@@ -32,7 +32,7 @@ public enum DeepLUserAPIHandler {
   public static func readKey() -> String {
     return readKeyInternal() ?? ""
   }
-  
+
   private static func readKeyInternal() -> String? {
     keychain.synchronizable = true
     return keychain.get(key)

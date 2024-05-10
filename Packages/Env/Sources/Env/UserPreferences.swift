@@ -60,13 +60,13 @@ import SwiftUI
     @AppStorage("show_reply_indentation") public var showReplyIndentation: Bool = true
 
     @AppStorage("show_account_popover") public var showAccountPopover: Bool = true
-    
+
     @AppStorage("sidebar_expanded") public var isSidebarExpanded: Bool = false
 
     init() {
       prepareTranslationType()
     }
-    
+
     private func prepareTranslationType() {
       let sharedDefault = UserDefaults.standard
       if let alwaysUseDeepl = (sharedDefault.object(forKey: "always_use_deepl") as? Bool) {
@@ -75,16 +75,17 @@ import SwiftUI
         }
         sharedDefault.removeObject(forKey: "always_use_deepl")
       }
-#if canImport(_Translation_SwiftUI)
-      if #unavailable(iOS 17.4),
-         preferredTranslationType == .useApple {
-        preferredTranslationType = .useServerIfPossible
-      }
-#else
-      if preferredTranslationType == .useApple {
-        preferredTranslationType = .useServerIfPossible
-      }
-#endif
+      #if canImport(_Translation_SwiftUI)
+        if #unavailable(iOS 17.4),
+           preferredTranslationType == .useApple
+        {
+          preferredTranslationType = .useServerIfPossible
+        }
+      #else
+        if preferredTranslationType == .useApple {
+          preferredTranslationType = .useServerIfPossible
+        }
+      #endif
     }
   }
 
@@ -350,7 +351,7 @@ import SwiftUI
       storage.showAccountPopover = showAccountPopover
     }
   }
-  
+
   public var isSidebarExpanded: Bool {
     didSet {
       storage.isSidebarExpanded = isSidebarExpanded
