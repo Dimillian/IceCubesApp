@@ -110,6 +110,9 @@ struct TranslationSettingsView: View {
     {
       Section {
         Text("settings.translation.api-key-still-stored")
+        if preferences.preferredTranslationType == .useServerIfPossible {
+          Text("It can however still be used as a fallback for your instance's translation service.")
+        }
         Button(role: .destructive) {
           withAnimation {
             writeNewValue(value: "")

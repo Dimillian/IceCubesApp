@@ -87,7 +87,6 @@
 		9F7D93942980063100EE6B7A /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9F7D93932980063100EE6B7A /* AppAccount */; };
 		9F7D939A29805DBD00EE6B7A /* AccountSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F7D939929805DBD00EE6B7A /* AccountSettingView.swift */; };
 		9FA6FD6229C04A8800E2312C /* TranslationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA6FD6129C04A8800E2312C /* TranslationSettingsView.swift */; };
-		9FAD85832971BF7200496AB1 /* Secret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9FAD85822971BF7200496AB1 /* Secret.plist */; };
 		9FAD858B29743F7400496AB1 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAD858A29743F7400496AB1 /* ShareViewController.swift */; };
 		9FAD858E29743F7400496AB1 /* (null) in Resources */ = {isa = PBXBuildFile; };
 		9FAD859229743F7400496AB1 /* IceCubesShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */; platformFilters = (ios, maccatalyst, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -271,7 +270,6 @@
 		9F7D939529800B0300EE6B7A /* IceCubesApp-release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "IceCubesApp-release.xcconfig"; sourceTree = "<group>"; };
 		9F7D939929805DBD00EE6B7A /* AccountSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingView.swift; sourceTree = "<group>"; };
 		9FA6FD6129C04A8800E2312C /* TranslationSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationSettingsView.swift; sourceTree = "<group>"; };
-		9FAD85822971BF7200496AB1 /* Secret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Secret.plist; sourceTree = "<group>"; };
 		9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IceCubesShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FAD858A29743F7400496AB1 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		9FAD858F29743F7400496AB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -602,7 +600,6 @@
 				9FAE4AC8293774FF00772766 /* Info.plist */,
 				9F398AB429360A5800A889F2 /* App */,
 				9F398AB529360A6100A889F2 /* Resources */,
-				9FAD85822971BF7200496AB1 /* Secret.plist */,
 			);
 			path = IceCubesApp;
 			sourceTree = "<group>";
@@ -960,7 +957,6 @@
 				9F18801829AE477F00D85459 /* favorite.wav in Resources */,
 				9F24EEB829360C330042359D /* Preview Assets.xcassets in Resources */,
 				069709A8298C87B5006E4CB5 /* OpenDyslexic-Regular.otf in Resources */,
-				9FAD85832971BF7200496AB1 /* Secret.plist in Resources */,
 				9F18801229AE477F00D85459 /* tabSelection.wav in Resources */,
 				9F18801429AE477F00D85459 /* bookmark.wav in Resources */,
 				9F18801629AE477F00D85459 /* refresh.wav in Resources */,

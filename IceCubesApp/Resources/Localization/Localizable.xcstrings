@@ -32513,6 +32513,20 @@
         }
       }
     },
+    "It can however still be used as a fallback for your instance's translation service." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er kann aber auch als Fallback für den Übersetzungsservice deiner Instanz dienen."
+          }
+        }
+      }
+    },
+    "Key" : {
+      "extractionState" : "manual"
+    },
     "list.edit.isExclusive" : {
       "extractionState" : "manual",
       "localizations" : {

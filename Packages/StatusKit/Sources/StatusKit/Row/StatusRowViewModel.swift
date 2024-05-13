@@ -40,6 +40,7 @@ import SwiftUI
       }
     }
   }
+
   var deeplTranslationError = false
   var instanceTranslationError = false
 
@@ -318,13 +319,19 @@ import SwiftUI
       isLoadingTranslation = true
     }
     if preferredTranslationType != .useDeepl {
-        let translation: Translation? = try? await client.post(endpoint: Statuses.translate(id: finalStatus.id,
+      let translation: Translation? = try? await client.post(endpoint: Statuses.translate(id: finalStatus.id,
                                                                                           lang: userLang))
-        withAnimation {
-            self.translation = translation
-            isLoadingTranslation = false
-        }
+
       if translation == nil {
+        await translateWithDeepL(userLang: userLang)
+      } else {
+        withAnimation {
+          self.translation = translation
+          isLoadingTranslation = false
+        }
+      }
+
+      if self.translation == nil {
         instanceTranslationError = true
       }
     } else {
@@ -356,7 +363,7 @@ import SwiftUI
   }
 
   private var userAPIKey: String? {
-    DeepLUserAPIHandler.readKeyIfAllowed()
+    DeepLUserAPIHandler.readKey()
   }
 
   func updatePreferredTranslation() {
