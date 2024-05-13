@@ -31,6 +31,18 @@ import SwiftUI
   var translation: Translation?
   var isLoadingTranslation: Bool = false
   var showDeleteAlert: Bool = false
+  var showAppleTranslation = false
+  var preferredTranslationType = TranslationType.useServerIfPossible {
+    didSet {
+      if oldValue != preferredTranslationType {
+        translation = nil
+        showAppleTranslation = false
+      }
+    }
+  }
+
+  var deeplTranslationError = false
+  var instanceTranslationError = false
 
   private(set) var actionsAccountsFetched: Bool = false
   var favoriters: [Account] = []
@@ -297,25 +309,43 @@ import SwiftUI
   }
 
   func translate(userLang: String) async {
-    withAnimation {
-      isLoadingTranslation = true
-    }
-    if !alwaysTranslateWithDeepl {
-      do {
-        // We first use instance translation API if available.
-        let translation: Translation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
-                                                                                          lang: userLang))
-        withAnimation {
-          self.translation = translation
-          isLoadingTranslation = false
-        }
-
-        return
-      } catch {}
+    updatePreferredTranslation()
+    if preferredTranslationType == .useApple {
+      showAppleTranslation = true
+      return
     }
 
-    // If not or fail we use Ice Cubes own DeepL client.
-    await translateWithDeepL(userLang: userLang)
+    if preferredTranslationType != .useDeepl {
+      await translateWithInstance(userLang: userLang)
+      
+      if translation == nil {
+        await translateWithDeepL(userLang: userLang)
+      }
+    } else {
+      await translateWithDeepL(userLang: userLang)
+      
+      if translation == nil {
+        await translateWithInstance(userLang: userLang)
+      }
+    }
+    
+    var hasShown = false
+#if canImport(_Translation_SwiftUI)
+    if translation == nil,
+       #available(iOS 17.4, *) {
+      showAppleTranslation = true
+      hasShown = true
+    }
+#endif
+    
+    if !hasShown,
+       translation == nil {
+      if preferredTranslationType == .useDeepl {
+        deeplTranslationError = true
+      } else {
+        instanceTranslationError = true
+      }
+    }
   }
 
   func translateWithDeepL(userLang: String) async {
@@ -331,6 +361,20 @@ import SwiftUI
       isLoadingTranslation = false
     }
   }
+  
+  func translateWithInstance(userLang: String) async {
+    withAnimation {
+      isLoadingTranslation = true
+    }
+
+    let translation: Translation? = try? await client.post(endpoint: Statuses.translate(id: finalStatus.id,
+                                                                                        lang: userLang))
+
+    withAnimation {
+      self.translation = translation
+      isLoadingTranslation = false
+    }
+  }
 
   private func getDeepLClient() -> DeepLClient {
     let userAPIfree = UserPreferences.shared.userDeeplAPIFree
@@ -339,11 +383,17 @@ import SwiftUI
   }
 
   private var userAPIKey: String? {
-    DeepLUserAPIHandler.readIfAllowed()
+    DeepLUserAPIHandler.readKey()
   }
 
-  var alwaysTranslateWithDeepl: Bool {
-    DeepLUserAPIHandler.shouldAlwaysUseDeepl
+  func updatePreferredTranslation() {
+    if DeepLUserAPIHandler.shouldAlwaysUseDeepl {
+      preferredTranslationType = .useDeepl
+    } else if UserPreferences.shared.preferredTranslationType == .useApple {
+      preferredTranslationType = .useApple
+    } else {
+      preferredTranslationType = .useServerIfPossible
+    }
   }
 
   func fetchRemoteStatus() async -> Bool {

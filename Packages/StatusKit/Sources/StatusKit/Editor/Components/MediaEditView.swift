@@ -161,7 +161,7 @@ extension StatusEditor {
 
     private func translateDescription() async -> String? {
       isTranslating = true
-      let userAPIKey = DeepLUserAPIHandler.readIfAllowed()
+      let userAPIKey = DeepLUserAPIHandler.readKeyIfAllowed()
       let userAPIFree = UserPreferences.shared.userDeeplAPIFree
       let deeplClient = DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIFree)
       let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
