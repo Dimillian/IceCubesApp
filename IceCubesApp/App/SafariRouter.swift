@@ -13,6 +13,7 @@ extension View {
 
 @MainActor
 private struct SafariRouter: ViewModifier {
+  @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var preferences
   @Environment(RouterPath.self) private var routerPath
@@ -25,10 +26,12 @@ private struct SafariRouter: ViewModifier {
     content
       .environment(\.openURL, OpenURLAction { url in
         // Open internal URL.
-        routerPath.handle(url: url)
+        guard !isSecondaryColumn else { return .discarded }
+        return routerPath.handle(url: url)
       })
       .onOpenURL { url in
         // Open external URL (from icecubesapp://)
+        guard !isSecondaryColumn else { return }
         let urlString = url.absoluteString.replacingOccurrences(of: AppInfo.scheme, with: "https://")
         guard let url = URL(string: urlString), url.host != nil else { return }
         _ = routerPath.handleDeepLink(url: url)

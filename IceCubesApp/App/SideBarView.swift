@@ -111,7 +111,8 @@ struct SideBarView<Content: View>: View {
                                           isInSettings: false),
                          isParentPresented: .constant(false))
         }
-        if showBadge,
+        if !userPreferences.isSidebarExpanded,
+           showBadge,
            let token = account.oauthToken,
            let notificationsCount = userPreferences.notificationsCount[token],
            notificationsCount > 0
