@@ -314,6 +314,12 @@
             "state" : "translated",
             "value" : "%@"
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
         }
       }
     },
@@ -677,6 +683,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ wurde auf Mastodon veröffentlicht"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Mastodonen argitaratu da"
           }
         }
       }
@@ -8880,6 +8892,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Konto"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontua"
           }
         }
       }
@@ -20431,6 +20449,12 @@
             "state" : "translated",
             "value" : "Ein Fehler ist beim Veröffentlichen auf Mastodon aufgetreten, bitte versuch es noch mal."
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errorea gertatu da Mastodonen argitaratzean, saiatu berriro."
+          }
         }
       }
     },
@@ -20572,6 +20596,12 @@
             "value" : "Lesezeichen"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laster-markak"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20587,6 +20617,12 @@
             "state" : "translated",
             "value" : "Einen Beitrag verfassen"
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idatzi bidalketa bat"
+          }
         }
       }
     },
@@ -20597,6 +20633,12 @@
             "state" : "translated",
             "value" : "Einen Beitrag für Mastodon verfassen"
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Idatzi bidalketa bat Mastodonerako"
+          }
         }
       }
     },
@@ -20606,6 +20648,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inhalt des Beitrags, der an Mastodon gesendet werden soll"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonera bidaliko den bidalketaren edukia"
           }
         }
       }
@@ -26544,6 +26592,12 @@
             "value" : "Erkunden & Trends"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arakatu & Joerak"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28584,6 +28638,12 @@
             "value" : "Favoriten"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gogokoak"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28598,6 +28658,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Föderierte Timeline"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denbora-lerro federatua"
           }
         },
         "zh-Hans" : {
@@ -30878,6 +30944,12 @@
             "value" : "Gefolgte Tags"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jarraitutako traolak"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30893,6 +30965,12 @@
             "state" : "translated",
             "value" : "Nur Leute, die dir folgen"
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jarraitzaileak bakarrik"
+          }
         }
       }
     },
@@ -30902,6 +30980,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eigene Timeline"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hasierako denbora-lerroa"
           }
         },
         "zh-Hans" : {
@@ -30920,6 +31004,12 @@
             "value" : "Bild"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Irudia"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30934,6 +31024,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bild zum Veröffentlichen auf Mastodon"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonen argitaratzeko irudia"
           }
         },
         "zh-Hans" : {
@@ -33226,6 +33322,12 @@
             "value" : "Listen"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zerrendak"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34195,6 +34297,12 @@
             "value" : "Lokale Timeline"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Denbora-lerro lokala"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34209,6 +34317,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erwähnungen"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aipamenak"
           }
         },
         "zh-Hans" : {
@@ -34936,6 +35050,12 @@
             "value" : "Neuer Beitrag"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidalketa berria"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34950,6 +35070,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Benachrichtigungen"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jakinarazpenak"
           }
         },
         "zh-Hans" : {
@@ -40049,6 +40175,12 @@
             "value" : "Ice Cubes öffnen"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ireki Ice Cubes"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40065,6 +40197,12 @@
             "value" : "Mit einem Tab öffnen"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ireki erlaitz batean"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40079,6 +40217,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Die App in einem vorgegebenen Tab öffnen"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ireki aplikazioa erlaitz zehatz batean"
           }
         },
         "zh-Hans" : {
@@ -40334,6 +40478,12 @@
             "value" : "Einen Status veröffentlichen"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu egoera bat"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40349,6 +40499,12 @@
             "state" : "translated",
             "value" : "Einen Status mit einem Bild veröffentlichen"
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu egoera bat irudi batekin"
+          }
         }
       }
     },
@@ -40358,6 +40514,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ein Bild auf Mastodon veröffentlichen"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu irudi bat Mastodonen"
           }
         },
         "zh-Hans" : {
@@ -40374,6 +40536,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Inhalt veröffentlichen"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu edukia"
           }
         },
         "zh-Hans" : {
@@ -40393,6 +40561,12 @@
             "value" : "Bilder veröffentlichen"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu irudiak"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40410,6 +40584,12 @@
             "value" : "Status auf Mastodon veröffentlichen"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu egoera Mastodonen"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40425,6 +40605,12 @@
             "state" : "translated",
             "value" : "Sichtbarkeit des Beitrags"
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidalketaren ikusgaitasuna"
+          }
         }
       }
     },
@@ -40435,6 +40621,12 @@
             "state" : "translated",
             "value" : "Privat"
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pribatua"
+          }
         }
       }
     },
@@ -40444,6 +40636,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Private Nachrichten"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mezu pribatuak"
           }
         },
         "zh-Hans" : {
@@ -40462,6 +40660,12 @@
             "value" : "Profil"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profila"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40477,6 +40681,12 @@
             "state" : "translated",
             "value" : "Öffentlich"
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publikoa"
+          }
         }
       }
     },
@@ -40486,6 +40696,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Still öffentlich"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zerrendatu gabea"
           }
         }
       }
@@ -40972,6 +41188,12 @@
             "value" : "Ausgewählter Tab"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hautatutako erlaitza"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40987,6 +41209,12 @@
             "state" : "translated",
             "value" : "Einen Beitrag senden"
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidali bidalketa bat"
+          }
         }
       }
     },
@@ -40996,6 +41224,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einen Textbeitrag mit Ice Cubes an Mastodon senden"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidali Mastodonen argitaratzeko testu bat Ice Cubes bidez"
           }
         }
       }
@@ -41007,6 +41241,12 @@
             "state" : "translated",
             "value" : "Beitrag an Mastodon senden"
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidali bidalketa Mastodonera"
+          }
         }
       }
     },
@@ -41016,6 +41256,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Einstellungen"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ezarpenak"
           }
         },
         "zh-Hans" : {
@@ -75107,6 +75353,12 @@
             "value" : "Tab"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erlaitza"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -75982,8 +76234,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
+            "state" : "translated",
+            "value" : "Profila (%@)"
           }
         },
         "fr" : {
@@ -80795,6 +81047,12 @@
             "value" : "Links im Trend"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gori-gorian dauden estekak"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -80809,6 +81067,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Timeline im Trend"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Joeren denbora-lerroa"
           }
         },
         "zh-Hans" : {
@@ -81185,6 +81449,12 @@
             "state" : "translated",
             "value" : "Ice Cubes verwenden, um einen Beitrag für Mastodon zu verfassen"
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erabili Ice Cubes Mastodonerako bidalketa bat idazteko"
+          }
         }
       }
     },
@@ -81194,6 +81464,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ice Cubes verwenden, um einen Beitrag mit einem Bild für Mastodon zu verfassen"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erabili Ice Cubes irudi bat duen Mastodonerako bidalketa bat idazteko"
           }
         }
       }
@@ -81205,6 +81481,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ice Cubes benutzen, um einen Status auf Mastodon zu veröffentlichen"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erabili Ice Cubes Mastodonen egoera bat argitaratzeko"
           }
         },
         "zh-Hans" : {
@@ -81224,6 +81506,12 @@
             "value" : "Ice Cubes benutzen, um einen Status mit einem Bild auf Mastodon zu veröffentlichen"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erabili Ice Cubes irudi bat duen Mastodonerako bidalketa bat argitaratzeko"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -81239,6 +81527,12 @@
             "state" : "translated",
             "value" : "Sichtbarkeit"
           }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ikusgaitasuna"
+          }
         }
       }
     },
@@ -81248,6 +81542,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sichtbarkeit deines Beitrags"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zure bidalketaren ikusgaitasuna"
           }
         }
       }
