@@ -109,7 +109,7 @@ struct TranslationSettingsView: View {
        !apiKey.isEmpty
     {
       Section {
-        Text("settings.translation.api-key-still-stored")
+        Text("The DeepL API Key is still stored!")
         if preferences.preferredTranslationType == .useServerIfPossible {
           Text("It can however still be used as a fallback for your instance's translation service.")
         }

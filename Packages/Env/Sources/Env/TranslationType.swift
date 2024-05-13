@@ -8,7 +8,7 @@ public enum TranslationType: String, CaseIterable {
   public var description: LocalizedStringKey {
     switch self {
     case .useServerIfPossible:
-      "enum.translation-type.use-server-if-possible"
+      "Instance"
     case .useDeepl:
       "DeepL"
     case .useApple:

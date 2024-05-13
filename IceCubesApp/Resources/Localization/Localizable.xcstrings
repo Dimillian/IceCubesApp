@@ -20424,40 +20424,6 @@
         }
       }
     },
-    "alert.translation-error.deepl" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DeepL konnte nicht erreicht werden!\nIst der API-Schlüssel korrekt?"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "DeepL couldn't be reached!\nIs the API Key correct?"
-          }
-        }
-      }
-    },
-    "alert.translation-error.instance" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Der Übersetzung-Service deiner Instanz konnte nicht erreicht werden!"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The Translation Service of your Instance couldn't be reached!"
-          }
-        }
-      }
-    },
     "An error occured while posting to Mastodon, please try again." : {
       "localizations" : {
         "de" : {
@@ -22174,6 +22140,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DeepL API Pro"
+          }
+        }
+      }
+    },
+    "DeepL couldn't be reached!\nIs the API Key correct?" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL konnte nicht erreicht werden! Ist der API-Schlüssel korrekt?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL couldn't be reached!\nIs the API Key correct?"
           }
         }
       }
@@ -26310,23 +26293,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "圖文"
-          }
-        }
-      }
-    },
-    "enum.translation-type.use-server-if-possible" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Instanz"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Instance"
           }
         }
       }
@@ -30974,6 +30940,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "向 Mastodon 发布的图片"
+          }
+        }
+      }
+    },
+    "Instance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instanz"
           }
         }
       }
@@ -60051,22 +60028,6 @@
         }
       }
     },
-    "settings.translation.api-key-still-stored" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Der DeepL-API-Schlüssel ist noch gespeichert!"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The DeepL API Key is still stored!"
-          }
-        }
-      }
-    },
     "settings.translation.api-key-type" : {
       "localizations" : {
         "be" : {
@@ -76921,6 +76882,28 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "The DeepL API Key is still stored!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der DeepL-API-Schlüssel ist noch gespeichert!"
+          }
+        }
+      }
+    },
+    "The Translation Service of your Instance couldn't be reached!" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Der Übersetzung-Service deiner Instanz konnte nicht erreicht werden!"
           }
         }
       }

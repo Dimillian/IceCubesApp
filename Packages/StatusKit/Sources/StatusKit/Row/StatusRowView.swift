@@ -233,14 +233,14 @@ public struct StatusRowView: View {
       StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,
                                                          client: viewModel.client)
     )
-    .alert("alert.translation-error.deepl", isPresented: $viewModel.deeplTranslationError) {
+    .alert("DeepL couldn't be reached!\nIs the API Key correct?", isPresented: $viewModel.deeplTranslationError) {
       Button("alert.button.ok", role: .cancel) {}
       Button("settings.general.translate") {
         RouterPath.settingsStartingPoint = .translation
         routerPath.presentedSheet = .settings
       }
     }
-    .alert("alert.translation-error.instance", isPresented: $viewModel.instanceTranslationError) {
+    .alert("The Translation Service of your Instance couldn't be reached!", isPresented: $viewModel.instanceTranslationError) {
       Button("alert.button.ok", role: .cancel) {}
       Button("settings.general.translate") {
         RouterPath.settingsStartingPoint = .translation
