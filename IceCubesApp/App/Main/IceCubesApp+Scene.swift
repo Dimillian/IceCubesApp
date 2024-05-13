@@ -100,6 +100,7 @@ extension IceCubesApp {
         }
       }
       .withEnvironments()
+      .environment(RouterPath())
       .withModelContainer()
       .applyTheme(theme)
       .frame(minWidth: 300, minHeight: 400)
