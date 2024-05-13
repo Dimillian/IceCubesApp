@@ -40,6 +40,8 @@ import SwiftUI
       }
     }
   }
+  var deeplTranslationError = false
+  var instanceTranslationError = false
 
   private(set) var actionsAccountsFetched: Bool = false
   var favoriters: [Account] = []
@@ -316,21 +318,21 @@ import SwiftUI
       isLoadingTranslation = true
     }
     if preferredTranslationType != .useDeepl {
-      do {
-        // We first use instance translation API if available.
-        let translation: Translation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
+        let translation: Translation? = try? await client.post(endpoint: Statuses.translate(id: finalStatus.id,
                                                                                           lang: userLang))
         withAnimation {
-          self.translation = translation
-          isLoadingTranslation = false
+            self.translation = translation
+            isLoadingTranslation = false
         }
-
-        return
-      } catch {}
+      if translation == nil {
+        instanceTranslationError = true
+      }
+    } else {
+      await translateWithDeepL(userLang: userLang)
+      if translation == nil {
+        deeplTranslationError = true
+      }
     }
-
-    // If not or fail we use Ice Cubes own DeepL client.
-    await translateWithDeepL(userLang: userLang)
   }
 
   func translateWithDeepL(userLang: String) async {

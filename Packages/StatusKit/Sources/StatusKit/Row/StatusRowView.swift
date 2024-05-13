@@ -28,6 +28,7 @@ public struct StatusRowView: View {
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.indentationLevel) private var indentationLevel
+  @Environment(RouterPath.self) private var routerPath: RouterPath
 
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
@@ -232,6 +233,20 @@ public struct StatusRowView: View {
       StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,
                                                          client: viewModel.client)
     )
+    .alert("alert.translation-error.deepl", isPresented: $viewModel.deeplTranslationError) {
+      Button("alert.button.ok", role: .cancel) {}
+      Button("settings.general.translate") {
+        RouterPath.settingsStartingPoint = .translation
+        routerPath.presentedSheet = .settings
+      }
+    }
+    .alert("alert.translation-error.instance", isPresented: $viewModel.instanceTranslationError) {
+      Button("alert.button.ok", role: .cancel) {}
+      Button("settings.general.translate") {
+        RouterPath.settingsStartingPoint = .translation
+        routerPath.presentedSheet = .settings
+      }
+    }
     #if canImport(_Translation_SwiftUI)
     .addTranslateView(isPresented: $viewModel.showAppleTranslation, text: viewModel.finalStatus.content.asRawText)
     #endif

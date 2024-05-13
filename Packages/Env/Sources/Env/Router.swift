@@ -115,6 +115,18 @@ public enum SheetDestination: Identifiable, Hashable {
   }
 }
 
+public enum SettingsStartingPoint {
+  case display
+  case haptic
+  case remoteTimelines
+  case tagGroups
+  case recentTags
+  case content
+  case swipeActions
+  case tabAndSidebarEntries
+  case translation
+}
+
 @MainActor
 @Observable public class RouterPath {
   public var client: Client?
@@ -122,6 +134,8 @@ public enum SheetDestination: Identifiable, Hashable {
 
   public var path: [RouterDestination] = []
   public var presentedSheet: SheetDestination?
+
+  public static var settingsStartingPoint: SettingsStartingPoint? = nil
 
   public init() {}
 
