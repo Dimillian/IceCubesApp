@@ -315,29 +315,35 @@ import SwiftUI
       return
     }
 
-    withAnimation {
-      isLoadingTranslation = true
-    }
     if preferredTranslationType != .useDeepl {
-      let translation: Translation? = try? await client.post(endpoint: Statuses.translate(id: finalStatus.id,
-                                                                                          lang: userLang))
-
+      await translateWithInstance(userLang: userLang)
+      
       if translation == nil {
         await translateWithDeepL(userLang: userLang)
-      } else {
-        withAnimation {
-          self.translation = translation
-          isLoadingTranslation = false
-        }
-      }
-
-      if self.translation == nil {
-        instanceTranslationError = true
       }
     } else {
       await translateWithDeepL(userLang: userLang)
+      
       if translation == nil {
+        await translateWithInstance(userLang: userLang)
+      }
+    }
+    
+    var hasShown = false
+#if canImport(_Translation_SwiftUI)
+    if translation == nil,
+       #available(iOS 17.4, *) {
+      showAppleTranslation = true
+      hasShown = true
+    }
+#endif
+    
+    if !hasShown,
+       translation == nil {
+      if preferredTranslationType == .useDeepl {
         deeplTranslationError = true
+      } else {
+        instanceTranslationError = true
       }
     }
   }
@@ -350,6 +356,20 @@ import SwiftUI
     let deepLClient = getDeepLClient()
     let translation = try? await deepLClient.request(target: userLang,
                                                      text: finalStatus.content.asRawText)
+    withAnimation {
+      self.translation = translation
+      isLoadingTranslation = false
+    }
+  }
+  
+  func translateWithInstance(userLang: String) async {
+    withAnimation {
+      isLoadingTranslation = true
+    }
+
+    let translation: Translation? = try? await client.post(endpoint: Statuses.translate(id: finalStatus.id,
+                                                                                        lang: userLang))
+
     withAnimation {
       self.translation = translation
       isLoadingTranslation = false
