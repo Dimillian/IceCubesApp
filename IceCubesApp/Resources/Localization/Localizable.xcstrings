@@ -32598,7 +32598,15 @@
       }
     },
     "Key" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schlüssel"
+          }
+        }
+      }
     },
     "list.edit.isExclusive" : {
       "extractionState" : "manual",
@@ -60762,8 +60770,8 @@
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Für diese Funktion ist ein DeepL-API-Schlüssel erforderlich."
+            "state" : "translated",
+            "value" : "Für diese Funktion ist ein DeepL-API-Schlüssel erforderlich"
           }
         },
         "en" : {
