@@ -61,7 +61,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
           _ = text.removeLast()
           _ = text.removeLast()
         }
-        asRawText = (try? Entities.unescape(text)) ?? ""
+        asRawText = (try? Entities.unescape(text)) ?? text
 
         if asMarkdown.hasPrefix("\n") {
           _ = asMarkdown.removeFirst()
