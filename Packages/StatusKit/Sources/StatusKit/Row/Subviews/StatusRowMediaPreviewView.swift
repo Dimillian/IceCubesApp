@@ -258,6 +258,7 @@ struct AltTextButton: View {
   @Environment(Theme.self) private var theme
 
   @State private var isDisplayingAlert = false
+  @State private var isDisplayingTranslation = false
 
   var body: some View {
     if !isInCaptureMode,
@@ -278,6 +279,9 @@ struct AltTextButton: View {
       .buttonStyle(.borderless)
       .padding(EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7))
       .background(.thinMaterial)
+      #if canImport(_Translation_SwiftUI)
+      .addTranslateView(isPresented: $isDisplayingTranslation, text: text)
+      #endif
       #if os(visionOS)
         .clipShape(Capsule())
       #endif
@@ -289,6 +293,11 @@ struct AltTextButton: View {
         ) {
           Button("alert.button.ok", action: {})
           Button("status.action.copy-text", action: { UIPasteboard.general.string = text })
+          #if canImport(_Translation_SwiftUI)
+          if #available(iOS 17.4, *) {
+            Button("status.action.translate", action: { isDisplayingTranslation = true })
+          }
+          #endif
         } message: {
           Text(text)
         }
