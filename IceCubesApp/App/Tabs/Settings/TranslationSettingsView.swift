@@ -52,7 +52,7 @@ struct TranslationSettingsView: View {
   @ViewBuilder
   private var translationSelector: some View {
     @Bindable var preferences = preferences
-    Picker("settings.translation.preferred-translation-type", selection: $preferences.preferredTranslationType) {
+    Picker("Translation Service", selection: $preferences.preferredTranslationType) {
       ForEach(allTTCases, id: \.self) { type in
         Text(type.description).tag(type)
       }

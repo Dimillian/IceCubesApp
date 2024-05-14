@@ -60864,22 +60864,6 @@
         }
       }
     },
-    "settings.translation.preferred-translation-type" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Übersetzungs-Service"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Translation Service"
-          }
-        }
-      }
-    },
     "settings.translation.user-api-key" : {
       "localizations" : {
         "be" : {
@@ -81035,6 +81019,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "TimelineFilter"
+          }
+        }
+      }
+    },
+    "Translation Service" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Translation Service"
           }
         }
       }
