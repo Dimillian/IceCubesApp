@@ -273,22 +273,4 @@ import SwiftUI
   func statusDidAppear(status _: Models.Status) {}
 
   func statusDidDisappear(status _: Status) {}
-
-  func translate(userLang: String) async {
-    guard let account else { return }
-    withAnimation {
-      isLoadingTranslation = true
-    }
-
-    let userAPIKey = DeepLUserAPIHandler.readKeyIfAllowed()
-    let userAPIFree = UserPreferences.shared.userDeeplAPIFree
-    let deeplClient = DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIFree)
-
-    let translation = try? await deeplClient.request(target: userLang, text: account.note.asRawText)
-
-    withAnimation {
-      self.translation = translation
-      isLoadingTranslation = false
-    }
-  }
 }

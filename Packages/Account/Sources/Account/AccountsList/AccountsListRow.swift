@@ -32,6 +32,7 @@ public struct AccountsListRow: View {
 
   @State private var isEditingRelationshipNote: Bool = false
   @State private var showBlockConfirmation: Bool = false
+  @State private var showTranslateView: Bool = false
 
   let isFollowRequest: Bool
   let requestUpdated: (() -> Void)?
@@ -108,8 +109,13 @@ public struct AccountsListRow: View {
     .onTapGesture {
       routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.account))
     }
+    #if canImport(_Translation_SwiftUI)
+    .addTranslateView(isPresented: $showTranslateView, text: viewModel.account.note.asRawText)
+    #endif
     .contextMenu {
-      AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, viewModel: .init(account: viewModel.account))
+      AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, 
+                               showTranslateView: $showTranslateView,
+                               viewModel: .init(account: viewModel.account))
     } preview: {
       List {
         AccountDetailHeaderView(viewModel: .init(account: viewModel.account),

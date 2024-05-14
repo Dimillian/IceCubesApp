@@ -33,7 +33,7 @@ struct MentionsWidgetProvider: AppIntentTimelineProvider {
                           oauthToken: configuration.account.account.oauthToken)
       var excludedTypes = Models.Notification.NotificationType.allCases
       excludedTypes.removeAll(where: { $0 == .mention })
-      var notifications: [Models.Notification] =
+      let notifications: [Models.Notification] =
         try await client.get(endpoint: Notifications.notifications(minId: nil,
                                                                    maxId: nil,
                                                                    types: excludedTypes.map(\.rawValue),

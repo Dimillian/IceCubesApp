@@ -24,6 +24,7 @@ public struct AccountDetailView: View {
   @State private var isCurrentUser: Bool = false
   @State private var showBlockConfirmation: Bool = false
   @State private var isEditingRelationshipNote: Bool = false
+  @State private var showTranslateView: Bool = false
 
   @State private var displayTitle: Bool = false
 
@@ -285,7 +286,9 @@ public struct AccountDetailView: View {
       }
 
       Menu {
-        AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, viewModel: viewModel)
+        AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, 
+                                 showTranslateView: $showTranslateView,
+                                 viewModel: viewModel)
 
         if !viewModel.isCurrentUser {
           Button {
@@ -380,6 +383,9 @@ public struct AccountDetailView: View {
       } message: {
         Text("account.action.block-user-confirmation")
       }
+      #if canImport(_Translation_SwiftUI)
+      .addTranslateView(isPresented: $showTranslateView, text: viewModel.account?.note.asRawText ?? "")
+      #endif
     }
   }
 }

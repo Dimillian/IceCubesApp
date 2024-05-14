@@ -9,6 +9,7 @@ public struct AccountDetailContextMenu: View {
   @Environment(UserPreferences.self) private var preferences
 
   @Binding var showBlockConfirmation: Bool
+  @Binding var showTranslateView: Bool
 
   var viewModel: AccountDetailViewModel
 
@@ -136,15 +137,15 @@ public struct AccountDetailContextMenu: View {
           #endif
         }
 
-        if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier {
-          Button {
-            Task {
-              await viewModel.translate(userLang: lang)
+        #if canImport(_Translation_SwiftUI)
+            if #available(iOS 17.4, *) {
+              Button {
+                showTranslateView = true
+              } label: {
+                Label("status.action.translate", systemImage: "captions.bubble")
+              }
             }
-          } label: {
-            Label("status.action.translate", systemImage: "captions.bubble")
-          }
-        }
+        #endif
 
         if viewModel.relationship?.following == true {
           Button {
