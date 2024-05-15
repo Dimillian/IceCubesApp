@@ -35,8 +35,11 @@ extension StatusEditor {
                       text: $imageDescription,
                       axis: .vertical)
               .focused($isFieldFocused)
-            generateButton
-            translateButton
+            if imageDescription.isEmpty {
+              generateButton
+            } else {
+              translateButton
+            }
           }
           .listRowBackground(theme.primaryBackgroundColor)
           Section {
@@ -113,8 +116,7 @@ extension StatusEditor {
             if let description = await generateDescription(url: url) {
               imageDescription = description
               #if canImport(_Translation_SwiftUI)
-              let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
-              if #available(iOS 17.4, *), lang != nil, lang != "en", DeepLUserAPIHandler.readKey().isEmpty == false {
+              if #available(iOS 17.4, *) {
                 withAnimation {
                   showTranslateButton = true
                 }
