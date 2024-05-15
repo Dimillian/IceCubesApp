@@ -23,7 +23,6 @@ extension StatusEditor {
     @State private var didAppear: Bool = false
     @State private var isGeneratingDescription: Bool = false
 
-    @State private var showTranslateButton: Bool = false
     @State private var showTranslateView: Bool = false
     @State private var isTranslating: Bool = false
 
@@ -37,9 +36,12 @@ extension StatusEditor {
               .focused($isFieldFocused)
             if imageDescription.isEmpty {
               generateButton
-            } else {
+            }
+            #if canImport(_Translation_SwiftUI)
+            if #available(iOS 17.4, *), !imageDescription.isEmpty {
               translateButton
             }
+            #endif
           }
           .listRowBackground(theme.primaryBackgroundColor)
           Section {
@@ -115,13 +117,6 @@ extension StatusEditor {
           Task {
             if let description = await generateDescription(url: url) {
               imageDescription = description
-              #if canImport(_Translation_SwiftUI)
-              if #available(iOS 17.4, *) {
-                withAnimation {
-                  showTranslateButton = true
-                }
-              }
-              #endif
             }
           }
         } label: {
@@ -136,20 +131,18 @@ extension StatusEditor {
 
     @ViewBuilder
     private var translateButton: some View {
-      if showTranslateButton {
-        Button {
-          showTranslateView = true
-        } label: {
-          if isTranslating {
-            ProgressView()
-          } else {
-            Text("status.action.translate")
-          }
+      Button {
+        showTranslateView = true
+      } label: {
+        if isTranslating {
+          ProgressView()
+        } else {
+          Text("status.action.translate")
         }
-        #if canImport(_Translation_SwiftUI)
-        .addTranslateView(isPresented: $showTranslateView, text: imageDescription)
-        #endif
       }
+      #if canImport(_Translation_SwiftUI)
+      .addTranslateView(isPresented: $showTranslateView, text: imageDescription)
+      #endif
     }
 
     private func generateDescription(url: URL) async -> String? {
