@@ -29,7 +29,7 @@ struct AccountSettingsView: View {
     Form {
       Section {
         Button {
-          routerPath.presentedSheet = .accountFiltersList
+          routerPath.presentedSheet = .accountEditInfo
         } label: {
           Label("account.action.edit-info", systemImage: "pencil")
             .frame(maxWidth: .infinity, alignment: .leading)
