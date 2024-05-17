@@ -8,5 +8,6 @@ struct IceCubesAppWidgetsExtensionBundle: WidgetBundle {
     HashtagPostsWidget()
     ListsPostWidget()
     MentionsWidget()
+    AccountWidget()
   }
 }
