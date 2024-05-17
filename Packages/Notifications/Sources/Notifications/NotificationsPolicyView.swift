@@ -47,7 +47,7 @@ struct NotificationsPolicyView: View {
             })
         }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor.opacity(0.3))
         #endif
       }
       .formStyle(.grouped)
