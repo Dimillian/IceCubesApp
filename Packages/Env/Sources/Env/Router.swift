@@ -134,13 +134,17 @@ public enum SettingsStartingPoint {
 
   public var path: [RouterDestination] = []
   public var presentedSheet: SheetDestination?
+    public var currentDestination: RouterDestination?
 
   public static var settingsStartingPoint: SettingsStartingPoint? = nil
 
   public init() {}
 
   public func navigate(to: RouterDestination) {
-    path.append(to)
+      if currentDestination != to {
+          path.append(to)
+          currentDestination = to
+      }
   }
 
   public func handleStatus(status: AnyStatus, url: URL) -> OpenURLAction.Result {
