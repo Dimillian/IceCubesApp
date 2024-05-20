@@ -27,25 +27,6 @@ public enum RouterDestination: Hashable {
   case notificationForAccount(accountId: String)
   case blockedAccounts
   case mutedAccounts
-
-  public static func == (lhs: RouterDestination, rhs: RouterDestination) -> Bool {
-    switch (lhs, rhs) {
-    case (.hashTag(let lhsTag, let lhsAccount), .hashTag(let rhsTag, let rhsAccount)):
-      return lhsTag.caseInsensitiveCompare(rhsTag) == .orderedSame && lhsAccount == rhsAccount
-    default:
-      return lhs.hashValue == rhs.hashValue
-    }
-  }
-
-  public func hash(into hasher: inout Hasher) {
-    switch self {
-    case .hashTag(let tag, let account):
-      hasher.combine(tag.lowercased())
-      hasher.combine(account?.lowercased())
-    default:
-      hasher.combine(hashValue)
-    }
-  }
 }
 
 
@@ -161,12 +142,15 @@ public enum SettingsStartingPoint {
   public init() {}
 
   public func navigate(to: RouterDestination) {
+    if case .hashTag(let newTag, let newAccount) = to,
+       let currentDest = currentDestination,
+       case .hashTag(let currentTag, let currentAccount) = currentDest,
+       newTag.caseInsensitiveCompare(currentTag) == .orderedSame,
+       newAccount?.caseInsensitiveCompare(currentAccount ?? "") == .orderedSame {
+      return
+    }
+    
     if currentDestination != to {
-      if case .hashTag(let newTag, _) = to, let currentDest = currentDestination, case .hashTag(let currentTag, _) = currentDest {
-        if newTag.caseInsensitiveCompare(currentTag) == .orderedSame {
-          return
-        }
-      }
       path.append(to)
       currentDestination = to
     }
