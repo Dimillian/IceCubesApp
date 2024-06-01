@@ -326,6 +326,12 @@
             "state" : "translated",
             "value" : "%@"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
         }
       }
     },
@@ -701,6 +707,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ Mastodonen argitaratu da"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Mastodon'da yayınlandı"
           }
         }
       }
@@ -8917,6 +8929,12 @@
             "state" : "translated",
             "value" : "Kontua"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hesap"
+          }
         }
       }
     },
@@ -11628,8 +11646,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Blocked accounts"
+            "state" : "translated",
+            "value" : "Engellenen Hesaplar"
           }
         },
         "uk" : {
@@ -17472,8 +17490,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Muted accounts"
+            "state" : "translated",
+            "value" : "Sessize alınmış hesaplar"
           }
         },
         "uk" : {
@@ -20479,6 +20497,12 @@
             "state" : "translated",
             "value" : "Errorea gertatu da Mastodonen argitaratzean, saiatu berriro."
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'a gönderim yapılırken bir hata oluştu, lütfen tekrar deneyin."
+          }
         }
       }
     },
@@ -20615,6 +20639,12 @@
             "state" : "translated",
             "value" : "AppAccount"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uygulama Hesabı"
+          }
         }
       }
     },
@@ -20636,6 +20666,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laster-markak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sık Kullanılanlar"
           }
         },
         "zh-Hans" : {
@@ -20665,6 +20701,12 @@
             "state" : "translated",
             "value" : "Idatzi bidalketa bat"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gönderi oluştur"
+          }
         }
       }
     },
@@ -20687,6 +20729,12 @@
             "state" : "translated",
             "value" : "Idatzi bidalketa bat Mastodonerako"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'a bir gönderi yazın"
+          }
         }
       }
     },
@@ -20708,6 +20756,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mastodonera bidaliko den bidalketaren edukia"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'a gönderilecek gönderinin içeriği"
           }
         }
       }
@@ -22265,6 +22319,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "¡No se ha podido conectar con DeepL! ¿Es esta la clave de la API correcta?"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL'e ulaşılamadı!\nAPI Anahtarı doğru mu?"
           }
         }
       }
@@ -26664,6 +26724,12 @@
             "value" : "Arakatu & Joerak"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keşfet &Trend Olanlar"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28716,6 +28782,12 @@
             "value" : "Gogokoak"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoriler"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28742,6 +28814,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Denbora-lerro federatua"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birleşik Zaman Çizelgesi"
           }
         },
         "zh-Hans" : {
@@ -31034,6 +31112,12 @@
             "value" : "Jarraitutako traolak"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takip Edilen Etiketler"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31061,6 +31145,12 @@
             "state" : "translated",
             "value" : "Jarraitzaileak bakarrik"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yalnızca Takipçiler"
+          }
         }
       }
     },
@@ -31082,6 +31172,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hasierako denbora-lerroa"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anasayfa "
           }
         },
         "zh-Hans" : {
@@ -31112,6 +31208,12 @@
             "value" : "Irudia"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Görsel"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31140,6 +31242,12 @@
             "value" : "Mastodonen argitaratzeko irudia"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'da yayınlanacak resim"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31161,6 +31269,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instancia"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Örnek"
           }
         }
       }
@@ -32714,6 +32828,12 @@
             "state" : "translated",
             "value" : "Sin embargo, aún se puede utilizar como alternativa para el servicio de traducción de su instancia."
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ancak yine de örneğinizin çeviri hizmeti için bir yedek olarak kullanılabilir."
+          }
         }
       }
     },
@@ -32724,6 +32844,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clave"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anahtar"
           }
         }
       }
@@ -33460,6 +33586,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zerrendak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listeler"
           }
         },
         "zh-Hans" : {
@@ -34443,6 +34575,12 @@
             "value" : "Denbora-lerro lokala"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yerel Zaman Çizelgesi"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34469,6 +34607,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aipamenak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bahsetmeler"
           }
         },
         "zh-Hans" : {
@@ -35327,6 +35471,12 @@
             "value" : "Bidalketa berria"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni ileti"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35353,6 +35503,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jakinarazpenak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bildirimler"
           }
         },
         "zh-Hans" : {
@@ -40464,6 +40620,12 @@
             "value" : "Ireki Ice Cubes"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ice Cubes Aç"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40492,6 +40654,12 @@
             "value" : "Ireki erlaitz batean"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir sekmede aç"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40518,6 +40686,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ireki aplikazioa erlaitz zehatz batean"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uygulamayı belirli bir sekmede açın"
           }
         },
         "zh-Hans" : {
@@ -40779,6 +40953,12 @@
             "value" : "Argitaratu egoera bat"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir durum gönder"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40806,6 +40986,12 @@
             "state" : "translated",
             "value" : "Argitaratu egoera bat irudi batekin"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resim ile bir durum gönder"
+          }
         }
       }
     },
@@ -40827,6 +41013,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Argitaratu irudi bat Mastodonen"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'a bir resim gönder"
           }
         },
         "zh-Hans" : {
@@ -40857,6 +41049,12 @@
             "value" : "Argitaratu edukia"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İçerik gönder"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40880,6 +41078,12 @@
             "value" : "Argitaratu irudiak"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resimleri gönder"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40901,6 +41105,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Argitaratu egoera Mastodonen"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durumu Mastodon'a gönder"
           }
         },
         "zh-Hans" : {
@@ -40930,6 +41140,12 @@
             "state" : "translated",
             "value" : "Bidalketaren ikusgaitasuna"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gönderi görünürlüğü"
+          }
         }
       }
     },
@@ -40952,6 +41168,12 @@
             "state" : "translated",
             "value" : "Pribatua"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Özel"
+          }
         }
       }
     },
@@ -40973,6 +41195,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mezu pribatuak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Özel Mesajlar"
           }
         },
         "zh-Hans" : {
@@ -41003,6 +41231,12 @@
             "value" : "Profila"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41030,6 +41264,12 @@
             "state" : "translated",
             "value" : "Publikoa"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herkese Açık"
+          }
         }
       }
     },
@@ -41051,6 +41291,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zerrendatu gabea"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oldukça Açık"
           }
         }
       }
@@ -41549,6 +41795,12 @@
             "value" : "Hautatutako erlaitza"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seçilen sekme"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41576,6 +41828,12 @@
             "state" : "translated",
             "value" : "Bidali bidalketa bat"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post gönder"
+          }
         }
       }
     },
@@ -41597,6 +41855,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidali Mastodonen argitaratzeko testu bat Ice Cubes bidez"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ice cubes ile Mastodon'a kısa mesaj gönder"
           }
         }
       }
@@ -41620,6 +41884,12 @@
             "state" : "translated",
             "value" : "Bidali bidalketa Mastodonera"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gönderiyi Mastodon'a gönder"
+          }
         }
       }
     },
@@ -41641,6 +41911,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ezarpenak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayarlar"
           }
         },
         "zh-Hans" : {
@@ -61219,8 +61495,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Bu özellik bir DeepL API anahtarı gerektirir"
+            "state" : "translated",
+            "value" : "Bu özellik bir DeepL API anahtarı gerektirir."
           }
         },
         "uk" : {
@@ -75728,6 +76004,12 @@
             "value" : "Erlaitza"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sekme"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -76657,8 +76939,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
+            "state" : "translated",
+            "value" : "Profil (%@)"
           }
         },
         "uk" : {
@@ -77521,6 +77803,12 @@
             "state" : "translated",
             "value" : "¡La clave de la API de DeepL todavía está guardada!"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Anahtarı hala saklanıyor!"
+          }
         }
       }
     },
@@ -77537,6 +77825,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "¡No se ha podido conectar con el Servicio de Traducción de su Instancia!"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Örneğinizin Çeviri Hizmetine ulaşılamadı!"
           }
         }
       }
@@ -81423,6 +81717,12 @@
             "state" : "translated",
             "value" : "TimelineFilter"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zaman Çizelgesi Filtresi"
+          }
         }
       }
     },
@@ -81439,6 +81739,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Servicio de Traducción"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çeviri servisi"
           }
         }
       }
@@ -81461,6 +81767,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gori-gorian dauden estekak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trend Linkler"
           }
         },
         "zh-Hans" : {
@@ -81489,6 +81801,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Joeren denbora-lerroa"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trend Olanlar"
           }
         },
         "zh-Hans" : {
@@ -81877,6 +82195,12 @@
             "state" : "translated",
             "value" : "Erabili Ice Cubes Mastodonerako bidalketa bat idazteko"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon için bir gönderi oluşturmak için Ice Cubes kullanın"
+          }
         }
       }
     },
@@ -81899,6 +82223,12 @@
             "state" : "translated",
             "value" : "Erabili Ice Cubes irudi bat duen Mastodonerako bidalketa bat idazteko"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'da görsel içeren bir gönderi oluşturmak için Ice Cubes kullanın"
+          }
         }
       }
     },
@@ -81915,6 +82245,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erabili Ice Cubes Mastodonen egoera bat argitaratzeko"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonda durum göndermek için Ice Cubes kullanın"
           }
         },
         "zh-Hans" : {
@@ -81938,6 +82274,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erabili Ice Cubes irudi bat duen Mastodonerako bidalketa bat argitaratzeko"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'a resim içeren bir durum göndermek için Ice Cubes kullanın"
           }
         },
         "zh-Hans" : {
@@ -81967,6 +82309,12 @@
             "state" : "translated",
             "value" : "Ikusgaitasuna"
           }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Görünürlük"
+          }
         }
       }
     },
@@ -81988,6 +82336,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zure bidalketaren ikusgaitasuna"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gönderinizin görünürlüğü"
           }
         }
       }
