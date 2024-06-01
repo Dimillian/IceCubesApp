@@ -315,7 +315,19 @@
             "value" : "%@"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
         "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
+        "tr" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@"
@@ -685,10 +697,22 @@
             "value" : "%@ wurde auf Mastodon veröffentlicht"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ha sido publicado en Mastodon"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ Mastodonen argitaratu da"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ Mastodon'da yayınlandı"
           }
         }
       }
@@ -8894,10 +8918,22 @@
             "value" : "Konto"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuenta"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kontua"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hesap"
           }
         }
       }
@@ -11550,8 +11586,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : ""
+            "state" : "translated",
+            "value" : "Cuentas bloqueadas"
           }
         },
         "eu" : {
@@ -11610,8 +11646,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Blocked accounts"
+            "state" : "translated",
+            "value" : "Engellenen Hesaplar"
           }
         },
         "uk" : {
@@ -17394,8 +17430,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Muted accounts"
+            "state" : "translated",
+            "value" : "Cuentas silenciadas"
           }
         },
         "eu" : {
@@ -17454,8 +17490,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Muted accounts"
+            "state" : "translated",
+            "value" : "Sessize alınmış hesaplar"
           }
         },
         "uk" : {
@@ -20450,10 +20486,22 @@
             "value" : "Ein Fehler ist beim Veröffentlichen auf Mastodon aufgetreten, bitte versuch es noch mal."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ha ocurrido un error al publicar en Mastodon, por favor inténtalo de nuevo."
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Errorea gertatu da Mastodonen argitaratzean, saiatu berriro."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'a gönderim yapılırken bir hata oluştu, lütfen tekrar deneyin."
           }
         }
       }
@@ -20585,6 +20633,18 @@
             "state" : "translated",
             "value" : "AppAccount"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppAccount"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uygulama Hesabı"
+          }
         }
       }
     },
@@ -20596,10 +20656,22 @@
             "value" : "Lesezeichen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcadores"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laster-markak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sık Kullanılanlar"
           }
         },
         "zh-Hans" : {
@@ -20618,10 +20690,22 @@
             "value" : "Einen Beitrag verfassen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escribir una publicación"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Idatzi bidalketa bat"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gönderi oluştur"
           }
         }
       }
@@ -20634,10 +20718,22 @@
             "value" : "Einen Beitrag für Mastodon verfassen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escribir una publicación para Mastodon"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Idatzi bidalketa bat Mastodonerako"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'a bir gönderi yazın"
           }
         }
       }
@@ -20650,10 +20746,22 @@
             "value" : "Inhalt des Beitrags, der an Mastodon gesendet werden soll"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contenido de la publicación que será enviada a Mastodon"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mastodonera bidaliko den bidalketaren edukia"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'a gönderilecek gönderinin içeriği"
           }
         }
       }
@@ -22205,6 +22313,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DeepL couldn't be reached!\nIs the API Key correct?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡No se ha podido conectar con DeepL! ¿Es esta la clave de la API correcta?"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL'e ulaşılamadı!\nAPI Anahtarı doğru mu?"
           }
         }
       }
@@ -26592,10 +26712,22 @@
             "value" : "Erkunden & Trends"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explorar y Tendencias"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Arakatu & Joerak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keşfet &Trend Olanlar"
           }
         },
         "zh-Hans" : {
@@ -28638,10 +28770,22 @@
             "value" : "Favoriten"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoritos"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gogokoak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoriler"
           }
         },
         "zh-Hans" : {
@@ -28660,10 +28804,22 @@
             "value" : "Föderierte Timeline"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cronología Federada"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Denbora-lerro federatua"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Birleşik Zaman Çizelgesi"
           }
         },
         "zh-Hans" : {
@@ -30944,10 +31100,22 @@
             "value" : "Gefolgte Tags"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etiquetas Seguidas"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jarraitutako traolak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Takip Edilen Etiketler"
           }
         },
         "zh-Hans" : {
@@ -30966,10 +31134,22 @@
             "value" : "Nur Leute, die dir folgen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo Seguidores"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jarraitzaileak bakarrik"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yalnızca Takipçiler"
           }
         }
       }
@@ -30982,10 +31162,22 @@
             "value" : "Eigene Timeline"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cronología Principal"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hasierako denbora-lerroa"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anasayfa "
           }
         },
         "zh-Hans" : {
@@ -31004,10 +31196,22 @@
             "value" : "Bild"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Irudia"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Görsel"
           }
         },
         "zh-Hans" : {
@@ -31026,10 +31230,22 @@
             "value" : "Bild zum Veröffentlichen auf Mastodon"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen para publicar en Mastodon"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mastodonen argitaratzeko irudia"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'da yayınlanacak resim"
           }
         },
         "zh-Hans" : {
@@ -31047,6 +31263,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instanz"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instancia"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Örnek"
           }
         }
       }
@@ -32594,6 +32822,18 @@
             "state" : "translated",
             "value" : "Er kann aber auch als Fallback für den Übersetzungsservice deiner Instanz dienen."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin embargo, aún se puede utilizar como alternativa para el servicio de traducción de su instancia."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ancak yine de örneğinizin çeviri hizmeti için bir yedek olarak kullanılabilir."
+          }
         }
       }
     },
@@ -32604,6 +32844,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Schlüssel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clave"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anahtar"
           }
         }
       }
@@ -33330,10 +33582,22 @@
             "value" : "Listen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listas"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zerrendak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listeler"
           }
         },
         "zh-Hans" : {
@@ -34305,10 +34569,22 @@
             "value" : "Lokale Timeline"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cronología Local"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Denbora-lerro lokala"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yerel Zaman Çizelgesi"
           }
         },
         "zh-Hans" : {
@@ -34327,10 +34603,22 @@
             "value" : "Erwähnungen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menciones"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aipamenak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bahsetmeler"
           }
         },
         "zh-Hans" : {
@@ -35050,6 +35338,125 @@
         }
       }
     },
+    "menu.settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Налады ..."
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Configuració ..."
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einstellungen ..."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings ..."
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Settings ..."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ajustes ..."
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ezarpenak ..."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Réglages ..."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Impostazioni ..."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "設定 ..."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "앱 설정 ..."
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Innstillinger ..."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Instellingen ..."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ustawienia ..."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Configurações ..."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ayarlar ..."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Налаштування ..."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "设置 ..."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "設定 ..."
+          }
+        }
+      }
+    },
     "New post" : {
       "localizations" : {
         "de" : {
@@ -35058,10 +35465,22 @@
             "value" : "Neuer Beitrag"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nueva publicación"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidalketa berria"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yeni ileti"
           }
         },
         "zh-Hans" : {
@@ -35080,10 +35499,22 @@
             "value" : "Benachrichtigungen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notificaciones"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jakinarazpenak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bildirimler"
           }
         },
         "zh-Hans" : {
@@ -40183,10 +40614,22 @@
             "value" : "Ice Cubes öffnen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir Ice Cubes"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ireki Ice Cubes"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ice Cubes Aç"
           }
         },
         "zh-Hans" : {
@@ -40205,10 +40648,22 @@
             "value" : "Mit einem Tab öffnen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir en una pestaña"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ireki erlaitz batean"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir sekmede aç"
           }
         },
         "zh-Hans" : {
@@ -40227,10 +40682,22 @@
             "value" : "Die App in einem vorgegebenen Tab öffnen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir aplicación en una pestaña específica"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ireki aplikazioa erlaitz zehatz batean"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uygulamayı belirli bir sekmede açın"
           }
         },
         "zh-Hans" : {
@@ -40492,6 +40959,12 @@
             "value" : "Argitaratu egoera bat"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir durum gönder"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40508,10 +40981,22 @@
             "value" : "Einen Status mit einem Bild veröffentlichen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hacer una publicación con una imagen"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Argitaratu egoera bat irudi batekin"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resim ile bir durum gönder"
           }
         }
       }
@@ -40524,10 +41009,22 @@
             "value" : "Ein Bild auf Mastodon veröffentlichen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicar una imagen en Mastodon"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Argitaratu irudi bat Mastodonen"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'a bir resim gönder"
           }
         },
         "zh-Hans" : {
@@ -40546,10 +41043,22 @@
             "value" : "Inhalt veröffentlichen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicar contenido"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Argitaratu edukia"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İçerik gönder"
           }
         },
         "zh-Hans" : {
@@ -40575,6 +41084,12 @@
             "value" : "Argitaratu irudiak"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resimleri gönder"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40598,6 +41113,12 @@
             "value" : "Argitaratu egoera Mastodonen"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durumu Mastodon'a gönder"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40614,10 +41135,22 @@
             "value" : "Sichtbarkeit des Beitrags"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibilidad de la publicación"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidalketaren ikusgaitasuna"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gönderi görünürlüğü"
           }
         }
       }
@@ -40630,10 +41163,22 @@
             "value" : "Privat"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privado"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pribatua"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Özel"
           }
         }
       }
@@ -40646,10 +41191,22 @@
             "value" : "Private Nachrichten"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mensajes Privados"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mezu pribatuak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Özel Mesajlar"
           }
         },
         "zh-Hans" : {
@@ -40668,10 +41225,22 @@
             "value" : "Profil"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profila"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil"
           }
         },
         "zh-Hans" : {
@@ -40690,10 +41259,22 @@
             "value" : "Öffentlich"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Público"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Publikoa"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Herkese Açık"
           }
         }
       }
@@ -40706,10 +41287,22 @@
             "value" : "Still öffentlich"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Público Silencioso"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zerrendatu gabea"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oldukça Açık"
           }
         }
       }
@@ -41196,10 +41789,22 @@
             "value" : "Ausgewählter Tab"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pestaña seleccionada"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hautatutako erlaitza"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seçilen sekme"
           }
         },
         "zh-Hans" : {
@@ -41218,10 +41823,22 @@
             "value" : "Einen Beitrag senden"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar una publicación"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidali bidalketa bat"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post gönder"
           }
         }
       }
@@ -41234,10 +41851,22 @@
             "value" : "Einen Textbeitrag mit Ice Cubes an Mastodon senden"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar una publicación de texto a Mastodon con Ice Cubes"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidali Mastodonen argitaratzeko testu bat Ice Cubes bidez"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ice cubes ile Mastodon'a kısa mesaj gönder"
           }
         }
       }
@@ -41250,10 +41879,22 @@
             "value" : "Beitrag an Mastodon senden"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar publicación a Mastodon"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidali bidalketa Mastodonera"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gönderiyi Mastodon'a gönder"
           }
         }
       }
@@ -41266,10 +41907,22 @@
             "value" : "Einstellungen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ezarpenak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ayarlar"
           }
         },
         "zh-Hans" : {
@@ -60788,8 +61441,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Esta funcionalidad requiere una clave API de DeepL"
+            "state" : "translated",
+            "value" : "Esta funcionalidad requiere una clave de la API de DeepL"
           }
         },
         "eu" : {
@@ -60848,8 +61501,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Bu özellik bir DeepL API anahtarı gerektirir"
+            "state" : "translated",
+            "value" : "Bu özellik bir DeepL API anahtarı gerektirir."
           }
         },
         "uk" : {
@@ -60868,22 +61521,6 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "本功能需有 DeepL API 密鑰"
-          }
-        }
-      }
-    },
-    "settings.translation.preferred-translation-type" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Übersetzungs-Service"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Translation Service"
           }
         }
       }
@@ -75361,10 +75998,22 @@
             "value" : "Tab"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pestaña"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erlaitza"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sekme"
           }
         },
         "zh-Hans" : {
@@ -76236,8 +76885,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
+            "state" : "translated",
+            "value" : "Perfil (%@)"
           }
         },
         "eu" : {
@@ -76296,8 +76945,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
+            "state" : "translated",
+            "value" : "Profil (%@)"
           }
         },
         "uk" : {
@@ -77154,6 +77803,18 @@
             "state" : "translated",
             "value" : "Der DeepL-API-Schlüssel ist noch gespeichert!"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡La clave de la API de DeepL todavía está guardada!"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API Anahtarı hala saklanıyor!"
+          }
         }
       }
     },
@@ -77164,6 +77825,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Der Übersetzung-Service deiner Instanz konnte nicht erreicht werden!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¡No se ha podido conectar con el Servicio de Traducción de su Instancia!"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Örneğinizin Çeviri Hizmetine ulaşılamadı!"
           }
         }
       }
@@ -81044,6 +81717,47 @@
             "state" : "translated",
             "value" : "TimelineFilter"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TimelineFilter"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zaman Çizelgesi Filtresi"
+          }
+        }
+      }
+    },
+    "Translation Service" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übersetzungdienst"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Translation Service"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Servicio de Traducción"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Çeviri servisi"
+          }
         }
       }
     },
@@ -81055,10 +81769,22 @@
             "value" : "Links im Trend"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enlaces en Tendencia"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gori-gorian dauden estekak"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trend Linkler"
           }
         },
         "zh-Hans" : {
@@ -81077,10 +81803,22 @@
             "value" : "Timeline im Trend"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cronología de Tendencias"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Joeren denbora-lerroa"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trend Olanlar"
           }
         },
         "zh-Hans" : {
@@ -81458,10 +82196,22 @@
             "value" : "Ice Cubes verwenden, um einen Beitrag für Mastodon zu verfassen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usar Ice Cubes para escribir una publicación para Mastodon"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erabili Ice Cubes Mastodonerako bidalketa bat idazteko"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon için bir gönderi oluşturmak için Ice Cubes kullanın"
           }
         }
       }
@@ -81474,10 +82224,22 @@
             "value" : "Ice Cubes verwenden, um einen Beitrag mit einem Bild für Mastodon zu verfassen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usar Ice Cubes para escribir una publicación con una imagen para Mastodon"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erabili Ice Cubes irudi bat duen Mastodonerako bidalketa bat idazteko"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'da görsel içeren bir gönderi oluşturmak için Ice Cubes kullanın"
           }
         }
       }
@@ -81495,6 +82257,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erabili Ice Cubes Mastodonen egoera bat argitaratzeko"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonda durum göndermek için Ice Cubes kullanın"
           }
         },
         "zh-Hans" : {
@@ -81520,6 +82288,12 @@
             "value" : "Erabili Ice Cubes irudi bat duen Mastodonerako bidalketa bat argitaratzeko"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'a resim içeren bir durum göndermek için Ice Cubes kullanın"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -81536,10 +82310,22 @@
             "value" : "Sichtbarkeit"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibilidad"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ikusgaitasuna"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Görünürlük"
           }
         }
       }
@@ -81552,10 +82338,22 @@
             "value" : "Sichtbarkeit deines Beitrags"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibilidad de su publicación"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zure bidalketaren ikusgaitasuna"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gönderinizin görünürlüğü"
           }
         }
       }
