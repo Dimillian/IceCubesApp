@@ -4,6 +4,12 @@ import SwiftUI
 extension IceCubesApp {
   @CommandsBuilder
   var appMenu: some Commands {
+    CommandGroup(replacing: .appSettings) {
+      Button("menu.settings") {
+        appRouterPath.presentedSheet = .settings
+      }
+      .keyboardShortcut(",", modifiers: .command)
+    }
     CommandGroup(replacing: .newItem) {
       Button("menu.new-window") {
         openWindow(id: "MainWindow")
