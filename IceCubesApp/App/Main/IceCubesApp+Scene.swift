@@ -25,6 +25,7 @@ extension IceCubesApp {
         .environment(pushNotificationsService)
         .environment(appIntentService)
         .environment(\.isSupporter, isSupporter)
+        .environment(TipedUsers.shared)
         .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
           MediaUIView(selectedAttachment: selectedMediaAttachment,
                       attachments: quickLook.mediaAttachments)

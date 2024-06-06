@@ -109,6 +109,8 @@ import SwiftUI
       theme.tintColor.opacity(0.15)
     } else if userMentionned {
       theme.secondaryBackgroundColor
+    } else if TipedUsers.shared.usersIds.contains(finalStatus.account.id) {
+      .yellow.opacity(0.4)
     } else {
       theme.primaryBackgroundColor
     }

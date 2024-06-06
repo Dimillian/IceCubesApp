@@ -176,6 +176,7 @@ extension View {
       .environment(PushNotificationsService.shared)
       .environment(AppAccountsManager.shared.currentClient)
       .environment(QuickLook.shared)
+      .environment(TipedUsers.shared)
   }
 
   func withModelContainer() -> some View {
