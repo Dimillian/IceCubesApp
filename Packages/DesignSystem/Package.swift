@@ -21,6 +21,7 @@ let package = Package(
     .package(name: "Env", path: "../Env"),
     .package(url: "https://github.com/kean/Nuke", from: "12.4.0"),
     .package(url: "https://github.com/divadretlaw/EmojiText", from: "4.0.0"),
+    .package(url: "https://github.com/dkk/WrappingHStack", from: "2.2.11"),
   ],
   targets: [
     .target(
@@ -31,6 +32,7 @@ let package = Package(
         .product(name: "NukeUI", package: "Nuke"),
         .product(name: "Nuke", package: "Nuke"),
         .product(name: "EmojiText", package: "EmojiText"),
+        .product(name: "WrappingHStack", package: "WrappingHStack"),
       ],
       swiftSettings: [
         .enableExperimentalFeature("StrictConcurrency"),

@@ -22,6 +22,8 @@ struct AccountDetailHeaderView: View {
   var viewModel: AccountDetailViewModel
   let account: Account
   let scrollViewProxy: ScrollViewProxy?
+  
+  @State private var isTipSheetPresented: Bool = false
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -209,6 +211,7 @@ struct AccountDetailHeaderView: View {
             .accessibilityRespondsToUserInteraction(false)
           movedToView
           joinedAtView
+          tipView
         }
         .accessibilityElement(children: .contain)
         .accessibilitySortPriority(1)
@@ -309,6 +312,23 @@ struct AccountDetailHeaderView: View {
       .font(.footnote)
       .padding(.top, 6)
       .accessibilityElement(children: .combine)
+    }
+  }
+  
+  @ViewBuilder
+  private var tipView: some View {
+    Button {
+      isTipSheetPresented = true
+    } label: {
+      Text("$ Send tip")
+    }
+    .buttonStyle(.bordered)
+    .padding(.top, 8)
+    .padding(.bottom, 4)
+    .sheet(isPresented: $isTipSheetPresented) {
+      if let account = viewModel.account {
+        TipSheetView(account: account)
+      }
     }
   }
 
