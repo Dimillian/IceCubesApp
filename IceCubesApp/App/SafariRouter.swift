@@ -4,6 +4,7 @@ import Models
 import Observation
 import SafariServices
 import SwiftUI
+import AppAccount
 
 extension View {
   @MainActor func withSafariRouter() -> some View {
@@ -17,6 +18,7 @@ private struct SafariRouter: ViewModifier {
   @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var preferences
   @Environment(RouterPath.self) private var routerPath
+  @Environment(AppAccountsManager.self) private var appAccount
 
   #if !os(visionOS)
     @State private var safariManager = InAppSafariManager()
@@ -47,6 +49,12 @@ private struct SafariRouter: ViewModifier {
               UIApplication.shared.open(url)
               return .handled
             }
+          } else if url.host() == "social-proxy.com", let accountName = appAccount.currentAccount.accountName {
+            let newURL = url.appending(queryItems: [
+              .init(name: "callack", value: "icecubesapp"),
+              .init(name: "id", value: accountName)
+            ])
+            return safariManager.open(newURL)
           }
           #if !targetEnvironment(macCatalyst)
             guard preferences.preferredBrowser == .inAppSafari else { return .systemAction }
