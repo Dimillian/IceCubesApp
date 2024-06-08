@@ -34,6 +34,10 @@ private struct SafariRouter: ViewModifier {
       .onOpenURL { url in
         // Open external URL (from icecubesapp://)
         guard !isSecondaryColumn else { return }
+        if url.lastPathComponent == "socialproxy" {
+          safariManager.dismiss()
+          return
+        }
         let urlString = url.absoluteString.replacingOccurrences(of: AppInfo.scheme, with: "https://")
         guard let url = URL(string: urlString), url.host != nil else { return }
         _ = routerPath.handleDeepLink(url: url)
@@ -51,7 +55,7 @@ private struct SafariRouter: ViewModifier {
             }
           } else if url.host() == "social-proxy.com", let accountName = appAccount.currentAccount.accountName {
             let newURL = url.appending(queryItems: [
-              .init(name: "callack", value: "icecubesapp"),
+              .init(name: "callback", value: "icecubesapp"),
               .init(name: "id", value: accountName)
             ])
             return safariManager.open(newURL)
@@ -108,6 +112,10 @@ private struct SafariRouter: ViewModifier {
       }
 
       return .handled
+    }
+    
+    func dismiss() {
+      viewController.presentedViewController?.dismiss(animated: true)
     }
 
     func setupWindow(windowScene: UIWindowScene) -> UIWindow {
