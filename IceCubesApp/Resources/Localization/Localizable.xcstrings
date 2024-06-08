@@ -20640,6 +20640,12 @@
             "value" : "AppAccount"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppAccount"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22319,6 +22325,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "¡No se ha podido conectar con DeepL! ¿Es esta la clave de la API correcta?"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ezin izan da DeepL atzitu!\nZuzena al da API gakoa?"
           }
         },
         "tr" : {
@@ -31271,6 +31283,12 @@
             "value" : "Instancia"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instantzia"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32829,6 +32847,12 @@
             "value" : "Sin embargo, aún se puede utilizar como alternativa para el servicio de traducción de su instancia."
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hala ere zure intantziako itzulpen zerbituzaren ordezko gisa erabili daiteke."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32844,6 +32868,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clave"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gakoa"
           }
         },
         "tr" : {
@@ -35373,7 +35403,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Ezarpenak ..."
           }
         },
@@ -61441,7 +61471,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Ezaugarri honek DeepL API gako bat behar du"
           }
         },
@@ -77804,6 +77834,12 @@
             "value" : "¡La clave de la API de DeepL todavía está guardada!"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API gakoa gordeta dago oraindik ere!"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -77825,6 +77861,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "¡No se ha podido conectar con el Servicio de Traducción de su Instancia!"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ezin izan da zure instantziako itzulpen zerbitzua atzitu!"
           }
         },
         "tr" : {
@@ -81718,6 +81760,12 @@
             "value" : "TimelineFilter"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TimelineFilter"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -81739,6 +81787,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Servicio de Traducción"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Itzulpen zerbitzua"
           }
         },
         "tr" : {
