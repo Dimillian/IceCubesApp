@@ -5,9 +5,6 @@ import Foundation
 import Models
 import Network
 
-extension IntentDescription: @unchecked Sendable {}
-extension TypeDisplayRepresentation: @unchecked Sendable {}
-
 public struct AppAccountEntity: Identifiable, AppEntity {
   public var id: String { account.id }
 

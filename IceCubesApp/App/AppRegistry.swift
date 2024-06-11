@@ -228,7 +228,7 @@ struct ActivityView: UIViewControllerRepresentable {
   func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}
 }
 
-extension URL: Identifiable {
+extension URL: @retroactive Identifiable {
   public var id: String {
     absoluteString
   }

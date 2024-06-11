@@ -536,7 +536,7 @@ import SwiftUI
   }
 }
 
-extension UInt: RawRepresentable {
+extension UInt: @retroactive RawRepresentable {
   public var rawValue: Int {
     Int(self)
   }

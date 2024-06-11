@@ -32,8 +32,8 @@ struct AppShortcuts: AppShortcutsProvider {
     AppShortcut(
       intent: PostImageIntent(),
       phrases: [
-        "Post images \(\.$images) in \(.applicationName)",
-        "Send photos \(\.$images) with \(.applicationName)",
+        "Post images images in \(.applicationName)",
+        "Send photos with \(.applicationName)",
       ],
       shortTitle: "Post a status with an image",
       systemImageName: "photo"

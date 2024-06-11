@@ -8,8 +8,8 @@ import Observation
 import SwiftUI
 import UserNotifications
 
-extension UNNotificationResponse: @unchecked Sendable {}
-extension UNUserNotificationCenter: @unchecked Sendable {}
+extension UNNotificationResponse: @unchecked @retroactive Sendable {}
+extension UNUserNotificationCenter: @unchecked @retroactive Sendable {}
 
 public struct PushAccount: Equatable {
   public let server: String
