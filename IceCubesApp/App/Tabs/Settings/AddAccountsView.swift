@@ -7,13 +7,14 @@ import Network
 import NukeUI
 import SafariServices
 import SwiftUI
+import AuthenticationServices
 
 @MainActor
 struct AddAccountView: View {
+  @Environment(\.webAuthenticationSession) private var webAuthenticationSession
   @Environment(\.dismiss) private var dismiss
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.openURL) private var openURL
-  @Environment(\.webAuthenticationSession) private var webAuthenticationSession
 
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(CurrentAccount.self) private var currentAccount

@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Dean151/ButtonKit",
       "state" : {
-        "revision" : "377f5bab4ed047704316d531e0826d4de5ebf6a4",
-        "version" : "0.1.1"
+        "revision" : "9e44e960106bd222ca26ddc1e8d85df36229cc40",
+        "version" : "0.3.1"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
       "state" : {
-        "revision" : "c54000aa9ccc048619054a5a2da2ce0576ffea18",
-        "version" : "4.0.1"
+        "revision" : "415112e5f14619be0fdddd9dc6594bd76702927c",
+        "version" : "4.0.3"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Giphy/giphy-ios-sdk",
       "state" : {
-        "revision" : "9c58a350a3381f1641f5a31cdcd162a406274892",
-        "version" : "2.2.8"
+        "revision" : "16cbb3368f77e73735abc3d9b15871d1e6c120cc",
+        "version" : "2.2.9"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "https://github.com/evgenyneu/keychain-swift",
       "state" : {
         "branch" : "master",
-        "revision" : "f38cb0ada97847ac5068b915b8d2793b35435668"
+        "revision" : "5e1b02b6a9dac2a759a1d5dbc175c86bd192a608"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nicklockwood/LRUCache",
       "state" : {
-        "revision" : "6d2b5246c9c98dcd498552bb22f08d55b12a8371",
-        "version" : "1.0.4"
+        "revision" : "542f0449556327415409ededc9c43a4bd0a397dc",
+        "version" : "1.0.7"
       }
     },
     {
@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "8ecbfc886da39bccb01c34abef5f2ff4073ad633",
-        "version" : "12.4.0"
+        "revision" : "2efd206503e99dd3a88a4dc433a76f98ce8cc198",
+        "version" : "12.7.1"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios",
       "state" : {
-        "revision" : "a9763ca482d52ea3d59aa2dfd2fc23427b02dada",
-        "version" : "4.40.1"
+        "revision" : "7ec1091a6f929c40be2a1c695a63471f5d0c330d",
+        "version" : "4.43.0"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/stephencelis/SQLite.swift.git",
       "state" : {
-        "revision" : "7a2e3cd27de56f6d396e84f63beefd0267b55ccb",
-        "version" : "0.14.1"
+        "revision" : "a95fc6df17d108bd99210db5e8a9bac90fe984b8",
+        "version" : "0.15.3"
       }
     },
     {
@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
-        "revision" : "8b6cf29eead8841a1fa7822481cb3af4ddaadba6",
-        "version" : "2.6.1"
+        "revision" : "028487d4a8a291b2fe1b4392b5425b6172056148",
+        "version" : "2.7.2"
       }
     },
     {
@@ -131,8 +131,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
       "state" : {
-        "revision" : "9e1cc02a65b22e09a8251261cccbccce02731fc5",
-        "version" : "1.1.1"
+        "revision" : "7dc5b287f8040e4ad5038739850b758e78f77808",
+        "version" : "1.1.4"
       }
     },
     {
