@@ -70,6 +70,10 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
   public var haveHeader: Bool {
     header.lastPathComponent != "missing.png"
   }
+  
+  public var fullAccountName: String {
+    "\(acct)@\(url?.host() ?? "")"
+  }
 
   public init(id: String, username: String, displayName: String?, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil, moved: Account? = nil) {
     self.id = id

@@ -3,6 +3,7 @@ import Models
 import Env
 import DesignSystem
 import WrappingHStack
+import AppAccount
 
 @MainActor
 struct TipSheetView: View {
@@ -10,6 +11,8 @@ struct TipSheetView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(Theme.self) private var theme: Theme
   @Environment(TipedUsers.self) private var tipedUSers: TipedUsers
+  @Environment(\.openURL) private var openURL
+  @Environment(AppAccountsManager.self) private var appAccount: AppAccountsManager
   
   @State private var selectedTip: String?
   
@@ -122,5 +125,13 @@ struct TipSheetView: View {
     }
     .font(.title)
     .fontWeight(.bold)
+    .onAppear {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        if let accountName = appAccount.currentAccount.accountName,
+            let url = URL(string: "https://social-proxy.com/subscribe/to/\(account.username)?callback=icecubesapp://socialproxy&id=@\(accountName)") {
+          openURL(url)
+        }
+      }
+    }
   }
 }

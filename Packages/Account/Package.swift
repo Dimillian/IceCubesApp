@@ -22,6 +22,7 @@ let package = Package(
     .package(name: "StatusKit", path: "../StatusKit"),
     .package(name: "Env", path: "../Env"),
     .package(url: "https://github.com/Dean151/ButtonKit", from: "0.1.1"),
+    .package(url: "https://github.com/dkk/WrappingHStack", from: "2.2.11"),
   ],
   targets: [
     .target(
@@ -32,6 +33,7 @@ let package = Package(
         .product(name: "StatusKit", package: "StatusKit"),
         .product(name: "Env", package: "Env"),
         .product(name: "ButtonKit", package: "ButtonKit"),
+        .product(name: "WrappingHStack", package: "WrappingHStack"),
       ],
       swiftSettings: [
         .enableExperimentalFeature("StrictConcurrency"),

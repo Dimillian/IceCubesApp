@@ -30,7 +30,8 @@ import SwiftUI
   func follow() async throws {
     guard let client else { return }
     do {
-      relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false, reblogs: true))
+      _ = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false, reblogs: true))
+      try await refreshRelationship()
       relationshipUpdated(relationship)
     } catch {
       throw error
@@ -40,10 +41,19 @@ import SwiftUI
   func unfollow() async throws {
     guard let client else { return }
     do {
-      relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
+      _ = try await client.post(endpoint: Accounts.unfollow(id: accountId))
+      try await refreshRelationship()
       relationshipUpdated(relationship)
     } catch {
       throw error
+    }
+  }
+  
+  func refreshRelationship() async throws {
+    guard let client else { return }
+    let relationships: [Relationship] = try await client.get(endpoint: Accounts.relationships(ids: [accountId]))
+    if let relationship = relationships.first {
+      self.relationship = relationship
     }
   }
 
@@ -83,7 +93,7 @@ public struct FollowButton: View {
   public var body: some View {
     VStack(alignment: .trailing) {
       AsyncButton {
-        if viewModel.relationship.following {
+        if viewModel.relationship.following || viewModel.relationship.requested {
           try await viewModel.unfollow()
         } else {
           try await viewModel.follow()

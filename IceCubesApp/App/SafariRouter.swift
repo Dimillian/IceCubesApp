@@ -5,6 +5,7 @@ import Observation
 import SafariServices
 import SwiftUI
 import AppAccount
+import WebKit
 
 extension View {
   @MainActor func withSafariRouter() -> some View {
@@ -19,6 +20,7 @@ private struct SafariRouter: ViewModifier {
   @Environment(UserPreferences.self) private var preferences
   @Environment(RouterPath.self) private var routerPath
   @Environment(AppAccountsManager.self) private var appAccount
+  @Environment(TipedUsers.self) private var tipedUsers
 
   #if !os(visionOS)
     @State private var safariManager = InAppSafariManager()
@@ -34,8 +36,9 @@ private struct SafariRouter: ViewModifier {
       .onOpenURL { url in
         // Open external URL (from icecubesapp://)
         guard !isSecondaryColumn else { return }
-        if url.lastPathComponent == "socialproxy" {
+        if url.absoluteString == "icecubesapp://socialproxy" {
           safariManager.dismiss()
+          TipedUsers.shared.tipedUserCount += 1
           return
         }
         let urlString = url.absoluteString.replacingOccurrences(of: AppInfo.scheme, with: "https://")
@@ -55,8 +58,8 @@ private struct SafariRouter: ViewModifier {
             }
           } else if url.host() == "social-proxy.com", let accountName = appAccount.currentAccount.accountName {
             let newURL = url.appending(queryItems: [
-              .init(name: "callback", value: "icecubesapp"),
-              .init(name: "id", value: accountName)
+              .init(name: "callback", value: "icecubesapp://socialproxy"),
+              .init(name: "id", value: "@\(accountName)")
             ])
             return safariManager.open(newURL)
           }
@@ -116,6 +119,9 @@ private struct SafariRouter: ViewModifier {
     
     func dismiss() {
       viewController.presentedViewController?.dismiss(animated: true)
+      window?.resignKey()
+      window?.isHidden = false
+      window = nil
     }
 
     func setupWindow(windowScene: UIWindowScene) -> UIWindow {

@@ -16,6 +16,7 @@ struct AccountDetailHeaderView: View {
   @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(TipedUsers.self) private var tipedUsers
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isSupporter) private var isSupporter: Bool
 
@@ -45,6 +46,13 @@ struct AccountDetailHeaderView: View {
       }
       accountInfoView
     }
+    .onChange(of: tipedUsers.tipedUserCount, { _, _ in
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        Task {
+          try? await viewModel.followButtonViewModel?.refreshRelationship()
+        }
+      }
+    })
   }
 
   private var headerImageView: some View {
@@ -211,20 +219,17 @@ struct AccountDetailHeaderView: View {
             .accessibilityRespondsToUserInteraction(false)
           movedToView
           joinedAtView
-          tipView
+          if viewModel.isProAccount {
+            tipView
+          }
         }
         .accessibilityElement(children: .contain)
         .accessibilitySortPriority(1)
 
         Spacer()
-        if let relationship = viewModel.relationship, !viewModel.isCurrentUser {
+        if let followButtonViewModel = viewModel.followButtonViewModel, !viewModel.isCurrentUser {
           HStack {
-            FollowButton(viewModel: .init(accountId: account.id,
-                                          relationship: relationship,
-                                          shouldDisplayNotify: true,
-                                          relationshipUpdated: { relationship in
-                                            viewModel.relationship = relationship
-                                          }))
+            FollowButton(viewModel: followButtonViewModel)
           }
         } else if !viewModel.isCurrentUser {
           ProgressView()
@@ -319,6 +324,9 @@ struct AccountDetailHeaderView: View {
   private var tipView: some View {
     Button {
       isTipSheetPresented = true
+      Task {
+        try? await viewModel.followButtonViewModel?.follow()
+      }
     } label: {
       Text("$ Send tip")
     }

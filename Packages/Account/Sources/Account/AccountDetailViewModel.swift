@@ -79,6 +79,12 @@ import SwiftUI
 
   var translation: Translation?
   var isLoadingTranslation = false
+  
+  var followButtonViewModel: FollowButtonViewModel?
+  
+  var isProAccount: Bool {
+    account?.url?.host() == "social-proxy.com"
+  }
 
   private(set) var account: Account?
   private var tabTask: Task<Void, Never>?
@@ -117,6 +123,14 @@ import SwiftUI
       featuredTags = data.featuredTags
       featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
       relationship = data.relationships.first
+      if let relationship {
+        followButtonViewModel = .init(accountId: accountId,
+                                      relationship: relationship,
+                                      shouldDisplayNotify: true,
+                                      relationshipUpdated: { [weak self] relationship in
+          self?.relationship = relationship
+        })
+      }
     } catch {
       if let account {
         accountState = .data(account: account)
