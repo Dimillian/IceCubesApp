@@ -219,7 +219,7 @@ struct AccountDetailHeaderView: View {
             .accessibilityRespondsToUserInteraction(false)
           movedToView
           joinedAtView
-          if viewModel.isProAccount {
+          if viewModel.isProAccount && viewModel.relationship?.following == false {
             tipView
           }
         }
@@ -328,7 +328,7 @@ struct AccountDetailHeaderView: View {
         try? await viewModel.followButtonViewModel?.follow()
       }
     } label: {
-      Text("$ Send tip")
+      Text("$ Subscribe")
     }
     .buttonStyle(.bordered)
     .padding(.top, 8)

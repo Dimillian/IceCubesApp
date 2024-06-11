@@ -30,8 +30,7 @@ import SwiftUI
   func follow() async throws {
     guard let client else { return }
     do {
-      _ = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false, reblogs: true))
-      try await refreshRelationship()
+      relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false, reblogs: true))
       relationshipUpdated(relationship)
     } catch {
       throw error
@@ -41,8 +40,7 @@ import SwiftUI
   func unfollow() async throws {
     guard let client else { return }
     do {
-      _ = try await client.post(endpoint: Accounts.unfollow(id: accountId))
-      try await refreshRelationship()
+      relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
       relationshipUpdated(relationship)
     } catch {
       throw error
@@ -54,6 +52,7 @@ import SwiftUI
     let relationships: [Relationship] = try await client.get(endpoint: Accounts.relationships(ids: [accountId]))
     if let relationship = relationships.first {
       self.relationship = relationship
+      relationshipUpdated(relationship)
     }
   }
 

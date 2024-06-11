@@ -7,14 +7,15 @@ import AppAccount
 
 @MainActor
 struct TipSheetView: View {
-  private let tips = ["$2.00", "$5.00", "$10.00", "$15.00", "$15.00", "$20.00", "$50.00"]
+  private let tips = [200, 500, 1000]
+  
   @Environment(\.dismiss) private var dismiss
   @Environment(Theme.self) private var theme: Theme
   @Environment(TipedUsers.self) private var tipedUSers: TipedUsers
   @Environment(\.openURL) private var openURL
   @Environment(AppAccountsManager.self) private var appAccount: AppAccountsManager
   
-  @State private var selectedTip: String?
+  @State private var selectedTip: Int?
   
   private enum TipState: Int, Equatable {
     case selection, sending, sent
@@ -57,16 +58,16 @@ struct TipSheetView: View {
       .padding(.top, 8)
     }
     VStack(alignment: .leading, spacing: 8) {
-      Text("Send a tip")
+      Text("Subscribe")
         .font(.title2)
-      Text("Send a tip to @\(account.username) to get access to exclusive content!")
+      Text("Subscribe to @\(account.username) to get access to exclusive content!")
       WrappingHStack(tips, id: \.self, spacing: .constant(12)) { tip in
         Button {
           withAnimation(.easeInOut(duration: 0.5)) {
             selectedTip = tip
           }
         } label: {
-          Text(tip)
+          Text((Double(tip) / 100.0).formatted(.currency(code: "USD").presentation(.narrow)))
         }
         .buttonStyle(.bordered)
         .padding(.vertical, 8)
@@ -80,9 +81,9 @@ struct TipSheetView: View {
     
     Spacer()
     
-    if let selectedTip {
+    if selectedTip != nil {
       HStack(alignment: .top) {
-        Text("Send \(selectedTip)")
+        Text("Subscribe")
           .font(.headline)
           .fontWeight(.bold)
       }
@@ -120,15 +121,15 @@ struct TipSheetView: View {
   
   private var sentView: some View {
     VStack(alignment: .center) {
-      Text("🎉🤑🎉")
-      Text("Thank for the tip!")
+      Text("Almost there...")
     }
     .font(.title)
     .fontWeight(.bold)
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-        if let accountName = appAccount.currentAccount.accountName,
-            let url = URL(string: "https://social-proxy.com/subscribe/to/\(account.username)?callback=icecubesapp://socialproxy&id=@\(accountName)") {
+        if let selectedTip,
+            let accountName = appAccount.currentAccount.accountName,
+            let url = URL(string: "https://social-proxy.com/subscribe/to/\(account.username)?callback=icecubesapp://socialproxy&id=@\(accountName)&amount=\(selectedTip)&currency=USD") {
           openURL(url)
         }
       }
