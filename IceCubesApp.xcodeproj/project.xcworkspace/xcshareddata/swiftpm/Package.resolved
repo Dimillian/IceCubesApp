@@ -3,10 +3,10 @@
     {
       "identity" : "bodega",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mergesort/Bodega",
+      "location" : "https://github.com/Dimillian/Bodega",
       "state" : {
-        "revision" : "f0554077c178088ba11557bbdbb71775cc6a1b84",
-        "version" : "2.1.0"
+        "branch" : "main",
+        "revision" : "a144ed8afdd760b65b6b9a136ba8bb75cd19387e"
       }
     },
     {
@@ -129,10 +129,10 @@
     {
       "identity" : "swiftui-introspect",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
+      "location" : "https://github.com/Dimillian/swiftui-introspect",
       "state" : {
-        "revision" : "7dc5b287f8040e4ad5038739850b758e78f77808",
-        "version" : "1.1.4"
+        "branch" : "main",
+        "revision" : "e5d36b00e6e437b552aa76ed6d1eca71d6fd8f8b"
       }
     },
     {
