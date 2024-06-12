@@ -68,7 +68,7 @@ public struct TimelineView: View {
           .scrollContentBackground(.hidden)
           .background(theme.primaryBackgroundColor)
         #endif
-          .introspect(.list, on: .iOS(.v18)) { (collectionView: UICollectionView) in
+          .introspect(.list, on: .iOS(.v17, .v18)) { (collectionView: UICollectionView) in
             DispatchQueue.main.async {
               self.collectionView = collectionView
             }
