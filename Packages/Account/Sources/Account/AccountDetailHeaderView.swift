@@ -219,7 +219,7 @@ struct AccountDetailHeaderView: View {
             .accessibilityRespondsToUserInteraction(false)
           movedToView
           joinedAtView
-          if viewModel.isProAccount && viewModel.relationship?.following == false {
+          if viewModel.account?.isProAccount == true && viewModel.relationship?.following == false {
             tipView
           }
         }

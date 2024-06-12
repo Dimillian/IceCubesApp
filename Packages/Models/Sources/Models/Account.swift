@@ -71,6 +71,10 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     header.lastPathComponent != "missing.png"
   }
   
+  public var isProAccount: Bool {
+    url?.host() == "social-proxy.com"
+  }
+  
   public var fullAccountName: String {
     "\(acct)@\(url?.host() ?? "")"
   }

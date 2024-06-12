@@ -82,10 +82,6 @@ import SwiftUI
   
   var followButtonViewModel: FollowButtonViewModel?
   
-  var isProAccount: Bool {
-    account?.url?.host() == "social-proxy.com"
-  }
-
   private(set) var account: Account?
   private var tabTask: Task<Void, Never>?
 
