@@ -22,7 +22,7 @@ let package = Package(
     .package(name: "Env", path: "../Env"),
     .package(name: "StatusKit", path: "../StatusKit"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
-    .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "1.0.0"),
+    .package(url: "https://github.com/Dimillian/swiftui-introspect", branch: "main"),
     .package(url: "https://github.com/Dimillian/Bodega", branch: "main"),
   ],
   targets: [
