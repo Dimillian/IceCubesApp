@@ -49,7 +49,7 @@ import SwiftUI
   private(set) var datasource = TimelineDatasource()
   private let cache = TimelineCache()
   private var isCacheEnabled: Bool {
-    canFilterTimeline && timeline.supportNewestPagination
+    canFilterTimeline && timeline.supportNewestPagination && client?.isAuth == true
   }
 
   @ObservationIgnored
