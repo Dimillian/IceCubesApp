@@ -4,25 +4,28 @@ import Testing
 import Foundation
 @testable import Timeline
 
-@Test
-func testTimelineCodableHome() {
-  #expect(testCodableOn(filter: .home))
-  #expect(testCodableOn(filter: .local))
-  #expect(testCodableOn(filter: .federated))
-  #expect(testCodableOn(filter: .remoteLocal(server: "me.dm", filter: .local)))
-  #expect(testCodableOn(filter: .tagGroup(title: "test", tags: ["test"], symbolName: nil)))
-  #expect(testCodableOn(filter: .tagGroup(title: "test", tags: ["test"], symbolName: "test")))
-  #expect(testCodableOn(filter: .hashtag(tag: "test", accountId: nil)))
-  #expect(testCodableOn(filter: .list(list: .init(id: "test", title: "test"))))
-}
-
-fileprivate func testCodableOn(filter: TimelineFilter) -> Bool {
-  let encoder = JSONEncoder()
-  let decoder = JSONDecoder()
-  guard let data = try? encoder.encode(filter) else {
-    return false
+@Suite("Timeline Filter Tests")
+struct TimelineFilterTests {
+  @Test("All timeline filter can be decoded and encoded",
+        arguments: [TimelineFilter.home, TimelineFilter.local, TimelineFilter.federated,
+                    TimelineFilter.remoteLocal(server: "me.dm", filter: .local),
+                    TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: nil),
+                    TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: "test"),
+                    TimelineFilter.hashtag(tag: "test", accountId: nil),
+                    TimelineFilter.list(list: .init(id: "test", title: "test"))])
+  func timelineCanEncodeAndDecode(filter: TimelineFilter) {
+    #expect(testCodableOn(filter: filter))
   }
-  let newFilter = try? decoder.decode(TimelineFilter.self, from: data)
-  return newFilter == filter
+
+  func testCodableOn(filter: TimelineFilter) -> Bool {
+    let encoder = JSONEncoder()
+    let decoder = JSONDecoder()
+    guard let data = try? encoder.encode(filter) else {
+      return false
+    }
+    let newFilter = try? decoder.decode(TimelineFilter.self, from: data)
+    return newFilter == filter
+
+  }
 
 }
