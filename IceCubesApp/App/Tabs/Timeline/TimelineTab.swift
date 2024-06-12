@@ -61,7 +61,7 @@ struct TimelineTab: View {
         if client.isAuth {
           timeline = lastTimelineFilter
         } else {
-          timeline = .federated
+          timeline = .trending
         }
       }
       Task {
@@ -125,8 +125,10 @@ struct TimelineTab: View {
   private var timelineFilterButton: some View {
     headerGroup
     timelineFiltersButtons
-    listsFiltersButons
-    tagsFiltersButtons
+    if client.isAuth {
+      listsFiltersButons
+      tagsFiltersButtons
+    }
     localTimelinesFiltersButtons
     tagGroupsFiltersButtons
     Divider()
@@ -325,7 +327,7 @@ struct TimelineTab: View {
     if client.isAuth, canFilterTimeline {
       timeline = lastTimelineFilter
     } else if !client.isAuth {
-      timeline = .federated
+      timeline = .trending
     }
   }
 }
