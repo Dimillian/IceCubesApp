@@ -122,7 +122,7 @@ struct AppView: View {
                 .tag(tab)
             }
           }
-          .introspect(.tabView, on: .iOS(.v18)) { (tabview: UITabBarController) in
+          .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
             tabview.tabBar.isHidden = horizontalSizeClass == .regular
             tabview.customizableViewControllers = []
             tabview.moreNavigationController.isNavigationBarHidden = true
