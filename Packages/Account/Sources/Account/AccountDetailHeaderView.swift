@@ -16,7 +16,7 @@ struct AccountDetailHeaderView: View {
   @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
-  @Environment(TipedUsers.self) private var tipedUsers
+  @Environment(StreamWatcher.self) private var watcher
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isSupporter) private var isSupporter: Bool
 
@@ -46,13 +46,15 @@ struct AccountDetailHeaderView: View {
       }
       accountInfoView
     }
-    .onChange(of: tipedUsers.tipedUserCount, { _, _ in
-      DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-        Task {
-          try? await viewModel.followButtonViewModel?.refreshRelationship()
+    .onChange(of: watcher.latestEvent?.id) {
+      if let latestEvent = watcher.latestEvent, let latestEvent = latestEvent as? StreamEventNotification {
+        if latestEvent.notification.account.id == viewModel.accountId {
+          Task {
+            try? await viewModel.followButtonViewModel?.refreshRelationship()
+          }
         }
       }
-    })
+    }
   }
 
   private var headerImageView: some View {
