@@ -7,8 +7,6 @@ import AppAccount
 
 @MainActor
 struct TipSheetView: View {
-  private let tips = [200, 500, 1000]
-  
   @Environment(\.dismiss) private var dismiss
   @Environment(Theme.self) private var theme: Theme
   @Environment(TipedUsers.self) private var tipedUSers: TipedUsers
@@ -18,7 +16,7 @@ struct TipSheetView: View {
   @State private var selectedTip: Int?
   
   private enum TipState: Int, Equatable {
-    case selection, sending, sent
+    case selection, preparing, webview
   }
   
   @State private var state: TipState = .selection
@@ -31,11 +29,11 @@ struct TipSheetView: View {
       switch state {
       case .selection:
         tipView
-      case .sending:
-        sendingView
+      case .preparing:
+        preparingView
           .transition(.blurReplace)
-      case .sent:
-        sentView
+      case .webview:
+        webView
           .transition(.blurReplace)
       }
     }
@@ -61,17 +59,15 @@ struct TipSheetView: View {
       Text("Subscribe")
         .font(.title2)
       Text("Subscribe to @\(account.username) to get access to exclusive content!")
-      WrappingHStack(tips, id: \.self, spacing: .constant(12)) { tip in
-        Button {
-          withAnimation(.easeInOut(duration: 0.5)) {
-            selectedTip = tip
-          }
-        } label: {
-          Text((Double(tip) / 100.0).formatted(.currency(code: "USD").presentation(.narrow)))
+      Button {
+        withAnimation(.easeInOut(duration: 0.5)) {
+          selectedTip = 500
         }
-        .buttonStyle(.bordered)
-        .padding(.vertical, 8)
+      } label: {
+        Text("$5 / month")
       }
+      .buttonStyle(.borderedProminent)
+      .padding(.vertical, 8)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(12)
@@ -94,15 +90,15 @@ struct TipSheetView: View {
       .onTapGesture {
         tipedUSers.usersIds.append(account.id)
         withAnimation {
-          state = .sending
+          state = .preparing
         }
       }
       .ignoresSafeArea()
     }
   }
   
-  private var sendingView: some View {
-    Label("Sending...", systemImage: "wifi")
+  private var preparingView: some View {
+    Label("Preparing...", systemImage: "wifi")
       .symbolEffect(.variableColor.iterative, options: .repeating, value: animationsending)
       .font(.title)
       .fontWeight(.bold)
@@ -113,13 +109,13 @@ struct TipSheetView: View {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
           withAnimation {
-            state = .sent
+            state = .webview
           }
         }
       }
   }
   
-  private var sentView: some View {
+  private var webView: some View {
     VStack(alignment: .center) {
       Text("Almost there...")
     }
