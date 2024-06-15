@@ -125,7 +125,7 @@ struct TipSheetView: View {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         if let selectedTip,
             let accountName = appAccount.currentAccount.accountName,
-            let url = URL(string: "https://social-proxy.com/subscribe/to/\(account.username)?callback=icecubesapp://socialproxy&id=@\(accountName)&amount=\(selectedTip)&currency=USD") {
+           let url = URL(string: "https://\(AppInfo.premiumInstance)/subscribe/to/\(account.username)?callback=icecubesapp://socialproxy&id=@\(accountName)&amount=\(selectedTip)&currency=USD") {
           openURL(url)
         }
       }

@@ -56,7 +56,7 @@ private struct SafariRouter: ViewModifier {
               UIApplication.shared.open(url)
               return .handled
             }
-          } else if url.host() == "social-proxy.com", let accountName = appAccount.currentAccount.accountName {
+          } else if url.host() == AppInfo.premiumInstance, let accountName = appAccount.currentAccount.accountName {
             let newURL = url.appending(queryItems: [
               .init(name: "callback", value: "icecubesapp://socialproxy"),
               .init(name: "id", value: "@\(accountName)")

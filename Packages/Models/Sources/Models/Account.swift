@@ -72,7 +72,7 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
   }
   
   public var isProAccount: Bool {
-    url?.host() == "social-proxy.com"
+    url?.host() == AppInfo.premiumInstance
   }
   
   public var fullAccountName: String {
