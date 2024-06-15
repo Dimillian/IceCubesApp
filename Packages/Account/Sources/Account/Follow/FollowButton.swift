@@ -9,18 +9,20 @@ import SwiftUI
 
 @MainActor
 @Observable public class FollowButtonViewModel {
-  var client: Client?
+  let client: Client
 
   public let accountId: String
   public let shouldDisplayNotify: Bool
   public let relationshipUpdated: (Relationship) -> Void
   public private(set) var relationship: Relationship
 
-  public init(accountId: String,
+  public init(client: Client,
+              accountId: String,
               relationship: Relationship,
               shouldDisplayNotify: Bool,
               relationshipUpdated: @escaping ((Relationship) -> Void))
   {
+    self.client = client
     self.accountId = accountId
     self.relationship = relationship
     self.shouldDisplayNotify = shouldDisplayNotify
@@ -28,7 +30,6 @@ import SwiftUI
   }
 
   func follow() async throws {
-    guard let client else { return }
     do {
       relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false, reblogs: true))
       relationshipUpdated(relationship)
@@ -38,7 +39,6 @@ import SwiftUI
   }
 
   func unfollow() async throws {
-    guard let client else { return }
     do {
       relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
       relationshipUpdated(relationship)
@@ -48,7 +48,6 @@ import SwiftUI
   }
   
   func refreshRelationship() async throws {
-    guard let client else { return }
     let relationships: [Relationship] = try await client.get(endpoint: Accounts.relationships(ids: [accountId]))
     if let relationship = relationships.first {
       self.relationship = relationship
@@ -57,7 +56,6 @@ import SwiftUI
   }
 
   func toggleNotify() async throws {
-    guard let client else { return }
     do {
       relationship = try await client.post(endpoint: Accounts.follow(id: accountId,
                                                                      notify: !relationship.notifying,
@@ -69,7 +67,6 @@ import SwiftUI
   }
 
   func toggleReboosts() async throws {
-    guard let client else { return }
     do {
       relationship = try await client.post(endpoint: Accounts.follow(id: accountId,
                                                                      notify: relationship.notifying,
@@ -130,8 +127,5 @@ public struct FollowButton: View {
       }
     }
     .buttonStyle(.bordered)
-    .onAppear {
-      viewModel.client = client
-    }
   }
 }
