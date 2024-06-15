@@ -6,20 +6,19 @@ import WrappingHStack
 import AppAccount
 
 @MainActor
-struct TipSheetView: View {
+struct PremiumAcccountSubsciptionSheetView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(Theme.self) private var theme: Theme
-  @Environment(TipedUsers.self) private var tipedUSers: TipedUsers
   @Environment(\.openURL) private var openURL
   @Environment(AppAccountsManager.self) private var appAccount: AppAccountsManager
   
-  @State private var selectedTip: Int?
+  @State private var isSubscibeSelected: Bool = false
   
-  private enum TipState: Int, Equatable {
+  private enum SheetState: Int, Equatable {
     case selection, preparing, webview
   }
   
-  @State private var state: TipState = .selection
+  @State private var state: SheetState = .selection
   @State private var animationsending: Bool = false
   
   let account: Account
@@ -61,7 +60,7 @@ struct TipSheetView: View {
       Text("Subscribe to @\(account.username) to get access to exclusive content!")
       Button {
         withAnimation(.easeInOut(duration: 0.5)) {
-          selectedTip = 500
+          isSubscibeSelected = true
         }
       } label: {
         Text("$5 / month")
@@ -77,7 +76,7 @@ struct TipSheetView: View {
     
     Spacer()
     
-    if selectedTip != nil {
+    if isSubscibeSelected {
       HStack(alignment: .top) {
         Text("Subscribe")
           .font(.headline)
@@ -88,7 +87,6 @@ struct TipSheetView: View {
       .frame(maxWidth: .infinity)
       .background(theme.tintColor.opacity(0.5))
       .onTapGesture {
-        tipedUSers.usersIds.append(account.id)
         withAnimation {
           state = .preparing
         }
@@ -123,9 +121,8 @@ struct TipSheetView: View {
     .fontWeight(.bold)
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-        if let selectedTip,
-            let accountName = appAccount.currentAccount.accountName,
-           let url = URL(string: "https://\(AppInfo.premiumInstance)/subscribe/to/\(account.username)?callback=icecubesapp://socialproxy&id=@\(accountName)&amount=\(selectedTip)&currency=USD") {
+        if let accountName = appAccount.currentAccount.accountName,
+           let url = URL(string: "https://\(AppInfo.premiumInstance)/subscribe/to/\(account.username)?callback=icecubesapp://socialproxy&id=@\(accountName)&amount=\(500)&currency=USD") {
           openURL(url)
         }
       }

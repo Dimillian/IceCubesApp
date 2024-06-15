@@ -337,7 +337,7 @@ struct AccountDetailHeaderView: View {
     .padding(.bottom, 4)
     .sheet(isPresented: $isTipSheetPresented) {
       if let account = viewModel.account {
-        TipSheetView(account: account)
+        PremiumAcccountSubsciptionSheetView(account: account)
       }
     }
   }

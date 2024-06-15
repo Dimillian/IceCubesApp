@@ -20,7 +20,6 @@ private struct SafariRouter: ViewModifier {
   @Environment(UserPreferences.self) private var preferences
   @Environment(RouterPath.self) private var routerPath
   @Environment(AppAccountsManager.self) private var appAccount
-  @Environment(TipedUsers.self) private var tipedUsers
 
   #if !os(visionOS)
     @State private var safariManager = InAppSafariManager()
@@ -38,7 +37,6 @@ private struct SafariRouter: ViewModifier {
         guard !isSecondaryColumn else { return }
         if url.absoluteString == "icecubesapp://socialproxy" {
           safariManager.dismiss()
-          TipedUsers.shared.tipedUserCount += 1
           return
         }
         let urlString = url.absoluteString.replacingOccurrences(of: AppInfo.scheme, with: "https://")
@@ -56,7 +54,9 @@ private struct SafariRouter: ViewModifier {
               UIApplication.shared.open(url)
               return .handled
             }
-          } else if url.host() == AppInfo.premiumInstance, let accountName = appAccount.currentAccount.accountName {
+          } else if url.query()?.contains("callback=") == false,
+                    url.host() == AppInfo.premiumInstance,
+                    let accountName = appAccount.currentAccount.accountName {
             let newURL = url.appending(queryItems: [
               .init(name: "callback", value: "icecubesapp://socialproxy"),
               .init(name: "id", value: "@\(accountName)")

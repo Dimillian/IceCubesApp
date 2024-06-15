@@ -66,6 +66,7 @@ public struct StatusRowView: View {
         } else {
           if !isCompact && context != .detail {
             Group {
+              StatusRowPremiumView(viewModel: viewModel)
               StatusRowTagView(viewModel: viewModel)
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
