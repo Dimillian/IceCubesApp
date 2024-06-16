@@ -61,6 +61,10 @@ import SwiftUI
   var featuredTags: [FeaturedTag] = []
   var fields: [Account.Field] = []
   var familiarFollowers: [Account] = []
+  
+  var premiumAccount: Account?
+  var premiumRelationship: Relationship?
+  
   var selectedTab = Tab.statuses {
     didSet {
       switch selectedTab {
@@ -112,8 +116,9 @@ import SwiftUI
     guard let client else { return }
     do {
       let data = try await fetchAccountData(accountId: accountId, client: client)
+      
       accountState = .data(account: data.account)
-
+      try await fetchPremiumAccount(fromAccount: data.account, client: client)
       account = data.account
       fields = data.account.fields
       featuredTags = data.featuredTags
@@ -284,4 +289,29 @@ import SwiftUI
   func statusDidAppear(status _: Models.Status) {}
 
   func statusDidDisappear(status _: Status) {}
+}
+
+extension AccountDetailViewModel {
+  private func fetchPremiumAccount(fromAccount: Account, client: Client) async throws {
+    if fromAccount.isLinkedToPremiumAccount, let acct = fromAccount.premiumAcct {
+      let results: SearchResults? = try await client.get(endpoint: Search.search(query: acct,
+                                                                                 type: "accounts",
+                                                                                 offset: nil,
+                                                                                 following: nil),
+                                                          forceVersion: .v2)
+      if let premiumAccount = results?.accounts.first {
+        self.premiumAccount = premiumAccount
+        var relationships: [Relationship] = try await client.get(endpoint: Accounts.relationships(ids: [premiumAccount.id]))
+        self.premiumRelationship = relationships.first
+      }
+    }
+  }
+  
+  func followPremiumAccount() async throws {
+    if let premiumAccount {
+      premiumRelationship = try await client?.post(endpoint: Accounts.follow(id: premiumAccount.id,
+                                                                             notify: false,
+                                                                             reblogs: true))
+    }
+  }
 }

@@ -109,7 +109,7 @@ import SwiftUI
       theme.tintColor.opacity(0.15)
     } else if userMentionned {
       theme.secondaryBackgroundColor
-    } else if status.account.isProAccount {
+    } else if status.account.isPremiumAccount {
       .yellow.opacity(0.4)
     } else {
       theme.primaryBackgroundColor

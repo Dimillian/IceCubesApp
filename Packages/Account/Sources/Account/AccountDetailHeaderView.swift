@@ -50,7 +50,11 @@ struct AccountDetailHeaderView: View {
       if let latestEvent = watcher.latestEvent, let latestEvent = latestEvent as? StreamEventNotification {
         if latestEvent.notification.account.id == viewModel.accountId {
           Task {
-            try? await viewModel.followButtonViewModel?.refreshRelationship()
+            if viewModel.account?.isLinkedToPremiumAccount == true {
+              await viewModel.fetchAccount()
+            } else {
+              try? await viewModel.followButtonViewModel?.refreshRelationship()
+            }
           }
         }
       }
@@ -221,7 +225,7 @@ struct AccountDetailHeaderView: View {
             .accessibilityRespondsToUserInteraction(false)
           movedToView
           joinedAtView
-          if viewModel.account?.isProAccount == true && viewModel.relationship?.following == false {
+          if viewModel.account?.isPremiumAccount == true && viewModel.relationship?.following == false || viewModel.account?.isLinkedToPremiumAccount == true && viewModel.premiumRelationship?.following == false {
             tipView
           }
         }
@@ -327,7 +331,11 @@ struct AccountDetailHeaderView: View {
     Button {
       isTipSheetPresented = true
       Task {
-        try? await viewModel.followButtonViewModel?.follow()
+        if viewModel.account?.isLinkedToPremiumAccount == true {
+          try? await viewModel.followPremiumAccount()
+        } else {
+          try? await viewModel.followButtonViewModel?.follow()
+        }
       }
     } label: {
       Text("$ Subscribe")

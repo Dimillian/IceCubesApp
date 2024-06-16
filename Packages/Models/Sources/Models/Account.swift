@@ -71,7 +71,15 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     header.lastPathComponent != "missing.png"
   }
   
-  public var isProAccount: Bool {
+  public var isLinkedToPremiumAccount: Bool {
+    fields.first(where: { $0.value.asRawText.hasSuffix(AppInfo.premiumInstance) }) != nil
+  }
+  
+  public var premiumAcct: String? {
+    fields.first(where: { $0.value.asRawText.hasSuffix(AppInfo.premiumInstance) })?.value.asRawText
+  }
+  
+  public var isPremiumAccount: Bool {
     url?.host() == AppInfo.premiumInstance
   }
   
