@@ -115,8 +115,9 @@ public struct StatusRowView: View {
           }
         }
       }
-      .padding(.init(top: isCompact ? 6 : 12, leading: 0, bottom: isFocused ? 12 : 6, trailing: 0))
+      .padding(.init(top: isCompact ? 6 : 12, leading: .layoutPadding, bottom: isFocused ? 12 : 6, trailing: .layoutPadding))
     }
+    .clipped()
     .onAppear {
       if !reasons.contains(.placeholder) {
         if !isCompact, viewModel.embeddedStatus == nil {
@@ -153,10 +154,7 @@ public struct StatusRowView: View {
     #else
     .listRowBackground(viewModel.highlightRowColor)
     #endif
-    .listRowInsets(.init(top: 0,
-                         leading: .layoutPadding,
-                         bottom: 0,
-                         trailing: .layoutPadding))
+    .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
     .accessibilityElement(children: isFocused ? .contain : .combine)
     .accessibilityLabel(isFocused == false && accessibilityVoiceOverEnabled
       ? StatusRowAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
