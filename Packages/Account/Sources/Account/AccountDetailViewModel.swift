@@ -16,7 +16,7 @@ import SwiftUI
   }
 
   enum Tab: Int {
-    case statuses, favorites, bookmarks, replies, boosts, media
+    case statuses, favorites, bookmarks, replies, boosts, media, premiumPosts
 
     static var currentAccountTabs: [Tab] {
       [.statuses, .replies, .boosts, .favorites, .bookmarks]
@@ -24,6 +24,10 @@ import SwiftUI
 
     static var accountTabs: [Tab] {
       [.statuses, .replies, .boosts, .media]
+    }
+    
+    static var premiumAccountTabs: [Tab] {
+      [.statuses, .premiumPosts, .replies, .boosts, .media]
     }
 
     var iconName: String {
@@ -34,6 +38,7 @@ import SwiftUI
       case .replies: "bubble.left.and.bubble.right"
       case .boosts: ""
       case .media: "photo.on.rectangle.angled"
+      case .premiumPosts: "dollarsign"
       }
     }
 
@@ -45,7 +50,19 @@ import SwiftUI
       case .replies: "accessibility.tabs.profile.picker.posts-and-replies"
       case .boosts: "accessibility.tabs.profile.picker.boosts"
       case .media: "accessibility.tabs.profile.picker.media"
+      case .premiumPosts: "Premium Posts"
       }
+    }
+  }
+  
+  
+  var tabs: [Tab] {
+    if isCurrentUser {
+      return Tab.currentAccountTabs
+    } else if account?.isLinkedToPremiumAccount == true && premiumAccount != nil {
+      return Tab.premiumAccountTabs
+    } else {
+      return Tab.accountTabs
     }
   }
 
@@ -68,7 +85,7 @@ import SwiftUI
   var selectedTab = Tab.statuses {
     didSet {
       switch selectedTab {
-      case .statuses, .replies, .boosts, .media:
+      case .statuses, .replies, .boosts, .media, .premiumPosts:
         tabTask?.cancel()
         tabTask = Task {
           await fetchNewestStatuses(pullToRefresh: false)
@@ -172,8 +189,12 @@ import SwiftUI
     do {
       statusesState = .loading
       boosts = []
+      var accountIdToFetch = accountId
+      if selectedTab == .premiumPosts, let accountId = premiumAccount?.id {
+        accountIdToFetch = accountId
+      }
       statuses =
-        try await client.get(endpoint: Accounts.statuses(id: accountId,
+        try await client.get(endpoint: Accounts.statuses(id: accountIdToFetch,
                                                          sinceId: nil,
                                                          tag: nil,
                                                          onlyMedia: selectedTab == .media,
@@ -210,10 +231,14 @@ import SwiftUI
   func fetchNextPage() async throws {
     guard let client else { return }
     switch selectedTab {
-    case .statuses, .replies, .boosts, .media:
+    case .statuses, .replies, .boosts, .media, .premiumPosts:
       guard let lastId = statuses.last?.id else { return }
+      var accountIdToFetch = accountId
+      if selectedTab == .premiumPosts, let accountId = premiumAccount?.id {
+        accountIdToFetch = accountId
+      }
       let newStatuses: [Status] =
-        try await client.get(endpoint: Accounts.statuses(id: accountId,
+        try await client.get(endpoint: Accounts.statuses(id: accountIdToFetch,
                                                          sinceId: lastId,
                                                          tag: nil,
                                                          onlyMedia: selectedTab == .media,
@@ -252,7 +277,7 @@ import SwiftUI
 
   private func reloadTabState() {
     switch selectedTab {
-    case .statuses, .replies, .media:
+    case .statuses, .replies, .media, .premiumPosts:
       statusesState = .display(statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
     case .boosts:
       statusesState = .display(statuses: boosts, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
@@ -301,7 +326,7 @@ extension AccountDetailViewModel {
                                                           forceVersion: .v2)
       if let premiumAccount = results?.accounts.first {
         self.premiumAccount = premiumAccount
-        var relationships: [Relationship] = try await client.get(endpoint: Accounts.relationships(ids: [premiumAccount.id]))
+        let relationships: [Relationship] = try await client.get(endpoint: Accounts.relationships(ids: [premiumAccount.id]))
         self.premiumRelationship = relationships.first
       }
     }

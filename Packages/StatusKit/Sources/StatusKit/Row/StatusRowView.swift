@@ -15,8 +15,8 @@ public struct StatusRowView: View {
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.indentationLevel) private var indentationLevel
+  
   @Environment(RouterPath.self) private var routerPath: RouterPath
-
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
