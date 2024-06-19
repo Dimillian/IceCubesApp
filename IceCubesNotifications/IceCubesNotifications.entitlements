@@ -6,7 +6,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.$(BUNDLE_ID_PREFIX).IceCubesApp</string>
+		<string>group..KoyakeiIceCubesApp</string>
 	</array>
 	<key>com.apple.security.network.client</key>
 	<true/>

@@ -7,7 +7,7 @@ public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable, Send
   case direct
 }
 
-public protocol AnyStatus {
+public protocol AnyStatus :Codable{
   var id: String { get }
   var content: HTMLString { get }
   var account: Account { get }
@@ -35,9 +35,11 @@ public protocol AnyStatus {
   var sensitive: Bool { get }
   var language: String? { get }
   var isHidden: Bool { get }
+    var kTagRelations: KTagRelations{get}
 }
 
-public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable {
+public class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable {
+    
   public static func == (lhs: Status, rhs: Status) -> Bool {
     lhs.id == rhs.id && lhs.editedAt?.asDate == rhs.editedAt?.asDate
   }
@@ -73,12 +75,13 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
-
+  public var kTagRelations: KTagRelations
+    
   public var isHidden: Bool {
     filtered?.first?.filter.filterAction == .hide
   }
 
-  public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application?, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
+    public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application?, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?, addedKTagRelations: KTagRelations = KTagRelations.init(addedKTagRelationList: Set(), addingKTagRelationRequestedList: Set(), deletingKTagRelationRequestedList: Set())) {
     self.id = id
     self.content = content
     self.account = account
@@ -106,6 +109,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
     self.filtered = filtered
     self.sensitive = sensitive
     self.language = language
+        self.kTagRelations = addedKTagRelations
   }
 
   public static func placeholder(forSettings: Bool = false, language: String? = nil) -> Status {
@@ -137,7 +141,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
           spoilerText: .init(stringValue: ""),
           filtered: [],
           sensitive: false,
-          language: language)
+          language: language,
+          addedKTagRelations: KTagRelations.init(addedKTagRelationList: Set(), addingKTagRelationRequestedList: Set(), deletingKTagRelationRequestedList: Set()))
   }
 
   public static func placeholders() -> [Status] {
@@ -173,13 +178,15 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
                    spoilerText: reblog.spoilerText,
                    filtered: reblog.filtered,
                    sensitive: reblog.sensitive,
-                   language: reblog.language)
+                   language: reblog.language,
+                   addedKTagRelations: reblog.kTagRelations)
     }
     return nil
   }
 }
 
 public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Hashable {
+    
   public static func == (lhs: ReblogStatus, rhs: ReblogStatus) -> Bool {
     lhs.id == rhs.id
   }
@@ -214,12 +221,12 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
-
+    public var kTagRelations: KTagRelations
   public var isHidden: Bool {
     filtered?.first?.filter.filterAction == .hide
   }
 
-  public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application? = nil, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
+  public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application? = nil, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?,kTagRelations: KTagRelations = KTagRelations.init(addedKTagRelationList: Set(), addingKTagRelationRequestedList: Set(), deletingKTagRelationRequestedList: Set()) ) {
     self.id = id
     self.content = content
     self.account = account
@@ -246,6 +253,7 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
     self.filtered = filtered
     self.sensitive = sensitive
     self.language = language
+      self.kTagRelations = kTagRelations
   }
 }
 

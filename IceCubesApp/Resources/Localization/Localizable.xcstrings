@@ -41291,9 +41291,6 @@
         }
       }
     },
-    "Search" : {
-
-    },
     "see-more" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -41440,9 +41437,6 @@
           }
         }
       }
-    },
-    "Selected Tags:" : {
-
     },
     "Send a post" : {
       "localizations" : {

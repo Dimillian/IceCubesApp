@@ -6,7 +6,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.$(BUNDLE_ID_PREFIX).IceCubesApp</string>
+		<string>group.com.koyakei.IceCubesApp</string>
 	</array>
 	<key>com.apple.security.files.user-selected.read-write</key>
 	<true/>

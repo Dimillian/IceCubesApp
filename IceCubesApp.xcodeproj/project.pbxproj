@@ -133,7 +133,6 @@
 		9FFF677C299B7B2C00FE700A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677B299B7B2C00FE700A /* Notifications */; };
 		9FFF6780299B7D2B00FE700A /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677F299B7D2B00FE700A /* DesignSystem */; };
 		9FFF6782299B7D3A00FE700A /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF6781299B7D3A00FE700A /* Account */; };
-		BABB55822C1735D4009F27D6 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = BABB55812C1735D4009F27D6 /* Tag.swift */; };
 		C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */; };
 		D08A9C3529956CFA00204A4A /* SwipeActionsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9C3429956CFA00204A4A /* SwipeActionsSettingsView.swift */; };
 		DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */; };
@@ -312,7 +311,6 @@
 		9FF2FB6C2BE8AE90001560CE /* MentionWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionWidget.swift; sourceTree = "<group>"; };
 		9FF2FB6E2BE8AE9B001560CE /* MentionWidgetConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionWidgetConfiguration.swift; sourceTree = "<group>"; };
 		B0BAB49E29B3D7A9008F54D7 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		BABB55812C1735D4009F27D6 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		C4CBB90B298A0DA3007E1707 /* en-GB */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-GB"; path = "en-GB.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C4FBCF6F298FD88A0015DF22 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSettingsView.swift; sourceTree = "<group>"; };
@@ -580,7 +578,6 @@
 				9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */,
 				9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */,
 				9F6028552B3F36AE00476078 /* AppView.swift */,
-				BABB55812C1735D4009F27D6 /* Tag.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -629,6 +626,7 @@
 		9FBFE63B292A715500C250E9 /* IceCubesApp */ = {
 			isa = PBXGroup;
 			children = (
+				BAE733D12C18454D003EEFC5 /* KTag */,
 				9FA0D2AC29921C1F008A143B /* Embeds */,
 				9FD34822293D06E800DB0EE9 /* Assets.xcassets */,
 				9FAE4AC8293774FF00772766 /* Info.plist */,
@@ -710,6 +708,13 @@
 				9FF2FB6E2BE8AE9B001560CE /* MentionWidgetConfiguration.swift */,
 			);
 			path = MentionWidget;
+			sourceTree = "<group>";
+		};
+		BAE733D12C18454D003EEFC5 /* KTag */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = KTag;
 			sourceTree = "<group>";
 		};
 		E9B576C029743F2A00BCE646 /* Localization */ = {
@@ -1070,7 +1075,6 @@
 				9F37BDE12BE38646007F28AD /* PostImageIntent.swift in Sources */,
 				9F37BDDF2BE37C35007F28AD /* TabIntent.swift in Sources */,
 				9F7788C02BE63935004E6BEF /* InlinePostIntent.swift in Sources */,
-				BABB55822C1735D4009F27D6 /* Tag.swift in Sources */,
 				9FAD85CF2975B68900496AB1 /* SideBarView.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
 				9FC14EF42B494D940006CEE1 /* RemoteTimelinesSettingView.swift in Sources */,
@@ -1182,7 +1186,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 730;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = X4RPB4Q33M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCubesNotifications/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = IceCubesNotifications;
@@ -1195,6 +1199,9 @@
 				);
 				MARKETING_VERSION = 1.10.41;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesNotifications";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.koyakei.IceCubesApp.IceCubesNotifications;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = com.koyakei.IceCubesApp.IceCubesNotifications;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=xros*]" = com.koyakei.IceCubesApp.IceCubesNotifications;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1255,7 +1262,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = X4RPB4Q33M;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCubesAppWidgetsExtension/Info.plist;
@@ -1269,6 +1276,8 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesAppWidgetsExtension";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.koyakei.IceCubesApp.IceCubesAppWidgetsExtension;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = com.koyakei.IceCubesApp.IceCubesAppWidgetsExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1325,7 +1334,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 730;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = X4RPB4Q33M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCubesShareExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ice Cubes";
@@ -1338,6 +1347,8 @@
 				);
 				MARKETING_VERSION = 1.10.41;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesShareExtension";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.koyakei.IceCubesApp.IceCubesShareExtension;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = com.koyakei.IceCubesApp.IceCubesShareExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1554,6 +1565,9 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.10.41;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.koyakei.IceCubesApp;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=macosx*]" = com.koyakei.IceCubesApp;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=xros*]" = com.koyakei.IceCubesApp;
 				PRODUCT_NAME = "Ice Cubes";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
@@ -1583,7 +1597,7 @@
 				CURRENT_PROJECT_VERSION = 730;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"IceCubesApp/Resources\"";
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = X4RPB4Q33M;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1632,7 +1646,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 730;
-				DEVELOPMENT_TEAM = "$(DEVELOPMENT_TEAM)";
+				DEVELOPMENT_TEAM = X4RPB4Q33M;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = IceCubesActionExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Open in Ice Cube";
@@ -1645,6 +1659,7 @@
 				);
 				MARKETING_VERSION = 1.10.41;
 				PRODUCT_BUNDLE_IDENTIFIER = "$(BUNDLE_ID_PREFIX).IceCubesApp.IceCubesActionExtension";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.koyakei.IceCubesApp.IceCubesActionExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
