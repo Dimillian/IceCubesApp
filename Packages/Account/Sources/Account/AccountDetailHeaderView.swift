@@ -48,11 +48,12 @@ struct AccountDetailHeaderView: View {
     }
     .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent, let latestEvent = latestEvent as? StreamEventNotification {
-        if latestEvent.notification.account.id == viewModel.accountId {
+        if latestEvent.notification.account.id == viewModel.accountId ||
+            latestEvent.notification.account.id == viewModel.premiumAccount?.id {
           Task {
             if viewModel.account?.isLinkedToPremiumAccount == true {
               await viewModel.fetchAccount()
-            } else {
+            } else{
               try? await viewModel.followButtonViewModel?.refreshRelationship()
             }
           }
@@ -333,9 +334,8 @@ struct AccountDetailHeaderView: View {
       Task {
         if viewModel.account?.isLinkedToPremiumAccount == true {
           try? await viewModel.followPremiumAccount()
-        } else {
-          try? await viewModel.followButtonViewModel?.follow()
         }
+        try? await viewModel.followButtonViewModel?.follow()
       }
     } label: {
       Text("$ Subscribe")
