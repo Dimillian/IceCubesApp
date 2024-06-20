@@ -99,6 +99,23 @@ public struct EditAccountView: View {
                 viewModel.isChangingHeader = true
                 viewModel.isPhotoPickerPresented = true
               }
+              if viewModel.avatar != nil || viewModel.header != nil {
+                  Divider()
+              }
+              if viewModel.avatar != nil {
+                  Button("account.edit.avatar.delete", role: .destructive) {
+                    Task {
+                      await viewModel.deleteAvatar()
+                    }
+                  }
+              }
+              if viewModel.header != nil {
+                  Button("account.edit.header.delete", role: .destructive) {
+                    Task {
+                      await viewModel.deleteHeader()
+                    }
+                  }
+              }
             } label: {
               Image(systemName: "photo.badge.plus")
                 .foregroundStyle(.white)
@@ -106,9 +123,11 @@ public struct EditAccountView: View {
             .buttonStyle(.borderedProminent)
             .clipShape(Circle())
             .offset(x: -8, y: 8)
+            .padding(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
           }
         }
       }
+      .frame(minWidth: 0, maxWidth: .infinity)
       .overlay {
         if viewModel.isChangingAvatar || viewModel.isChangingHeader {
           ZStack(alignment: .center) {
