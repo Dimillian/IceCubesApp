@@ -35,7 +35,7 @@ private struct SafariRouter: ViewModifier {
       .onOpenURL { url in
         // Open external URL (from icecubesapp://)
         guard !isSecondaryColumn else { return }
-        if url.absoluteString == "icecubesapp://socialproxy" {
+        if url.absoluteString == "icecubesapp://subclub" {
           safariManager.dismiss()
           return
         }
@@ -58,7 +58,7 @@ private struct SafariRouter: ViewModifier {
                     url.host() == AppInfo.premiumInstance,
                     let accountName = appAccount.currentAccount.accountName {
             let newURL = url.appending(queryItems: [
-              .init(name: "callback", value: "icecubesapp://socialproxy"),
+              .init(name: "callback", value: "icecubesapp://subclub"),
               .init(name: "id", value: "@\(accountName)")
             ])
             return safariManager.open(newURL)
