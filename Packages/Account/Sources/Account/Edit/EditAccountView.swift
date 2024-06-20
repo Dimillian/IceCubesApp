@@ -87,44 +87,42 @@ public struct EditAccountView: View {
             .frame(height: 150)
           }
         }
-        if let avatar = viewModel.avatar {
-          ZStack(alignment: .bottomLeading) {
-            AvatarView(avatar, config: .account)
-            Menu {
-              Button("account.edit.avatar") {
-                viewModel.isChangingAvatar = true
-                viewModel.isPhotoPickerPresented = true
-              }
-              Button("account.edit.header") {
-                viewModel.isChangingHeader = true
-                viewModel.isPhotoPickerPresented = true
-              }
-              if viewModel.avatar != nil || viewModel.header != nil {
-                  Divider()
-              }
-              if viewModel.avatar != nil {
-                  Button("account.edit.avatar.delete", role: .destructive) {
-                    Task {
-                      await viewModel.deleteAvatar()
-                    }
-                  }
-              }
-              if viewModel.header != nil {
-                  Button("account.edit.header.delete", role: .destructive) {
-                    Task {
-                      await viewModel.deleteHeader()
-                    }
-                  }
-              }
-            } label: {
-              Image(systemName: "photo.badge.plus")
-                .foregroundStyle(.white)
+        ZStack(alignment: .bottomLeading) {
+          AvatarView(viewModel.avatar, config: .account)
+          Menu {
+            Button("account.edit.avatar") {
+              viewModel.isChangingAvatar = true
+              viewModel.isPhotoPickerPresented = true
             }
-            .buttonStyle(.borderedProminent)
-            .clipShape(Circle())
-            .offset(x: -8, y: 8)
-            .padding(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
+            Button("account.edit.header") {
+              viewModel.isChangingHeader = true
+              viewModel.isPhotoPickerPresented = true
+            }
+            if viewModel.avatar != nil || viewModel.header != nil {
+                Divider()
+            }
+            if viewModel.avatar != nil {
+                Button("account.edit.avatar.delete", role: .destructive) {
+                  Task {
+                    await viewModel.deleteAvatar()
+                  }
+                }
+            }
+            if viewModel.header != nil {
+                Button("account.edit.header.delete", role: .destructive) {
+                  Task {
+                    await viewModel.deleteHeader()
+                  }
+                }
+            }
+          } label: {
+            Image(systemName: "photo.badge.plus")
+              .foregroundStyle(.white)
           }
+          .buttonStyle(.borderedProminent)
+          .clipShape(Circle())
+          .offset(x: -8, y: 8)
+          .padding(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
         }
       }
       .frame(minWidth: 0, maxWidth: .infinity)
