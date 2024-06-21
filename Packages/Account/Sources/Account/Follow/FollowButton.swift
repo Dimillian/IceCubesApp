@@ -14,7 +14,7 @@ import SwiftUI
   public let accountId: String
   public let shouldDisplayNotify: Bool
   public let relationshipUpdated: (Relationship) -> Void
-  public private(set) var relationship: Relationship
+  public var relationship: Relationship
 
   public init(client: Client,
               accountId: String,

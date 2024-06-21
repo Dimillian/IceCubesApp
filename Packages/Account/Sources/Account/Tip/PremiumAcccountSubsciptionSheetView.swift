@@ -123,7 +123,7 @@ struct PremiumAcccountSubsciptionSheetView: View {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         if let accountName = appAccount.currentAccount.accountName,
            let premiumUsername = account.premiumUsername,
-           let url = URL(string: "https://\(AppInfo.premiumInstance)/subscribe/to/\(premiumUsername)?callback=icecubesapp://subclub&id=@\(accountName)&amount=\(500)&currency=USD") {
+           let url = URL(string: "https://\(AppInfo.premiumInstance)/@\(premiumUsername)/subscribe?callback=icecubesapp://subclub&id=@\(accountName)&amount=\(500)&currency=USD") {
           openURL(url)
         }
       }

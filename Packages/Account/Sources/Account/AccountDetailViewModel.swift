@@ -142,13 +142,17 @@ import SwiftUI
       featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
       relationship = data.relationships.first
       if let relationship {
-        followButtonViewModel = .init(client: client,
-                                      accountId: accountId,
-                                      relationship: relationship,
-                                      shouldDisplayNotify: true,
-                                      relationshipUpdated: { [weak self] relationship in
-          self?.relationship = relationship
-        })
+        if let followButtonViewModel {
+          followButtonViewModel.relationship = relationship
+        } else {
+          followButtonViewModel = .init(client: client,
+                                        accountId: accountId,
+                                        relationship: relationship,
+                                        shouldDisplayNotify: true,
+                                        relationshipUpdated: { [weak self] relationship in
+            self?.relationship = relationship
+          })
+        }
       }
     } catch {
       if let account {
