@@ -332,6 +332,12 @@
             "state" : "translated",
             "value" : "%@"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
         }
       }
     },
@@ -713,6 +719,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ Mastodon'da yayınlandı"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 已在 Mastodon 发布"
           }
         }
       }
@@ -8934,6 +8946,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hesap"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account"
           }
         }
       }
@@ -20503,6 +20521,12 @@
             "state" : "translated",
             "value" : "Mastodon'a gönderim yapılırken bir hata oluştu, lütfen tekrar deneyin."
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在向 Mastodon 发 时出错，请重试。"
+          }
         }
       }
     },
@@ -20651,6 +20675,12 @@
             "state" : "translated",
             "value" : "Uygulama Hesabı"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppAccount"
+          }
         }
       }
     },
@@ -20713,6 +20743,12 @@
             "state" : "translated",
             "value" : "Gönderi oluştur"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "撰写一篇嘟文"
+          }
         }
       }
     },
@@ -20741,6 +20777,12 @@
             "state" : "translated",
             "value" : "Mastodon'a bir gönderi yazın"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "向 Mastodon 撰写一篇嘟文"
+          }
         }
       }
     },
@@ -20768,6 +20810,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mastodon'a gönderilecek gönderinin içeriği"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发布到 Mastodon 的嘟文内容"
           }
         }
       }
@@ -22337,6 +22385,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DeepL'e ulaşılamadı!\nAPI Anahtarı doğru mu?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法连接 DeepL！\n你的 API 密钥是正确的吗？"
           }
         }
       }
@@ -31163,6 +31217,12 @@
             "state" : "translated",
             "value" : "Yalnızca Takipçiler"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "仅关注者"
+          }
         }
       }
     },
@@ -31293,6 +31353,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Örnek"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "服务器"
           }
         }
       }
@@ -32858,6 +32924,12 @@
             "state" : "translated",
             "value" : "Ancak yine de örneğinizin çeviri hizmeti için bir yedek olarak kullanılabilir."
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "它仍可用作服务器翻译服务的备用。"
+          }
         }
       }
     },
@@ -32880,6 +32952,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Anahtar"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key"
           }
         }
       }
@@ -35469,7 +35547,7 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "设置 ..."
           }
         },
@@ -41022,6 +41100,12 @@
             "state" : "translated",
             "value" : "Resim ile bir durum gönder"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发布带图片的状态"
+          }
         }
       }
     },
@@ -41176,6 +41260,12 @@
             "state" : "translated",
             "value" : "Gönderi görünürlüğü"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "嘟文可见度"
+          }
         }
       }
     },
@@ -41203,6 +41293,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Özel"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "具体的人"
           }
         }
       }
@@ -41300,6 +41396,12 @@
             "state" : "translated",
             "value" : "Herkese Açık"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "公开"
+          }
         }
       }
     },
@@ -41327,6 +41429,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oldukça Açık"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "悄悄公开"
           }
         }
       }
@@ -41864,6 +41972,12 @@
             "state" : "translated",
             "value" : "Post gönder"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发送嘟文"
+          }
         }
       }
     },
@@ -41892,6 +42006,12 @@
             "state" : "translated",
             "value" : "Ice cubes ile Mastodon'a kısa mesaj gönder"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用 Ice Cubes 向 Mastodon 发布文本嘟文"
+          }
         }
       }
     },
@@ -41919,6 +42039,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gönderiyi Mastodon'a gönder"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发送嘟文至 Mastodon"
           }
         }
       }
@@ -61537,7 +61663,7 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "该功能需要 DeepL API 密钥"
           }
         },
@@ -76981,8 +77107,8 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
+            "state" : "translated",
+            "value" : "个人主页 (%@)"
           }
         },
         "zh-Hant" : {
@@ -77845,6 +77971,12 @@
             "state" : "translated",
             "value" : "DeepL API Anahtarı hala saklanıyor!"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API 密钥已存储！"
+          }
         }
       }
     },
@@ -77873,6 +78005,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Örneğinizin Çeviri Hizmetine ulaşılamadı!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法连接你的服务器翻译服务！"
           }
         }
       }
@@ -81771,6 +81909,12 @@
             "state" : "translated",
             "value" : "Zaman Çizelgesi Filtresi"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TimelineFilter"
+          }
         }
       }
     },
@@ -81799,6 +81943,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Çeviri servisi"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻译服务"
           }
         }
       }
@@ -82255,6 +82405,12 @@
             "state" : "translated",
             "value" : "Mastodon için bir gönderi oluşturmak için Ice Cubes kullanın"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用 Ice Cubes 向 Mastodon 发布嘟文"
+          }
         }
       }
     },
@@ -82282,6 +82438,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mastodon'da görsel içeren bir gönderi oluşturmak için Ice Cubes kullanın"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用 Ice Cubes 向 Mastodon 发布带有图片的嘟文"
           }
         }
       }
@@ -82369,6 +82531,12 @@
             "state" : "translated",
             "value" : "Görünürlük"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可见度"
+          }
         }
       }
     },
@@ -82396,6 +82564,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gönderinizin görünürlüğü"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "嘟文可见度"
           }
         }
       }
