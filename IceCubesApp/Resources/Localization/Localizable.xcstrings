@@ -69756,7 +69756,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your settings require alt text on all media before posting"
+            "value" : "你的设置要求在发布前为所有媒体添加描述文本"
           }
         },
         "zh-Hant" : {
