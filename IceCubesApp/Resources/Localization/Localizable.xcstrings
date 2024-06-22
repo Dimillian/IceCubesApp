@@ -32928,7 +32928,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "它仍可用作服务器翻译服务的备用。"
+            "value" : "它仍可用作为你所处服务器的翻译服务的备用。"
           }
         }
       }
@@ -78010,7 +78010,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "无法连接你的服务器翻译服务！"
+            "value" : "无法连接你的服务器的翻译服务！"
           }
         }
       }
