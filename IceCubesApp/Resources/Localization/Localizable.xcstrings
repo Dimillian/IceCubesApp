@@ -20525,7 +20525,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在向 Mastodon 发 时出错，请重试。"
+            "value" : "在向 Mastodon 发表嘟文时出错，请重试。"
           }
         }
       }
