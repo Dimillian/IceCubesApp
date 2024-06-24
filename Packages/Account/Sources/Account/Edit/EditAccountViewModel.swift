@@ -51,17 +51,19 @@ import SwiftUI
     didSet {
       if let item = mediaPickers.first {
         Task {
-          if let data = await getItemImageData(item: item) {
             if isChangingAvatar {
-              _ = await uploadAvatar(data: data)
+              if let data = await getItemImageData(item: item, for: .avatar) {
+                _ = await uploadAvatar(data: data)
+              }
+              isChangingAvatar = false
             } else if isChangingHeader {
-              _ = await uploadHeader(data: data)
+              if let data = await getItemImageData(item: item, for: .header) {
+                _ = await uploadHeader(data: data)
+              }
+              isChangingHeader = false
             }
             await fetchAccount()
-            isChangingAvatar = false
-            isChangingHeader = false
             mediaPickers = []
-          }
         }
       }
     }
@@ -140,16 +142,48 @@ import SwiftUI
     }
   }
 
-  private func getItemImageData(item: PhotosPickerItem) async -> Data? {
+  private func getItemImageData(item: PhotosPickerItem, for type: ItemType) async -> Data? {
     guard let imageFile = try? await item.loadTransferable(type: StatusEditor.ImageFileTranseferable.self) else { return nil }
 
     let compressor = StatusEditor.Compressor()
 
     guard let compressedData = await compressor.compressImageFrom(url: imageFile.url),
           let image = UIImage(data: compressedData),
-          let uploadData = try? await compressor.compressImageForUpload(image)
-    else { return nil }
+          let uploadData = try? await compressor.compressImageForUpload(
+            image,
+            maxSize: 2 * 1024 * 1024, // 2MB
+            maxHeight: type.maxHeight,
+            maxWidth: type.maxWidth
+          )
+    else {
+      return nil
+    }
 
     return uploadData
   }
+}
+
+extension EditAccountViewModel {
+    private enum ItemType {
+        case avatar
+        case header
+
+        var maxHeight: CGFloat {
+            switch self {
+            case .avatar:
+                400
+            case .header:
+                500
+            }
+        }
+
+        var maxWidth: CGFloat {
+            switch self {
+            case .avatar:
+                400
+            case .header:
+                1500
+            }
+        }
+    }
 }
