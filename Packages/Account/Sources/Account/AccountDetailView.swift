@@ -81,7 +81,7 @@ public struct AccountDetailView: View {
                          client: client,
                          routerPath: routerPath)
       }
-      .environment(\.defaultMinListRowHeight, 1)
+      .environment(\.defaultMinListRowHeight, 0)
       .listStyle(.plain)
       #if !os(visionOS)
         .scrollContentBackground(.hidden)
