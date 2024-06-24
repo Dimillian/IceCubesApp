@@ -23,7 +23,7 @@ let package = Package(
     .package(name: "StatusKit", path: "../StatusKit"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
     .package(url: "https://github.com/siteline/swiftui-introspect", exact: "1.2.0"),
-    .package(url: "https://github.com/Dimillian/Bodega", branch: "main"),
+    .package(url: "https://github.com/mergesort/Bodega", exact: "2.1.3"),
   ],
   targets: [
     .target(
