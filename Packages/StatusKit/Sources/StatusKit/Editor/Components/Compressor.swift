@@ -57,28 +57,43 @@ public extension StatusEditor {
       }
     }
 
-    public func compressImageForUpload(_ image: UIImage) async throws -> Data {
+    public func compressImageForUpload(
+        _ image: UIImage,
+        maxSize: Int = 10 * 1024 * 1024,
+        maxHeight: Double = 5000,
+        maxWidth: Double = 5000
+    ) async throws -> Data {
       var image = image
-      if image.size.height > 5000 || image.size.width > 5000 {
-        image = image.resized(to: .init(width: image.size.width / 4,
-                                        height: image.size.height / 4))
+
+      if image.size.height > maxHeight || image.size.width > maxWidth {
+        let heightFactor = image.size.height / maxHeight
+        let widthFactor = image.size.width / maxWidth
+        let maxFactor = max(heightFactor, widthFactor)
+
+        image = image.resized(to: .init(width: image.size.width / maxFactor,
+                                        height: image.size.height / maxFactor))
       }
 
       guard var imageData = image.jpegData(compressionQuality: 0.8) else {
         throw CompressorError.noData
       }
 
-      let maxSize = 10 * 1024 * 1024
-
+      var compressionQualityFactor: CGFloat = 0.8
       if imageData.count > maxSize {
-        while imageData.count > maxSize {
+        while imageData.count > maxSize && compressionQualityFactor >= 0 {
           guard let compressedImage = UIImage(data: imageData),
-                let compressedData = compressedImage.jpegData(compressionQuality: 0.8)
+                let compressedData = compressedImage.jpegData(compressionQuality: compressionQualityFactor)
           else {
             throw CompressorError.noData
           }
+
           imageData = compressedData
+          compressionQualityFactor -= 0.1
         }
+      }
+
+      if imageData.count > maxSize && compressionQualityFactor <= 0 {
+        throw CompressorError.noData
       }
 
       return imageData
