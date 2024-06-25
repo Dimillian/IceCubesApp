@@ -9,6 +9,7 @@ struct ToolbarTab: ToolbarContent {
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
   @Environment(UserPreferences.self) private var userPreferences
+  @Environment(Theme.self) private var theme
 
   @Binding var routerPath: RouterPath
 
@@ -35,7 +36,7 @@ struct ToolbarTab: ToolbarContent {
         (UIDevice.current.userInterfaceIdiom == .pad && horizontalSizeClass == .compact)
       {
         ToolbarItem(placement: .navigationBarLeading) {
-          AppAccountsSelectorView(routerPath: routerPath)
+          AppAccountsSelectorView(routerPath: routerPath, avatarConfig: theme.avatarShape == .circle ? .badge : .badgeRounded)
         }
       }
     }

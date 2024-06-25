@@ -53,6 +53,7 @@ public struct AvatarView: View {
     #endif
     public static let embed = FrameConfig(width: 34, height: 34)
     public static let badge = FrameConfig(width: 28, height: 28, cornerRadius: 14)
+    public static let badgeRounded = FrameConfig(width: 28, height: 28)
     public static let list = FrameConfig(width: 20, height: 20, cornerRadius: 10)
     public static let boost = FrameConfig(width: 12, height: 12, cornerRadius: 6)
   }
