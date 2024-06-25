@@ -12,7 +12,7 @@ struct TimelineFilterTests {
                     TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: nil),
                     TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: "test"),
                     TimelineFilter.hashtag(tag: "test", accountId: nil),
-                    TimelineFilter.list(list: .init(id: "test", title: "test"))])
+                    TimelineFilter.list(list: .init(id: "test", title: "test", repliesPolicy: .list, exclusive: true))])
   func timelineCanEncodeAndDecode(filter: TimelineFilter) {
     #expect(testCodableOn(filter: filter))
   }
