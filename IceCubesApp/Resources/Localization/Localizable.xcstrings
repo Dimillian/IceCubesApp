@@ -13465,6 +13465,23 @@
         }
       }
     },
+    "account.edit.avatar.delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete avatar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer l'avatar"
+          }
+        }
+      }
+    },
     "account.edit.display-name" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -13937,6 +13954,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "更換橫幅圖片"
+          }
+        }
+      }
+    },
+    "account.edit.header.delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete header"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer la bannière"
           }
         }
       }
