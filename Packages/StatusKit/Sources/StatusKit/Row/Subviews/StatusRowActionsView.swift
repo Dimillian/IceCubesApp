@@ -212,6 +212,7 @@ struct StatusRowActionsView: View {
         }
       }
     }
+    .fixedSize(horizontal: false, vertical: true)
     .sheet(isPresented: $showTextForSelection) {
       let content = viewModel.status.reblog?.content.asSafeMarkdownAttributedString ?? viewModel.status.content.asSafeMarkdownAttributedString
       SelectTextView(content: content)
