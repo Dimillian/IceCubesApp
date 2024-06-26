@@ -82,8 +82,8 @@ import SwiftUI
       isBot = account.bot
       isLocked = account.locked
       isDiscoverable = account.discoverable ?? false
-      avatar = account.avatar
-      header = account.header
+      avatar = account.haveAvatar ? account.avatar : nil
+      header = account.haveHeader ? account.header : nil
       fields = account.source?.fields.map { .init(name: $0.name, value: $0.value.asRawText) } ?? []
       withAnimation {
         isLoading = false
@@ -109,6 +109,28 @@ import SwiftUI
     } catch {
       isSaving = false
       saveError = true
+    }
+  }
+
+  func deleteAvatar() async -> Bool {
+    guard let client else { return false }
+    do {
+      let response = try await client.delete(endpoint: Profile.deleteAvatar)
+      avatar = nil
+      return response?.statusCode == 200
+    } catch {
+      return false
+    }
+  }
+
+  func deleteHeader() async -> Bool {
+    guard let client else { return false }
+    do {
+      let response = try await client.delete(endpoint: Profile.deleteHeader)
+      header = nil
+      return response?.statusCode == 200
+    } catch {
+      return false
     }
   }
 
