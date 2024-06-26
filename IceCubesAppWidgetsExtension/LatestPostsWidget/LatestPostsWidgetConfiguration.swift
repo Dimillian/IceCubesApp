@@ -2,7 +2,7 @@ import AppIntents
 import WidgetKit
 
 struct LatestPostsWidgetConfiguration: WidgetConfigurationIntent {
-  static let title: LocalizedStringResource = "Configuration"
+  static let title: LocalizedStringResource = "Timeline Widget Configuration"
   static let description = IntentDescription("Choose the account and timeline for this widget")
 
   @Parameter(title: "Account")
