@@ -47,6 +47,7 @@ struct StatusRowHeaderView: View {
           Group {
             EmojiTextApp(viewModel.finalStatus.account.cachedDisplayName,
                          emojis: viewModel.finalStatus.account.emojis)
+              .fixedSize(horizontal: false, vertical: true)
               .font(.scaledSubheadline)
               .foregroundColor(theme.labelColor)
               .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
@@ -59,6 +60,7 @@ struct StatusRowHeaderView: View {
 
             if !redactionReasons.contains(.placeholder) {
               accountBadgeView
+                .fixedSize(horizontal: false, vertical: true)
                 .font(.footnote)
             }
           }
@@ -69,6 +71,7 @@ struct StatusRowHeaderView: View {
             theme.avatarPosition == .top
           {
             Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
+              .fixedSize(horizontal: false, vertical: true)
               .font(.scaledFootnote)
               .foregroundStyle(.secondary)
               .lineLimit(1)
@@ -96,6 +99,7 @@ struct StatusRowHeaderView: View {
         Text(" ⸱ ") +
         Text(viewModel.finalStatus.createdAt.relativeFormatted)
     }
+    .fixedSize(horizontal: false, vertical: true)
     .font(.scaledFootnote)
     .foregroundStyle(.secondary)
     .lineLimit(1)
