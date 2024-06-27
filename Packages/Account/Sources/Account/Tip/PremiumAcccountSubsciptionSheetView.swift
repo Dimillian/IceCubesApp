@@ -11,6 +11,7 @@ struct PremiumAcccountSubsciptionSheetView: View {
   @Environment(Theme.self) private var theme: Theme
   @Environment(\.openURL) private var openURL
   @Environment(AppAccountsManager.self) private var appAccount: AppAccountsManager
+  @Environment(\.colorScheme) private var colorScheme
   
   @State private var isSubscibeSelected: Bool = false
   
@@ -123,7 +124,7 @@ struct PremiumAcccountSubsciptionSheetView: View {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         if let accountName = appAccount.currentAccount.accountName,
            let premiumUsername = account.premiumUsername,
-           let url = URL(string: "https://\(AppInfo.premiumInstance)/@\(premiumUsername)/subscribe?callback=icecubesapp://subclub&id=@\(accountName)&amount=\(500)&currency=USD") {
+           let url = URL(string: "https://\(AppInfo.premiumInstance)/@\(premiumUsername)/subscribe?callback=icecubesapp://subclub&id=@\(accountName)&amount=\(500)&currency=USD&theme=\(colorScheme)") {
           openURL(url)
         }
       }
