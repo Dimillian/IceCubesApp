@@ -9,5 +9,5 @@ public enum AppInfo {
   public static let revenueCatKey = "appl_JXmiRckOzXXTsHKitQiicXCvMQi"
   public static let defaultServer = "mastodon.social"
   public static let keychainGroup = "346J38YKE3.com.thomasricouard.IceCubesApp"
-  public static let premiumInstance = "sub.club"
+  public static let premiumInstance = "subclub.social"
 }
