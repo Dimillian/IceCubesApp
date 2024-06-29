@@ -9,6 +9,11 @@ import SwiftUI
 
 @MainActor
 @Observable public class StatusRowViewModel {
+//    var kTagListViewModel:  KTagWithRelationListViewModel {
+//        get{
+//            return KTagWithRelationListViewModel.init(kTagRelations: status.kTagRelations ?? KTagRelations.init(addedKTagRelationList: Set(), addingKTagRelationRequestedList: Set(), deletingKTagRelationRequestedList: Set()), client: client, statusId: status.id)
+//        }
+//    }
   let status: Status
   // Whether this status is on a remote local timeline (many actions are unavailable if so)
   let isRemote: Bool
@@ -115,7 +120,6 @@ import SwiftUI
       theme.primaryBackgroundColor
     }
   }
-
   public init(status: Status,
               client: Client,
               routerPath: RouterPath,
@@ -197,6 +201,12 @@ import SwiftUI
     let relationships: [Relationship]? = try? await client.get(endpoint: Accounts.relationships(ids: [status.reblog?.account.id ?? status.account.id]))
     authorRelationship = relationships?.first
   }
+    
+    
+    
+    func cancelAddKTagRelationRequest(id: String) async{
+        let deletedId = try? await client.delete(endpoint: KTagAddRelationRequests.delete(id: id))
+    }
 
   private func embededStatusURL() -> URL? {
     let content = finalStatus.content
