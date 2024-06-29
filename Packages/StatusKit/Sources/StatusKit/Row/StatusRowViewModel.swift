@@ -11,7 +11,7 @@ import SwiftUI
 @Observable public class StatusRowViewModel {
     var kTagListViewModel:  KTagWithRelationListViewModel {
         get{
-            return KTagWithRelationListViewModel.init(kTagRelations: status.kTagRelations, client: client, statusId: status.id)
+            return KTagWithRelationListViewModel.init(kTagRelations: status.kTagRelations ?? KTagRelations.init(addedKTagRelationList: Set(), addingKTagRelationRequestedList: Set(), deletingKTagRelationRequestedList: Set()), client: client, statusId: status.id)
         }
     }
   var status: Status

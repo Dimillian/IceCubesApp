@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct KTagRelations:Codable{
+public struct KTagRelations: Codable{
     public var addedKTagRelationList: Set<AddedKTagRelation>
     public var addingKTagRelationRequestedList: Set<AddingKTagRelationRequested>
     public var deletingKTagRelationRequestedList: Set<DeletingKTagRelationRequested>
