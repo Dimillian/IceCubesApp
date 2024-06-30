@@ -1,4 +1,6 @@
 import Foundation
+import AnyCodable
+
 
 public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable, Sendable {
   case pub = "public"
@@ -75,12 +77,45 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
-//  public let kTagRelations: KTagRelations?
-    
+    public let kTagRelations: [AddedKTagRelation]
+    public let kTagAddRealationRequests: [AddingKTagRelationRequested]
   public var isHidden: Bool {
     filtered?.first?.filter.filterAction == .hide
   }
-
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.content = try container.decode(HTMLString.self, forKey: .content)
+        self.account = try container.decode(Account.self, forKey: .account)
+        self.createdAt = try container.decode(ServerDate.self, forKey: .createdAt)
+        self.editedAt = try container.decodeIfPresent(ServerDate.self, forKey: .editedAt)
+        self.reblog = try container.decodeIfPresent(ReblogStatus.self, forKey: .reblog)
+        self.mediaAttachments = try container.decode([MediaAttachment].self, forKey: .mediaAttachments)
+        self.mentions = try container.decode([Mention].self, forKey: .mentions)
+        self.repliesCount = try container.decode(Int.self, forKey: .repliesCount)
+        self.reblogsCount = try container.decode(Int.self, forKey: .reblogsCount)
+        self.favouritesCount = try container.decode(Int.self, forKey: .favouritesCount)
+        self.card = try container.decodeIfPresent(Card.self, forKey: .card)
+        self.favourited = try container.decodeIfPresent(Bool.self, forKey: .favourited)
+        self.reblogged = try container.decodeIfPresent(Bool.self, forKey: .reblogged)
+        self.pinned = try container.decodeIfPresent(Bool.self, forKey: .pinned)
+        self.bookmarked = try container.decodeIfPresent(Bool.self, forKey: .bookmarked)
+        self.emojis = try container.decode([Emoji].self, forKey: .emojis)
+        self.url = try container.decodeIfPresent(String.self, forKey: .url)
+        self.application = try container.decodeIfPresent(Application.self, forKey: .application)
+        self.inReplyToId = try container.decodeIfPresent(String.self, forKey: .inReplyToId)
+        self.inReplyToAccountId = try container.decodeIfPresent(String.self, forKey: .inReplyToAccountId)
+        self.visibility = try container.decode(Visibility.self, forKey: .visibility)
+        self.poll = try container.decodeIfPresent(Poll.self, forKey: .poll)
+        self.spoilerText = try container.decode(HTMLString.self, forKey: .spoilerText)
+        self.filtered = try container.decodeIfPresent([Filtered].self, forKey: .filtered)
+        self.sensitive = try container.decode(Bool.self, forKey: .sensitive)
+        
+        self.kTagAddRealationRequests = try container.decodeIfPresent([AddingKTagRelationRequested].self, forKey: .kTagAddRealationRequests) ?? []
+        self.kTagRelations = try container.decodeIfPresent([AddedKTagRelation].self, forKey: .kTagRelations) ?? []
+        self.language = try container.decodeIfPresent(String.self, forKey: .language)
+    }
+    
     public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application?, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?
 //                , addedKTagRelations: KTagRelations?
     ) {
@@ -111,7 +146,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
     self.filtered = filtered
     self.sensitive = sensitive
     self.language = language
-//        self.kTagRelations = nil
+    self.kTagRelations = []
+    self.kTagAddRealationRequests = []
   }
 
   public static func placeholder(forSettings: Bool = false, language: String? = nil) -> Status {

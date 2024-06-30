@@ -12,11 +12,34 @@ public struct KTagRelations: Codable, Sendable{
     public var addingKTagRelationRequestedList: Set<AddingKTagRelationRequested>
     public var deletingKTagRelationRequestedList: Set<DeletingKTagRelationRequested>
     
-    public init(addedKTagRelationList: Set<AddedKTagRelation>, addingKTagRelationRequestedList: Set<AddingKTagRelationRequested>, deletingKTagRelationRequestedList: Set<DeletingKTagRelationRequested>) {
+    public init(addedKTagRelationList: Set<AddedKTagRelation>,
+                addingKTagRelationRequestedList: Set<AddingKTagRelationRequested>,
+                deletingKTagRelationRequestedList: Set<DeletingKTagRelationRequested>) {
         self.addedKTagRelationList = addedKTagRelationList
         self.addingKTagRelationRequestedList = addingKTagRelationRequestedList
         self.deletingKTagRelationRequestedList = deletingKTagRelationRequestedList
     }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        print("KTagRelations　Container contents:")
+            for key in container.allKeys {
+                print("\(key.stringValue)")
+                
+            }
+        do {
+            self.addedKTagRelationList = try container.decode(Set<AddedKTagRelation>.self, forKey: .addedKTagRelationList)
+        } catch {
+            print("KTagRelationsDecoding error: \(error)")
+            print(container)
+            self.addedKTagRelationList = Set<AddedKTagRelation>()
+            // エラーハンドリングのコードをここに追加
+        }
+        
+        self.addingKTagRelationRequestedList = try container.decodeIfPresent(Set<AddingKTagRelationRequested>.self, forKey: .addingKTagRelationRequestedList) ?? Set<AddingKTagRelationRequested> ()
+        self.deletingKTagRelationRequestedList = try container.decodeIfPresent(Set<DeletingKTagRelationRequested>.self, forKey: .deletingKTagRelationRequestedList) ?? Set<DeletingKTagRelationRequested> ()
+    }
+    
     public mutating func remove(_ tagAndRelation: AddedKTagRelation){
         addedKTagRelationList.remove(tagAndRelation)
         addingKTagRelationRequestedList = addingKTagRelationRequestedList.filter{

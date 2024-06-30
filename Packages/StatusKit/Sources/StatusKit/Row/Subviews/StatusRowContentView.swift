@@ -20,13 +20,13 @@ struct StatusRowContentView: View {
     }
 //      KTagWithRelationListView(viewModel: KTagWithRelationListViewModel(kTagRelations: viewModel.status.kTagRelations ?? KTagRelations.init(addedKTagRelationList: Set(), addingKTagRelationRequestedList: Set(), deletingKTagRelationRequestedList: Set()), client: viewModel.client, statusId: viewModel.status.id))
 //      //TODO これで参照渡しできてるの？
-//      NavigationLink(destination: KTagSearchAndAddView(  viewModel: KTagWithRelationListViewModel(kTagRelations: viewModel.status.kTagRelations ?? KTagRelations.init(addedKTagRelationList: Set(), addingKTagRelationRequestedList: Set(), deletingKTagRelationRequestedList: Set()), client: viewModel.client, statusId: viewModel.status.id))) {
-//          Text("追加")
-//              .foregroundColor(.white)
-//              .padding()
-//              .background(Color.blue)
-//              .cornerRadius(8)
-//      }
+      NavigationLink(destination: KTagSearchAndAddView( viewModel: KTagWithRelationListViewModel.init(client: viewModel.client, statusId: viewModel.status.id), client: viewModel.client)) {
+          Text("追加")
+              .foregroundColor(.white)
+              .padding()
+              .background(Color.blue)
+              .cornerRadius(8)
+      }
     if !viewModel.displaySpoiler {
       StatusRowTextView(viewModel: viewModel)
       if !reasons.contains(.placeholder) {

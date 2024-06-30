@@ -24,8 +24,10 @@ struct KTagSearchAndAddView : View, Sendable {
                 
                 do {
                     searchResults = try await client.get(endpoint: KTagRequests.search(query: searchText, type: nil, offset: nil, following: nil))
+                    print("fff")
                 } catch {
-                    searchResults = []
+                    print(error)
+//                    searchResults = []
                 }
             }
     var body: some View {
@@ -42,44 +44,40 @@ struct KTagSearchAndAddView : View, Sendable {
                     }
                 }
             // 検索候補の表示
-            if !searchText.isEmpty {
-                List {
-                    ForEach(searchResults) { tag in
-                        Button(action: {
-                            Task{
-                                await viewModel.addKTagRelationRequest(tagId: tag.id)
-                            }
-                            self.selectedTag.append(tag)
-                        }) {
-                            Text(tag.name)
-                        }.foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-                    }
-                }
-                .listStyle(PlainListStyle())
-            }
+//            if !searchText.isEmpty {
+//                List {
+//                    ForEach(searchResults) { tag in
+//                        Button(action: {
+//                            Task{
+//                                await viewModel.addKTagRelationRequest(tagId: tag.id)
+//                            }
+//                            self.selectedTag.append(tag)
+//                        }) {
+//                            Text(tag.name)
+//                        }.foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+//                    }
+//                }
+//                .listStyle(PlainListStyle())
+//            }
             
             // 選択されたタグの表示 追加候補になったら追加
-            if !self.selectedTag.isEmpty {
+//            if !self.selectedTag.isEmpty {
                 Text("Selected Tags:")
                     .font(.headline)
                     .padding(.top)
-                
-                ForEach(selectedTag) { tag in
-                    Button(action: {
-                        viewModel.del(tagId: tag.id)
-                        selectedTag.removeAll(where: {$0.id == tag.id})
-                    }) {
-                        Text(tag.name)
-                            .padding(4)
-                            .background(Color.blue.opacity(0.2))
-                            .cornerRadius(8)
+            Text(String(searchResults.count))
+                if !searchResults.isEmpty{
+                    ForEach(searchResults) { tag in
+    //                    Button(action: {
+    ////                        viewModel.del(tagId: tag.id)
+    //                        selectedTag.removeAll(where: {$0.id == tag.id})
+    //                    }) {
+                        Text(tag.name).font(.headline)
+    //                    }
                     }
                 }
-            }
-            
-            Spacer()
         }.onAppear(perform: {
-            selectedTag = viewModel.kTags
+//            selectedTag = viewModel.kTags
         })
 //        .onDisappear(perform: {
 //            //selectedTag - viewModel.kTags
@@ -100,76 +98,76 @@ struct KTagWithRelationListView: View {
     // stream から削除信号が来たらタグを消す
     var body: some View {
         HStack{
-            let array = Array(viewModel.kTagRelations.addedKTagRelationList)
-            ForEach(array, id: \.id){ kTagRelation in
-                Button(action: {
-                    showAlert = true
-                }, label: {
-                    Text(kTagRelation.kTag.name)
-                        .padding(4)
-                        .background(Color.blue.opacity(0.2))
-                        .cornerRadius(8)
-                }).foregroundColor(color(kTagRelation))
-                    .alert(isPresented: $showAlert) {
-                        Alert(
-                            title: Text("Confirmation"),
-                            message: Text("Do you want to proceed?"),
-                            primaryButton: .default(Text("OK"), action: {
-                                Task {
-                                    await viewModel.deleteKTagRelationRequest(kTagRelation: kTagRelation)
-                                }
-                            }),
-                            secondaryButton: .cancel()
-                        )
-                    }
-            }
-            let array2 = Array(viewModel.kTagRelations.addingKTagRelationRequestedList)
-            ForEach(array2, id: \.kTagId){ kTagRelation in
-                Button(action: {
-                    showAlert = true
-                }, label: {
-                    Text(kTagRelation.kTag.name)
-                        .padding(4)
-                        .background(Color.blue.opacity(0.2))
-                        .cornerRadius(8)
-                }).foregroundColor(color(kTagRelation))
-                    .alert(isPresented: $showAlert) {
-                        Alert(
-                            title: Text("Confirmation"),
-                            message: Text("Do you want to proceed?"),
-                            primaryButton: .default(Text("OK"), action: {
-                                Task {
-                                    await viewModel.deleteKTagRelationRequest(kTagRelation: kTagRelation)
-                                }
-                            }),
-                            secondaryButton: .cancel()
-                        )
-                    }
-        }
-            
-            let array3  = Array(viewModel.kTagRelations.deletingKTagRelationRequestedList)
-            ForEach(array3, id: \.id){ kTagRelation in
-                Button(action: {
-                    showAlert = true
-                }, label: {
-                    Text(kTagRelation.kTag.name)
-                        .padding(4)
-                        .background(Color.blue.opacity(0.2))
-                        .cornerRadius(8)
-                }).foregroundColor(color(kTagRelation))
-                    .alert(isPresented: $showAlert) {
-                        Alert(
-                            title: Text("Confirmation"),
-                            message: Text("Do you want to proceed?"),
-                            primaryButton: .default(Text("OK"), action: {
-                                Task {
-                                    await viewModel.addKTagRelationRequest(kTagRelation: kTagRelation)//Sending main actor-isolated 'self.viewModel' to nonisolated instance method 'addKTagRelationRequest(kTagRelation:)' risks causing data races between nonisolated and main actor-isolated uses
-                                }
-                            }),
-                            secondaryButton: .cancel()
-                        )
-                    }
-            }
+//            let array = Array(viewModel.kTagRelations.addedKTagRelationList)
+//            ForEach(array, id: \.id){ kTagRelation in
+//                Button(action: {
+//                    showAlert = true
+//                }, label: {
+//                    Text(kTagRelation.kTag.name)
+//                        .padding(4)
+//                        .background(Color.blue.opacity(0.2))
+//                        .cornerRadius(8)
+//                }).foregroundColor(color(kTagRelation))
+//                    .alert(isPresented: $showAlert) {
+//                        Alert(
+//                            title: Text("Confirmation"),
+//                            message: Text("Do you want to proceed?"),
+//                            primaryButton: .default(Text("OK"), action: {
+//                                Task {
+//                                    await viewModel.deleteKTagRelationRequest(kTagRelation: kTagRelation)
+//                                }
+//                            }),
+//                            secondaryButton: .cancel()
+//                        )
+//                    }
+//            }
+//            let array2 = Array(viewModel.kTagRelations.addingKTagRelationRequestedList)
+//            ForEach(array2, id: \.kTagId){ kTagRelation in
+//                Button(action: {
+//                    showAlert = true
+//                }, label: {
+//                    Text(kTagRelation.kTag.name)
+//                        .padding(4)
+//                        .background(Color.blue.opacity(0.2))
+//                        .cornerRadius(8)
+//                }).foregroundColor(color(kTagRelation))
+//                    .alert(isPresented: $showAlert) {
+//                        Alert(
+//                            title: Text("Confirmation"),
+//                            message: Text("Do you want to proceed?"),
+//                            primaryButton: .default(Text("OK"), action: {
+//                                Task {
+//                                    await viewModel.deleteKTagRelationRequest(kTagRelation: kTagRelation)
+//                                }
+//                            }),
+//                            secondaryButton: .cancel()
+//                        )
+//                    }
+//        }
+//            
+//            let array3  = Array(viewModel.kTagRelations.deletingKTagRelationRequestedList)
+//            ForEach(array3, id: \.id){ kTagRelation in
+//                Button(action: {
+//                    showAlert = true
+//                }, label: {
+//                    Text(kTagRelation.kTag.name)
+//                        .padding(4)
+//                        .background(Color.blue.opacity(0.2))
+//                        .cornerRadius(8)
+//                }).foregroundColor(color(kTagRelation))
+//                    .alert(isPresented: $showAlert) {
+//                        Alert(
+//                            title: Text("Confirmation"),
+//                            message: Text("Do you want to proceed?"),
+//                            primaryButton: .default(Text("OK"), action: {
+//                                Task {
+//                                    await viewModel.addKTagRelationRequest(kTagRelation: kTagRelation)//Sending main actor-isolated 'self.viewModel' to nonisolated instance method 'addKTagRelationRequest(kTagRelation:)' risks causing data races between nonisolated and main actor-isolated uses
+//                                }
+//                            }),
+//                            secondaryButton: .cancel()
+//                        )
+//                    }
+//            }
         }
     }
     

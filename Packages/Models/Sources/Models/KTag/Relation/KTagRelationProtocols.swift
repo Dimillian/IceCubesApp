@@ -31,9 +31,8 @@ public protocol NotIdentifiedKTagAddRelationRequestWithKTagDataProtocol: NotIden
     var kTag: KTag {get}
 }
 
-public protocol NotCreatedYetKTagRelationForSearchAndAddProtocol: NotIdentifiedKTagAddRelationRequestDataProtocol, Codable{
-    func encode(to encoder: Encoder) throws
-    init(from decoder: Decoder) throws
+public protocol NotCreatedYetKTagRelationForSearchAndAddProtocol: NotIdentifiedKTagAddRelationRequestDataProtocol{
+    
 }
 
 public protocol CreatedKTagRelationWithKTagProtocol:NotIdentifiedKTagAddRelationRequestWithKTagDataProtocol, IdentifiedDataProtocol{

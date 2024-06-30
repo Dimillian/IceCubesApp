@@ -133,6 +133,7 @@
 		9FFF677C299B7B2C00FE700A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677B299B7B2C00FE700A /* Notifications */; };
 		9FFF6780299B7D2B00FE700A /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677F299B7D2B00FE700A /* DesignSystem */; };
 		9FFF6782299B7D3A00FE700A /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF6781299B7D3A00FE700A /* Account */; };
+		BA31E7332C30D637004F4D8E /* AnyCodable in Frameworks */ = {isa = PBXBuildFile; productRef = BA31E7322C30D637004F4D8E /* AnyCodable */; };
 		C9B22677297F6C2E001F9EFE /* ContentSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B22676297F6C2E001F9EFE /* ContentSettingsView.swift */; };
 		D08A9C3529956CFA00204A4A /* SwipeActionsSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D08A9C3429956CFA00204A4A /* SwipeActionsSettingsView.swift */; };
 		DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */; };
@@ -389,6 +390,7 @@
 				9F398AA92935FFDB00A889F2 /* Account in Frameworks */,
 				9FBFE64E292A72BD00C250E9 /* Network in Frameworks */,
 				9FD542E72962D2FF0045321A /* Lists in Frameworks */,
+				BA31E7332C30D637004F4D8E /* AnyCodable in Frameworks */,
 				9F398AAB2935FFDB00A889F2 /* Models in Frameworks */,
 				9F5E581929545BE700A53960 /* Env in Frameworks */,
 				DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */,
@@ -846,6 +848,7 @@
 				9FC2A38A2B49D19A00DFD1C1 /* StatusKit */,
 				9FE4CCAA2B4C848A00DA5F13 /* GiphyUISDK */,
 				9FE6A42D2BD043A90055D388 /* RevenueCat */,
+				BA31E7322C30D637004F4D8E /* AnyCodable */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* Ice Cubes.app */;
@@ -931,6 +934,7 @@
 				DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				9FE4CCA92B4C848A00DA5F13 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */,
 				9FE6A42C2BD043A80055D388 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				BA31E7312C30D5F1004F4D8E /* XCRemoteSwiftPackageReference "AnyCodable" */,
 			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
@@ -1773,6 +1777,14 @@
 				minimumVersion = 4.40.1;
 			};
 		};
+		BA31E7312C30D5F1004F4D8E /* XCRemoteSwiftPackageReference "AnyCodable" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Flight-School/AnyCodable";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.7;
+			};
+		};
 		DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
@@ -1933,6 +1945,11 @@
 		9FFF6781299B7D3A00FE700A /* Account */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Account;
+		};
+		BA31E7322C30D637004F4D8E /* AnyCodable */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA31E7312C30D5F1004F4D8E /* XCRemoteSwiftPackageReference "AnyCodable" */;
+			productName = AnyCodable;
 		};
 		DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -25,6 +25,13 @@ public struct KTag: KtagProtocol{
     public let name: String
     public let isOwned: Bool
     
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.accountId = try container.decode(String.self, forKey: .accountId)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.name = try container.decode(String.self, forKey: .name)
+        self.isOwned = try container.decode(Bool.self, forKey: .isOwned)
+    }
     
     init(kTagSearchResult: KTagAddingCandidate){
         self.id = kTagSearchResult.id
