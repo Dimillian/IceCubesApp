@@ -38,6 +38,10 @@ import Observation
   public var isNotificationsFilterSupported: Bool {
     version >= 4.3
   }
+  
+  public var isLinkTimelineSupported: Bool {
+    version >= 4.3
+  }
 
   private init() {}
 
