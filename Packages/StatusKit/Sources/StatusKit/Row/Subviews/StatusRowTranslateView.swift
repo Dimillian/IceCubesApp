@@ -66,7 +66,7 @@ struct StatusRowTranslateView: View {
     generalTranslateButton
       .onChange(of: preferences.preferredTranslationType) { _, _ in
         withAnimation {
-          _ = viewModel.updatePreferredTranslation()
+          viewModel.updatePreferredTranslation()
         }
       }
 

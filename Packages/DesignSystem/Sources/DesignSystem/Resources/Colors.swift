@@ -18,7 +18,7 @@ public extension Color {
   }
 }
 
-extension Color: RawRepresentable {
+extension Color: @retroactive RawRepresentable {
   public init?(rawValue: Int) {
     let red = Double((rawValue & 0xFF0000) >> 16) / 0xFF
     let green = Double((rawValue & 0x00FF00) >> 8) / 0xFF

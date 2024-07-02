@@ -2,62 +2,71 @@ import Models
 import Network
 @testable import Timeline
 import XCTest
+import Testing
 
 @MainActor
-final class TimelineViewModelTests: XCTestCase {
-  var subject = TimelineViewModel()
-
-  override func setUp() async throws {
-    subject = TimelineViewModel()
+@Suite("Timeline View Model tests")
+struct Tests {
+  func makeSubject() -> TimelineViewModel {
+    let subject = TimelineViewModel()
     let client = Client(server: "localhost")
     subject.client = client
     subject.timeline = .home
     subject.isTimelineVisible = true
     subject.timelineTask?.cancel()
+    return subject
   }
-
-  func testStreamEventInsertNewStatus() async throws {
+  
+  @Test
+  func streamEventInsertNewStatus() async throws {
+    let subject = makeSubject()
     let isEmpty = await subject.datasource.isEmpty
-    XCTAssertTrue(isEmpty)
+    #expect(isEmpty)
     await subject.datasource.append(.placeholder())
     var count = await subject.datasource.count()
-    XCTAssertTrue(count == 1)
+    #expect(count == 1)
     await subject.handleEvent(event: StreamEventUpdate(status: .placeholder()))
     count = await subject.datasource.count()
-    XCTAssertTrue(count == 2)
+    #expect(count == 2)
   }
-
-  func testStreamEventInsertDuplicateStatus() async throws {
+  
+  @Test
+  func streamEventInsertDuplicateStatus() async throws {
+    let subject = makeSubject()
     let isEmpty = await subject.datasource.isEmpty
-    XCTAssertTrue(isEmpty)
+    #expect(isEmpty)
     let status = Status.placeholder()
     await subject.datasource.append(status)
     var count = await subject.datasource.count()
-    XCTAssertTrue(count == 1)
+    #expect(count == 1)
     await subject.handleEvent(event: StreamEventUpdate(status: status))
     count = await subject.datasource.count()
-    XCTAssertTrue(count == 1)
+    #expect(count == 1)
   }
 
-  func testStreamEventRemove() async throws {
+  @Test
+  func streamEventRemove() async throws {
+    let subject = makeSubject()
     let isEmpty = await subject.datasource.isEmpty
-    XCTAssertTrue(isEmpty)
+    #expect(isEmpty)
     let status = Status.placeholder()
     await subject.datasource.append(status)
     var count = await subject.datasource.count()
-    XCTAssertTrue(count == 1)
+    #expect(count == 1)
     await subject.handleEvent(event: StreamEventDelete(status: status.id))
     count = await subject.datasource.count()
-    XCTAssertTrue(count == 0)
+    #expect(count == 0)
   }
 
-  func testStreamEventUpdateStatus() async throws {
+  @Test
+  func streamEventUpdateStatus() async throws {
+    let subject = makeSubject()
     var status = Status.placeholder()
     let isEmpty = await subject.datasource.isEmpty
-    XCTAssertTrue(isEmpty)
+    #expect(isEmpty)
     await subject.datasource.append(status)
     var count = await subject.datasource.count()
-    XCTAssertTrue(count == 1)
+    #expect(count == 1)
     status = .init(id: status.id,
                    content: .init(stringValue: "test"),
                    account: status.account,
@@ -88,7 +97,7 @@ final class TimelineViewModelTests: XCTestCase {
     await subject.handleEvent(event: StreamEventStatusUpdate(status: status))
     let statuses = await subject.datasource.get()
     count = await subject.datasource.count()
-    XCTAssertTrue(count == 1)
-    XCTAssertTrue(statuses.first?.content.asRawText == "test")
+    #expect(count == 1)
+    #expect(statuses.first?.content.asRawText == "test")
   }
 }
