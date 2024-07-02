@@ -15,27 +15,28 @@ public struct AddedKTagRelation :CreatedKTagAddRelationRequestDataProtocol, Send
     public let accountId: String
     public let kTag: KTag
     public var isOwned: Bool
-    public init(id: String, kTagId: String,statusId:String ,accountId: String,kTag:KTag, isOwned: Bool) {
+    public var kTagDeleteRelationRequests:[KTagDeleteRelationRequest]
+    public init(id: String, kTagId: String,statusId:String ,accountId: String,kTag:KTag, isOwned: Bool,kTagDeleteRelationRequests:[KTagDeleteRelationRequest]) {
         self.id = id
         self.kTagId = kTagId
         self.statusId = statusId
         self.accountId = accountId
         self.kTag = kTag
         self.isOwned = isOwned
+        self.kTagDeleteRelationRequests = kTagDeleteRelationRequests
     }
+    
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        print("AddedKTagRelation　Container contents:")
-            for key in container.allKeys {
-                print("\(key.stringValue)")
-                
-            }
+        self.kTagDeleteRelationRequests = []
+//        try container.decode([KTagDeleteRelationRequest].self, forKey: .kTagDeleteRelationRequests)
         self.id = try container.decode(String.self, forKey: .id)
         self.kTagId = try container.decode(String.self, forKey: .kTagId)
         self.statusId = try container.decode(String.self, forKey: .statusId)
         self.accountId = try container.decode(String.self, forKey: .accountId)
         self.kTag = try container.decode(KTag.self, forKey: .kTag)
         self.isOwned = try container.decode(Bool.self, forKey: .isOwned)
+        
     }
     
     public init( _ tag: DeletingKTagRelationRequested){
@@ -45,5 +46,10 @@ public struct AddedKTagRelation :CreatedKTagAddRelationRequestDataProtocol, Send
         self.accountId = tag.accountId
         self.kTag = tag.kTag
         self.isOwned = false
+        if let r = tag.kTagDeleteRelationRequest {
+            self.kTagDeleteRelationRequests = [r]
+        } else {
+            self.kTagDeleteRelationRequests = []
+        }
     }
 }

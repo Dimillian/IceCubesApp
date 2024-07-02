@@ -16,22 +16,39 @@ struct KTagSearchAndAddView : View, Sendable {
     @State var client: Client?
     // 検索結果のフィルタリング
     @State var searchResults: [KTag] = []
+    
     func fetchSearchResults() async {
-                guard !searchText.isEmpty, let client = client else {
-                    searchResults = []
-                    return
-                }
-                
-                do {
-                    searchResults = try await client.get(endpoint: KTagRequests.search(query: searchText, type: nil, offset: nil, following: nil))
-                    print("fff")
-                } catch {
-                    print(error)
-//                    searchResults = []
-                }
-            }
+        guard !searchText.isEmpty, let client = client else {
+            searchResults = []
+            return
+        }
+        
+        do {
+            searchResults = try await client.get(endpoint: KTagRequests.search(query: searchText, type: nil, offset: nil, following: nil))
+        } catch {
+            print(error)
+        }
+    }
+    
     var body: some View {
         VStack {
+            // 選択されたタグの表示 追加候補になったら追加
+//            if !self.selectedTag.isEmpty {
+                Text("Selected Tags:")
+                    .font(.headline)
+                    .padding(.top)
+                if !searchResults.isEmpty{
+                    ForEach(selectedTag) { tag in
+                        Button(action: {
+                            Task{ 
+                                await viewModel.del(tagId: tag.id) // Sending main actor-isolated 'self.viewModel' to nonisolated instance method 'del(tagId:)' risks causing data races between nonisolated and main actor-isolated uses
+                            }
+                            selectedTag.removeAll(where: {$0.id == tag.id})
+                        }) {
+                        Text(tag.name).font(.headline)
+                        }
+                    }
+                }
             // 検索バー
             TextField("Search", text: $searchText)
                 .padding()
@@ -44,38 +61,23 @@ struct KTagSearchAndAddView : View, Sendable {
                     }
                 }
             // 検索候補の表示
-//            if !searchText.isEmpty {
-//                List {
-//                    ForEach(searchResults) { tag in
-//                        Button(action: {
-//                            Task{
-//                                await viewModel.addKTagRelationRequest(tagId: tag.id)
-//                            }
-//                            self.selectedTag.append(tag)
-//                        }) {
-//                            Text(tag.name)
-//                        }.foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
-//                    }
-//                }
-//                .listStyle(PlainListStyle())
-//            }
-            
-            // 選択されたタグの表示 追加候補になったら追加
-//            if !self.selectedTag.isEmpty {
-                Text("Selected Tags:")
-                    .font(.headline)
-                    .padding(.top)
-            Text(String(searchResults.count))
-                if !searchResults.isEmpty{
+            if !searchText.isEmpty {
+                List {
                     ForEach(searchResults) { tag in
-    //                    Button(action: {
-    ////                        viewModel.del(tagId: tag.id)
-    //                        selectedTag.removeAll(where: {$0.id == tag.id})
-    //                    }) {
-                        Text(tag.name).font(.headline)
-    //                    }
+                        Button(action: {
+                            Task{
+                                await viewModel.addKTagRelationRequest(tagId: tag.id)
+                            }
+                            self.selectedTag.append(tag)
+                        }) {
+                            Text(tag.name)
+                        }.foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
                     }
                 }
+                .listStyle(PlainListStyle())
+            }
+            
+
         }.onAppear(perform: {
 //            selectedTag = viewModel.kTags
         })
@@ -90,106 +92,3 @@ struct KTagSearchAndAddView : View, Sendable {
     }
 }
 
-struct KTagWithRelationListView: View {
-    @State var viewModel: KTagWithRelationListViewModel
-    var client: Client?
-    @State private var showAlert = false
-   
-    // stream から削除信号が来たらタグを消す
-    var body: some View {
-        HStack{
-//            let array = Array(viewModel.kTagRelations.addedKTagRelationList)
-//            ForEach(array, id: \.id){ kTagRelation in
-//                Button(action: {
-//                    showAlert = true
-//                }, label: {
-//                    Text(kTagRelation.kTag.name)
-//                        .padding(4)
-//                        .background(Color.blue.opacity(0.2))
-//                        .cornerRadius(8)
-//                }).foregroundColor(color(kTagRelation))
-//                    .alert(isPresented: $showAlert) {
-//                        Alert(
-//                            title: Text("Confirmation"),
-//                            message: Text("Do you want to proceed?"),
-//                            primaryButton: .default(Text("OK"), action: {
-//                                Task {
-//                                    await viewModel.deleteKTagRelationRequest(kTagRelation: kTagRelation)
-//                                }
-//                            }),
-//                            secondaryButton: .cancel()
-//                        )
-//                    }
-//            }
-//            let array2 = Array(viewModel.kTagRelations.addingKTagRelationRequestedList)
-//            ForEach(array2, id: \.kTagId){ kTagRelation in
-//                Button(action: {
-//                    showAlert = true
-//                }, label: {
-//                    Text(kTagRelation.kTag.name)
-//                        .padding(4)
-//                        .background(Color.blue.opacity(0.2))
-//                        .cornerRadius(8)
-//                }).foregroundColor(color(kTagRelation))
-//                    .alert(isPresented: $showAlert) {
-//                        Alert(
-//                            title: Text("Confirmation"),
-//                            message: Text("Do you want to proceed?"),
-//                            primaryButton: .default(Text("OK"), action: {
-//                                Task {
-//                                    await viewModel.deleteKTagRelationRequest(kTagRelation: kTagRelation)
-//                                }
-//                            }),
-//                            secondaryButton: .cancel()
-//                        )
-//                    }
-//        }
-//            
-//            let array3  = Array(viewModel.kTagRelations.deletingKTagRelationRequestedList)
-//            ForEach(array3, id: \.id){ kTagRelation in
-//                Button(action: {
-//                    showAlert = true
-//                }, label: {
-//                    Text(kTagRelation.kTag.name)
-//                        .padding(4)
-//                        .background(Color.blue.opacity(0.2))
-//                        .cornerRadius(8)
-//                }).foregroundColor(color(kTagRelation))
-//                    .alert(isPresented: $showAlert) {
-//                        Alert(
-//                            title: Text("Confirmation"),
-//                            message: Text("Do you want to proceed?"),
-//                            primaryButton: .default(Text("OK"), action: {
-//                                Task {
-//                                    await viewModel.addKTagRelationRequest(kTagRelation: kTagRelation)//Sending main actor-isolated 'self.viewModel' to nonisolated instance method 'addKTagRelationRequest(kTagRelation:)' risks causing data races between nonisolated and main actor-isolated uses
-//                                }
-//                            }),
-//                            secondaryButton: .cancel()
-//                        )
-//                    }
-//            }
-        }
-    }
-    
-    func color(_ tag: any NotIdentifiedKTagAddRelationRequestDataProtocol) -> Color {
-        switch tag {
-            case is AddingKTagRelationRequested:
-                if (tag.isOwned){
-                    return .purple
-                } else{
-                    return .blue
-                }
-            case is DeletingKTagRelationRequested:
-                if (tag.isOwned){
-                    return .red
-                } else{
-                    return .yellow
-                }
-        case is AddedKTagRelation:
-            return .clear // Doubleの場合は緑色
-        default:
-                return .clear // 他の型の場合は灰色
-        }
-    }
-    
-}

@@ -37,7 +37,8 @@ public protocol AnyStatus {
   var sensitive: Bool { get }
   var language: String? { get }
   var isHidden: Bool { get }
-//    var kTagRelations: KTagRelations?{get}
+    var kTagRelations: [AddedKTagRelation]{ get }
+    var kTagAddRealationRequests: [AddingKTagRelationRequested]{ get }
 }
 
 public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable {
@@ -259,7 +260,8 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
-    public let kTagRelations: KTagRelations?
+  public let kTagRelations: [AddedKTagRelation]
+  public let kTagAddRealationRequests: [AddingKTagRelationRequested]
   public var isHidden: Bool {
     filtered?.first?.filter.filterAction == .hide
   }
@@ -293,7 +295,8 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
     self.filtered = filtered
     self.sensitive = sensitive
     self.language = language
-      self.kTagRelations = nil
+      self.kTagRelations = []
+      self.kTagAddRealationRequests = []
   }
 }
 

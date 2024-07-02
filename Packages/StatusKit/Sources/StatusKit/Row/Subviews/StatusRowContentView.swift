@@ -18,9 +18,10 @@ struct StatusRowContentView: View {
       @Bindable var viewModel = viewModel
       StatusRowSpoilerView(status: viewModel.finalStatus, displaySpoiler: $viewModel.displaySpoiler)
     }
-//      KTagWithRelationListView(viewModel: KTagWithRelationListViewModel(kTagRelations: viewModel.status.kTagRelations ?? KTagRelations.init(addedKTagRelationList: Set(), addingKTagRelationRequestedList: Set(), deletingKTagRelationRequestedList: Set()), client: viewModel.client, statusId: viewModel.status.id))
+      KTagWithRelationListView(viewModel: KTagWithRelationListViewModel.init(statusId: viewModel.status.id, kTagRelations: viewModel.status.kTagRelations, addingKTagRelations: viewModel.status.kTagAddRealationRequests), client: viewModel.client)
 //      //TODO これで参照渡しできてるの？
-      NavigationLink(destination: KTagSearchAndAddView( viewModel: KTagWithRelationListViewModel.init(client: viewModel.client, statusId: viewModel.status.id), client: viewModel.client)) {
+      
+      NavigationLink(destination: KTagSearchAndAddView( viewModel: KTagWithRelationListViewModel.init(client:  viewModel.client, statusId: viewModel.status.id, kTagRelations: viewModel.status.kTagRelations , addingKTagRelations: viewModel.status.kTagAddRealationRequests), client: viewModel.client)) {
           Text("追加")
               .foregroundColor(.white)
               .padding()
