@@ -14,6 +14,7 @@ public struct StatusRowCardView: View {
 
   @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
+  @Environment(CurrentInstance.self) private var currentInstance
 
   let card: Card
 
@@ -122,6 +123,9 @@ public struct StatusRowCardView: View {
         .font(.scaledFootnote)
         .foregroundColor(theme.tintColor)
         .lineLimit(1)
+      if let account = card.authors?.first?.account {
+        moreFromAccountView(account)
+      }
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(10)
@@ -149,18 +153,39 @@ public struct StatusRowCardView: View {
         .frame(width: imageHeight, height: imageHeight)
       }
       VStack(alignment: .leading, spacing: 6) {
-        Text(title)
-          .font(.scaledHeadline)
-          .lineLimit(3)
-        Text(url.host() ?? url.absoluteString)
+        Text(card.providerName ?? url.host() ?? url.absoluteString)
           .font(.scaledFootnote)
           .foregroundColor(theme.tintColor)
           .lineLimit(1)
+        Text(title)
+          .font(.scaledHeadline)
+          .lineLimit(3)
+        if let account = card.authors?.first?.account {
+          moreFromAccountView(account, divider: false)
+        } else if let authorName = card.authorName, !authorName.isEmpty {
+          Text("by \(authorName)")
+            .font(.scaledFootnote)
+            .foregroundStyle(.secondary)
+            .lineLimit(1)
+        }
         if let history = card.history {
           let uses = history.compactMap { Int($0.accounts) }.reduce(0, +)
           HStack(spacing: 4) {
-            Image(systemName: "bubble.left.and.text.bubble.right")
-            Text("trending-tag-people-talking \(uses)")
+            Button {
+              if currentInstance.isLinkTimelineSupported {
+                routerPath.navigate(to: .linkTimeline(url: url, title: title))
+              }
+            } label: {
+              HStack(spacing: 4) {
+                Image(systemName: "bubble.left.and.text.bubble.right")
+                Text("trending-tag-people-talking \(uses)")
+                if currentInstance.isLinkTimelineSupported {
+                  Image(systemName: "chevron.right")
+                }
+              }
+            }
+            .buttonStyle(.bordered)
+            
             Spacer()
             Button {
               #if targetEnvironment(macCatalyst)
@@ -170,11 +195,11 @@ public struct StatusRowCardView: View {
               #endif
             } label: {
               Image(systemName: "quote.opening")
+                .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
           }
           .font(.scaledCaption)
-          .foregroundStyle(.secondary)
           .lineLimit(1)
           .padding(.top, 12)
         }
@@ -221,6 +246,37 @@ public struct StatusRowCardView: View {
           .lineLimit(1)
       }.padding(16)
     }
+  }
+  
+  @ViewBuilder
+  private func moreFromAccountView(_ account: Account, divider: Bool = true) -> some View {
+    if divider {
+      Divider()
+    }
+    Button {
+      routerPath.navigate(to: .accountDetailWithAccount(account: account))
+    } label: {
+      HStack(alignment: .center, spacing: 8) {
+        AvatarView(account.avatar, config: .list)
+          .padding(.top, 2)
+        
+        HStack(alignment: .firstTextBaseline, spacing: 0) {
+          Text("More from ")
+          EmojiTextApp(account.cachedDisplayName, emojis: account.emojis)
+            .fontWeight(.semibold)
+            .emojiText.size(Font.scaledFootnoteFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
+        }
+        .font(.scaledFootnote)
+        .lineLimit(1)
+        .padding(.top, 3)
+        
+        Spacer()
+        Image(systemName: "chevron.right")
+      }
+      .padding(.vertical, 4)
+    }
+    .buttonStyle(.plain)
   }
 }
 

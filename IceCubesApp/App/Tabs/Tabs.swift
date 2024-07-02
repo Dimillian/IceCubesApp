@@ -186,6 +186,7 @@ class SidebarTabs {
       .init(tab: .favorites, enabled: true),
       .init(tab: .followedTags, enabled: true),
       .init(tab: .lists, enabled: true),
+      .init(tab: .links, enabled: true),
 
       .init(tab: .settings, enabled: true),
       .init(tab: .profile, enabled: true),
@@ -221,7 +222,7 @@ class iOSTabs {
     @AppStorage(TabEntries.first.rawValue) var firstTab = Tab.timeline
     @AppStorage(TabEntries.second.rawValue) var secondTab = Tab.notifications
     @AppStorage(TabEntries.third.rawValue) var thirdTab = Tab.explore
-    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = Tab.messages
+    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = Tab.links
     @AppStorage(TabEntries.fifth.rawValue) var fifthTab = Tab.profile
   }
 
