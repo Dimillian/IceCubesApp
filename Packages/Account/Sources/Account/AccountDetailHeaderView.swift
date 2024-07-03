@@ -42,6 +42,7 @@ struct AccountDetailHeaderView: View {
         }
       }
       accountInfoView
+      Spacer()
     }
   }
 
