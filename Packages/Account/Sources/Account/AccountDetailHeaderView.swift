@@ -45,6 +45,7 @@ struct AccountDetailHeaderView: View {
         }
       }
       accountInfoView
+      Spacer()
     }
     .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent, let latestEvent = latestEvent as? StreamEventNotification {

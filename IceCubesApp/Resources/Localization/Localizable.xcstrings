@@ -13492,6 +13492,12 @@
             "value" : "Delete avatar"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ezabatu abatarra"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13983,6 +13989,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete header"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ezabatu goiburua"
           }
         },
         "fr" : {
