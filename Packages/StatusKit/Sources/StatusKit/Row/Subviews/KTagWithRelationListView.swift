@@ -32,6 +32,25 @@ struct KTagSearchAndAddView : View, Sendable {
     
     var body: some View {
         VStack {
+            Text("Added Tags:")
+                .font(.headline)
+                .padding(.top)
+            ForEach(viewModel.kTagRelations.filter({$0.kTagDeleteRelationRequests.isEmpty}), id: \.kTag.id) { kTagRelation in
+                            Button(action: {
+                                Task {
+                                    await viewModel.del(tagId: kTagRelation.kTag.id)
+                                }
+                            }) {
+                                Text("x:" + kTagRelation.kTag.name).font(.headline)
+                            }
+                        }
+            ForEach(viewModel.kTagRelations.filter({!$0.kTagDeleteRelationRequests.isEmpty}), id: \.kTag.id) { kTagRelation in
+                            Button(action: {
+                                
+                            }) {
+                                Text( kTagRelation.kTag.name).font(.headline).strikethrough(color: .red)
+                            }
+                        }
             // 選択されたタグの表示 追加候補になったら追加
 //            if !self.selectedTag.isEmpty {
                 Text("Selected Tags:")
