@@ -222,12 +222,18 @@ public struct TimelineView: View {
           Text(timeline.localizedTitle())
             .font(.caption)
             .foregroundStyle(.secondary)
-        case .home:
+        case let .link(url, _):
           Text(timeline.localizedTitle())
             .font(.headline)
+          Text(url.host() ?? url.absoluteString)
+            .font(.caption)
+            .foregroundStyle(.secondary)
         default:
           Text(timeline.localizedTitle())
             .font(.headline)
+          Text(client.server)
+            .font(.caption)
+            .foregroundStyle(.secondary)
         }
       }
       .accessibilityRepresentation {

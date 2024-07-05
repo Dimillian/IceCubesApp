@@ -256,25 +256,21 @@ public struct StatusRowCardView: View {
     Button {
       routerPath.navigate(to: .accountDetailWithAccount(account: account))
     } label: {
-      HStack(alignment: .center, spacing: 8) {
-        AvatarView(account.avatar, config: .list)
+      HStack(alignment: .center, spacing: 4) {
+        Image(systemName: "link")
+        Text("More from")
+        AvatarView(account.avatar, config: .boost)
           .padding(.top, 2)
-        
-        HStack(alignment: .firstTextBaseline, spacing: 0) {
-          Text("More from ")
-          EmojiTextApp(account.cachedDisplayName, emojis: account.emojis)
-            .fontWeight(.semibold)
-            .emojiText.size(Font.scaledFootnoteFont.emojiSize)
-            .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
-        }
-        .font(.scaledFootnote)
-        .lineLimit(1)
-        .padding(.top, 3)
-        
+        EmojiTextApp(account.cachedDisplayName, emojis: account.emojis)
+          .fontWeight(.semibold)
+          .emojiText.size(Font.scaledFootnoteFont.emojiSize)
+          .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
         Spacer()
         Image(systemName: "chevron.right")
       }
-      .padding(.vertical, 4)
+      .font(.scaledFootnote)
+      .lineLimit(1)
+      .padding(.top, 4)
     }
     .buttonStyle(.plain)
   }

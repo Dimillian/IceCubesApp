@@ -303,7 +303,7 @@ extension TimelineViewModel: StatusesFetcher {
     }
   }
 
-  // Fetch pages from the top most status of the tomeline.
+  // Fetch pages from the top most status of the timeline.
   private func fetchNewPagesFrom(latestStatus: String, client: Client) async throws {
     canStreamEvents = false
     let initialTimeline = timeline
