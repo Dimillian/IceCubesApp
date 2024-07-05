@@ -4,6 +4,7 @@ import Env
 import DesignSystem
 import WrappingHStack
 import AppAccount
+import Network
 
 @MainActor
 struct PremiumAcccountSubsciptionSheetView: View {
@@ -21,8 +22,10 @@ struct PremiumAcccountSubsciptionSheetView: View {
   
   @State private var state: SheetState = .selection
   @State private var animationsending: Bool = false
+  @State private var subClubUser: SubClubUser?
   
   let account: Account
+  let subClubClient = SubClubClient()
   
   var body: some View {
     VStack {
@@ -40,6 +43,14 @@ struct PremiumAcccountSubsciptionSheetView: View {
     .presentationBackground(.thinMaterial)
     .presentationCornerRadius(8)
     .presentationDetents([.height(330)])
+    .task {
+      if let premiumUsername = account.premiumUsername {
+        let user = await subClubClient.getUser(username: premiumUsername)
+        withAnimation {
+          subClubUser = user
+        }
+      }
+    }
   }
   
   @ViewBuilder
@@ -59,15 +70,21 @@ struct PremiumAcccountSubsciptionSheetView: View {
       Text("Subscribe")
         .font(.title2)
       Text("Subscribe to @\(account.username) to get access to exclusive content!")
-      Button {
-        withAnimation(.easeInOut(duration: 0.5)) {
-          isSubscibeSelected = true
+      if let subscription = subClubUser?.subscription {
+        Button {
+          withAnimation(.easeInOut(duration: 0.5)) {
+            isSubscibeSelected = true
+          }
+        } label: {
+          Text("\(subscription.formattedAmount) / month")
         }
-      } label: {
-        Text("$5 / month")
+        .buttonStyle(.borderedProminent)
+        .padding(.vertical, 8)
+      } else {
+        ProgressView()
+          .foregroundStyle(theme.labelColor)
+          .padding(.vertical, 8)
       }
-      .buttonStyle(.borderedProminent)
-      .padding(.vertical, 8)
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(12)
@@ -122,9 +139,10 @@ struct PremiumAcccountSubsciptionSheetView: View {
     .fontWeight(.bold)
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-        if let accountName = appAccount.currentAccount.accountName,
+        if let subscription = subClubUser?.subscription,
+           let accountName = appAccount.currentAccount.accountName,
            let premiumUsername = account.premiumUsername,
-           let url = URL(string: "https://\(AppInfo.premiumInstance)/@\(premiumUsername)/subscribe?callback=icecubesapp://subclub&id=@\(accountName)&amount=\(500)&currency=USD&theme=\(colorScheme)") {
+           let url = URL(string: "https://\(AppInfo.premiumInstance)/@\(premiumUsername)/subscribe?callback=icecubesapp://subclub&id=@\(accountName)&amount=\(subscription.unitAmount)&currency=\(subscription.currency)&theme=\(colorScheme)") {
           openURL(url)
         }
       }

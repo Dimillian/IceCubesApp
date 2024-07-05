@@ -202,7 +202,9 @@ extension Account {
   }
   
   public var premiumAcct: String? {
-    if let field = fields.first(where: { $0.value.asRawText.hasSuffix(AppInfo.premiumInstance) }) {
+    if isPremiumAccount {
+      return "@\(acct)"
+    } else if let field = fields.first(where: { $0.value.asRawText.hasSuffix(AppInfo.premiumInstance) }) {
       return field.value.asRawText
     } else if let field = fields.first(where: { $0.value.asRawText.hasPrefix("https://\(AppInfo.premiumInstance)") }),
                 let url = URL(string: field.value.asRawText) {
