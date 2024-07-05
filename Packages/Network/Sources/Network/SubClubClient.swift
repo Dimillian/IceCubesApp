@@ -16,7 +16,7 @@ public struct SubClubClient: Sendable {
   public init() { }
   
   private var url: String {
-    "https://sub.club/"
+    "https://\(AppInfo.premiumInstance)/"
   }
   
   public func getUser(username: String) async -> SubClubUser? {
