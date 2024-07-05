@@ -11,7 +11,7 @@ import Network
 import Models
 struct KTagSearchAndAddView : View, Sendable {
     @State private var searchText = ""
-    var viewModel: KTagWithRelationListViewModel
+    @State var viewModel: KTagWithRelationListViewModel
     @State var selectedTag:[KTag] = []
     @State var client: Client?
     // 検索結果のフィルタリング

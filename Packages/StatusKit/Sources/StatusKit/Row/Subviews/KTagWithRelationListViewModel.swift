@@ -9,12 +9,15 @@ import Foundation
 import Network
 import Models
 import SwiftUICore
+import OSLog
 
-public class KTagWithRelationListViewModel : ObservableObject{
+@MainActor
+@Observable public class KTagWithRelationListViewModel : ObservableObject{
     public var kTagRelations: [AddedKTagRelation]
     public var addingKTagRelations: [AddingKTagRelationRequested]
     var client: Client?
     let statusId: String
+    private let logger = Logger(subsystem: "com.icecubesapp", category: "KTagWithRelationListViewModel")
     var kTags: [KTag]{
         get{
             kTagRelations.map{$0.kTag} +
@@ -30,28 +33,51 @@ public class KTagWithRelationListViewModel : ObservableObject{
     }
     
     // tagid ベースで消す　一致しているのを探す　見つかったのを消す
-    func del(tagId :String) async{
-        // すでの自分の削除リクエストがあるか
-        if let delTarget = kTagRelations.filter({$0.kTagId == tagId && $0.isOwned}).first { // すでに送っているなら再度送る必要はなし 自分の削除リクエストがないなら削除リクエストを追加
-            if let res = await try? await client?.post(endpoint: KTagDeleteRelationRequests.create(json: KTagDeleteRelatioonRequestData.init(k_tag_relation_id: delTarget.id))) as?  DeletingKTagRelationRequested {
-                // レスポンスでその場で削除できた場合
-                if let ktag = res.kTagDeleteRelationRequest{
-                    if var updatedDelTarget = kTagRelations.first(where: { $0.id == delTarget.id }) {
-                                        updatedDelTarget.kTagDeleteRelationRequests.append(ktag)
-                                        if let index = kTagRelations.firstIndex(where: { $0.id == delTarget.id }) {
-                                            kTagRelations[index] = updatedDelTarget
-                                        }
-                                    }
-                } else{
-                    addingKTagRelations.removeAll(where:{$0.kTagId == tagId})
+    // tagId ベースで消す　一致しているのを探す　見つかったのを消す
+    func del(tagId: String) async {
+        guard let client = self.client else {
+            print("Client is not initialized")
+            return
+        }
+
+        // Check for existing delete requests
+        if let delTarget = kTagRelations.first(where: { $0.kTagId == tagId && $0.isOwned }) {
+            do {
+                let deleteRequest = KTagDeleteRelatioonRequestData(k_tag_relation_id: delTarget.id)
+                let (data, response) = try await client.postWithData(endpoint: KTagDeleteRelationRequests.create(json: deleteRequest))
+                if let httpResponse = response as? HTTPURLResponse, (404...404).contains(httpResponse.statusCode){
+                    kTagRelations.removeAll(where: { $0.kTagId == tagId })
+                                    return
                 }
+                logger.log(level: .info, "\(data)")
+                // Decode the response
+                let decoder = JSONDecoder()
+                if let ktag = try? decoder.decode(KTagDeleteRelationRequest.self, from: data) {
+                    // Update kTagRelations
+                    if var updatedDelTarget = kTagRelations.first(where: { $0.id == delTarget.id }) {
+                        updatedDelTarget.kTagDeleteRelationRequests.append(ktag)
+                        if let index = kTagRelations.firstIndex(where: { $0.id == delTarget.id }) {
+                            kTagRelations[index] = updatedDelTarget
+                        }
+                    }
+                } else if let kTag :AddedKTagRelation = try? decoder.decode(AddedKTagRelation.self, from: data) {//Initializer for conditional binding must have Optional type, not
+                    kTagRelations.removeAll(where: { $0.kTagId == kTag.kTagId })
+                }
+                
+            } catch {
+                print("Error deleting KTag relation: \(error.localizedDescription)")
             }
-        } else if let delTarget = addingKTagRelations.filter({$0.kTagAddRelationRequest?.isOwned ?? false && $0.kTagId == tagId}).first?.kTagAddRelationRequest{
-            if let res = try? await client?.post(endpoint: KTagAddRelationRequests.delete(id: delTarget.id)) as?  KTagAddRelationRequest{
-                addingKTagRelations.removeAll(where:{$0.kTagId == tagId})
+        } else if let delTarget = addingKTagRelations.first(where: { $0.kTagAddRelationRequest?.isOwned ?? false && $0.kTagId == tagId })?.kTagAddRelationRequest {
+            do {
+                let (data, _) = try await client.postWithData(endpoint: KTagAddRelationRequests.delete(id: delTarget.id))
+                // Decode the response
+                let decoder = JSONDecoder()
+                if let kTagAddRelationRequest :KTagAddRelationRequest = try? decoder.decode(KTagAddRelationRequest.self, from: data) {
+                    addingKTagRelations.removeAll(where: { $0.kTagId == kTagAddRelationRequest.kTagId })
+                }
+            } catch {
+                print("Error deleting KTag add relation request: \(error.localizedDescription)")
             }
-//            消せたら削除　失敗は　対象なしなら４０４で返すべき？失敗なら必ず消すべきとも限らなさそうだが　おかしくなったらリロードすりゃいいだけのはなしか。
-//            前の画面に戻ったらツイート丸ごとリロードが走るはず
         }
     }
     

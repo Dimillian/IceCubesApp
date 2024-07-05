@@ -11,6 +11,6 @@ import Foundation
 public struct KTagDeleteRelationRequest :Codable, Sendable{
     public let id: String
     public let kTagId: String
-    public let targetRelationId :String
+    public let kTagRelationId :String
     public let requesterId: String
 }
