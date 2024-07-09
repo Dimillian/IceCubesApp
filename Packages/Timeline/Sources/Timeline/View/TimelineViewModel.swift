@@ -49,7 +49,7 @@ import SwiftUI
   private(set) var datasource = TimelineDatasource()
   private let cache = TimelineCache()
   private var isCacheEnabled: Bool {
-    canFilterTimeline && timeline.supportNewestPagination
+    canFilterTimeline && timeline.supportNewestPagination && client?.isAuth == true
   }
 
   @ObservationIgnored
@@ -303,7 +303,7 @@ extension TimelineViewModel: StatusesFetcher {
     }
   }
 
-  // Fetch pages from the top most status of the tomeline.
+  // Fetch pages from the top most status of the timeline.
   private func fetchNewPagesFrom(latestStatus: String, client: Client) async throws {
     canStreamEvents = false
     let initialTimeline = timeline

@@ -2,7 +2,7 @@ import AppIntents
 import WidgetKit
 
 struct HashtagPostsWidgetConfiguration: WidgetConfigurationIntent {
-  static let title: LocalizedStringResource = "Configuration"
+  static let title: LocalizedStringResource = "Hashtag Widget Configuration"
   static let description = IntentDescription("Choose the account and hashtag for this widget")
 
   @Parameter(title: "Account")

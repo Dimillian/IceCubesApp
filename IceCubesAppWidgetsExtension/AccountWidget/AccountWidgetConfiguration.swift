@@ -2,7 +2,7 @@ import AppIntents
 import WidgetKit
 
 struct AccountWidgetConfiguration: WidgetConfigurationIntent {
-  static let title: LocalizedStringResource = "Configuration"
+  static let title: LocalizedStringResource = "Account Widget Configuration"
   static let description = IntentDescription("Choose the account for this widget")
 
   @Parameter(title: "Account")

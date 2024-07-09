@@ -5,7 +5,7 @@ struct AppShortcuts: AppShortcutsProvider {
     AppShortcut(
       intent: PostIntent(),
       phrases: [
-        "Post \(\.$content) in \(.applicationName)",
+        "Post in \(.applicationName)",
         "Post a status on Mastodon with \(.applicationName)",
       ],
       shortTitle: "Compose a post",
@@ -23,7 +23,6 @@ struct AppShortcuts: AppShortcutsProvider {
     AppShortcut(
       intent: TabIntent(),
       phrases: [
-        "Open \(\.$tab) in \(.applicationName)",
         "Open \(.applicationName)",
       ],
       shortTitle: "Open Ice Cubes",
@@ -32,8 +31,10 @@ struct AppShortcuts: AppShortcutsProvider {
     AppShortcut(
       intent: PostImageIntent(),
       phrases: [
-        "Post images \(\.$images) in \(.applicationName)",
-        "Send photos \(\.$images) with \(.applicationName)",
+        "Post images in \(.applicationName)",
+        "Post an image in \(.applicationName)",
+        "Send photos with \(.applicationName)",
+        "Send a photo with \(.applicationName)",
       ],
       shortTitle: "Post a status with an image",
       systemImageName: "photo"
