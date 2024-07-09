@@ -20,7 +20,6 @@ struct NotificationsTab: View {
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(PushNotificationsService.self) private var pushNotificationsService
   @State private var routerPath = RouterPath()
-  @State private var scrollToTopSignal: Int = 0
 
   @Binding var selectedTab: AppTab
 
@@ -28,7 +27,7 @@ struct NotificationsTab: View {
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      NotificationsListView(lockedType: lockedType, scrollToTopSignal: $scrollToTopSignal)
+      NotificationsListView(lockedType: lockedType)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {

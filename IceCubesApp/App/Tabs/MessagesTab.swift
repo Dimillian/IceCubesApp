@@ -15,11 +15,10 @@ struct MessagesTab: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(AppAccountsManager.self) private var appAccount
   @State private var routerPath = RouterPath()
-  @State private var scrollToTopSignal: Int = 0
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      ConversationsListView(scrollToTopSignal: $scrollToTopSignal)
+      ConversationsListView()
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {

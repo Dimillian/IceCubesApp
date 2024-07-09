@@ -22,7 +22,6 @@ struct TimelineTab: View {
   @State private var didAppear: Bool = false
   @State private var timeline: TimelineFilter = .home
   @State private var selectedTagGroup: TagGroup?
-  @State private var scrollToTopSignal: Int = 0
 
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
@@ -42,7 +41,6 @@ struct TimelineTab: View {
       TimelineView(timeline: $timeline,
                    pinnedFilters: $pinnedFilters,
                    selectedTagGroup: $selectedTagGroup,
-                   scrollToTopSignal: $scrollToTopSignal,
                    canFilterTimeline: canFilterTimeline)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)

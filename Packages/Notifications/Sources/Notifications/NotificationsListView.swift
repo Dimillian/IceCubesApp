@@ -17,18 +17,15 @@ public struct NotificationsListView: View {
 
   @State private var viewModel = NotificationsViewModel()
   @State private var isNotificationsPolicyPresented: Bool = false
-  @Binding var scrollToTopSignal: Int
 
   let lockedType: Models.Notification.NotificationType?
   let lockedAccountId: String?
 
   public init(lockedType: Models.Notification.NotificationType? = nil,
-              lockedAccountId: String? = nil,
-              scrollToTopSignal: Binding<Int>)
+              lockedAccountId: String? = nil)
   {
     self.lockedType = lockedType
     self.lockedAccountId = lockedAccountId
-    _scrollToTopSignal = scrollToTopSignal
   }
 
   public var body: some View {
@@ -44,11 +41,6 @@ public struct NotificationsListView: View {
       .id(account.account?.id)
       .environment(\.defaultMinListRowHeight, 1)
       .listStyle(.plain)
-      .onChange(of: scrollToTopSignal) {
-        withAnimation {
-          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
-        }
-      }
     }
     .toolbar {
       ToolbarItem(placement: .principal) {

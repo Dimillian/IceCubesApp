@@ -13,11 +13,10 @@ struct ExploreTab: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(Client.self) private var client
   @State private var routerPath = RouterPath()
-  @State private var scrollToTopSignal: Int = 0
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      ExploreView(scrollToTopSignal: $scrollToTopSignal)
+      ExploreView()
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)

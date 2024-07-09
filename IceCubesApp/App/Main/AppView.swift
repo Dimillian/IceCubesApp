@@ -70,18 +70,18 @@ struct AppView: View {
       selectedTab = newTab
     })) {
       ForEach(availableTabs) { tab in
-        tab.makeContentView(selectedTab: $selectedTab)
-          .tabItem {
-            if userPreferences.showiPhoneTabLabel {
-              tab.label
-                .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
-            } else {
-              Image(systemName: tab.iconName)
-            }
+        Tab(value: tab) {
+          tab.makeContentView(selectedTab: $selectedTab)
+            .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
+        } label:  {
+          if userPreferences.showiPhoneTabLabel {
+            tab.label
+              .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+          } else {
+            Image(systemName: tab.iconName)
           }
-          .tag(tab)
-          .badge(badgeFor(tab: tab))
-          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
+        }
+        .badge(badgeFor(tab: tab))
       }
     }
     .id(appAccountsManager.currentClient.id)

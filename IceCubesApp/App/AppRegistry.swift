@@ -19,9 +19,9 @@ extension View {
     navigationDestination(for: RouterDestination.self) { destination in
       switch destination {
       case let .accountDetail(id):
-        AccountDetailView(accountId: id, scrollToTopSignal: .constant(0))
+        AccountDetailView(accountId: id)
       case let .accountDetailWithAccount(account):
-        AccountDetailView(account: account, scrollToTopSignal: .constant(0))
+        AccountDetailView(account: account)
       case let .accountSettingsWithAccount(account, appAccount):
         AccountSettingsView(account: account, appAccount: appAccount)
       case let .statusDetail(id):
@@ -36,19 +36,16 @@ extension View {
         TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)),
                      pinnedFilters: .constant([]),
                      selectedTagGroup: .constant(nil),
-                     scrollToTopSignal: .constant(0),
                      canFilterTimeline: false)
       case let .list(list):
         TimelineView(timeline: .constant(.list(list: list)),
                      pinnedFilters: .constant([]),
                      selectedTagGroup: .constant(nil),
-                     scrollToTopSignal: .constant(0),
                      canFilterTimeline: false)
       case let .linkTimeline(url, title):
         TimelineView(timeline: .constant(.link(url: url, title: title)),
                      pinnedFilters: .constant([]),
                      selectedTagGroup: .constant(nil),
-                     scrollToTopSignal: .constant(0),
                      canFilterTimeline: false)
       case let .following(id):
         AccountsListView(mode: .following(accountId: id))
@@ -64,7 +61,6 @@ extension View {
         TimelineView(timeline: .constant(.trending),
                      pinnedFilters: .constant([]),
                      selectedTagGroup: .constant(nil),
-                     scrollToTopSignal: .constant(0),
                      canFilterTimeline: false)
       case let .trendingLinks(cards):
         TrendingLinksListView(cards: cards)
@@ -74,8 +70,7 @@ extension View {
         NotificationsRequestsListView()
       case let .notificationForAccount(accountId):
         NotificationsListView(lockedType: nil,
-                              lockedAccountId: accountId,
-                              scrollToTopSignal: .constant(0))
+                              lockedAccountId: accountId)
       case .blockedAccounts:
         AccountsListView(mode: .blocked)
       case .mutedAccounts:

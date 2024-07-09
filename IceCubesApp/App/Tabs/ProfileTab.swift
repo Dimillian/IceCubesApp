@@ -14,18 +14,17 @@ struct ProfileTab: View {
   @Environment(Client.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount
   @State private var routerPath = RouterPath()
-  @State private var scrollToTopSignal: Int = 0
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
       if let account = currentAccount.account {
-        AccountDetailView(account: account, scrollToTopSignal: $scrollToTopSignal)
+        AccountDetailView(account: account)
           .withAppRouter()
           .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
           .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
           .id(account.id)
       } else {
-        AccountDetailView(account: .placeholder(), scrollToTopSignal: $scrollToTopSignal)
+        AccountDetailView(account: .placeholder())
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
       }
