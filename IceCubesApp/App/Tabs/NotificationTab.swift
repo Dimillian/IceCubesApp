@@ -22,8 +22,8 @@ struct NotificationsTab: View {
   @State private var routerPath = RouterPath()
   @State private var scrollToTopSignal: Int = 0
 
-  @Binding var selectedTab: Tab
-  @Binding var popToRootTab: Tab
+  @Binding var selectedTab: AppTab
+  @Binding var popToRootTab: AppTab
 
   let lockedType: Models.Notification.NotificationType?
 

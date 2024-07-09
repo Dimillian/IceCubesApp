@@ -7,7 +7,7 @@ import StatusKit
 import SwiftUI
 
 @MainActor
-enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
+enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
   case timeline, notifications, mentions, explore, messages, settings, other
   case trending, federated, local
   case profile
@@ -22,16 +22,16 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
     rawValue
   }
 
-  static func loggedOutTab() -> [Tab] {
+  static func loggedOutTab() -> [AppTab] {
     [.timeline, .settings]
   }
 
-  static func visionOSTab() -> [Tab] {
+  static func visionOSTab() -> [AppTab] {
     [.profile, .timeline, .notifications, .mentions, .explore, .post, .settings]
   }
 
   @ViewBuilder
-  func makeContentView(selectedTab: Binding<Tab>, popToRootTab: Binding<Tab>) -> some View {
+  func makeContentView(selectedTab: Binding<AppTab>, popToRootTab: Binding<AppTab>) -> some View {
     switch self {
     case .timeline:
       TimelineTab(popToRootTab: popToRootTab)
@@ -168,7 +168,7 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
 @Observable
 class SidebarTabs {
   struct SidedebarTab: Hashable, Codable {
-    let tab: Tab
+    let tab: AppTab
     var enabled: Bool
   }
 
@@ -202,7 +202,7 @@ class SidebarTabs {
     }
   }
 
-  func isEnabled(_ tab: Tab) -> Bool {
+  func isEnabled(_ tab: AppTab) -> Bool {
     tabs.first(where: { $0.tab.id == tab.id })?.enabled == true
   }
 
@@ -219,45 +219,45 @@ class iOSTabs {
   }
 
   class Storage {
-    @AppStorage(TabEntries.first.rawValue) var firstTab = Tab.timeline
-    @AppStorage(TabEntries.second.rawValue) var secondTab = Tab.notifications
-    @AppStorage(TabEntries.third.rawValue) var thirdTab = Tab.explore
-    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = Tab.links
-    @AppStorage(TabEntries.fifth.rawValue) var fifthTab = Tab.profile
+    @AppStorage(TabEntries.first.rawValue) var firstTab = AppTab.timeline
+    @AppStorage(TabEntries.second.rawValue) var secondTab = AppTab.notifications
+    @AppStorage(TabEntries.third.rawValue) var thirdTab = AppTab.explore
+    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = AppTab.links
+    @AppStorage(TabEntries.fifth.rawValue) var fifthTab = AppTab.profile
   }
 
   private let storage = Storage()
   public static let shared = iOSTabs()
 
-  var tabs: [Tab] {
+  var tabs: [AppTab] {
     [firstTab, secondTab, thirdTab, fourthTab, fifthTab]
   }
 
-  var firstTab: Tab {
+  var firstTab: AppTab {
     didSet {
       storage.firstTab = firstTab
     }
   }
 
-  var secondTab: Tab {
+  var secondTab: AppTab {
     didSet {
       storage.secondTab = secondTab
     }
   }
 
-  var thirdTab: Tab {
+  var thirdTab: AppTab {
     didSet {
       storage.thirdTab = thirdTab
     }
   }
 
-  var fourthTab: Tab {
+  var fourthTab: AppTab {
     didSet {
       storage.fourthTab = fourthTab
     }
   }
 
-  var fifthTab: Tab {
+  var fifthTab: AppTab {
     didSet {
       storage.fifthTab = fifthTab
     }

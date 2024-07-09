@@ -14,7 +14,7 @@ struct ExploreTab: View {
   @Environment(Client.self) private var client
   @State private var routerPath = RouterPath()
   @State private var scrollToTopSignal: Int = 0
-  @Binding var popToRootTab: Tab
+  @Binding var popToRootTab: AppTab
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {

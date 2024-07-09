@@ -18,7 +18,7 @@ struct TimelineTab: View {
   @Environment(UserPreferences.self) private var preferences
   @Environment(Client.self) private var client
   @State private var routerPath = RouterPath()
-  @Binding var popToRootTab: Tab
+  @Binding var popToRootTab: AppTab
 
   @State private var didAppear: Bool = false
   @State private var timeline: TimelineFilter = .home
@@ -33,7 +33,7 @@ struct TimelineTab: View {
 
   private let canFilterTimeline: Bool
 
-  init(popToRootTab: Binding<Tab>, timeline: TimelineFilter? = nil) {
+  init(popToRootTab: Binding<AppTab>, timeline: TimelineFilter? = nil) {
     canFilterTimeline = timeline == nil
     _popToRootTab = popToRootTab
     _timeline = .init(initialValue: timeline ?? .home)

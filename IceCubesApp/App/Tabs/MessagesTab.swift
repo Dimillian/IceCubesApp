@@ -16,7 +16,7 @@ struct MessagesTab: View {
   @Environment(AppAccountsManager.self) private var appAccount
   @State private var routerPath = RouterPath()
   @State private var scrollToTopSignal: Int = 0
-  @Binding var popToRootTab: Tab
+  @Binding var popToRootTab: AppTab
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {

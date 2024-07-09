@@ -28,7 +28,7 @@ struct SettingsTabs: View {
   @State private var cachedRemoved = false
   @State private var timelineCache = TimelineCache()
 
-  @Binding var popToRootTab: Tab
+  @Binding var popToRootTab: AppTab
 
   let isModal: Bool
   

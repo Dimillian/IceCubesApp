@@ -21,10 +21,10 @@ struct AppView: View {
   @Environment(\.openWindow) var openWindow
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
-  @Binding var selectedTab: Tab
+  @Binding var selectedTab: AppTab
   @Binding var appRouterPath: RouterPath
 
-  @State var popToRootTab: Tab = .other
+  @State var popToRootTab: AppTab = .other
   @State var iosTabs = iOSTabs.shared
   @State var sidebarTabs = SidebarTabs.shared
 
@@ -40,14 +40,14 @@ struct AppView: View {
     #endif
   }
 
-  var availableTabs: [Tab] {
+  var availableTabs: [AppTab] {
     guard appAccountsManager.currentClient.isAuth else {
-      return Tab.loggedOutTab()
+      return AppTab.loggedOutTab()
     }
     if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
       return iosTabs.tabs
     } else if UIDevice.current.userInterfaceIdiom == .vision {
-      return Tab.visionOSTab()
+      return AppTab.visionOSTab()
     }
     return sidebarTabs.tabs.map { $0.tab }
   }
@@ -96,7 +96,7 @@ struct AppView: View {
     .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
   }
 
-  private func badgeFor(tab: Tab) -> Int {
+  private func badgeFor(tab: AppTab) -> Int {
     if tab == .notifications, selectedTab != tab,
        let token = appAccountsManager.currentAccount.oauthToken
     {
@@ -114,14 +114,15 @@ struct AppView: View {
         HStack(spacing: 0) {
           TabView(selection: $selectedTab) {
             ForEach(availableTabs) { tab in
-              tab
-                .makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
-                .tabItem {
-                  tab.label
-                }
-                .tag(tab)
+              Tab(value: tab) {
+                tab.makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
+              } label: {
+                tab.label
+              }
+              .defaultVisibility(.hidden, for: .automatic)
             }
           }
+          .tabViewStyle(.tabBarOnly)
           .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
             tabview.tabBar.isHidden = horizontalSizeClass == .regular
             tabview.customizableViewControllers = []
