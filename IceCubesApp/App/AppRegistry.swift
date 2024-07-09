@@ -133,7 +133,7 @@ extension View {
         StatusEditHistoryView(statusId: status)
           .withEnvironments()
       case .settings:
-        SettingsTabs(popToRootTab: .constant(.settings), isModal: true)
+        SettingsTabs(isModal: true)
           .withEnvironments()
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
       case .accountPushNotficationsSettings:

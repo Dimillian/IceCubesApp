@@ -31,28 +31,28 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
   }
 
   @ViewBuilder
-  func makeContentView(selectedTab: Binding<AppTab>, popToRootTab: Binding<AppTab>) -> some View {
+  func makeContentView(selectedTab: Binding<AppTab>) -> some View {
     switch self {
     case .timeline:
-      TimelineTab(popToRootTab: popToRootTab)
+      TimelineTab()
     case .trending:
-      TimelineTab(popToRootTab: popToRootTab, timeline: .trending)
+      TimelineTab(timeline: .trending)
     case .local:
-      TimelineTab(popToRootTab: popToRootTab, timeline: .local)
+      TimelineTab(timeline: .local)
     case .federated:
-      TimelineTab(popToRootTab: popToRootTab, timeline: .federated)
+      TimelineTab(timeline: .federated)
     case .notifications:
-      NotificationsTab(selectedTab: selectedTab, popToRootTab: popToRootTab, lockedType: nil)
+      NotificationsTab(selectedTab: selectedTab, lockedType: nil)
     case .mentions:
-      NotificationsTab(selectedTab: selectedTab, popToRootTab: popToRootTab, lockedType: .mention)
+      NotificationsTab(selectedTab: selectedTab, lockedType: .mention)
     case .explore:
-      ExploreTab(popToRootTab: popToRootTab)
+      ExploreTab()
     case .messages:
-      MessagesTab(popToRootTab: popToRootTab)
+      MessagesTab()
     case .settings:
-      SettingsTabs(popToRootTab: popToRootTab, isModal: false)
+      SettingsTabs(isModal: false)
     case .profile:
-      ProfileTab(popToRootTab: popToRootTab)
+      ProfileTab()
     case .bookmarks:
       NavigationTab {
         AccountStatusesListView(mode: .bookmarks)

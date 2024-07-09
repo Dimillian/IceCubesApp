@@ -15,7 +15,6 @@ struct ProfileTab: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @State private var routerPath = RouterPath()
   @State private var scrollToTopSignal: Int = 0
-  @Binding var popToRootTab: AppTab
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
@@ -29,15 +28,6 @@ struct ProfileTab: View {
         AccountDetailView(account: .placeholder(), scrollToTopSignal: $scrollToTopSignal)
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
-      }
-    }
-    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
-      if newValue == .profile {
-        if routerPath.path.isEmpty {
-          scrollToTopSignal += 1
-        } else {
-          routerPath.path = []
-        }
       }
     }
     .onChange(of: client.id) {

@@ -24,7 +24,6 @@ struct AppView: View {
   @Binding var selectedTab: AppTab
   @Binding var appRouterPath: RouterPath
 
-  @State var popToRootTab: AppTab = .other
   @State var iosTabs = iOSTabs.shared
   @State var sidebarTabs = SidebarTabs.shared
 
@@ -64,21 +63,14 @@ struct AppView: View {
         #endif
         return
       }
-      if newTab == selectedTab {
-        /// Stupid hack to trigger onChange binding in tab views.
-        popToRootTab = .other
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-          popToRootTab = selectedTab
-        }
-      }
-
+      
       HapticManager.shared.fireHaptic(.tabSelection)
       SoundEffectManager.shared.playSound(.tabSelection)
 
       selectedTab = newTab
     })) {
       ForEach(availableTabs) { tab in
-        tab.makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
+        tab.makeContentView(selectedTab: $selectedTab)
           .tabItem {
             if userPreferences.showiPhoneTabLabel {
               tab.label
@@ -108,14 +100,13 @@ struct AppView: View {
   #if !os(visionOS)
     var sidebarView: some View {
       SideBarView(selectedTab: $selectedTab,
-                  popToRootTab: $popToRootTab,
                   tabs: availableTabs)
       {
         HStack(spacing: 0) {
           TabView(selection: $selectedTab) {
             ForEach(availableTabs) { tab in
               Tab(value: tab) {
-                tab.makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
+                tab.makeContentView(selectedTab: $selectedTab)
               } label: {
                 tab.label
               }
@@ -142,8 +133,8 @@ struct AppView: View {
   #endif
 
   var notificationsSecondaryColumn: some View {
-    NotificationsTab(selectedTab: .constant(.notifications),
-                     popToRootTab: $popToRootTab, lockedType: nil)
+    NotificationsTab(selectedTab: .constant(.notifications)
+                     , lockedType: nil)
       .environment(\.isSecondaryColumn, true)
       .frame(maxWidth: .secondaryColumnWidth)
       .id(appAccountsManager.currentAccount.id)

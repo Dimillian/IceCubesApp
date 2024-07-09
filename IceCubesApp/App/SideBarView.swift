@@ -19,7 +19,6 @@ struct SideBarView<Content: View>: View {
   @Environment(RouterPath.self) private var routerPath
 
   @Binding var selectedTab: AppTab
-  @Binding var popToRootTab: AppTab
   var tabs: [AppTab]
   @ViewBuilder var content: () -> Content
 
@@ -143,13 +142,6 @@ struct SideBarView<Content: View>: View {
         Button {
           // ensure keyboard is always dismissed when selecting a tab
           hideKeyboard()
-
-          if tab == selectedTab {
-            popToRootTab = .other
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-              popToRootTab = tab
-            }
-          }
           selectedTab = tab
           SoundEffectManager.shared.playSound(.tabSelection)
           if tab == .notifications {

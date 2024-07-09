@@ -28,8 +28,6 @@ struct SettingsTabs: View {
   @State private var cachedRemoved = false
   @State private var timelineCache = TimelineCache()
 
-  @Binding var popToRootTab: AppTab
-
   let isModal: Bool
   
   @State private var startingPoint: SettingsStartingPoint? = nil
@@ -103,11 +101,6 @@ struct SettingsTabs: View {
     }
     .withSafariRouter()
     .environment(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
-      if newValue == .notifications {
-        routerPath.path = []
-      }
-    }
   }
 
   private var accountsSection: some View {
