@@ -35,7 +35,7 @@ enum TabEnum: String, AppEnum, Sendable {
      .post: .init(title: "New post")]
   }
 
-  var toAppTab: AppTab {
+  var toAppTab: Tab {
     switch self {
     case .timeline:
       .timeline

@@ -16,6 +16,7 @@ struct MessagesTab: View {
   @Environment(AppAccountsManager.self) private var appAccount
   @State private var routerPath = RouterPath()
   @State private var scrollToTopSignal: Int = 0
+  @Binding var popToRootTab: Tab
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
@@ -27,6 +28,15 @@ struct MessagesTab: View {
         }
         .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .id(client.id)
+    }
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+      if newValue == .messages {
+        if routerPath.path.isEmpty {
+          scrollToTopSignal += 1
+        } else {
+          routerPath.path = []
+        }
+      }
     }
     .onChange(of: client.id) {
       routerPath.path = []

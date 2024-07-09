@@ -28,7 +28,7 @@ struct IceCubesApp: App {
   @State var quickLook = QuickLook.shared
   @State var theme = Theme.shared
 
-  @State var selectedTab: AppTab = .timeline
+  @State var selectedTab: Tab = .timeline
   @State var appRouterPath = RouterPath()
 
   @State var isSupporter: Bool = false

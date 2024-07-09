@@ -18,6 +18,7 @@ struct TimelineTab: View {
   @Environment(UserPreferences.self) private var preferences
   @Environment(Client.self) private var client
   @State private var routerPath = RouterPath()
+  @Binding var popToRootTab: Tab
 
   @State private var didAppear: Bool = false
   @State private var timeline: TimelineFilter = .home
@@ -32,8 +33,9 @@ struct TimelineTab: View {
 
   private let canFilterTimeline: Bool
 
-  init(timeline: TimelineFilter? = nil) {
+  init(popToRootTab: Binding<Tab>, timeline: TimelineFilter? = nil) {
     canFilterTimeline = timeline == nil
+    _popToRootTab = popToRootTab
     _timeline = .init(initialValue: timeline ?? .home)
   }
 
@@ -74,6 +76,15 @@ struct TimelineTab: View {
     }
     .onChange(of: currentAccount.account?.id) {
       resetTimelineFilter()
+    }
+    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
+      if newValue == .timeline {
+        if routerPath.path.isEmpty {
+          scrollToTopSignal += 1
+        } else {
+          routerPath.path = []
+        }
+      }
     }
     .onChange(of: client.id) {
       routerPath.path = []

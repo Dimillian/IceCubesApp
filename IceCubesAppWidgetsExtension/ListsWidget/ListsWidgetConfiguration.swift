@@ -6,10 +6,10 @@ struct ListsWidgetConfiguration: WidgetConfigurationIntent {
   static let description = IntentDescription("Choose the account and list for this widget")
 
   @Parameter(title: "Account")
-  var account: AppAccountEntity?
+  var account: AppAccountEntity
 
   @Parameter(title: "List")
-  var timeline: ListEntity?
+  var timeline: ListEntity
 }
 
 extension ListsWidgetConfiguration {

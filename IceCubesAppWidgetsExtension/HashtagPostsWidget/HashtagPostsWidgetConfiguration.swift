@@ -6,10 +6,10 @@ struct HashtagPostsWidgetConfiguration: WidgetConfigurationIntent {
   static let description = IntentDescription("Choose the account and hashtag for this widget")
 
   @Parameter(title: "Account")
-  var account: AppAccountEntity?
+  var account: AppAccountEntity
 
   @Parameter(title: "Hashtag")
-  var hashgtag: String?
+  var hashgtag: String
 }
 
 extension HashtagPostsWidgetConfiguration {

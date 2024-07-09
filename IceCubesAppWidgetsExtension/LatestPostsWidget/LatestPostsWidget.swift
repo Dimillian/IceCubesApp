@@ -18,7 +18,7 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
       return entry
     }
     return .init(date: Date(),
-                 title: configuration.timeline?.timeline.title ?? "",
+                 title: configuration.timeline.timeline.title,
                  statuses: [],
                  images: [:])
   }
@@ -29,24 +29,17 @@ struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
 
   private func timeline(for configuration: LatestPostsWidgetConfiguration, context: Context) async -> Timeline<PostsWidgetEntry> {
     do {
-      guard let timeline = configuration.timeline, let account = configuration.account else {
-        return Timeline(entries: [.init(date: Date(),
-                                        title: "",
-                                        statuses: [],
-                                        images: [:])],
-                        policy: .atEnd)
-      }
-      let statuses = await loadStatuses(for: timeline.timeline,
-                                        account: account,
+      let statuses = await loadStatuses(for: configuration.timeline.timeline,
+                                        account: configuration.account,
                                         widgetFamily: context.family)
       let images = try await loadImages(urls: statuses.map { $0.account.avatar })
       return Timeline(entries: [.init(date: Date(),
-                                      title: timeline.timeline.title,
+                                      title: configuration.timeline.timeline.title,
                                       statuses: statuses,
                                       images: images)], policy: .atEnd)
     } catch {
       return Timeline(entries: [.init(date: Date(),
-                                      title: configuration.timeline?.timeline.title ?? "",
+                                      title: configuration.timeline.timeline.title,
                                       statuses: [],
                                       images: [:])],
                       policy: .atEnd)

@@ -36,7 +36,7 @@
 		9F2A542A296AF557009B2D7C /* NotificationServiceSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2A5429296AF557009B2D7C /* NotificationServiceSupport.swift */; };
 		9F2A542C296B1177009B2D7C /* glass.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542B296B1177009B2D7C /* glass.caf */; };
 		9F2A542E296B1CC0009B2D7C /* glass.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542D296B1CC0009B2D7C /* glass.wav */; };
-		9F2B92F6295AE04800DE16D0 /* AppTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F5295AE04800DE16D0 /* AppTab.swift */; };
+		9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F5295AE04800DE16D0 /* Tabs.swift */; };
 		9F2B92FA295DA7D700DE16D0 /* AddAccountsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */; };
 		9F2B92FC295DA94500DE16D0 /* InstanceInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */; };
 		9F35DB4729506F6600B3281A /* NotificationTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F35DB4629506F6600B3281A /* NotificationTab.swift */; };
@@ -102,12 +102,14 @@
 		9FAD85A0297456A100496AB1 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD859F297456A100496AB1 /* Models */; };
 		9FAD85A2297456A400496AB1 /* Env in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD85A1297456A400496AB1 /* Env */; };
 		9FAD85A4297456A800496AB1 /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAD85A3297456A800496AB1 /* DesignSystem */; };
+		9FAD85CF2975B68900496AB1 /* SideBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAD85CE2975B68900496AB1 /* SideBarView.swift */; };
 		9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAE4ACA293783B000772766 /* SettingsTab.swift */; };
 		9FAE4ACE29379A5A00772766 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9FAE4ACD29379A5A00772766 /* KeychainSwift */; };
 		9FB143D12983104700A27BB1 /* glass.caf in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542B296B1177009B2D7C /* glass.caf */; };
 		9FB143D22983104A00A27BB1 /* glass.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9F2A542D296B1CC0009B2D7C /* glass.wav */; };
 		9FB183222AE9268800BBB692 /* IceCubesApp+Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */; };
 		9FB183292AE9449100BBB692 /* IceCubesApp+Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */; };
+		9FBA1D352B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBA1D342B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift */; };
 		9FBFE63D292A715500C250E9 /* IceCubesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFE63C292A715500C250E9 /* IceCubesApp.swift */; };
 		9FBFE64E292A72BD00C250E9 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = 9FBFE64D292A72BD00C250E9 /* Network */; };
 		9FC14EF22B494D180006CEE1 /* TagsGroupSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */; };
@@ -229,7 +231,7 @@
 		9F2A5429296AF557009B2D7C /* NotificationServiceSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationServiceSupport.swift; sourceTree = "<group>"; };
 		9F2A542B296B1177009B2D7C /* glass.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = glass.caf; sourceTree = "<group>"; };
 		9F2A542D296B1CC0009B2D7C /* glass.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = glass.wav; sourceTree = "<group>"; };
-		9F2B92F5295AE04800DE16D0 /* AppTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTab.swift; sourceTree = "<group>"; };
+		9F2B92F5295AE04800DE16D0 /* Tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabs.swift; sourceTree = "<group>"; };
 		9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAccountsView.swift; sourceTree = "<group>"; };
 		9F2B92FB295DA94500DE16D0 /* InstanceInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstanceInfoView.swift; sourceTree = "<group>"; };
 		9F35DB45294FA04C00B3281A /* DesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = DesignSystem; path = Packages/DesignSystem; sourceTree = "<group>"; };
@@ -284,10 +286,12 @@
 		9FAD858A29743F7400496AB1 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		9FAD858F29743F7400496AB1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9FAD859629743F7E00496AB1 /* IceCubesShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IceCubesShareExtension.entitlements; sourceTree = "<group>"; };
+		9FAD85CE2975B68900496AB1 /* SideBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarView.swift; sourceTree = "<group>"; };
 		9FAE4AC8293774FF00772766 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9FAE4ACA293783B000772766 /* SettingsTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTab.swift; sourceTree = "<group>"; };
 		9FB183212AE9268800BBB692 /* IceCubesApp+Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Menu.swift"; sourceTree = "<group>"; };
 		9FB183282AE9449100BBB692 /* IceCubesApp+Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IceCubesApp+Scene.swift"; sourceTree = "<group>"; };
+		9FBA1D342B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarEntriesSettingsView.swift; sourceTree = "<group>"; };
 		9FBFE639292A715500C250E9 /* Ice Cubes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ice Cubes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFE63C292A715500C250E9 /* IceCubesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IceCubesApp.swift; sourceTree = "<group>"; };
 		9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagsGroupSettingView.swift; sourceTree = "<group>"; };
@@ -456,6 +460,7 @@
 				9FAE4AC9293783A200772766 /* Tabs */,
 				9F398AA52935FE8A00A889F2 /* AppRegistry.swift */,
 				639CDF9B296AC82F00C35E58 /* SafariRouter.swift */,
+				9FAD85CE2975B68900496AB1 /* SideBarView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -560,7 +565,7 @@
 				9F35DB4629506F6600B3281A /* NotificationTab.swift */,
 				9F35DB4B2952005C00B3281A /* MessagesTab.swift */,
 				9F55C68C2955968700F94077 /* ExploreTab.swift */,
-				9F2B92F5295AE04800DE16D0 /* AppTab.swift */,
+				9F2B92F5295AE04800DE16D0 /* Tabs.swift */,
 				9F4A48182976B21900A1A038 /* ProfileTab.swift */,
 				9F15D5FF2B3D6A850008C220 /* NavigationTab.swift */,
 				9F15D6032B3DC2180008C220 /* NavigationSheet.swift */,
@@ -667,6 +672,7 @@
 				9FC14EF12B494D180006CEE1 /* TagsGroupSettingView.swift */,
 				9FC14EF32B494D940006CEE1 /* RemoteTimelinesSettingView.swift */,
 				9FC14EF52B494DFF0006CEE1 /* RecenTagsSettingView.swift */,
+				9FBA1D342B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1065,6 +1071,7 @@
 				9F37BDE12BE38646007F28AD /* PostImageIntent.swift in Sources */,
 				9F37BDDF2BE37C35007F28AD /* TabIntent.swift in Sources */,
 				9F7788C02BE63935004E6BEF /* InlinePostIntent.swift in Sources */,
+				9FAD85CF2975B68900496AB1 /* SideBarView.swift in Sources */,
 				9FAE4ACB293783B000772766 /* SettingsTab.swift in Sources */,
 				9FC14EF42B494D940006CEE1 /* RemoteTimelinesSettingView.swift in Sources */,
 				9FC14EF22B494D180006CEE1 /* TagsGroupSettingView.swift in Sources */,
@@ -1072,7 +1079,7 @@
 				9F7335F92968576500AFF0BA /* DisplaySettingsView.swift in Sources */,
 				9F2A540729699698009B2D7C /* SupportAppView.swift in Sources */,
 				9FB183292AE9449100BBB692 /* IceCubesApp+Scene.swift in Sources */,
-				9F2B92F6295AE04800DE16D0 /* AppTab.swift in Sources */,
+				9F2B92F6295AE04800DE16D0 /* Tabs.swift in Sources */,
 				FA31A9AB2A66BF7C00D5F662 /* EditTagGroupView.swift in Sources */,
 				9F398AB329360A4C00A889F2 /* TimelineTab.swift in Sources */,
 				9F398AA62935FE8A00A889F2 /* AppRegistry.swift in Sources */,
@@ -1092,6 +1099,7 @@
 				9F6028562B3F36AE00476078 /* AppView.swift in Sources */,
 				9F55C68D2955968700F94077 /* ExploreTab.swift in Sources */,
 				9F1E8B47298EBCBB00609F80 /* HapticSettingsView.swift in Sources */,
+				9FBA1D352B4E9B7E00ADB568 /* SidebarEntriesSettingsView.swift in Sources */,
 				9F2A5411296A1429009B2D7C /* PushNotificationsView.swift in Sources */,
 				9F6028582B3F3B7600476078 /* ToolbarTab.swift in Sources */,
 			);
@@ -1179,7 +1187,7 @@
 				INFOPLIST_FILE = IceCubesNotifications/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = IceCubesNotifications;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1214,7 +1222,7 @@
 				INFOPLIST_FILE = IceCubesNotifications/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = IceCubesNotifications;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1253,7 +1261,7 @@
 				INFOPLIST_FILE = IceCubesAppWidgetsExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = IceCubesAppWidgetsExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1289,7 +1297,7 @@
 				INFOPLIST_FILE = IceCubesAppWidgetsExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = IceCubesAppWidgetsExtension;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1322,7 +1330,7 @@
 				INFOPLIST_FILE = IceCubesShareExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ice Cubes";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1356,7 +1364,7 @@
 				INFOPLIST_FILE = IceCubesShareExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Ice Cubes";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1540,7 +1548,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -1565,7 +1573,7 @@
 				SWIFT_UPCOMING_FEATURE_REGION_BASED_ISOLATION = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				_EXPERIMENTAL_SWIFT_EXPLICIT_MODULES = NO;
+				_EXPERIMENTAL_SWIFT_EXPLICIT_MODULES = YES;
 			};
 			name = Debug;
 		};
@@ -1607,7 +1615,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -1632,7 +1640,7 @@
 				SWIFT_UPCOMING_FEATURE_REGION_BASED_ISOLATION = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
-				_EXPERIMENTAL_SWIFT_EXPLICIT_MODULES = NO;
+				_EXPERIMENTAL_SWIFT_EXPLICIT_MODULES = YES;
 			};
 			name = Release;
 		};
@@ -1651,7 +1659,7 @@
 				INFOPLIST_FILE = IceCubesActionExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Open in Ice Cube";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1686,7 +1694,7 @@
 				INFOPLIST_FILE = IceCubesActionExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Open in Ice Cube";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

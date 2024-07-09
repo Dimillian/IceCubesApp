@@ -29,15 +29,8 @@ struct MentionsWidgetProvider: AppIntentTimelineProvider {
 
   private func timeline(for configuration: MentionsWidgetConfiguration, context _: Context) async -> Timeline<PostsWidgetEntry> {
     do {
-      guard let account = configuration.account else {
-        return Timeline(entries: [.init(date: Date(),
-                                        title: "Mentions",
-                                        statuses: [],
-                                        images: [:])],
-                        policy: .atEnd)
-      }
-      let client = Client(server: account.account.server,
-                          oauthToken: account.account.oauthToken)
+      let client = Client(server: configuration.account.account.server,
+                          oauthToken: configuration.account.account.oauthToken)
       var excludedTypes = Models.Notification.NotificationType.allCases
       excludedTypes.removeAll(where: { $0 == .mention })
       let notifications: [Models.Notification] =

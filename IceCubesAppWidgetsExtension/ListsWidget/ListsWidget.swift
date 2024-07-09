@@ -29,20 +29,13 @@ struct ListsWidgetProvider: AppIntentTimelineProvider {
 
   private func timeline(for configuration: ListsWidgetConfiguration, context: Context) async -> Timeline<PostsWidgetEntry> {
     do {
-      guard let account = configuration.account, let timeline = configuration.timeline else {
-        return Timeline(entries: [.init(date: Date(),
-                                        title: "List name",
-                                        statuses: [],
-                                        images: [:])],
-                        policy: .atEnd)
-      }
-      let filter: TimelineFilter = .list(list: timeline.list)
-      let statuses = await loadStatuses(for: filter,
-                                        account: account,
+      let timeline: TimelineFilter = .list(list: configuration.timeline.list)
+      let statuses = await loadStatuses(for: timeline,
+                                        account: configuration.account,
                                         widgetFamily: context.family)
       let images = try await loadImages(urls: statuses.map { $0.account.avatar })
       return Timeline(entries: [.init(date: Date(),
-                                      title: filter.title,
+                                      title: timeline.title,
                                       statuses: statuses,
                                       images: images)], policy: .atEnd)
     } catch {

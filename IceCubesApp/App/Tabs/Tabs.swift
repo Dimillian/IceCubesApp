@@ -7,8 +7,8 @@ import StatusKit
 import SwiftUI
 
 @MainActor
-enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
-  case timeline, notifications, mentions, explore, messages, settings
+enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
+  case timeline, notifications, mentions, explore, messages, settings, other
   case trending, federated, local
   case profile
   case bookmarks
@@ -22,43 +22,37 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
     rawValue
   }
 
-  static func loggedOutTab() -> [AppTab] {
+  static func loggedOutTab() -> [Tab] {
     [.timeline, .settings]
   }
 
-  static func visionOSTab() -> [AppTab] {
+  static func visionOSTab() -> [Tab] {
     [.profile, .timeline, .notifications, .mentions, .explore, .post, .settings]
-  }
-  
-  static func sideBarTab() -> [AppTab] {
-    [.timeline, .trending, .federated, .local, .notifications,
-      .mentions, .mentions, .explore, .bookmarks, .favorites,
-      .followedTags, .links, .lists, .settings, .profile]
   }
 
   @ViewBuilder
-  func makeContentView(selectedTab: Binding<AppTab>) -> some View {
+  func makeContentView(selectedTab: Binding<Tab>, popToRootTab: Binding<Tab>) -> some View {
     switch self {
     case .timeline:
-      TimelineTab()
+      TimelineTab(popToRootTab: popToRootTab)
     case .trending:
-      TimelineTab(timeline: .trending)
+      TimelineTab(popToRootTab: popToRootTab, timeline: .trending)
     case .local:
-      TimelineTab(timeline: .local)
+      TimelineTab(popToRootTab: popToRootTab, timeline: .local)
     case .federated:
-      TimelineTab(timeline: .federated)
+      TimelineTab(popToRootTab: popToRootTab, timeline: .federated)
     case .notifications:
-      NotificationsTab(selectedTab: selectedTab, lockedType: nil)
+      NotificationsTab(selectedTab: selectedTab, popToRootTab: popToRootTab, lockedType: nil)
     case .mentions:
-      NotificationsTab(selectedTab: selectedTab, lockedType: .mention)
+      NotificationsTab(selectedTab: selectedTab, popToRootTab: popToRootTab, lockedType: .mention)
     case .explore:
-      ExploreTab()
+      ExploreTab(popToRootTab: popToRootTab)
     case .messages:
-      MessagesTab()
+      MessagesTab(popToRootTab: popToRootTab)
     case .settings:
-      SettingsTabs(isModal: false)
+      SettingsTabs(popToRootTab: popToRootTab, isModal: false)
     case .profile:
-      ProfileTab()
+      ProfileTab(popToRootTab: popToRootTab)
     case .bookmarks:
       NavigationTab {
         AccountStatusesListView(mode: .bookmarks)
@@ -79,12 +73,16 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
       NavigationTab { TrendingLinksListView(cards: []) }
     case .post:
       VStack {}
+    case .other:
+      EmptyView()
     }
   }
 
   @ViewBuilder
   var label: some View {
-    Label(title, systemImage: iconName)
+    if self != .other {
+      Label(title, systemImage: iconName)
+    }
   }
 
   var title: LocalizedStringKey {
@@ -121,6 +119,8 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
       "timeline.filter.lists"
     case .links:
       "explore.section.trending.links"
+    case .other:
+      ""
     }
   }
 
@@ -158,7 +158,56 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
       "list.bullet"
     case .links:
       "newspaper"
+    case .other:
+      ""
     }
+  }
+}
+
+@MainActor
+@Observable
+class SidebarTabs {
+  struct SidedebarTab: Hashable, Codable {
+    let tab: Tab
+    var enabled: Bool
+  }
+
+  class Storage {
+    @AppStorage("sidebar_tabs") var tabs: [SidedebarTab] = [
+      .init(tab: .timeline, enabled: true),
+      .init(tab: .trending, enabled: true),
+      .init(tab: .federated, enabled: true),
+      .init(tab: .local, enabled: true),
+      .init(tab: .notifications, enabled: true),
+      .init(tab: .mentions, enabled: true),
+      .init(tab: .messages, enabled: true),
+      .init(tab: .explore, enabled: true),
+      .init(tab: .bookmarks, enabled: true),
+      .init(tab: .favorites, enabled: true),
+      .init(tab: .followedTags, enabled: true),
+      .init(tab: .lists, enabled: true),
+      .init(tab: .links, enabled: true),
+
+      .init(tab: .settings, enabled: true),
+      .init(tab: .profile, enabled: true),
+    ]
+  }
+
+  private let storage = Storage()
+  public static let shared = SidebarTabs()
+
+  var tabs: [SidedebarTab] {
+    didSet {
+      storage.tabs = tabs
+    }
+  }
+
+  func isEnabled(_ tab: Tab) -> Bool {
+    tabs.first(where: { $0.tab.id == tab.id })?.enabled == true
+  }
+
+  private init() {
+    tabs = storage.tabs
   }
 }
 
@@ -170,45 +219,45 @@ class iOSTabs {
   }
 
   class Storage {
-    @AppStorage(TabEntries.first.rawValue) var firstTab = AppTab.timeline
-    @AppStorage(TabEntries.second.rawValue) var secondTab = AppTab.notifications
-    @AppStorage(TabEntries.third.rawValue) var thirdTab = AppTab.explore
-    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = AppTab.links
-    @AppStorage(TabEntries.fifth.rawValue) var fifthTab = AppTab.profile
+    @AppStorage(TabEntries.first.rawValue) var firstTab = Tab.timeline
+    @AppStorage(TabEntries.second.rawValue) var secondTab = Tab.notifications
+    @AppStorage(TabEntries.third.rawValue) var thirdTab = Tab.explore
+    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = Tab.links
+    @AppStorage(TabEntries.fifth.rawValue) var fifthTab = Tab.profile
   }
 
   private let storage = Storage()
   public static let shared = iOSTabs()
 
-  var tabs: [AppTab] {
+  var tabs: [Tab] {
     [firstTab, secondTab, thirdTab, fourthTab, fifthTab]
   }
 
-  var firstTab: AppTab {
+  var firstTab: Tab {
     didSet {
       storage.firstTab = firstTab
     }
   }
 
-  var secondTab: AppTab {
+  var secondTab: Tab {
     didSet {
       storage.secondTab = secondTab
     }
   }
 
-  var thirdTab: AppTab {
+  var thirdTab: Tab {
     didSet {
       storage.thirdTab = thirdTab
     }
   }
 
-  var fourthTab: AppTab {
+  var fourthTab: Tab {
     didSet {
       storage.fourthTab = fourthTab
     }
   }
 
-  var fifthTab: AppTab {
+  var fifthTab: Tab {
     didSet {
       storage.fifthTab = fifthTab
     }
