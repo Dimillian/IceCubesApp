@@ -49,12 +49,21 @@ public struct AppAccountsSelectorView: View {
         .contentShape(Rectangle())
     }
     .sheet(isPresented: $isPresented, content: {
-      accountsView.presentationDetents([.height(preferredHeight), .large])
-        .presentationBackground(.ultraThinMaterial)
-        .presentationCornerRadius(16)
-        .onAppear {
-          refreshAccounts()
-        }
+      if UIDevice.current.userInterfaceIdiom == .mac || UIDevice.current.userInterfaceIdiom == .pad {
+        accountsView
+          .presentationBackground(.ultraThinMaterial)
+          .onAppear {
+            refreshAccounts()
+          }
+      } else {
+        accountsView
+          .presentationDetents([.height(preferredHeight), .large])
+          .presentationBackground(.ultraThinMaterial)
+          .presentationCornerRadius(16)
+          .onAppear {
+            refreshAccounts()
+          }
+      }
     })
     .onChange(of: currentAccount.account?.id) {
       refreshAccounts()

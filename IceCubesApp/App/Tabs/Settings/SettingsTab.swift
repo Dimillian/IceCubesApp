@@ -28,8 +28,6 @@ struct SettingsTabs: View {
   @State private var cachedRemoved = false
   @State private var timelineCache = TimelineCache()
 
-  @Binding var popToRootTab: Tab
-
   let isModal: Bool
   
   @State private var startingPoint: SettingsStartingPoint? = nil
@@ -103,11 +101,6 @@ struct SettingsTabs: View {
     }
     .withSafariRouter()
     .environment(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
-      if newValue == .notifications {
-        routerPath.path = []
-      }
-    }
   }
 
   private var accountsSection: some View {
@@ -191,10 +184,6 @@ struct SettingsTabs: View {
       if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
         NavigationLink(destination: TabbarEntriesSettingsView()) {
           Label("settings.general.tabbarEntries", systemImage: "platter.filled.bottom.iphone")
-        }
-      } else if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
-        NavigationLink(destination: SidebarEntriesSettingsView()) {
-          Label("settings.general.sidebarEntries", systemImage: "sidebar.squares.leading")
         }
       }
       NavigationLink(destination: TranslationSettingsView()) {

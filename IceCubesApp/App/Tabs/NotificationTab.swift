@@ -22,8 +22,7 @@ struct NotificationsTab: View {
   @State private var routerPath = RouterPath()
   @State private var scrollToTopSignal: Int = 0
 
-  @Binding var selectedTab: Tab
-  @Binding var popToRootTab: Tab
+  @Binding var selectedTab: AppTab
 
   let lockedType: Models.Notification.NotificationType?
 
@@ -51,15 +50,6 @@ struct NotificationsTab: View {
     }
     .withSafariRouter()
     .environment(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
-      if newValue == .notifications {
-        if routerPath.path.isEmpty {
-          scrollToTopSignal += 1
-        } else {
-          routerPath.path = []
-        }
-      }
-    }
     .onChange(of: selectedTab) { _, _ in
       clearNotifications()
     }
