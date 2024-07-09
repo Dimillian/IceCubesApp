@@ -51,41 +51,71 @@ struct AppView: View {
     return sidebarTabs.tabs.map { $0.tab }
   }
 
+  @ViewBuilder
   var tabBarView: some View {
-    TabView(selection: .init(get: {
-      selectedTab
-    }, set: { newTab in
-      if newTab == .post {
-        #if os(visionOS)
-          openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
-        #else
-          appRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
-        #endif
-        return
-      }
-      
-      HapticManager.shared.fireHaptic(.tabSelection)
-      SoundEffectManager.shared.playSound(.tabSelection)
-
-      selectedTab = newTab
-    })) {
-      ForEach(availableTabs) { tab in
-        Tab(value: tab) {
-          tab.makeContentView(selectedTab: $selectedTab)
-            .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
-        } label:  {
-          if userPreferences.showiPhoneTabLabel {
-            tab.label
-              .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
-          } else {
-            Image(systemName: tab.iconName)
+    if #available(iOS 18.0, *) {
+      TabView(selection: .init(get: {
+        selectedTab
+      }, set: { newTab in
+        updateTab(with: newTab)
+      })) {
+        ForEach(availableTabs) { tab in
+          Tab(value: tab) {
+            tab.makeContentView(selectedTab: $selectedTab)
+              .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
+          } label:  {
+            if userPreferences.showiPhoneTabLabel {
+              tab.label
+                .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+            } else {
+              Image(systemName: tab.iconName)
+            }
           }
+          .badge(badgeFor(tab: tab))
         }
-        .badge(badgeFor(tab: tab))
       }
+      .id(appAccountsManager.currentClient.id)
+      .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
+    } else {
+      TabView(selection: .init(get: {
+        selectedTab
+      }, set: { newTab in
+        updateTab(with: newTab)
+      })) {
+        ForEach(availableTabs) { tab in
+          tab.makeContentView(selectedTab: $selectedTab)
+            .tabItem {
+              if userPreferences.showiPhoneTabLabel {
+                tab.label
+                  .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+              } else {
+                Image(systemName: tab.iconName)
+              }
+            }
+            .tag(tab)
+            .badge(badgeFor(tab: tab))
+            .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
+        }
+      }
+      .id(appAccountsManager.currentClient.id)
+      .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
     }
-    .id(appAccountsManager.currentClient.id)
-    .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
+  }
+  
+  private func updateTab(with newTab: AppTab) {
+    if newTab == .post {
+      #if os(visionOS)
+        openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
+      #else
+        appRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+      #endif
+      return
+    }
+    
+    HapticManager.shared.fireHaptic(.tabSelection)
+    SoundEffectManager.shared.playSound(.tabSelection)
+
+    selectedTab = newTab
   }
 
   private func badgeFor(tab: AppTab) -> Int {
@@ -103,21 +133,39 @@ struct AppView: View {
                   tabs: availableTabs)
       {
         HStack(spacing: 0) {
-          TabView(selection: $selectedTab) {
-            ForEach(availableTabs) { tab in
-              Tab(value: tab) {
-                tab.makeContentView(selectedTab: $selectedTab)
-              } label: {
-                tab.label
+          if #available(iOS 18.0, *) {
+            TabView(selection: $selectedTab) {
+              ForEach(availableTabs) { tab in
+                Tab(value: tab) {
+                  tab.makeContentView(selectedTab: $selectedTab)
+                } label: {
+                  tab.label
+                }
+                .defaultVisibility(.hidden, for: .automatic)
               }
-              .defaultVisibility(.hidden, for: .automatic)
             }
-          }
-          .tabViewStyle(.tabBarOnly)
-          .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
-            tabview.tabBar.isHidden = horizontalSizeClass == .regular
-            tabview.customizableViewControllers = []
-            tabview.moreNavigationController.isNavigationBarHidden = true
+            .tabViewStyle(.tabBarOnly)
+            .introspect(.tabView, on: .iOS(.v18)) { (tabview: UITabBarController) in
+              tabview.tabBar.isHidden = horizontalSizeClass == .regular
+              tabview.customizableViewControllers = []
+              tabview.moreNavigationController.isNavigationBarHidden = true
+            }
+          } else {
+            TabView(selection: $selectedTab) {
+              ForEach(availableTabs) { tab in
+                tab
+                  .makeContentView(selectedTab: $selectedTab)
+                  .tabItem {
+                    tab.label
+                  }
+                  .tag(tab)
+              }
+            }
+            .introspect(.tabView, on: .iOS(.v17)) { (tabview: UITabBarController) in
+              tabview.tabBar.isHidden = horizontalSizeClass == .regular
+              tabview.customizableViewControllers = []
+              tabview.moreNavigationController.isNavigationBarHidden = true
+            }
           }
           if horizontalSizeClass == .regular,
              appAccountsManager.currentClient.isAuth,
