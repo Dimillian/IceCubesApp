@@ -53,53 +53,28 @@ struct AppView: View {
 
   @ViewBuilder
   var tabBarView: some View {
-    if #available(iOS 18.0, *) {
-      TabView(selection: .init(get: {
-        selectedTab
-      }, set: { newTab in
-        updateTab(with: newTab)
-      })) {
-        ForEach(availableTabs) { tab in
-          Tab(value: tab) {
-            tab.makeContentView(selectedTab: $selectedTab)
-              .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
-          } label:  {
-            if userPreferences.showiPhoneTabLabel {
-              tab.label
-                .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
-            } else {
-              Image(systemName: tab.iconName)
-            }
-          }
-          .badge(badgeFor(tab: tab))
-        }
-      }
-      .id(appAccountsManager.currentClient.id)
-      .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
-    } else {
-      TabView(selection: .init(get: {
-        selectedTab
-      }, set: { newTab in
-        updateTab(with: newTab)
-      })) {
-        ForEach(availableTabs) { tab in
+    TabView(selection: .init(get: {
+      selectedTab
+    }, set: { newTab in
+      updateTab(with: newTab)
+    })) {
+      ForEach(availableTabs) { tab in
+        Tab(value: tab) {
           tab.makeContentView(selectedTab: $selectedTab)
-            .tabItem {
-              if userPreferences.showiPhoneTabLabel {
-                tab.label
-                  .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
-              } else {
-                Image(systemName: tab.iconName)
-              }
-            }
-            .tag(tab)
-            .badge(badgeFor(tab: tab))
             .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
+        } label:  {
+          if userPreferences.showiPhoneTabLabel {
+            tab.label
+              .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+          } else {
+            Image(systemName: tab.iconName)
+          }
         }
+        .badge(badgeFor(tab: tab))
       }
-      .id(appAccountsManager.currentClient.id)
-      .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
     }
+    .id(appAccountsManager.currentClient.id)
+    .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
   }
   
   private func updateTab(with newTab: AppTab) {
@@ -133,39 +108,21 @@ struct AppView: View {
                   tabs: availableTabs)
       {
         HStack(spacing: 0) {
-          if #available(iOS 18.0, *) {
-            TabView(selection: $selectedTab) {
-              ForEach(availableTabs) { tab in
-                Tab(value: tab) {
-                  tab.makeContentView(selectedTab: $selectedTab)
-                } label: {
+          TabView(selection: $selectedTab) {
+            ForEach(availableTabs) { tab in
+              tab
+                .makeContentView(selectedTab: $selectedTab)
+                .toolbar(horizontalSizeClass == .regular ? .hidden : .visible, for: .tabBar)
+                .tabItem {
                   tab.label
                 }
-                .defaultVisibility(.hidden, for: .automatic)
-              }
+                .tag(tab)
             }
-            .tabViewStyle(.tabBarOnly)
-            .introspect(.tabView, on: .iOS(.v18)) { (tabview: UITabBarController) in
-              tabview.tabBar.isHidden = horizontalSizeClass == .regular
-              tabview.customizableViewControllers = []
-              tabview.moreNavigationController.isNavigationBarHidden = true
-            }
-          } else {
-            TabView(selection: $selectedTab) {
-              ForEach(availableTabs) { tab in
-                tab
-                  .makeContentView(selectedTab: $selectedTab)
-                  .tabItem {
-                    tab.label
-                  }
-                  .tag(tab)
-              }
-            }
-            .introspect(.tabView, on: .iOS(.v17)) { (tabview: UITabBarController) in
-              tabview.tabBar.isHidden = horizontalSizeClass == .regular
-              tabview.customizableViewControllers = []
-              tabview.moreNavigationController.isNavigationBarHidden = true
-            }
+          }
+          .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
+            tabview.tabBar.isHidden = horizontalSizeClass == .regular
+            tabview.customizableViewControllers = []
+            tabview.moreNavigationController.isNavigationBarHidden = true
           }
           if horizontalSizeClass == .regular,
              appAccountsManager.currentClient.isAuth,
