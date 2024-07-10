@@ -21,6 +21,7 @@ public enum RouterDestination: Hashable {
   case rebloggedBy(id: String)
   case accountsList(accounts: [Account])
   case trendingTimeline
+  case linkTimeline(url: URL, title: String)
   case trendingLinks(cards: [Card])
   case tagsList(tags: [Tag])
   case notificationsRequests

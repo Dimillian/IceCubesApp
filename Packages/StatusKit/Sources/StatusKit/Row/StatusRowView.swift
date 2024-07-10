@@ -15,8 +15,10 @@ public struct StatusRowView: View {
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.indentationLevel) private var indentationLevel
+  @Environment(\.isHomeTimeline) private var isHomeTimeline
   
   @Environment(RouterPath.self) private var routerPath: RouterPath
+
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
@@ -32,17 +34,15 @@ public struct StatusRowView: View {
     _viewModel = .init(initialValue: viewModel)
     self.context = context
   }
+
   var contextMenu: some View {
-      
     StatusRowContextMenu(viewModel: viewModel,
                          showTextForSelection: $showSelectableText,
                          isBlockConfirmationPresented: $isBlockConfirmationPresented)
   }
-   
+
   public var body: some View {
     HStack(spacing: 0) {
-       
-       
       if !isCompact {
         HStack(spacing: 3) {
           ForEach(0 ..< indentationLevel, id: \.self) { level in
@@ -68,7 +68,6 @@ public struct StatusRowView: View {
         } else {
           if !isCompact && context != .detail {
             Group {
-              StatusRowPremiumView(viewModel: viewModel)
               StatusRowTagView(viewModel: viewModel)
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
@@ -88,7 +87,6 @@ public struct StatusRowView: View {
                 }
             }
             VStack(alignment: .leading, spacing: .statusComponentSpacing) {
-                KTagWithRelationListView(viewModel: viewModel)
               if !isCompact {
                 StatusRowHeaderView(viewModel: viewModel)
               }
@@ -155,7 +153,7 @@ public struct StatusRowView: View {
       .foregroundStyle(.background).hoverEffect())
     .listRowHoverEffectDisabled()
     #else
-    .listRowBackground(viewModel.highlightRowColor)
+    .listRowBackground(viewModel.makeBackgroundColor(isHomeTimeline: isHomeTimeline))
     #endif
     .listRowInsets(.init(top: 0,
                          leading: .layoutPadding,

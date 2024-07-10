@@ -9,33 +9,17 @@ import SwiftUI
 
 @MainActor
 @Observable public class StatusRowViewModel {
-    
-    func addKTagRelationRequest(tagId: String) async {
-        do {
-            let postStatus :Status = try await client.post(endpoint: KTagAddRelationRequests.create(json: KTagAddRelatioonRequestData.init(k_tag_id: tagId, status_id: status.id)))
-            StreamWatcher.shared.emmitEditEvent(for: postStatus)
-        } catch {
-        }
-    }
-    
-    func del(tagId: String) async {
-        // Check for existing delete requests
-        if let delTarget = status.kTagRelations.first(where: { $0.kTagId == tagId && $0.isOwned }) {
-                let deleteRequest = KTagDeleteRelatioonRequestData(k_tag_relation_id: delTarget.id)
-                if let postStatus :Status = try? await client.post(endpoint: KTagDeleteRelationRequests.create(json: deleteRequest)){
-                    StreamWatcher.shared.emmitEditEvent(for: postStatus)
-                }
-        }
-    }
-
   let status: Status
-    let isRemote: Bool
+  // Whether this status is on a remote local timeline (many actions are unavailable if so)
+  let isRemote: Bool
   let showActions: Bool
   let textDisabled: Bool
   let finalStatus: AnyStatus
 
   let client: Client
   let routerPath: RouterPath
+  
+  let userFollowedTag: HTMLString.Link?
 
   private let theme = Theme.shared
   private let userMentionned: Bool
@@ -121,18 +105,56 @@ import SwiftUI
     status.reblog?.inReplyToId != nil || status.reblog?.inReplyToAccountId != nil ||
       status.inReplyToId != nil || status.inReplyToAccountId != nil
   }
-
-  var highlightRowColor: Color {
+  
+  @ViewBuilder
+  func makeBackgroundColor(isHomeTimeline: Bool) -> some View {
+    if isHomeTimeline {
+      homeBackgroundColor
+    } else {
+      backgroundColor
+    }
+  }
+  
+  @ViewBuilder
+  var homeBackgroundColor: some View {
     if status.visibility == .direct {
       theme.tintColor.opacity(0.15)
     } else if userMentionned {
       theme.secondaryBackgroundColor
-    } else if status.account.isPremiumAccount {
-      .yellow.opacity(0.4)
+    } else {
+      if userFollowedTag != nil {
+        makeDecorativeGradient(startColor: .teal, endColor: theme.primaryBackgroundColor)
+      } else if status.reblog != nil {
+        makeDecorativeGradient(startColor: theme.tintColor, endColor: theme.primaryBackgroundColor)
+      } else {
+        theme.primaryBackgroundColor
+      }
+    }
+  }
+
+  @ViewBuilder
+  var backgroundColor: some View {
+    if status.visibility == .direct {
+      theme.tintColor.opacity(0.15)
+    } else if userMentionned {
+      theme.secondaryBackgroundColor
     } else {
       theme.primaryBackgroundColor
     }
   }
+  
+  func makeDecorativeGradient(startColor: Color, endColor: Color) -> some View {
+    LinearGradient(stops: [
+      .init(color: startColor.opacity(0.3), location: 0.03),
+      .init(color: startColor.opacity(0.2), location: 0.06),
+      .init(color: startColor.opacity(0.1), location: 0.09),
+      .init(color: startColor.opacity(0.05), location: 0.15),
+      .init(color: endColor, location: 0.25),
+    ],
+                   startPoint: .topLeading,
+                   endPoint: .bottomTrailing)
+  }
+
   public init(status: Status,
               client: Client,
               routerPath: RouterPath,
@@ -165,6 +187,10 @@ import SwiftUI
     } else {
       userMentionned = false
     }
+    
+    userFollowedTag = finalStatus.content.links.first(where: { link in
+      link.type == .hashtag && CurrentAccount.shared.tags.contains(where: { $0.name.lowercased() == link.title.lowercased() })
+    })
 
     isFiltered = filter != nil
 
@@ -214,12 +240,6 @@ import SwiftUI
     let relationships: [Relationship]? = try? await client.get(endpoint: Accounts.relationships(ids: [status.reblog?.account.id ?? status.account.id]))
     authorRelationship = relationships?.first
   }
-    
-    
-    
-    func cancelAddKTagRelationRequest(id: String) async{
-        let deletedId = try? await client.delete(endpoint: KTagAddRelationRequests.delete(id: id))
-    }
 
   private func embededStatusURL() -> URL? {
     let content = finalStatus.content
