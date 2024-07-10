@@ -18,6 +18,8 @@ import SwiftUI
 
   let client: Client
   let routerPath: RouterPath
+  
+  let userFollowedTag: HTMLString.Link?
 
   private let theme = Theme.shared
   private let userMentionned: Bool
@@ -103,8 +105,35 @@ import SwiftUI
     status.reblog?.inReplyToId != nil || status.reblog?.inReplyToAccountId != nil ||
       status.inReplyToId != nil || status.inReplyToAccountId != nil
   }
+  
+  @ViewBuilder
+  func makeBackgroundColor(isHomeTimeline: Bool) -> some View {
+    if isHomeTimeline {
+      homeBackgroundColor
+    } else {
+      backgroundColor
+    }
+  }
+  
+  @ViewBuilder
+  var homeBackgroundColor: some View {
+    if status.visibility == .direct {
+      theme.tintColor.opacity(0.15)
+    } else if userMentionned {
+      theme.secondaryBackgroundColor
+    } else {
+      if userFollowedTag != nil {
+        makeDecorativeGradient(startColor: .teal, endColor: theme.primaryBackgroundColor)
+      } else if status.reblog != nil {
+        makeDecorativeGradient(startColor: theme.tintColor, endColor: theme.primaryBackgroundColor)
+      } else {
+        theme.primaryBackgroundColor
+      }
+    }
+  }
 
-  var highlightRowColor: Color {
+  @ViewBuilder
+  var backgroundColor: some View {
     if status.visibility == .direct {
       theme.tintColor.opacity(0.15)
     } else if userMentionned {
@@ -114,6 +143,18 @@ import SwiftUI
     } else {
       theme.primaryBackgroundColor
     }
+  }
+  
+  func makeDecorativeGradient(startColor: Color, endColor: Color) -> some View {
+    LinearGradient(stops: [
+      .init(color: startColor.opacity(0.3), location: 0.03),
+      .init(color: startColor.opacity(0.2), location: 0.06),
+      .init(color: startColor.opacity(0.1), location: 0.09),
+      .init(color: startColor.opacity(0.05), location: 0.15),
+      .init(color: endColor, location: 0.25),
+    ],
+                   startPoint: .topLeading,
+                   endPoint: .bottomTrailing)
   }
 
   public init(status: Status,
@@ -148,6 +189,10 @@ import SwiftUI
     } else {
       userMentionned = false
     }
+    
+    userFollowedTag = finalStatus.content.links.first(where: { link in
+      link.type == .hashtag && CurrentAccount.shared.tags.contains(where: { $0.name.lowercased() == link.title.lowercased() })
+    })
 
     isFiltered = filter != nil
 
