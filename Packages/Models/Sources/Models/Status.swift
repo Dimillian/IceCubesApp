@@ -1,5 +1,4 @@
 import Foundation
-import AnyCodable
 
 
 public enum Visibility: String, Codable, CaseIterable, Hashable, Equatable, Sendable {
@@ -110,15 +109,14 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
         self.poll = try container.decodeIfPresent(Poll.self, forKey: .poll)
         self.spoilerText = try container.decode(HTMLString.self, forKey: .spoilerText)
         self.filtered = try container.decodeIfPresent([Filtered].self, forKey: .filtered)
-        self.sensitive = try container.decode(Bool.self, forKey: .sensitive)
-        
         self.kTagAddRealationRequests = try container.decodeIfPresent([AddingKTagRelationRequested].self, forKey: .kTagAddRealationRequests) ?? []
+        self.sensitive = try container.decode(Bool.self, forKey: .sensitive)
         self.kTagRelations = try container.decodeIfPresent([AddedKTagRelation].self, forKey: .kTagRelations) ?? []
         self.language = try container.decodeIfPresent(String.self, forKey: .language)
     }
     
     public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application?, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?
-//                , addedKTagRelations: KTagRelations?
+                , kTagRelations: [AddedKTagRelation]
     ) {
     self.id = id
     self.content = content
@@ -147,7 +145,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
     self.filtered = filtered
     self.sensitive = sensitive
     self.language = language
-    self.kTagRelations = []
+    self.kTagRelations = kTagRelations
     self.kTagAddRealationRequests = []
   }
 
@@ -180,7 +178,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
           spoilerText: .init(stringValue: ""),
           filtered: [],
           sensitive: false,
-          language: language)
+          language: language, kTagRelations: [])
   }
 
   public static func placeholders() -> [Status] {
@@ -216,8 +214,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
                    spoilerText: reblog.spoilerText,
                    filtered: reblog.filtered,
                    sensitive: reblog.sensitive,
-                   language: reblog.language
-//                   addedKTagRelations: reblog.kTagRelations
+                   language: reblog.language,
+                   kTagRelations: reblog.kTagRelations
       )
     }
     return nil
@@ -260,8 +258,8 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
-  public let kTagRelations: [AddedKTagRelation]
-  public let kTagAddRealationRequests: [AddingKTagRelationRequested]
+  public var kTagRelations: [AddedKTagRelation]
+  public var kTagAddRealationRequests: [AddingKTagRelationRequested]
   public var isHidden: Bool {
     filtered?.first?.filter.filterAction == .hide
   }

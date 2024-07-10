@@ -167,13 +167,6 @@ import SwiftUI
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
-    
-    public func postWithData(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> (Data,URLResponse) {
-      let url = try makeURL(endpoint: endpoint, forceVersion: forceVersion)
-      let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "POST")
-      return try await urlSession.data(for: request)
-    }
-    
 
   public func patch(endpoint: Endpoint) async throws -> HTTPURLResponse? {
     let url = try makeURL(endpoint: endpoint)

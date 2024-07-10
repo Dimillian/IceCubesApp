@@ -9,66 +9,37 @@ import Foundation
 import SwiftUI
 import Network
 import Models
-struct KTagSearchAndAddView : View, Sendable {
+import Env
+@MainActor
+struct KTagSearchAndAddView : View {
+    @State private var selectedTexts: [String] = []
+        let buttonTexts = ["Apple", "Banana", "Cherry", "Date", "Elderberry"]
     @State private var searchText = ""
-    @State var viewModel: KTagWithRelationListViewModel
-    @State var selectedTag:[KTag] = []
-    @State var client: Client?
+   var viewModel: StatusRowViewModel
+    @State private var selectedTag:[KTag] = []
     // 検索結果のフィルタリング
-    @State var searchResults: [KTag] = []
-    
+    @State private var searchResults: [KTag] = []
+    @Environment(StatusDataController.self) private var statusDataController
     func fetchSearchResults() async {
-        guard !searchText.isEmpty, let client = client else {
-            searchResults = []
-            return
-        }
-        
         do {
-            searchResults = try await client.get(endpoint: KTagRequests.search(query: searchText, type: nil, offset: nil, following: nil))
+            searchResults = try await viewModel.client.get(endpoint: KTagRequests.search(query: searchText, type: nil, offset: nil, following: nil))
         } catch {
             print(error)
         }
     }
-    
+    // リストアイテムの削除機能
+    func deleteItem(_ item: String) {
+            if let index = selectedTexts.firstIndex(of: item) {
+                selectedTexts.remove(at: index)
+            }
+        }
+
     var body: some View {
+        
+                    
+                    // 選択されたテキストのリスト表示
+            
         VStack {
-            Text("Added Tags:")
-                .font(.headline)
-                .padding(.top)
-            ForEach(viewModel.kTagRelations.filter({$0.kTagDeleteRelationRequests.isEmpty}), id: \.kTag.id) { kTagRelation in
-                            Button(action: {
-                                Task {
-                                    await viewModel.del(tagId: kTagRelation.kTag.id)
-                                }
-                            }) {
-                                Text("x:" + kTagRelation.kTag.name).font(.headline)
-                            }
-                        }
-            ForEach(viewModel.kTagRelations.filter({!$0.kTagDeleteRelationRequests.isEmpty}), id: \.kTag.id) { kTagRelation in
-                            Button(action: {
-                                
-                            }) {
-                                Text( kTagRelation.kTag.name).font(.headline).strikethrough(color: .red)
-                            }
-                        }
-            // 選択されたタグの表示 追加候補になったら追加
-//            if !self.selectedTag.isEmpty {
-                Text("Selected Tags:")
-                    .font(.headline)
-                    .padding(.top)
-                if !searchResults.isEmpty{
-                    ForEach(selectedTag) { tag in
-                        Button(action: {
-                            Task{ 
-                                await viewModel.del(tagId: tag.id) // Sending main actor-isolated 'self.viewModel' to nonisolated instance method 'del(tagId:)' risks causing data races between nonisolated and main actor-isolated uses
-                            }
-                            selectedTag.removeAll(where: {$0.id == tag.id})
-                        }) {
-                        Text(tag.name).font(.headline)
-                        }
-                    }
-                }
-            // 検索バー
             TextField("Search", text: $searchText)
                 .padding()
                 .background(Color(.systemGray6))
@@ -80,34 +51,52 @@ struct KTagSearchAndAddView : View, Sendable {
                     }
                 }
             // 検索候補の表示
-            if !searchText.isEmpty {
-                List {
-                    ForEach(searchResults) { tag in
+            if !searchResults.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 10) {
+                        ForEach(searchResults, id: \.id) { tag in
+                            Button(action: { // このボタンをタップすると、selectedTag　に追加されるようにして
+                                                            Task{
+                                                                await viewModel.addKTagRelationRequest(tagId: tag.id)
+                                                            }
+                                selectedTag.append(tag)
+                            }) {
+                                Text(tag.name)
+                            }.foregroundColor(.blue)
+                                .background(Color(.systemGray6))
+                                .cornerRadius(8).padding()
+                        }
+                    }}
+            }
+            Text("Added Tags:")
+                .font(.headline)
+                .padding(.top)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack{
+                    ForEach(statusDataController.kTagRelations.filter({$0.kTagDeleteRelationRequests.isEmpty}), id: \.kTag.id) { kTagRelation in
                         Button(action: {
-                            Task{
-                                await viewModel.addKTagRelationRequest(tagId: tag.id)
+                            Task {
+                                await viewModel.del(tagId: kTagRelation.kTag.id)
                             }
-                            self.selectedTag.append(tag)
                         }) {
-                            Text(tag.name)
-                        }.foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                            Text("x:" + kTagRelation.kTag.name).font(.headline)
+                        }.foregroundColor(.blue)
+                            .background(Color(.systemGray6))
+                            .cornerRadius(8)
+                    }
+                    ForEach(statusDataController.kTagRelations.filter({!$0.kTagDeleteRelationRequests.isEmpty}), id: \.kTag.id) { kTagRelation in
+                        Button(action: {
+                            
+                        }) {
+                            Text( kTagRelation.kTag.name).font(.headline).strikethrough(color: .red)
+                        }
                     }
                 }
-                .listStyle(PlainListStyle())
             }
             
-
-        }.onAppear(perform: {
-//            selectedTag = viewModel.kTags
-        })
-//        .onDisappear(perform: {
-//            //selectedTag - viewModel.kTags
-//            // 差分を反映する。　無くなったタグを消去リクエスト　追加するタグを追加リクエスト
-//            selectedTag.filter { elementA in
-//                !viewModel.kTags.contains(where: { elementB in
-//                    elementB == elementA
-//                })}.map{viewModel.addKTagRelationRequest(tag: $0)}
-//        })
+            
+        }
     }
+    
 }
 

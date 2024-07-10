@@ -32,15 +32,17 @@ public struct StatusRowView: View {
     _viewModel = .init(initialValue: viewModel)
     self.context = context
   }
-
   var contextMenu: some View {
+      
     StatusRowContextMenu(viewModel: viewModel,
                          showTextForSelection: $showSelectableText,
                          isBlockConfirmationPresented: $isBlockConfirmationPresented)
   }
-
+   
   public var body: some View {
     HStack(spacing: 0) {
+       
+       
       if !isCompact {
         HStack(spacing: 3) {
           ForEach(0 ..< indentationLevel, id: \.self) { level in
@@ -86,6 +88,7 @@ public struct StatusRowView: View {
                 }
             }
             VStack(alignment: .leading, spacing: .statusComponentSpacing) {
+                KTagWithRelationListView(viewModel: viewModel)
               if !isCompact {
                 StatusRowHeaderView(viewModel: viewModel)
               }

@@ -2,6 +2,7 @@ import DesignSystem
 import Env
 import Models
 import SwiftUI
+import Network
 
 struct StatusRowContentView: View {
   @Environment(\.redactionReasons) private var reasons
@@ -9,23 +10,14 @@ struct StatusRowContentView: View {
   @Environment(\.isStatusFocused) private var isFocused
 
   @Environment(Theme.self) private var theme
-
   var viewModel: StatusRowViewModel
-
+    
   var body: some View {
-      
+    KTagSearchAndAddView( viewModel: viewModel)
     if !viewModel.finalStatus.spoilerText.asRawText.isEmpty {
       @Bindable var viewModel = viewModel
       StatusRowSpoilerView(status: viewModel.finalStatus, displaySpoiler: $viewModel.displaySpoiler)
     }
-        KTagWithRelationListView(viewModel: KTagWithRelationListViewModel.init(statusId: viewModel.status.id, kTagRelations: viewModel.status.kTagRelations, addingKTagRelations: viewModel.status.kTagAddRealationRequests), client: viewModel.client)
-        NavigationLink(destination: KTagSearchAndAddView( viewModel: KTagWithRelationListViewModel.init(client:  viewModel.client, statusId: viewModel.status.id, kTagRelations: viewModel.status.kTagRelations , addingKTagRelations: viewModel.status.kTagAddRealationRequests), client: viewModel.client)) {
-          Text("追加")
-              .foregroundColor(.white)
-              .padding()
-              .background(Color.blue)
-              .cornerRadius(8)
-        }
     if !viewModel.displaySpoiler {
       StatusRowTextView(viewModel: viewModel)
       if !reasons.contains(.placeholder) {

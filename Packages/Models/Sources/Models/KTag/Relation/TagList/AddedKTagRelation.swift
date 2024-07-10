@@ -6,16 +6,16 @@
 //
 
 import Foundation
-
-public struct AddedKTagRelation :CreatedKTagAddRelationRequestDataProtocol, Sendable{
+@Observable
+public final class AddedKTagRelation :CreatedKTagAddRelationRequestDataProtocol, Sendable{
     
     public let id: String
     public let kTagId: String
     public let statusId: String
     public let accountId: String
     public let kTag: KTag
-    public var isOwned: Bool
-    public var kTagDeleteRelationRequests:[KTagDeleteRelationRequest]
+    public let isOwned: Bool
+    public let kTagDeleteRelationRequests:[KTagDeleteRelationRequest]
     public init(id: String, kTagId: String,statusId:String ,accountId: String,kTag:KTag, isOwned: Bool,kTagDeleteRelationRequests:[KTagDeleteRelationRequest]) {
         self.id = id
         self.kTagId = kTagId
@@ -25,8 +25,27 @@ public struct AddedKTagRelation :CreatedKTagAddRelationRequestDataProtocol, Send
         self.isOwned = isOwned
         self.kTagDeleteRelationRequests = kTagDeleteRelationRequests
     }
+    public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(id, forKey: .id)
+            try container.encode(kTagId, forKey: .kTagId)
+            try container.encode(statusId, forKey: .statusId)
+            try container.encode(accountId, forKey: .accountId)
+            try container.encode(kTag, forKey: .kTag)
+            try container.encode(isOwned, forKey: .isOwned)
+            try container.encode(kTagDeleteRelationRequests, forKey: .kTagDeleteRelationRequests)
+        }
+    private enum CodingKeys: String, CodingKey {
+            case id
+            case kTagId
+            case statusId
+            case accountId
+            case kTag
+            case isOwned
+            case kTagDeleteRelationRequests
+        }
     
-    public init(from decoder: any Decoder) throws {
+    required public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         for key in container.allKeys {
                     if let stringValue = try? container.decode(String.self, forKey: key) {

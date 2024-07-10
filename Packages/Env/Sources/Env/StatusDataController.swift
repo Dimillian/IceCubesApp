@@ -51,6 +51,8 @@ public final class StatusDataControllerProvider {
 
 @MainActor
 @Observable public final class StatusDataController: StatusDataControlling {
+  
+    
   private let status: AnyStatus
   private let client: Client
 
@@ -62,6 +64,7 @@ public final class StatusDataControllerProvider {
   public var favoritesCount: Int
   public var reblogsCount: Int
   public var repliesCount: Int
+    public var kTagRelations: [AddedKTagRelation]
 
   init(status: AnyStatus, client: Client) {
     self.status = status
@@ -75,6 +78,7 @@ public final class StatusDataControllerProvider {
     repliesCount = status.repliesCount
     favoritesCount = status.favouritesCount
     content = status.content
+      kTagRelations = status.kTagRelations
   }
 
   public func updateFrom(status: AnyStatus) {
@@ -86,6 +90,7 @@ public final class StatusDataControllerProvider {
     repliesCount = status.repliesCount
     favoritesCount = status.favouritesCount
     content = status.content
+      kTagRelations = status.kTagRelations
   }
 
   public func toggleFavorite(remoteStatus: String?) async {
