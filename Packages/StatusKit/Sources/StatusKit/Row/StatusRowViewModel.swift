@@ -122,7 +122,9 @@ import SwiftUI
     } else if userMentionned {
       theme.secondaryBackgroundColor
     } else {
-      if userFollowedTag != nil {
+      if status.account.isPremiumAccount {
+        makeDecorativeGradient(startColor: .yellow, endColor: theme.primaryBackgroundColor)
+      } else if userFollowedTag != nil {
         makeDecorativeGradient(startColor: .teal, endColor: theme.primaryBackgroundColor)
       } else if status.reblog != nil {
         makeDecorativeGradient(startColor: theme.tintColor, endColor: theme.primaryBackgroundColor)
@@ -139,7 +141,7 @@ import SwiftUI
     } else if userMentionned {
       theme.secondaryBackgroundColor
     } else if status.account.isPremiumAccount {
-      .yellow.opacity(0.4)
+      Color.yellow.opacity(0.4)
     } else {
       theme.primaryBackgroundColor
     }
