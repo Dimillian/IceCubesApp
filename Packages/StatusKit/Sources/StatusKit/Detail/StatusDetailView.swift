@@ -137,13 +137,6 @@ public struct StatusDetailView: View {
             }
           }
         }
-      #if !os(visionOS)
-        .listRowBackground(viewModel.highlightRowColor)
-      #endif
-        .listRowInsets(.init(top: 12,
-                             leading: .layoutPadding,
-                             bottom: 12,
-                             trailing: .layoutPadding))
     }
   }
 
