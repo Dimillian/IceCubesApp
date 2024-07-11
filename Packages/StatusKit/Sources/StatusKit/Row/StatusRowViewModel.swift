@@ -459,4 +459,23 @@ import SwiftUI
       return false
     }
   }
+    
+    func addKTagRelationRequest(tagId: String) async {
+        do {
+            let postStatus :Status = try await client.post(endpoint: KTagAddRelationRequests.create(json: KTagAddRelatioonRequestData.init(k_tag_id: tagId, status_id: status.id)))
+            StreamWatcher.shared.emmitEditEvent(for: postStatus)
+        } catch {
+        }
+    }
+    
+    func del(tagId: String) async {
+        // Check for existing delete requests
+        if let delTarget = status.kTagRelations.first(where: { $0.kTagId == tagId && $0.isOwned }) {
+                let deleteRequest = KTagDeleteRelatioonRequestData(k_tag_relation_id: delTarget.id)
+                if let postStatus :Status = try? await client.post(endpoint: KTagDeleteRelationRequests.create(json: deleteRequest)){
+                    StreamWatcher.shared.emmitEditEvent(for: postStatus)
+                }
+        }
+    }
+
 }
