@@ -62127,6 +62127,9 @@
         }
       }
     },
+    "Show Content Gradient" : {
+
+    },
     "status.action.bookmark" : {
       "extractionState" : "manual",
       "localizations" : {
