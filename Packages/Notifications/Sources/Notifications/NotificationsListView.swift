@@ -29,19 +29,17 @@ public struct NotificationsListView: View {
   }
 
   public var body: some View {
-    ScrollViewReader { proxy in
-      List {
-        scrollToTopView
-        topPaddingView
-        if lockedAccountId == nil, let summary = viewModel.policy?.summary {
-          NotificationsHeaderFilteredView(filteredNotifications: summary)
-        }
-        notificationsView
+    List {
+      scrollToTopView
+      topPaddingView
+      if lockedAccountId == nil, let summary = viewModel.policy?.summary {
+        NotificationsHeaderFilteredView(filteredNotifications: summary)
       }
-      .id(account.account?.id)
-      .environment(\.defaultMinListRowHeight, 1)
-      .listStyle(.plain)
+      notificationsView
     }
+    .id(account.account?.id)
+    .environment(\.defaultMinListRowHeight, 1)
+    .listStyle(.plain)
     .toolbar {
       ToolbarItem(placement: .principal) {
         let title = lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title"

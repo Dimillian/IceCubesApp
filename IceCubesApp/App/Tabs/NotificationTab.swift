@@ -81,10 +81,12 @@ struct NotificationsTab: View {
 
   private func clearNotifications() {
     if selectedTab == .notifications || isSecondaryColumn {
-      if let token = appAccount.currentAccount.oauthToken {
+      if let token = appAccount.currentAccount.oauthToken, userPreferences.notificationsCount[token] ?? 0 > 0 {
         userPreferences.notificationsCount[token] = 0
       }
-      watcher.unreadNotificationsCount = 0
+      if watcher.unreadNotificationsCount > 0 {
+        watcher.unreadNotificationsCount = 0
+      }
     }
   }
 }
