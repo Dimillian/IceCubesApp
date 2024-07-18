@@ -38,7 +38,6 @@ public struct StatusRowView: View {
   }
 
   public var body: some View {
-    let _ = Self._printChanges()
     HStack(spacing: 0) {
       if !isCompact {
         HStack(spacing: 3) {
