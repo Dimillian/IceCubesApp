@@ -26,7 +26,8 @@ public struct StatusEmbeddedView: View {
         StatusRowView(viewModel: .init(status: status,
                                        client: client,
                                        routerPath: routerPath,
-                                       showActions: false))
+                                       showActions: false),
+                      context: .timeline)
           .accessibilityLabel(status.content.asRawText)
           .environment(\.isCompact, true)
           .environment(\.isMediaCompact, true)

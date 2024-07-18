@@ -29,7 +29,8 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     switch fetcher.statusesState {
     case .loading:
       ForEach(Status.placeholders()) { status in
-        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath),
+                      context: .timeline)
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
       }
@@ -48,7 +49,8 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         StatusRowView(viewModel: StatusRowViewModel(status: status,
                                                     client: client,
                                                     routerPath: routerPath,
-                                                    isRemote: isRemote))
+                                                    isRemote: isRemote),
+                      context: .timeline)
           .onAppear {
             fetcher.statusDidAppear(status: status)
           }

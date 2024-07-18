@@ -73,9 +73,6 @@ struct AppView: View {
           .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
       }
     }
-    .introspect(.tabView, on: .iOS(.v17, .v18)) { (_: UITabBarController) in
-      UITabBar.setAnimationsEnabled(false)
-    }
     .id(appAccountsManager.currentClient.id)
     .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
   }
