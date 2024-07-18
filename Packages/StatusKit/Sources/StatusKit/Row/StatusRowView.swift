@@ -23,17 +23,13 @@ public struct StatusRowView: View {
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
 
-  @State private var viewModel: StatusRowViewModel
   @State private var showSelectableText: Bool = false
   @State private var isBlockConfirmationPresented = false
 
   public enum Context { case timeline, detail }
-  private let context: Context
-
-  public init(viewModel: StatusRowViewModel, context: Context = .timeline) {
-    _viewModel = .init(initialValue: viewModel)
-    self.context = context
-  }
+  
+  @State public var viewModel: StatusRowViewModel
+  public let context: Context
 
   var contextMenu: some View {
     StatusRowContextMenu(viewModel: viewModel,
@@ -42,6 +38,7 @@ public struct StatusRowView: View {
   }
 
   public var body: some View {
+    let _ = Self._printChanges()
     HStack(spacing: 0) {
       if !isCompact {
         HStack(spacing: 3) {
