@@ -5,6 +5,7 @@ public enum Timelines: Endpoint {
   case home(sinceId: String?, maxId: String?, minId: String?)
   case list(listId: String, sinceId: String?, maxId: String?, minId: String?)
   case hashtag(tag: String, additional: [String]?, maxId: String?, minId: String?)
+  case link(url: URL, sinceId: String?, maxId: String?, minId: String?)
 
   public func path() -> String {
     switch self {
@@ -16,6 +17,8 @@ public enum Timelines: Endpoint {
       "timelines/list/\(listId)"
     case let .hashtag(tag, _, _, _):
       "timelines/tag/\(tag)"
+    case .link:
+      "timelines/link"
     }
   }
 
@@ -33,6 +36,10 @@ public enum Timelines: Endpoint {
       var params = makePaginationParam(sinceId: nil, maxId: maxId, mindId: minId) ?? []
       params.append(contentsOf: (additional ?? [])
         .map { URLQueryItem(name: "any[]", value: $0) })
+      return params
+    case let .link(url, sinceId, maxId, minId):
+      var params = makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: minId) ?? []
+      params.append(.init(name: "url", value: url.absoluteString))
       return params
     }
   }

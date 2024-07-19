@@ -15,23 +15,21 @@ public struct StatusRowView: View {
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.indentationLevel) private var indentationLevel
+  @Environment(\.isHomeTimeline) private var isHomeTimeline
+  
   @Environment(RouterPath.self) private var routerPath: RouterPath
 
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
 
-  @State private var viewModel: StatusRowViewModel
   @State private var showSelectableText: Bool = false
   @State private var isBlockConfirmationPresented = false
 
   public enum Context { case timeline, detail }
-  private let context: Context
-
-  public init(viewModel: StatusRowViewModel, context: Context = .timeline) {
-    _viewModel = .init(initialValue: viewModel)
-    self.context = context
-  }
+  
+  @State public var viewModel: StatusRowViewModel
+  public let context: Context
 
   var contextMenu: some View {
     StatusRowContextMenu(viewModel: viewModel,
@@ -151,7 +149,7 @@ public struct StatusRowView: View {
       .foregroundStyle(.background).hoverEffect())
     .listRowHoverEffectDisabled()
     #else
-    .listRowBackground(viewModel.highlightRowColor)
+    .listRowBackground(viewModel.makeBackgroundColor(isHomeTimeline: isHomeTimeline))
     #endif
     .listRowInsets(.init(top: 0,
                          leading: .layoutPadding,

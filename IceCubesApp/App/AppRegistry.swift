@@ -44,6 +44,12 @@ extension View {
                      selectedTagGroup: .constant(nil),
                      scrollToTopSignal: .constant(0),
                      canFilterTimeline: false)
+      case let .linkTimeline(url, title):
+        TimelineView(timeline: .constant(.link(url: url, title: title)),
+                     pinnedFilters: .constant([]),
+                     selectedTagGroup: .constant(nil),
+                     scrollToTopSignal: .constant(0),
+                     canFilterTimeline: false)
       case let .following(id):
         AccountsListView(mode: .following(accountId: id))
       case let .followers(id):

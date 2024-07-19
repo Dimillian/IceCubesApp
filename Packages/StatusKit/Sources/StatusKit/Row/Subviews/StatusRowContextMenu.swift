@@ -104,7 +104,7 @@ struct StatusRowContextMenu: View {
 
         Button {
           let view = HStack {
-            StatusRowView(viewModel: viewModel)
+            StatusRowView(viewModel: viewModel, context: .timeline)
               .padding(16)
           }
           .environment(\.isInCaptureMode, true)
