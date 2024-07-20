@@ -13539,6 +13539,12 @@
             "value" : "Verwijder profielfoto"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatarı Sil"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14048,6 +14054,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verwijder omslagfoto"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Başlığı Sil"
           }
         },
         "zh-Hans" : {
@@ -28642,8 +28654,8 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Yükselişteki Bağlantılar"
+            "state" : "translated",
+            "value" : "Trend Bağlantılar"
           }
         },
         "uk" : {
@@ -28762,7 +28774,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yükselişteki Gönderiler"
+            "value" : "Trend Gönderiler"
           }
         },
         "uk" : {
@@ -28881,7 +28893,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yükselişteki Etiketler"
+            "value" : "Trend Etiketler"
           }
         },
         "uk" : {
@@ -35874,7 +35886,7 @@
         },
         "tr" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Ayarlar ..."
           }
         },
@@ -62385,7 +62397,14 @@
       }
     },
     "Show Content Gradient" : {
-
+      "localizations" : {
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İçerik Gradyanını Göster"
+          }
+        }
+      }
     },
     "status.action.bookmark" : {
       "extractionState" : "manual",
@@ -78056,7 +78075,7 @@
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Yükselişte"
+            "value" : "Trend"
           }
         },
         "uk" : {
@@ -83096,14 +83115,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld kişi konuşuyor"
+                  "state" : "translated",
+                  "value" : "%lld gönderi"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld kişi konuşuyor"
+                  "state" : "translated",
+                  "value" : "%lld gönderi"
                 }
               }
             }
