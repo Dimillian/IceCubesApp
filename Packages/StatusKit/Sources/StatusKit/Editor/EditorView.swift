@@ -129,7 +129,8 @@ extension StatusEditor {
         StatusRowView(viewModel: .init(status: status,
                                        client: client,
                                        routerPath: RouterPath(),
-                                       showActions: false))
+                                       showActions: false),
+                      context: .timeline)
           .accessibilityLabel(status.content.asRawText)
           .environment(RouterPath())
           .allowsHitTesting(false)

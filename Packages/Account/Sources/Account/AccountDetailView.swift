@@ -239,7 +239,7 @@ public struct AccountDetailView: View {
         .listRowBackground(theme.primaryBackgroundColor)
       #endif
       ForEach(viewModel.pinned) { status in
-        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+        StatusRowExternalView(viewModel: .init(status: status, client: client, routerPath: routerPath))
       }
       Rectangle()
       #if os(visionOS)

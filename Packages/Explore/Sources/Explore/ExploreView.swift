@@ -155,7 +155,7 @@ public struct ExploreView: View {
 
   private var loadingView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+      StatusRowExternalView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         .padding(.vertical, 8)
         .redacted(reason: .placeholder)
         .allowsHitTesting(false)
@@ -201,7 +201,7 @@ public struct ExploreView: View {
     if !results.statuses.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .posts {
       Section("explore.section.posts") {
         ForEach(results.statuses) { status in
-          StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+          StatusRowExternalView(viewModel: .init(status: status, client: client, routerPath: routerPath))
           #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
           #else
@@ -279,7 +279,7 @@ public struct ExploreView: View {
       ForEach(viewModel.trendingStatuses
         .prefix(upTo: viewModel.trendingStatuses.count > 3 ? 3 : viewModel.trendingStatuses.count))
       { status in
-        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+        StatusRowExternalView(viewModel: .init(status: status, client: client, routerPath: routerPath))
         #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
         #else
