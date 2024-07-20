@@ -54,7 +54,7 @@ struct IconSelectorView: View {
       IconSelector(title: "\("settings.app.icon.designed-by".localized) BeAware@social.beaware.live", icons: [.alt39, .alt40, .alt41, .alt42, .alt43]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Simone Margio", icons: [.alt44, .alt45]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Peter Broqvist (@PKB)", icons: [.alt47, .alt48]),
-      IconSelector(title: "\("settings.app.icon.designed-by".localized) Oz Tsori", icons: [.alt49]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) Oz Tsori (@oztsori)", icons: [.alt49]),
     ]
   }
 
