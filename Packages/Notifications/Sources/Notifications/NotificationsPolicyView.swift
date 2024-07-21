@@ -20,28 +20,28 @@ struct NotificationsPolicyView: View {
           Toggle(isOn: .init(get: { policy?.filterNotFollowing == true },
                              set: { newValue in
                                policy?.filterNotFollowing = newValue
-                               Task { await updatePolicy() }
+                               Task { await updatePolicy(client) }
                              }), label: {
               Text("notifications.content-filter.peopleYouDontFollow")
             })
           Toggle(isOn: .init(get: { policy?.filterNotFollowers == true },
                              set: { newValue in
                                policy?.filterNotFollowers = newValue
-                               Task { await updatePolicy() }
+                               Task { await updatePolicy(client) }
                              }), label: {
               Text("notifications.content-filter.peopleNotFollowingYou")
             })
           Toggle(isOn: .init(get: { policy?.filterNewAccounts == true },
                              set: { newValue in
                                policy?.filterNewAccounts = newValue
-                               Task { await updatePolicy() }
+                               Task { await updatePolicy(client) }
                              }), label: {
               Text("notifications.content-filter.newAccounts")
             })
           Toggle(isOn: .init(get: { policy?.filterPrivateMentions == true },
                              set: { newValue in
                                policy?.filterPrivateMentions = newValue
-                               Task { await updatePolicy() }
+                               Task { await updatePolicy(client) }
                              }), label: {
               Text("notifications.content-filter.privateMentions")
             })
@@ -57,14 +57,14 @@ struct NotificationsPolicyView: View {
       .toolbar { CloseToolbarItem() }
       .disabled(policy == nil || isUpdating)
       .task {
-        await getPolicy()
+        await getPolicy(client)
       }
     }
     .presentationDetents([.medium])
     .presentationBackground(.thinMaterial)
   }
 
-  private func getPolicy() async {
+  private func getPolicy(_ client: Client) async {
     defer {
       isUpdating = false
     }
@@ -76,7 +76,7 @@ struct NotificationsPolicyView: View {
     }
   }
 
-  private func updatePolicy() async {
+  private func updatePolicy(_ client: Client) async {
     if let policy {
       defer {
         isUpdating = false

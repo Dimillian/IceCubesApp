@@ -65,7 +65,7 @@ public struct NotificationsListView: View {
           Button {
             viewModel.selectedType = nil
             Task {
-              await viewModel.fetchNotifications()
+              await viewModel.fetchNotifications(viewModel.selectedType)
             }
           } label: {
             Label("notifications.navigation-title", systemImage: "bell.fill")
@@ -75,7 +75,7 @@ public struct NotificationsListView: View {
             Button {
               viewModel.selectedType = type
               Task {
-                await viewModel.fetchNotifications()
+                await viewModel.fetchNotifications(viewModel.selectedType)
               }
             } label: {
               Label {
@@ -116,27 +116,27 @@ public struct NotificationsListView: View {
           viewModel.loadSelectedType()
         }
         Task {
-          await viewModel.fetchNotifications()
+          await viewModel.fetchNotifications(viewModel.selectedType)
           await viewModel.fetchPolicy()
         }
       }
       .refreshable {
         SoundEffectManager.shared.playSound(.pull)
         HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
-        await viewModel.fetchNotifications()
+        await viewModel.fetchNotifications(viewModel.selectedType)
         HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
         SoundEffectManager.shared.playSound(.refresh)
       }
       .onChange(of: watcher.latestEvent?.id) {
         if let latestEvent = watcher.latestEvent {
-          viewModel.handleEvent(event: latestEvent)
+          viewModel.handleEvent(selectedType: viewModel.selectedType, event: latestEvent)
         }
       }
       .onChange(of: scenePhase) { _, newValue in
         switch newValue {
         case .active:
           Task {
-            await viewModel.fetchNotifications()
+            await viewModel.fetchNotifications(viewModel.selectedType)
           }
         default:
           break
@@ -202,7 +202,7 @@ public struct NotificationsListView: View {
           EmptyView()
         case .hasNextPage:
           NextPageView {
-            try await viewModel.fetchNextPage()
+            try await viewModel.fetchNextPage(viewModel.selectedType)
           }
           .listRowInsets(.init(top: .layoutPadding,
                                leading: .layoutPadding + 4,
@@ -219,7 +219,7 @@ public struct NotificationsListView: View {
                 message: "notifications.error.message",
                 buttonTitle: "action.retry")
       {
-        await viewModel.fetchNotifications()
+        await viewModel.fetchNotifications(viewModel.selectedType)
       }
       #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)

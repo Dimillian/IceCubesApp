@@ -108,6 +108,7 @@ struct ConversationMessageView: View {
       Label("status.action.copy-text", systemImage: "doc.on.doc")
     }
     Button {
+      let client = client
       Task {
         do {
           let status: Status
@@ -125,7 +126,9 @@ struct ConversationMessageView: View {
       Label(isLiked ? "status.action.unfavorite" : "status.action.favorite",
             systemImage: isLiked ? "star.fill" : "star")
     }
-    Button { Task {
+    Button {
+      let client = client
+      Task {
       do {
         let status: Status
         if isBookmarked {
@@ -144,6 +147,7 @@ struct ConversationMessageView: View {
     Divider()
     if message.account.id == currentAccount.account?.id {
       Button("status.action.delete", role: .destructive) {
+        let client = client
         Task {
           _ = try await client.delete(endpoint: Statuses.status(id: message.id))
         }

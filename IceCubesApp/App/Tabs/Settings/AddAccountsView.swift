@@ -94,6 +94,7 @@ struct AddAccountView: View {
         }
         .onAppear {
           isInstanceURLFieldFocused = true
+          let instanceName = instanceName
           Task {
             let instances = await instanceSocialClient.fetchInstances(keyword: instanceName)
             withAnimation {
@@ -104,6 +105,8 @@ struct AddAccountView: View {
         }
         .onChange(of: instanceName) {
           searchingTask.cancel()
+          let instanceName = instanceName
+          let instanceSocialClient = instanceSocialClient
           searchingTask = Task {
             try? await Task.sleep(for: .seconds(0.1))
             guard !Task.isCancelled else { return }
@@ -129,7 +132,7 @@ struct AddAccountView: View {
                 let instance: Instance = try await instanceDetailClient.get(endpoint: Instances.instance)
                 withAnimation {
                   self.instance = instance
-                  instanceName = sanitizedName // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
+                  self.instanceName = sanitizedName // clean up the text box, principally to chop off the username if present so it's clear that you might not wind up siging in as the thing in the box
                 }
                 instanceFetchError = nil
               } else {

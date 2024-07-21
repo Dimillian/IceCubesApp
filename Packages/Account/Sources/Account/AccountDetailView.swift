@@ -364,6 +364,7 @@ public struct AccountDetailView: View {
       .confirmationDialog("Block User", isPresented: $showBlockConfirmation) {
         if let account = viewModel.account {
           Button("account.action.block-user-\(account.username)", role: .destructive) {
+            let client = client
             Task {
               do {
                 viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))

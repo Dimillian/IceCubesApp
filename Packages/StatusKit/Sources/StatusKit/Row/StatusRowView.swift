@@ -199,6 +199,7 @@ public struct StatusRowView: View {
                         isPresented: $isBlockConfirmationPresented)
     {
       Button("account.action.block", role: .destructive) {
+        let client = client
         Task {
           do {
             let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
