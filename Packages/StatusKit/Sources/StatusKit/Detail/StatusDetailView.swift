@@ -155,7 +155,7 @@ public struct StatusDetailView: View {
 
   private var loadingDetailView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath), context: .timeline)
         .redacted(reason: .placeholder)
         .allowsHitTesting(false)
     }

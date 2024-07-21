@@ -37,7 +37,7 @@ struct DisplaySettingsView: View {
     ZStack(alignment: .top) {
       Form {
         #if !os(visionOS)
-          StatusRowView(viewModel: previewStatusViewModel)
+          StatusRowExternalView(viewModel: previewStatusViewModel)
             .allowsHitTesting(false)
             .opacity(0)
             .hidden()
@@ -85,7 +85,7 @@ struct DisplaySettingsView: View {
 
   private var examplePost: some View {
     VStack(spacing: 0) {
-      StatusRowView(viewModel: previewStatusViewModel)
+      StatusRowExternalView(viewModel: previewStatusViewModel)
         .allowsHitTesting(false)
         .padding(.layoutPadding)
         .background(theme.primaryBackgroundColor)
@@ -237,6 +237,7 @@ struct DisplaySettingsView: View {
         }
       }
       Toggle("settings.display.show-account-popover", isOn: $userPreferences.showAccountPopover)
+      Toggle("Show Content Gradient", isOn: $theme.showContentGradient)
     }
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)

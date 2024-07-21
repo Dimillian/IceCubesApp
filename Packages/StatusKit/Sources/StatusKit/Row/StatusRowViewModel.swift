@@ -108,7 +108,7 @@ import SwiftUI
   
   @ViewBuilder
   func makeBackgroundColor(isHomeTimeline: Bool) -> some View {
-    if isHomeTimeline {
+    if isHomeTimeline, theme.showContentGradient {
       homeBackgroundColor
     } else {
       backgroundColor
@@ -145,10 +145,10 @@ import SwiftUI
   
   func makeDecorativeGradient(startColor: Color, endColor: Color) -> some View {
     LinearGradient(stops: [
-      .init(color: startColor.opacity(0.3), location: 0.03),
-      .init(color: startColor.opacity(0.2), location: 0.06),
-      .init(color: startColor.opacity(0.1), location: 0.09),
-      .init(color: startColor.opacity(0.05), location: 0.15),
+      .init(color: startColor.opacity(0.2), location: 0.03),
+      .init(color: startColor.opacity(0.1), location: 0.06),
+      .init(color: startColor.opacity(0.05), location: 0.09),
+      .init(color: startColor.opacity(0.02), location: 0.15),
       .init(color: endColor, location: 0.25),
     ],
                    startPoint: .topLeading,
