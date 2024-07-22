@@ -19,7 +19,6 @@ public extension StatusEditor {
       didSet {
         if let itemsProvider {
           mediaContainers = []
-          processItemsProvider(items: itemsProvider)
         }
       }
     }
