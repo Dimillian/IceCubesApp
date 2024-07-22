@@ -139,11 +139,12 @@ struct AddAccountView: View {
                 instance = nil
                 instanceFetchError = nil
               }
-            } catch _ as DecodingError {
+            } catch _ as ServerError {
               instance = nil
               instanceFetchError = "account.add.error.instance-not-supported"
             } catch {
               instance = nil
+              instanceFetchError = nil
             }
           }
         }
