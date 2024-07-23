@@ -22,6 +22,7 @@ struct MediaUIAttachmentImageView: View {
             .progressViewStyle(.circular)
         }
       }
+      .draggable(MediaUIImageTransferable(url: url))
       .contextMenu {
         MediaUIShareLink(url: url, type: .image)
       }
