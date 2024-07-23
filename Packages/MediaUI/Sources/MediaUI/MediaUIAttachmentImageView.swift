@@ -22,6 +22,9 @@ struct MediaUIAttachmentImageView: View {
             .progressViewStyle(.circular)
         }
       }
+      .contextMenu {
+        MediaUIShareLink(url: url, type: .image)
+      }
     }
   }
 }
