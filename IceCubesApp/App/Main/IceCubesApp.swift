@@ -44,8 +44,8 @@ struct IceCubesApp: App {
     userPreferences.setClient(client: client)
     Task {
       await currentInstance.fetchCurrentInstance()
-      watcher.setClient(client: client, instanceStreamingURL: currentInstance.instance?.urls?.streamingApi)
-      watcher.watch(streams: [.user, .direct])
+      await watcher.setClient(client: client, instanceStreamingURL: currentInstance.instance?.urls?.streamingApi)
+      await watcher.watch(streams: [.user, .direct])
     }
   }
 
@@ -54,10 +54,10 @@ struct IceCubesApp: App {
     case .background:
       watcher.stopWatching()
     case .active:
-      watcher.watch(streams: [.user, .direct])
-      UNUserNotificationCenter.current().setBadgeCount(0)
-      userPreferences.reloadNotificationsCount(tokens: appAccountsManager.availableAccounts.compactMap(\.oauthToken))
       Task {
+        await watcher.watch(streams: [.user, .direct])
+        try? await UNUserNotificationCenter.current().setBadgeCount(0)
+        userPreferences.reloadNotificationsCount(tokens: appAccountsManager.availableAccounts.compactMap(\.oauthToken))
         await userPreferences.refreshServerPreferences()
       }
     default:

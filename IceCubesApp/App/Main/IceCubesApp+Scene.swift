@@ -71,7 +71,9 @@ extension IceCubesApp {
     .onChange(of: appAccountsManager.currentClient) { _, newValue in
       setNewClientsInEnv(client: newValue)
       if newValue.isAuth {
-        watcher.watch(streams: [.user, .direct])
+        Task {
+          await watcher.watch(streams: [.user, .direct])
+        }
       }
     }
   }

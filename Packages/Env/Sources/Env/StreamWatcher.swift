@@ -36,16 +36,16 @@ import OSLog
     decoder.keyDecodingStrategy = .convertFromSnakeCase
   }
 
-  public func setClient(client: Client, instanceStreamingURL: URL?) {
+  public func setClient(client: Client, instanceStreamingURL: URL?) async {
     if self.client != nil {
       stopWatching()
     }
     self.client = client
     self.instanceStreamingURL = instanceStreamingURL
-    connect()
+    await connect()
   }
 
-  private func connect() {
+  private func connect() async {
     guard let task = try? client?.makeWebSocketTask(
       endpoint: Streaming.streaming,
       instanceStreamingURL: instanceStreamingURL
@@ -54,15 +54,15 @@ import OSLog
     }
     self.task = task
     self.task?.resume()
-    receiveMessage()
+    await receiveMessage()
   }
 
-  public func watch(streams: [Stream]) {
+  public func watch(streams: [Stream]) async {
     if client?.isAuth == false {
       return
     }
     if task == nil {
-      connect()
+      await connect()
     }
     watchedStreams = streams
     for stream in streams {
@@ -83,48 +83,42 @@ import OSLog
     }
   }
 
-  private func receiveMessage() {
-    task?.receive(completionHandler: { [weak self] result in
-      guard let self else { return }
-      switch result {
-      case let .success(message):
-        switch message {
-        case let .string(string):
-          do {
-            guard let data = string.data(using: .utf8) else {
-              logger.error("Error decoding streaming event string")
-              return
-            }
-            let rawEvent = try decoder.decode(RawStreamEvent.self, from: data)
-            logger.info("Stream update: \(rawEvent.event)")
-            if let event = rawEventToEvent(rawEvent: rawEvent) {
-              Task { @MainActor in
-                self.events.append(event)
-                self.latestEvent = event
-                if let event = event as? StreamEventNotification, event.notification.status?.visibility != .direct {
-                  self.unreadNotificationsCount += 1
-                }
-              }
-            }
-          } catch {
-            logger.error("Error decoding streaming event: \(error.localizedDescription)")
+  private func receiveMessage() async {
+    do {
+      guard let message = try await task?.receive() else { return }
+
+      switch message {
+      case let .string(string):
+        do {
+          guard let data = string.data(using: .utf8) else {
+            logger.error("Error decoding streaming event string")
+            return
           }
-
-        default:
-          break
+          let rawEvent = try decoder.decode(RawStreamEvent.self, from: data)
+          logger.info("Stream update: \(rawEvent.event)")
+          if let event = rawEventToEvent(rawEvent: rawEvent) {
+            events.append(event)
+            latestEvent = event
+            if let event = event as? StreamEventNotification, event.notification.status?.visibility != .direct {
+              unreadNotificationsCount += 1
+            }
+          }
+        } catch {
+          logger.error("Error decoding streaming event: \(error.localizedDescription)")
         }
 
-        receiveMessage()
-
-      case .failure:
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(retryDelay)) {
-          self.retryDelay += 30
-          self.stopWatching()
-          self.connect()
-          self.watch(streams: self.watchedStreams)
-        }
+      default:
+        break
       }
-    })
+
+      await receiveMessage()
+    } catch {
+      try? await Task.sleep(nanoseconds: UInt64(retryDelay * 1000 * 1000 * 1000))
+      retryDelay += 30
+      stopWatching()
+      await connect()
+      await watch(streams: watchedStreams)
+    }
   }
 
   private func rawEventToEvent(rawEvent: RawStreamEvent) -> (any StreamEvent)? {
