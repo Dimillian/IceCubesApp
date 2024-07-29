@@ -81,6 +81,7 @@ public struct StatusRowCardView: View {
                 .stroke(.gray.opacity(0.35), lineWidth: 1)
             }
           }
+          .draggable(url)
           .contextMenu {
             ShareLink(item: url) {
               Label("status.card.share", systemImage: "square.and.arrow.up")
