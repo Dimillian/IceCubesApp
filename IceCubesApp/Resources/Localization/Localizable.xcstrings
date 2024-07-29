@@ -710,6 +710,12 @@
     "%@ ist keine valide Instanz" : {
       "extractionState" : "stale",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ no es una instancia válida"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13521,6 +13527,12 @@
             "value" : "Delete avatar"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar imagen de perfil"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14036,6 +14048,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete header"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar cabecera"
           }
         },
         "eu" : {
@@ -28594,8 +28612,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Enlaces que son tendencia"
+            "state" : "translated",
+            "value" : "Noticias"
           }
         },
         "eu" : {
@@ -35826,7 +35844,7 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Ajustes ..."
           }
         },
@@ -41466,6 +41484,12 @@
             "value" : "Einen Status veröffentlichen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hacer una publicación"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41645,6 +41669,12 @@
             "value" : "Bilder veröffentlichen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicar imágenes"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41684,6 +41714,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Status auf Mastodon veröffentlichen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hacer una publicación en Mastodon"
           }
         },
         "eu" : {
@@ -62398,6 +62434,12 @@
     },
     "Show Content Gradient" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar contenido con gradiente"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -82923,14 +82965,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld persona hablando"
+                  "state" : "translated",
+                  "value" : "%lld publicación"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld personas hablando"
+                  "state" : "translated",
+                  "value" : "%lld publicaciones"
                 }
               }
             }
@@ -83273,6 +83315,12 @@
             "value" : "Ice Cubes benutzen, um einen Status auf Mastodon zu veröffentlichen"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usar Ice Cubes para hacer una publicación en Mastodon"
+          }
+        },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83312,6 +83360,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ice Cubes benutzen, um einen Status mit einem Bild auf Mastodon zu veröffentlichen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usar Ice Cubes para hacer una publicación con una imagen en Mastodon"
           }
         },
         "eu" : {
