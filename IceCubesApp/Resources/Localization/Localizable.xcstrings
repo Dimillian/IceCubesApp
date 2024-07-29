@@ -28600,8 +28600,8 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Gori-gorian dauden estekak"
+            "state" : "translated",
+            "value" : "Albisteak"
           }
         },
         "fr" : {
@@ -62398,6 +62398,12 @@
     },
     "Show Content Gradient" : {
       "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erakutsi edukiaren gradientea"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -82941,14 +82947,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "Pertsona batek hizpide"
+                  "state" : "translated",
+                  "value" : "Bidalketa %lld"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld pertsonak hizpide"
+                  "state" : "translated",
+                  "value" : "%lld bidalketa"
                 }
               }
             }
