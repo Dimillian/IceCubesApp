@@ -62403,6 +62403,12 @@
             "state" : "translated",
             "value" : "İçerik Gradyanını Göster"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用渐变嘟文背景"
+          }
         }
       }
     },
@@ -83151,13 +83157,13 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld 人正在参与讨论"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld 人正在参与讨论"
                 }
               }
