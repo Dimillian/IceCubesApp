@@ -122,6 +122,7 @@ struct AppView: View {
                 .tag(tab)
             }
           }
+          .id(availableTabs.count) /// Resets the TabView state when the number of tabs changes to avoid navigation bar issues and prevent crashes
           .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
             tabview.tabBar.isHidden = horizontalSizeClass == .regular
             tabview.customizableViewControllers = []

@@ -22,6 +22,23 @@ struct MediaUIAttachmentImageView: View {
             .progressViewStyle(.circular)
         }
       }
+      .draggable(MediaUIImageTransferable(url: url))
+      .contextMenu {
+        MediaUIShareLink(url: url, type: .image)
+        Button {
+          Task {
+            let transferable = MediaUIImageTransferable(url: url)
+            UIPasteboard.general.image = UIImage(data: await transferable.fetchData())
+          }
+        } label: {
+          Label("status.media.contextmenu.copy", systemImage: "doc.on.doc")
+        }
+        Button {
+          UIPasteboard.general.url = url
+        } label: {
+          Label("status.action.copy-link", systemImage: "link")
+        }
+      }
     }
   }
 }

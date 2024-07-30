@@ -105,7 +105,11 @@ import SwiftUI
     status.reblog?.inReplyToId != nil || status.reblog?.inReplyToAccountId != nil ||
       status.inReplyToId != nil || status.inReplyToAccountId != nil
   }
-  
+
+  var url: URL? {
+    (status.reblog?.url ?? status.url).flatMap(URL.init(string:))
+  }
+
   @ViewBuilder
   func makeBackgroundColor(isHomeTimeline: Bool) -> some View {
     if isHomeTimeline, theme.showContentGradient {

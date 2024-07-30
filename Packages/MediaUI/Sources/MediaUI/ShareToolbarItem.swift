@@ -6,13 +6,7 @@ struct ShareToolbarItem: ToolbarContent, @unchecked Sendable {
 
   var body: some ToolbarContent {
     ToolbarItem(placement: .topBarTrailing) {
-      if type == .image {
-        let transferable = MediaUIImageTransferable(url: url)
-        ShareLink(item: transferable, preview: .init("status.media.contextmenu.share",
-                                                     image: transferable))
-      } else {
-        ShareLink(item: url)
-      }
+      MediaUIShareLink(url: url, type: type)
     }
   }
 }

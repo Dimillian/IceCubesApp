@@ -124,6 +124,7 @@ public struct StatusRowView: View {
         }
       }
     }
+    .if(viewModel.url != nil) { $0.draggable(viewModel.url!) }
     .contextMenu {
       contextMenu
         .onAppear {

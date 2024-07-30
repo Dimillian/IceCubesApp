@@ -307,109 +307,100 @@ extension TimelineViewModel: StatusesFetcher {
   private func fetchNewPagesFrom(latestStatus: String, client: Client) async throws {
     canStreamEvents = false
     let initialTimeline = timeline
-    var newStatuses: [Status] = await fetchNewPages(minId: latestStatus, maxPages: 5)
-
-    // Dedup statuses, a status with the same id could have been streamed in.
+    
+    let newStatuses = await fetchAndDedupNewStatuses(latestStatus: latestStatus, client: client)
+    
+    guard !newStatuses.isEmpty,
+          isTimelineVisible,
+          !Task.isCancelled,
+          initialTimeline == timeline else {
+      canStreamEvents = true
+      return
+    }
+    
+    await updateTimelineWithNewStatuses(newStatuses)
+    
+    if !Task.isCancelled, let latest = await datasource.get().first {
+      pendingStatusesObserver.isLoadingNewStatuses = true
+      try await fetchNewPagesFrom(latestStatus: latest.id, client: client)
+    }
+  }
+  
+  private func fetchAndDedupNewStatuses(latestStatus: String, client: Client) async -> [Status] {
+    var newStatuses = await fetchNewPages(minId: latestStatus, maxPages: 5)
     let ids = await datasource.get().map(\.id)
     newStatuses = newStatuses.filter { status in
       !ids.contains(where: { $0 == status.id })
     }
-
     StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
-
-    // If no new statuses, resume streaming and exit.
-    guard !newStatuses.isEmpty else {
-      canStreamEvents = true
-      return
-    }
-
-    // If the timeline is not visible, we don't update it as it would mess up the user position.
-    guard isTimelineVisible else {
-      canStreamEvents = true
-      return
-    }
-
-    // Return if task has been cancelled.
-    guard !Task.isCancelled else {
-      canStreamEvents = true
-      return
-    }
-
-    // As this is a long runnign task we need to ensure that the user didn't changed the timeline filter.
-    guard initialTimeline == timeline else {
-      canStreamEvents = true
-      return
-    }
-
-    // Keep track of the top most status, so we can scroll back to it after view update.
+    return newStatuses
+  }
+  
+  private func updateTimelineWithNewStatuses(_ newStatuses: [Status]) async {
     let topStatus = await datasource.getFiltered().first
-
-    // Insert new statuses in internal datasource.
     await datasource.insert(contentOf: newStatuses, at: 0)
-
-    // Cache statuses for timeline.
     await cache()
-
-    // Append new statuses in the timeline indicator.
     pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map(\.id), at: 0)
-
-    // High chance the user is scrolled to the top.
-    // We need to update the statuses state, and then scroll to the previous top most status.
-    if let topStatus, visibileStatuses.contains(where: { $0.id == topStatus.id }), scrollToTopVisible {
-      pendingStatusesObserver.disableUpdate = true
-      let statuses = await datasource.getFiltered()
-      statusesState = .display(statuses: statuses,
-                               nextPageState: statuses.count < 20 ? .none : .hasNextPage)
-      scrollToIndexAnimated = false
-      scrollToIndex = newStatuses.count + 1
-      DispatchQueue.main.async {
-        self.pendingStatusesObserver.disableUpdate = false
-        self.canStreamEvents = true
-      }
+    
+    let statuses = await datasource.getFiltered()
+    let nextPageState: StatusesState.PagingState = statuses.count < 20 ? .none : .hasNextPage
+    
+    if let topStatus = topStatus,
+       visibileStatuses.contains(where: { $0.id == topStatus.id }),
+       scrollToTopVisible {
+      updateTimelineWithScrollToTop(newStatuses: newStatuses, statuses: statuses, nextPageState: nextPageState)
     } else {
-      // This will keep the scroll position (if the list is scrolled) and prepend statuses on the top.
-      let statuses = await datasource.getFiltered()
-      withAnimation {
-        statusesState = .display(statuses: statuses,
-                                 nextPageState: statuses.count < 20 ? .none : .hasNextPage)
-        canStreamEvents = true
-      }
+      updateTimelineWithAnimation(statuses: statuses, nextPageState: nextPageState)
     }
-
-    if !Task.isCancelled,
-       let latest = await datasource.get().first
-    {
-      pendingStatusesObserver.isLoadingNewStatuses = true
-      try await fetchNewPagesFrom(latestStatus: latest.id, client: client)
+  }
+  
+  // Refresh the timeline while keeping the scroll position to the top status.
+  private func updateTimelineWithScrollToTop(newStatuses: [Status], statuses: [Status], nextPageState: StatusesState.PagingState) {
+    pendingStatusesObserver.disableUpdate = true
+    statusesState = .display(statuses: statuses, nextPageState: nextPageState)
+    scrollToIndexAnimated = false
+    scrollToIndex = newStatuses.count + 1
+    
+    DispatchQueue.main.async { [weak self] in
+      self?.pendingStatusesObserver.disableUpdate = false
+      self?.canStreamEvents = true
+    }
+  }
+  
+  // Refresh the timeline while keeping the user current position.
+  // It works because a side effect of withAnimation is that it keep scroll position IF the List is not scrolled to the top.
+  private func updateTimelineWithAnimation(statuses: [Status], nextPageState: StatusesState.PagingState) {
+    withAnimation {
+      statusesState = .display(statuses: statuses, nextPageState: nextPageState)
+      canStreamEvents = true
     }
   }
 
   private func fetchNewPages(minId: String, maxPages: Int) async -> [Status] {
     guard let client else { return [] }
-    var pagesLoaded = 0
     var allStatuses: [Status] = []
     var latestMinId = minId
     do {
-      while
-        !Task.isCancelled,
-        let newStatuses: [Status] =
-        try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                         maxId: nil,
-                                                         minId: latestMinId,
-                                                         offset: datasource.get().count)),
-        !newStatuses.isEmpty,
-        pagesLoaded < maxPages
-      {
-        pagesLoaded += 1
-
+      for _ in 1...maxPages {
+        if Task.isCancelled { break }
+        
+        let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(
+          sinceId: nil,
+          maxId: nil,
+          minId: latestMinId,
+          offset: nil
+        ))
+        
+        if newStatuses.isEmpty { break }
+        
         StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
-
         allStatuses.insert(contentsOf: newStatuses, at: 0)
-        latestMinId = newStatuses.first?.id ?? ""
+        latestMinId = newStatuses.first?.id ?? latestMinId
       }
     } catch {
       return allStatuses
     }
+    
     return allStatuses
   }
 
