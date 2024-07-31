@@ -79,6 +79,22 @@ public struct AccountDetailView: View {
         if viewModel.selectedTab == .statuses {
           pinnedPostsView
         }
+        if viewModel.selectedTab == .media {
+          HStack {
+            Label("Media Grid", systemImage: "square.grid.2x2")
+            Spacer()
+            Image(systemName: "chevron.right")
+          }
+            .onTapGesture {
+              if let account = viewModel.account {
+                routerPath.navigate(to: .accountMediaGridView(account: account,
+                                                              initialMediaStatuses: viewModel.statusesMedias))
+              }
+            }
+          #if !os(visionOS)
+            .listRowBackground(theme.primaryBackgroundColor)
+          #endif
+        }
         StatusesListView(fetcher: viewModel,
                          client: client,
                          routerPath: routerPath)
