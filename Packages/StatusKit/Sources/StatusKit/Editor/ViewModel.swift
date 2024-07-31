@@ -591,7 +591,7 @@ public extension StatusEditor {
             showRecentsTagsInline = false
             query.removeFirst()
             results = try await client.get(endpoint: Search.search(query: query,
-                                                                   type: "hashtags",
+                                                                   type: .hashtags,
                                                                    offset: 0,
                                                                    following: nil),
                                            forceVersion: .v2)

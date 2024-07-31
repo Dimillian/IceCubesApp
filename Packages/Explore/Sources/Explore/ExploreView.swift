@@ -181,6 +181,9 @@ public struct ExploreView: View {
             #endif
           }
         }
+        if viewModel.searchScope == .people {
+          makeNextPageView(for: .accounts)
+        }
       }
     }
     if !results.hashtags.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .hashtags {
@@ -196,6 +199,9 @@ public struct ExploreView: View {
           #endif
             .padding(.vertical, 4)
         }
+        if viewModel.searchScope == .hashtags {
+          makeNextPageView(for: .hashtags)
+        }
       }
     }
     if !results.statuses.isEmpty, viewModel.searchScope == .all || viewModel.searchScope == .posts {
@@ -210,6 +216,9 @@ public struct ExploreView: View {
             .listRowHoverEffectDisabled()
           #endif
             .padding(.vertical, 8)
+        }
+        if viewModel.searchScope == .posts {
+          makeNextPageView(for: .statuses)
         }
       }
     }
@@ -344,5 +353,15 @@ public struct ExploreView: View {
       .onDisappear {
         viewModel.scrollToTopVisible = false
       }
+  }
+  
+  private func makeNextPageView(for type: Search.EntityType) -> some View {
+    NextPageView {
+      await viewModel.fetchNextPage(of: type)
+    }
+    .padding(.horizontal, .layoutPadding)
+    #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 }

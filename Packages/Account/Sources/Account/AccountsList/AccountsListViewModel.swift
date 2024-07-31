@@ -150,7 +150,7 @@ public enum AccountsListMode {
       state = .loading
       try await Task.sleep(for: .milliseconds(250))
       var results: SearchResults = try await client.get(endpoint: Search.search(query: searchQuery,
-                                                                                type: "accounts",
+                                                                                type: .accounts,
                                                                                 offset: nil,
                                                                                 following: true),
                                                         forceVersion: .v2)
