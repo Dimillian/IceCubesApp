@@ -5,10 +5,10 @@ public struct SearchResults: Decodable {
     case accounts, statuses, hashtags
   }
 
-  public let accounts: [Account]
+  public var accounts: [Account]
   public var relationships: [Relationship] = []
-  public let statuses: [Status]
-  public let hashtags: [Tag]
+  public var statuses: [Status]
+  public var hashtags: [Tag]
 
   public var isEmpty: Bool {
     accounts.isEmpty && statuses.isEmpty && hashtags.isEmpty

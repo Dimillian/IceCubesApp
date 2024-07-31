@@ -280,7 +280,7 @@ import SwiftUI
         embed = try await client.get(endpoint: Statuses.status(id: String(id)))
       } else {
         let results: SearchResults = try await client.get(endpoint: Search.search(query: url.absoluteString,
-                                                                                  type: "statuses",
+                                                                                  type: .statuses,
                                                                                   offset: 0,
                                                                                   following: nil),
                                                           forceVersion: .v2)
@@ -449,7 +449,7 @@ import SwiftUI
     guard isRemote, let remoteStatusURL = URL(string: finalStatus.url ?? "") else { return false }
     isLoadingRemoteContent = true
     let results: SearchResults? = try? await client.get(endpoint: Search.search(query: remoteStatusURL.absoluteString,
-                                                                                type: "statuses",
+                                                                                type: .statuses,
                                                                                 offset: nil,
                                                                                 following: nil),
                                                         forceVersion: .v2)

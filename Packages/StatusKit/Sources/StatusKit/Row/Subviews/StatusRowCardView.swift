@@ -262,7 +262,7 @@ public struct StatusRowCardView: View {
         Text("More from")
         AvatarView(account.avatar, config: .boost)
           .padding(.top, 2)
-        EmojiTextApp(account.cachedDisplayName, emojis: account.emojis)
+        EmojiTextApp(account.cachedDisplayName, emojis: account.emojis, lineLimit: 1)
           .fontWeight(.semibold)
           .emojiText.size(Font.scaledFootnoteFont.emojiSize)
           .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
