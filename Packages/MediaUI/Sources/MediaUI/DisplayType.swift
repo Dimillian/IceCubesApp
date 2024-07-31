@@ -1,11 +1,11 @@
 import Models
 import SwiftUI
 
-enum DisplayType {
+public enum DisplayType {
   case image
   case av
 
-  init(from attachmentType: MediaAttachment.SupportedType) {
+  public init(from attachmentType: MediaAttachment.SupportedType) {
     switch attachmentType {
     case .image:
       self = .image
