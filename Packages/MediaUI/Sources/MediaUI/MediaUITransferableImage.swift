@@ -8,7 +8,7 @@ public struct MediaUIImageTransferable: Codable, Transferable {
   public init(url: URL) {
     self.url = url
   }
-  
+
   public func fetchData() async -> Data {
     do {
       return try await URLSession.shared.data(from: url).0

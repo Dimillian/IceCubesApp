@@ -58,10 +58,10 @@ public extension StatusEditor {
     }
 
     public func compressImageForUpload(
-        _ image: UIImage,
-        maxSize: Int = 10 * 1024 * 1024,
-        maxHeight: Double = 5000,
-        maxWidth: Double = 5000
+      _ image: UIImage,
+      maxSize: Int = 10 * 1024 * 1024,
+      maxHeight: Double = 5000,
+      maxWidth: Double = 5000
     ) async throws -> Data {
       var image = image
 

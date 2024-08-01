@@ -115,7 +115,7 @@ import SwiftUI
       isSearching = false
     }
   }
-  
+
   func fetchNextPage(of type: Search.EntityType) async {
     guard let client, !searchQuery.isEmpty,
           let results = results[searchQuery] else { return }
@@ -128,18 +128,18 @@ import SwiftUI
       case .statuses:
         results.statuses.count
       }
-      
+
       var newPageResults: SearchResults = try await client.get(endpoint: Search.search(query: searchQuery,
-                                                                                type: type,
-                                                                                offset: offset,
-                                                                                following: nil),
-                                                        forceVersion: .v2)
+                                                                                       type: type,
+                                                                                       offset: offset,
+                                                                                       following: nil),
+                                                               forceVersion: .v2)
       if type == .accounts {
         let relationships: [Relationship] =
           try await client.get(endpoint: Accounts.relationships(ids: newPageResults.accounts.map(\.id)))
         newPageResults.relationships = relationships
       }
-      
+
       switch type {
       case .accounts:
         self.results[searchQuery]?.accounts.append(contentsOf: newPageResults.accounts)
@@ -149,8 +149,6 @@ import SwiftUI
       case .statuses:
         self.results[searchQuery]?.statuses.append(contentsOf: newPageResults.statuses)
       }
-    } catch {
-      
-    }
+    } catch {}
   }
 }

@@ -22,24 +22,24 @@ public struct ListEntity: Identifiable, AppEntity {
 
 public struct DefaultListEntityQuery: EntityQuery {
   public init() {}
-  
+
   @IntentParameterDependency<ListsWidgetConfiguration>(
     \.$account
   )
   var account
-  
+
   public func entities(for _: [ListEntity.ID]) async throws -> [ListEntity] {
-    await fetchLists().map{ .init(list: $0 )}
+    await fetchLists().map { .init(list: $0) }
   }
 
   public func suggestedEntities() async throws -> [ListEntity] {
-    await fetchLists().map{ .init(list: $0 )}
+    await fetchLists().map { .init(list: $0) }
   }
 
   public func defaultResult() async -> ListEntity? {
     nil
   }
-  
+
   private func fetchLists() async -> [Models.List] {
     guard let account = account?.account.account else {
       return []

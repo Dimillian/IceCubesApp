@@ -186,7 +186,7 @@ public struct StatusRowCardView: View {
               }
             }
             .buttonStyle(.bordered)
-            
+
             Spacer()
             Button {
               #if targetEnvironment(macCatalyst)
@@ -248,7 +248,7 @@ public struct StatusRowCardView: View {
       }.padding(16)
     }
   }
-  
+
   @ViewBuilder
   private func moreFromAccountView(_ account: Account, divider: Bool = true) -> some View {
     if divider {

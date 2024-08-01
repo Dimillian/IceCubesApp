@@ -137,7 +137,7 @@ public enum SettingsStartingPoint {
   public var path: [RouterDestination] = []
   public var presentedSheet: SheetDestination?
 
-  public static var settingsStartingPoint: SettingsStartingPoint? = nil
+  public static var settingsStartingPoint: SettingsStartingPoint?
 
   public init() {}
 

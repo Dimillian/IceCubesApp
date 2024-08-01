@@ -4,7 +4,6 @@ public enum Profile: Endpoint {
   case deleteAvatar
   case deleteHeader
 
-
   public func path() -> String {
     switch self {
     case .deleteAvatar:

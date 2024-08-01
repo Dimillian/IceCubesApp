@@ -1,10 +1,10 @@
-import SwiftUI
 import DesignSystem
-import NukeUI
 import Env
 import MediaUI
 import Models
 import Network
+import NukeUI
+import SwiftUI
 
 @MainActor
 public struct AccountDetailMediaGridView: View {
@@ -12,21 +12,22 @@ public struct AccountDetailMediaGridView: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(Client.self) private var client
   @Environment(QuickLook.self) private var quickLook
-  
+
   let account: Account
   @State var mediaStatuses: [MediaStatus]
-  
+
   public init(account: Account, initialMediaStatuses: [MediaStatus]) {
     self.account = account
-    self.mediaStatuses = initialMediaStatuses
+    mediaStatuses = initialMediaStatuses
   }
-  
+
   public var body: some View {
     ScrollView(.vertical) {
       LazyVGrid(columns: [.init(.flexible(minimum: 100), spacing: 4),
                           .init(.flexible(minimum: 100), spacing: 4),
                           .init(.flexible(minimum: 100), spacing: 4)],
-                spacing: 4) {
+                spacing: 4)
+      {
         ForEach(mediaStatuses) { status in
           GeometryReader { proxy in
             if let url = status.attachment.url {
@@ -35,7 +36,7 @@ public struct AccountDetailMediaGridView: View {
                 case .image:
                   LazyImage(url: url, transaction: Transaction(animation: .easeIn)) { state in
                     if let image = state.image {
-                        image
+                      image
                         .resizable()
                         .scaledToFill()
                         .frame(width: proxy.size.width, height: proxy.size.width)
@@ -84,7 +85,7 @@ public struct AccountDetailMediaGridView: View {
           .clipped()
           .aspectRatio(1, contentMode: .fit)
         }
-        
+
         VStack {
           Spacer()
           NextPageView {
@@ -96,21 +97,21 @@ public struct AccountDetailMediaGridView: View {
     }
     .navigationTitle(account.displayName ?? "")
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.primaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.primaryBackgroundColor)
     #endif
   }
-  
+
   private func fetchNextPage() async throws {
     let client = client
     let newStatuses: [Status] =
-    try await client.get(endpoint: Accounts.statuses(id: account.id,
-                                                      sinceId: mediaStatuses.last?.id,
+      try await client.get(endpoint: Accounts.statuses(id: account.id,
+                                                       sinceId: mediaStatuses.last?.id,
                                                        tag: nil,
                                                        onlyMedia: true,
                                                        excludeReplies: true,
                                                        excludeReblogs: true,
                                                        pinned: nil))
-    mediaStatuses.append(contentsOf: newStatuses.flatMap{ $0.asMediaStatus })
+    mediaStatuses.append(contentsOf: newStatuses.flatMap { $0.asMediaStatus })
   }
 }

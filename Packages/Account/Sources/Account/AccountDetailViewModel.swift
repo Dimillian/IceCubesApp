@@ -85,7 +85,7 @@ import SwiftUI
 
   private(set) var statuses: [Status] = []
   var statusesMedias: [MediaStatus] {
-    statuses.filter{ !$0.mediaAttachments.isEmpty }.flatMap{ $0.asMediaStatus}
+    statuses.filter { !$0.mediaAttachments.isEmpty }.flatMap { $0.asMediaStatus }
   }
 
   var boosts: [Status] = []

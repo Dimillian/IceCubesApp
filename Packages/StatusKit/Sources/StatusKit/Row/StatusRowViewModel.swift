@@ -18,7 +18,7 @@ import SwiftUI
 
   let client: Client
   let routerPath: RouterPath
-  
+
   let userFollowedTag: HTMLString.Link?
 
   private let theme = Theme.shared
@@ -118,7 +118,7 @@ import SwiftUI
       backgroundColor
     }
   }
-  
+
   @ViewBuilder
   var homeBackgroundColor: some View {
     if status.visibility == .direct {
@@ -146,7 +146,7 @@ import SwiftUI
       theme.primaryBackgroundColor
     }
   }
-  
+
   func makeDecorativeGradient(startColor: Color, endColor: Color) -> some View {
     LinearGradient(stops: [
       .init(color: startColor.opacity(0.2), location: 0.03),
@@ -155,8 +155,8 @@ import SwiftUI
       .init(color: startColor.opacity(0.02), location: 0.15),
       .init(color: endColor, location: 0.25),
     ],
-                   startPoint: .topLeading,
-                   endPoint: .bottomTrailing)
+    startPoint: .topLeading,
+    endPoint: .bottomTrailing)
   }
 
   public init(status: Status,
@@ -191,7 +191,7 @@ import SwiftUI
     } else {
       userMentionned = false
     }
-    
+
     userFollowedTag = finalStatus.content.links.first(where: { link in
       link.type == .hashtag && CurrentAccount.shared.tags.contains(where: { $0.name.lowercased() == link.title.lowercased() })
     })
@@ -366,29 +366,31 @@ import SwiftUI
 
     if preferredTranslationType != .useDeepl {
       await translateWithInstance(userLang: userLang)
-      
+
       if translation == nil {
         await translateWithDeepL(userLang: userLang)
       }
     } else {
       await translateWithDeepL(userLang: userLang)
-      
+
       if translation == nil {
         await translateWithInstance(userLang: userLang)
       }
     }
-    
+
     var hasShown = false
-#if canImport(_Translation_SwiftUI)
-    if translation == nil,
-       #available(iOS 17.4, *) {
-      showAppleTranslation = true
-      hasShown = true
-    }
-#endif
-    
+    #if canImport(_Translation_SwiftUI)
+      if translation == nil,
+         #available(iOS 17.4, *)
+      {
+        showAppleTranslation = true
+        hasShown = true
+      }
+    #endif
+
     if !hasShown,
-       translation == nil {
+       translation == nil
+    {
       if preferredTranslationType == .useDeepl {
         deeplTranslationError = true
       } else {
@@ -410,7 +412,7 @@ import SwiftUI
       isLoadingTranslation = false
     }
   }
-  
+
   func translateWithInstance(userLang: String) async {
     withAnimation {
       isLoadingTranslation = true

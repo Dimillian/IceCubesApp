@@ -4,11 +4,12 @@ public struct Card: Codable, Identifiable, Equatable, Hashable {
   public var id: String {
     url
   }
-  
+
   public struct CardAuthor: Codable, Sendable, Identifiable, Equatable, Hashable {
     public var id: String {
       url
     }
+
     public let name: String
     public let url: String
     public let account: Account?
