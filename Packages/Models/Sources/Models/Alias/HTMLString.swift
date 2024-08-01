@@ -175,9 +175,9 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         return
       } else if node.nodeName() == "#text" {
         var txt = node.description
-        
+
         txt = (try? Entities.unescape(txt)) ?? txt
-        
+
         if let underscore_regex, let main_regex {
           //  This is the markdown escaper
           txt = main_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")

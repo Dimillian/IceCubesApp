@@ -8,7 +8,7 @@ public struct MediaUIShareLink: View, @unchecked Sendable {
     self.url = url
     self.type = type
   }
-  
+
   public var body: some View {
     if type == .image {
       let transferable = MediaUIImageTransferable(url: url)

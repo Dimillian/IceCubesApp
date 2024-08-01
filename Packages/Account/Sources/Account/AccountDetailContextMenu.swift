@@ -145,13 +145,13 @@ public struct AccountDetailContextMenu: View {
         }
 
         #if canImport(_Translation_SwiftUI)
-            if #available(iOS 17.4, *) {
-              Button {
-                showTranslateView = true
-              } label: {
-                Label("status.action.translate", systemImage: "captions.bubble")
-              }
+          if #available(iOS 17.4, *) {
+            Button {
+              showTranslateView = true
+            } label: {
+              Label("status.action.translate", systemImage: "captions.bubble")
             }
+          }
         #endif
 
         if viewModel.relationship?.following == true {

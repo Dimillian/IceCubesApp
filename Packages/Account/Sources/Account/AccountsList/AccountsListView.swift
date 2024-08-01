@@ -128,7 +128,7 @@ public struct AccountsListView: View {
           PlaceholderView(iconName: "person.icloud",
                           title: "No accounts found",
                           message: "This list of accounts is empty")
-          .listRowSeparator(.hidden)
+            .listRowSeparator(.hidden)
         } else {
           ForEach(accounts) { account in
             if let relationship = relationships.first(where: { $0.id == account.id }) {
@@ -139,7 +139,7 @@ public struct AccountsListView: View {
         }
       }
       #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       switch nextPageState {

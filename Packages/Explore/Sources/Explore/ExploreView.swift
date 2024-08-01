@@ -341,7 +341,7 @@ public struct ExploreView: View {
         viewModel.scrollToTopVisible = false
       }
   }
-  
+
   private func makeNextPageView(for type: Search.EntityType) -> some View {
     NextPageView {
       await viewModel.fetchNextPage(of: type)

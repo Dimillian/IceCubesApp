@@ -100,12 +100,12 @@ struct SideBarView<Content: View>: View {
     } label: {
       ZStack(alignment: .topTrailing) {
         if userPreferences.isSidebarExpanded {
-          AppAccountView(viewModel: .init(appAccount: account, 
+          AppAccountView(viewModel: .init(appAccount: account,
                                           isCompact: false,
                                           isInSettings: false),
                          isParentPresented: .constant(false))
         } else {
-          AppAccountView(viewModel: .init(appAccount: account, 
+          AppAccountView(viewModel: .init(appAccount: account,
                                           isCompact: true,
                                           isInSettings: false),
                          isParentPresented: .constant(false))

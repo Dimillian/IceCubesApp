@@ -51,19 +51,19 @@ import SwiftUI
     didSet {
       if let item = mediaPickers.first {
         Task {
-            if isChangingAvatar {
-              if let data = await getItemImageData(item: item, for: .avatar) {
-                _ = await uploadAvatar(data: data)
-              }
-              isChangingAvatar = false
-            } else if isChangingHeader {
-              if let data = await getItemImageData(item: item, for: .header) {
-                _ = await uploadHeader(data: data)
-              }
-              isChangingHeader = false
+          if isChangingAvatar {
+            if let data = await getItemImageData(item: item, for: .avatar) {
+              _ = await uploadAvatar(data: data)
             }
-            await fetchAccount()
-            mediaPickers = []
+            isChangingAvatar = false
+          } else if isChangingHeader {
+            if let data = await getItemImageData(item: item, for: .header) {
+              _ = await uploadHeader(data: data)
+            }
+            isChangingHeader = false
+          }
+          await fetchAccount()
+          mediaPickers = []
         }
       }
     }
@@ -186,26 +186,26 @@ import SwiftUI
 }
 
 extension EditAccountViewModel {
-    private enum ItemType {
-        case avatar
-        case header
+  private enum ItemType {
+    case avatar
+    case header
 
-        var maxHeight: CGFloat {
-            switch self {
-            case .avatar:
-                400
-            case .header:
-                500
-            }
-        }
-
-        var maxWidth: CGFloat {
-            switch self {
-            case .avatar:
-                400
-            case .header:
-                1500
-            }
-        }
+    var maxHeight: CGFloat {
+      switch self {
+      case .avatar:
+        400
+      case .header:
+        500
+      }
     }
+
+    var maxWidth: CGFloat {
+      switch self {
+      case .avatar:
+        400
+      case .header:
+        1500
+      }
+    }
+  }
 }

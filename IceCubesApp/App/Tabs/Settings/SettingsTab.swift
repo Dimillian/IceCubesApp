@@ -29,9 +29,9 @@ struct SettingsTabs: View {
   @State private var timelineCache = TimelineCache()
 
   let isModal: Bool
-  
+
   @State private var startingPoint: SettingsStartingPoint? = nil
-  
+
   var body: some View {
     NavigationStack(path: $routerPath.path) {
       Form {
@@ -70,24 +70,24 @@ struct SettingsTabs: View {
         }
         .navigationDestination(item: $startingPoint) { targetView in
           switch targetView {
-            case .display:
-              DisplaySettingsView()
-            case .haptic:
-              HapticSettingsView()
-            case .remoteTimelines:
-              RemoteTimelinesSettingView()
-            case .tagGroups:
-              TagsGroupSettingView()
-            case .recentTags:
-              RecenTagsSettingView()
-            case .content:
-              ContentSettingsView()
-            case .swipeActions:
-              SwipeActionsSettingsView()
-            case .tabAndSidebarEntries:
-              EmptyView()
-            case .translation:
-              TranslationSettingsView()
+          case .display:
+            DisplaySettingsView()
+          case .haptic:
+            HapticSettingsView()
+          case .remoteTimelines:
+            RemoteTimelinesSettingView()
+          case .tagGroups:
+            TagsGroupSettingView()
+          case .recentTags:
+            RecenTagsSettingView()
+          case .content:
+            ContentSettingsView()
+          case .swipeActions:
+            SwipeActionsSettingsView()
+          case .tabAndSidebarEntries:
+            EmptyView()
+          case .translation:
+            TranslationSettingsView()
           }
         }
     }

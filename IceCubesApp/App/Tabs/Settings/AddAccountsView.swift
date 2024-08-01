@@ -1,4 +1,5 @@
 import AppAccount
+import AuthenticationServices
 import Combine
 import DesignSystem
 import Env
@@ -7,7 +8,6 @@ import Network
 import NukeUI
 import SafariServices
 import SwiftUI
-import AuthenticationServices
 
 @MainActor
 struct AddAccountView: View {
