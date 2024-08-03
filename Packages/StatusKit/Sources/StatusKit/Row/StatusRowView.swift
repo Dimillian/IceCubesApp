@@ -349,7 +349,9 @@ public struct StatusRowView: View {
   private func handleTap() {
     guard !isFocused else { return }
     if indentationLevel > 0, viewModel.hierarchyCollapseState != nil {
-      viewModel.isHierarchyExplicitlyCollapsed.toggle()
+      withAnimation {
+        viewModel.isHierarchyExplicitlyCollapsed.toggle()
+      }
     } else {
       viewModel.navigateToDetail()
     }
