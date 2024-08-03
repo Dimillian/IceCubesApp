@@ -29,9 +29,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     switch fetcher.statusesState {
     case .loading:
       ForEach(Status.placeholders()) { status in
-        StatusRowView(viewModel: .init(status: status,
-                                       client: client,
-                                       routerPath: routerPath),
+        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath),
                       context: .timeline)
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
