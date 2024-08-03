@@ -86,16 +86,18 @@ public struct StatusRowView: View {
               if !isCompact {
                 StatusRowHeaderView(viewModel: viewModel)
               }
-              StatusRowContentView(viewModel: viewModel)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                  handleTap()
-                }
-                .accessibilityActions {
-                  if isFocused, viewModel.showActions {
-                    accessibilityActions
+              if !viewModel.isHierarchyExplicitlyCollapsed {
+                StatusRowContentView(viewModel: viewModel)
+                  .contentShape(Rectangle())
+                  .onTapGesture {
+                    handleTap()
                   }
-                }
+                  .accessibilityActions {
+                    if isFocused, viewModel.showActions {
+                      accessibilityActions
+                    }
+                  }
+              }
               if !reasons.contains(.placeholder),
                  viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
                  !isInCaptureMode
