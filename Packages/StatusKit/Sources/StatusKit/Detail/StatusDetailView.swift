@@ -113,12 +113,15 @@ public struct StatusDetailView: View {
     .navigationBarTitleDisplayMode(.inline)
   }
 
+  @ViewBuilder
   private func makeStatusesListView(statuses: [Status]) -> some View {
-    ForEach(statuses) { status in
+    let collapsedIds = viewModel.hierarchyCollapseState.implicitlyCollapsedStatusIds(for: statuses)
+    ForEach(statuses.filter { !collapsedIds.contains($0.id) }) { status in
       let (indentationLevel, extraInsets) = viewModel.getIndentationLevel(id: status.id, maxIndent: userPreferences.getRealMaxIndent())
       let viewModel: StatusRowViewModel = .init(status: status,
                                                 client: client,
                                                 routerPath: routerPath,
+                                                hierarchyCollapseState: viewModel.hierarchyCollapseState,
                                                 scrollToId: $viewModel.scrollToId)
       let isFocused = self.viewModel.statusId == status.id
 

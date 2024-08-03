@@ -11,6 +11,8 @@ import SwiftUI
 
   var client: Client?
   var routerPath: RouterPath?
+    
+  let hierarchyCollapseState = StatusHierarchyCollapseState()
 
   enum State {
     case loading, display(statuses: [Status]), error(error: Error)
