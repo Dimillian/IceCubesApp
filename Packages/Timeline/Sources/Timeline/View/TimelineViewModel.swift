@@ -47,6 +47,7 @@ import SwiftUI
 
   // Internal source of truth for a timeline.
   private(set) var datasource = TimelineDatasource()
+  private let statusFetcher: TimelineStatusFetching
   private let cache = TimelineCache()
   private var isCacheEnabled: Bool {
     canFilterTimeline && timeline.supportNewestPagination && client?.isAuth == true
@@ -93,7 +94,8 @@ import SwiftUI
   var scrollToIndexAnimated: Bool = false
   var marker: Marker.Content?
 
-  init() {
+  init(statusFetcher: TimelineStatusFetching = TimelineStatusFetcher()) {
+    self.statusFetcher = statusFetcher
     pendingStatusesObserver.scrollToIndex = { [weak self] index in
       self?.scrollToIndexAnimated = true
       self?.scrollToIndex = index
@@ -121,41 +123,6 @@ import SwiftUI
         self.marker = marker
       }
       timeline = oldValue
-    }
-  }
-
-  func handleEvent(event: any StreamEvent) async {
-    if let event = event as? StreamEventUpdate,
-       let client,
-       timeline == .home,
-       canStreamEvents,
-       isTimelineVisible,
-       await !datasource.contains(statusId: event.status.id)
-    {
-      pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
-      let newStatus = event.status
-      await datasource.insert(newStatus, at: 0)
-      await cache()
-      StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
-      let statuses = await datasource.getFiltered()
-      withAnimation {
-        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-      }
-    } else if let event = event as? StreamEventDelete {
-      await datasource.remove(event.status)
-      await cache()
-      let statuses = await datasource.getFiltered()
-      withAnimation {
-        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-      }
-    } else if let event = event as? StreamEventStatusUpdate, let client {
-      if let originalIndex = await datasource.indexOf(statusId: event.status.id) {
-        StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
-        await datasource.replace(event.status, at: originalIndex)
-        await cache()
-        let statuses = await datasource.getFiltered()
-        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-      }
     }
   }
 }
@@ -216,10 +183,8 @@ extension TimelineViewModel: StatusesFetcher {
   func fetchStatuses(from: Marker.Content) async throws {
     guard let client else { return }
     statusesState = .loading
-    var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                              maxId: from.lastReadId,
-                                                                              minId: nil,
-                                                                              offset: 0))
+    var statuses: [Status] = try await statusFetcher.fetchFirstPage(client: client,
+                                                                    timeline: timeline)
 
     StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
 
@@ -286,10 +251,8 @@ extension TimelineViewModel: StatusesFetcher {
       // And then we fetch statuses again toget newest statuses from there.
       await fetchNewestStatuses(pullToRefresh: false)
     } else {
-      var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                                maxId: nil,
-                                                                                minId: nil,
-                                                                                offset: 0))
+      var statuses: [Status] = try await statusFetcher.fetchFirstPage(client: client,
+                                                                      timeline: timeline)
 
       StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
 
@@ -308,7 +271,8 @@ extension TimelineViewModel: StatusesFetcher {
     canStreamEvents = false
     let initialTimeline = timeline
 
-    let newStatuses = await fetchAndDedupNewStatuses(latestStatus: latestStatus, client: client)
+    let newStatuses = try await fetchAndDedupNewStatuses(latestStatus: latestStatus,
+                                                         client: client)
 
     guard !newStatuses.isEmpty,
           isTimelineVisible,
@@ -327,8 +291,11 @@ extension TimelineViewModel: StatusesFetcher {
     }
   }
 
-  private func fetchAndDedupNewStatuses(latestStatus: String, client: Client) async -> [Status] {
-    var newStatuses = await fetchNewPages(minId: latestStatus, maxPages: 5)
+  private func fetchAndDedupNewStatuses(latestStatus: String, client: Client) async throws -> [Status] {
+    var newStatuses = try await statusFetcher.fetchNewPages(client: client,
+                                                  timeline: timeline,
+                                                  minId: latestStatus,
+                                                  maxPages: 5)
     let ids = await datasource.get().map(\.id)
     newStatuses = newStatuses.filter { status in
       !ids.contains(where: { $0 == status.id })
@@ -378,34 +345,6 @@ extension TimelineViewModel: StatusesFetcher {
     }
   }
 
-  private func fetchNewPages(minId: String, maxPages: Int) async -> [Status] {
-    guard let client else { return [] }
-    var allStatuses: [Status] = []
-    var latestMinId = minId
-    do {
-      for _ in 1 ... maxPages {
-        if Task.isCancelled { break }
-
-        let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(
-          sinceId: nil,
-          maxId: nil,
-          minId: latestMinId,
-          offset: nil
-        ))
-
-        if newStatuses.isEmpty { break }
-
-        StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
-        allStatuses.insert(contentsOf: newStatuses, at: 0)
-        latestMinId = newStatuses.first?.id ?? latestMinId
-      }
-    } catch {
-      return allStatuses
-    }
-
-    return allStatuses
-  }
-
   enum NextPageError: Error {
     case internalError
   }
@@ -413,10 +352,10 @@ extension TimelineViewModel: StatusesFetcher {
   func fetchNextPage() async throws {
     let statuses = await datasource.get()
     guard let client, let lastId = statuses.last?.id else { throw NextPageError.internalError }
-    let newStatuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                                 maxId: lastId,
-                                                                                 minId: nil,
-                                                                                 offset: statuses.count))
+    let newStatuses: [Status] = try await statusFetcher.fetchNextPage(client: client,
+                                                                      timeline: timeline,
+                                                                      lastId: lastId,
+                                                                      offset: statuses.count)
 
     await datasource.append(contentOf: newStatuses)
     StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
@@ -441,7 +380,7 @@ extension TimelineViewModel: StatusesFetcher {
   }
 }
 
-// MARK: - MARKER
+// MARK: - Marker handling
 
 extension TimelineViewModel {
   func fetchMarker() async -> Marker.Content? {
@@ -463,6 +402,58 @@ extension TimelineViewModel {
       do {
         let _: Marker = try await client.post(endpoint: Markers.markHome(lastReadId: id))
       } catch {}
+    }
+  }
+}
+
+// MARK: - Event handling
+
+extension TimelineViewModel {
+  func handleEvent(event: any StreamEvent) async {
+    guard let client = client, canStreamEvents, isTimelineVisible else { return }
+
+    switch event {
+    case let updateEvent as StreamEventUpdate:
+      await handleUpdateEvent(updateEvent, client: client)
+    case let deleteEvent as StreamEventDelete:
+      await handleDeleteEvent(deleteEvent)
+    case let statusUpdateEvent as StreamEventStatusUpdate:
+      await handleStatusUpdateEvent(statusUpdateEvent, client: client)
+    default:
+      break
+    }
+  }
+
+  private func handleUpdateEvent(_ event: StreamEventUpdate, client: Client) async {
+    guard timeline == .home,
+          await !datasource.contains(statusId: event.status.id) else { return }
+
+    pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
+    await datasource.insert(event.status, at: 0)
+    await cache()
+    StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
+    await updateStatusesState()
+  }
+
+  private func handleDeleteEvent(_ event: StreamEventDelete) async {
+    await datasource.remove(event.status)
+    await cache()
+    await updateStatusesState()
+  }
+
+  private func handleStatusUpdateEvent(_ event: StreamEventStatusUpdate, client: Client) async {
+    guard let originalIndex = await datasource.indexOf(statusId: event.status.id) else { return }
+
+    StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
+    await datasource.replace(event.status, at: originalIndex)
+    await cache()
+    await updateStatusesState()
+  }
+
+  private func updateStatusesState() async {
+    let statuses = await datasource.getFiltered()
+    withAnimation {
+      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     }
   }
 }
