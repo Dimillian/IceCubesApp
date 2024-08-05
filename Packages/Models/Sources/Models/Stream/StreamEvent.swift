@@ -1,17 +1,17 @@
 import Foundation
 
-public struct RawStreamEvent: Decodable {
+public struct RawStreamEvent: Decodable, Sendable{
   public let event: String
   public let stream: [String]
   public let payload: String
 }
 
-public protocol StreamEvent: Identifiable {
+public protocol StreamEvent: Identifiable, Sendable {
   var date: Date { get }
   var id: String { get }
 }
 
-public struct StreamEventUpdate: StreamEvent {
+public struct StreamEventUpdate: StreamEvent, Sendable {
   public let date = Date()
   public var id: String { status.id }
   public let status: Status
@@ -20,7 +20,7 @@ public struct StreamEventUpdate: StreamEvent {
   }
 }
 
-public struct StreamEventStatusUpdate: StreamEvent {
+public struct StreamEventStatusUpdate: StreamEvent, Sendable {
   public let date = Date()
   public var id: String { status.id + (status.editedAt?.asDate.description ?? "") }
   public let status: Status
@@ -29,7 +29,7 @@ public struct StreamEventStatusUpdate: StreamEvent {
   }
 }
 
-public struct StreamEventDelete: StreamEvent {
+public struct StreamEventDelete: StreamEvent, Sendable {
   public let date = Date()
   public var id: String { status + date.description }
   public let status: String
@@ -38,7 +38,7 @@ public struct StreamEventDelete: StreamEvent {
   }
 }
 
-public struct StreamEventNotification: StreamEvent {
+public struct StreamEventNotification: StreamEvent, Sendable {
   public let date = Date()
   public var id: String { notification.id }
   public let notification: Notification
@@ -47,7 +47,7 @@ public struct StreamEventNotification: StreamEvent {
   }
 }
 
-public struct StreamEventConversation: StreamEvent {
+public struct StreamEventConversation: StreamEvent, Sendable {
   public let date = Date()
   public var id: String { conversation.id }
   public let conversation: Conversation

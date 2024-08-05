@@ -18,14 +18,13 @@ struct SideBarView<Content: View>: View {
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(RouterPath.self) private var routerPath
 
-  @Binding var selectedTab: Tab
-  @Binding var popToRootTab: Tab
-  var tabs: [Tab]
+  @Binding var selectedTab: AppTab
+  var tabs: [AppTab]
   @ViewBuilder var content: () -> Content
 
   @State private var sidebarTabs = SidebarTabs.shared
 
-  private func badgeFor(tab: Tab) -> Int {
+  private func badgeFor(tab: AppTab) -> Int {
     if tab == .notifications, selectedTab != tab,
        let token = appAccounts.currentAccount.oauthToken
     {
@@ -34,7 +33,7 @@ struct SideBarView<Content: View>: View {
     return 0
   }
 
-  private func makeIconForTab(tab: Tab) -> some View {
+  private func makeIconForTab(tab: AppTab) -> some View {
     HStack {
       ZStack(alignment: .topTrailing) {
         SideBarIcon(systemIconName: tab.iconName,
@@ -83,7 +82,7 @@ struct SideBarView<Content: View>: View {
         .offset(x: 2, y: -2)
     }
     .buttonStyle(.borderedProminent)
-    .help(Tab.post.title)
+    .help(AppTab.post.title)
   }
 
   private func makeAccountButton(account: AppAccount, showBadge: Bool) -> some View {
@@ -133,7 +132,7 @@ struct SideBarView<Content: View>: View {
     if let accountName {
       "tab.profile-account-\(accountName)"
     } else {
-      Tab.profile.title
+      AppTab.profile.title
     }
   }
 
@@ -143,13 +142,6 @@ struct SideBarView<Content: View>: View {
         Button {
           // ensure keyboard is always dismissed when selecting a tab
           hideKeyboard()
-
-          if tab == selectedTab {
-            popToRootTab = .other
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-              popToRootTab = tab
-            }
-          }
           selectedTab = tab
           SoundEffectManager.shared.playSound(.tabSelection)
           if tab == .notifications {

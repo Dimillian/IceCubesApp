@@ -35,6 +35,7 @@ public struct AccountDetailContextMenu: View {
 
           if viewModel.relationship?.blocking == true {
             Button {
+              let client = client
               Task {
                 do {
                   viewModel.relationship = try await client.post(endpoint: Accounts.unblock(id: account.id))
@@ -53,6 +54,7 @@ public struct AccountDetailContextMenu: View {
 
           if viewModel.relationship?.muting == true {
             Button {
+              let client = client
               Task {
                 do {
                   viewModel.relationship = try await client.post(endpoint: Accounts.unmute(id: account.id))
@@ -65,6 +67,7 @@ public struct AccountDetailContextMenu: View {
             Menu {
               ForEach(Duration.mutingDurations(), id: \.rawValue) { duration in
                 Button(duration.description) {
+                  let client = client
                   Task {
                     do {
                       viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id, json: MuteData(duration: duration.rawValue)))
@@ -82,6 +85,7 @@ public struct AccountDetailContextMenu: View {
           {
             if relationship.notifying {
               Button {
+                let client = client
                 Task {
                   do {
                     viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
@@ -94,6 +98,7 @@ public struct AccountDetailContextMenu: View {
               }
             } else {
               Button {
+                let client = client
                 Task {
                   do {
                     viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
@@ -107,6 +112,7 @@ public struct AccountDetailContextMenu: View {
             }
             if relationship.showingReblogs {
               Button {
+                let client = client
                 Task {
                   do {
                     viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
@@ -119,6 +125,7 @@ public struct AccountDetailContextMenu: View {
               }
             } else {
               Button {
+                let client = client
                 Task {
                   do {
                     viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,

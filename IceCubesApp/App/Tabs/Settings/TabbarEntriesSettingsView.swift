@@ -14,27 +14,27 @@ struct TabbarEntriesSettingsView: View {
     Form {
       Section {
         Picker("settings.tabs.first-tab", selection: $tabs.firstTab) {
-          ForEach(Tab.allCases) { tab in
+          ForEach(AppTab.allCases) { tab in
             tab.label.tag(tab)
           }
         }
         Picker("settings.tabs.second-tab", selection: $tabs.secondTab) {
-          ForEach(Tab.allCases) { tab in
+          ForEach(AppTab.allCases) { tab in
             tab.label.tag(tab)
           }
         }
         Picker("settings.tabs.third-tab", selection: $tabs.thirdTab) {
-          ForEach(Tab.allCases) { tab in
+          ForEach(AppTab.allCases) { tab in
             tab.label.tag(tab)
           }
         }
         Picker("settings.tabs.fourth-tab", selection: $tabs.fourthTab) {
-          ForEach(Tab.allCases) { tab in
+          ForEach(AppTab.allCases) { tab in
             tab.label.tag(tab)
           }
         }
         Picker("settings.tabs.fifth-tab", selection: $tabs.fifthTab) {
-          ForEach(Tab.allCases) { tab in
+          ForEach(AppTab.allCases) { tab in
             tab.label.tag(tab)
           }
         }

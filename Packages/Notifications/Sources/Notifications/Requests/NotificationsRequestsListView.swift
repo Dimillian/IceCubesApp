@@ -32,7 +32,7 @@ public struct NotificationsRequestsListView: View {
                   message: "notifications.error.message",
                   buttonTitle: "action.retry")
         {
-          await fetchRequests()
+          await fetchRequests(client)
         }
         #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
@@ -43,13 +43,13 @@ public struct NotificationsRequestsListView: View {
           NotificationsRequestsRowView(request: request)
             .swipeActions {
               Button {
-                Task { await acceptRequest(request) }
+                Task { await acceptRequest(client, request) }
               } label: {
                 Label("account.follow-request.accept", systemImage: "checkmark")
               }
 
               Button {
-                Task { await dismissRequest(request) }
+                Task { await dismissRequest(client, request) }
               } label: {
                 Label("account.follow-request.reject", systemImage: "xmark")
               }
@@ -66,14 +66,14 @@ public struct NotificationsRequestsListView: View {
       .navigationTitle("notifications.content-filter.requests.title")
       .navigationBarTitleDisplayMode(.inline)
       .task {
-        await fetchRequests()
+        await fetchRequests(client)
       }
       .refreshable {
-        await fetchRequests()
+        await fetchRequests(client)
       }
   }
 
-  private func fetchRequests() async {
+  private func fetchRequests(_ client: Client) async {
     do {
       viewState = try .requests(await client.get(endpoint: Notifications.requests))
     } catch {
@@ -81,13 +81,13 @@ public struct NotificationsRequestsListView: View {
     }
   }
 
-  private func acceptRequest(_ request: NotificationsRequest) async {
+  private func acceptRequest(_ client: Client, _ request: NotificationsRequest) async {
     _ = try? await client.post(endpoint: Notifications.acceptRequest(id: request.id))
-    await fetchRequests()
+    await fetchRequests(client)
   }
 
-  private func dismissRequest(_ request: NotificationsRequest) async {
+  private func dismissRequest(_ client: Client, _ request: NotificationsRequest) async {
     _ = try? await client.post(endpoint: Notifications.dismissRequest(id: request.id))
-    await fetchRequests()
+    await fetchRequests(client)
   }
 }

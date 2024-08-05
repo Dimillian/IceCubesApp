@@ -14,11 +14,7 @@ public struct ExploreView: View {
 
   @State private var viewModel = ExploreViewModel()
 
-  @Binding var scrollToTopSignal: Int
-
-  public init(scrollToTopSignal: Binding<Int>) {
-    _scrollToTopSignal = scrollToTopSignal
-  }
+  public init() { }
 
   public var body: some View {
     ScrollViewReader { proxy in
@@ -110,15 +106,6 @@ public struct ExploreView: View {
         }
         .task(id: viewModel.searchQuery) {
           await viewModel.search()
-        }
-        .onChange(of: scrollToTopSignal) {
-          if viewModel.scrollToTopVisible {
-            viewModel.isSearchPresented.toggle()
-          } else {
-            withAnimation {
-              proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
-            }
-          }
         }
     }
   }

@@ -1,7 +1,7 @@
 import AppAccount
 import CryptoKit
 import Env
-@preconcurrency import Intents
+import Intents
 import KeychainSwift
 import Models
 import Network

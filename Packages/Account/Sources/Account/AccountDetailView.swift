@@ -28,18 +28,14 @@ public struct AccountDetailView: View {
 
   @State private var displayTitle: Bool = false
 
-  @Binding var scrollToTopSignal: Int
-
   /// When coming from a URL like a mention tap in a status.
-  public init(accountId: String, scrollToTopSignal: Binding<Int>) {
+  public init(accountId: String) {
     _viewModel = .init(initialValue: .init(accountId: accountId))
-    _scrollToTopSignal = scrollToTopSignal
   }
 
   /// When the account is already fetched by the parent caller.
-  public init(account: Account, scrollToTopSignal: Binding<Int>) {
+  public init(account: Account) {
     _viewModel = .init(initialValue: .init(account: account))
-    _scrollToTopSignal = scrollToTopSignal
   }
 
   public var body: some View {
@@ -105,11 +101,6 @@ public struct AccountDetailView: View {
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
       #endif
-        .onChange(of: scrollToTopSignal) {
-          withAnimation {
-            proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
-          }
-        }
     }
     .onAppear {
       guard reasons != .placeholder else { return }
@@ -389,6 +380,7 @@ public struct AccountDetailView: View {
       .confirmationDialog("Block User", isPresented: $showBlockConfirmation) {
         if let account = viewModel.account {
           Button("account.action.block-user-\(account.username)", role: .destructive) {
+            let client = client
             Task {
               do {
                 viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
@@ -419,6 +411,6 @@ extension View {
 
 struct AccountDetailView_Previews: PreviewProvider {
   static var previews: some View {
-    AccountDetailView(account: .placeholder(), scrollToTopSignal: .constant(0))
+    AccountDetailView(account: .placeholder())
   }
 }

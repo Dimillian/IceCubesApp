@@ -140,13 +140,13 @@ struct AboutView: View {
   private func fetchAccounts() async {
     await withThrowingTaskGroup(of: Void.self) { group in
       group.addTask {
-        let viewModel = try await fetchAccountViewModel(account: "dimillian@mastodon.social")
+        let viewModel = try await fetchAccountViewModel(client, account: "dimillian@mastodon.social")
         await MainActor.run {
           dimillianAccount = viewModel
         }
       }
       group.addTask {
-        let viewModel = try await fetchAccountViewModel(account: "icecubesapp@mastodon.online")
+        let viewModel = try await fetchAccountViewModel(client, account: "icecubesapp@mastodon.online")
         await MainActor.run {
           iceCubesAccount = viewModel
         }
@@ -154,7 +154,7 @@ struct AboutView: View {
     }
   }
 
-  private func fetchAccountViewModel(account: String) async throws -> AccountsListRowViewModel {
+  private func fetchAccountViewModel(_ client: Client, account: String) async throws -> AccountsListRowViewModel {
     let dimillianAccount: Account = try await client.get(endpoint: Accounts.lookup(name: account))
     let rel: [Relationship] = try await client.get(endpoint: Accounts.relationships(ids: [dimillianAccount.id]))
     return .init(account: dimillianAccount, relationShip: rel.first)

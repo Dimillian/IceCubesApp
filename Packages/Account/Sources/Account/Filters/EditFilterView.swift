@@ -118,7 +118,7 @@ struct EditFilterView: View {
         .focused($focusedField, equals: .title)
         .onSubmit {
           Task {
-            await saveFilter()
+            await saveFilter(client)
           }
         }
     }
@@ -130,7 +130,7 @@ struct EditFilterView: View {
       Section {
         Button {
           Task {
-            await saveFilter()
+            await saveFilter(client)
           }
         } label: {
           if isSavingFilter {
@@ -158,7 +158,7 @@ struct EditFilterView: View {
           Spacer()
           Button {
             Task {
-              await deleteKeyword(keyword: keyword)
+              await deleteKeyword(client, keyword: keyword)
             }
           } label: {
             Image(systemName: "trash")
@@ -170,7 +170,7 @@ struct EditFilterView: View {
         if let index = indexes.first {
           let keyword = keywords[index]
           Task {
-            await deleteKeyword(keyword: keyword)
+            await deleteKeyword(client, keyword: keyword)
           }
         }
       }
@@ -179,7 +179,7 @@ struct EditFilterView: View {
           .focused($focusedField, equals: .newKeyword)
           .onSubmit {
             Task {
-              await addKeyword(name: newKeyword)
+              await addKeyword(client, name: newKeyword)
               newKeyword = ""
               focusedField = .newKeyword
             }
@@ -189,7 +189,7 @@ struct EditFilterView: View {
           Button {
             Task {
               Task {
-                await addKeyword(name: newKeyword)
+                await addKeyword(client, name: newKeyword)
                 newKeyword = ""
               }
             }
@@ -217,7 +217,7 @@ struct EditFilterView: View {
             contexts.append(context)
           }
           Task {
-            await saveFilter()
+            await saveFilter(client)
           }
         })) {
           Label(context.name, systemImage: context.iconName)
@@ -242,7 +242,7 @@ struct EditFilterView: View {
       }
       .onChange(of: filterAction) {
         Task {
-          await saveFilter()
+          await saveFilter(client)
         }
       }
       .pickerStyle(.inline)
@@ -256,11 +256,11 @@ struct EditFilterView: View {
     Button {
       Task {
         if !newKeyword.isEmpty {
-          await addKeyword(name: newKeyword)
+          await addKeyword(client, name: newKeyword)
           newKeyword = ""
           focusedField = .newKeyword
         }
-        await saveFilter()
+        await saveFilter(client)
         dismiss()
       }
     } label: {
@@ -273,7 +273,7 @@ struct EditFilterView: View {
     .disabled(!canSave)
   }
 
-  private func saveFilter() async {
+  private func saveFilter(_ client: Client) async {
     do {
       isSavingFilter = true
       if let filter {
@@ -288,7 +288,7 @@ struct EditFilterView: View {
     isSavingFilter = false
   }
 
-  private func addKeyword(name: String) async {
+  private func addKeyword(_ client: Client, name: String) async {
     guard let filterId = filter?.id else { return }
     isSavingFilter = true
     do {
@@ -302,7 +302,7 @@ struct EditFilterView: View {
     isSavingFilter = false
   }
 
-  private func deleteKeyword(keyword: ServerFilter.Keyword) async {
+  private func deleteKeyword(_ client: Client, keyword: ServerFilter.Keyword) async {
     isSavingFilter = true
     do {
       let response = try await client.delete(endpoint: ServerFilters.removeKeyword(id: keyword.id),

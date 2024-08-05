@@ -14,11 +14,7 @@ public struct ConversationsListView: View {
 
   @State private var viewModel = ConversationsListViewModel()
 
-  @Binding var scrollToTopSignal: Int
-
-  public init(scrollToTopSignal: Binding<Int>) {
-    _scrollToTopSignal = scrollToTopSignal
-  }
+  public init() { }
 
   private var conversations: Binding<[Conversation]> {
     if viewModel.isLoadingFirstPage {
@@ -87,11 +83,6 @@ public struct ConversationsListView: View {
       .onChange(of: watcher.latestEvent?.id) {
         if let latestEvent = watcher.latestEvent {
           viewModel.handleEvent(event: latestEvent)
-        }
-      }
-      .onChange(of: scrollToTopSignal) {
-        withAnimation {
-          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
         }
       }
       .refreshable {

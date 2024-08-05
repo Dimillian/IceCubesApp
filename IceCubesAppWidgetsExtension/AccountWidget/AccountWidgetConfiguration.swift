@@ -6,7 +6,7 @@ struct AccountWidgetConfiguration: WidgetConfigurationIntent {
   static let description = IntentDescription("Choose the account for this widget")
 
   @Parameter(title: "Account")
-  var account: AppAccountEntity
+  var account: AppAccountEntity?
 }
 
 extension AccountWidgetConfiguration {

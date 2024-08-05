@@ -2,14 +2,14 @@ import AppIntents
 import WidgetKit
 
 struct ListsWidgetConfiguration: WidgetConfigurationIntent {
-  static let title: LocalizedStringResource = "Configuration"
+  static let title: LocalizedStringResource = "List Widget Configuration"
   static let description = IntentDescription("Choose the account and list for this widget")
 
   @Parameter(title: "Account")
-  var account: AppAccountEntity
+  var account: AppAccountEntity?
 
   @Parameter(title: "List")
-  var timeline: ListEntity
+  var timeline: ListEntity?
 }
 
 extension ListsWidgetConfiguration {

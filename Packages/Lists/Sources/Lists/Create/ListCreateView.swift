@@ -42,6 +42,7 @@ public struct ListCreateView: View {
         CancelToolbarItem()
         ToolbarItem {
           Button {
+            let client = client
             Task {
               isSaving = true
               let _: Models.List = try await client.post(endpoint: Lists.createList(title: title,

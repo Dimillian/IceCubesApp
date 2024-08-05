@@ -44,6 +44,7 @@ public struct ReportView: View {
           ToolbarItem(placement: .navigationBarTrailing) {
             Button {
               isSendingReport = true
+              let client = client
               Task {
                 do {
                   let _: ReportSent =

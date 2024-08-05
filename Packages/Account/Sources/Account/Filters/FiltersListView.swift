@@ -50,7 +50,7 @@ public struct FiltersListView: View {
                 }
               }
               .onDelete { indexes in
-                deleteFilter(indexes: indexes)
+                deleteFilter(client, indexes: indexes)
               }
             }
           }
@@ -78,6 +78,7 @@ public struct FiltersListView: View {
         .background(theme.secondaryBackgroundColor)
       #endif
         .task {
+          let client = client
           do {
             isLoading = true
             filters = try await client.get(endpoint: ServerFilters.filters, forceVersion: .v2)
@@ -89,7 +90,7 @@ public struct FiltersListView: View {
     }
   }
 
-  private func deleteFilter(indexes: IndexSet) {
+  private func deleteFilter(_ client: Client, indexes: IndexSet) {
     if let index = indexes.first {
       Task {
         do {
