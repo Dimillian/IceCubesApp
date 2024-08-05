@@ -86,17 +86,18 @@ public struct StatusRowView: View {
               if !isCompact {
                 StatusRowHeaderView(viewModel: viewModel)
               }
-              StatusRowContentView(viewModel: viewModel)
-                .contentShape(Rectangle())
-                .onTapGesture {
-                  guard !isFocused else { return }
-                  viewModel.navigateToDetail()
-                }
-                .accessibilityActions {
-                  if isFocused, viewModel.showActions {
-                    accessibilityActions
+              if !viewModel.isHierarchyExplicitlyCollapsed {
+                StatusRowContentView(viewModel: viewModel)
+                  .contentShape(Rectangle())
+                  .onTapGesture {
+                    handleTap()
                   }
-                }
+                  .accessibilityActions {
+                    if isFocused, viewModel.showActions {
+                      accessibilityActions
+                    }
+                  }
+              }
               if !reasons.contains(.placeholder),
                  viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
                  !isInCaptureMode
@@ -161,8 +162,7 @@ public struct StatusRowView: View {
       ? StatusRowAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
     .accessibilityHidden(viewModel.filter?.filter.filterAction == .hide)
     .accessibilityAction {
-      guard !isFocused else { return }
-      viewModel.navigateToDetail()
+      handleTap()
     }
     .accessibilityActions {
       if !isFocused, viewModel.showActions, accessibilityVoiceOverEnabled {
@@ -173,8 +173,7 @@ public struct StatusRowView: View {
       Color.clear
         .contentShape(Rectangle())
         .onTapGesture {
-          guard !isFocused else { return }
-          viewModel.navigateToDetail()
+          handleTap()
         }
     }
     .overlay {
@@ -347,6 +346,17 @@ public struct StatusRowView: View {
     }
     .background(Color.black.opacity(0.40))
     .transition(.opacity)
+  }
+    
+  private func handleTap() {
+    guard !isFocused else { return }
+    if indentationLevel > 0, viewModel.hierarchyCollapseState != nil {
+      withAnimation {
+        viewModel.isHierarchyExplicitlyCollapsed.toggle()
+      }
+    } else {
+      viewModel.navigateToDetail()
+    }
   }
 }
 
