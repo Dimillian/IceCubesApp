@@ -99,21 +99,21 @@ public struct EditAccountView: View {
               viewModel.isPhotoPickerPresented = true
             }
             if viewModel.avatar != nil || viewModel.header != nil {
-                Divider()
+              Divider()
             }
             if viewModel.avatar != nil {
-                Button("account.edit.avatar.delete", role: .destructive) {
-                  Task {
-                    await viewModel.deleteAvatar()
-                  }
+              Button("account.edit.avatar.delete", role: .destructive) {
+                Task {
+                  await viewModel.deleteAvatar()
                 }
+              }
             }
             if viewModel.header != nil {
-                Button("account.edit.header.delete", role: .destructive) {
-                  Task {
-                    await viewModel.deleteHeader()
-                  }
+              Button("account.edit.header.delete", role: .destructive) {
+                Task {
+                  await viewModel.deleteHeader()
                 }
+              }
             }
           } label: {
             Image(systemName: "photo.badge.plus")

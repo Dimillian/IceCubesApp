@@ -95,9 +95,9 @@ struct StatusRowHeaderView: View {
 
   private var dateView: some View {
     Text("\(Image(systemName: viewModel.finalStatus.visibility.iconName)) ⸱ \(viewModel.finalStatus.createdAt.relativeFormatted)")
-    .fixedSize(horizontal: false, vertical: true)
-    .font(.scaledFootnote)
-    .foregroundStyle(.secondary)
-    .lineLimit(1)
+      .fixedSize(horizontal: false, vertical: true)
+      .font(.scaledFootnote)
+      .foregroundStyle(.secondary)
+      .lineLimit(1)
   }
 }

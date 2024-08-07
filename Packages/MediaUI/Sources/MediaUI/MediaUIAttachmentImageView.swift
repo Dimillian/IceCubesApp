@@ -2,12 +2,12 @@ import Models
 import NukeUI
 import SwiftUI
 
-struct MediaUIAttachmentImageView: View {
-  let url: URL
+public struct MediaUIAttachmentImageView: View {
+  public let url: URL
 
   @GestureState private var zoom = 1.0
 
-  var body: some View {
+  public var body: some View {
     MediaUIZoomableContainer {
       LazyImage(url: url) { state in
         if let image = state.image {

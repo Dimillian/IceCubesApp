@@ -24,6 +24,8 @@ extension View {
         AccountDetailView(account: account, scrollToTopSignal: .constant(0))
       case let .accountSettingsWithAccount(account, appAccount):
         AccountSettingsView(account: account, appAccount: appAccount)
+      case let .accountMediaGridView(account, initialMedia):
+        AccountDetailMediaGridView(account: account, initialMediaStatuses: initialMedia)
       case let .statusDetail(id):
         StatusDetailView(statusId: id)
       case let .statusDetailWithStatus(status):

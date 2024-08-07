@@ -16,7 +16,7 @@ public struct StatusRowView: View {
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.indentationLevel) private var indentationLevel
   @Environment(\.isHomeTimeline) private var isHomeTimeline
-  
+
   @Environment(RouterPath.self) private var routerPath: RouterPath
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
@@ -26,7 +26,7 @@ public struct StatusRowView: View {
   @State private var isBlockConfirmationPresented = false
 
   public enum Context { case timeline, detail }
-  
+
   @State public var viewModel: StatusRowViewModel
   public let context: Context
 

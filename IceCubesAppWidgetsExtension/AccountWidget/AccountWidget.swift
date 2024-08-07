@@ -10,18 +10,18 @@ struct AccountWidgetProvider: AppIntentTimelineProvider {
     .init(date: Date(), account: .placeholder(), avatar: nil)
   }
 
-  func snapshot(for configuration: AccountWidgetConfiguration, in context: Context) async -> AccountWidgetEntry {
+  func snapshot(for configuration: AccountWidgetConfiguration, in _: Context) async -> AccountWidgetEntry {
     let account = await fetchAccount(configuration: configuration)
     return .init(date: Date(), account: account, avatar: nil)
   }
 
-  func timeline(for configuration: AccountWidgetConfiguration, in context: Context) async -> Timeline<AccountWidgetEntry> {
+  func timeline(for configuration: AccountWidgetConfiguration, in _: Context) async -> Timeline<AccountWidgetEntry> {
     let account = await fetchAccount(configuration: configuration)
     let images = try? await loadImages(urls: [account.avatar])
     return .init(entries: [.init(date: Date(), account: account, avatar: images?.first?.value)],
                  policy: .atEnd)
   }
-  
+
   private func fetchAccount(configuration: AccountWidgetConfiguration) async -> Account {
     let client = Client(server: configuration.account.account.server,
                         oauthToken: configuration.account.account.oauthToken)

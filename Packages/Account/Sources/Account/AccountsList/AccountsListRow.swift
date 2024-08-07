@@ -114,7 +114,7 @@ public struct AccountsListRow: View {
     .addTranslateView(isPresented: $showTranslateView, text: viewModel.account.note.asRawText)
     #endif
     .contextMenu {
-      AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, 
+      AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation,
                                showTranslateView: $showTranslateView,
                                viewModel: .init(account: viewModel.account))
     } preview: {

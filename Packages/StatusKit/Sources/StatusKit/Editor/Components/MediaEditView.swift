@@ -38,9 +38,9 @@ extension StatusEditor {
               generateButton
             }
             #if canImport(_Translation_SwiftUI)
-            if #available(iOS 17.4, *), !imageDescription.isEmpty {
-              translateButton
-            }
+              if #available(iOS 17.4, *), !imageDescription.isEmpty {
+                translateButton
+              }
             #endif
           }
           .listRowBackground(theme.primaryBackgroundColor)
