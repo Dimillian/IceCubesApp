@@ -327,7 +327,7 @@ extension AccountDetailViewModel {
   private func fetchPremiumAccount(fromAccount: Account, client: Client) async throws {
     if fromAccount.isLinkedToPremiumAccount, let acct = fromAccount.premiumAcct {
       let results: SearchResults? = try await client.get(endpoint: Search.search(query: acct,
-                                                                                 type: "accounts",
+                                                                                 type: .accounts,
                                                                                  offset: nil,
                                                                                  following: nil),
                                                           forceVersion: .v2)

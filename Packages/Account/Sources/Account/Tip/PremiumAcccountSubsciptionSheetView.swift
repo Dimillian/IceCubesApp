@@ -95,21 +95,20 @@ struct PremiumAcccountSubsciptionSheetView: View {
     Spacer()
     
     if isSubscibeSelected {
-      HStack(alignment: .top) {
-        Text("Subscribe")
-          .font(.headline)
-          .fontWeight(.bold)
-      }
-      .transition(.push(from: .bottom))
-      .frame(height: 50)
-      .frame(maxWidth: .infinity)
-      .background(theme.tintColor.opacity(0.5))
-      .onTapGesture {
+      Button {
         withAnimation {
           state = .preparing
         }
+      } label: {
+        Text("Subscribe")
+          .font(.headline)
+          .fontWeight(.bold)
+          .frame(maxWidth: .infinity)
+          .frame(height: 40)
       }
-      .ignoresSafeArea()
+      .buttonStyle(.borderedProminent)
+      .padding(.horizontal, 16)
+      .padding(.bottom, 38)
     }
   }
   
