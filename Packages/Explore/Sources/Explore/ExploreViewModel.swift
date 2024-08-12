@@ -115,4 +115,40 @@ import SwiftUI
       isSearching = false
     }
   }
+
+  func fetchNextPage(of type: Search.EntityType) async {
+    guard let client, !searchQuery.isEmpty,
+          let results = results[searchQuery] else { return }
+    do {
+      let offset = switch type {
+      case .accounts:
+        results.accounts.count
+      case .hashtags:
+        results.hashtags.count
+      case .statuses:
+        results.statuses.count
+      }
+
+      var newPageResults: SearchResults = try await client.get(endpoint: Search.search(query: searchQuery,
+                                                                                       type: type,
+                                                                                       offset: offset,
+                                                                                       following: nil),
+                                                               forceVersion: .v2)
+      if type == .accounts {
+        let relationships: [Relationship] =
+          try await client.get(endpoint: Accounts.relationships(ids: newPageResults.accounts.map(\.id)))
+        newPageResults.relationships = relationships
+      }
+
+      switch type {
+      case .accounts:
+        self.results[searchQuery]?.accounts.append(contentsOf: newPageResults.accounts)
+        self.results[searchQuery]?.relationships.append(contentsOf: newPageResults.relationships)
+      case .hashtags:
+        self.results[searchQuery]?.hashtags.append(contentsOf: newPageResults.hashtags)
+      case .statuses:
+        self.results[searchQuery]?.statuses.append(contentsOf: newPageResults.statuses)
+      }
+    } catch {}
+  }
 }

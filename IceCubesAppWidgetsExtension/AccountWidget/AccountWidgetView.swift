@@ -11,7 +11,6 @@ struct AccountWidgetView: View {
   @Environment(\.widgetFamily) var family
   @Environment(\.redactionReasons) var redacted
 
-
   var body: some View {
     VStack(alignment: .center, spacing: 4) {
       if let avatar = entry.avatar {

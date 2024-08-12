@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "311016d972aa751ae8ab0cd5897422ebe7db0501",
-        "version" : "12.7.3"
+        "revision" : "0ead44350d2737db384908569c012fe67c421e4d",
+        "version" : "12.8.0"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios",
       "state" : {
-        "revision" : "7ec1091a6f929c40be2a1c695a63471f5d0c330d",
-        "version" : "4.43.0"
+        "revision" : "7d55b964114a3d4a76791227cdc28577617596db",
+        "version" : "4.43.2"
       }
     },
     {

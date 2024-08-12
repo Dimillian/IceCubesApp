@@ -9,6 +9,7 @@ public enum RouterDestination: Hashable {
   case accountDetail(id: String)
   case accountDetailWithAccount(account: Account)
   case accountSettingsWithAccount(account: Account, appAccount: AppAccount)
+  case accountMediaGridView(account: Account, initialMediaStatuses: [MediaStatus])
   case statusDetail(id: String)
   case statusDetailWithStatus(status: Status)
   case remoteStatusDetail(url: URL)
@@ -136,7 +137,7 @@ public enum SettingsStartingPoint {
   public var path: [RouterDestination] = []
   public var presentedSheet: SheetDestination?
 
-  public static var settingsStartingPoint: SettingsStartingPoint? = nil
+  public static var settingsStartingPoint: SettingsStartingPoint?
 
   public init() {}
 
@@ -260,7 +261,7 @@ public enum SettingsStartingPoint {
   public func navigateToAccountFrom(acct: String, url: URL) async {
     guard let client else { return }
     let results: SearchResults? = try? await client.get(endpoint: Search.search(query: acct,
-                                                                                type: "accounts",
+                                                                                type: .accounts,
                                                                                 offset: nil,
                                                                                 following: nil),
                                                         forceVersion: .v2)
@@ -274,7 +275,7 @@ public enum SettingsStartingPoint {
   public func navigateToAccountFrom(url: URL) async {
     guard let client else { return }
     let results: SearchResults? = try? await client.get(endpoint: Search.search(query: url.absoluteString,
-                                                                                type: "accounts",
+                                                                                type: .accounts,
                                                                                 offset: nil,
                                                                                 following: nil),
                                                         forceVersion: .v2)

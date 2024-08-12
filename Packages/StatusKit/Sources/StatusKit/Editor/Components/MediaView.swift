@@ -194,7 +194,7 @@ extension StatusEditor {
       }
     }
 
-    private func makeErrorView(error: ServerError) -> some View {
+    private func makeErrorView(error _: ServerError) -> some View {
       ZStack {
         placeholderView
         Text("status.editor.error.upload")

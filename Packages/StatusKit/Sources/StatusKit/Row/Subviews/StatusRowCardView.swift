@@ -81,6 +81,7 @@ public struct StatusRowCardView: View {
                 .stroke(.gray.opacity(0.35), lineWidth: 1)
             }
           }
+          .draggable(url)
           .contextMenu {
             ShareLink(item: url) {
               Label("status.card.share", systemImage: "square.and.arrow.up")
@@ -185,7 +186,7 @@ public struct StatusRowCardView: View {
               }
             }
             .buttonStyle(.bordered)
-            
+
             Spacer()
             Button {
               #if targetEnvironment(macCatalyst)
@@ -247,7 +248,7 @@ public struct StatusRowCardView: View {
       }.padding(16)
     }
   }
-  
+
   @ViewBuilder
   private func moreFromAccountView(_ account: Account, divider: Bool = true) -> some View {
     if divider {
@@ -261,7 +262,7 @@ public struct StatusRowCardView: View {
         Text("More from")
         AvatarView(account.avatar, config: .boost)
           .padding(.top, 2)
-        EmojiTextApp(account.cachedDisplayName, emojis: account.emojis)
+        EmojiTextApp(account.cachedDisplayName, emojis: account.emojis, lineLimit: 1)
           .fontWeight(.semibold)
           .emojiText.size(Font.scaledFootnoteFont.emojiSize)
           .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)

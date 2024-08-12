@@ -84,6 +84,9 @@ import SwiftUI
   private var tabTask: Task<Void, Never>?
 
   private(set) var statuses: [Status] = []
+  var statusesMedias: [MediaStatus] {
+    statuses.filter { !$0.mediaAttachments.isEmpty }.flatMap { $0.asMediaStatus }
+  }
 
   var boosts: [Status] = []
 

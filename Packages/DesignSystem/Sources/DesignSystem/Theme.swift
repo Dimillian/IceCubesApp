@@ -284,7 +284,7 @@ public final class Theme {
       themeStorage.chosenFontData = chosenFontData
     }
   }
-  
+
   public var showContentGradient: Bool {
     didSet {
       themeStorage.showContentGradient = showContentGradient
