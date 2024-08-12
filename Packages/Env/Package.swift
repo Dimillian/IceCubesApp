@@ -30,7 +30,7 @@ let package = Package(
         .product(name: "KeychainSwift", package: "keychain-swift"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6),
+        .swiftLanguageMode(.v5),
       ]
     ),
     .testTarget(
