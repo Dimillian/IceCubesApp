@@ -40,11 +40,11 @@
         self.parent = parent
       }
 
-      func didDismiss(controller _: GiphyViewController?) {
+      @MainActor func didDismiss(controller _: GiphyViewController?) {
         parent.onShouldDismissGifPicker()
       }
 
-      func didSelectMedia(giphyViewController _: GiphyViewController, media: GPHMedia) {
+      @MainActor func didSelectMedia(giphyViewController _: GiphyViewController, media: GPHMedia) {
         let url = media.url(rendition: .fixedWidth, fileType: .gif)
         parent.completion(url ?? "")
       }
