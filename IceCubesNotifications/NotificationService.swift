@@ -12,14 +12,18 @@ import UserNotifications
 class NotificationService: UNNotificationServiceExtension {
   var contentHandler: ((UNNotificationContent) -> Void)?
   var bestAttemptContent: UNMutableNotificationContent?
+  
+  private let pushKeys = PushKeys()
 
-  @MainActor override func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+  @MainActor
+  override func didReceive(_ request: UNNotificationRequest,
+                           withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
     self.contentHandler = contentHandler
     bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
 
     if var bestAttemptContent {
-      let privateKey = PushNotificationsService.shared.notificationsPrivateKeyAsKey
-      let auth = PushNotificationsService.shared.notificationsAuthKeyAsKey
+      let privateKey = pushKeys.notificationsPrivateKeyAsKey
+      let auth = pushKeys.notificationsAuthKeyAsKey
 
       guard let encodedPayload = bestAttemptContent.userInfo["m"] as? String,
             let payload = Data(base64Encoded: encodedPayload.URLSafeBase64ToBase64())
