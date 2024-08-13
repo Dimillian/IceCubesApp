@@ -17,7 +17,7 @@ public extension StatusEditor {
     var client: Client?
     var currentAccount: Account? {
       didSet {
-        if let itemsProvider {
+        if itemsProvider != nil {
           mediaContainers = []
         }
       }
