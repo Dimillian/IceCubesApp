@@ -108,7 +108,6 @@ struct ConversationMessageView: View {
       Label("status.action.copy-text", systemImage: "doc.on.doc")
     }
     Button {
-      let client = client
       Task {
         do {
           let status: Status
@@ -127,7 +126,6 @@ struct ConversationMessageView: View {
             systemImage: isLiked ? "star.fill" : "star")
     }
     Button {
-      let client = client
       Task {
       do {
         let status: Status
@@ -147,7 +145,6 @@ struct ConversationMessageView: View {
     Divider()
     if message.account.id == currentAccount.account?.id {
       Button("status.action.delete", role: .destructive) {
-        let client = client
         Task {
           _ = try await client.delete(endpoint: Statuses.status(id: message.id))
         }

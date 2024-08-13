@@ -78,7 +78,6 @@ public struct FiltersListView: View {
         .background(theme.secondaryBackgroundColor)
       #endif
         .task {
-          let client = client
           do {
             isLoading = true
             filters = try await client.get(endpoint: ServerFilters.filters, forceVersion: .v2)

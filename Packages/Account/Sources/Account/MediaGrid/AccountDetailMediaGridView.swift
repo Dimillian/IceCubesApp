@@ -103,7 +103,6 @@ public struct AccountDetailMediaGridView: View {
   }
 
   private func fetchNextPage() async throws {
-    let client = client
     let newStatuses: [Status] =
       try await client.get(endpoint: Accounts.statuses(id: account.id,
                                                        sinceId: mediaStatuses.last?.id,
