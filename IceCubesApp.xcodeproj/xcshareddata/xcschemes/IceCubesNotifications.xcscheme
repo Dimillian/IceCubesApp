@@ -56,8 +56,12 @@
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES"
       launchAutomaticallySubstyle = "2">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <RemoteRunnable
+         runnableDebuggingMode = "1"
+         BundleIdentifier = "com.thomasricouard.IceCubesApp"
+         RemotePath = "/Users/dimillian/Library/Developer/CoreSimulator/Devices/8EF923D0-4CF1-49B6-B287-5F05AD5440C1/data/Containers/Bundle/Application/C447A1D1-9BC9-49C9-8FA5-130E8403972F/Ice Cubes.app">
+      </RemoteRunnable>
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9FBFE638292A715500C250E9"
@@ -65,7 +69,7 @@
             BlueprintName = "IceCubesApp"
             ReferencedContainer = "container:IceCubesApp.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

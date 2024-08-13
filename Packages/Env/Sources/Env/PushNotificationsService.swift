@@ -111,14 +111,6 @@ public struct HandledNotification: Equatable {
     UNUserNotificationCenter.current().delegate = self
   }
 
-  private var keychain: KeychainSwift {
-    let keychain = KeychainSwift()
-    #if !DEBUG && !targetEnvironment(simulator)
-      keychain.accessGroup = AppInfo.keychainGroup
-    #endif
-    return keychain
-  }
-
   public func requestPushNotifications() {
     UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { @Sendable _, _ in
       DispatchQueue.main.async {
