@@ -214,8 +214,10 @@ extension TimelineViewModel: StatusesFetcher {
         pendingStatusesObserver.isLoadingNewStatuses = !pullToRefresh
         try await fetchNewPagesFrom(latestStatus: latest.id, client: client)
       }
-    } catch {
-      statusesState = .error(error: error)
+    } catch let error {
+      if (error as NSError).code != -999 {
+        statusesState = .error(error: error)
+      }
       canStreamEvents = true
     }
   }
