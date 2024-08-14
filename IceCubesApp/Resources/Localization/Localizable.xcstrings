@@ -35814,44 +35814,44 @@
       "localizations" : {
         "be" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Налады ..."
+            "state" : "translated",
+            "value" : "Налады..."
           }
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Configuració ..."
+            "state" : "translated",
+            "value" : "Configuració..."
           }
         },
         "de" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Einstellungen ..."
+            "state" : "translated",
+            "value" : "Einstellungen..."
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Settings ..."
+            "value" : "Settings..."
           }
         },
         "en-GB" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Settings ..."
+            "state" : "translated",
+            "value" : "Settings..."
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ajustes ..."
+            "value" : "Ajustes..."
           }
         },
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ezarpenak ..."
+            "value" : "Ezarpenak..."
           }
         },
         "fr" : {
@@ -35862,26 +35862,26 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Impostazioni ..."
+            "state" : "translated",
+            "value" : "Impostazioni..."
           }
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "設定 ..."
+            "state" : "translated",
+            "value" : "設定..."
           }
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "앱 설정 ..."
+            "state" : "translated",
+            "value" : "앱 설정..."
           }
         },
         "nb" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Innstillinger ..."
+            "state" : "translated",
+            "value" : "Innstillinger..."
           }
         },
         "nl" : {
@@ -35892,38 +35892,38 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ustawienia ..."
+            "state" : "translated",
+            "value" : "Ustawienia..."
           }
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Configurações ..."
+            "state" : "translated",
+            "value" : "Configurações..."
           }
         },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ayarlar ..."
+            "value" : "Ayarlar..."
           }
         },
         "uk" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Налаштування ..."
+            "state" : "translated",
+            "value" : "Налаштування..."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "设置 ..."
+            "value" : "设置..."
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "設定 ..."
+            "state" : "translated",
+            "value" : "設定..."
           }
         }
       }
