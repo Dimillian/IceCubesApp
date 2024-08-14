@@ -88,9 +88,7 @@ struct AddAccountView: View {
         .scrollDismissesKeyboard(.immediately)
       #endif
         .toolbar {
-          if !appAccountsManager.availableAccounts.isEmpty {
-            CancelToolbarItem()
-          }
+          CancelToolbarItem()
         }
         .onAppear {
           isInstanceURLFieldFocused = true
@@ -290,6 +288,7 @@ struct AddAccountView: View {
       let oauthToken = try await client.continueOauthFlow(url: url)
       let client = Client(server: client.server, oauthToken: oauthToken)
       let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
+      Telemetry.signal("account.added")
       appAccountsManager.add(account: AppAccount(server: client.server,
                                                  accountName: "\(account.acct)@\(client.server)",
                                                  oauthToken: oauthToken))
