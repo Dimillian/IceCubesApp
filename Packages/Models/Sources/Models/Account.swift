@@ -71,6 +71,10 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     header.lastPathComponent != "missing.png"
   }
 
+  public var fullAccountName: String {
+    "\(acct)@\(url?.host() ?? "")"
+  }
+
   public init(id: String, username: String, displayName: String?, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil, moved: Account? = nil) {
     self.id = id
     self.username = username
@@ -187,3 +191,36 @@ public struct FamiliarAccounts: Decodable {
 }
 
 extension FamiliarAccounts: Sendable {}
+
+// Premium Stuff
+extension Account {
+  public var isLinkedToPremiumAccount: Bool {
+    guard url?.host() != AppInfo.premiumInstance else {
+      return false
+    }
+    return fields.first(where: { $0.value.asRawText.contains(AppInfo.premiumInstance) }) != nil
+  }
+  
+  public var premiumAcct: String? {
+    if isPremiumAccount {
+      return "@\(acct)"
+    } else if let field = fields.first(where: { $0.value.asRawText.hasSuffix(AppInfo.premiumInstance) }) {
+      return field.value.asRawText
+    } else if let field = fields.first(where: { $0.value.asRawText.hasPrefix("https://\(AppInfo.premiumInstance)") }),
+                let url = URL(string: field.value.asRawText) {
+      return "\(url.lastPathComponent)@\(url.host() ?? "\(AppInfo.premiumInstance)")"
+    }
+    return nil
+  }
+  
+  public var premiumUsername: String? {
+    var username = premiumAcct?.replacingOccurrences(of: "@\(AppInfo.premiumInstance)", with: "")
+    username?.removeFirst()
+    return username
+  }
+  
+  public var isPremiumAccount: Bool {
+    url?.host() == AppInfo.premiumInstance
+  }
+  
+}

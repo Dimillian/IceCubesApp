@@ -16,12 +16,15 @@ struct AccountDetailHeaderView: View {
   @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(StreamWatcher.self) private var watcher
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isSupporter) private var isSupporter: Bool
 
   var viewModel: AccountDetailViewModel
   let account: Account
   let scrollViewProxy: ScrollViewProxy?
+  
+  @State private var isTipSheetPresented: Bool = false
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -43,6 +46,20 @@ struct AccountDetailHeaderView: View {
       }
       accountInfoView
       Spacer()
+    }
+    .onChange(of: watcher.latestEvent?.id) {
+      if let latestEvent = watcher.latestEvent, let latestEvent = latestEvent as? StreamEventNotification {
+        if latestEvent.notification.account.id == viewModel.accountId ||
+            latestEvent.notification.account.id == viewModel.premiumAccount?.id {
+          Task {
+            if viewModel.account?.isLinkedToPremiumAccount == true {
+              await viewModel.fetchAccount()
+            } else{
+              try? await viewModel.followButtonViewModel?.refreshRelationship()
+            }
+          }
+        }
+      }
     }
   }
 
@@ -210,19 +227,17 @@ struct AccountDetailHeaderView: View {
             .accessibilityRespondsToUserInteraction(false)
           movedToView
           joinedAtView
+          if viewModel.account?.isPremiumAccount == true && viewModel.relationship?.following == false || viewModel.account?.isLinkedToPremiumAccount == true && viewModel.premiumRelationship?.following == false {
+            tipView
+          }
         }
         .accessibilityElement(children: .contain)
         .accessibilitySortPriority(1)
 
         Spacer()
-        if let relationship = viewModel.relationship, !viewModel.isCurrentUser {
+        if let followButtonViewModel = viewModel.followButtonViewModel, !viewModel.isCurrentUser {
           HStack {
-            FollowButton(viewModel: .init(accountId: account.id,
-                                          relationship: relationship,
-                                          shouldDisplayNotify: true,
-                                          relationshipUpdated: { relationship in
-                                            viewModel.relationship = relationship
-                                          }))
+            FollowButton(viewModel: followButtonViewModel)
           }
         } else if !viewModel.isCurrentUser {
           ProgressView()
@@ -310,6 +325,29 @@ struct AccountDetailHeaderView: View {
       .font(.footnote)
       .padding(.top, 6)
       .accessibilityElement(children: .combine)
+    }
+  }
+  
+  @ViewBuilder
+  private var tipView: some View {
+    Button {
+      isTipSheetPresented = true
+      Task {
+        if viewModel.account?.isLinkedToPremiumAccount == true {
+          try? await viewModel.followPremiumAccount()
+        }
+        try? await viewModel.followButtonViewModel?.follow()
+      }
+    } label: {
+      Text("$ Subscribe")
+    }
+    .buttonStyle(.bordered)
+    .padding(.top, 8)
+    .padding(.bottom, 4)
+    .sheet(isPresented: $isTipSheetPresented) {
+      if let account = viewModel.account {
+        PremiumAcccountSubsciptionSheetView(account: account)
+      }
     }
   }
 

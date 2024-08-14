@@ -18,7 +18,6 @@ public struct StatusRowView: View {
   @Environment(\.isHomeTimeline) private var isHomeTimeline
 
   @Environment(RouterPath.self) private var routerPath: RouterPath
-
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
@@ -64,6 +63,7 @@ public struct StatusRowView: View {
         } else {
           if !isCompact && context != .detail {
             Group {
+              StatusRowPremiumView(viewModel: viewModel)
               StatusRowTagView(viewModel: viewModel)
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
