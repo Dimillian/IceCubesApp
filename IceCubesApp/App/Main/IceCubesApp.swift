@@ -87,6 +87,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
     try? AVAudioSession.sharedInstance().setActive(true)
     PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
+    Telemetry.setup()
+    Telemetry.signal("app.launched")
     return true
   }
 

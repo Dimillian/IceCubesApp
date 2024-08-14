@@ -129,10 +129,10 @@ struct SettingsTabs: View {
           }
         }
       }
+      addAccountButton
       if !appAccountsManager.availableAccounts.isEmpty {
         editAccountButton
       }
-      addAccountButton
     }
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
@@ -147,6 +147,7 @@ struct SettingsTabs: View {
       await timelineCache.clearCache(for: client.id)
       await sub.deleteSubscription()
       appAccountsManager.delete(account: account)
+      Telemetry.signal("account.removed")
     }
   }
 
@@ -307,7 +308,7 @@ struct SettingsTabs: View {
     Button {
       addAccountSheetPresented.toggle()
     } label: {
-      Text("settings.account.add")
+      Label("settings.account.add", systemImage: "person.badge.plus")
     }
     .sheet(isPresented: $addAccountSheetPresented) {
       AddAccountView()
@@ -315,15 +316,17 @@ struct SettingsTabs: View {
   }
 
   private var editAccountButton: some View {
-    Button(role: isEditingAccount ? .none : .destructive) {
+    Button(role: .destructive) {
       withAnimation {
         isEditingAccount.toggle()
       }
     } label: {
       if isEditingAccount {
-        Text("action.done")
+        Label("action.done", systemImage: "person.badge.minus")
+          .foregroundStyle(.red)
       } else {
-        Text("account.action.logout")
+        Label("account.action.logout", systemImage: "person.badge.minus")
+          .foregroundStyle(.red)
       }
     }
   }

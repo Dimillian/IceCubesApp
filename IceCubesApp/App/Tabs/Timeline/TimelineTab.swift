@@ -205,9 +205,11 @@ struct TimelineTab: View {
     Button {
       withAnimation {
         if let index {
-          pinnedFilters.remove(at: index)
+          let timeline = pinnedFilters.remove(at: index)
+          Telemetry.signal("timeline.pin.removed", parameters: ["timeline" : timeline.rawValue])
         } else {
           pinnedFilters.append(timeline)
+          Telemetry.signal("timeline.pin.added", parameters: ["timeline" : timeline.rawValue])
         }
       }
     } label: {
