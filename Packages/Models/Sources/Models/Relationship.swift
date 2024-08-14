@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Relationship: Codable {
+public struct Relationship: Codable, Equatable, Identifiable {
   public let id: String
   public let following: Bool
   public let showingReblogs: Bool

@@ -21,7 +21,6 @@ public struct AccountDetailView: View {
   @Environment(RouterPath.self) private var routerPath
 
   @State private var viewModel: AccountDetailViewModel
-  @State private var isCurrentUser: Bool = false
   @State private var showBlockConfirmation: Bool = false
   @State private var isEditingRelationshipNote: Bool = false
   @State private var showTranslateView: Bool = false
@@ -53,8 +52,7 @@ public struct AccountDetailView: View {
           .applyAccountDetailsRowStyle(theme: theme)
 
         Picker("", selection: $viewModel.selectedTab) {
-          ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
-                  id: \.self)
+          ForEach(viewModel.tabs, id: \.self)
           { tab in
             if tab == .boosts {
               Image("Rocket")
@@ -104,8 +102,7 @@ public struct AccountDetailView: View {
     }
     .onAppear {
       guard reasons != .placeholder else { return }
-      isCurrentUser = currentAccount.account?.id == viewModel.accountId
-      viewModel.isCurrentUser = isCurrentUser
+      viewModel.isCurrentUser = currentAccount.account?.id == viewModel.accountId
       viewModel.client = client
 
       // Avoid capturing non-Sendable `self` just to access the view model.
@@ -305,7 +302,7 @@ public struct AccountDetailView: View {
           }
         }
 
-        if isCurrentUser {
+        if viewModel.isCurrentUser {
           Button {
             routerPath.presentedSheet = .accountEditInfo
           } label: {

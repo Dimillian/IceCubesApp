@@ -183,7 +183,8 @@ public enum SettingsStartingPoint {
     {
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
-    } else if url.lastPathComponent.first == "@",
+    } else if url.lastPathComponent.first == "@" ||
+                (url.host() == AppInfo.premiumInstance && url.pathComponents.contains("users")),
               let host = url.host,
               !host.hasPrefix("www")
     {
