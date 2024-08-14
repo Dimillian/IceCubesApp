@@ -154,6 +154,11 @@ extension PushNotificationsService: UNUserNotificationCenterDelegate {
       handledNotification = .init(account: account.account, notification: notification)
     } catch {}
   }
+  
+  public func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                     willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+    return [.banner, .sound]
+  }
 }
 
 extension Data {
