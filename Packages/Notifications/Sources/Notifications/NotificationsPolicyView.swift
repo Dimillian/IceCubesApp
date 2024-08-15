@@ -17,34 +17,85 @@ struct NotificationsPolicyView: View {
     NavigationStack {
       Form {
         Section("notifications.content-filter.title-inline") {
-          Toggle(isOn: .init(get: { policy?.filterNotFollowing == true },
-                             set: { newValue in
-                               policy?.filterNotFollowing = newValue
-                               Task { await updatePolicy() }
-                             }), label: {
+          Picker(selection: .init(get: {
+            policy?.forNotFollowing ?? .drop
+          }, set: { policy in
+            self.policy?.forNotFollowing = policy
+            Task { await updatePolicy() }
+          })) {
+            pickerMenu
+          } label: {
+            VStack(alignment: .leading) {
               Text("notifications.content-filter.peopleYouDontFollow")
-            })
-          Toggle(isOn: .init(get: { policy?.filterNotFollowers == true },
-                             set: { newValue in
-                               policy?.filterNotFollowers = newValue
-                               Task { await updatePolicy() }
-                             }), label: {
+              Text("Until you manually approve them")
+                .foregroundStyle(.secondary)
+                .font(.footnote)
+            }
+          }
+          
+          Picker(selection: .init(get: {
+            policy?.forNotFollowers ?? .drop
+          }, set: { policy in
+            self.policy?.forNotFollowers = policy
+            Task { await updatePolicy() }
+          })) {
+            pickerMenu
+          } label: {
+            VStack(alignment: .leading) {
               Text("notifications.content-filter.peopleNotFollowingYou")
-            })
-          Toggle(isOn: .init(get: { policy?.filterNewAccounts == true },
-                             set: { newValue in
-                               policy?.filterNewAccounts = newValue
-                               Task { await updatePolicy() }
-                             }), label: {
+              Text("And following you for less than 3 days")
+                .foregroundStyle(.secondary)
+                .font(.footnote)
+            }
+          }
+          
+          Picker(selection: .init(get: {
+            policy?.forNewAccounts ?? .drop
+          }, set: { policy in
+            self.policy?.forNewAccounts = policy
+            Task { await updatePolicy() }
+          })) {
+            pickerMenu
+          } label: {
+            VStack(alignment: .leading) {
               Text("notifications.content-filter.newAccounts")
-            })
-          Toggle(isOn: .init(get: { policy?.filterPrivateMentions == true },
-                             set: { newValue in
-                               policy?.filterPrivateMentions = newValue
-                               Task { await updatePolicy() }
-                             }), label: {
+              Text("Created within the past 30 days")
+                .foregroundStyle(.secondary)
+                .font(.footnote)
+            }
+          }
+          
+          Picker(selection: .init(get: {
+            policy?.forPrivateMentions ?? .drop
+          }, set: { policy in
+            self.policy?.forPrivateMentions = policy
+            Task { await updatePolicy() }
+          })) {
+            pickerMenu
+          } label: {
+            VStack(alignment: .leading) {
               Text("notifications.content-filter.privateMentions")
-            })
+              Text("Unless it's in reply to your own mention or if you follow the sender")
+                .foregroundStyle(.secondary)
+                .font(.footnote)
+            }
+          }
+          
+          Picker(selection: .init(get: {
+            policy?.forLimitedAccounts ?? .drop
+          }, set: { policy in
+            self.policy?.forLimitedAccounts = policy
+            Task { await updatePolicy() }
+          })) {
+            pickerMenu
+          } label: {
+            VStack(alignment: .leading) {
+              Text("Moderated accounts")
+              Text("Limited by server moderators")
+                .foregroundStyle(.secondary)
+                .font(.footnote)
+            }
+          }
         }
         #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor.opacity(0.3))
@@ -59,9 +110,16 @@ struct NotificationsPolicyView: View {
       .task {
         await getPolicy()
       }
+      .redacted(reason: policy == nil ? .placeholder : [])
     }
     .presentationDetents([.medium])
     .presentationBackground(.thinMaterial)
+  }
+  
+  private var pickerMenu: some View {
+    ForEach(NotificationsPolicy.Policy.allCases, id: \.self) { policy in
+      Text(policy.rawValue.capitalized)
+    }
   }
 
   private func getPolicy() async {
@@ -70,7 +128,7 @@ struct NotificationsPolicyView: View {
     }
     do {
       isUpdating = true
-      policy = try await client.get(endpoint: Notifications.policy)
+      policy = try await client.get(endpoint: Notifications.policy, forceVersion: .v2)
     } catch {
       dismiss()
     }
@@ -83,7 +141,7 @@ struct NotificationsPolicyView: View {
       }
       do {
         isUpdating = true
-        self.policy = try await client.put(endpoint: Notifications.putPolicy(policy: policy))
+        self.policy = try await client.put(endpoint: Notifications.putPolicy(policy: policy), forceVersion: .v2)
       } catch {}
     }
   }
