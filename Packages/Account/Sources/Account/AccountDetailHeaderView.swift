@@ -24,6 +24,8 @@ struct AccountDetailHeaderView: View {
   let account: Account
   let scrollViewProxy: ScrollViewProxy?
   
+  private let premiumTimer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+  @State private var shouldListenToPremiumTimer: Bool = false
   @State private var isTipSheetPresented: Bool = false
 
   var body: some View {
@@ -57,6 +59,17 @@ struct AccountDetailHeaderView: View {
             } else{
               try? await viewModel.followButtonViewModel?.refreshRelationship()
             }
+          }
+        }
+      }
+    }
+    .onReceive(premiumTimer) { _ in
+      if shouldListenToPremiumTimer {
+        Task {
+          if viewModel.account?.isLinkedToPremiumAccount == true {
+            await viewModel.fetchAccount()
+          } else{
+            try? await viewModel.followButtonViewModel?.refreshRelationship()
           }
         }
       }
@@ -332,6 +345,7 @@ struct AccountDetailHeaderView: View {
   private var tipView: some View {
     Button {
       isTipSheetPresented = true
+      shouldListenToPremiumTimer = true
       Task {
         if viewModel.account?.isLinkedToPremiumAccount == true {
           try? await viewModel.followPremiumAccount()
