@@ -92,6 +92,8 @@
 		9F8B92122BF77DBE003D37A2 /* AccountWidgetConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B920E2BF77DB4003D37A2 /* AccountWidgetConfiguration.swift */; };
 		9F8B92132BF77DBE003D37A2 /* AccountWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B92102BF77DBB003D37A2 /* AccountWidget.swift */; };
 		9F8B92162BF77F0B003D37A2 /* AccountWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8B92142BF77F05003D37A2 /* AccountWidgetView.swift */; };
+		9F9191562C6DDE1F001C89E7 /* WishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9191552C6DDE1C001C89E7 /* WishlistView.swift */; };
+		9F9191592C6DDF20001C89E7 /* WishKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9F9191582C6DDF20001C89E7 /* WishKit */; };
 		9FA6FD6229C04A8800E2312C /* TranslationSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA6FD6129C04A8800E2312C /* TranslationSettingsView.swift */; };
 		9FAD858B29743F7400496AB1 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FAD858A29743F7400496AB1 /* ShareViewController.swift */; };
 		9FAD858E29743F7400496AB1 /* (null) in Resources */ = {isa = PBXBuildFile; };
@@ -281,6 +283,7 @@
 		9F8B920E2BF77DB4003D37A2 /* AccountWidgetConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWidgetConfiguration.swift; sourceTree = "<group>"; };
 		9F8B92102BF77DBB003D37A2 /* AccountWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWidget.swift; sourceTree = "<group>"; };
 		9F8B92142BF77F05003D37A2 /* AccountWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountWidgetView.swift; sourceTree = "<group>"; };
+		9F9191552C6DDE1C001C89E7 /* WishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistView.swift; sourceTree = "<group>"; };
 		9FA6FD6129C04A8800E2312C /* TranslationSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslationSettingsView.swift; sourceTree = "<group>"; };
 		9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IceCubesShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FAD858A29743F7400496AB1 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
@@ -396,6 +399,7 @@
 				9F5E581929545BE700A53960 /* Env in Frameworks */,
 				DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */,
 				9FE6A42E2BD043A90055D388 /* RevenueCat in Frameworks */,
+				9F9191592C6DDF20001C89E7 /* WishKit in Frameworks */,
 				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
 				9F35DB4A29506FA100B3281A /* Notifications in Frameworks */,
 				9FC2A38B2B49D19A00DFD1C1 /* StatusKit in Frameworks */,
@@ -655,6 +659,7 @@
 		9FE151A4293C90EA00E9683D /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				9F9191552C6DDE1C001C89E7 /* WishlistView.swift */,
 				069709A9298C9AD7006E4CB5 /* AboutView.swift */,
 				9F7D939929805DBD00EE6B7A /* AccountSettingView.swift */,
 				9F2B92F9295DA7D700DE16D0 /* AddAccountsView.swift */,
@@ -850,6 +855,7 @@
 				9FC2A38A2B49D19A00DFD1C1 /* StatusKit */,
 				9FE4CCAA2B4C848A00DA5F13 /* GiphyUISDK */,
 				9FE6A42D2BD043A90055D388 /* RevenueCat */,
+				9F9191582C6DDF20001C89E7 /* WishKit */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* Ice Cubes.app */;
@@ -935,6 +941,7 @@
 				DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
 				9FE4CCA92B4C848A00DA5F13 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */,
 				9FE6A42C2BD043A80055D388 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				9F9191572C6DDF20001C89E7 /* XCRemoteSwiftPackageReference "wishkit-ios" */,
 			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
@@ -1092,6 +1099,7 @@
 				9F7788ED2BE78D75004E6BEF /* TimelineFilterEntity.swift in Sources */,
 				9F37BDE32BE393A7007F28AD /* AppShortcuts.swift in Sources */,
 				9F654BEF299AC45B00D27FA5 /* ReportView.swift in Sources */,
+				9F9191562C6DDE1F001C89E7 /* WishlistView.swift in Sources */,
 				D08A9C3529956CFA00204A4A /* SwipeActionsSettingsView.swift in Sources */,
 				9F7335F22967608F00AFF0BA /* AddRemoteTimelineView.swift in Sources */,
 				9F7788E82BE65533004E6BEF /* AppAccountEntity.swift in Sources */,
@@ -1777,6 +1785,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9F9191572C6DDF20001C89E7 /* XCRemoteSwiftPackageReference "wishkit-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wishkit/wishkit-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.1;
+			};
+		};
 		9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
@@ -1880,6 +1896,11 @@
 		9F7D93932980063100EE6B7A /* AppAccount */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppAccount;
+		};
+		9F9191582C6DDF20001C89E7 /* WishKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9F9191572C6DDF20001C89E7 /* XCRemoteSwiftPackageReference "wishkit-ios" */;
+			productName = WishKit;
 		};
 		9FAD8599297440CB00496AB1 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;

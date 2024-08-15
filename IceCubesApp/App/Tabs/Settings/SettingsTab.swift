@@ -288,8 +288,16 @@ struct SettingsTabs: View {
         .tint(theme.labelColor)
       }
 
-      NavigationLink(destination: AboutView()) {
+      NavigationLink {
+        AboutView()
+      } label: {
         Label("settings.app.about", systemImage: "info.circle")
+      }
+      
+      NavigationLink {
+        WishlistView()
+      } label: {
+        Label("Feature Requests", systemImage: "list.bullet.rectangle.portrait")
       }
 
     } header: {
