@@ -20,7 +20,7 @@ let package = Package(
     .package(name: "Models", path: "../Models"),
     .package(name: "Network", path: "../Network"),
     .package(url: "https://github.com/evgenyneu/keychain-swift", branch: "master"),
-    .package(url: "https://github.com/TelemetryDeck/SwiftSDK", from: "2.3.0")
+    .package(url: "https://github.com/TelemetryDeck/SwiftSDK", from: "2.3.0"),
   ],
   targets: [
     .target(
