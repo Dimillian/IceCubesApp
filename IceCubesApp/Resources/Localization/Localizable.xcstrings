@@ -41803,6 +41803,9 @@
         }
       }
     },
+    "Privacy Policy" : {
+
+    },
     "Private" : {
       "localizations" : {
         "de" : {
@@ -78620,6 +78623,12 @@
           }
         }
       }
+    },
+    "Telemetry" : {
+
+    },
+    "Telemetry by TelemtryDeck" : {
+
     },
     "The DeepL API Key is still stored!" : {
       "extractionState" : "manual",
