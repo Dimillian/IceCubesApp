@@ -4,21 +4,25 @@ import Env
 import Models
 import NukeUI
 import SwiftUI
+import AppAccount
 
 @MainActor
 struct AccountDetailHeaderView: View {
   enum Constants {
     static let headerHeight: CGFloat = 200
   }
-
+  
   @Environment(\.openWindow) private var openWindow
   @Environment(Theme.self) private var theme
   @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(StreamWatcher.self) private var watcher
+  @Environment(AppAccountsManager.self) private var appAccount
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isSupporter) private var isSupporter: Bool
+  @Environment(\.openURL) private var openURL
+  @Environment(\.colorScheme) private var colorScheme
 
   var viewModel: AccountDetailViewModel
   let account: Account
@@ -241,7 +245,7 @@ struct AccountDetailHeaderView: View {
           movedToView
           joinedAtView
           if viewModel.account?.isPremiumAccount == true && viewModel.relationship?.following == false || viewModel.account?.isLinkedToPremiumAccount == true && viewModel.premiumRelationship?.following == false {
-            tipView
+            subscribeButton
           }
         }
         .accessibilityElement(children: .contain)
@@ -342,18 +346,31 @@ struct AccountDetailHeaderView: View {
   }
   
   @ViewBuilder
-  private var tipView: some View {
+  private var subscribeButton: some View {
     Button {
-      isTipSheetPresented = true
-      shouldListenToPremiumTimer = true
+      if let subscription = viewModel.subClubUser?.subscription,
+          let accountName = appAccount.currentAccount.accountName,
+          let premiumUsername = account.premiumUsername,
+         let url = URL(string: "https://\(AppInfo.premiumInstance)/@\(premiumUsername)/subscribe?callback=icecubesapp://subclub&id=@\(accountName)&amount=\(subscription.unitAmount)&currency=\(subscription.currency)&theme=\(colorScheme)") {
+        openURL(url)
+      } else {
+        isTipSheetPresented = true
+        shouldListenToPremiumTimer = true
+      }
+      
       Task {
         if viewModel.account?.isLinkedToPremiumAccount == true {
           try? await viewModel.followPremiumAccount()
         }
         try? await viewModel.followButtonViewModel?.follow()
       }
+      
     } label: {
-      Text("$ Subscribe")
+      if let subscription = viewModel.subClubUser?.subscription {
+        Text("Subscribe \(subscription.formattedAmount) / month")
+      } else {
+        Text("$ Subscribe")
+      }
     }
     .buttonStyle(.bordered)
     .padding(.top, 8)
