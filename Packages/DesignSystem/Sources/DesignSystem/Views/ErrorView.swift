@@ -4,9 +4,9 @@ public struct ErrorView: View {
   public let title: LocalizedStringKey
   public let message: LocalizedStringKey
   public let buttonTitle: LocalizedStringKey
-  public let onButtonPress: (() async -> Void)
+  public let onButtonPress: () async -> Void
 
-  public init(title: LocalizedStringKey, message: LocalizedStringKey, buttonTitle: LocalizedStringKey, onButtonPress: @escaping (() async -> Void) ) {
+  public init(title: LocalizedStringKey, message: LocalizedStringKey, buttonTitle: LocalizedStringKey, onButtonPress: @escaping (() async -> Void)) {
     self.title = title
     self.message = message
     self.buttonTitle = buttonTitle

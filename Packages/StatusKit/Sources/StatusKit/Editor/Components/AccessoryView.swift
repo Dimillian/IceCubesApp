@@ -161,7 +161,7 @@ extension StatusEditor {
 
       Button {
         // all SEVM have the same visibility value
-        followUpSEVMs.append(ViewModel(mode: .new(visibility: focusedSEVM.visibility)))
+        followUpSEVMs.append(ViewModel(mode: .new(text: nil, visibility: focusedSEVM.visibility)))
       } label: {
         Image(systemName: "arrowshape.turn.up.left.circle.fill")
       }

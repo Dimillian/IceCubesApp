@@ -106,6 +106,11 @@ extension StatusEditor {
             }
           }
       }
+      .alert("alert.error", isPresented: $isErrorDisplayed) {
+        Button("Ok", action: {})
+      } message: {
+        Text(container.error?.localizedDescription ?? "")
+      }
       .overlay(alignment: .bottomTrailing) {
         makeAltMarker(container: container)
       }
@@ -189,15 +194,10 @@ extension StatusEditor {
       }
     }
 
-    private func makeErrorView(error: ServerError) -> some View {
+    private func makeErrorView(error _: ServerError) -> some View {
       ZStack {
         placeholderView
         Text("status.editor.error.upload")
-      }
-      .alert("alert.error", isPresented: $isErrorDisplayed) {
-        Button("Ok", action: {})
-      } message: {
-        Text(error.error ?? "")
       }
     }
 

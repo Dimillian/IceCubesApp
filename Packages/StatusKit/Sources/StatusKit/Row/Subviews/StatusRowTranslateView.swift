@@ -35,7 +35,8 @@ struct StatusRowTranslateView: View {
     }
   }
 
-  var body: some View {
+  @ViewBuilder
+  var translateButton: some View {
     if !isInCaptureMode,
        !isCompact,
        let userLang = preferences.serverPreferences?.postLanguage,
@@ -54,8 +55,22 @@ struct StatusRowTranslateView: View {
       }
       .buttonStyle(.borderless)
     }
+  }
 
-    if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
+  @ViewBuilder
+  var generalTranslateButton: some View {
+    translateButton
+  }
+
+  var body: some View {
+    generalTranslateButton
+      .onChange(of: preferences.preferredTranslationType) { _, _ in
+        withAnimation {
+          _ = viewModel.updatePreferredTranslation()
+        }
+      }
+
+    if let translation = viewModel.translation, !viewModel.isLoadingTranslation, preferences.preferredTranslationType != .useApple {
       GroupBox {
         VStack(alignment: .leading, spacing: 4) {
           Text(translation.content.asSafeMarkdownAttributedString)

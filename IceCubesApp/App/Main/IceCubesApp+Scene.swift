@@ -1,3 +1,4 @@
+import AppIntents
 import Env
 import MediaUI
 import StatusKit
@@ -22,6 +23,7 @@ extension IceCubesApp {
         .environment(theme)
         .environment(watcher)
         .environment(pushNotificationsService)
+        .environment(appIntentService)
         .environment(\.isSupporter, isSupporter)
         .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
           MediaUIView(selectedAttachment: selectedMediaAttachment,
@@ -45,6 +47,12 @@ extension IceCubesApp {
             } else {
               selectedTab = .notifications
             }
+          }
+        }
+        .onChange(of: appIntentService.handledIntent) { _, _ in
+          if let intent = appIntentService.handledIntent?.intent {
+            handleIntent(intent)
+            appIntentService.handledIntent = nil
           }
         }
         .withModelContainer()
@@ -74,7 +82,9 @@ extension IceCubesApp {
       Group {
         switch destination.wrappedValue {
         case let .newStatusEditor(visibility):
-          StatusEditor.MainView(mode: .new(visibility: visibility))
+          StatusEditor.MainView(mode: .new(text: nil, visibility: visibility))
+        case let .prefilledStatusEditor(text, visibility):
+          StatusEditor.MainView(mode: .new(text: text, visibility: visibility))
         case let .editStatusEditor(status):
           StatusEditor.MainView(mode: .edit(status: status))
         case let .quoteStatusEditor(status):
@@ -90,6 +100,7 @@ extension IceCubesApp {
         }
       }
       .withEnvironments()
+      .environment(RouterPath())
       .withModelContainer()
       .applyTheme(theme)
       .frame(minWidth: 300, minHeight: 400)
@@ -114,5 +125,24 @@ extension IceCubesApp {
     }
     .defaultSize(width: 1200, height: 1000)
     .windowResizability(.contentMinSize)
+  }
+
+  private func handleIntent(_: any AppIntent) {
+    if let postIntent = appIntentService.handledIntent?.intent as? PostIntent {
+      #if os(visionOS) || os(macOS)
+        openWindow(value: WindowDestinationEditor.prefilledStatusEditor(text: postIntent.content ?? "",
+                                                                        visibility: userPreferences.postVisibility))
+      #else
+        appRouterPath.presentedSheet = .prefilledStatusEditor(text: postIntent.content ?? "",
+                                                              visibility: userPreferences.postVisibility)
+      #endif
+    } else if let tabIntent = appIntentService.handledIntent?.intent as? TabIntent {
+      selectedTab = tabIntent.tab.toAppTab
+    } else if let imageIntent = appIntentService.handledIntent?.intent as? PostImageIntent,
+              let urls = imageIntent.images?.compactMap({ $0.fileURL })
+    {
+      appRouterPath.presentedSheet = .imageURL(urls: urls,
+                                               visibility: userPreferences.postVisibility)
+    }
   }
 }

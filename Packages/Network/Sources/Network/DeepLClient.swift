@@ -12,20 +12,8 @@ public struct DeepLClient: Sendable {
     "https://api\(deeplUserAPIFree && (deeplUserAPIKey != nil) ? "-free" : "").deepl.com/v2/translate"
   }
 
-  private var APIKey: String {
-    if let deeplUserAPIKey {
-      return deeplUserAPIKey
-    }
-
-    if let path = Bundle.main.path(forResource: "Secret", ofType: "plist") {
-      let secret = NSDictionary(contentsOfFile: path)
-      return secret?["DEEPL_SECRET"] as? String ?? ""
-    }
-    return ""
-  }
-
   private var authorizationHeaderValue: String {
-    "DeepL-Auth-Key \(APIKey)"
+    "DeepL-Auth-Key \(deeplUserAPIKey ?? "")"
   }
 
   public struct Response: Decodable {
@@ -49,26 +37,22 @@ public struct DeepLClient: Sendable {
   }
 
   public func request(target: String, text: String) async throws -> Translation {
-    do {
-      var components = URLComponents(string: endpoint)!
-      var queryItems: [URLQueryItem] = []
-      queryItems.append(.init(name: "text", value: text))
-      queryItems.append(.init(name: "target_lang", value: target.uppercased()))
-      components.queryItems = queryItems
-      var request = URLRequest(url: components.url!)
-      request.httpMethod = "POST"
-      request.setValue(authorizationHeaderValue, forHTTPHeaderField: "Authorization")
-      request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-      let (result, _) = try await URLSession.shared.data(for: request)
-      let response = try decoder.decode(Response.self, from: result)
-      if let translation = response.translations.first {
-        return .init(content: translation.text.removingPercentEncoding ?? "",
-                     detectedSourceLanguage: translation.detectedSourceLanguage,
-                     provider: "DeepL.com")
-      }
-      throw DeepLError.notFound
-    } catch {
-      throw error
+    var components = URLComponents(string: endpoint)!
+    var queryItems: [URLQueryItem] = []
+    queryItems.append(.init(name: "text", value: text))
+    queryItems.append(.init(name: "target_lang", value: target.uppercased()))
+    components.queryItems = queryItems
+    var request = URLRequest(url: components.url!)
+    request.httpMethod = "POST"
+    request.setValue(authorizationHeaderValue, forHTTPHeaderField: "Authorization")
+    request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+    let (result, _) = try await URLSession.shared.data(for: request)
+    let response = try decoder.decode(Response.self, from: result)
+    if let translation = response.translations.first {
+      return .init(content: translation.text.removingPercentEncoding ?? "",
+                   detectedSourceLanguage: translation.detectedSourceLanguage,
+                   provider: "DeepL.com")
     }
+    throw DeepLError.notFound
   }
 }

@@ -10,6 +10,7 @@ import RevenueCat
 import StatusKit
 import SwiftUI
 import Timeline
+import WishKit
 
 @main
 struct IceCubesApp: App {
@@ -23,6 +24,7 @@ struct IceCubesApp: App {
   @State var currentAccount = CurrentAccount.shared
   @State var userPreferences = UserPreferences.shared
   @State var pushNotificationsService = PushNotificationsService.shared
+  @State var appIntentService = AppIntentService.shared
   @State var watcher = StreamWatcher.shared
   @State var quickLook = QuickLook.shared
   @State var theme = Theme.shared
@@ -79,13 +81,16 @@ struct IceCubesApp: App {
   }
 }
 
-class AppDelegate: NSObject, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_: UIApplication,
                    didFinishLaunchingWithOptions _: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
   {
     try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
     try? AVAudioSession.sharedInstance().setActive(true)
     PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
+    Telemetry.setup()
+    Telemetry.signal("app.launched")
+    WishKit.configure(with: "AF21AE07-3BA9-4FE2-BFB1-59A3B3941730")
     return true
   }
 
@@ -112,5 +117,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
       configuration.delegateClass = SceneDelegate.self
     }
     return configuration
+  }
+
+  override func buildMenu(with builder: UIMenuBuilder) {
+    super.buildMenu(with: builder)
+    builder.remove(menu: .document)
+    builder.remove(menu: .toolbar)
+    builder.remove(menu: .sidebar)
   }
 }

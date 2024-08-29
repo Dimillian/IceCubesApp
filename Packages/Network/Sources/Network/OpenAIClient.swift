@@ -25,7 +25,7 @@ public struct OpenAIClient {
       public let content: String
     }
 
-    let model = "gpt-3.5-turbo"
+    let model = "gpt-4o-mini"
     let messages: [Message]
 
     let temperature: CGFloat
@@ -52,7 +52,7 @@ public struct OpenAIClient {
       public let content: [MessageContent]
     }
 
-    let model = "gpt-4-vision-preview"
+    let model = "gpt-4o-mini"
     let messages: [Message]
     let maxTokens = 50
   }

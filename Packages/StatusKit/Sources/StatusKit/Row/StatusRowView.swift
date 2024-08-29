@@ -15,22 +15,20 @@ public struct StatusRowView: View {
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.indentationLevel) private var indentationLevel
+  @Environment(\.isHomeTimeline) private var isHomeTimeline
 
+  @Environment(RouterPath.self) private var routerPath: RouterPath
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
 
-  @State private var viewModel: StatusRowViewModel
   @State private var showSelectableText: Bool = false
   @State private var isBlockConfirmationPresented = false
 
   public enum Context { case timeline, detail }
-  private let context: Context
 
-  public init(viewModel: StatusRowViewModel, context: Context = .timeline) {
-    _viewModel = .init(initialValue: viewModel)
-    self.context = context
-  }
+  @State public var viewModel: StatusRowViewModel
+  public let context: Context
 
   var contextMenu: some View {
     StatusRowContextMenu(viewModel: viewModel,
@@ -65,6 +63,7 @@ public struct StatusRowView: View {
         } else {
           if !isCompact && context != .detail {
             Group {
+              StatusRowPremiumView(viewModel: viewModel)
               StatusRowTagView(viewModel: viewModel)
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
@@ -125,6 +124,7 @@ public struct StatusRowView: View {
         }
       }
     }
+    .if(viewModel.url != nil) { $0.draggable(viewModel.url!) }
     .contextMenu {
       contextMenu
         .onAppear {
@@ -150,7 +150,7 @@ public struct StatusRowView: View {
       .foregroundStyle(.background).hoverEffect())
     .listRowHoverEffectDisabled()
     #else
-    .listRowBackground(viewModel.highlightRowColor)
+    .listRowBackground(viewModel.makeBackgroundColor(isHomeTimeline: isHomeTimeline))
     #endif
     .listRowInsets(.init(top: 0,
                          leading: .layoutPadding,
@@ -219,6 +219,23 @@ public struct StatusRowView: View {
       StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,
                                                          client: viewModel.client)
     )
+    .alert("DeepL couldn't be reached!\nIs the API Key correct?", isPresented: $viewModel.deeplTranslationError) {
+      Button("alert.button.ok", role: .cancel) {}
+      Button("settings.general.translate") {
+        RouterPath.settingsStartingPoint = .translation
+        routerPath.presentedSheet = .settings
+      }
+    }
+    .alert("The Translation Service of your Instance couldn't be reached!", isPresented: $viewModel.instanceTranslationError) {
+      Button("alert.button.ok", role: .cancel) {}
+      Button("settings.general.translate") {
+        RouterPath.settingsStartingPoint = .translation
+        routerPath.presentedSheet = .settings
+      }
+    }
+    #if canImport(_Translation_SwiftUI)
+    .addTranslateView(isPresented: $viewModel.showAppleTranslation, text: viewModel.finalStatus.content.asRawText)
+    #endif
   }
 
   @ViewBuilder

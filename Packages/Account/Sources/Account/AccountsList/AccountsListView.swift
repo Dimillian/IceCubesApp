@@ -52,6 +52,9 @@ public struct AccountsListView: View {
       searchableList
     } else {
       standardList
+        .refreshable {
+          await viewModel.fetch()
+        }
     }
   }
 
@@ -121,16 +124,23 @@ public struct AccountsListView: View {
         }
       }
       Section {
-        ForEach(accounts) { account in
-          if let relationship = relationships.first(where: { $0.id == account.id }) {
-            AccountsListRow(viewModel: .init(account: account,
-                                             relationShip: relationship))
-            #if !os(visionOS)
-              .listRowBackground(theme.primaryBackgroundColor)
-            #endif
+        if accounts.isEmpty {
+          PlaceholderView(iconName: "person.icloud",
+                          title: "No accounts found",
+                          message: "This list of accounts is empty")
+            .listRowSeparator(.hidden)
+        } else {
+          ForEach(accounts) { account in
+            if let relationship = relationships.first(where: { $0.id == account.id }) {
+              AccountsListRow(viewModel: .init(account: account,
+                                               relationShip: relationship))
+            }
           }
         }
       }
+      #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       switch nextPageState {
       case .hasNextPage:

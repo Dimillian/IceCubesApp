@@ -258,6 +258,7 @@ struct AltTextButton: View {
   @Environment(Theme.self) private var theme
 
   @State private var isDisplayingAlert = false
+  @State private var isDisplayingTranslation = false
 
   var body: some View {
     if !isInCaptureMode,
@@ -278,24 +279,33 @@ struct AltTextButton: View {
       .buttonStyle(.borderless)
       .padding(EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7))
       .background(.thinMaterial)
-      #if os(visionOS)
-        .clipShape(Capsule())
+      #if canImport(_Translation_SwiftUI)
+        .addTranslateView(isPresented: $isDisplayingTranslation, text: text)
       #endif
-        .cornerRadius(4)
-        .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
-        .alert(
-          "status.editor.media.image-description",
-          isPresented: $isDisplayingAlert
-        ) {
-          Button("alert.button.ok", action: {})
-        } message: {
-          Text(text)
-        }
-        .frame(
-          maxWidth: .infinity,
-          maxHeight: .infinity,
-          alignment: .bottomTrailing
-        )
+      #if os(visionOS)
+      .clipShape(Capsule())
+      #endif
+      .cornerRadius(4)
+      .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
+      .alert(
+        "status.editor.media.image-description",
+        isPresented: $isDisplayingAlert
+      ) {
+        Button("alert.button.ok", action: {})
+        Button("status.action.copy-text", action: { UIPasteboard.general.string = text })
+        #if canImport(_Translation_SwiftUI)
+          if #available(iOS 17.4, *) {
+            Button("status.action.translate", action: { isDisplayingTranslation = true })
+          }
+        #endif
+      } message: {
+        Text(text)
+      }
+      .frame(
+        maxWidth: .infinity,
+        maxHeight: .infinity,
+        alignment: .bottomTrailing
+      )
     }
   }
 }

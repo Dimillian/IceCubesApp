@@ -20,6 +20,7 @@ let package = Package(
     .package(name: "Models", path: "../Models"),
     .package(name: "Network", path: "../Network"),
     .package(url: "https://github.com/evgenyneu/keychain-swift", branch: "master"),
+    .package(url: "https://github.com/TelemetryDeck/SwiftSDK", from: "2.3.0"),
   ],
   targets: [
     .target(
@@ -28,6 +29,7 @@ let package = Package(
         .product(name: "Models", package: "Models"),
         .product(name: "Network", package: "Network"),
         .product(name: "KeychainSwift", package: "keychain-swift"),
+        .product(name: "TelemetryDeck", package: "SwiftSDK")
       ],
       swiftSettings: [
         .enableExperimentalFeature("StrictConcurrency"),

@@ -25,7 +25,7 @@ import SwiftUI
     @AppStorage("app_require_alt_text") public var appRequireAltText = false
     @AppStorage("autoplay_video") public var autoPlayVideo = true
     @AppStorage("mute_video") public var muteVideo = true
-    @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
+    @AppStorage("preferred_translation_type") public var preferredTranslationType = TranslationType.useServerIfPossible
     @AppStorage("user_deepl_api_free") public var userDeeplAPIFree = true
     @AppStorage("auto_detect_post_language") public var autoDetectPostLanguage = true
 
@@ -61,7 +61,32 @@ import SwiftUI
 
     @AppStorage("show_account_popover") public var showAccountPopover: Bool = true
 
-    init() {}
+    @AppStorage("sidebar_expanded") public var isSidebarExpanded: Bool = false
+
+    init() {
+      prepareTranslationType()
+    }
+
+    private func prepareTranslationType() {
+      let sharedDefault = UserDefaults.standard
+      if let alwaysUseDeepl = (sharedDefault.object(forKey: "always_use_deepl") as? Bool) {
+        if alwaysUseDeepl {
+          preferredTranslationType = .useDeepl
+        }
+        sharedDefault.removeObject(forKey: "always_use_deepl")
+      }
+      #if canImport(_Translation_SwiftUI)
+        if #unavailable(iOS 17.4),
+           preferredTranslationType == .useApple
+        {
+          preferredTranslationType = .useServerIfPossible
+        }
+      #else
+        if preferredTranslationType == .useApple {
+          preferredTranslationType = .useServerIfPossible
+        }
+      #endif
+    }
   }
 
   public static let sharedDefault = UserDefaults(suiteName: "group.com.thomasricouard.IceCubesApp")
@@ -183,9 +208,9 @@ import SwiftUI
     }
   }
 
-  public var alwaysUseDeepl: Bool {
+  public var preferredTranslationType: TranslationType {
     didSet {
-      storage.alwaysUseDeepl = alwaysUseDeepl
+      storage.preferredTranslationType = preferredTranslationType
     }
   }
 
@@ -324,6 +349,12 @@ import SwiftUI
   public var showAccountPopover: Bool {
     didSet {
       storage.showAccountPopover = showAccountPopover
+    }
+  }
+
+  public var isSidebarExpanded: Bool {
+    didSet {
+      storage.isSidebarExpanded = isSidebarExpanded
     }
   }
 
@@ -474,7 +505,7 @@ import SwiftUI
     appDefaultPostsSensitive = storage.appDefaultPostsSensitive
     appRequireAltText = storage.appRequireAltText
     autoPlayVideo = storage.autoPlayVideo
-    alwaysUseDeepl = storage.alwaysUseDeepl
+    preferredTranslationType = storage.preferredTranslationType
     userDeeplAPIFree = storage.userDeeplAPIFree
     autoDetectPostLanguage = storage.autoDetectPostLanguage
     inAppBrowserReaderView = storage.inAppBrowserReaderView
@@ -501,6 +532,7 @@ import SwiftUI
     showReplyIndentation = storage.showReplyIndentation
     showAccountPopover = storage.showAccountPopover
     muteVideo = storage.muteVideo
+    isSidebarExpanded = storage.isSidebarExpanded
   }
 }
 

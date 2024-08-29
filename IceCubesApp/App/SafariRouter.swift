@@ -4,6 +4,8 @@ import Models
 import Observation
 import SafariServices
 import SwiftUI
+import AppAccount
+import WebKit
 
 extension View {
   @MainActor func withSafariRouter() -> some View {
@@ -13,9 +15,11 @@ extension View {
 
 @MainActor
 private struct SafariRouter: ViewModifier {
+  @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
   @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var preferences
   @Environment(RouterPath.self) private var routerPath
+  @Environment(AppAccountsManager.self) private var appAccount
 
   #if !os(visionOS)
     @State private var safariManager = InAppSafariManager()
@@ -25,13 +29,21 @@ private struct SafariRouter: ViewModifier {
     content
       .environment(\.openURL, OpenURLAction { url in
         // Open internal URL.
-        routerPath.handle(url: url)
+        guard !isSecondaryColumn else { return .discarded }
+        return routerPath.handle(url: url)
       })
       .onOpenURL { url in
         // Open external URL (from icecubesapp://)
+        guard !isSecondaryColumn else { return }
+        if url.absoluteString == "icecubesapp://subclub" {
+          #if !os(visionOS)
+          safariManager.dismiss()
+          #endif
+          return
+        }
         let urlString = url.absoluteString.replacingOccurrences(of: AppInfo.scheme, with: "https://")
         guard let url = URL(string: urlString), url.host != nil else { return }
-        _ = routerPath.handle(url: url)
+        _ = routerPath.handleDeepLink(url: url)
       }
       .onAppear {
         routerPath.urlHandler = { url in
@@ -44,6 +56,19 @@ private struct SafariRouter: ViewModifier {
               UIApplication.shared.open(url)
               return .handled
             }
+          } else if url.query()?.contains("callback=") == false,
+                    url.host() == AppInfo.premiumInstance,
+                    let accountName = appAccount.currentAccount.accountName {
+            let newURL = url.appending(queryItems: [
+              .init(name: "callback", value: "icecubesapp://subclub"),
+              .init(name: "id", value: "@\(accountName)")
+            ])
+            
+            #if !os(visionOS)
+            return safariManager.open(newURL)
+            #else
+            return .systemAction
+            #endif
           }
           #if !targetEnvironment(macCatalyst)
             guard preferences.preferredBrowser == .inAppSafari else { return .systemAction }
@@ -97,6 +122,13 @@ private struct SafariRouter: ViewModifier {
       }
 
       return .handled
+    }
+    
+    func dismiss() {
+      viewController.presentedViewController?.dismiss(animated: true)
+      window?.resignKey()
+      window?.isHidden = false
+      window = nil
     }
 
     func setupWindow(windowScene: UIWindowScene) -> UIWindow {

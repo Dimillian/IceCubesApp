@@ -31,7 +31,7 @@ struct StatusRowContextMenu: View {
     }
 
     if statusDataController.isReblogged {
-      return Label("status.action.unboost", image: "Rocket.fill")
+      return Label("status.action.unboost", image: "Rocket.Fill")
     }
     return Label("status.action.boost", image: "Rocket")
   }
@@ -88,9 +88,7 @@ struct StatusRowContextMenu: View {
     Divider()
 
     Menu("status.action.share-title") {
-      if let urlString = viewModel.status.reblog?.url ?? viewModel.status.url,
-         let url = URL(string: urlString)
-      {
+      if let url = viewModel.url {
         ShareLink(item: url,
                   subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
                   message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText))
@@ -104,7 +102,7 @@ struct StatusRowContextMenu: View {
 
         Button {
           let view = HStack {
-            StatusRowView(viewModel: viewModel)
+            StatusRowView(viewModel: viewModel, context: .timeline)
               .padding(16)
           }
           .environment(\.isInCaptureMode, true)
@@ -133,7 +131,7 @@ struct StatusRowContextMenu: View {
       }
     }
 
-    if let url = URL(string: viewModel.status.reblog?.url ?? viewModel.status.url ?? "") {
+    if let url = viewModel.url {
       Button { UIApplication.shared.open(url) } label: {
         Label("status.action.view-in-browser", systemImage: "safari")
       }
@@ -152,7 +150,7 @@ struct StatusRowContextMenu: View {
     }
 
     Button {
-      UIPasteboard.general.string = viewModel.status.reblog?.url ?? viewModel.status.url
+      UIPasteboard.general.url = viewModel.url
     } label: {
       Label("status.action.copy-link", systemImage: "link")
     }

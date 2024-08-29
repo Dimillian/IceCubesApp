@@ -58,7 +58,7 @@ import SwiftUI
   private func fetchRemoteStatus() async -> Bool {
     guard let client, let remoteStatusURL else { return false }
     let results: SearchResults? = try? await client.get(endpoint: Search.search(query: remoteStatusURL.absoluteString,
-                                                                                type: "statuses",
+                                                                                type: .statuses,
                                                                                 offset: nil,
                                                                                 following: nil),
                                                         forceVersion: .v2)

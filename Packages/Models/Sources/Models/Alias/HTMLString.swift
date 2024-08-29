@@ -61,7 +61,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
           _ = text.removeLast()
           _ = text.removeLast()
         }
-        asRawText = text
+        asRawText = (try? Entities.unescape(text)) ?? text
 
         if asMarkdown.hasPrefix("\n") {
           _ = asMarkdown.removeFirst()
@@ -175,6 +175,8 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         return
       } else if node.nodeName() == "#text" {
         var txt = node.description
+
+        txt = (try? Entities.unescape(txt)) ?? txt
 
         if let underscore_regex, let main_regex {
           //  This is the markdown escaper

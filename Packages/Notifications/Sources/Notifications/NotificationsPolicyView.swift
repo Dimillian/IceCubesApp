@@ -1,53 +1,86 @@
-import SwiftUI
-import Network
 import DesignSystem
 import Models
+import Network
+import SwiftUI
 
 @MainActor
 struct NotificationsPolicyView: View {
   @Environment(\.dismiss) private var dismiss
-  
+
   @Environment(Client.self) private var client
   @Environment(Theme.self) private var theme
-  
+
   @State private var policy: NotificationsPolicy?
   @State private var isUpdating: Bool = false
-  
+
   var body: some View {
     NavigationStack {
       Form {
         Section("notifications.content-filter.title-inline") {
-          Toggle(isOn: .init(get: { policy?.filterNotFollowing == true },
-                             set: { newValue in
-            policy?.filterNotFollowing = newValue
+          Picker(selection: .init(get: {
+            policy?.forNotFollowing ?? .drop
+          }, set: { policy in
+            self.policy?.forNotFollowing = policy
             Task { await updatePolicy() }
-          }), label: {
-            Text("notifications.content-filter.peopleYouDontFollow")
-          })
-          Toggle(isOn: .init(get: { policy?.filterNotFollowers == true },
-                             set: { newValue in
-            policy?.filterNotFollowers = newValue
+          })) {
+            pickerMenu
+          } label: {
+            makePickerLabel(title: "notifications.content-filter.peopleYouDontFollow",
+                            subtitle: "Until you manually approve them")
+          }
+          
+          Picker(selection: .init(get: {
+            policy?.forNotFollowers ?? .drop
+          }, set: { policy in
+            self.policy?.forNotFollowers = policy
             Task { await updatePolicy() }
-          }), label: {
-            Text("notifications.content-filter.peopleNotFollowingYou")
-          })
-          Toggle(isOn: .init(get: { policy?.filterNewAccounts == true },
-                             set: { newValue in
-            policy?.filterNewAccounts = newValue
+          })) {
+            pickerMenu
+          } label: {
+            makePickerLabel(title: "notifications.content-filter.peopleNotFollowingYou",
+                            subtitle: "And following you for less than 3 days")
+          }
+          
+          Picker(selection: .init(get: {
+            policy?.forNewAccounts ?? .drop
+          }, set: { policy in
+            self.policy?.forNewAccounts = policy
             Task { await updatePolicy() }
-          }), label: {
-            Text("notifications.content-filter.newAccounts")
-          })
-          Toggle(isOn: .init(get: { policy?.filterPrivateMentions == true },
-                             set: { newValue in
-            policy?.filterPrivateMentions = newValue
+          })) {
+            pickerMenu
+          } label: {
+            makePickerLabel(title: "notifications.content-filter.newAccounts",
+                            subtitle: "Created within the past 30 days")
+          }
+          
+          Picker(selection: .init(get: {
+            policy?.forPrivateMentions ?? .drop
+          }, set: { policy in
+            self.policy?.forPrivateMentions = policy
             Task { await updatePolicy() }
-          }), label: {
-            Text("notifications.content-filter.privateMentions")
-          })
+          })) {
+            pickerMenu
+          } label: {
+            makePickerLabel(title: "notifications.content-filter.privateMentions",
+                            subtitle: "Unless it's in reply to your own mention or if you follow the sender")
+          }
+          
+          Picker(selection: .init(get: {
+            policy?.forLimitedAccounts ?? .drop
+          }, set: { policy in
+            self.policy?.forLimitedAccounts = policy
+            Task { await updatePolicy() }
+          })) {
+            pickerMenu
+          } label: {
+            VStack(alignment: .leading) {
+              makePickerLabel(title: "Moderated accounts",
+                              subtitle: "Limited by server moderators")
+            }
+          }
         }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor.opacity(0.3))
         #endif
       }
       .formStyle(.grouped)
@@ -59,23 +92,40 @@ struct NotificationsPolicyView: View {
       .task {
         await getPolicy()
       }
+      .redacted(reason: policy == nil ? .placeholder : [])
     }
-    .presentationDetents([.medium])
+    .presentationDetents([.height(500)])
     .presentationBackground(.thinMaterial)
   }
   
+  private var pickerMenu: some View {
+    ForEach(NotificationsPolicy.Policy.allCases, id: \.self) { policy in
+      Text(policy.rawValue.capitalized)
+    }
+  }
+  
+  private func makePickerLabel(title: LocalizedStringKey, subtitle: LocalizedStringKey) -> some View {
+    VStack(alignment: .leading) {
+      Text(title)
+        .font(.callout)
+      Text(subtitle)
+        .foregroundStyle(.secondary)
+        .font(.footnote)
+    }
+  }
+
   private func getPolicy() async {
     defer {
       isUpdating = false
     }
     do {
       isUpdating = true
-      policy = try await client.get(endpoint: Notifications.policy)
+      policy = try await client.get(endpoint: Notifications.policy, forceVersion: .v2)
     } catch {
       dismiss()
     }
   }
-  
+
   private func updatePolicy() async {
     if let policy {
       defer {
@@ -83,8 +133,8 @@ struct NotificationsPolicyView: View {
       }
       do {
         isUpdating = true
-        self.policy = try await client.put(endpoint: Notifications.putPolicy(policy: policy))
-      } catch { }
+        self.policy = try await client.put(endpoint: Notifications.putPolicy(policy: policy), forceVersion: .v2)
+      } catch {}
     }
   }
 }

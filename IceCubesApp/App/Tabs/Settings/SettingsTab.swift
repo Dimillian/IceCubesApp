@@ -32,6 +32,8 @@ struct SettingsTabs: View {
 
   let isModal: Bool
 
+  @State private var startingPoint: SettingsStartingPoint? = nil
+
   var body: some View {
     NavigationStack(path: $routerPath.path) {
       Form {
@@ -64,6 +66,32 @@ struct SettingsTabs: View {
         }
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+        .onAppear {
+          startingPoint = RouterPath.settingsStartingPoint
+          RouterPath.settingsStartingPoint = nil
+        }
+        .navigationDestination(item: $startingPoint) { targetView in
+          switch targetView {
+          case .display:
+            DisplaySettingsView()
+          case .haptic:
+            HapticSettingsView()
+          case .remoteTimelines:
+            RemoteTimelinesSettingView()
+          case .tagGroups:
+            TagsGroupSettingView()
+          case .recentTags:
+            RecenTagsSettingView()
+          case .content:
+            ContentSettingsView()
+          case .swipeActions:
+            SwipeActionsSettingsView()
+          case .tabAndSidebarEntries:
+            EmptyView()
+          case .translation:
+            TranslationSettingsView()
+          }
+        }
     }
     .onAppear {
       routerPath.client = client
@@ -108,10 +136,10 @@ struct SettingsTabs: View {
           }
         }
       }
+      addAccountButton
       if !appAccountsManager.availableAccounts.isEmpty {
         editAccountButton
       }
-      addAccountButton
     }
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
@@ -126,6 +154,7 @@ struct SettingsTabs: View {
       await timelineCache.clearCache(for: client.id)
       await sub.deleteSubscription()
       appAccountsManager.delete(account: account)
+      Telemetry.signal("account.removed")
     }
   }
 
@@ -236,10 +265,14 @@ struct SettingsTabs: View {
             Text("settings.app.icon")
           } icon: {
             let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
-            Image(uiImage: .init(named: icon.appIconName)!)
-              .resizable()
-              .frame(width: 25, height: 25)
-              .cornerRadius(4)
+            if let image: UIImage = .init(named: icon.appIconName) {
+              Image(uiImage: image)
+                .resizable()
+                .frame(width: 25, height: 25)
+                .cornerRadius(4)
+            } else {
+              EmptyView()
+            }
           }
         }
       #endif
@@ -262,8 +295,16 @@ struct SettingsTabs: View {
         .tint(theme.labelColor)
       }
 
-      NavigationLink(destination: AboutView()) {
+      NavigationLink {
+        AboutView()
+      } label: {
         Label("settings.app.about", systemImage: "info.circle")
+      }
+      
+      NavigationLink {
+        WishlistView()
+      } label: {
+        Label("Feature Requests", systemImage: "list.bullet.rectangle.portrait")
       }
 
     } header: {
@@ -282,7 +323,7 @@ struct SettingsTabs: View {
     Button {
       addAccountSheetPresented.toggle()
     } label: {
-      Text("settings.account.add")
+      Label("settings.account.add", systemImage: "person.badge.plus")
     }
     .sheet(isPresented: $addAccountSheetPresented) {
       AddAccountView()
@@ -290,15 +331,17 @@ struct SettingsTabs: View {
   }
 
   private var editAccountButton: some View {
-    Button(role: isEditingAccount ? .none : .destructive) {
+    Button(role: .destructive) {
       withAnimation {
         isEditingAccount.toggle()
       }
     } label: {
       if isEditingAccount {
-        Text("action.done")
+        Label("action.done", systemImage: "person.badge.minus")
+          .foregroundStyle(.red)
       } else {
-        Text("account.action.logout")
+        Label("account.action.logout", systemImage: "person.badge.minus")
+          .foregroundStyle(.red)
       }
     }
   }

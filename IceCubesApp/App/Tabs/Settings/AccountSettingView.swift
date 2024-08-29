@@ -29,7 +29,7 @@ struct AccountSettingsView: View {
     Form {
       Section {
         Button {
-          routerPath.presentedSheet = .accountFiltersList
+          routerPath.presentedSheet = .accountEditInfo
         } label: {
           Label("account.action.edit-info", systemImage: "pencil")
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -85,11 +85,12 @@ struct AccountSettingsView: View {
                 await sub.deleteSubscription()
               }
               appAccountsManager.delete(account: appAccount)
+              Telemetry.signal("account.removed")
               dismiss()
             }
           }
         } label: {
-          Text("account.action.logout")
+          Label("account.action.logout", systemImage: "trash")
             .frame(maxWidth: .infinity)
         }
       }

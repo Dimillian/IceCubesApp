@@ -5,12 +5,13 @@ import UIKit
 public extension StatusEditor.ViewModel {
   enum Mode {
     case replyTo(status: Status)
-    case new(visibility: Models.Visibility)
+    case new(text: String?, visibility: Models.Visibility)
     case edit(status: Status)
     case quote(status: Status)
     case quoteLink(link: URL)
     case mention(account: Account, visibility: Models.Visibility)
     case shareExtension(items: [NSItemProvider])
+    case imageURL(urls: [URL], visibility: Models.Visibility)
 
     var isInShareExtension: Bool {
       switch self {
@@ -41,7 +42,7 @@ public extension StatusEditor.ViewModel {
 
     var title: LocalizedStringKey {
       switch self {
-      case .new, .mention, .shareExtension, .quoteLink:
+      case .new, .mention, .shareExtension, .quoteLink, .imageURL:
         "status.editor.mode.new"
       case .edit:
         "status.editor.mode.edit"

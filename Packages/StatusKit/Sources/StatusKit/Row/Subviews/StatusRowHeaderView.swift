@@ -27,7 +27,7 @@ struct StatusRowHeaderView: View {
       }
     }
     .accessibilityElement(children: .combine)
-    .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)") + Text(", ") + Text(viewModel.finalStatus.createdAt.relativeFormatted))
+    .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName), \(viewModel.finalStatus.createdAt.relativeFormatted)"))
     .accessibilityAction {
       viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
     }
@@ -47,6 +47,7 @@ struct StatusRowHeaderView: View {
           Group {
             EmojiTextApp(viewModel.finalStatus.account.cachedDisplayName,
                          emojis: viewModel.finalStatus.account.emojis)
+              .fixedSize(horizontal: false, vertical: true)
               .font(.scaledSubheadline)
               .foregroundColor(theme.labelColor)
               .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
@@ -59,6 +60,7 @@ struct StatusRowHeaderView: View {
 
             if !redactionReasons.contains(.placeholder) {
               accountBadgeView
+                .fixedSize(horizontal: false, vertical: true)
                 .font(.footnote)
             }
           }
@@ -69,6 +71,7 @@ struct StatusRowHeaderView: View {
             theme.avatarPosition == .top
           {
             Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
+              .fixedSize(horizontal: false, vertical: true)
               .font(.scaledFootnote)
               .foregroundStyle(.secondary)
               .lineLimit(1)
@@ -81,23 +84,20 @@ struct StatusRowHeaderView: View {
     }
   }
 
-  private var accountBadgeView: Text {
+  private var accountBadgeView: Text? {
     if (viewModel.status.reblogAsAsStatus ?? viewModel.status).account.bot {
-      return Text(Image(systemName: "poweroutlet.type.b.fill")) + Text(" ")
+      return Text("\(Image(systemName: "poweroutlet.type.b.fill")) ")
     } else if (viewModel.status.reblogAsAsStatus ?? viewModel.status).account.locked {
-      return Text(Image(systemName: "lock.fill")) + Text(" ")
+      return Text("\(Image(systemName: "lock.fill")) ")
     }
-    return Text("")
+    return nil
   }
 
   private var dateView: some View {
-    Group {
-      Text(Image(systemName: viewModel.finalStatus.visibility.iconName)) +
-        Text(" ⸱ ") +
-        Text(viewModel.finalStatus.createdAt.relativeFormatted)
-    }
-    .font(.scaledFootnote)
-    .foregroundStyle(.secondary)
-    .lineLimit(1)
+    Text("\(Image(systemName: viewModel.finalStatus.visibility.iconName)) ⸱ \(viewModel.finalStatus.createdAt.relativeFormatted)")
+      .fixedSize(horizontal: false, vertical: true)
+      .font(.scaledFootnote)
+      .foregroundStyle(.secondary)
+      .lineLimit(1)
   }
 }

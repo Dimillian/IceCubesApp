@@ -3,7 +3,7 @@ import Models
 import Network
 import SwiftUI
 
-public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
+public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable, Sendable {
   case local, federated, trending
 
   public func localizedTitle() -> LocalizedStringKey {
@@ -29,12 +29,13 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable {
   }
 }
 
-public enum TimelineFilter: Hashable, Equatable, Identifiable {
+public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
   case home, local, federated, trending
   case hashtag(tag: String, accountId: String?)
   case tagGroup(title: String, tags: [String], symbolName: String?)
   case list(list: Models.List)
   case remoteLocal(server: String, filter: RemoteTimelineFilter)
+  case link(url: URL, title: String)
   case latest
   case resume
 
@@ -46,6 +47,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
       return list.id
     case let .tagGroup(title, tags, _):
       return title + tags.joined()
+    case let .link(url, _):
+      return url.absoluteString
     default:
       return title
     }
@@ -87,6 +90,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
       "Trending"
     case .home:
       "Home"
+    case let .link(_, title):
+      title
     case let .hashtag(tag, _):
       "#\(tag)"
     case let .tagGroup(title, _, _):
@@ -112,6 +117,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
       "timeline.trending"
     case .home:
       "timeline.home"
+    case let .link(_, title):
+      LocalizedStringKey(title)
     case let .hashtag(tag, _):
       "#\(tag)"
     case let .tagGroup(title, _, _):
@@ -145,6 +152,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
       symbolName ?? "tag"
     case .hashtag:
       "number"
+    case .link:
+      "link"
     }
   }
 
@@ -165,6 +174,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable {
     case .resume: return Timelines.home(sinceId: nil, maxId: nil, minId: nil)
     case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
     case .trending: return Trends.statuses(offset: offset)
+    case let .link(url, _): return Timelines.link(url: url, sinceId: sinceId, maxId: maxId, minId: minId)
     case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
     case let .hashtag(tag, accountId):
       if let accountId {
@@ -202,6 +212,7 @@ extension TimelineFilter: Codable {
     case remoteLocal
     case latest
     case resume
+    case link
   }
 
   public init(from decoder: Decoder) throws {
@@ -250,6 +261,11 @@ extension TimelineFilter: Codable {
       )
     case .latest:
       self = .latest
+    case .link:
+      var nestedContainer = try container.nestedUnkeyedContainer(forKey: .link)
+      let url = try nestedContainer.decode(URL.self)
+      let title = try nestedContainer.decode(String.self)
+      self = .link(url: url, title: title)
     default:
       throw DecodingError.dataCorrupted(
         DecodingError.Context(
@@ -290,6 +306,10 @@ extension TimelineFilter: Codable {
       try container.encode(CodingKeys.latest.rawValue, forKey: .latest)
     case .resume:
       try container.encode(CodingKeys.resume.rawValue, forKey: .latest)
+    case let .link(url, title):
+      var nestedContainer = container.nestedUnkeyedContainer(forKey: .link)
+      try nestedContainer.encode(url)
+      try nestedContainer.encode(title)
     }
   }
 }

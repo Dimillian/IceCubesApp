@@ -16,8 +16,8 @@ extension StatusEditor {
     var body: some View {
       NavigationStack {
         ScrollView {
-          ForEach(viewModel.customEmojiContainer) { container in
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 40, maximum: 40))], spacing: 9) {
+          LazyVGrid(columns: [GridItem(.adaptive(minimum: 40, maximum: 40))], spacing: 9) {
+            ForEach(viewModel.customEmojiContainer) { container in
               Section {
                 ForEach(container.emojis) { emoji in
                   LazyImage(url: emoji.url) { state in
@@ -39,15 +39,16 @@ extension StatusEditor {
                     viewModel.insertStatusText(text: " :\(emoji.shortcode): ")
                   }
                 }
+                .padding(.horizontal, 16)
               } header: {
-                HStack {
-                  Text(container.categoryName)
-                    .font(.scaledFootnote)
-                  Spacer()
-                }
+                Text(container.categoryName)
+                  .font(.scaledHeadline)
+                  .bold()
+                  .foregroundStyle(Color.secondary)
+                  .frame(maxWidth: .infinity, alignment: .leading)
+                  .padding(.horizontal, 16)
               }
             }
-            .padding(.horizontal, 8)
           }
         }
         .toolbar {

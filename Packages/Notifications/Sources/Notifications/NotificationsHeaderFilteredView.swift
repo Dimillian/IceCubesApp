@@ -1,21 +1,21 @@
-import SwiftUI
-import Models
 import DesignSystem
 import Env
+import Models
+import SwiftUI
 
 struct NotificationsHeaderFilteredView: View {
   @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
-  
+
   let filteredNotifications: NotificationsPolicy.Summary
-  
+
   var body: some View {
-    if let count = Int(filteredNotifications.pendingNotificationsCount), count > 0 {
+    if filteredNotifications.pendingNotificationsCount > 0 {
       HStack {
         Label("notifications.content-filter.requests.title", systemImage: "archivebox")
           .foregroundStyle(.secondary)
         Spacer()
-        Text(filteredNotifications.pendingNotificationsCount)
+        Text("\(filteredNotifications.pendingNotificationsCount)")
           .font(.footnote)
           .fontWeight(.semibold)
           .monospacedDigit()

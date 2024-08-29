@@ -61,7 +61,7 @@ struct TimelineTab: View {
         if client.isAuth {
           timeline = lastTimelineFilter
         } else {
-          timeline = .federated
+          timeline = .trending
         }
       }
       Task {
@@ -125,8 +125,10 @@ struct TimelineTab: View {
   private var timelineFilterButton: some View {
     headerGroup
     timelineFiltersButtons
-    listsFiltersButons
-    tagsFiltersButtons
+    if client.isAuth {
+      listsFiltersButons
+      tagsFiltersButtons
+    }
     localTimelinesFiltersButtons
     tagGroupsFiltersButtons
     Divider()
@@ -216,9 +218,11 @@ struct TimelineTab: View {
     Button {
       withAnimation {
         if let index {
-          pinnedFilters.remove(at: index)
+          let timeline = pinnedFilters.remove(at: index)
+          Telemetry.signal("timeline.pin.removed", parameters: ["timeline" : timeline.rawValue])
         } else {
           pinnedFilters.append(timeline)
+          Telemetry.signal("timeline.pin.added", parameters: ["timeline" : timeline.rawValue])
         }
       }
     } label: {
@@ -325,7 +329,7 @@ struct TimelineTab: View {
     if client.isAuth, canFilterTimeline {
       timeline = lastTimelineFilter
     } else if !client.isAuth {
-      timeline = .federated
+      timeline = .trending
     }
   }
 }

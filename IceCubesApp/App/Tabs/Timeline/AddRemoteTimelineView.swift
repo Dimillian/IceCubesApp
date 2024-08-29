@@ -37,6 +37,11 @@ struct AddRemoteTimelineView: View {
             .foregroundColor(.green)
             .listRowBackground(theme.primaryBackgroundColor)
         }
+        if !instanceName.isEmpty && instance == nil {
+          Label("timeline.\(instanceName)-not-valid", systemImage: "xmark.seal.fill")
+            .foregroundColor(.red)
+            .listRowBackground(theme.primaryBackgroundColor)
+        }
         Button {
           guard instance != nil else { return }
           context.insert(LocalTimeline(instance: instanceName))
@@ -45,6 +50,7 @@ struct AddRemoteTimelineView: View {
           Text("timeline.add.action.add")
         }
         .listRowBackground(theme.primaryBackgroundColor)
+        .disabled(instance == nil)
 
         instancesListView
       }

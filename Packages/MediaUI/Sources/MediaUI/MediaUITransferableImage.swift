@@ -2,10 +2,14 @@ import CoreTransferable
 import SwiftUI
 import UIKit
 
-struct MediaUIImageTransferable: Codable, Transferable {
-  let url: URL
+public struct MediaUIImageTransferable: Codable, Transferable {
+  public let url: URL
 
-  func fetchData() async -> Data {
+  public init(url: URL) {
+    self.url = url
+  }
+
+  public func fetchData() async -> Data {
     do {
       return try await URLSession.shared.data(from: url).0
     } catch {
@@ -13,7 +17,7 @@ struct MediaUIImageTransferable: Codable, Transferable {
     }
   }
 
-  static var transferRepresentation: some TransferRepresentation {
+  public static var transferRepresentation: some TransferRepresentation {
     DataRepresentation(exportedContentType: .jpeg) { transferable in
       await transferable.fetchData()
     }

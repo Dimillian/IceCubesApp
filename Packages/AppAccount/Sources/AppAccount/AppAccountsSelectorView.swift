@@ -50,7 +50,7 @@ public struct AppAccountsSelectorView: View {
     }
     .sheet(isPresented: $isPresented, content: {
       accountsView.presentationDetents([.height(preferredHeight), .large])
-        .presentationBackground(.thinMaterial)
+        .presentationBackground(.ultraThinMaterial)
         .presentationCornerRadius(16)
         .onAppear {
           refreshAccounts()
@@ -101,7 +101,7 @@ public struct AppAccountsSelectorView: View {
           #endif
         }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
         #endif
 
         if accountCreationEnabled {
@@ -113,7 +113,7 @@ public struct AppAccountsSelectorView: View {
           #if os(visionOS)
           .foregroundStyle(theme.labelColor)
           #else
-          .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
           #endif
         }
       }

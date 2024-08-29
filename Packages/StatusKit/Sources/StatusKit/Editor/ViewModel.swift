@@ -19,7 +19,6 @@ public extension StatusEditor {
       didSet {
         if let itemsProvider {
           mediaContainers = []
-          processItemsProvider(items: itemsProvider)
         }
       }
     }
@@ -234,7 +233,7 @@ public extension StatusEditor {
                               language: selectedLanguage,
                               mediaAttributes: mediaAttributes)
         switch mode {
-        case .new, .replyTo, .quote, .mention, .shareExtension, .quoteLink:
+        case .new, .replyTo, .quote, .mention, .shareExtension, .quoteLink, .imageURL:
           postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
           if let postStatus {
             StreamWatcher.shared.emmitPostEvent(for: postStatus)
@@ -301,12 +300,23 @@ public extension StatusEditor {
 
     func prepareStatusText() {
       switch mode {
-      case let .new(visibility):
+      case let .new(text, visibility):
+        if let text {
+          statusText = .init(string: text)
+          selectedRange = .init(location: text.utf16.count, length: 0)
+        }
         self.visibility = visibility
       case let .shareExtension(items):
         itemsProvider = items
         visibility = .pub
         processItemsProvider(items: items)
+      case let .imageURL(urls, visibility):
+        Task {
+          for container in await Self.makeImageContainer(from: urls) {
+            prepareToPost(for: container)
+          }
+        }
+        self.visibility = visibility
       case let .replyTo(status):
         var mentionString = ""
         if (status.reblog?.account.acct ?? status.account.acct) != currentAccount?.acct {
@@ -557,7 +567,7 @@ public extension StatusEditor {
          !statusText.string.contains(url.absoluteString)
       {
         embeddedStatus = nil
-        mode = .new(visibility: visibility)
+        mode = .new(text: nil, visibility: visibility)
       }
     }
 
@@ -581,7 +591,7 @@ public extension StatusEditor {
             showRecentsTagsInline = false
             query.removeFirst()
             results = try await client.get(endpoint: Search.search(query: query,
-                                                                   type: "hashtags",
+                                                                   type: .hashtags,
                                                                    offset: 0,
                                                                    following: nil),
                                            forceVersion: .v2)
@@ -734,6 +744,31 @@ public extension StatusEditor {
         mediaAttachment: nil,
         error: nil
       )
+    }
+
+    private static func makeImageContainer(from urls: [URL]) async -> [MediaContainer] {
+      var containers: [MediaContainer] = []
+
+      for url in urls {
+        let compressor = Compressor()
+        _ = url.startAccessingSecurityScopedResource()
+        if let compressedData = await compressor.compressImageFrom(url: url),
+           let image = UIImage(data: compressedData)
+        {
+          containers.append(MediaContainer(
+            id: UUID().uuidString,
+            image: image,
+            movieTransferable: nil,
+            gifTransferable: nil,
+            mediaAttachment: nil,
+            error: nil
+          ))
+        }
+
+        url.stopAccessingSecurityScopedResource()
+      }
+
+      return containers
     }
 
     func upload(container: MediaContainer) async {

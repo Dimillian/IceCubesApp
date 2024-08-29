@@ -39,7 +39,7 @@ import SwiftUI
   private let filterKey = "notification-filter"
   var state: State = .loading
   var isLockedType: Bool = false
-  var lockedAccountId: String? = nil
+  var lockedAccountId: String?
   var policy: Models.NotificationsPolicy?
   var selectedType: Models.Notification.NotificationType? {
     didSet {
@@ -156,7 +156,7 @@ import SwiftUI
     let newNotifications: [Models.Notification]
     if let lockedAccountId {
       newNotifications =
-      try await client.get(endpoint: Notifications.notificationsForAccount(accountId: lockedAccountId, maxId: lastId))
+        try await client.get(endpoint: Notifications.notificationsForAccount(accountId: lockedAccountId, maxId: lastId))
     } else {
       newNotifications =
         try await client.get(endpoint: Notifications.notifications(minId: nil,
@@ -180,7 +180,7 @@ import SwiftUI
       } catch {}
     }
   }
-  
+
   func fetchPolicy() async {
     policy = try? await client?.get(endpoint: Notifications.policy)
   }

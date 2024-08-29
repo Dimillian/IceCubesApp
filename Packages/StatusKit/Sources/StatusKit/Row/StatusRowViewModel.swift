@@ -19,6 +19,8 @@ import SwiftUI
   let client: Client
   let routerPath: RouterPath
 
+  let userFollowedTag: HTMLString.Link?
+
   private let theme = Theme.shared
   private let userMentionned: Bool
 
@@ -31,6 +33,18 @@ import SwiftUI
   var translation: Translation?
   var isLoadingTranslation: Bool = false
   var showDeleteAlert: Bool = false
+  var showAppleTranslation = false
+  var preferredTranslationType = TranslationType.useServerIfPossible {
+    didSet {
+      if oldValue != preferredTranslationType {
+        translation = nil
+        showAppleTranslation = false
+      }
+    }
+  }
+
+  var deeplTranslationError = false
+  var instanceTranslationError = false
 
   private(set) var actionsAccountsFetched: Bool = false
   var favoriters: [Account] = []
@@ -92,14 +106,61 @@ import SwiftUI
       status.inReplyToId != nil || status.inReplyToAccountId != nil
   }
 
-  var highlightRowColor: Color {
+  var url: URL? {
+    (status.reblog?.url ?? status.url).flatMap(URL.init(string:))
+  }
+
+  @ViewBuilder
+  func makeBackgroundColor(isHomeTimeline: Bool) -> some View {
+    if isHomeTimeline, theme.showContentGradient {
+      homeBackgroundColor
+    } else {
+      backgroundColor
+    }
+  }
+
+  @ViewBuilder
+  var homeBackgroundColor: some View {
     if status.visibility == .direct {
       theme.tintColor.opacity(0.15)
     } else if userMentionned {
       theme.secondaryBackgroundColor
     } else {
+      if status.account.isPremiumAccount {
+        makeDecorativeGradient(startColor: .yellow, endColor: theme.primaryBackgroundColor)
+      } else if userFollowedTag != nil {
+        makeDecorativeGradient(startColor: .teal, endColor: theme.primaryBackgroundColor)
+      } else if status.reblog != nil {
+        makeDecorativeGradient(startColor: theme.tintColor, endColor: theme.primaryBackgroundColor)
+      } else {
+        theme.primaryBackgroundColor
+      }
+    }
+  }
+
+  @ViewBuilder
+  var backgroundColor: some View {
+    if status.visibility == .direct {
+      theme.tintColor.opacity(0.15)
+    } else if userMentionned {
+      theme.secondaryBackgroundColor
+    } else if status.account.isPremiumAccount {
+      Color.yellow.opacity(0.4)
+    } else {
       theme.primaryBackgroundColor
     }
+  }
+
+  func makeDecorativeGradient(startColor: Color, endColor: Color) -> some View {
+    LinearGradient(stops: [
+      .init(color: startColor.opacity(0.2), location: 0.03),
+      .init(color: startColor.opacity(0.1), location: 0.06),
+      .init(color: startColor.opacity(0.05), location: 0.09),
+      .init(color: startColor.opacity(0.02), location: 0.15),
+      .init(color: endColor, location: 0.25),
+    ],
+    startPoint: .topLeading,
+    endPoint: .bottomTrailing)
   }
 
   public init(status: Status,
@@ -134,6 +195,10 @@ import SwiftUI
     } else {
       userMentionned = false
     }
+
+    userFollowedTag = finalStatus.content.links.first(where: { link in
+      link.type == .hashtag && CurrentAccount.shared.tags.contains(where: { $0.name.lowercased() == link.title.lowercased() })
+    })
 
     isFiltered = filter != nil
 
@@ -219,7 +284,7 @@ import SwiftUI
         embed = try await client.get(endpoint: Statuses.status(id: String(id)))
       } else {
         let results: SearchResults = try await client.get(endpoint: Search.search(query: url.absoluteString,
-                                                                                  type: "statuses",
+                                                                                  type: .statuses,
                                                                                   offset: 0,
                                                                                   following: nil),
                                                           forceVersion: .v2)
@@ -297,25 +362,45 @@ import SwiftUI
   }
 
   func translate(userLang: String) async {
-    withAnimation {
-      isLoadingTranslation = true
-    }
-    if !alwaysTranslateWithDeepl {
-      do {
-        // We first use instance translation API if available.
-        let translation: Translation = try await client.post(endpoint: Statuses.translate(id: finalStatus.id,
-                                                                                          lang: userLang))
-        withAnimation {
-          self.translation = translation
-          isLoadingTranslation = false
-        }
-
-        return
-      } catch {}
+    updatePreferredTranslation()
+    if preferredTranslationType == .useApple {
+      showAppleTranslation = true
+      return
     }
 
-    // If not or fail we use Ice Cubes own DeepL client.
-    await translateWithDeepL(userLang: userLang)
+    if preferredTranslationType != .useDeepl {
+      await translateWithInstance(userLang: userLang)
+
+      if translation == nil {
+        await translateWithDeepL(userLang: userLang)
+      }
+    } else {
+      await translateWithDeepL(userLang: userLang)
+
+      if translation == nil {
+        await translateWithInstance(userLang: userLang)
+      }
+    }
+
+    var hasShown = false
+    #if canImport(_Translation_SwiftUI)
+      if translation == nil,
+         #available(iOS 17.4, *)
+      {
+        showAppleTranslation = true
+        hasShown = true
+      }
+    #endif
+
+    if !hasShown,
+       translation == nil
+    {
+      if preferredTranslationType == .useDeepl {
+        deeplTranslationError = true
+      } else {
+        instanceTranslationError = true
+      }
+    }
   }
 
   func translateWithDeepL(userLang: String) async {
@@ -332,6 +417,20 @@ import SwiftUI
     }
   }
 
+  func translateWithInstance(userLang: String) async {
+    withAnimation {
+      isLoadingTranslation = true
+    }
+
+    let translation: Translation? = try? await client.post(endpoint: Statuses.translate(id: finalStatus.id,
+                                                                                        lang: userLang))
+
+    withAnimation {
+      self.translation = translation
+      isLoadingTranslation = false
+    }
+  }
+
   private func getDeepLClient() -> DeepLClient {
     let userAPIfree = UserPreferences.shared.userDeeplAPIFree
 
@@ -339,18 +438,24 @@ import SwiftUI
   }
 
   private var userAPIKey: String? {
-    DeepLUserAPIHandler.readIfAllowed()
+    DeepLUserAPIHandler.readKey()
   }
 
-  var alwaysTranslateWithDeepl: Bool {
-    DeepLUserAPIHandler.shouldAlwaysUseDeepl
+  func updatePreferredTranslation() {
+    if DeepLUserAPIHandler.shouldAlwaysUseDeepl {
+      preferredTranslationType = .useDeepl
+    } else if UserPreferences.shared.preferredTranslationType == .useApple {
+      preferredTranslationType = .useApple
+    } else {
+      preferredTranslationType = .useServerIfPossible
+    }
   }
 
   func fetchRemoteStatus() async -> Bool {
     guard isRemote, let remoteStatusURL = URL(string: finalStatus.url ?? "") else { return false }
     isLoadingRemoteContent = true
     let results: SearchResults? = try? await client.get(endpoint: Search.search(query: remoteStatusURL.absoluteString,
-                                                                                type: "statuses",
+                                                                                type: .statuses,
                                                                                 offset: nil,
                                                                                 following: nil),
                                                         forceVersion: .v2)

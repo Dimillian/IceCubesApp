@@ -1,4 +1,5 @@
 import AppAccount
+import AuthenticationServices
 import Combine
 import DesignSystem
 import Env
@@ -10,10 +11,10 @@ import SwiftUI
 
 @MainActor
 struct AddAccountView: View {
+  @Environment(\.webAuthenticationSession) private var webAuthenticationSession
   @Environment(\.dismiss) private var dismiss
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.openURL) private var openURL
-  @Environment(\.webAuthenticationSession) private var webAuthenticationSession
 
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(CurrentAccount.self) private var currentAccount
@@ -87,9 +88,7 @@ struct AddAccountView: View {
         .scrollDismissesKeyboard(.immediately)
       #endif
         .toolbar {
-          if !appAccountsManager.availableAccounts.isEmpty {
-            CancelToolbarItem()
-          }
+          CancelToolbarItem()
         }
         .onAppear {
           isInstanceURLFieldFocused = true
@@ -135,11 +134,12 @@ struct AddAccountView: View {
                 instance = nil
                 instanceFetchError = nil
               }
-            } catch _ as DecodingError {
+            } catch _ as ServerError {
               instance = nil
               instanceFetchError = "account.add.error.instance-not-supported"
             } catch {
               instance = nil
+              instanceFetchError = nil
             }
           }
         }
@@ -288,6 +288,7 @@ struct AddAccountView: View {
       let oauthToken = try await client.continueOauthFlow(url: url)
       let client = Client(server: client.server, oauthToken: oauthToken)
       let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
+      Telemetry.signal("account.added")
       appAccountsManager.add(account: AppAccount(server: client.server,
                                                  accountName: "\(account.acct)@\(client.server)",
                                                  oauthToken: oauthToken))

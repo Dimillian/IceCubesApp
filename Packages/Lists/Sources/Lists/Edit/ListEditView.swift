@@ -150,7 +150,8 @@ public struct ListEditView: View {
                 }
               }))
             } else {
-              FollowButton(viewModel: .init(accountId: account.id,
+              FollowButton(viewModel: .init(client: client,
+                                            accountId: account.id,
                                             relationship: relationship,
                                             shouldDisplayNotify: false,
                                             relationshipUpdated: { relationship in

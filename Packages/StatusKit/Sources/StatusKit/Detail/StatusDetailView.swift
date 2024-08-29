@@ -137,13 +137,6 @@ public struct StatusDetailView: View {
             }
           }
         }
-      #if !os(visionOS)
-        .listRowBackground(viewModel.highlightRowColor)
-      #endif
-        .listRowInsets(.init(top: 12,
-                             leading: .layoutPadding,
-                             bottom: 12,
-                             trailing: .layoutPadding))
     }
   }
 
@@ -162,7 +155,7 @@ public struct StatusDetailView: View {
 
   private var loadingDetailView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath), context: .timeline)
         .redacted(reason: .placeholder)
         .allowsHitTesting(false)
     }

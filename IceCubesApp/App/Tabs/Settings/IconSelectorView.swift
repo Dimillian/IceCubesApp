@@ -27,6 +27,8 @@ struct IconSelectorView: View {
     case alt39, alt40, alt41, alt42, alt43
     case alt44, alt45
     case alt46
+    case alt47, alt48
+    case alt49
 
     var appIconName: String {
       return "AppIconAlternate\(rawValue)"
@@ -51,6 +53,8 @@ struct IconSelectorView: View {
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Duncan Horne", icons: [.alt38]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) BeAware@social.beaware.live", icons: [.alt39, .alt40, .alt41, .alt42, .alt43]),
       IconSelector(title: "\("settings.app.icon.designed-by".localized) Simone Margio", icons: [.alt44, .alt45]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) Peter Broqvist (@PKB)", icons: [.alt47, .alt48]),
+      IconSelector(title: "\("settings.app.icon.designed-by".localized) Oz Tsori (@oztsori)", icons: [.alt49]),
     ]
   }
 

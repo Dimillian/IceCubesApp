@@ -1,4 +1,5 @@
 import Account
+import AppIntents
 import DesignSystem
 import Explore
 import Foundation
@@ -79,41 +80,47 @@ enum Tab: Int, Identifiable, Hashable, CaseIterable, Codable {
 
   @ViewBuilder
   var label: some View {
+    if self != .other {
+      Label(title, systemImage: iconName)
+    }
+  }
+
+  var title: LocalizedStringKey {
     switch self {
     case .timeline:
-      Label("tab.timeline", systemImage: iconName)
+      "tab.timeline"
     case .trending:
-      Label("tab.trending", systemImage: iconName)
+      "tab.trending"
     case .local:
-      Label("tab.local", systemImage: iconName)
+      "tab.local"
     case .federated:
-      Label("tab.federated", systemImage: iconName)
+      "tab.federated"
     case .notifications:
-      Label("tab.notifications", systemImage: iconName)
+      "tab.notifications"
     case .mentions:
-      Label("tab.mentions", systemImage: iconName)
+      "tab.mentions"
     case .explore:
-      Label("tab.explore", systemImage: iconName)
+      "tab.explore"
     case .messages:
-      Label("tab.messages", systemImage: iconName)
+      "tab.messages"
     case .settings:
-      Label("tab.settings", systemImage: iconName)
+      "tab.settings"
     case .profile:
-      Label("tab.profile", systemImage: iconName)
+      "tab.profile"
     case .bookmarks:
-      Label("accessibility.tabs.profile.picker.bookmarks", systemImage: iconName)
+      "accessibility.tabs.profile.picker.bookmarks"
     case .favorites:
-      Label("accessibility.tabs.profile.picker.favorites", systemImage: iconName)
+      "accessibility.tabs.profile.picker.favorites"
     case .post:
-      Label("menu.new-post", systemImage: iconName)
+      "menu.new-post"
     case .followedTags:
-      Label("timeline.filter.tags", systemImage: iconName)
+      "timeline.filter.tags"
     case .lists:
-      Label("timeline.filter.lists", systemImage: iconName)
+      "timeline.filter.lists"
     case .links:
-      Label("explore.section.trending.links", systemImage: iconName)
+      "explore.section.trending.links"
     case .other:
-      EmptyView()
+      ""
     }
   }
 
@@ -179,6 +186,7 @@ class SidebarTabs {
       .init(tab: .favorites, enabled: true),
       .init(tab: .followedTags, enabled: true),
       .init(tab: .lists, enabled: true),
+      .init(tab: .links, enabled: true),
 
       .init(tab: .settings, enabled: true),
       .init(tab: .profile, enabled: true),
@@ -214,7 +222,7 @@ class iOSTabs {
     @AppStorage(TabEntries.first.rawValue) var firstTab = Tab.timeline
     @AppStorage(TabEntries.second.rawValue) var secondTab = Tab.notifications
     @AppStorage(TabEntries.third.rawValue) var thirdTab = Tab.explore
-    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = Tab.messages
+    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = Tab.links
     @AppStorage(TabEntries.fifth.rawValue) var fifthTab = Tab.profile
   }
 
