@@ -25,12 +25,8 @@ struct NotificationsPolicyView: View {
           })) {
             pickerMenu
           } label: {
-            VStack(alignment: .leading) {
-              Text("notifications.content-filter.peopleYouDontFollow")
-              Text("Until you manually approve them")
-                .foregroundStyle(.secondary)
-                .font(.footnote)
-            }
+            makePickerLabel(title: "notifications.content-filter.peopleYouDontFollow",
+                            subtitle: "Until you manually approve them")
           }
           
           Picker(selection: .init(get: {
@@ -41,12 +37,8 @@ struct NotificationsPolicyView: View {
           })) {
             pickerMenu
           } label: {
-            VStack(alignment: .leading) {
-              Text("notifications.content-filter.peopleNotFollowingYou")
-              Text("And following you for less than 3 days")
-                .foregroundStyle(.secondary)
-                .font(.footnote)
-            }
+            makePickerLabel(title: "notifications.content-filter.peopleNotFollowingYou",
+                            subtitle: "And following you for less than 3 days")
           }
           
           Picker(selection: .init(get: {
@@ -57,12 +49,8 @@ struct NotificationsPolicyView: View {
           })) {
             pickerMenu
           } label: {
-            VStack(alignment: .leading) {
-              Text("notifications.content-filter.newAccounts")
-              Text("Created within the past 30 days")
-                .foregroundStyle(.secondary)
-                .font(.footnote)
-            }
+            makePickerLabel(title: "notifications.content-filter.newAccounts",
+                            subtitle: "Created within the past 30 days")
           }
           
           Picker(selection: .init(get: {
@@ -73,12 +61,8 @@ struct NotificationsPolicyView: View {
           })) {
             pickerMenu
           } label: {
-            VStack(alignment: .leading) {
-              Text("notifications.content-filter.privateMentions")
-              Text("Unless it's in reply to your own mention or if you follow the sender")
-                .foregroundStyle(.secondary)
-                .font(.footnote)
-            }
+            makePickerLabel(title: "notifications.content-filter.privateMentions",
+                            subtitle: "Unless it's in reply to your own mention or if you follow the sender")
           }
           
           Picker(selection: .init(get: {
@@ -90,10 +74,8 @@ struct NotificationsPolicyView: View {
             pickerMenu
           } label: {
             VStack(alignment: .leading) {
-              Text("Moderated accounts")
-              Text("Limited by server moderators")
-                .foregroundStyle(.secondary)
-                .font(.footnote)
+              makePickerLabel(title: "Moderated accounts",
+                              subtitle: "Limited by server moderators")
             }
           }
         }
@@ -112,13 +94,23 @@ struct NotificationsPolicyView: View {
       }
       .redacted(reason: policy == nil ? .placeholder : [])
     }
-    .presentationDetents([.medium])
+    .presentationDetents([.height(500)])
     .presentationBackground(.thinMaterial)
   }
   
   private var pickerMenu: some View {
     ForEach(NotificationsPolicy.Policy.allCases, id: \.self) { policy in
       Text(policy.rawValue.capitalized)
+    }
+  }
+  
+  private func makePickerLabel(title: LocalizedStringKey, subtitle: LocalizedStringKey) -> some View {
+    VStack(alignment: .leading) {
+      Text(title)
+        .font(.callout)
+      Text(subtitle)
+        .foregroundStyle(.secondary)
+        .font(.footnote)
     }
   }
 

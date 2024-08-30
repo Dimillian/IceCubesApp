@@ -30,19 +30,19 @@ struct AboutView: View {
         #if !targetEnvironment(macCatalyst) && !os(visionOS)
           HStack {
             Spacer()
-            Image(uiImage: .init(named: "AppIconAlternate0")!)
+            Image(uiImage: .init(named: "AppIconAlternate0") ?? .init())
               .resizable()
               .frame(width: 50, height: 50)
               .cornerRadius(4)
-            Image(uiImage: .init(named: "AppIconAlternate4")!)
+            Image(uiImage: .init(named: "AppIconAlternate4") ?? .init())
               .resizable()
               .frame(width: 50, height: 50)
               .cornerRadius(4)
-            Image(uiImage: .init(named: "AppIconAlternate17")!)
+            Image(uiImage: .init(named: "AppIconAlternate17") ?? .init())
               .resizable()
               .frame(width: 50, height: 50)
               .cornerRadius(4)
-            Image(uiImage: .init(named: "AppIconAlternate23")!)
+            Image(uiImage: .init(named: "AppIconAlternate23") ?? .init())
               .resizable()
               .frame(width: 50, height: 50)
               .cornerRadius(4)
@@ -64,6 +64,15 @@ struct AboutView: View {
       #endif
 
       followAccountsSection
+      
+      Section("Telemetry") {
+        Link(destination: .init(string: "https://telemetrydeck.com")!) {
+          Label("Telemetry by TelemtryDeck", systemImage: "link")
+        }
+        Link(destination: .init(string: "https://telemetrydeck.com/privacy/")!) {
+          Label("Privacy Policy", systemImage: "checkmark.shield")
+        }
+      }
 
       Section {
         Text("""

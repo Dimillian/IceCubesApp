@@ -79,8 +79,11 @@ import SwiftUI
   var fields: [Account.Field] = []
   var familiarFollowers: [Account] = []
   
+  // Sub.club stuff
   var premiumAccount: Account?
   var premiumRelationship: Relationship?
+  var subClubUser: SubClubUser?
+  private let subClubClient = SubClubClient()
   
   var selectedTab = Tab.statuses {
     didSet {
@@ -333,9 +336,12 @@ extension AccountDetailViewModel {
                                                           forceVersion: .v2)
       if let premiumAccount = results?.accounts.first {
         self.premiumAccount = premiumAccount
+        await fetchSubClubAccount(premiumUsername: premiumAccount.username)
         let relationships: [Relationship] = try await client.get(endpoint: Accounts.relationships(ids: [premiumAccount.id]))
         self.premiumRelationship = relationships.first
       }
+    } else if fromAccount.isPremiumAccount {
+      await fetchSubClubAccount(premiumUsername: fromAccount.username)
     }
   }
   
@@ -345,5 +351,10 @@ extension AccountDetailViewModel {
                                                                              notify: false,
                                                                              reblogs: true))
     }
+  }
+  
+  private func fetchSubClubAccount(premiumUsername: String) async {
+    let user = await subClubClient.getUser(username: premiumUsername)
+    subClubUser = user
   }
 }
