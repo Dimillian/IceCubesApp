@@ -29190,6 +29190,12 @@
             "state" : "translated",
             "value" : "Richieste di funzionalità"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "功能请求"
+          }
         }
       }
     },
@@ -42044,6 +42050,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privacy policy"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隐私政策"
           }
         }
       }
@@ -78945,6 +78957,12 @@
             "state" : "translated",
             "value" : "Telemetria"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "遥测数据"
+          }
         }
       }
     },
@@ -78954,6 +78972,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Telemetria di TelemetryDeck"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "遥测服务由 TelemtryDeck 提供"
           }
         }
       }
