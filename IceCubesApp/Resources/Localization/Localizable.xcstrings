@@ -78961,7 +78961,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "数据收集"
+            "value" : "数据采集"
           }
         }
       }
@@ -78977,7 +78977,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "数据收集服务由 TelemtryDeck 提供"
+            "value" : "数据采集服务由 TelemtryDeck 提供"
           }
         }
       }
