@@ -78948,12 +78948,12 @@
         }
       }
     },
-    "Telemetry by TelemtryDeck" : {
+    "Telemetry by TelemetryDeck" : {
       "localizations" : {
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Telemetria di TelemtryDeck"
+            "value" : "Telemetria di TelemetryDeck"
           }
         }
       }
