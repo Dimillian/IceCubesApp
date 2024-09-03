@@ -15,27 +15,37 @@ struct TabbarEntriesSettingsView: View {
       Section {
         Picker("settings.tabs.first-tab", selection: $tabs.firstTab) {
           ForEach(Tab.allCases) { tab in
-            tab.label.tag(tab)
+            if tab == tabs.firstTab || !tabs.tabs.contains(tab) {
+              tab.label.tag(tab)
+            }
           }
         }
         Picker("settings.tabs.second-tab", selection: $tabs.secondTab) {
           ForEach(Tab.allCases) { tab in
-            tab.label.tag(tab)
+            if tab == tabs.secondTab || !tabs.tabs.contains(tab) {
+              tab.label.tag(tab)
+            }
           }
         }
         Picker("settings.tabs.third-tab", selection: $tabs.thirdTab) {
           ForEach(Tab.allCases) { tab in
-            tab.label.tag(tab)
+            if tab == tabs.thirdTab || !tabs.tabs.contains(tab) {
+              tab.label.tag(tab)
+            }
           }
         }
         Picker("settings.tabs.fourth-tab", selection: $tabs.fourthTab) {
           ForEach(Tab.allCases) { tab in
-            tab.label.tag(tab)
+            if tab == tabs.fourthTab || !tabs.tabs.contains(tab) {
+              tab.label.tag(tab)
+            }
           }
         }
         Picker("settings.tabs.fifth-tab", selection: $tabs.fifthTab) {
           ForEach(Tab.allCases) { tab in
-            tab.label.tag(tab)
+            if tab == tabs.fifthTab || !tabs.tabs.contains(tab) {
+              tab.label.tag(tab)
+            }
           }
         }
       }
