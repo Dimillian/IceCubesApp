@@ -67,12 +67,15 @@ struct AboutView: View {
       
       Section("Telemetry") {
         Link(destination: .init(string: "https://telemetrydeck.com")!) {
-          Label("Telemetry by TelemtryDeck", systemImage: "link")
+          Label("Telemetry by TelemetryDeck", systemImage: "link")
         }
         Link(destination: .init(string: "https://telemetrydeck.com/privacy/")!) {
           Label("Privacy Policy", systemImage: "checkmark.shield")
         }
       }
+      #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       Section {
         Text("""

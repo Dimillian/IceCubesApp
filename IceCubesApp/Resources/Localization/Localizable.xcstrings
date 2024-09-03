@@ -333,6 +333,12 @@
             "value" : "%@"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -748,6 +754,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ a été publié sur Mastodon"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ è stato postato su Mastodon"
           }
         },
         "nl" : {
@@ -8989,6 +9001,12 @@
             "value" : "Compte"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13545,6 +13563,12 @@
             "value" : "Supprimer l'avatar"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina avatar"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14066,6 +14090,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Supprimer la bannière"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina la copertina"
           }
         },
         "nl" : {
@@ -17613,8 +17643,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : ""
+            "state" : "translated",
+            "value" : "Account mutati"
           }
         },
         "ja" : {
@@ -20669,6 +20699,12 @@
             "value" : "Une erreur s'est produite lors de la publication sur Mastodon, veuillez réessayer."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Si è verificato un errore postando su Mastodon, riprova."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20835,6 +20871,12 @@
             "value" : "Compte de l'app"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20879,6 +20921,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Marque-pages"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segnalibri"
           }
         },
         "nl" : {
@@ -20927,6 +20975,12 @@
             "value" : "Composer une publication"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Componi un post"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20967,6 +21021,12 @@
             "value" : "Composer une publication vers Mastodon"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Componi un post per Mastodon"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21005,6 +21065,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contenu de la publication à envoyer vers Mastodon"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contenuto del post da inviare a Mastodon"
           }
         },
         "tr" : {
@@ -22586,6 +22652,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DeepL n'est pas joignable ! Est-ce que la clé d'API est correcte ?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile raggiungere DeepL! La chiave API è corretta?"
           }
         },
         "nl" : {
@@ -27009,6 +27081,12 @@
             "value" : "Explore & tendances"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esplora & In tendenza"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28630,7 +28708,7 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Link in tendenza"
           }
         },
@@ -29079,6 +29157,12 @@
             "value" : "Favoris"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preferiti"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29100,7 +29184,14 @@
       }
     },
     "Feature Requests" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Richieste di funzionalità"
+          }
+        }
+      }
     },
     "Federated Timeline" : {
       "localizations" : {
@@ -29126,6 +29217,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chronologie fédérée"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeline federata"
           }
         },
         "nl" : {
@@ -31436,6 +31533,12 @@
             "value" : "Tags suivis"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag seguiti"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31480,6 +31583,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abonnés uniquement"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo follower"
           }
         },
         "nl" : {
@@ -31528,6 +31637,12 @@
             "value" : "Chronologie personnelle"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Timeline Home"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31572,6 +31687,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Image"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Immagine"
           }
         },
         "nl" : {
@@ -31620,6 +31741,12 @@
             "value" : "Image à publier sur Mastodon"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Immagine da postare su Mastodon"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31659,6 +31786,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instance"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Istanza"
           }
         },
         "nl" : {
@@ -33243,6 +33376,12 @@
             "value" : "Il peut cependant toujours être utilisé comme solution de secours pour le service de traduction de votre instance."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Può comunque essere usato come alternativa per il servizio di traduzione della tua istanza."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33276,6 +33415,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clé"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiave"
           }
         },
         "nl" : {
@@ -34036,6 +34181,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Listes"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liste"
           }
         },
         "nl" : {
@@ -35037,6 +35188,12 @@
             "value" : "Chronologie locale"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeline locale"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35081,6 +35238,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mentions"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menzioni"
           }
         },
         "nl" : {
@@ -35957,6 +36120,12 @@
             "value" : "Nouvelle publication"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuovo post"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36001,6 +36170,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notifications"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifiche"
           }
         },
         "nl" : {
@@ -41130,6 +41305,12 @@
             "value" : "Ouvrir Ice Cubes"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri Ice Cubes"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41176,6 +41357,12 @@
             "value" : "Ouvrir dans un onglet"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri in un tab"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41220,6 +41407,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ouvrir l'app sur un onglet spécifique"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apri l'app in un tab specifico"
           }
         },
         "nl" : {
@@ -41505,6 +41698,12 @@
             "value" : "Publier un statut"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posta uno status"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41549,6 +41748,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Publier un statut avec une image"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posta uno status con un'immagine"
           }
         },
         "nl" : {
@@ -41597,6 +41802,12 @@
             "value" : "Publier une image vers Mastodon"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posta un'immagine su Mastodon"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41641,6 +41852,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Publier contenu"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contenuto del post"
           }
         },
         "nl" : {
@@ -41690,6 +41907,12 @@
             "value" : "Publier des images"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posta immagini"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41735,6 +41958,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Publier un status sur Mastodon"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posta uno status su Mastodon"
           }
         },
         "nl" : {
@@ -41783,6 +42012,12 @@
             "value" : "Visibilité de la publication"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibilità del post"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41804,7 +42039,14 @@
       }
     },
     "Privacy Policy" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy policy"
+          }
+        }
+      }
     },
     "Private" : {
       "localizations" : {
@@ -41830,6 +42072,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privée"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privato"
           }
         },
         "nl" : {
@@ -41878,6 +42126,12 @@
             "value" : "Messages privées"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Messaggi privati"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41922,6 +42176,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profil"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profilo"
           }
         },
         "nl" : {
@@ -41970,6 +42230,12 @@
             "value" : "Public"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pubblico"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42014,6 +42280,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Public calme"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pubblico silenzioso"
           }
         },
         "nl" : {
@@ -42536,6 +42808,12 @@
             "value" : "Onglet sélectionné"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tab selezionato"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42580,6 +42858,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Envoyer une publication"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invia un post"
           }
         },
         "nl" : {
@@ -42628,6 +42912,12 @@
             "value" : "Envoyer une publication textulle à Mastodon avec Ice Cubes"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invia un post testuale a Mastodon con Ice Cubes"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42668,6 +42958,12 @@
             "value" : "Envoyer la publication vers Mastodon"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invia un post su Mastodon"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42706,6 +43002,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Paramètres"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impostazione"
           }
         },
         "nl" : {
@@ -62254,7 +62556,7 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Questa funzione richiede una chiave API DeepL"
           }
         },
@@ -62444,6 +62746,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar contenido con gradiente"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostra gradiente del contenuto"
           }
         },
         "tr" : {
@@ -76833,6 +77141,12 @@
             "value" : "Onglet"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -77732,8 +78046,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
+            "state" : "translated",
+            "value" : "Profilo (%@)"
           }
         },
         "ja" : {
@@ -78625,10 +78939,24 @@
       }
     },
     "Telemetry" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetria"
+          }
+        }
+      }
     },
-    "Telemetry by TelemtryDeck" : {
-
+    "Telemetry by TelemetryDeck" : {
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetria di TelemetryDeck"
+          }
+        }
+      }
     },
     "The DeepL API Key is still stored!" : {
       "extractionState" : "manual",
@@ -78655,6 +78983,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La clé API DeepL est déjà stockée !"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La chiave API DeepL è ancora salvata!"
           }
         },
         "nl" : {
@@ -78702,6 +79036,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Le Service de Traduction de votre instance n'est pas joignable !"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile raggiungere il servizio di traduzione della tua istanza!"
           }
         },
         "nl" : {
@@ -82738,6 +83078,12 @@
             "value" : "Filtre de chronologie"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : ""
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -82777,6 +83123,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Service de traduction"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Servizio di traduzione"
           }
         },
         "nl" : {
@@ -82825,6 +83177,12 @@
             "value" : "Liens tendances"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Link in tendenza"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -82869,6 +83227,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chronologie des tendances"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeline delle tendenze"
           }
         },
         "tr" : {
@@ -83037,13 +83401,13 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld persona ne parla"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld persone ne parlano"
                 }
               }
@@ -83270,6 +83634,12 @@
             "value" : "Utiliser Ice Cubes pour composer une publication pour Mastodon"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa Ice Cubes per comporre un post per Mastodon"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83308,6 +83678,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Utiliser Ice Cubes pour composer une publication avec une image sur Mastodon"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa Ice Cubes per comporre un post con un'immagine per Mastodon"
           }
         },
         "tr" : {
@@ -83349,6 +83725,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Utilisez Ice Cubes pour publier un statut sur Mastodon"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa Ice Cubes per postare uno status su Mastodon"
           }
         },
         "nl" : {
@@ -83398,6 +83780,12 @@
             "value" : "Utiliser Ice Cubes pour publier un statut avec une image sur Mastodon"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa Ice Cubes per postare uno status con un'immagine su Mastodon"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83444,6 +83832,12 @@
             "value" : "Visibilité"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibilità"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83488,6 +83882,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visibilité de votre publication"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibilità del tuo post"
           }
         },
         "nl" : {
