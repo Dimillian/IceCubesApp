@@ -73,6 +73,9 @@ struct AboutView: View {
           Label("Privacy Policy", systemImage: "checkmark.shield")
         }
       }
+      #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       Section {
         Text("""
