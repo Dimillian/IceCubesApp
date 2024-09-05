@@ -29185,6 +29185,12 @@
     },
     "Feature Requests" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solicitudes de funciones"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42046,6 +42052,12 @@
     },
     "Privacy Policy" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de Privacidad"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -78952,6 +78964,12 @@
     },
     "Telemetry" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetría"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -78968,6 +78986,12 @@
     },
     "Telemetry by TelemetryDeck" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetría de TelemetryDeck"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
