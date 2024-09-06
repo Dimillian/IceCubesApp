@@ -108,22 +108,14 @@ struct AppView: View {
                   tabs: availableTabs)
       {
         HStack(spacing: 0) {
-          TabView(selection: $selectedTab) {
-            ForEach(availableTabs) { tab in
-              tab
-                .makeContentView(selectedTab: $selectedTab)
-                .toolbar(horizontalSizeClass == .regular ? .hidden : .visible, for: .tabBar)
-                .tabItem {
-                  tab.label
-                }
-                .tag(tab)
+          if #available(macCatalyst 18.0, *) {
+            baseTabView
+            .tabViewStyle(.sidebarAdaptable)
+            .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
+              tabview.sidebar.isHidden = true
             }
-          }
-          .id(availableTabs.count) /// Resets the TabView state when the number of tabs changes to avoid navigation bar issues and prevent crashes
-          .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
-            tabview.tabBar.isHidden = horizontalSizeClass == .regular
-            tabview.customizableViewControllers = []
-            tabview.moreNavigationController.isNavigationBarHidden = true
+          } else {
+            baseTabView
           }
           if horizontalSizeClass == .regular,
              appAccountsManager.currentClient.isAuth,
@@ -137,6 +129,26 @@ struct AppView: View {
       .environment(appRouterPath)
     }
   #endif
+  
+  private var baseTabView: some View {
+    TabView(selection: $selectedTab) {
+      ForEach(availableTabs) { tab in
+        tab
+          .makeContentView(selectedTab: $selectedTab)
+          .toolbar(horizontalSizeClass == .regular ? .hidden : .visible, for: .tabBar)
+          .tabItem {
+            tab.label
+          }
+          .tag(tab)
+      }
+    }
+    .id(availableTabs.count) /// Resets the TabView state when the number of tabs changes to avoid navigation bar issues and prevent crashes
+    .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
+      tabview.tabBar.isHidden = horizontalSizeClass == .regular
+      tabview.customizableViewControllers = []
+      tabview.moreNavigationController.isNavigationBarHidden = true
+    }
+  }
 
   var notificationsSecondaryColumn: some View {
     NotificationsTab(selectedTab: .constant(.notifications)
