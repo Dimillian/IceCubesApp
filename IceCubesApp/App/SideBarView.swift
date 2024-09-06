@@ -34,26 +34,32 @@ struct SideBarView<Content: View>: View {
     return 0
   }
 
-  private func makeIconForTab(tab: Tab) -> some View {
+  private func makeIconForTab(tab: AppTab) -> some View {
     HStack {
       ZStack(alignment: .topTrailing) {
         SideBarIcon(systemIconName: tab.iconName,
                     isSelected: tab == selectedTab)
-        let badge = badgeFor(tab: tab)
-        if badge > 0 {
-          makeBadgeView(count: badge)
+        if userPreferences.isSidebarExpanded {
+          Text(tab.title)
+            .font(.headline)
+            .foregroundColor(tab == selectedTab ? theme.tintColor : theme.labelColor)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
       }
-      if userPreferences.isSidebarExpanded {
-        Text(tab.title)
-          .font(.headline)
-          .foregroundColor(tab == selectedTab ? theme.tintColor : theme.labelColor)
-          .frame(maxWidth: .infinity, alignment: .leading)
+      .frame(width: (userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth) - 24, height: 50)
+      .background(tab == selectedTab ? theme.primaryBackgroundColor : .clear,
+                  in: RoundedRectangle(cornerRadius: 8))
+      .cornerRadius(8)
+      .shadow(color: tab == selectedTab ? .black.opacity(0.2) : .clear, radius: 5)
+      .overlay(
+          RoundedRectangle(cornerRadius: 8)
+            .stroke(tab == selectedTab ? theme.labelColor.opacity(0.1) : .clear, lineWidth: 1)
+      )
+      let badge = badgeFor(tab: tab)
+      if badge > 0 {
+        makeBadgeView(count: 10)
       }
     }
-    .frame(width: (userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth) - 24, height: 50)
-    .background(tab == selectedTab ? theme.secondaryBackgroundColor : .clear,
-                in: RoundedRectangle(cornerRadius: 8))
   }
 
   private func makeBadgeView(count: Int) -> some View {
@@ -65,7 +71,7 @@ struct SideBarView<Content: View>: View {
         .font(.caption2)
     }
     .frame(width: 24, height: 24)
-    .offset(x: 14, y: -14)
+    .offset(x: 10, y: -10)
   }
 
   private var postButton: some View {

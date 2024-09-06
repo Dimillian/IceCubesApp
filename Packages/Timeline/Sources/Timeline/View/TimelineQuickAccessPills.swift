@@ -25,6 +25,7 @@ struct TimelineQuickAccessPills: View {
     }
     .scrollClipDisabled()
     .scrollIndicators(.never)
+    .scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
     .onChange(of: currentAccount.lists) { _, lists in
       guard client.isAuth else { return }
       var filters = pinnedFilters
