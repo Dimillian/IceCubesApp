@@ -33,6 +33,10 @@ struct IconSelectorView: View {
     var appIconName: String {
       return "AppIconAlternate\(rawValue)"
     }
+    
+    var previewImageName: String {
+      return "AppIconAlternate\(rawValue)-image"
+    }
   }
 
   struct IconSelector: Identifiable {
@@ -98,7 +102,7 @@ struct IconSelectorView: View {
           }
         } label: {
           ZStack(alignment: .bottomTrailing) {
-            Image(uiImage: .init(named: icon.appIconName) ?? .init())
+            Image(icon.previewImageName)
               .resizable()
               .aspectRatio(contentMode: .fit)
               .frame(minHeight: 125, maxHeight: 1024)
