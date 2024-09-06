@@ -47,12 +47,6 @@ import UIKit
     _ = Self.observer // just for activating the lazy static property
   }
 
-  deinit {
-    Task { @MainActor in
-      Self.observedSceneDelegate.remove(self)
-    }
-  }
-
   private static var observedSceneDelegate: Set<SceneDelegate> = []
   private static let observer = Task { @MainActor in
     while true {
