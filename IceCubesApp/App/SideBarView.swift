@@ -34,7 +34,7 @@ struct SideBarView<Content: View>: View {
     return 0
   }
 
-  private func makeIconForTab(tab: AppTab) -> some View {
+  private func makeIconForTab(tab: Tab) -> some View {
     HStack {
       ZStack(alignment: .topTrailing) {
         SideBarIcon(systemIconName: tab.iconName,
