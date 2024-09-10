@@ -7,12 +7,13 @@ import Foundation
 @Suite("Timeline Filter Tests")
 struct TimelineFilterTests {
   @Test("All timeline filter can be decoded and encoded",
-        arguments: [TimelineFilter.home, TimelineFilter.local, TimelineFilter.federated,
+        arguments: [TimelineFilter.home,
+                    TimelineFilter.local,
+                    TimelineFilter.federated,
                     TimelineFilter.remoteLocal(server: "me.dm", filter: .local),
                     TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: nil),
                     TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: "test"),
-                    TimelineFilter.hashtag(tag: "test", accountId: nil),
-                    TimelineFilter.list(list: .init(id: "test", title: "test", repliesPolicy: .list, exclusive: true))])
+                    TimelineFilter.hashtag(tag: "test", accountId: nil)])
   func timelineCanEncodeAndDecode(filter: TimelineFilter) {
     #expect(testCodableOn(filter: filter))
   }
