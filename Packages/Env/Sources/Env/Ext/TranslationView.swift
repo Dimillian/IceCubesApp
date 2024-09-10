@@ -5,7 +5,7 @@ import SwiftUI
 
   public extension View {
     func addTranslateView(isPresented: Binding<Bool>, text: String) -> some View {
-      #if targetEnvironment(macCatalyst)
+      #if targetEnvironment(macCatalyst) || os(visionOS)
         return self
       #else
       if #available(iOS 17.4, *) {
