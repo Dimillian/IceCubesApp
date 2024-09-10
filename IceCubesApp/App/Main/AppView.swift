@@ -21,10 +21,9 @@ struct AppView: View {
   @Environment(\.openWindow) var openWindow
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
-  @Binding var selectedTab: Tab
+  @Binding var selectedTab: AppTab
   @Binding var appRouterPath: RouterPath
 
-  @State var popToRootTab: Tab = .other
   @State var iosTabs = iOSTabs.shared
   @State var sidebarTabs = SidebarTabs.shared
 
@@ -40,45 +39,27 @@ struct AppView: View {
     #endif
   }
 
-  var availableTabs: [Tab] {
+  var availableTabs: [AppTab] {
     guard appAccountsManager.currentClient.isAuth else {
-      return Tab.loggedOutTab()
+      return AppTab.loggedOutTab()
     }
     if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
       return iosTabs.tabs
     } else if UIDevice.current.userInterfaceIdiom == .vision {
-      return Tab.visionOSTab()
+      return AppTab.visionOSTab()
     }
     return sidebarTabs.tabs.map { $0.tab }
   }
 
+  @ViewBuilder
   var tabBarView: some View {
     TabView(selection: .init(get: {
       selectedTab
     }, set: { newTab in
-      if newTab == .post {
-        #if os(visionOS)
-          openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
-        #else
-          appRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
-        #endif
-        return
-      }
-      if newTab == selectedTab {
-        /// Stupid hack to trigger onChange binding in tab views.
-        popToRootTab = .other
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-          popToRootTab = selectedTab
-        }
-      }
-
-      HapticManager.shared.fireHaptic(.tabSelection)
-      SoundEffectManager.shared.playSound(.tabSelection)
-
-      selectedTab = newTab
+      updateTab(with: newTab)
     })) {
       ForEach(availableTabs) { tab in
-        tab.makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
+        tab.makeContentView(selectedTab: $selectedTab)
           .tabItem {
             if userPreferences.showiPhoneTabLabel {
               tab.label
@@ -95,8 +76,24 @@ struct AppView: View {
     .id(appAccountsManager.currentClient.id)
     .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
   }
+  
+  private func updateTab(with newTab: AppTab) {
+    if newTab == .post {
+      #if os(visionOS)
+        openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
+      #else
+        appRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
+      #endif
+      return
+    }
+    
+    HapticManager.shared.fireHaptic(.tabSelection)
+    SoundEffectManager.shared.playSound(.tabSelection)
 
-  private func badgeFor(tab: Tab) -> Int {
+    selectedTab = newTab
+  }
+
+  private func badgeFor(tab: AppTab) -> Int {
     if tab == .notifications, selectedTab != tab,
        let token = appAccountsManager.currentAccount.oauthToken
     {
@@ -108,25 +105,17 @@ struct AppView: View {
   #if !os(visionOS)
     var sidebarView: some View {
       SideBarView(selectedTab: $selectedTab,
-                  popToRootTab: $popToRootTab,
                   tabs: availableTabs)
       {
         HStack(spacing: 0) {
-          TabView(selection: $selectedTab) {
-            ForEach(availableTabs) { tab in
-              tab
-                .makeContentView(selectedTab: $selectedTab, popToRootTab: $popToRootTab)
-                .tabItem {
-                  tab.label
-                }
-                .tag(tab)
+          if #available(iOS 18.0, *) {
+            baseTabView
+            .tabViewStyle(.sidebarAdaptable)
+            .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
+              tabview.sidebar.isHidden = true
             }
-          }
-          .id(availableTabs.count) /// Resets the TabView state when the number of tabs changes to avoid navigation bar issues and prevent crashes
-          .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
-            tabview.tabBar.isHidden = horizontalSizeClass == .regular
-            tabview.customizableViewControllers = []
-            tabview.moreNavigationController.isNavigationBarHidden = true
+          } else {
+            baseTabView
           }
           if horizontalSizeClass == .regular,
              appAccountsManager.currentClient.isAuth,
@@ -140,10 +129,30 @@ struct AppView: View {
       .environment(appRouterPath)
     }
   #endif
+  
+  private var baseTabView: some View {
+    TabView(selection: $selectedTab) {
+      ForEach(availableTabs) { tab in
+        tab
+          .makeContentView(selectedTab: $selectedTab)
+          .toolbar(horizontalSizeClass == .regular ? .hidden : .visible, for: .tabBar)
+          .tabItem {
+            tab.label
+          }
+          .tag(tab)
+      }
+    }
+    .id(availableTabs.count) /// Resets the TabView state when the number of tabs changes to avoid navigation bar issues and prevent crashes
+    .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
+      tabview.tabBar.isHidden = horizontalSizeClass == .regular
+      tabview.customizableViewControllers = []
+      tabview.moreNavigationController.isNavigationBarHidden = true
+    }
+  }
 
   var notificationsSecondaryColumn: some View {
-    NotificationsTab(selectedTab: .constant(.notifications),
-                     popToRootTab: $popToRootTab, lockedType: nil)
+    NotificationsTab(selectedTab: .constant(.notifications)
+                     , lockedType: nil)
       .environment(\.isSecondaryColumn, true)
       .frame(maxWidth: .secondaryColumnWidth)
       .id(appAccountsManager.currentAccount.id)

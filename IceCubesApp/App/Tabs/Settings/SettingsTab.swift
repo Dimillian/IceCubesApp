@@ -28,8 +28,6 @@ struct SettingsTabs: View {
   @State private var cachedRemoved = false
   @State private var timelineCache = TimelineCache()
 
-  @Binding var popToRootTab: Tab
-
   let isModal: Bool
 
   @State private var startingPoint: SettingsStartingPoint? = nil
@@ -103,11 +101,6 @@ struct SettingsTabs: View {
     }
     .withSafariRouter()
     .environment(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
-      if newValue == .notifications {
-        routerPath.path = []
-      }
-    }
   }
 
   private var accountsSection: some View {
@@ -265,7 +258,7 @@ struct SettingsTabs: View {
             Text("settings.app.icon")
           } icon: {
             let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
-            if let image: UIImage = .init(named: icon.appIconName) {
+            if let image: UIImage = .init(named: icon.previewImageName) {
               Image(uiImage: image)
                 .resizable()
                 .frame(width: 25, height: 25)

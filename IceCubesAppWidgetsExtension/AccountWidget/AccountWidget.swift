@@ -23,8 +23,11 @@ struct AccountWidgetProvider: AppIntentTimelineProvider {
   }
 
   private func fetchAccount(configuration: AccountWidgetConfiguration) async -> Account {
-    let client = Client(server: configuration.account.account.server,
-                        oauthToken: configuration.account.account.oauthToken)
+    guard let account = configuration.account else {
+      return .placeholder()
+    }
+    let client = Client(server: account.account.server,
+                        oauthToken: account.account.oauthToken)
     do {
       let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
       return account

@@ -8,48 +8,18 @@ import Observation
 import SwiftUI
 import UserNotifications
 
-extension UNNotificationResponse: @unchecked Sendable {}
-extension UNUserNotificationCenter: @unchecked Sendable {}
+extension UNNotification: @unchecked @retroactive Sendable {}
+extension UNNotificationResponse: @unchecked @retroactive Sendable {}
+extension UNUserNotificationCenter: @unchecked @retroactive Sendable {}
 
-public struct PushAccount: Equatable {
-  public let server: String
-  public let token: OauthToken
-  public let accountName: String?
-
-  public init(server: String, token: OauthToken, accountName: String?) {
-    self.server = server
-    self.token = token
-    self.accountName = accountName
-  }
-}
-
-public struct HandledNotification: Equatable {
-  public let account: PushAccount
-  public let notification: Models.Notification
-}
-
-@MainActor
-@Observable public class PushNotificationsService: NSObject {
+public struct PushKeys: Sendable {
   enum Constants {
-    static let endpoint = "https://icecubesrelay.fly.dev"
     static let keychainAuthKey = "notifications_auth_key"
     static let keychainPrivateKey = "notifications_private_key"
   }
-
-  public static let shared = PushNotificationsService()
-
-  public private(set) var subscriptions: [PushNotificationSubscriptionSettings] = []
-
-  public var pushToken: Data?
-
-  public var handledNotification: HandledNotification?
-
-  override init() {
-    super.init()
-
-    UNUserNotificationCenter.current().delegate = self
-  }
-
+  
+  public init() { }
+  
   private var keychain: KeychainSwift {
     let keychain = KeychainSwift()
     #if !DEBUG && !targetEnvironment(simulator)
@@ -57,44 +27,7 @@ public struct HandledNotification: Equatable {
     #endif
     return keychain
   }
-
-  public func requestPushNotifications() {
-    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { _, _ in
-      DispatchQueue.main.async {
-        UIApplication.shared.registerForRemoteNotifications()
-      }
-    }
-  }
-
-  public func setAccounts(accounts: [PushAccount]) {
-    subscriptions = []
-    for account in accounts {
-      let sub = PushNotificationSubscriptionSettings(account: account,
-                                                     key: notificationsPrivateKeyAsKey.publicKey.x963Representation,
-                                                     authKey: notificationsAuthKeyAsKey,
-                                                     pushToken: pushToken)
-      subscriptions.append(sub)
-    }
-  }
-
-  public func updateSubscriptions(forceCreate: Bool) async {
-    for subscription in subscriptions {
-      await withTaskGroup(of: Void.self, body: { group in
-        group.addTask {
-          await subscription.fetchSubscription()
-          if await subscription.subscription != nil, !forceCreate {
-            await subscription.deleteSubscription()
-            await subscription.updateSubscription()
-          } else if forceCreate {
-            await subscription.updateSubscription()
-          }
-        }
-      })
-    }
-  }
-
-  // MARK: - Key management
-
+  
   public var notificationsPrivateKeyAsKey: P256.KeyAgreement.PrivateKey {
     if let key = keychain.get(Constants.keychainPrivateKey),
        let data = Data(base64Encoded: key)
@@ -130,12 +63,87 @@ public struct HandledNotification: Equatable {
       return key
     }
   }
-
+  
   private static func makeRandomNotificationsAuthKey() -> Data {
     let byteCount = 16
     var bytes = Data(count: byteCount)
     _ = bytes.withUnsafeMutableBytes { SecRandomCopyBytes(kSecRandomDefault, byteCount, $0.baseAddress!) }
     return bytes
+  }
+}
+
+public struct PushAccount: Equatable {
+  public let server: String
+  public let token: OauthToken
+  public let accountName: String?
+
+  public init(server: String, token: OauthToken, accountName: String?) {
+    self.server = server
+    self.token = token
+    self.accountName = accountName
+  }
+}
+
+public struct HandledNotification: Equatable {
+  public let account: PushAccount
+  public let notification: Models.Notification
+}
+
+@MainActor
+@Observable public class PushNotificationsService: NSObject {
+  enum Constants {
+    static let endpoint = "https://icecubesrelay.fly.dev"
+  }
+
+  public static let shared = PushNotificationsService()
+
+  private let pushKeys = PushKeys()
+  
+  public private(set) var subscriptions: [PushNotificationSubscriptionSettings] = []
+
+  public var pushToken: Data?
+
+  public var handledNotification: HandledNotification?
+
+  override init() {
+    super.init()
+
+    UNUserNotificationCenter.current().delegate = self
+  }
+
+  public func requestPushNotifications() {
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { @Sendable _, _ in
+      DispatchQueue.main.async {
+        UIApplication.shared.registerForRemoteNotifications()
+      }
+    }
+  }
+
+  public func setAccounts(accounts: [PushAccount]) {
+    subscriptions = []
+    for account in accounts {
+      let sub = PushNotificationSubscriptionSettings(account: account,
+                                                     key: pushKeys.notificationsPrivateKeyAsKey.publicKey.x963Representation,
+                                                     authKey: pushKeys.notificationsAuthKeyAsKey,
+                                                     pushToken: pushToken)
+      subscriptions.append(sub)
+    }
+  }
+
+  public func updateSubscriptions(forceCreate: Bool) async {
+    for subscription in subscriptions {
+      await withTaskGroup(of: Void.self, body: { group in
+        group.addTask {
+          await subscription.fetchSubscription()
+          if await subscription.subscription != nil, !forceCreate {
+            await subscription.deleteSubscription()
+            await subscription.updateSubscription()
+          } else if forceCreate {
+            await subscription.updateSubscription()
+          }
+        }
+      })
+    }
   }
 }
 

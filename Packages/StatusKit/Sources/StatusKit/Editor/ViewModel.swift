@@ -17,7 +17,7 @@ public extension StatusEditor {
     var client: Client?
     var currentAccount: Account? {
       didSet {
-        if let itemsProvider {
+        if itemsProvider != nil {
           mediaContainers = []
         }
       }
@@ -981,4 +981,4 @@ extension StatusEditor.ViewModel: UITextPasteDelegate {
   }
 }
 
-extension PhotosPickerItem: @unchecked Sendable {}
+extension PhotosPickerItem: @unchecked @retroactive Sendable {}

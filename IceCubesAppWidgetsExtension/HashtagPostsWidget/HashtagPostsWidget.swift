@@ -29,9 +29,16 @@ struct HashtagPostsWidgetProvider: AppIntentTimelineProvider {
 
   private func timeline(for configuration: HashtagPostsWidgetConfiguration, context: Context) async -> Timeline<PostsWidgetEntry> {
     do {
-      let timeline: TimelineFilter = .hashtag(tag: configuration.hashgtag, accountId: nil)
+      guard let account = configuration.account, let hashgtag = configuration.hashgtag else {
+        return Timeline(entries: [.init(date: Date(),
+                                        title: "#Mastodon",
+                                        statuses: [],
+                                        images: [:])],
+                        policy: .atEnd)
+      }
+      let timeline: TimelineFilter = .hashtag(tag: hashgtag, accountId: nil)
       let statuses = await loadStatuses(for: timeline,
-                                        account: configuration.account,
+                                        account: account,
                                         widgetFamily: context.family)
       let images = try await loadImages(urls: statuses.map { $0.account.avatar })
       return Timeline(entries: [.init(date: Date(),

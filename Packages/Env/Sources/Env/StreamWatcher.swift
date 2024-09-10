@@ -97,8 +97,8 @@ import OSLog
             }
             let rawEvent = try decoder.decode(RawStreamEvent.self, from: data)
             logger.info("Stream update: \(rawEvent.event)")
-            if let event = rawEventToEvent(rawEvent: rawEvent) {
-              Task { @MainActor in
+            Task { @MainActor in
+              if let event = self.rawEventToEvent(rawEvent: rawEvent) {
                 self.events.append(event)
                 self.latestEvent = event
                 if let event = event as? StreamEventNotification, event.notification.status?.visibility != .direct {
@@ -114,10 +114,13 @@ import OSLog
           break
         }
 
-        receiveMessage()
+        Task { @MainActor in
+          self.receiveMessage()
+        }
 
       case .failure:
-        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(retryDelay)) {
+        Task { @MainActor in
+          try? await Task.sleep(for: .seconds(self.retryDelay))
           self.retryDelay += 30
           self.stopWatching()
           self.connect()

@@ -78,7 +78,7 @@ import SwiftUI
 
   private var consolidatedNotifications: [ConsolidatedNotification] = []
 
-  func fetchNotifications() async {
+  func fetchNotifications(_ selectedType: Models.Notification.NotificationType?) async {
     guard let client, let currentAccount else { return }
     do {
       var nextPageState: State.PagingState = .hasNextPage
@@ -150,7 +150,7 @@ import SwiftUI
     return allNotifications
   }
 
-  func fetchNextPage() async throws {
+  func fetchNextPage(_ selectedType: Models.Notification.NotificationType?) async throws {
     guard let client else { return }
     guard let lastId = consolidatedNotifications.last?.notificationIds.last else { return }
     let newNotifications: [Models.Notification]
@@ -185,7 +185,7 @@ import SwiftUI
     policy = try? await client?.get(endpoint: Notifications.policy)
   }
 
-  func handleEvent(event: any StreamEvent) {
+  func handleEvent(selectedType: Models.Notification.NotificationType?, event: any StreamEvent) {
     Task {
       // Check if the event is a notification,
       // if it is not already in the list,

@@ -50,7 +50,7 @@ public struct FiltersListView: View {
                 }
               }
               .onDelete { indexes in
-                deleteFilter(indexes: indexes)
+                deleteFilter(client, indexes: indexes)
               }
             }
           }
@@ -89,7 +89,7 @@ public struct FiltersListView: View {
     }
   }
 
-  private func deleteFilter(indexes: IndexSet) {
+  private func deleteFilter(_ client: Client, indexes: IndexSet) {
     if let index = indexes.first {
       Task {
         do {

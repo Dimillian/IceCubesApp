@@ -45,7 +45,8 @@ struct StatusActionButtonStyle: ButtonStyle {
     }
   }
 
-  struct SparklesView: View, Animatable {
+  @MainActor
+  struct SparklesView: View, @preconcurrency Animatable {
     var counter: Float
     var tint: Color
     var size: CGFloat

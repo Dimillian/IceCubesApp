@@ -29,6 +29,13 @@ import UIKit
 
   override public init() {
     super.init()
+    
+    Task { @MainActor in
+      setup()
+    }
+  }
+  
+  private func setup() {
     #if os(visionOS)
       windowWidth = window?.bounds.size.width ?? 0
       windowHeight = window?.bounds.size.height ?? 0
@@ -38,12 +45,6 @@ import UIKit
     #endif
     Self.observedSceneDelegate.insert(self)
     _ = Self.observer // just for activating the lazy static property
-  }
-
-  deinit {
-    Task { @MainActor in
-      Self.observedSceneDelegate.remove(self)
-    }
   }
 
   private static var observedSceneDelegate: Set<SceneDelegate> = []

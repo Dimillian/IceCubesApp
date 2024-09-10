@@ -1,9 +1,10 @@
 #if !os(visionOS) && !DEBUG
   import DesignSystem
-  import GiphyUISDK
+  @preconcurrency import GiphyUISDK
   import SwiftUI
   import UIKit
-
+  
+  @MainActor
   struct GifPickerView: UIViewControllerRepresentable {
     @Environment(Theme.self) private var theme
 
@@ -33,6 +34,7 @@
       GifPickerView.Coordinator(parent: self)
     }
 
+    @MainActor
     class Coordinator: NSObject, GiphyDelegate {
       var parent: GifPickerView
 
@@ -40,13 +42,17 @@
         self.parent = parent
       }
 
-      func didDismiss(controller _: GiphyViewController?) {
-        parent.onShouldDismissGifPicker()
+      nonisolated func didDismiss(controller _: GiphyViewController?) {
+        Task { @MainActor in
+          parent.onShouldDismissGifPicker()
+        }
       }
 
-      func didSelectMedia(giphyViewController _: GiphyViewController, media: GPHMedia) {
-        let url = media.url(rendition: .fixedWidth, fileType: .gif)
-        parent.completion(url ?? "")
+      nonisolated func didSelectMedia(giphyViewController _: GiphyViewController, media: GPHMedia) {
+        Task { @MainActor in
+          let url = media.url(rendition: .fixedWidth, fileType: .gif)
+          parent.completion(url ?? "")
+        }
       }
     }
   }

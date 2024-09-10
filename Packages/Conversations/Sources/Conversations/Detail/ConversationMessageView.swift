@@ -125,7 +125,8 @@ struct ConversationMessageView: View {
       Label(isLiked ? "status.action.unfavorite" : "status.action.favorite",
             systemImage: isLiked ? "star.fill" : "star")
     }
-    Button { Task {
+    Button {
+      Task {
       do {
         let status: Status
         if isBookmarked {

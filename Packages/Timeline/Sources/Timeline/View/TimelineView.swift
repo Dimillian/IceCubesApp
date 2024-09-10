@@ -27,7 +27,6 @@ public struct TimelineView: View {
   @Binding var timeline: TimelineFilter
   @Binding var pinnedFilters: [TimelineFilter]
   @Binding var selectedTagGroup: TagGroup?
-  @Binding var scrollToTopSignal: Int
 
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
@@ -36,82 +35,73 @@ public struct TimelineView: View {
   public init(timeline: Binding<TimelineFilter>,
               pinnedFilters: Binding<[TimelineFilter]>,
               selectedTagGroup: Binding<TagGroup?>,
-              scrollToTopSignal: Binding<Int>,
               canFilterTimeline: Bool)
   {
     _timeline = timeline
     _pinnedFilters = pinnedFilters
     _selectedTagGroup = selectedTagGroup
-    _scrollToTopSignal = scrollToTopSignal
     self.canFilterTimeline = canFilterTimeline
   }
 
   public var body: some View {
-    ScrollViewReader { proxy in
-      ZStack(alignment: .top) {
-        List {
-          scrollToTopView
-          TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $timeline)
-          TimelineTagHeaderView(tag: $viewModel.tag)
-          switch viewModel.timeline {
-          case .remoteLocal:
-            StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
-          default:
-            StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
-              .environment(\.isHomeTimeline, timeline == .home)
+    ZStack(alignment: .top) {
+      List {
+        scrollToTopView
+        TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $timeline)
+        TimelineTagHeaderView(tag: $viewModel.tag)
+        switch viewModel.timeline {
+        case .remoteLocal:
+          StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
+        default:
+          StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
+            .environment(\.isHomeTimeline, timeline == .home)
+        }
+      }
+      .id(client.id)
+      .environment(\.defaultMinListRowHeight, 1)
+      .listStyle(.plain)
+      #if !os(visionOS)
+        .scrollContentBackground(.hidden)
+        .background(theme.primaryBackgroundColor)
+      #endif
+        .introspect(.list, on: .iOS(.v17, .v18)) { (collectionView: UICollectionView) in
+          DispatchQueue.main.async {
+            self.collectionView = collectionView
           }
+          prefetcher.viewModel = viewModel
+          collectionView.isPrefetchingEnabled = true
+          collectionView.prefetchDataSource = prefetcher
         }
-        .id(client.id)
-        .environment(\.defaultMinListRowHeight, 1)
-        .listStyle(.plain)
-        #if !os(visionOS)
-          .scrollContentBackground(.hidden)
-          .background(theme.primaryBackgroundColor)
-        #endif
-          .introspect(.list, on: .iOS(.v17, .v18)) { (collectionView: UICollectionView) in
-            DispatchQueue.main.async {
-              self.collectionView = collectionView
-            }
-            prefetcher.viewModel = viewModel
-            collectionView.isPrefetchingEnabled = true
-            collectionView.prefetchDataSource = prefetcher
-          }
-        if viewModel.timeline.supportNewestPagination {
-          TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver)
+      if viewModel.timeline.supportNewestPagination {
+        TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver)
+      }
+    }
+    .safeAreaInset(edge: .top, spacing: 0) {
+      if canFilterTimeline, !pinnedFilters.isEmpty {
+        VStack(spacing: 0) {
+          TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
+            .padding(.vertical, 8)
+            .padding(.horizontal, .layoutPadding)
+            .background(theme.primaryBackgroundColor.opacity(0.30))
+            .background(Material.ultraThin)
+          Divider()
         }
       }
-      .safeAreaInset(edge: .top, spacing: 0) {
-        if canFilterTimeline, !pinnedFilters.isEmpty {
-          VStack(spacing: 0) {
-            TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
-              .padding(.vertical, 8)
-              .padding(.horizontal, .layoutPadding)
-              .background(theme.primaryBackgroundColor.opacity(0.30))
-              .background(Material.ultraThin)
-            Divider()
-          }
-        }
-      }
-      .if(canFilterTimeline && !pinnedFilters.isEmpty) { view in
-        view.toolbarBackground(.hidden, for: .navigationBar)
-      }
-      .onChange(of: viewModel.scrollToIndex) { _, newValue in
-        if let collectionView,
-           let newValue,
-           let rows = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: 0),
-           rows > newValue
-        {
-          collectionView.scrollToItem(at: .init(row: newValue, section: 0),
-                                      at: .top,
-                                      animated: viewModel.scrollToIndexAnimated)
-          viewModel.scrollToIndexAnimated = false
-          viewModel.scrollToIndex = nil
-        }
-      }
-      .onChange(of: scrollToTopSignal) {
-        withAnimation {
-          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
-        }
+    }
+    .if(canFilterTimeline && !pinnedFilters.isEmpty) { view in
+      view.toolbarBackground(.hidden, for: .navigationBar)
+    }
+    .onChange(of: viewModel.scrollToIndex) { _, newValue in
+      if let collectionView,
+         let newValue,
+         let rows = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: 0),
+         rows > newValue
+      {
+        collectionView.scrollToItem(at: .init(row: newValue, section: 0),
+                                    at: .top,
+                                    animated: viewModel.scrollToIndexAnimated)
+        viewModel.scrollToIndexAnimated = false
+        viewModel.scrollToIndex = nil
       }
     }
     .toolbar {

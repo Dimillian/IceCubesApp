@@ -1,5 +1,5 @@
-@preconcurrency import AVFoundation
-import Foundation
+import AVFoundation
+@preconcurrency import Foundation
 import PhotosUI
 import SwiftUI
 import UIKit

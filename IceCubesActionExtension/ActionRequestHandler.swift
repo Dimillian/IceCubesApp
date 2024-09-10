@@ -13,7 +13,7 @@ import Models
 import Network
 
 // Sample code was sending this from a thread to another, let asume @Sendable for this
-extension NSExtensionContext: @unchecked Sendable {}
+extension NSExtensionContext: @unchecked @retroactive Sendable {}
 
 final class ActionRequestHandler: NSObject, NSExtensionRequestHandling, Sendable {
   enum Error: Swift.Error {
