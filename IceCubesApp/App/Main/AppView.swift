@@ -110,10 +110,7 @@ struct AppView: View {
         HStack(spacing: 0) {
           if #available(iOS 18.0, *) {
             baseTabView
-            .tabViewStyle(.sidebarAdaptable)
-            .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
-              tabview.sidebar.isHidden = true
-            }
+            .tabViewStyle(.tabBarOnly)
           } else {
             baseTabView
           }

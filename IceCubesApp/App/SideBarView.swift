@@ -34,8 +34,8 @@ struct SideBarView<Content: View>: View {
   }
 
   private func makeIconForTab(tab: AppTab) -> some View {
-    HStack {
-      ZStack(alignment: .topTrailing) {
+    ZStack(alignment: .topTrailing) {
+      HStack {
         SideBarIcon(systemIconName: tab.iconName,
                     isSelected: tab == selectedTab)
         if userPreferences.isSidebarExpanded {
@@ -56,7 +56,7 @@ struct SideBarView<Content: View>: View {
       )
       let badge = badgeFor(tab: tab)
       if badge > 0 {
-        makeBadgeView(count: 10)
+        makeBadgeView(count: badge)
       }
     }
   }
@@ -70,7 +70,7 @@ struct SideBarView<Content: View>: View {
         .font(.caption2)
     }
     .frame(width: 24, height: 24)
-    .offset(x: 10, y: -10)
+    .offset(x: 5, y: -5)
   }
 
   private var postButton: some View {
