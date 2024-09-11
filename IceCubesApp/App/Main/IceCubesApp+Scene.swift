@@ -58,7 +58,7 @@ extension IceCubesApp {
         .withModelContainer()
     }
     #if targetEnvironment(macCatalyst)
-    .defaultSize(width: userPreferences.showiPadSecondaryColumn ? 1100 : 800, height: 1400)
+    .windowResizability(.contentSize)
     #elseif os(visionOS)
     .defaultSize(width: 800, height: 1200)
     #endif
