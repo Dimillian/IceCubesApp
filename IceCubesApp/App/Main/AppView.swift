@@ -110,7 +110,14 @@ struct AppView: View {
         HStack(spacing: 0) {
           if #available(iOS 18.0, *) {
             baseTabView
+            #if targetEnvironment(macCatalyst)
+            .tabViewStyle(.sidebarAdaptable)
+            .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
+              tabview.sidebar.isHidden = true
+            }
+            #else
             .tabViewStyle(.tabBarOnly)
+            #endif
           } else {
             baseTabView
           }
