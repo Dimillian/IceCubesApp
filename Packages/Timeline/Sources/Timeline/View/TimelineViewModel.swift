@@ -406,7 +406,7 @@ extension TimelineViewModel {
     guard let client = client, canStreamEvents, isTimelineVisible else { return }
 
     switch event {
-    case let updateEvent as StreamEventUpdate:
+    case _ as StreamEventUpdate:
       // Removed automatic stream for events.
       break
     case let deleteEvent as StreamEventDelete:
