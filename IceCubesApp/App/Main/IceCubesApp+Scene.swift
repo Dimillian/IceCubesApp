@@ -57,11 +57,6 @@ extension IceCubesApp {
         }
         .withModelContainer()
     }
-    #if targetEnvironment(macCatalyst)
-    .windowResizability(.contentSize)
-    #elseif os(visionOS)
-    .defaultSize(width: 800, height: 1200)
-    #endif
     .commands {
       appMenu
     }
@@ -74,6 +69,11 @@ extension IceCubesApp {
         watcher.watch(streams: [.user, .direct])
       }
     }
+    #if targetEnvironment(macCatalyst)
+    .windowResize()
+    #elseif os(visionOS)
+    .defaultSize(width: 800, height: 1200)
+    #endif
   }
 
   @SceneBuilder
@@ -143,6 +143,16 @@ extension IceCubesApp {
     {
       appRouterPath.presentedSheet = .imageURL(urls: urls,
                                                visibility: userPreferences.postVisibility)
+    }
+  }
+}
+
+extension Scene {
+  func windowResize() -> some Scene {
+    if #available(iOS 18.0, *) {
+      return self.windowResizability(.contentSize)
+    } else {
+      return self.defaultSize(width: 1100, height: 1400)
     }
   }
 }
