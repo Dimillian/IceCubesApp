@@ -26,8 +26,7 @@ struct IconSelectorView: View {
     case alt38
     case alt39, alt40, alt41, alt42, alt43
     case alt44, alt45
-    case alt46
-    case alt47, alt48
+    case alt46, alt47, alt48
     case alt49
 
     var appIconName: String {
