@@ -10,7 +10,6 @@ import SwiftUI
   var pendingStatusesCount: Int = 0
 
   var disableUpdate: Bool = false
-  var scrollToIndex: ((Int) -> Void)?
 
   var isLoadingNewStatuses: Bool = false
 
@@ -39,9 +38,7 @@ struct TimelineUnreadStatusesView: View {
 
   var body: some View {
     if observer.pendingStatusesCount > 0 || observer.isLoadingNewStatuses {
-      Button {
-        observer.scrollToIndex?(observer.pendingStatusesCount)
-      } label: {
+      Button { } label: {
         HStack(spacing: 8) {
           if observer.isLoadingNewStatuses {
             ProgressView()

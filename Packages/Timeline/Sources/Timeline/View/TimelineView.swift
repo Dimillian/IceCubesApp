@@ -99,8 +99,7 @@ public struct TimelineView: View {
       {
         collectionView.scrollToItem(at: .init(row: newValue, section: 0),
                                     at: .top,
-                                    animated: viewModel.scrollToIndexAnimated)
-        viewModel.scrollToIndexAnimated = false
+                                    animated: false)
         viewModel.scrollToIndex = nil
       }
     }

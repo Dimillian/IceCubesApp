@@ -80,13 +80,7 @@ import SwiftUI
     }
   }
 
-  var scrollToTopVisible: Bool = false {
-    didSet {
-      if scrollToTopVisible {
-        pendingStatusesObserver.pendingStatuses = []
-      }
-    }
-  }
+  var scrollToTopVisible: Bool = false
 
   var serverName: String {
     client?.server ?? "Error"
@@ -94,15 +88,10 @@ import SwiftUI
 
   var isTimelineVisible: Bool = false
   let pendingStatusesObserver: TimelineUnreadStatusesObserver = .init()
-  var scrollToIndexAnimated: Bool = false
   var marker: Marker.Content?
 
   init(statusFetcher: TimelineStatusFetching = TimelineStatusFetcher()) {
     self.statusFetcher = statusFetcher
-    pendingStatusesObserver.scrollToIndex = { [weak self] index in
-      self?.scrollToIndexAnimated = true
-      self?.scrollToIndex = index
-    }
   }
 
   private func fetchTag(id: String) async {
@@ -159,6 +148,12 @@ extension TimelineViewModel {
 extension TimelineViewModel: StatusesFetcher {
   func pullToRefresh() async {
     timelineTask?.cancel()
+    
+    if !pendingStatusesObserver.pendingStatuses.isEmpty {
+      await dequeuePendingStatuses()
+      return
+    }
+    
     if !timeline.supportNewestPagination || UserPreferences.shared.fastRefreshEnabled {
       await reset()
     }
@@ -245,7 +240,6 @@ extension TimelineViewModel: StatusesFetcher {
       {
         // Restore cache and scroll to latest seen status.
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-        scrollToIndexAnimated = false
         scrollToIndex = index + 1
       } else {
         // Restore cache and scroll to top.
@@ -309,6 +303,23 @@ extension TimelineViewModel: StatusesFetcher {
     return newStatuses
   }
 
+  private func dequeuePendingStatuses() async {
+    canStreamEvents = false
+    pendingStatusesObserver.disableUpdate = true
+    let statuses = await datasource.getFiltered()
+    let newStatuses = pendingStatusesObserver.pendingStatuses.count + 1
+    statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+    try? await Task.sleep(for: .milliseconds(0.005))
+    scrollToIndex = newStatuses
+    DispatchQueue.main.async { [weak self] in
+      self?.pendingStatusesObserver.disableUpdate = false
+      self?.canStreamEvents = true
+    }
+    if pendingStatusesObserver.pendingStatuses.count <= 2 {
+      pendingStatusesObserver.pendingStatuses = []
+    }
+  }
+  
   private func updateTimelineWithNewStatuses(_ newStatuses: [Status]) async {
     let topStatus = await datasource.getFiltered().first
     await datasource.insert(contentOf: newStatuses, at: 0)
@@ -332,7 +343,6 @@ extension TimelineViewModel: StatusesFetcher {
   private func updateTimelineWithScrollToTop(newStatuses: [Status], statuses: [Status], nextPageState: StatusesState.PagingState) {
     pendingStatusesObserver.disableUpdate = true
     statusesState = .display(statuses: statuses, nextPageState: nextPageState)
-    scrollToIndexAnimated = false
     scrollToIndex = newStatuses.count + 1
 
     DispatchQueue.main.async { [weak self] in
@@ -437,7 +447,9 @@ extension TimelineViewModel {
     await datasource.insert(event.status, at: 0)
     await cache()
     StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
-    await updateStatusesState()
+    if scrollToTopVisible, pendingStatusesObserver.pendingStatuses.isEmpty {
+      await updateStatusesState()
+    }
   }
 
   private func handleDeleteEvent(_ event: StreamEventDelete) async {
