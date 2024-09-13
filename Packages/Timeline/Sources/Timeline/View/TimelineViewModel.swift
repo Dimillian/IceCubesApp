@@ -148,12 +148,7 @@ extension TimelineViewModel {
 extension TimelineViewModel: StatusesFetcher {
   func pullToRefresh() async {
     timelineTask?.cancel()
-    
-    if !pendingStatusesObserver.pendingStatuses.isEmpty {
-      await dequeuePendingStatuses()
-      return
-    }
-    
+
     if !timeline.supportNewestPagination || UserPreferences.shared.fastRefreshEnabled {
       await reset()
     }
@@ -302,23 +297,6 @@ extension TimelineViewModel: StatusesFetcher {
     StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
     return newStatuses
   }
-
-  private func dequeuePendingStatuses() async {
-    canStreamEvents = false
-    pendingStatusesObserver.disableUpdate = true
-    let statuses = await datasource.getFiltered()
-    let newStatuses = pendingStatusesObserver.pendingStatuses.count + 1
-    statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-    try? await Task.sleep(for: .milliseconds(0.005))
-    scrollToIndex = newStatuses
-    DispatchQueue.main.async { [weak self] in
-      self?.pendingStatusesObserver.disableUpdate = false
-      self?.canStreamEvents = true
-    }
-    if pendingStatusesObserver.pendingStatuses.count <= 2 {
-      pendingStatusesObserver.pendingStatuses = []
-    }
-  }
   
   private func updateTimelineWithNewStatuses(_ newStatuses: [Status]) async {
     let topStatus = await datasource.getFiltered().first
@@ -429,26 +407,14 @@ extension TimelineViewModel {
 
     switch event {
     case let updateEvent as StreamEventUpdate:
-      await handleUpdateEvent(updateEvent, client: client)
+      // Removed automatic stream for events.
+      break
     case let deleteEvent as StreamEventDelete:
       await handleDeleteEvent(deleteEvent)
     case let statusUpdateEvent as StreamEventStatusUpdate:
       await handleStatusUpdateEvent(statusUpdateEvent, client: client)
     default:
       break
-    }
-  }
-
-  private func handleUpdateEvent(_ event: StreamEventUpdate, client: Client) async {
-    guard timeline == .home,
-          await !datasource.contains(statusId: event.status.id) else { return }
-
-    pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
-    await datasource.insert(event.status, at: 0)
-    await cache()
-    StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
-    if scrollToTopVisible, pendingStatusesObserver.pendingStatuses.isEmpty {
-      await updateStatusesState()
     }
   }
 
