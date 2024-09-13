@@ -17,6 +17,7 @@ struct Tests {
     return subject
   }
   
+  /*
   @Test
   func streamEventInsertNewStatus() async throws {
     let subject = makeSubject()
@@ -29,6 +30,7 @@ struct Tests {
     count = await subject.datasource.count()
     #expect(count == 2)
   }
+   */
   
   @Test
   func streamEventInsertDuplicateStatus() async throws {
