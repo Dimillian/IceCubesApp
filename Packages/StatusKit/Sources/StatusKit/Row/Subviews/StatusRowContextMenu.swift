@@ -150,7 +150,7 @@ struct StatusRowContextMenu: View {
     }
 
     Button {
-      UIPasteboard.general.url = viewModel.url
+      UIPasteboard.general.string = viewModel.url?.absoluteString
     } label: {
       Label("status.action.copy-link", systemImage: "link")
     }
