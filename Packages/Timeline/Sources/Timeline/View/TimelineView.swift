@@ -11,6 +11,8 @@ import SwiftUIIntrospect
 @MainActor
 public struct TimelineView: View {
   @Environment(\.scenePhase) private var scenePhase
+  @Environment(\.selectedTabScrollToTop) private var selectedTabScrollToTop
+  
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var account
   @Environment(StreamWatcher.self) private var watcher
@@ -45,33 +47,42 @@ public struct TimelineView: View {
 
   public var body: some View {
     ZStack(alignment: .top) {
-      List {
-        scrollToTopView
-        TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $timeline)
-        TimelineTagHeaderView(tag: $viewModel.tag)
-        switch viewModel.timeline {
-        case .remoteLocal:
-          StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
-        default:
-          StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
-            .environment(\.isHomeTimeline, timeline == .home)
-        }
-      }
-      .id(client.id)
-      .environment(\.defaultMinListRowHeight, 1)
-      .listStyle(.plain)
-      #if !os(visionOS)
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
-      #endif
-        .introspect(.list, on: .iOS(.v17, .v18)) { (collectionView: UICollectionView) in
-          DispatchQueue.main.async {
-            self.collectionView = collectionView
+      ScrollViewReader { proxy in
+        List {
+          scrollToTopView
+          TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $timeline)
+          TimelineTagHeaderView(tag: $viewModel.tag)
+          switch viewModel.timeline {
+          case .remoteLocal:
+            StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
+          default:
+            StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
+              .environment(\.isHomeTimeline, timeline == .home)
           }
-          prefetcher.viewModel = viewModel
-          collectionView.isPrefetchingEnabled = true
-          collectionView.prefetchDataSource = prefetcher
         }
+        .id(client.id)
+        .environment(\.defaultMinListRowHeight, 1)
+        .listStyle(.plain)
+        .onChange(of: selectedTabScrollToTop) { _, newValue in
+          if newValue == 0, routerPath.path.isEmpty {
+            withAnimation {
+              proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+            }
+          }
+        }
+        #if !os(visionOS)
+          .scrollContentBackground(.hidden)
+          .background(theme.primaryBackgroundColor)
+        #endif
+          .introspect(.list, on: .iOS(.v17, .v18)) { (collectionView: UICollectionView) in
+            DispatchQueue.main.async {
+              self.collectionView = collectionView
+            }
+            prefetcher.viewModel = viewModel
+            collectionView.isPrefetchingEnabled = true
+            collectionView.prefetchDataSource = prefetcher
+          }
+      }
       if viewModel.timeline.supportNewestPagination {
         TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver)
       }

@@ -26,6 +26,7 @@ struct AppView: View {
 
   @State var iosTabs = iOSTabs.shared
   @State var sidebarTabs = SidebarTabs.shared
+  @State var selectedTabScrollToTop: Int = -1
 
   var body: some View {
     #if os(visionOS)
@@ -75,6 +76,7 @@ struct AppView: View {
     }
     .id(appAccountsManager.currentClient.id)
     .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
+    .environment(\.selectedTabScrollToTop, selectedTabScrollToTop)
   }
   
   private func updateTab(with newTab: AppTab) {
@@ -90,6 +92,15 @@ struct AppView: View {
     HapticManager.shared.fireHaptic(.tabSelection)
     SoundEffectManager.shared.playSound(.tabSelection)
 
+    if selectedTab == newTab {
+      selectedTabScrollToTop = newTab.rawValue
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+        selectedTabScrollToTop = -1
+      }
+    } else {
+      selectedTabScrollToTop = -1
+    }
+    
     selectedTab = newTab
   }
 
