@@ -67,12 +67,26 @@ actor TimelineDatasource {
   func insert(contentOf: [Status], at: Int) {
     statuses.insert(contentsOf: contentOf, at: at)
   }
+  
+  func remove(after: Status, safeOffset: Int) {
+    if let index = statuses.firstIndex(of: after) {
+      let safeIndex = index + safeOffset
+      if statuses.count > safeIndex {
+        statuses.removeSubrange(safeIndex..<statuses.endIndex)
+      }
+    }
+  }
 
   func replace(_ status: Status, at: Int) {
     statuses[at] = status
   }
 
-  func remove(_ statusId: String) {
-    statuses.removeAll(where: { $0.id == statusId })
+  func remove(_ statusId: String) -> Status? {
+    if let index = statuses.firstIndex(where: { status in
+      status.id == statusId
+    }) {
+      return statuses.remove(at: index)
+    }
+    return nil
   }
 }

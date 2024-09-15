@@ -65,7 +65,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         }
         .padding(.horizontal, .layoutPadding)
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
         #endif
 
       case .none:

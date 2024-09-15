@@ -57,7 +57,7 @@ import SwiftUI
   }
 
   @ObservationIgnored
-  private var visibileStatuses: [Status] = []
+  private var visibleStatuses: [Status] = []
 
   private var canStreamEvents: Bool = true {
     didSet {
@@ -301,6 +301,9 @@ extension TimelineViewModel: StatusesFetcher {
   private func updateTimelineWithNewStatuses(_ newStatuses: [Status]) async {
     let topStatus = await datasource.getFiltered().first
     await datasource.insert(contentOf: newStatuses, at: 0)
+    if let lastVisible = visibleStatuses.last {
+      await datasource.remove(after: lastVisible, safeOffset: 15)
+    }
     await cache()
     pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map(\.id), at: 0)
 
@@ -308,7 +311,7 @@ extension TimelineViewModel: StatusesFetcher {
     let nextPageState: StatusesState.PagingState = statuses.count < 20 ? .none : .hasNextPage
 
     if let topStatus = topStatus,
-       visibileStatuses.contains(where: { $0.id == topStatus.id }),
+       visibleStatuses.contains(where: { $0.id == topStatus.id }),
        scrollToTopVisible
     {
       updateTimelineWithScrollToTop(newStatuses: newStatuses, statuses: statuses, nextPageState: nextPageState)
@@ -359,17 +362,17 @@ extension TimelineViewModel: StatusesFetcher {
 
   func statusDidAppear(status: Status) {
     pendingStatusesObserver.removeStatus(status: status)
-    visibileStatuses.insert(status, at: 0)
+    visibleStatuses.insert(status, at: 0)
 
     if let client, timeline.supportNewestPagination {
       Task {
-        await cache.setLatestSeenStatuses(visibileStatuses, for: client, filter: timeline.id)
+        await cache.setLatestSeenStatuses(visibleStatuses, for: client, filter: timeline.id)
       }
     }
   }
 
   func statusDidDisappear(status: Status) {
-    visibileStatuses.removeAll(where: { $0.id == status.id })
+    visibleStatuses.removeAll(where: { $0.id == status.id })
   }
 }
 
@@ -419,9 +422,10 @@ extension TimelineViewModel {
   }
 
   private func handleDeleteEvent(_ event: StreamEventDelete) async {
-    await datasource.remove(event.status)
-    await cache()
-    await updateStatusesState()
+    if let _ = await datasource.remove(event.status) {
+      await cache()
+      await updateStatusesState()
+    }
   }
 
   private func handleStatusUpdateEvent(_ event: StreamEventStatusUpdate, client: Client) async {
