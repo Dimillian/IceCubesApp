@@ -115,8 +115,11 @@ struct AppView: View {
 
   #if !os(visionOS)
     var sidebarView: some View {
-      SideBarView(selectedTab: $selectedTab,
-                  tabs: availableTabs)
+      SideBarView(selectedTab: .init(get: {
+        selectedTab
+      }, set: { newTab in
+        updateTab(with: newTab)
+      }), tabs: availableTabs)
       {
         HStack(spacing: 0) {
           if #available(iOS 18.0, *) {
@@ -142,6 +145,7 @@ struct AppView: View {
         }
       }
       .environment(appRouterPath)
+      .environment(\.selectedTabScrollToTop, selectedTabScrollToTop)
     }
   #endif
   
