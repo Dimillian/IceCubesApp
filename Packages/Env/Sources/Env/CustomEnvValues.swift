@@ -6,6 +6,7 @@ extension EnvironmentValues {
   @Entry public var extraLeadingInset: CGFloat = 0
   @Entry public var isCompact: Bool = false
   @Entry public var isMediaCompact: Bool = false
+  @Entry public var isCatalystWindow: Bool = false
   @Entry public var isModal: Bool = false
   @Entry public var isInCaptureMode: Bool = false
   @Entry public var isSupporter: Bool = false

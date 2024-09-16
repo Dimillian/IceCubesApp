@@ -83,6 +83,7 @@ import SwiftUI
 public struct MediaUIAttachmentVideoView: View {
   @Environment(\.openWindow) private var openWindow
   @Environment(\.scenePhase) private var scenePhase
+  @Environment(\.isCatalystWindow) private var isCatalystWindow
   @Environment(\.isMediaCompact) private var isCompact
   @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
@@ -96,6 +97,28 @@ public struct MediaUIAttachmentVideoView: View {
 
   public var body: some View {
     videoView
+      .overlay(content: {
+        if isCatalystWindow {
+          EmptyView()
+        } else {
+          HStack { }
+          .frame(maxWidth: .infinity, maxHeight: .infinity)
+          .contentShape(Rectangle())
+          .onTapGesture {
+            if !preferences.autoPlayVideo && !viewModel.isPlaying {
+              viewModel.play()
+              return
+            }
+            #if targetEnvironment(macCatalyst)
+              viewModel.pause()
+              let attachement = MediaAttachment.videoWith(url: viewModel.url)
+              openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement], selectedAttachment: attachement))
+            #else
+              isFullScreen = true
+            #endif
+          }
+        }
+      })
       .onAppear {
         viewModel.preparePlayer(autoPlay: isFullScreen ? true : preferences.autoPlayVideo,
                                 isCompact: isCompact)
@@ -104,59 +127,8 @@ public struct MediaUIAttachmentVideoView: View {
       .onDisappear {
         viewModel.stop()
       }
-      .onTapGesture {
-        if !preferences.autoPlayVideo && !viewModel.isPlaying {
-          viewModel.play()
-          return
-        }
-        #if targetEnvironment(macCatalyst)
-          viewModel.pause()
-          let attachement = MediaAttachment.videoWith(url: viewModel.url)
-          openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement], selectedAttachment: attachement))
-        #else
-          isFullScreen = true
-        #endif
-      }
       .fullScreenCover(isPresented: $isFullScreen) {
-        NavigationStack {
-          videoView
-            .toolbar {
-              ToolbarItem(placement: .topBarLeading) {
-                Button { isFullScreen.toggle() } label: {
-                  Image(systemName: "xmark.circle")
-                }
-              }
-              QuickLookToolbarItem(itemUrl: viewModel.url)
-            }
-        }
-        .onAppear {
-          DispatchQueue.global().async {
-            try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
-            try? AVAudioSession.sharedInstance().setCategory(.playback, options: .duckOthers)
-            try? AVAudioSession.sharedInstance().setActive(true)
-          }
-          viewModel.preventSleep(true)
-          viewModel.mute(false)
-          DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            if isCompact || !preferences.autoPlayVideo {
-              viewModel.play()
-            } else {
-              viewModel.resume()
-            }
-          }
-        }
-        .onDisappear {
-          if isCompact || !preferences.autoPlayVideo {
-            viewModel.pause()
-          }
-          viewModel.preventSleep(false)
-          viewModel.mute(preferences.muteVideo)
-          DispatchQueue.global().async {
-            try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
-            try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
-            try? AVAudioSession.sharedInstance().setActive(true)
-          }
-        }
+        modalPreview
       }
       .cornerRadius(4)
       .onChange(of: scenePhase) { _, newValue in
@@ -171,6 +143,48 @@ public struct MediaUIAttachmentVideoView: View {
           break
         }
       }
+  }
+  
+  private var modalPreview: some View {
+    NavigationStack {
+      videoView
+        .toolbar {
+          ToolbarItem(placement: .topBarLeading) {
+            Button { isFullScreen.toggle() } label: {
+              Image(systemName: "xmark.circle")
+            }
+          }
+          QuickLookToolbarItem(itemUrl: viewModel.url)
+        }
+    }
+    .onAppear {
+      DispatchQueue.global().async {
+        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        try? AVAudioSession.sharedInstance().setCategory(.playback, options: .duckOthers)
+        try? AVAudioSession.sharedInstance().setActive(true)
+      }
+      viewModel.preventSleep(true)
+      viewModel.mute(false)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        if isCompact || !preferences.autoPlayVideo {
+          viewModel.play()
+        } else {
+          viewModel.resume()
+        }
+      }
+    }
+    .onDisappear {
+      if isCompact || !preferences.autoPlayVideo {
+        viewModel.pause()
+      }
+      viewModel.preventSleep(false)
+      viewModel.mute(preferences.muteVideo)
+      DispatchQueue.global().async {
+        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        try? AVAudioSession.sharedInstance().setCategory(.ambient, options: .mixWithOthers)
+        try? AVAudioSession.sharedInstance().setActive(true)
+      }
+    }
   }
 
   private var videoView: some View {
@@ -194,5 +208,6 @@ public struct MediaUIAttachmentVideoView: View {
       }
     })
     .accessibilityAddTraits(.startsMediaSession)
+    .ignoresSafeArea()
   }
 }

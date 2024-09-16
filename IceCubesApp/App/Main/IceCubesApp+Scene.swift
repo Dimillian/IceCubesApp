@@ -100,6 +100,7 @@ extension IceCubesApp {
         }
       }
       .withEnvironments()
+      .environment(\.isCatalystWindow, true)
       .environment(RouterPath())
       .withModelContainer()
       .applyTheme(theme)
@@ -121,6 +122,7 @@ extension IceCubesApp {
       .withEnvironments()
       .withModelContainer()
       .applyTheme(theme)
+      .environment(\.isCatalystWindow, true)
       .frame(minWidth: 300, minHeight: 400)
     }
     .defaultSize(width: 1200, height: 1000)
