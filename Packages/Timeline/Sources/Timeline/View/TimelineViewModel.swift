@@ -308,15 +308,14 @@ extension TimelineViewModel: StatusesFetcher {
     pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map(\.id), at: 0)
 
     let statuses = await datasource.getFiltered()
-    let nextPageState: StatusesState.PagingState = statuses.count < 20 ? .none : .hasNextPage
 
     if let topStatus = topStatus,
        visibleStatuses.contains(where: { $0.id == topStatus.id }),
        scrollToTopVisible
     {
-      updateTimelineWithScrollToTop(newStatuses: newStatuses, statuses: statuses, nextPageState: nextPageState)
+      updateTimelineWithScrollToTop(newStatuses: newStatuses, statuses: statuses, nextPageState: .hasNextPage)
     } else {
-      updateTimelineWithAnimation(statuses: statuses, nextPageState: nextPageState)
+      updateTimelineWithAnimation(statuses: statuses, nextPageState: .hasNextPage)
     }
   }
 
