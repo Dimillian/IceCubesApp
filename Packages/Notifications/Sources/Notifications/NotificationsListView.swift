@@ -98,6 +98,8 @@ public struct NotificationsListView: View {
     }
     .sheet(isPresented: $isNotificationsPolicyPresented) {
       NotificationsPolicyView()
+        .environment(client)
+        .environment(theme)
     }
     .navigationBarTitleDisplayMode(.inline)
     #if !os(visionOS)
@@ -124,6 +126,7 @@ public struct NotificationsListView: View {
         SoundEffectManager.shared.playSound(.pull)
         HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
         await viewModel.fetchNotifications(viewModel.selectedType)
+        await viewModel.fetchPolicy()
         HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
         SoundEffectManager.shared.playSound(.refresh)
       }

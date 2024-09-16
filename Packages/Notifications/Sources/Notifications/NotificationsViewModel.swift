@@ -182,7 +182,7 @@ import SwiftUI
   }
 
   func fetchPolicy() async {
-    policy = try? await client?.get(endpoint: Notifications.policy)
+    policy = try? await client?.get(endpoint: Notifications.policy, forceVersion: .v2)
   }
 
   func handleEvent(selectedType: Models.Notification.NotificationType?, event: any StreamEvent) {
