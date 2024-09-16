@@ -46,6 +46,7 @@ public struct MediaUIView: View, @unchecked Sendable {
           isFocused = true
         }
       }
+      .ignoresSafeArea()
     }
   }
 
