@@ -6,7 +6,6 @@ import Network
 import StatusKit
 import SwiftData
 import SwiftUI
-import SwiftUIIntrospect
 
 @MainActor
 public struct TimelineView: View {
@@ -20,11 +19,9 @@ public struct TimelineView: View {
   @Environment(RouterPath.self) private var routerPath
 
   @State private var viewModel = TimelineViewModel()
-  @State private var prefetcher = TimelineMediaPrefetcher()
   @State private var contentFilter = TimelineContentFilter.shared
 
   @State private var wasBackgrounded: Bool = false
-  @State private var collectionView: UICollectionView?
 
   @Binding var timeline: TimelineFilter
   @Binding var pinnedFilters: [TimelineFilter]
@@ -66,18 +63,6 @@ public struct TimelineView: View {
     }
     .if(canFilterTimeline && !pinnedFilters.isEmpty) { view in
       view.toolbarBackground(.hidden, for: .navigationBar)
-    }
-    .onChange(of: viewModel.scrollToIndex) { _, newValue in
-      if let collectionView,
-         let newValue,
-         let rows = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: 0),
-         rows > newValue
-      {
-        collectionView.scrollToItem(at: .init(row: newValue, section: 0),
-                                    at: .top,
-                                    animated: false)
-        viewModel.scrollToIndex = nil
-      }
     }
     .toolbar {
       toolbarTitleView
@@ -193,25 +178,23 @@ public struct TimelineView: View {
       .id(client.id)
       .environment(\.defaultMinListRowHeight, 1)
       .listStyle(.plain)
-      #if !os(visionOS)
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
-      #endif
-        .introspect(.list, on: .iOS(.v17, .v18)) { (collectionView: UICollectionView) in
-          DispatchQueue.main.async {
-            self.collectionView = collectionView
-          }
-          prefetcher.viewModel = viewModel
-          collectionView.isPrefetchingEnabled = true
-          collectionView.prefetchDataSource = prefetcher
+#if !os(visionOS)
+      .scrollContentBackground(.hidden)
+      .background(theme.primaryBackgroundColor)
+#endif
+      .onChange(of: viewModel.scrollToId) { _, newValue in
+        if let newValue {
+          proxy.scrollTo(newValue, anchor: .top)
+          viewModel.scrollToId = nil
         }
-        .onChange(of: selectedTabScrollToTop) { _, newValue in
-          if newValue == 0, routerPath.path.isEmpty {
-            withAnimation {
-              proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
-            }
+      }
+      .onChange(of: selectedTabScrollToTop) { _, newValue in
+        if newValue == 0, routerPath.path.isEmpty {
+          withAnimation {
+            proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
           }
         }
+      }
     }
   }
 

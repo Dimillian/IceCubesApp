@@ -7,7 +7,7 @@ import SwiftUI
 
 @MainActor
 @Observable class TimelineViewModel {
-  var scrollToIndex: Int?
+  var scrollToId: String?
   var statusesState: StatusesState = .loading
   var timeline: TimelineFilter = .home {
     willSet {
@@ -229,13 +229,11 @@ extension TimelineViewModel: StatusesFetcher {
     {
       await datasource.set(cachedStatuses)
       let statuses = await datasource.getFiltered()
-      if let latestSeenId = await cache.getLatestSeenStatus(for: client, filter: timeline.id)?.first,
-         let index = await datasource.indexOf(statusId: latestSeenId),
-         index > 0
+      if let latestSeenId = await cache.getLatestSeenStatus(for: client, filter: timeline.id)?.first
       {
         // Restore cache and scroll to latest seen status.
+        scrollToId = latestSeenId
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-        scrollToIndex = index + 1
       } else {
         // Restore cache and scroll to top.
         withAnimation {
@@ -299,6 +297,9 @@ extension TimelineViewModel: StatusesFetcher {
   }
   
   private func updateTimelineWithNewStatuses(_ newStatuses: [Status]) async {
+    defer {
+      canStreamEvents = true
+    }
     let topStatus = await datasource.getFiltered().first
     await datasource.insert(contentOf: newStatuses, at: 0)
     if let lastVisible = visibleStatuses.last {
@@ -313,33 +314,15 @@ extension TimelineViewModel: StatusesFetcher {
        visibleStatuses.contains(where: { $0.id == topStatus.id }),
        scrollToTopVisible
     {
-      updateTimelineWithScrollToTop(newStatuses: newStatuses, statuses: statuses, nextPageState: .hasNextPage)
+      scrollToId = topStatus.id
+      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } else {
-      updateTimelineWithAnimation(statuses: statuses, nextPageState: .hasNextPage)
+      withAnimation {
+        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      }
     }
   }
-
-  // Refresh the timeline while keeping the scroll position to the top status.
-  private func updateTimelineWithScrollToTop(newStatuses: [Status], statuses: [Status], nextPageState: StatusesState.PagingState) {
-    pendingStatusesObserver.disableUpdate = true
-    statusesState = .display(statuses: statuses, nextPageState: nextPageState)
-    scrollToIndex = newStatuses.count + 1
-
-    DispatchQueue.main.async { [weak self] in
-      self?.pendingStatusesObserver.disableUpdate = false
-      self?.canStreamEvents = true
-    }
-  }
-
-  // Refresh the timeline while keeping the user current position.
-  // It works because a side effect of withAnimation is that it keep scroll position IF the List is not scrolled to the top.
-  private func updateTimelineWithAnimation(statuses: [Status], nextPageState: StatusesState.PagingState) {
-    withAnimation {
-      statusesState = .display(statuses: statuses, nextPageState: nextPageState)
-      canStreamEvents = true
-    }
-  }
-
+  
   enum NextPageError: Error {
     case internalError
   }
