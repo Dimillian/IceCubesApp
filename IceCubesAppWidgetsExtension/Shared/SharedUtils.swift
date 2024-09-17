@@ -16,7 +16,8 @@ func loadStatuses(for timeline: TimelineFilter,
     var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                                               maxId: nil,
                                                                               minId: nil,
-                                                                              offset: nil))
+                                                                              offset: nil,
+                                                                              limit: 6))
     statuses = statuses.filter { $0.reblog == nil && !$0.content.asRawText.isEmpty }
     switch widgetFamily {
     case .systemSmall, .systemMedium:

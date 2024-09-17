@@ -157,22 +157,26 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
     }
   }
 
-  public func endpoint(sinceId: String?, maxId: String?, minId: String?, offset: Int?) -> Endpoint {
+  public func endpoint(sinceId: String?,
+                       maxId: String?,
+                       minId: String?,
+                       offset: Int?,
+                       limit: Int?) -> Endpoint {
     switch self {
-    case .federated: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
-    case .local: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
+    case .federated: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false, limit: limit)
+    case .local: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true, limit: limit)
     case let .remoteLocal(_, filter):
       switch filter {
       case .local:
-        return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true)
+        return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true, limit: limit)
       case .federated:
-        return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false)
+        return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false, limit: limit)
       case .trending:
         return Trends.statuses(offset: offset)
       }
-    case .latest: return Timelines.home(sinceId: nil, maxId: nil, minId: nil)
-    case .resume: return Timelines.home(sinceId: nil, maxId: nil, minId: nil)
-    case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId)
+    case .latest: return Timelines.home(sinceId: nil, maxId: nil, minId: nil, limit: limit)
+    case .resume: return Timelines.home(sinceId: nil, maxId: nil, minId: nil, limit: limit)
+    case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId, limit: limit)
     case .trending: return Trends.statuses(offset: offset)
     case let .link(url, _): return Timelines.link(url: url, sinceId: sinceId, maxId: maxId, minId: minId)
     case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)

@@ -25,7 +25,8 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
     return try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                             maxId: nil,
                                                             minId: nil,
-                                                            offset: 0))
+                                                            offset: 0,
+                                                            limit: 40))
   }
   
   func fetchNewPages(client: Client?, timeline: TimelineFilter, minId: String, maxPages: Int) async throws -> [Status] {
@@ -39,7 +40,8 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
         sinceId: nil,
         maxId: nil,
         minId: latestMinId,
-        offset: nil
+        offset: nil,
+        limit: 40
       ))
       
       if newStatuses.isEmpty { break }
@@ -55,6 +57,7 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
     return try await client.get(endpoint: timeline.endpoint(sinceId: nil,
                                                             maxId: lastId,
                                                             minId: nil,
-                                                            offset: offset))
+                                                            offset: offset,
+                                                            limit: 40))
   }
 }

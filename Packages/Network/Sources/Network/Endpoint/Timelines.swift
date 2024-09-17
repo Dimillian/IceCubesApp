@@ -1,8 +1,8 @@
 import Foundation
 
 public enum Timelines: Endpoint {
-  case pub(sinceId: String?, maxId: String?, minId: String?, local: Bool)
-  case home(sinceId: String?, maxId: String?, minId: String?)
+  case pub(sinceId: String?, maxId: String?, minId: String?, local: Bool, limit: Int?)
+  case home(sinceId: String?, maxId: String?, minId: String?, limit: Int?)
   case list(listId: String, sinceId: String?, maxId: String?, minId: String?)
   case hashtag(tag: String, additional: [String]?, maxId: String?, minId: String?)
   case link(url: URL, sinceId: String?, maxId: String?, minId: String?)
@@ -24,12 +24,19 @@ public enum Timelines: Endpoint {
 
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case let .pub(sinceId, maxId, minId, local):
+    case let .pub(sinceId, maxId, minId, local, limit):
       var params = makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: minId) ?? []
       params.append(.init(name: "local", value: local ? "true" : "false"))
+      if let limit {
+        params.append(.init(name: "limit", value: String(limit)))
+      }
       return params
-    case let .home(sinceId, maxId, mindId):
-      return makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: mindId)
+    case let .home(sinceId, maxId, mindId, limit):
+      var params = makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: mindId) ?? []
+      if let limit {
+        params.append(.init(name: "limit", value: String(limit)))
+      }
+      return params
     case let .list(_, sinceId, maxId, mindId):
       return makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: mindId)
     case let .hashtag(_, additional, maxId, minId):
