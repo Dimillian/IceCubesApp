@@ -46,7 +46,6 @@ public struct MediaUIView: View, @unchecked Sendable {
           isFocused = true
         }
       }
-      .ignoresSafeArea()
     }
   }
 
@@ -216,6 +215,7 @@ private struct DisplayView: View {
       MediaUIAttachmentImageView(url: data.url)
     case .av:
       MediaUIAttachmentVideoView(viewModel: .init(url: data.url, forceAutoPlay: true))
+        .ignoresSafeArea()
     }
   }
 }
