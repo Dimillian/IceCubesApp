@@ -161,7 +161,6 @@ struct AppView: View {
           .tag(tab)
       }
     }
-    .id(availableTabs.count)
     #if !os(visionOS)
     .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
       tabview.tabBar.isHidden = horizontalSizeClass == .regular
