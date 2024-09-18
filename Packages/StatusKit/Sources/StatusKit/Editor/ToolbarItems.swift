@@ -34,13 +34,11 @@ extension StatusEditor {
             Image(systemName: "pencil.and.list.clipboard")
           }
           .accessibilityLabel("accessibility.editor.button.drafts")
-          .popover(isPresented: $isDraftsSheetDisplayed) {
+          .sheet(isPresented: $isDraftsSheetDisplayed) {
             if UIDevice.current.userInterfaceIdiom == .phone {
               draftsListView
-                .presentationDetents([.medium])
             } else {
               draftsListView
-                .frame(width: 400, height: 500)
             }
           }
         }

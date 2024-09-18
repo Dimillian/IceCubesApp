@@ -31,7 +31,12 @@ extension StatusEditor {
                   .font(.footnote)
                   .foregroundStyle(.gray)
               }
-            }.listRowBackground(theme.primaryBackgroundColor)
+            }
+            #if os(visionOS)
+            .foregroundStyle(theme.labelColor)
+            #else
+            .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
+            #endif
           }
           .onDelete { indexes in
             if let index = indexes.first {
@@ -42,10 +47,14 @@ extension StatusEditor {
         .toolbar {
           CancelToolbarItem()
         }
+        .listStyle(.insetGrouped)
         .scrollContentBackground(.hidden)
-        .background(theme.secondaryBackgroundColor)
+        .background(.clear)
         .navigationTitle("status.editor.drafts.navigation-title")
         .navigationBarTitleDisplayMode(.inline)
+        .presentationBackground(.thinMaterial)
+        .presentationCornerRadius(16)
+        .presentationDetents([.medium, .large])
       }
     }
   }

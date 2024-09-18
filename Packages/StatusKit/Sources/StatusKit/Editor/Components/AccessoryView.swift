@@ -177,13 +177,8 @@ extension StatusEditor {
           Image(systemName: customEmojiSheetIconName)
         }
         .accessibilityLabel("accessibility.editor.button.custom-emojis")
-        .popover(isPresented: $isCustomEmojisSheetDisplay) {
-          if UIDevice.current.userInterfaceIdiom == .phone {
-            CustomEmojisView(viewModel: focusedSEVM)
-          } else {
-            CustomEmojisView(viewModel: focusedSEVM)
-              .frame(width: 400, height: 500)
-          }
+        .sheet(isPresented: $isCustomEmojisSheetDisplay) {
+          CustomEmojisView(viewModel: focusedSEVM)
         }
       }
 
