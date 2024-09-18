@@ -16,6 +16,8 @@ public struct MediaUIAttachmentImageView: View {
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .scaledToFit()
             .padding(.horizontal, 8)
+            .padding(.top, 44)
+            .padding(.bottom, 32)
             .scaleEffect(zoom)
         } else if state.isLoading {
           ProgressView()

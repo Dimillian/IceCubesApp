@@ -26,11 +26,20 @@ extension IceCubesApp {
         .environment(appIntentService)
         .environment(\.isSupporter, isSupporter)
         .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
-          MediaUIView(selectedAttachment: selectedMediaAttachment,
-                      attachments: quickLook.mediaAttachments)
+          if #available(iOS 18.0, *) {
+            MediaUIView(selectedAttachment: selectedMediaAttachment,
+                        attachments: quickLook.mediaAttachments)
+            .presentationBackground(.ultraThinMaterial)
+            .presentationCornerRadius(16)
+            .presentationSizing(.page)
+            .withEnvironments()
+          } else {
+            MediaUIView(selectedAttachment: selectedMediaAttachment,
+                        attachments: quickLook.mediaAttachments)
             .presentationBackground(.ultraThinMaterial)
             .presentationCornerRadius(16)
             .withEnvironments()
+          }
         }
         .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
           if newValue != nil {
