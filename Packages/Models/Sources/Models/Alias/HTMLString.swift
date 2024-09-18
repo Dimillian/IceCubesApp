@@ -139,10 +139,14 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       } else if node.nodeName() == "a" {
         let href = try node.attr("href")
         if href != "" {
-          if let url = URL(string: href),
-             let _ = Int(url.lastPathComponent)
-          {
-            statusesURLs.append(url)
+          if let url = URL(string: href) {
+            if Int(url.lastPathComponent) != nil {
+              statusesURLs.append(url)
+            } else if url.host() == "www.threads.net" || url.host() == "threads.net",
+                      url.pathComponents.count == 4,
+                      url.pathComponents[2] == "post" {
+              statusesURLs.append(url)
+            }
           }
         }
         asMarkdown += "["
