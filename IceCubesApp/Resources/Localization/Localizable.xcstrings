@@ -20438,7 +20438,14 @@
       }
     },
     "AI" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AA"
+          }
+        }
+      }
     },
     "alert.button.ok" : {
       "localizations" : {
@@ -23844,10 +23851,24 @@
       }
     },
     "Disable to hide AI assisted tool options such as copywritting and alt-image description generated using AI. Uses OpenAI API. See our Privacy Policy for more information." : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ezgaitu AAk lagundutako tresnen aukerak ezkutatzeko, testuen moldaketa edo irudien deskribapena, besteak beste. OpenAI-ren APIa darabil. Ikus pribatutasun politika informazio gehiagorako."
+          }
+        }
+      }
     },
     "Enabling post streaming will automatically add new posts at the top of your home timeline. Disable if you get performance issues." : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidalketen jarioa gaituz gero, bidalketa berriak automatikoki agertuko dira denbora-lerroan. Ezgaitu errendimendu-arazoak izatekotan."
+          }
+        }
+      }
     },
     "enum.avatar-position.leading" : {
       "comment" : "MARK: Enums",
@@ -28705,7 +28726,7 @@
         },
         "eu" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Gori-gorian dauden estekak"
           }
         },
@@ -29198,6 +29219,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Solicitudes de funciones"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ezaugarrien eskaerak"
           }
         },
         "it" : {
@@ -42060,7 +42087,14 @@
       }
     },
     "Posts streaming" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bidalketen jarioa"
+          }
+        }
+      }
     },
     "Privacy Policy" : {
       "localizations" : {
@@ -42068,6 +42102,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Política de Privacidad"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pribatutasun politika"
           }
         },
         "it" : {
@@ -42345,7 +42385,14 @@
       }
     },
     "Remove all cached images and videos" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Katxeko irudi eta bideo guztiak kenduko ditu"
+          }
+        }
+      }
     },
     "report.action.send" : {
       "localizations" : {
@@ -50541,7 +50588,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hondoaren kolorea"
+            "value" : "Atzeko planoko kolorea"
           }
         },
         "fr" : {
@@ -50659,7 +50706,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bigarren mailako hondoaren kolorea"
+            "value" : "Atzeko planoko bigarren mailako kolorea"
           }
         },
         "fr" : {
@@ -62785,6 +62832,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar contenido con gradiente"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erakutsi gradientea"
           }
         },
         "it" : {
@@ -77155,7 +77208,14 @@
       }
     },
     "Streaming" : {
-
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jarioa"
+          }
+        }
+      }
     },
     "Tab" : {
       "localizations" : {
@@ -78988,6 +79048,12 @@
             "value" : "Telemetría"
           }
         },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetria"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -79008,6 +79074,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Telemetría de TelemetryDeck"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetria TelemetryDeck-i esker"
           }
         },
         "it" : {
@@ -83431,13 +83503,13 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "Pertsona batek hizpide"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld pertsonak hizpide"
                 }
               }
