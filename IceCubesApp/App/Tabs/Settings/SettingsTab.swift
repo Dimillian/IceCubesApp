@@ -39,6 +39,7 @@ struct SettingsTabs: View {
         accountsSection
         generalSection
         otherSections
+        AISection
         cacheSection
       }
       .scrollContentBackground(.hidden)
@@ -228,9 +229,6 @@ struct SettingsTabs: View {
         }
         .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
       #endif
-      Toggle(isOn: $preferences.isOpenAIEnabled) {
-        Label("settings.other.hide-openai", systemImage: "faxmachine")
-      }
       Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
         Label("settings.other.social-keyboard", systemImage: "keyboard")
       }
@@ -244,6 +242,23 @@ struct SettingsTabs: View {
       Text("settings.section.other")
     } footer: {
       Text("settings.section.other.footer")
+    }
+    #if !os(visionOS)
+    .listRowBackground(theme.primaryBackgroundColor)
+    #endif
+  }
+  
+  @ViewBuilder
+  private var AISection: some View {
+    @Bindable var preferences = preferences
+    Section {
+      Toggle(isOn: $preferences.isOpenAIEnabled) {
+        Label("settings.other.hide-openai", systemImage: "faxmachine")
+      }
+    } header: {
+      Text("AI")
+    } footer: {
+      Text("Disable to hide AI assisted tools options such as copywritting and alt image description generated from AI. Use OpenAI API. See our Privacy Policy for more information.")
     }
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
@@ -340,7 +355,7 @@ struct SettingsTabs: View {
   }
 
   private var cacheSection: some View {
-    Section("settings.section.cache") {
+    Section {
       if cachedRemoved {
         Text("action.done")
           .transition(.move(edge: .leading))
@@ -352,6 +367,10 @@ struct SettingsTabs: View {
           }
         }
       }
+    } header: {
+      Text("settings.section.cache")
+    } footer: {
+      Text("Remove all cached images and videos")
     }
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)

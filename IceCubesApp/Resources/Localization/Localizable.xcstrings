@@ -20437,6 +20437,9 @@
         }
       }
     },
+    "AI" : {
+
+    },
     "alert.button.ok" : {
       "localizations" : {
         "be" : {
@@ -23839,6 +23842,9 @@
           }
         }
       }
+    },
+    "Disable to hide AI assisted tools options such as copywritting and alt image description generated from AI. Use OpenAI API. See our Privacy Policy for more information." : {
+
     },
     "enum.avatar-position.leading" : {
       "comment" : "MARK: Enums",
@@ -42331,6 +42337,9 @@
           }
         }
       }
+    },
+    "Remove all cached images and videos" : {
+
     },
     "report.action.send" : {
       "localizations" : {
