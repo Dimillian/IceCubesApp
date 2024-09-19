@@ -20,6 +20,8 @@ public struct TimelineView: View {
 
   @State private var viewModel = TimelineViewModel()
   @State private var contentFilter = TimelineContentFilter.shared
+  
+  @State private var scrollToIdAnimated: String? = nil
 
   @State private var wasBackgrounded: Bool = false
 
@@ -45,9 +47,7 @@ public struct TimelineView: View {
   public var body: some View {
     ZStack(alignment: .top) {
       listView
-      if viewModel.timeline.supportNewestPagination {
-        TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver)
-      }
+      statusesObserver
     }
     .safeAreaInset(edge: .top, spacing: 0) {
       if canFilterTimeline, !pinnedFilters.isEmpty {
@@ -188,11 +188,30 @@ public struct TimelineView: View {
           viewModel.scrollToId = nil
         }
       }
+      .onChange(of: scrollToIdAnimated) { _, newValue in
+        if let newValue {
+          withAnimation {
+            proxy.scrollTo(newValue, anchor: .top)
+            scrollToIdAnimated = nil
+          }
+        }
+      }
       .onChange(of: selectedTabScrollToTop) { _, newValue in
         if newValue == 0, routerPath.path.isEmpty {
           withAnimation {
             proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
           }
+        }
+      }
+    }
+  }
+  
+  @ViewBuilder
+  private var statusesObserver: some View {
+    if viewModel.timeline.supportNewestPagination {
+      TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver) { statusId in
+        if let statusId {
+          scrollToIdAnimated = statusId
         }
       }
     }

@@ -32,13 +32,17 @@ import SwiftUI
 }
 
 struct TimelineUnreadStatusesView: View {
-  @State var observer: TimelineUnreadStatusesObserver
   @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
 
+  @State var observer: TimelineUnreadStatusesObserver
+  let onButtonTap: (String?) -> Void
+
   var body: some View {
     if observer.pendingStatusesCount > 0 || observer.isLoadingNewStatuses {
-      Button { } label: {
+      Button {
+        onButtonTap(observer.pendingStatuses.last)
+      } label: {
         HStack(spacing: 8) {
           if observer.isLoadingNewStatuses {
             ProgressView()
