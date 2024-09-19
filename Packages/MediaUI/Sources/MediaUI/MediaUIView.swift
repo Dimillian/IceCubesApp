@@ -75,7 +75,9 @@ private struct MediaToolBar: ToolbarContent {
   let data: DisplayData
 
   var body: some ToolbarContent {
+#if !targetEnvironment(macCatalyst)
     DismissToolbarItem()
+#endif
     QuickLookToolbarItem(itemUrl: data.url)
     AltTextToolbarItem(alt: data.description)
     SavePhotoToolbarItem(url: data.url, type: data.type)
