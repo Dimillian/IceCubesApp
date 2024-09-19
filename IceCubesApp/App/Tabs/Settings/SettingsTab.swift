@@ -276,7 +276,7 @@ struct SettingsTabs: View {
     } header: {
       Text("AI")
     } footer: {
-      Text("Disable to hide AI assisted tools options such as copywritting and alt image description generated from AI. Use OpenAI API. See our Privacy Policy for more information.")
+      Text("Disable to hide AI assisted tool options such as copywritting and alt-image description generated using AI. Uses OpenAI API. See our Privacy Policy for more information.")
     }
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
