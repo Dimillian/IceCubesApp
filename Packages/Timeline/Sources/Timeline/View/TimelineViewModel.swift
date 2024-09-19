@@ -391,9 +391,8 @@ extension TimelineViewModel {
     guard let client = client, canStreamEvents, isTimelineVisible else { return }
 
     switch event {
-    case _ as StreamEventUpdate:
-      // Removed automatic stream for events.
-      break
+    case let updateEvent as StreamEventUpdate:
+      await handleUpdateEvent(updateEvent, client: client)
     case let deleteEvent as StreamEventDelete:
       await handleDeleteEvent(deleteEvent)
     case let statusUpdateEvent as StreamEventStatusUpdate:
@@ -401,6 +400,18 @@ extension TimelineViewModel {
     default:
       break
     }
+  }
+  
+  private func handleUpdateEvent(_ event: StreamEventUpdate, client: Client) async {
+    guard timeline == .home,
+          UserPreferences.shared.isPostsStreamingEnabled,
+          await !datasource.contains(statusId: event.status.id) else { return }
+
+    pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
+    await datasource.insert(event.status, at: 0)
+    await cache()
+    StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
+    await updateStatusesState()
   }
 
   private func handleDeleteEvent(_ event: StreamEventDelete) async {

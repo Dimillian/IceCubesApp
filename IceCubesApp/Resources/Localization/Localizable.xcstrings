@@ -23846,6 +23846,9 @@
     "Disable to hide AI assisted tools options such as copywritting and alt image description generated from AI. Use OpenAI API. See our Privacy Policy for more information." : {
 
     },
+    "Enabling post streaming will automatically add new posts at the top of your home timeline. Disable if you get performance issues." : {
+
+    },
     "enum.avatar-position.leading" : {
       "comment" : "MARK: Enums",
       "extractionState" : "manual",
@@ -42055,6 +42058,9 @@
           }
         }
       }
+    },
+    "Posts streaming" : {
+
     },
     "Privacy Policy" : {
       "localizations" : {
@@ -77147,6 +77153,9 @@
           }
         }
       }
+    },
+    "Streaming" : {
+
     },
     "Tab" : {
       "localizations" : {
