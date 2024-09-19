@@ -11,7 +11,9 @@ import SwiftUI
   var statusesState: StatusesState = .loading
   var timeline: TimelineFilter = .home {
     willSet {
-      if timeline == .home, newValue != .resume {
+      if timeline == .home,
+          newValue != .resume,
+          newValue != timeline {
         saveMarker()
       }
     }
@@ -176,8 +178,11 @@ extension TimelineViewModel: StatusesFetcher {
   func fetchStatuses(from: Marker.Content) async throws {
     guard let client else { return }
     statusesState = .loading
-    var statuses: [Status] = try await statusFetcher.fetchFirstPage(client: client,
-                                                                    timeline: timeline)
+    var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
+                                                                              maxId: from.lastReadId,
+                                                                              minId: nil,
+                                                                              offset: 0,
+                                                                              limit: 40))
 
     StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
 
