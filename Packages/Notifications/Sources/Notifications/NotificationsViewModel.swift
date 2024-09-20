@@ -198,13 +198,21 @@ import SwiftUI
         if event.notification.isConsolidable(selectedType: selectedType),
            !consolidatedNotifications.isEmpty
         {
-          // If the notification type can be consolidated, try to consolidate with the latest row
-          let latestConsolidatedNotification = consolidatedNotifications.removeFirst()
-          await consolidatedNotifications.insert(
-            contentsOf: ([event.notification] + latestConsolidatedNotification.notifications)
-              .consolidated(selectedType: selectedType),
-            at: 0
-          )
+          if let index = consolidatedNotifications.firstIndex(where: { $0.type == event.notification.supportedType && $0.status?.id == event.notification.status?.id }) {
+            let latestConsolidatedNotification = consolidatedNotifications.remove(at: index)
+            await consolidatedNotifications.insert(
+              contentsOf: ([event.notification] + latestConsolidatedNotification.notifications)
+                .consolidated(selectedType: selectedType),
+              at: 0
+            )
+          } else {
+            let latestConsolidatedNotification = consolidatedNotifications.removeFirst()
+            await consolidatedNotifications.insert(
+              contentsOf: ([event.notification] + latestConsolidatedNotification.notifications)
+                .consolidated(selectedType: selectedType),
+              at: 0
+            )
+          }
         } else {
           // Otherwise, just insert the new notification
           await consolidatedNotifications.insert(
