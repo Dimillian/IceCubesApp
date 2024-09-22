@@ -14,6 +14,7 @@ public final class Theme {
       case lineSpacing
       case statusActionSecondary
       case contentGradient
+      case compactLayoutPadding
     }
 
     @AppStorage("is_previously_set") public var isThemePreviouslySet: Bool = false
@@ -32,6 +33,7 @@ public final class Theme {
     @AppStorage(ThemeKey.lineSpacing.rawValue) public var lineSpacing: Double = 1.2
     @AppStorage(ThemeKey.statusActionSecondary.rawValue) public var statusActionSecondary: StatusActionSecondary = .share
     @AppStorage(ThemeKey.contentGradient.rawValue) public var showContentGradient: Bool = true
+    @AppStorage(ThemeKey.compactLayoutPadding.rawValue) public var compactLayoutPadding: Bool = true
     @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
     @AppStorage("chosen_font") public var chosenFontData: Data?
 
@@ -290,7 +292,13 @@ public final class Theme {
       themeStorage.showContentGradient = showContentGradient
     }
   }
-
+  
+  public var compactLayoutPadding: Bool {
+    didSet {
+      themeStorage.compactLayoutPadding = compactLayoutPadding
+    }
+  }
+  
   public var selectedSet: ColorSetName = .iceCubeDark
 
   public static let shared = Theme()
@@ -332,6 +340,7 @@ public final class Theme {
     chosenFontData = themeStorage.chosenFontData
     statusActionSecondary = themeStorage.statusActionSecondary
     showContentGradient = themeStorage.showContentGradient
+    compactLayoutPadding = themeStorage.compactLayoutPadding
     selectedSet = storedSet
 
     computeContrastingTintColor()

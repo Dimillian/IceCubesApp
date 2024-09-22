@@ -2,7 +2,10 @@ import Foundation
 
 @MainActor
 public extension CGFloat {
-  static let layoutPadding: CGFloat = 20
+  static var layoutPadding: CGFloat {
+    Theme.shared.compactLayoutPadding ? 20 : 8
+  }
+  
   static let dividerPadding: CGFloat = 2
   static let scrollToViewHeight: CGFloat = 1
   static let statusColumnsSpacing: CGFloat = 8

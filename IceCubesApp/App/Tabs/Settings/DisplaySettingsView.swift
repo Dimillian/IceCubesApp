@@ -238,6 +238,7 @@ struct DisplaySettingsView: View {
       }
       Toggle("settings.display.show-account-popover", isOn: $userPreferences.showAccountPopover)
       Toggle("Show Content Gradient", isOn: $theme.showContentGradient)
+      Toggle("Compact Layout", isOn: $theme.compactLayoutPadding)
     }
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
