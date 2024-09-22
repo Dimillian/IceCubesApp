@@ -20959,6 +20959,16 @@
         }
       }
     },
+    "Compact Layout" : {
+      "localizations" : {
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Antolaketa trinkoa"
+          }
+        }
+      }
+    },
     "Compose a post" : {
       "localizations" : {
         "de" : {
@@ -50588,7 +50598,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Atzeko planoko kolorea"
+            "value" : "Hondoaren kolorea"
           }
         },
         "fr" : {
@@ -50706,7 +50716,7 @@
         "eu" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Atzeko planoko bigarren mailako kolorea"
+            "value" : "Bigarren mailako hondoaren kolorea"
           }
         },
         "fr" : {
