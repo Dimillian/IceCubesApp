@@ -66,15 +66,12 @@ struct TimelineQuickAccessPills: View {
       case .hashtag:
         Label(filter.title.replacingOccurrences(of: "#", with: ""),
               systemImage: filter.iconName())
-          .font(.callout)
       case let .list(list):
         if let list = currentAccount.lists.first(where: { $0.id == list.id }) {
           Label(list.title, systemImage: filter.iconName())
-            .font(.callout)
         }
       default:
         Label(filter.localizedTitle(), systemImage: filter.iconName())
-          .font(.callout)
       }
     }
     .transition(.push(from: .leading).combined(with: .opacity))
@@ -85,6 +82,9 @@ struct TimelineQuickAccessPills: View {
     .onDrop(of: [.text], delegate: PillDropDelegate(destinationItem: filter,
                                                     items: $pinnedFilters,
                                                     draggedItem: $draggedFilter))
+    .buttonBorderShape(.capsule)
+    .controlSize(.mini)
+    
   }
 
   private func isFilterSupported(_ filter: TimelineFilter) -> Bool {
