@@ -60,12 +60,12 @@ struct TimelineTab: View {
           timeline = .trending
         }
       }
-      Task {
-        await currentAccount.fetchLists()
-      }
       if !client.isAuth {
         routerPath.presentedSheet = .addAccount
       }
+    }
+    .task {
+      await currentAccount.fetchLists()
     }
     .onChange(of: client.isAuth) {
       resetTimelineFilter()

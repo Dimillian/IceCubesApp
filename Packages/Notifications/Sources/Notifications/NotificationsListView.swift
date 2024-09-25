@@ -106,7 +106,7 @@ public struct NotificationsListView: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-      .onAppear {
+      .task {
         viewModel.client = client
         viewModel.currentAccount = account
         if let lockedType {
@@ -117,10 +117,8 @@ public struct NotificationsListView: View {
         } else {
           viewModel.loadSelectedType()
         }
-        Task {
-          await viewModel.fetchNotifications(viewModel.selectedType)
-          await viewModel.fetchPolicy()
-        }
+        await viewModel.fetchNotifications(viewModel.selectedType)
+        await viewModel.fetchPolicy()
       }
       .refreshable {
         SoundEffectManager.shared.playSound(.pull)
