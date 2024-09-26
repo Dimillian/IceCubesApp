@@ -722,6 +722,12 @@
             "value" : "%@ no es una instancia válida"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ n'est pas une instance valide"
+          }
+        },
         "uk" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2721,7 +2727,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Image alt text: %@"
+            "value" : "Texte alternatif de l'image : %@"
           }
         },
         "it" : {
@@ -6410,7 +6416,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posts and replies"
+            "value" : "Publications et réponses"
           }
         },
         "it" : {
@@ -6767,7 +6773,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Displays a larger version."
+            "value" : "Affiche une version plus large."
           }
         },
         "it" : {
@@ -20438,7 +20444,14 @@
       }
     },
     "AI" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IA"
+          }
+        }
+      }
     },
     "alert.button.ok" : {
       "localizations" : {
@@ -20953,7 +20966,14 @@
       }
     },
     "Compact Layout" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Affichage compact"
+          }
+        }
+      }
     },
     "Compose a post" : {
       "localizations" : {
@@ -23847,10 +23867,24 @@
       }
     },
     "Disable to hide AI assisted tool options such as copywritting and alt-image description generated using AI. Uses OpenAI API. See our Privacy Policy for more information." : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désactiver pour cacher les options d'outils d'aideavec l'IA telles que le copywriting et la description d’images générées par l'IA. Utilise l'API OpenAI. Consulter notre Politique de confidentialité pour plus d'informations."
+          }
+        }
+      }
     },
     "Enabling post streaming will automatically add new posts at the top of your home timeline. Disable if you get performance issues." : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activer le streaming des messages ajoutera automatiquement de nouveaux messages en haut de votre timeline. Désactiver si vous avez des problèmes de performance."
+          }
+        }
+      }
     },
     "enum.avatar-position.leading" : {
       "comment" : "MARK: Enums",
@@ -29201,6 +29235,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Solicitudes de funciones"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Demande de fonctionnalité"
           }
         },
         "it" : {
@@ -42063,7 +42103,14 @@
       }
     },
     "Posts streaming" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flux de publications"
+          }
+        }
+      }
     },
     "Privacy Policy" : {
       "localizations" : {
@@ -42071,6 +42118,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Política de Privacidad"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Politique de confidentialité"
           }
         },
         "it" : {
@@ -42162,7 +42215,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Messages privées"
+            "value" : "Messages privés"
           }
         },
         "it" : {
@@ -42348,7 +42401,14 @@
       }
     },
     "Remove all cached images and videos" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer toutes les images et vidéos mises en cache"
+          }
+        }
+      }
     },
     "report.action.send" : {
       "localizations" : {
@@ -57631,7 +57691,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chargement sous-titre…"
+            "value" : "Chargement du sous-titre…"
           }
         },
         "it" : {
@@ -62788,6 +62848,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostrar contenido con gradiente"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher le dégradé de contenu"
           }
         },
         "it" : {
@@ -77158,7 +77224,14 @@
       }
     },
     "Streaming" : {
-
+      "localizations" : {
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flux"
+          }
+        }
+      }
     },
     "Tab" : {
       "localizations" : {
@@ -78991,6 +79064,12 @@
             "value" : "Telemetría"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Télémétrie"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -79011,6 +79090,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Telemetría de TelemetryDeck"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Télémétrie par TelemetryDeck"
           }
         },
         "it" : {
@@ -83452,13 +83537,13 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld personne parle"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld personnes parlent"
                 }
               }
