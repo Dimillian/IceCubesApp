@@ -20438,7 +20438,14 @@
       }
     },
     "AI" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IA"
+          }
+        }
+      }
     },
     "alert.button.ok" : {
       "localizations" : {
@@ -20953,7 +20960,14 @@
       }
     },
     "Compact Layout" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diseño compacto"
+          }
+        }
+      }
     },
     "Compose a post" : {
       "localizations" : {
@@ -23847,10 +23861,24 @@
       }
     },
     "Disable to hide AI assisted tool options such as copywritting and alt-image description generated using AI. Uses OpenAI API. See our Privacy Policy for more information." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desactiva para ocultar la herramienta de asistencia de IA como la redacción y la generación de texto alternativo para imágenes con IA. Utiliza la API de OpenAI. Consulta nuestra Política de Privacidad para más información."
+          }
+        }
+      }
     },
     "Enabling post streaming will automatically add new posts at the top of your home timeline. Disable if you get performance issues." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar la actualización automática de publicaciones añadirá publicaciones nuevas a tu cronología principal. Desactívalo si tienes problemas de rendimiento."
+          }
+        }
+      }
     },
     "enum.avatar-position.leading" : {
       "comment" : "MARK: Enums",
@@ -42063,7 +42091,14 @@
       }
     },
     "Posts streaming" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualización automática de mensajes"
+          }
+        }
+      }
     },
     "Privacy Policy" : {
       "localizations" : {
@@ -42348,7 +42383,14 @@
       }
     },
     "Remove all cached images and videos" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar todas las imágenes y vídeos de la caché"
+          }
+        }
+      }
     },
     "report.action.send" : {
       "localizations" : {
@@ -77158,7 +77200,14 @@
       }
     },
     "Streaming" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualización automática"
+          }
+        }
+      }
     },
     "Tab" : {
       "localizations" : {
