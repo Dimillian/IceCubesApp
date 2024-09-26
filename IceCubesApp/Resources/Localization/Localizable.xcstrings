@@ -20445,6 +20445,12 @@
     },
     "AI" : {
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IA"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20971,6 +20977,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Affichage compact"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diseño compacto"
           }
         }
       }
@@ -23873,6 +23885,12 @@
             "state" : "translated",
             "value" : "Désactiver pour cacher les options d'outils d'aideavec l'IA telles que le copywriting et la description d’images générées par l'IA. Utilise l'API OpenAI. Consulter notre Politique de confidentialité pour plus d'informations."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desactiva para ocultar la herramienta de asistencia de IA como la redacción y la generación de texto alternativo para imágenes con IA. Utiliza la API de OpenAI. Consulta nuestra Política de Privacidad para más información."
+          }
         }
       }
     },
@@ -23882,6 +23900,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Activer le streaming des messages ajoutera automatiquement de nouveaux messages en haut de votre timeline. Désactiver si vous avez des problèmes de performance."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar la actualización automática de publicaciones añadirá publicaciones nuevas a tu cronología principal. Desactívalo si tienes problemas de rendimiento."
           }
         }
       }
@@ -42109,6 +42133,12 @@
             "state" : "translated",
             "value" : "Flux de publications"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualización automática de mensajes"
+          }
         }
       }
     },
@@ -42406,6 +42436,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Supprimer toutes les images et vidéos mises en cache"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar todas las imágenes y vídeos de la caché"
           }
         }
       }
@@ -77229,6 +77265,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Flux"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualización automática"
           }
         }
       }
