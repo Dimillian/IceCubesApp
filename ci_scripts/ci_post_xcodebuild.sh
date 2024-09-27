@@ -3,7 +3,11 @@
 set -e
 
 if [[ "$CI_XCODE_SCHEME" != "IceCubesApp" ]]; then
-    exit 1
+    exit 0
+fi
+
+if [[ "$CI_PRODUCT_PLATFORM" != "iOS" ]]; then
+    exit 0
 fi
 
 required_env_vars=(
