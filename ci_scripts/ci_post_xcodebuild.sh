@@ -2,11 +2,7 @@
 
 set -e
 
-if [[ "$CI_XCODE_SCHEME" != "IceCubesApp" ]]; then
-    exit 0
-fi
-
-if [[ "$CI_PRODUCT_PLATFORM" != "iOS" ]]; then
+if [[ "$CI_WORKFLOW" != "EmergeTools Upload" ]]; then
     exit 0
 fi
 
@@ -24,7 +20,7 @@ pushd $(dirname $CI_ARCHIVE_PATH)
 zip -r --symlinks "$(basename $zip_path)" "$(basename $CI_ARCHIVE_PATH)"
 popd
 
-repo_name='IceCubesApp'
+repo_name='Dimillian/IceCubesApp'
 tag='release'
 json_fields=$(cat <<EOF
 "filename":"${zip_path}",
