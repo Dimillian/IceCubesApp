@@ -17,13 +17,6 @@ required_env_vars=(
     "EMERGE_API_KEY"
 )
 
-for var in "${required_env_vars[@]}"; do
-    if [[ -z "${!var}" ]]; then
-        echo "Environment variable $var is not set"
-        exit 1
-    fi
-done
-
 brew install jq
 
 zip_path="$CI_ARCHIVE_PATH.zip"
