@@ -6,7 +6,6 @@ import SwiftUI
 
 @MainActor
 struct StatusRowHeaderView: View {
-  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.redactionReasons) private var redactionReasons
 

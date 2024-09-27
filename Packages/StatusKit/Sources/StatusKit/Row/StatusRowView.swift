@@ -23,6 +23,7 @@ public struct StatusRowView: View {
   @Environment(Client.self) private var client
 
   @State private var showSelectableText: Bool = false
+  @State private var isShareAsImageSheetPresented: Bool = false
   @State private var isBlockConfirmationPresented = false
 
   public enum Context { case timeline, detail }
@@ -33,7 +34,8 @@ public struct StatusRowView: View {
   var contextMenu: some View {
     StatusRowContextMenu(viewModel: viewModel,
                          showTextForSelection: $showSelectableText,
-                         isBlockConfirmationPresented: $isBlockConfirmationPresented)
+                         isBlockConfirmationPresented: $isBlockConfirmationPresented,
+                         isShareAsImageSheetPresented: $isShareAsImageSheetPresented)
   }
 
   public var body: some View {
@@ -213,7 +215,7 @@ public struct StatusRowView: View {
     }
     .sheet(isPresented: $showSelectableText) {
       let content = viewModel.status.reblog?.content.asSafeMarkdownAttributedString ?? viewModel.status.content.asSafeMarkdownAttributedString
-      SelectTextView(content: content)
+      StatusRowSelectableTextView(content: content)
     }
     .environment(
       StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,

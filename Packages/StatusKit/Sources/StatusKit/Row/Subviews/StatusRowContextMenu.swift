@@ -6,7 +6,6 @@ import SwiftUI
 
 @MainActor
 struct StatusRowContextMenu: View {
-  @Environment(\.displayScale) var displayScale
   @Environment(\.openWindow) var openWindow
 
   @Environment(Client.self) private var client
@@ -21,6 +20,7 @@ struct StatusRowContextMenu: View {
   var viewModel: StatusRowViewModel
   @Binding var showTextForSelection: Bool
   @Binding var isBlockConfirmationPresented: Bool
+  @Binding var isShareAsImageSheetPresented: Bool
 
   var boostLabel: some View {
     if viewModel.status.visibility == .priv, viewModel.status.account.id == account.account?.id {
@@ -101,30 +101,7 @@ struct StatusRowContextMenu: View {
         }
 
         Button {
-          let view = HStack {
-            StatusRowView(viewModel: viewModel, context: .timeline)
-              .padding(16)
-          }
-          .environment(\.isInCaptureMode, true)
-          .environment(Theme.shared)
-          .environment(preferences)
-          .environment(account)
-          .environment(currentInstance)
-          .environment(SceneDelegate())
-          .environment(quickLook)
-          .environment(viewModel.client)
-          .environment(RouterPath())
-          .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
-          .foregroundColor(Theme.shared.labelColor)
-          .background(Theme.shared.primaryBackgroundColor)
-          .frame(width: sceneDelegate.windowWidth - 12)
-          .tint(Theme.shared.tintColor)
-          let renderer = ImageRenderer(content: view)
-          renderer.scale = displayScale
-          renderer.isOpaque = false
-          if let image = renderer.uiImage {
-            viewModel.routerPath.presentedSheet = .shareImage(image: image, status: viewModel.status)
-          }
+          isShareAsImageSheetPresented = true
         } label: {
           Label("status.action.share-image", systemImage: "photo")
         }
@@ -282,61 +259,4 @@ struct StatusRowContextMenu: View {
       }
     }
   }
-}
-
-struct ActivityView: UIViewControllerRepresentable {
-  let image: Image
-
-  func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
-    UIActivityViewController(activityItems: [image], applicationActivities: nil)
-  }
-
-  func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}
-}
-
-struct SelectTextView: View {
-  @Environment(\.dismiss) private var dismiss
-  let content: AttributedString
-
-  var body: some View {
-    NavigationStack {
-      SelectableText(content: content)
-        .padding()
-        .toolbar {
-          ToolbarItem(placement: .navigationBarTrailing) {
-            Button {
-              dismiss()
-            } label: {
-              Text("action.done").bold()
-            }
-          }
-        }
-        .background(Theme.shared.primaryBackgroundColor)
-        .navigationTitle("status.action.select-text")
-        .navigationBarTitleDisplayMode(.inline)
-    }
-  }
-}
-
-struct SelectableText: UIViewRepresentable {
-  let content: AttributedString
-
-  func makeUIView(context _: Context) -> UITextView {
-    let attributedText = NSMutableAttributedString(content)
-    attributedText.addAttribute(
-      .font,
-      value: Font.scaledBodyFont,
-      range: NSRange(location: 0, length: content.characters.count)
-    )
-
-    let textView = UITextView()
-    textView.isEditable = false
-    textView.attributedText = attributedText
-    textView.textColor = UIColor(Color.label)
-    textView.backgroundColor = UIColor(Theme.shared.primaryBackgroundColor)
-    return textView
-  }
-
-  func updateUIView(_: UITextView, context _: Context) {}
-  func makeCoordinator() {}
 }

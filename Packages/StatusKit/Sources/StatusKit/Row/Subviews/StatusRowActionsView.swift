@@ -10,12 +10,15 @@ struct StatusRowActionsView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(StatusDataController.self) private var statusDataController
   @Environment(UserPreferences.self) private var userPreferences
+  @Environment(Client.self) private var client
+  @Environment(SceneDelegate.self) private var sceneDelegate
 
   @Environment(\.openWindow) private var openWindow
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.horizontalSizeClass) var horizontalSizeClass
 
   @State private var showTextForSelection: Bool = false
+  @State private var isShareAsImageSheetPresented: Bool = false
 
   @Binding var isBlockConfirmationPresented: Bool
 
@@ -190,7 +193,8 @@ struct StatusRowActionsView: View {
             Menu {
               StatusRowContextMenu(viewModel: viewModel,
                                    showTextForSelection: $showTextForSelection,
-                                   isBlockConfirmationPresented: $isBlockConfirmationPresented)
+                                   isBlockConfirmationPresented: $isBlockConfirmationPresented,
+                                   isShareAsImageSheetPresented: $isShareAsImageSheetPresented)
                 .onAppear {
                   Task {
                     await viewModel.loadAuthorRelationship()
@@ -215,7 +219,36 @@ struct StatusRowActionsView: View {
     .fixedSize(horizontal: false, vertical: true)
     .sheet(isPresented: $showTextForSelection) {
       let content = viewModel.status.reblog?.content.asSafeMarkdownAttributedString ?? viewModel.status.content.asSafeMarkdownAttributedString
-      SelectTextView(content: content)
+      StatusRowSelectableTextView(content: content)
+        .tint(theme.tintColor)
+    }
+    .sheet(isPresented: $isShareAsImageSheetPresented) {
+      let view =
+      HStack {
+        StatusRowView(viewModel: viewModel, context: .timeline)
+          .padding(8)
+      }
+        .environment(\.isInCaptureMode, true)
+        .environment(RouterPath())
+        .environment(QuickLook.shared)
+        .environment(theme)
+        .environment(client)
+        .environment(sceneDelegate)
+        .environment(UserPreferences.shared)
+        .environment(CurrentAccount.shared)
+        .environment(CurrentInstance.shared)
+        .environment(statusDataController)
+        .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
+        .foregroundColor(theme.labelColor)
+        .background(theme.primaryBackgroundColor)
+        .frame(width: sceneDelegate.windowWidth - 12)
+        .tint(theme.tintColor)
+      let renderer = ImageRenderer(content: AnyView(view))
+      renderer.isOpaque = true
+      renderer.scale = 3.0
+      return StatusRowShareAsImageView(viewModel: viewModel,
+                                       renderer: renderer)
+      .tint(theme.tintColor)
     }
   }
 

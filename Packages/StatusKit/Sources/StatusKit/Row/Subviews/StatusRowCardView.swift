@@ -9,7 +9,6 @@ import SwiftUI
 public struct StatusRowCardView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.openWindow) private var openWindow
-  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.isCompact) private var isCompact: Bool
 
   @Environment(Theme.self) private var theme
@@ -106,7 +105,7 @@ public struct StatusRowCardView: View {
 
   @ViewBuilder
   private func defaultLinkPreview(_ title: String, _ url: URL) -> some View {
-    if let imageURL = card.image, !isInCaptureMode {
+    if let imageURL = card.image {
       DefaultPreviewImage(url: imageURL, originalWidth: card.width, originalHeight: card.height)
     }
 
@@ -134,7 +133,7 @@ public struct StatusRowCardView: View {
 
   private func compactLinkPreview(_ title: String, _ url: URL) -> some View {
     HStack(alignment: .top) {
-      if let imageURL = card.image, !isInCaptureMode {
+      if let imageURL = card.image {
         LazyResizableImage(url: imageURL) { state, _ in
           if let image = state.image {
             image
@@ -212,7 +211,7 @@ public struct StatusRowCardView: View {
   private func iconLinkPreview(_ title: String, _ url: URL) -> some View {
     // ..where the image is known to be a square icon
     HStack {
-      if let imageURL = card.image, !isInCaptureMode {
+      if let imageURL = card.image {
         LazyResizableImage(url: imageURL) { state, _ in
           if let image = state.image {
             image
