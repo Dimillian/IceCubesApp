@@ -2,6 +2,10 @@
 
 set -e
 
+if [[ "$CI_XCODE_SCHEME" != "IceCubesApp" ]]; then
+    exit 1
+fi
+
 required_env_vars=(
     "CI_ARCHIVE_PATH"
     "CI_BRANCH"
@@ -23,14 +27,8 @@ pushd $(dirname $CI_ARCHIVE_PATH)
 zip -r --symlinks "$(basename $zip_path)" "$(basename $CI_ARCHIVE_PATH)"
 popd
 
-# Update this with your repo
 repo_name='IceCubesApp'
-
 tag='release'
-if [[ "$CI_XCODE_SCHEME" == "My Debug Archive Scheme" ]]; then
-    tag='debug'
-fi
-
 json_fields=$(cat <<EOF
 "filename":"${zip_path}",
 "branch":"${CI_BRANCH}",
