@@ -23898,7 +23898,7 @@
             "value" : "禁用以隐藏AI辅助工具选项，例如使用AI生成文案和图片描述文本。内容使用 OpenAI API 生成。如需了解更多信息，请参阅我们的隐私政策。"
           }
         }
-      }
+      } 
     },
     "Enabling post streaming will automatically add new posts at the top of your home timeline. Disable if you get performance issues." : {
       "localizations" : {
@@ -39464,7 +39464,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "转嘟了你的嘟文"
+            "value" : "转发了你的嘟文"
           }
         },
         "zh-Hant" : {
