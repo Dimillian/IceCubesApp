@@ -2310,7 +2310,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "更改嘟文可见度。"
+            "value" : "更改嘟文可见范围。"
           }
         },
         "zh-Hant" : {
@@ -2429,7 +2429,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "可见度"
+            "value" : "可见范围"
           }
         },
         "zh-Hant" : {
@@ -3501,7 +3501,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ 转发了 %@"
+            "value" : "%@ 转嘟了 %@"
           }
         },
         "zh-Hant" : {
@@ -7309,7 +7309,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "显示转发"
+            "value" : "显示转嘟"
           }
         },
         "zh-Hant" : {
@@ -10804,7 +10804,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "隐藏转发"
+            "value" : "隐藏转嘟"
           }
         },
         "zh-Hant" : {
@@ -10923,7 +10923,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "显示转发"
+            "value" : "显示转嘟"
           }
         },
         "zh-Hant" : {
@@ -11873,7 +11873,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "转发"
+            "value" : "转嘟了"
           }
         },
         "zh-Hant" : {
@@ -16136,7 +16136,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粉丝"
+            "value" : "关注者"
           }
         },
         "zh-Hant" : {
@@ -16255,7 +16255,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "关注"
+            "value" : "正在关注"
           }
         },
         "zh-Hant" : {
@@ -16839,13 +16839,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ 粉丝"
+                      "value" : "%2$@ 关注者"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ 粉丝"
+                      "value" : "%2$@ 关注者"
                     }
                   }
                 }
@@ -17704,7 +17704,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "已免打扰的账户"
+            "value" : "已隐藏的账户"
           }
         },
         "zh-Hant" : {
@@ -17823,7 +17823,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "固定的嘟文"
+            "value" : "置顶嘟文"
           }
         },
         "zh-Hant" : {
@@ -18418,7 +18418,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "保存报错"
+            "value" : "保存时发生错误"
           }
         },
         "zh-Hant" : {
@@ -19959,7 +19959,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "少于两个标签"
+            "value" : "至少需要选择两个标签"
           }
         },
         "zh-Hant" : {
@@ -23891,6 +23891,12 @@
             "state" : "translated",
             "value" : "Desactiva para ocultar la herramienta de asistencia de IA como la redacción y la generación de texto alternativo para imágenes con IA. Utiliza la API de OpenAI. Consulta nuestra Política de Privacidad para más información."
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "禁用以隐藏AI辅助工具选项，例如使用AI生成文案和图片描述文本。内容使用 OpenAI API 生成。如需了解更多信息，请参阅我们的隐私政策。"
+          }
         }
       }
     },
@@ -23906,6 +23912,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Activar la actualización automática de publicaciones añadirá publicaciones nuevas a tu cronología principal. Desactívalo si tienes problemas de rendimiento."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用流式传输会自动将新嘟文添加到主页时间线的顶部。如果出现性能问题，请禁用此功能。"
           }
         }
       }
@@ -24019,7 +24031,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "居首"
+            "value" : "居于左侧"
           }
         },
         "zh-Hant" : {
@@ -24138,7 +24150,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "顶部"
+            "value" : "居于顶部"
           }
         },
         "zh-Hant" : {
@@ -25685,7 +25697,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "隐藏所有"
+            "value" : "隐藏全部"
           }
         },
         "zh-Hant" : {
@@ -25923,7 +25935,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全部粉丝"
+            "value" : "显示全部"
           }
         },
         "zh-Hant" : {
@@ -26994,7 +27006,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "多个投票"
+            "value" : "多选"
           }
         },
         "zh-Hant" : {
@@ -27114,7 +27126,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "单个投票"
+            "value" : "单选"
           }
         },
         "zh-Hant" : {
@@ -30512,7 +30524,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "结束时间"
+            "value" : "失效时间"
           }
         },
         "zh-Hant" : {
@@ -33479,7 +33491,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "它仍可用作为你所处服务器的翻译服务的备用。"
+            "value" : "它仍可作为你所在服务器的备用翻译服务。"
           }
         }
       }
@@ -33639,7 +33651,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "不在主页显示这些嘟文"
+            "value" : "在主页中隐藏这些嘟文"
           }
         },
         "zh-Hant" : {
@@ -33996,7 +34008,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "全部粉丝"
+            "value" : "任何已关注的用户"
           }
         },
         "zh-Hant" : {
@@ -34644,7 +34656,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "创建列表"
+            "value" : "新建列表"
           }
         },
         "zh-Hant" : {
@@ -37926,7 +37938,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "出现了一个错误"
+            "value" : "载入通知时发生错误"
           }
         },
         "zh-Hant" : {
@@ -38129,7 +38141,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "星标"
+            "value" : "喜欢了你的嘟文"
           }
         },
         "zh-Hant" : {
@@ -39452,7 +39464,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "已转发"
+            "value" : "转嘟了你的嘟文"
           }
         },
         "zh-Hant" : {
@@ -39571,7 +39583,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🚀 转发了："
+            "value" : "🚀 转嘟了："
           }
         },
         "zh-Hant" : {
@@ -40761,7 +40773,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "转发"
+            "value" : "转嘟"
           }
         },
         "zh-Hant" : {
@@ -41807,7 +41819,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "发布状态"
+            "value" : "发布嘟文"
           }
         }
       }
@@ -41859,7 +41871,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "发布带图片的状态"
+            "value" : "发布带有图片的嘟文"
           }
         }
       }
@@ -42069,7 +42081,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "向 Mastodon 发布状态"
+            "value" : "向 Mastodon 发布嘟文"
           }
         }
       }
@@ -42121,7 +42133,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "嘟文可见度"
+            "value" : "嘟文可见范围"
           }
         }
       }
@@ -42138,6 +42150,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Actualización automática de mensajes"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用嘟文流式传输"
           }
         }
       }
@@ -42217,7 +42235,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "具体的人"
+            "value" : "特定的人"
           }
         }
       }
@@ -44930,7 +44948,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "被折叠嘟文只会显示前几行但会提供查看全文的按钮"
+            "value" : "被折叠的嘟文只会显示有限的行数，并提供查看全文的按钮"
           }
         },
         "zh-Hant" : {
@@ -45048,7 +45066,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "默认回复可见性"
+            "value" : "默认回复可见范围"
           }
         },
         "zh-Hant" : {
@@ -45284,7 +45302,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "默认发布内容可见性"
+            "value" : "默认嘟文可见范围"
           }
         },
         "zh-Hant" : {
@@ -46346,7 +46364,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "有 ALT 才能发布"
+            "value" : "发布图片时必须包含描述文本"
           }
         },
         "zh-Hant" : {
@@ -47174,7 +47192,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "头像边框"
+            "value" : "头像形状"
           }
         },
         "zh-Hant" : {
@@ -50470,7 +50488,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "二级状态操作"
+            "value" : "次要嘟文操作"
           }
         },
         "zh-Hant" : {
@@ -50824,7 +50842,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "二级背景颜色"
+            "value" : "次级背景颜色"
           }
         },
         "zh-Hant" : {
@@ -51532,7 +51550,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "应用内浏览器"
+            "value" : "内置浏览器"
           }
         },
         "zh-Hant" : {
@@ -51650,7 +51668,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "启用应用内浏览器阅读器"
+            "value" : "启用内置浏览器阅读器"
           }
         },
         "zh-Hant" : {
@@ -52122,7 +52140,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "触感触控"
+            "value" : "触感反馈"
           }
         },
         "zh-Hant" : {
@@ -53303,7 +53321,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "触感触控设置"
+            "value" : "触控设置"
           }
         },
         "zh-Hant" : {
@@ -54365,7 +54383,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "转发"
+            "value" : "转嘟"
           }
         },
         "zh-Hant" : {
@@ -60149,7 +60167,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "转发"
+            "value" : "转嘟"
           }
         },
         "zh-Hant" : {
@@ -63139,7 +63157,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "转发"
+            "value" : "转嘟"
           }
         },
         "zh-Hant" : {
@@ -63258,7 +63276,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "转发给粉丝"
+            "value" : "转嘟给关注者"
           }
         },
         "zh-Hant" : {
@@ -64448,7 +64466,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "固定"
+            "value" : "置顶"
           }
         },
         "zh-Hant" : {
@@ -66234,7 +66252,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消转发"
+            "value" : "取消转嘟"
           }
         },
         "zh-Hant" : {
@@ -66472,7 +66490,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消固定"
+            "value" : "取消置顶"
           }
         },
         "zh-Hant" : {
@@ -70518,7 +70536,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "嘟文可见性"
+            "value" : "嘟文可见范围"
           }
         },
         "zh-Hant" : {
@@ -74767,7 +74785,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "转发"
+            "value" : "转嘟"
           }
         },
         "zh-Hant" : {
@@ -75005,7 +75023,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "你转发了"
+            "value" : "你转嘟了"
           }
         },
         "zh-Hant" : {
@@ -76051,13 +76069,13 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld 转发"
+                  "value" : "%lld 转嘟"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld 转发"
+                  "value" : "%lld 转嘟"
                 }
               }
             }
@@ -77010,7 +77028,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粉丝"
+            "value" : "关注者"
           }
         },
         "zh-Hant" : {
@@ -77271,6 +77289,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Actualización automática"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "流式传输"
           }
         }
       }
@@ -81130,7 +81154,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "显示转发"
+            "value" : "显示转嘟"
           }
         },
         "zh-Hant" : {
@@ -83944,7 +83968,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "使用 Ice Cubes 向 Mastodon 发布状态"
+            "value" : "使用 Ice Cubes 向 Mastodon 发布嘟文"
           }
         }
       }
@@ -83997,7 +84021,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "使用 Ice Cubes 向 Mastodon 发布带有图片的状态"
+            "value" : "使用 Ice Cubes 向 Mastodon 发布带有图片的嘟文"
           }
         }
       }
@@ -84049,7 +84073,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "可见度"
+            "value" : "可见范围"
           }
         }
       }
@@ -84101,7 +84125,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "嘟文可见度"
+            "value" : "嘟文可见范围"
           }
         }
       }
