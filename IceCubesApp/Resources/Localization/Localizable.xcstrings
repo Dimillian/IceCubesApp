@@ -37938,7 +37938,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "载入通知时发生错误"
+            "value" : "发生错误"
           }
         },
         "zh-Hant" : {
@@ -71131,7 +71131,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "发生了一个错误"
+            "value" : "发生错误"
           }
         },
         "zh-Hant" : {
