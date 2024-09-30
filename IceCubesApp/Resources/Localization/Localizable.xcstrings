@@ -7666,7 +7666,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "已免打扰"
+            "value" : "已隐藏"
           }
         },
         "zh-Hant" : {
@@ -10328,7 +10328,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "免打扰"
+            "value" : "隐藏"
           }
         },
         "zh-Hant" : {
@@ -11280,7 +11280,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "取消免打扰"
+            "value" : "取消隐藏"
           }
         },
         "zh-Hant" : {
