@@ -28369,7 +28369,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "搜索你的服务器"
+            "value" : "在你的服务器上搜索"
           }
         },
         "zh-Hant" : {
@@ -39464,7 +39464,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "转发了你的嘟文"
+            "value" : "转嘟了你的嘟文"
           }
         },
         "zh-Hant" : {
