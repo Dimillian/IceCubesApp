@@ -189,6 +189,13 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         }
         // Strip newlines and line separators - they should be being sent as <br>s
         asMarkdown += txt.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\u{2028}", with: "")
+      } else if node.nodeName() == "blockquote" {
+        asMarkdown += "\n\n`"
+        for nn in node.getChildNodes() {
+          handleNode(node: nn, indent: indent)
+        }
+        asMarkdown += "`"
+        return
       } else if node.nodeName() == "strong" || node.nodeName() == "b" {
         asMarkdown += "**"
         for nn in node.getChildNodes() {
