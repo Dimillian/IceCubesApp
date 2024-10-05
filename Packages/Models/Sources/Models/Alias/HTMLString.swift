@@ -109,7 +109,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     try container.encode(links, forKey: .links)
   }
 
-  private mutating func handleNode(node: SwiftSoup.Node) {
+  private mutating func handleNode(node: SwiftSoup.Node, indent: Int? = 0) {
     do {
       if let className = try? node.attr("class") {
         if className == "invisible" {
@@ -121,7 +121,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
           // descend into this one now and
           // append the ellipsis
           for nn in node.getChildNodes() {
-            handleNode(node: nn)
+            handleNode(node: nn, indent: indent)
           }
           asMarkdown += "…"
           return
@@ -189,32 +189,45 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         }
         // Strip newlines and line separators - they should be being sent as <br>s
         asMarkdown += txt.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\u{2028}", with: "")
-      } else if node.nodeName() == "ul" {
-        // Unordered (bulleted) list
-        // SwiftUI's Text won't display these in an AttributedString, but we can at least improve the appearance
-        asMarkdown += "\n\n"
+      } else if node.nodeName() == "strong" || node.nodeName() == "b" {
+        asMarkdown += "**"
         for nn in node.getChildNodes() {
-          asMarkdown += "- "
-          handleNode(node: nn)
-          asMarkdown += "\n"
+          handleNode(node: nn, indent: indent)
+        }
+        asMarkdown += "**"
+        return
+      } else if node.nodeName() == "em" || node.nodeName() == "i" {
+        asMarkdown += "_"
+        for nn in node.getChildNodes() {
+          handleNode(node: nn, indent: indent)
+        }
+        asMarkdown += "_"
+        return
+      } else if node.nodeName() == "ul" || node.nodeName() == "ol" {
+        asMarkdown += "\n"
+        for nn in node.getChildNodes() {
+          handleNode(node: nn, indent: (indent ?? 0) + 1)
         }
         return
-      } else if node.nodeName() == "ol" {
-        // Ordered (numbered) list
-        // Same thing, won't display in a Text, but this is just an attempt to improve the appearance
-        asMarkdown += "\n\n"
-        var curNumber = 1
-        for nn in node.getChildNodes() {
-          asMarkdown += "\(curNumber). "
-          handleNode(node: nn)
-          asMarkdown += "\n"
-          curNumber += 1
+      } else if node.nodeName() == "li" {
+        asMarkdown += "   "
+        if let indent, indent > 1 {
+          for _ in 0..<indent {
+            asMarkdown += "   "
+          }
+          asMarkdown += "- "
+        } else {
+          asMarkdown += "• "
         }
+        for nn in node.getChildNodes() {
+          handleNode(node: nn, indent: indent)
+        }
+        asMarkdown += "\n"
         return
       }
 
       for n in node.getChildNodes() {
-        handleNode(node: n)
+        handleNode(node: n, indent: indent)
       }
     } catch {}
   }
