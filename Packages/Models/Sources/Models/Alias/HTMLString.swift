@@ -49,7 +49,8 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       asMarkdown = ""
       do {
         let document: Document = try SwiftSoup.parse(htmlValue)
-        handleNode(node: document)
+        var listCounters: [Int] = []
+        handleNode(node: document, listCounters: &listCounters)
 
         document.outputSettings(OutputSettings().prettyPrint(pretty: false))
         try document.select("br").after("\n")
@@ -109,7 +110,10 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     try container.encode(links, forKey: .links)
   }
 
-  private mutating func handleNode(node: SwiftSoup.Node, indent: Int? = 0) {
+  private mutating func handleNode(node: SwiftSoup.Node,
+                                   indent: Int? = 0,
+                                   skipParagraph: Bool = false,
+                                   listCounters: inout [Int]) {
     do {
       if let className = try? node.attr("class") {
         if className == "invisible" {
@@ -121,7 +125,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
           // descend into this one now and
           // append the ellipsis
           for nn in node.getChildNodes() {
-            handleNode(node: nn, indent: indent)
+            handleNode(node: nn, indent: indent, listCounters: &listCounters)
           }
           asMarkdown += "…"
           return
@@ -129,11 +133,14 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       }
 
       if node.nodeName() == "p" {
-        if asMarkdown.count > 0 { // ignore first opening <p>
+        if asMarkdown.count > 0 && !skipParagraph {
           asMarkdown += "\n\n"
         }
       } else if node.nodeName() == "br" {
         if asMarkdown.count > 0 { // ignore first opening <br>
+          asMarkdown += "\n"
+        }
+        if (indent ?? 0) > 0 {
           asMarkdown += "\n"
         }
       } else if node.nodeName() == "a" {
@@ -154,7 +161,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         // descend into this node now so we can wrap the
         // inner part of the link in the right markup
         for nn in node.getChildNodes() {
-          handleNode(node: nn)
+          handleNode(node: nn, listCounters: &listCounters)
         }
         let finish = asMarkdown.endIndex
 
@@ -192,29 +199,46 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       } else if node.nodeName() == "blockquote" {
         asMarkdown += "\n\n`"
         for nn in node.getChildNodes() {
-          handleNode(node: nn, indent: indent)
+          handleNode(node: nn, indent: indent, listCounters: &listCounters)
         }
         asMarkdown += "`"
         return
       } else if node.nodeName() == "strong" || node.nodeName() == "b" {
         asMarkdown += "**"
         for nn in node.getChildNodes() {
-          handleNode(node: nn, indent: indent)
+          handleNode(node: nn, indent: indent, listCounters: &listCounters)
         }
         asMarkdown += "**"
         return
       } else if node.nodeName() == "em" || node.nodeName() == "i" {
         asMarkdown += "_"
         for nn in node.getChildNodes() {
-          handleNode(node: nn, indent: indent)
+          handleNode(node: nn, indent: indent, listCounters: &listCounters)
         }
         asMarkdown += "_"
         return
       } else if node.nodeName() == "ul" || node.nodeName() == "ol" {
-        asMarkdown += "\n"
-        for nn in node.getChildNodes() {
-          handleNode(node: nn, indent: (indent ?? 0) + 1)
+        
+        if skipParagraph {
+          asMarkdown += "\n"
+        } else {
+          asMarkdown += "\n\n"
         }
+        
+        var listCounters = listCounters
+        
+        if node.nodeName() == "ol" {
+          listCounters.append(1) // Start numbering for a new ordered list
+        }
+        
+        for nn in node.getChildNodes() {
+          handleNode(node: nn, indent: (indent ?? 0) + 1, listCounters: &listCounters)
+        }
+        
+        if node.nodeName() == "ol" {
+          listCounters.removeLast()
+        }
+        
         return
       } else if node.nodeName() == "li" {
         asMarkdown += "   "
@@ -223,18 +247,26 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
             asMarkdown += "   "
           }
           asMarkdown += "- "
-        } else {
-          asMarkdown += "• "
         }
+        
+   
+        if listCounters.isEmpty {
+          asMarkdown += "• "
+        } else {
+          let currentIndex = listCounters.count - 1
+          asMarkdown += "\(listCounters[currentIndex]). "
+          listCounters[currentIndex] += 1
+        }
+        
         for nn in node.getChildNodes() {
-          handleNode(node: nn, indent: indent)
+          handleNode(node: nn, indent: indent, skipParagraph: true, listCounters: &listCounters)
         }
         asMarkdown += "\n"
         return
       }
 
       for n in node.getChildNodes() {
-        handleNode(node: n, indent: indent)
+        handleNode(node: n, indent: indent, listCounters: &listCounters)
       }
     } catch {}
   }
