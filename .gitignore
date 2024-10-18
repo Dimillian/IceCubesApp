@@ -90,3 +90,5 @@ fastlane/test_output
 iOSInjectionProject/
 .DS_Store
 IceCubesApp.xcconfig
+*.resolved
+buildServer.json
