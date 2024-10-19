@@ -6,7 +6,6 @@ import SwiftUI
 
 struct NotificationsRequestsRowView: View {
   @Environment(Theme.self) private var theme
-  @Environment(RouterPath.self) private var routerPath
   @Environment(Client.self) private var client
 
   let request: NotificationsRequest
@@ -39,18 +38,5 @@ struct NotificationsRequestsRowView: View {
       Image(systemName: "chevron.right")
         .foregroundStyle(.secondary)
     }
-    .onTapGesture {
-      routerPath.navigate(to: .notificationForAccount(accountId: request.account.id))
-    }
-    .listRowInsets(.init(top: 12,
-                         leading: .layoutPadding,
-                         bottom: 12,
-                         trailing: .layoutPadding))
-    #if os(visionOS)
-      .listRowBackground(RoundedRectangle(cornerRadius: 8)
-        .foregroundStyle(.background))
-    #else
-        .listRowBackground(theme.primaryBackgroundColor)
-    #endif
   }
 }

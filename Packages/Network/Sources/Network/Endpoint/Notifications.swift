@@ -11,8 +11,8 @@ public enum Notifications: Endpoint {
   case policy
   case putPolicy(policy: Models.NotificationsPolicy)
   case requests
-  case acceptRequest(id: String)
-  case dismissRequest(id: String)
+  case acceptRequests(ids: [String])
+  case dismissRequests(ids: [String])
   case clear
 
   public func path() -> String {
@@ -25,10 +25,10 @@ public enum Notifications: Endpoint {
       "notifications/policy"
     case .requests:
       "notifications/requests"
-    case let .acceptRequest(id):
-      "notifications/requests/\(id)/accept"
-    case let .dismissRequest(id):
-      "notifications/requests/\(id)/dismiss"
+    case .acceptRequests:
+      "notifications/requests/accept"
+    case .dismissRequests:
+      "notifications/requests/dismiss"
     case .clear:
       "notifications/clear"
     }
@@ -58,6 +58,8 @@ public enum Notifications: Endpoint {
         }
       }
       return params
+    case let .acceptRequests(ids), let .dismissRequests(ids):
+      return ids.map { URLQueryItem(name: "id[]", value: $0) }
     default:
       return nil
     }
