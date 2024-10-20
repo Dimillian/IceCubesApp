@@ -34,6 +34,14 @@ struct IceCubesApp: App {
 
   @State var isSupporter: Bool = false
 
+  init() {
+    #if DEBUG
+    // Enable "GraphReuseLogging" for debugging purpose
+    // subsystem: "com.apple.SwiftUI" category: "GraphReuse"
+    UserDefaults.standard.register(defaults: ["com.apple.SwiftUI.GraphReuseLogging": true])
+    #endif
+  }
+
   var body: some Scene {
     appScene
     otherScenes
