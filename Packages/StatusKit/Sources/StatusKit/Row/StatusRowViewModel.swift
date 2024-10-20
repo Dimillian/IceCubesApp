@@ -18,6 +18,8 @@ import SwiftUI
 
   let client: Client
   let routerPath: RouterPath
+  
+  let hierarchyCollapseState: StatusHierarchyCollapseState?
 
   let userFollowedTag: HTMLString.Link?
 
@@ -64,6 +66,20 @@ import SwiftUI
          relationship.blocking || relationship.muting
       {
         lineLimit = 0
+      }
+    }
+  }
+  
+  // toggled on tap, collapses the post with its hierarchy of replies
+  var isHierarchyExplicitlyCollapsed: Bool {
+    get {
+      hierarchyCollapseState?.explicitlyCollapsedStatusIds.contains(status.id) ?? false
+    }
+    set {
+      if newValue {
+        hierarchyCollapseState?.explicitlyCollapsedStatusIds.insert(status.id)
+      } else {
+        hierarchyCollapseState?.explicitlyCollapsedStatusIds.remove(status.id)
       }
     }
   }
@@ -166,6 +182,7 @@ import SwiftUI
   public init(status: Status,
               client: Client,
               routerPath: RouterPath,
+              hierarchyCollapseState: StatusHierarchyCollapseState? = nil,
               isRemote: Bool = false,
               showActions: Bool = true,
               textDisabled: Bool = false,
@@ -175,6 +192,7 @@ import SwiftUI
     finalStatus = status.reblog ?? status
     self.client = client
     self.routerPath = routerPath
+    self.hierarchyCollapseState = hierarchyCollapseState
     self.isRemote = isRemote
     self.showActions = showActions
     self.textDisabled = textDisabled
