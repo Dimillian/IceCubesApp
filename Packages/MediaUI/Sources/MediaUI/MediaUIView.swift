@@ -3,6 +3,7 @@ import Models
 import Nuke
 import QuickLook
 import SwiftUI
+import Photos
 
 public struct MediaUIView: View, @unchecked Sendable {
   private let data: [DisplayData]
@@ -144,6 +145,8 @@ private struct SavePhotoToolbarItem: ToolbarContent, @unchecked Sendable {
                   state = .unsaved
                 }
               }
+            } else {
+              state = .unsaved
             }
           }
         } label: {
@@ -180,11 +183,19 @@ private struct SavePhotoToolbarItem: ToolbarContent, @unchecked Sendable {
     }
     return nil
   }
-
+  
   private func saveImage(url: URL) async -> Bool {
+    var status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+    
     if let image = try? await uiimageFor(url: url) {
-      UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-      return true
+      if status != .authorized {
+        await PHPhotoLibrary.requestAuthorization(for: .addOnly)
+        status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+      }
+      if status == .authorized {
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        return true
+      }
     }
     return false
   }
