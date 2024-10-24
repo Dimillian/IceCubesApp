@@ -92,7 +92,11 @@ public struct NotificationsRequestsListView: View {
         }
         .buttonStyle(.bordered)
         Button {
-          Task { await acceptSelectedRequests(client) }
+          Task {
+            await acceptSelectedRequests(client)
+            isInSelectMode = false
+            selectedRequests.removeAll()
+          }
         } label: {
           Text("Accept")
         }
@@ -100,7 +104,11 @@ public struct NotificationsRequestsListView: View {
         .buttonStyle(.borderedProminent)
 
         Button {
-          Task { await rejectSelectedRequests(client) }
+          Task {
+            await rejectSelectedRequests(client)
+            isInSelectMode = false
+            selectedRequests.removeAll()
+          }
         } label: {
           Text("Reject")
         }
