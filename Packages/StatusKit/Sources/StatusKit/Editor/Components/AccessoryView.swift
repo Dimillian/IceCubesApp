@@ -179,6 +179,7 @@ extension StatusEditor {
         .accessibilityLabel("accessibility.editor.button.custom-emojis")
         .sheet(isPresented: $isCustomEmojisSheetDisplay) {
           CustomEmojisView(viewModel: focusedSEVM)
+            .environment(theme)
         }
       }
 
