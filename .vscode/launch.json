@@ -7,7 +7,7 @@
         {
             "type": "sweetpad-lldb",
             "request": "launch",
-            "name": "Attach to running app (SweetPad)",
+            "name": "Debug",
             "preLaunchTask": "sweetpad: launch"
         }
     ]
