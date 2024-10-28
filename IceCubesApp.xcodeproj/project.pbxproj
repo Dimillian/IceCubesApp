@@ -47,8 +47,6 @@
 		9FC2A38F2B49D1AA00DFD1C1 /* StatusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9FC2A38E2B49D1AA00DFD1C1 /* StatusKit */; };
 		9FD542E72962D2FF0045321A /* Lists in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD542E62962D2FF0045321A /* Lists */; };
 		9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE3DB56296FEFCA00628CB0 /* AppAccount */; };
-		9FE4CCAB2B4C848A00DA5F13 /* GiphyUISDK in Frameworks */ = {isa = PBXBuildFile; platformFilters = (ios, maccatalyst, ); productRef = 9FE4CCAA2B4C848A00DA5F13 /* GiphyUISDK */; };
-		9FE4CCAD2B4C849F00DA5F13 /* GiphyUISDK in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE4CCAC2B4C849F00DA5F13 /* GiphyUISDK */; };
 		9FE6A42E2BD043A90055D388 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE6A42D2BD043A90055D388 /* RevenueCat */; };
 		9FFF677C299B7B2C00FE700A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677B299B7B2C00FE700A /* Notifications */; };
 		9FFF6780299B7D2B00FE700A /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677F299B7D2B00FE700A /* DesignSystem */; };
@@ -256,7 +254,6 @@
 				9FAD85A2297456A400496AB1 /* Env in Frameworks */,
 				9FAD85A0297456A100496AB1 /* Models in Frameworks */,
 				9FAD85A4297456A800496AB1 /* DesignSystem in Frameworks */,
-				9FE4CCAD2B4C849F00DA5F13 /* GiphyUISDK in Frameworks */,
 				9FAD859E2974569B00496AB1 /* Account in Frameworks */,
 				9FAD859C2974422700496AB1 /* AppAccount in Frameworks */,
 				9FC2A38F2B49D1AA00DFD1C1 /* StatusKit in Frameworks */,
@@ -269,7 +266,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F7335EF29674F7100AFF0BA /* QuickLook.framework in Frameworks */,
-				9FE4CCAB2B4C848A00DA5F13 /* GiphyUISDK in Frameworks */,
 				9F7335ED2967463400AFF0BA /* AVKit.framework in Frameworks */,
 				9F2A540E2969A0B0009B2D7C /* StoreKit.framework in Frameworks */,
 				9F55C6902955993C00F94077 /* Explore in Frameworks */,
@@ -437,7 +433,6 @@
 				9FAD85A1297456A400496AB1 /* Env */,
 				9FAD85A3297456A800496AB1 /* DesignSystem */,
 				9FC2A38E2B49D1AA00DFD1C1 /* StatusKit */,
-				9FE4CCAC2B4C849F00DA5F13 /* GiphyUISDK */,
 			);
 			productName = IceCubesShareExtension;
 			productReference = 9FAD858829743F7400496AB1 /* IceCubesShareExtension.appex */;
@@ -479,7 +474,6 @@
 				9FE3DB56296FEFCA00628CB0 /* AppAccount */,
 				DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */,
 				9FC2A38A2B49D19A00DFD1C1 /* StatusKit */,
-				9FE4CCAA2B4C848A00DA5F13 /* GiphyUISDK */,
 				9FE6A42D2BD043A90055D388 /* RevenueCat */,
 				9F9191582C6DDF20001C89E7 /* WishKit */,
 			);
@@ -568,7 +562,6 @@
 			packageReferences = (
 				9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
-				9FE4CCA92B4C848A00DA5F13 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */,
 				9FE6A42C2BD043A80055D388 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				9F9191572C6DDF20001C89E7 /* XCRemoteSwiftPackageReference "wishkit-ios" */,
 			);
@@ -1316,14 +1309,6 @@
 				kind = branch;
 			};
 		};
-		9FE4CCA92B4C848A00DA5F13 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Giphy/giphy-ios-sdk";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.8;
-			};
-		};
 		9FE6A42C2BD043A80055D388 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios";
@@ -1470,16 +1455,6 @@
 		9FE3DB56296FEFCA00628CB0 /* AppAccount */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppAccount;
-		};
-		9FE4CCAA2B4C848A00DA5F13 /* GiphyUISDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9FE4CCA92B4C848A00DA5F13 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */;
-			productName = GiphyUISDK;
-		};
-		9FE4CCAC2B4C849F00DA5F13 /* GiphyUISDK */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9FE4CCA92B4C848A00DA5F13 /* XCRemoteSwiftPackageReference "giphy-ios-sdk" */;
-			productName = GiphyUISDK;
 		};
 		9FE6A42D2BD043A90055D388 /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,8 +1,5 @@
 import DesignSystem
 import Env
-#if !os(visionOS) && !DEBUG
-  import GiphyUISDK
-#endif
 import Models
 import NukeUI
 import PhotosUI
@@ -24,7 +21,6 @@ extension StatusEditor {
     @State private var isPhotosPickerPresented: Bool = false
     @State private var isFileImporterPresented: Bool = false
     @State private var isCameraPickerPresented: Bool = false
-    @State private var isGIFPickerPresented: Bool = false
 
     var body: some View {
       @Bindable var viewModel = focusedSEVM
@@ -94,14 +90,6 @@ extension StatusEditor {
         } label: {
           Label("status.editor.browse-file", systemImage: "folder")
         }
-
-        #if !os(visionOS)
-          Button {
-            isGIFPickerPresented = true
-          } label: {
-            Label("GIPHY", systemImage: "party.popper")
-          }
-        #endif
       } label: {
         if viewModel.isMediasLoading {
           ProgressView()
@@ -131,30 +119,6 @@ extension StatusEditor {
           }
         }))
         .background(.black)
-      })
-      .sheet(isPresented: $isGIFPickerPresented, content: {
-        #if !os(visionOS) && !DEBUG
-          #if targetEnvironment(macCatalyst)
-            NavigationStack {
-              giphyView
-                .toolbar {
-                  ToolbarItem(placement: .topBarLeading) {
-                    Button {
-                      isGIFPickerPresented = false
-                    } label: {
-                      Image(systemName: "xmark.circle")
-                    }
-                  }
-                }
-            }
-            .presentationDetents([.medium, .large])
-          #else
-            giphyView
-              .presentationDetents([.medium, .large])
-          #endif
-        #else
-          EmptyView()
-        #endif
       })
       .accessibilityLabel("accessibility.editor.button.attach-photo")
       .disabled(viewModel.showPoll)
@@ -215,22 +179,6 @@ extension StatusEditor {
 
       return false
     }
-
-    #if !os(visionOS) && !DEBUG
-      @ViewBuilder
-      private var giphyView: some View {
-        @Bindable var viewModel = focusedSEVM
-        GifPickerView { url in
-          GPHCache.shared.downloadAssetData(url) { data, _ in
-            guard let data else { return }
-            viewModel.processGIFData(data: data)
-          }
-          isGIFPickerPresented = false
-        } onShouldDismissGifPicker: {
-          isGIFPickerPresented = false
-        }
-      }
-    #endif
 
     private var AIMenu: some View {
       Menu {

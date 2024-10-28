@@ -1,5 +1,5 @@
 {
-  "originHash" : "b7af8c2ab18771d4cebfbeb66d91559df500516a12027cd67834b2a576eb3df0",
+  "originHash" : "800f54ad2dcf12c6d2dda1b14c463b8c702e2a6461b5cb072611d4016256adb3",
   "pins" : [
     {
       "identity" : "bodega",
@@ -29,30 +29,12 @@
       }
     },
     {
-      "identity" : "giphy-ios-sdk",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Giphy/giphy-ios-sdk",
-      "state" : {
-        "revision" : "fb61ec12738133eb3b9bf62ed11d1bf93d9b4b20",
-        "version" : "2.2.10"
-      }
-    },
-    {
       "identity" : "keychain-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/evgenyneu/keychain-swift",
       "state" : {
         "branch" : "master",
         "revision" : "5e1b02b6a9dac2a759a1d5dbc175c86bd192a608"
-      }
-    },
-    {
-      "identity" : "libwebp-xcode",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/libwebp-Xcode",
-      "state" : {
-        "revision" : "b2b1d20a90b14d11f6ef4241da6b81c1d3f171e4",
-        "version" : "1.3.2"
       }
     },
     {
