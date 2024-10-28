@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "Account",
       targets: ["Account"]
-    ),
+    )
   ],
   dependencies: [
     .package(name: "Network", path: "../Network"),
@@ -36,7 +36,7 @@ let package = Package(
         .product(name: "WrappingHStack", package: "WrappingHStack"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6),
+        .swiftLanguageMode(.v6)
       ]
     ),
     .testTarget(

@@ -12,8 +12,10 @@ public enum Markers: Endpoint {
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case .markers:
-      [URLQueryItem(name: "timeline[]", value: "home"),
-       URLQueryItem(name: "timeline[]", value: "notifications")]
+      [
+        URLQueryItem(name: "timeline[]", value: "home"),
+        URLQueryItem(name: "timeline[]", value: "notifications"),
+      ]
     case let .markNotifications(lastReadId):
       [URLQueryItem(name: "notifications[last_read_id]", value: lastReadId)]
     case let .markHome(lastReadId):

@@ -29,15 +29,18 @@ struct ConversationsListRow: View {
             .accessibilityHidden(true)
           VStack(alignment: .leading, spacing: 4) {
             HStack {
-              EmojiTextApp(.init(stringValue: conversation.accounts.map(\.safeDisplayName).joined(separator: ", ")),
-                           emojis: conversation.accounts.flatMap(\.emojis))
-                .font(.scaledSubheadline)
-                .foregroundColor(theme.labelColor)
-                .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
-                .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-                .fontWeight(.semibold)
-                .foregroundColor(theme.labelColor)
-                .multilineTextAlignment(.leading)
+              EmojiTextApp(
+                .init(
+                  stringValue: conversation.accounts.map(\.safeDisplayName).joined(separator: ", ")),
+                emojis: conversation.accounts.flatMap(\.emojis)
+              )
+              .font(.scaledSubheadline)
+              .foregroundColor(theme.labelColor)
+              .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
+              .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+              .fontWeight(.semibold)
+              .foregroundColor(theme.labelColor)
+              .multilineTextAlignment(.leading)
               Spacer()
               if conversation.unread {
                 Circle()
@@ -53,13 +56,16 @@ struct ConversationsListRow: View {
                   .font(.scaledFootnote)
               }
             }
-            EmojiTextApp(conversation.lastStatus?.content ?? HTMLString(stringValue: ""), emojis: conversation.lastStatus?.emojis ?? [])
-              .multilineTextAlignment(.leading)
-              .font(.scaledBody)
-              .foregroundColor(theme.labelColor)
-              .emojiText.size(Font.scaledBodyFont.emojiSize)
-              .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
-              .accessibilityLabel(conversation.lastStatus?.content.asRawText ?? "")
+            EmojiTextApp(
+              conversation.lastStatus?.content ?? HTMLString(stringValue: ""),
+              emojis: conversation.lastStatus?.emojis ?? []
+            )
+            .multilineTextAlignment(.leading)
+            .font(.scaledBody)
+            .foregroundColor(theme.labelColor)
+            .emojiText.size(Font.scaledBodyFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+            .accessibilityLabel(conversation.lastStatus?.content.asRawText ?? "")
           }
           Spacer()
         }
@@ -146,7 +152,8 @@ struct ConversationsListRow: View {
       if message.account.id != currentAccount.account?.id {
         Section(message.reblog?.account.acct ?? message.account.acct) {
           Button {
-            routerPath.presentedSheet = .mentionStatusEditor(account: message.reblog?.account ?? message.account, visibility: .pub)
+            routerPath.presentedSheet = .mentionStatusEditor(
+              account: message.reblog?.account ?? message.account, visibility: .pub)
           } label: {
             Label("status.action.mention", systemImage: "at")
           }
@@ -177,16 +184,20 @@ struct ConversationsListRow: View {
         await viewModel.favorite(conversation: conversation)
       }
     } label: {
-      Label(conversation.lastStatus?.favourited ?? false ? "status.action.unfavorite" : "status.action.favorite",
-            systemImage: conversation.lastStatus?.favourited ?? false ? "star.fill" : "star")
+      Label(
+        conversation.lastStatus?.favourited ?? false
+          ? "status.action.unfavorite" : "status.action.favorite",
+        systemImage: conversation.lastStatus?.favourited ?? false ? "star.fill" : "star")
     }
     Button {
       Task {
         await viewModel.bookmark(conversation: conversation)
       }
     } label: {
-      Label(conversation.lastStatus?.bookmarked ?? false ? "status.action.unbookmark" : "status.action.bookmark",
-            systemImage: conversation.lastStatus?.bookmarked ?? false ? "bookmark.fill" : "bookmark")
+      Label(
+        conversation.lastStatus?.bookmarked ?? false
+          ? "status.action.unbookmark" : "status.action.bookmark",
+        systemImage: conversation.lastStatus?.bookmarked ?? false ? "bookmark.fill" : "bookmark")
     }
   }
 

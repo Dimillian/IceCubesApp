@@ -1,10 +1,10 @@
-import SwiftUI
-import Models
-import Env
-import DesignSystem
-import WrappingHStack
 import AppAccount
+import DesignSystem
+import Env
+import Models
 import Network
+import SwiftUI
+import WrappingHStack
 
 @MainActor
 struct PremiumAcccountSubsciptionSheetView: View {
@@ -13,20 +13,20 @@ struct PremiumAcccountSubsciptionSheetView: View {
   @Environment(\.openURL) private var openURL
   @Environment(AppAccountsManager.self) private var appAccount: AppAccountsManager
   @Environment(\.colorScheme) private var colorScheme
-  
+
   @State private var isSubscibeSelected: Bool = false
-  
+
   private enum SheetState: Int, Equatable {
     case selection, preparing, webview
   }
-  
+
   @State private var state: SheetState = .selection
   @State private var animationsending: Bool = false
   @State private var subClubUser: SubClubUser?
-  
+
   let account: Account
   let subClubClient = SubClubClient()
-  
+
   var body: some View {
     VStack {
       switch state {
@@ -52,7 +52,7 @@ struct PremiumAcccountSubsciptionSheetView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private var tipView: some View {
     HStack {
@@ -91,9 +91,9 @@ struct PremiumAcccountSubsciptionSheetView: View {
     .background(theme.secondaryBackgroundColor.opacity(0.4))
     .cornerRadius(8)
     .padding(12)
-    
+
     Spacer()
-    
+
     if isSubscibeSelected {
       Button {
         withAnimation {
@@ -111,7 +111,7 @@ struct PremiumAcccountSubsciptionSheetView: View {
       .padding(.bottom, 38)
     }
   }
-  
+
   private var preparingView: some View {
     Label("Preparing...", systemImage: "wifi")
       .symbolEffect(.variableColor.iterative, options: .repeating, value: animationsending)
@@ -129,7 +129,7 @@ struct PremiumAcccountSubsciptionSheetView: View {
         }
       }
   }
-  
+
   private var webView: some View {
     VStack(alignment: .center) {
       Text("Almost there...")
@@ -139,9 +139,13 @@ struct PremiumAcccountSubsciptionSheetView: View {
     .onAppear {
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
         if let subscription = subClubUser?.subscription,
-           let accountName = appAccount.currentAccount.accountName,
-           let premiumUsername = account.premiumUsername,
-           let url = URL(string: "https://\(AppInfo.premiumInstance)/@\(premiumUsername)/subscribe?callback=icecubesapp://subclub&id=@\(accountName)&amount=\(subscription.unitAmount)&currency=\(subscription.currency)&theme=\(colorScheme)") {
+          let accountName = appAccount.currentAccount.accountName,
+          let premiumUsername = account.premiumUsername,
+          let url = URL(
+            string:
+              "https://\(AppInfo.premiumInstance)/@\(premiumUsername)/subscribe?callback=icecubesapp://subclub&id=@\(accountName)&amount=\(subscription.unitAmount)&currency=\(subscription.currency)&theme=\(colorScheme)"
+          )
+        {
           openURL(url)
         }
       }

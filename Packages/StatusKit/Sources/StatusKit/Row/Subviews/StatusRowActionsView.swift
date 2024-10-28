@@ -25,11 +25,14 @@ struct StatusRowActionsView: View {
   var viewModel: StatusRowViewModel
 
   var isNarrow: Bool {
-    horizontalSizeClass == .compact && (UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac)
+    horizontalSizeClass == .compact
+      && (UIDevice.current.userInterfaceIdiom == .pad
+        || UIDevice.current.userInterfaceIdiom == .mac)
   }
 
   func privateBoost() -> Bool {
-    viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
+    viewModel.status.visibility == .priv
+      && viewModel.status.account.id == currentAccount.account?.id
   }
 
   var actions: [Action] {
@@ -69,7 +72,9 @@ struct StatusRowActionsView: View {
       }
     }
 
-    func accessibilityLabel(dataController: StatusDataController, privateBoost: Bool = false) -> LocalizedStringKey {
+    func accessibilityLabel(dataController: StatusDataController, privateBoost: Bool = false)
+      -> LocalizedStringKey
+    {
       switch self {
       case .respond:
         return "status.action.reply"
@@ -140,7 +145,7 @@ struct StatusRowActionsView: View {
         ForEach(actions, id: \.self) { action in
           if action == .share {
             if let urlString = viewModel.finalStatus.url,
-               let url = URL(string: urlString)
+              let url = URL(string: urlString)
             {
               switch userPreferences.shareButtonBehavior {
               case .linkOnly:
@@ -150,56 +155,59 @@ struct StatusRowActionsView: View {
                     .padding(.vertical, 6)
                     .padding(.horizontal, 8)
                     .contentShape(Rectangle())
-                  #if targetEnvironment(macCatalyst)
-                    .font(.scaledBody)
-                  #else
-                    .font(.body)
-                    .dynamicTypeSize(.large)
-                  #endif
+                    #if targetEnvironment(macCatalyst)
+                      .font(.scaledBody)
+                    #else
+                      .font(.body)
+                      .dynamicTypeSize(.large)
+                    #endif
                 }
                 .buttonStyle(.borderless)
                 #if !os(visionOS)
                   .offset(x: -8)
                 #endif
-                  .accessibilityElement(children: .combine)
-                  .accessibilityLabel("status.action.share-link")
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("status.action.share-link")
               case .linkAndText:
-                ShareLink(item: url,
-                          subject: Text(viewModel.finalStatus.account.safeDisplayName),
-                          message: Text(viewModel.finalStatus.content.asRawText))
-                {
+                ShareLink(
+                  item: url,
+                  subject: Text(viewModel.finalStatus.account.safeDisplayName),
+                  message: Text(viewModel.finalStatus.content.asRawText)
+                ) {
                   action.image(dataController: statusDataController)
                     .foregroundColor(Color(UIColor.secondaryLabel))
                     .padding(.vertical, 6)
                     .padding(.horizontal, 8)
                     .contentShape(Rectangle())
-                  #if targetEnvironment(macCatalyst)
-                    .font(.scaledBody)
-                  #else
-                    .font(.body)
-                    .dynamicTypeSize(.large)
-                  #endif
+                    #if targetEnvironment(macCatalyst)
+                      .font(.scaledBody)
+                    #else
+                      .font(.body)
+                      .dynamicTypeSize(.large)
+                    #endif
                 }
                 .buttonStyle(.borderless)
                 #if !os(visionOS)
                   .offset(x: -8)
                 #endif
-                  .accessibilityElement(children: .combine)
-                  .accessibilityLabel("status.action.share-link")
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel("status.action.share-link")
               }
             }
             Spacer()
           } else if action == .menu {
             Menu {
-              StatusRowContextMenu(viewModel: viewModel,
-                                   showTextForSelection: $showTextForSelection,
-                                   isBlockConfirmationPresented: $isBlockConfirmationPresented,
-                                   isShareAsImageSheetPresented: $isShareAsImageSheetPresented)
-                .onAppear {
-                  Task {
-                    await viewModel.loadAuthorRelationship()
-                  }
+              StatusRowContextMenu(
+                viewModel: viewModel,
+                showTextForSelection: $showTextForSelection,
+                isBlockConfirmationPresented: $isBlockConfirmationPresented,
+                isShareAsImageSheetPresented: $isShareAsImageSheetPresented
+              )
+              .onAppear {
+                Task {
+                  await viewModel.loadAuthorRelationship()
                 }
+              }
             } label: {
               Label("", systemImage: "ellipsis")
                 .padding(.vertical, 6)
@@ -218,16 +226,18 @@ struct StatusRowActionsView: View {
     }
     .fixedSize(horizontal: false, vertical: true)
     .sheet(isPresented: $showTextForSelection) {
-      let content = viewModel.status.reblog?.content.asSafeMarkdownAttributedString ?? viewModel.status.content.asSafeMarkdownAttributedString
+      let content =
+        viewModel.status.reblog?.content.asSafeMarkdownAttributedString
+        ?? viewModel.status.content.asSafeMarkdownAttributedString
       StatusRowSelectableTextView(content: content)
         .tint(theme.tintColor)
     }
     .sheet(isPresented: $isShareAsImageSheetPresented) {
       let view =
-      HStack {
-        StatusRowView(viewModel: viewModel, context: .timeline)
-          .padding(8)
-      }
+        HStack {
+          StatusRowView(viewModel: viewModel, context: .timeline)
+            .padding(8)
+        }
         .environment(\.isInCaptureMode, true)
         .environment(RouterPath())
         .environment(QuickLook.shared)
@@ -246,8 +256,10 @@ struct StatusRowActionsView: View {
       let renderer = ImageRenderer(content: AnyView(view))
       renderer.isOpaque = true
       renderer.scale = 3.0
-      return StatusRowShareAsImageView(viewModel: viewModel,
-                                       renderer: renderer)
+      return StatusRowShareAsImageView(
+        viewModel: viewModel,
+        renderer: renderer
+      )
       .tint(theme.tintColor)
     }
   }
@@ -262,38 +274,39 @@ struct StatusRowActionsView: View {
             .image(dataController: statusDataController, privateBoost: privateBoost())
             .imageScale(.medium)
             .fontWeight(.black)
-          #if targetEnvironment(macCatalyst)
-            .font(.scaledBody)
-          #else
-            .font(.body)
-            .dynamicTypeSize(.large)
-          #endif
+            #if targetEnvironment(macCatalyst)
+              .font(.scaledBody)
+            #else
+              .font(.body)
+              .dynamicTypeSize(.large)
+            #endif
         } else {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
-          #if targetEnvironment(macCatalyst)
-            .font(.scaledBody)
-          #else
-            .font(.body)
-            .dynamicTypeSize(.large)
-          #endif
+            #if targetEnvironment(macCatalyst)
+              .font(.scaledBody)
+            #else
+              .font(.body)
+              .dynamicTypeSize(.large)
+            #endif
         }
         if !isNarrow,
-           let count = action.count(dataController: statusDataController,
-                                    isFocused: isFocused,
-                                    theme: theme), !viewModel.isRemote
+          let count = action.count(
+            dataController: statusDataController,
+            isFocused: isFocused,
+            theme: theme), !viewModel.isRemote
         {
           Text(count, format: .number.notation(.compactName))
             .lineLimit(1)
             .minimumScaleFactor(0.6)
             .contentTransition(.numericText(value: Double(count)))
             .foregroundColor(Color(UIColor.secondaryLabel))
-          #if targetEnvironment(macCatalyst)
-            .font(.scaledFootnote)
-          #else
-            .font(.footnote)
-            .dynamicTypeSize(.medium)
-          #endif
+            #if targetEnvironment(macCatalyst)
+              .font(.scaledFootnote)
+            #else
+              .font(.footnote)
+              .dynamicTypeSize(.medium)
+            #endif
             .monospacedDigit()
             .opacity(count > 0 ? 1 : 0)
         }
@@ -303,21 +316,26 @@ struct StatusRowActionsView: View {
       .contentShape(Rectangle())
     }
     #if os(visionOS)
-    .buttonStyle(.borderless)
-    .foregroundColor(Color(UIColor.secondaryLabel))
+      .buttonStyle(.borderless)
+      .foregroundColor(Color(UIColor.secondaryLabel))
     #else
-    .buttonStyle(
-      .statusAction(
-        isOn: action.isOn(dataController: statusDataController),
-        tintColor: action.tintColor(theme: theme)
+      .buttonStyle(
+        .statusAction(
+          isOn: action.isOn(dataController: statusDataController),
+          tintColor: action.tintColor(theme: theme)
+        )
       )
-    )
-    .offset(x: -8)
+      .offset(x: -8)
     #endif
-    .disabled(action == .boost &&
-      (viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id))
+    .disabled(
+      action == .boost
+        && (viewModel.status.visibility == .direct
+          || viewModel.status.visibility == .priv
+            && viewModel.status.account.id != currentAccount.account?.id)
+    )
     .accessibilityElement(children: .combine)
-    .accessibilityLabel(action.accessibilityLabel(dataController: statusDataController, privateBoost: privateBoost()))
+    .accessibilityLabel(
+      action.accessibilityLabel(dataController: statusDataController, privateBoost: privateBoost()))
   }
 
   private func handleAction(action: Action) {
@@ -332,9 +350,12 @@ struct StatusRowActionsView: View {
       case .respond:
         SoundEffectManager.shared.playSound(.share)
         #if targetEnvironment(macCatalyst) || os(visionOS)
-          openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status))
+          openWindow(
+            value: WindowDestinationEditor.replyToStatusEditor(
+              status: viewModel.localStatus ?? viewModel.status))
         #else
-          viewModel.routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.localStatus ?? viewModel.status)
+          viewModel.routerPath.presentedSheet = .replyToStatusEditor(
+            status: viewModel.localStatus ?? viewModel.status)
         #endif
       case .favorite:
         SoundEffectManager.shared.playSound(.favorite)

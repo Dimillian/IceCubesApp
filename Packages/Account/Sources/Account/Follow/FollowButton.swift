@@ -3,8 +3,8 @@ import Combine
 import Foundation
 import Models
 import Network
-import Observation
 import OSLog
+import Observation
 import SwiftUI
 
 @MainActor
@@ -16,12 +16,13 @@ import SwiftUI
   public let relationshipUpdated: (Relationship) -> Void
   public var relationship: Relationship
 
-  public init(client: Client,
-              accountId: String,
-              relationship: Relationship,
-              shouldDisplayNotify: Bool,
-              relationshipUpdated: @escaping ((Relationship) -> Void))
-  {
+  public init(
+    client: Client,
+    accountId: String,
+    relationship: Relationship,
+    shouldDisplayNotify: Bool,
+    relationshipUpdated: @escaping ((Relationship) -> Void)
+  ) {
     self.client = client
     self.accountId = accountId
     self.relationship = relationship
@@ -31,7 +32,8 @@ import SwiftUI
 
   func follow() async throws {
     do {
-      relationship = try await client.post(endpoint: Accounts.follow(id: accountId, notify: false, reblogs: true))
+      relationship = try await client.post(
+        endpoint: Accounts.follow(id: accountId, notify: false, reblogs: true))
       relationshipUpdated(relationship)
     } catch {
       throw error
@@ -46,9 +48,10 @@ import SwiftUI
       throw error
     }
   }
-  
+
   func refreshRelationship() async throws {
-    let relationships: [Relationship] = try await client.get(endpoint: Accounts.relationships(ids: [accountId]))
+    let relationships: [Relationship] = try await client.get(
+      endpoint: Accounts.relationships(ids: [accountId]))
     if let relationship = relationships.first {
       self.relationship = relationship
       relationshipUpdated(relationship)
@@ -57,9 +60,11 @@ import SwiftUI
 
   func toggleNotify() async throws {
     do {
-      relationship = try await client.post(endpoint: Accounts.follow(id: accountId,
-                                                                     notify: !relationship.notifying,
-                                                                     reblogs: relationship.showingReblogs))
+      relationship = try await client.post(
+        endpoint: Accounts.follow(
+          id: accountId,
+          notify: !relationship.notifying,
+          reblogs: relationship.showingReblogs))
       relationshipUpdated(relationship)
     } catch {
       throw error
@@ -68,9 +73,11 @@ import SwiftUI
 
   func toggleReboosts() async throws {
     do {
-      relationship = try await client.post(endpoint: Accounts.follow(id: accountId,
-                                                                     notify: relationship.notifying,
-                                                                     reblogs: !relationship.showingReblogs))
+      relationship = try await client.post(
+        endpoint: Accounts.follow(
+          id: accountId,
+          notify: relationship.notifying,
+          reblogs: !relationship.showingReblogs))
       relationshipUpdated(relationship)
     } catch {
       throw error
@@ -98,13 +105,17 @@ public struct FollowButton: View {
         if viewModel.relationship.requested == true {
           Text("account.follow.requested")
         } else {
-          Text(viewModel.relationship.following ? "account.follow.following" : "account.follow.follow")
-            .accessibilityLabel("account.follow.following")
-            .accessibilityValue(viewModel.relationship.following ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+          Text(
+            viewModel.relationship.following ? "account.follow.following" : "account.follow.follow"
+          )
+          .accessibilityLabel("account.follow.following")
+          .accessibilityValue(
+            viewModel.relationship.following
+              ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
         }
       }
       if viewModel.relationship.following,
-         viewModel.shouldDisplayNotify
+        viewModel.shouldDisplayNotify
       {
         HStack {
           AsyncButton {
@@ -113,14 +124,18 @@ public struct FollowButton: View {
             Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
           }
           .accessibilityLabel("accessibility.tabs.profile.user-notifications.label")
-          .accessibilityValue(viewModel.relationship.notifying ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+          .accessibilityValue(
+            viewModel.relationship.notifying
+              ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
           AsyncButton {
             try await viewModel.toggleReboosts()
           } label: {
             Image(viewModel.relationship.showingReblogs ? "Rocket.Fill" : "Rocket")
           }
           .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
-          .accessibilityValue(viewModel.relationship.showingReblogs ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+          .accessibilityValue(
+            viewModel.relationship.showingReblogs
+              ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
         }
         .asyncButtonStyle(.none)
         .disabledWhenLoading()

@@ -20,18 +20,25 @@ public final class Theme {
     @AppStorage("is_previously_set") public var isThemePreviouslySet: Bool = false
     @AppStorage(ThemeKey.selectedScheme.rawValue) public var selectedScheme: ColorScheme = .dark
     @AppStorage(ThemeKey.tint.rawValue) public var tintColor: Color = .black
-    @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color = .white
-    @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color = .gray
+    @AppStorage(ThemeKey.primaryBackground.rawValue) public var primaryBackgroundColor: Color =
+      .white
+    @AppStorage(ThemeKey.secondaryBackground.rawValue) public var secondaryBackgroundColor: Color =
+      .gray
     @AppStorage(ThemeKey.label.rawValue) public var labelColor: Color = .black
     @AppStorage(ThemeKey.avatarPosition2.rawValue) var avatarPosition: AvatarPosition = .leading
     @AppStorage(ThemeKey.avatarShape2.rawValue) var avatarShape: AvatarShape = .circle
     @AppStorage(ThemeKey.selectedSet.rawValue) var storedSet: ColorSetName = .iceCubeDark
-    @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay: StatusActionsDisplay = .full
-    @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle: StatusDisplayStyle = .large
-    @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool = true
-    @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername: Bool = false
+    @AppStorage(ThemeKey.statusActionsDisplay.rawValue) public var statusActionsDisplay:
+      StatusActionsDisplay = .full
+    @AppStorage(ThemeKey.statusDisplayStyle.rawValue) public var statusDisplayStyle:
+      StatusDisplayStyle = .large
+    @AppStorage(ThemeKey.followSystemColorSchme.rawValue) public var followSystemColorScheme: Bool =
+      true
+    @AppStorage(ThemeKey.displayFullUsernameTimeline.rawValue) public var displayFullUsername:
+      Bool = false
     @AppStorage(ThemeKey.lineSpacing.rawValue) public var lineSpacing: Double = 1.2
-    @AppStorage(ThemeKey.statusActionSecondary.rawValue) public var statusActionSecondary: StatusActionSecondary = .share
+    @AppStorage(ThemeKey.statusActionSecondary.rawValue) public var statusActionSecondary:
+      StatusActionSecondary = .share
     @AppStorage(ThemeKey.contentGradient.rawValue) public var showContentGradient: Bool = true
     @AppStorage(ThemeKey.compactLayoutPadding.rawValue) public var compactLayoutPadding: Bool = true
     @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
@@ -139,14 +146,17 @@ public final class Theme {
         return _cachedChoosenFont
       }
       guard let chosenFontData,
-            let font = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIFont.self, from: chosenFontData) else { return nil }
+        let font = try? NSKeyedUnarchiver.unarchivedObject(
+          ofClass: UIFont.self, from: chosenFontData)
+      else { return nil }
 
       _cachedChoosenFont = font
       return font
     }
     set {
       if let font = newValue,
-         let data = try? NSKeyedArchiver.archivedData(withRootObject: font, requiringSecureCoding: false)
+        let data = try? NSKeyedArchiver.archivedData(
+          withRootObject: font, requiringSecureCoding: false)
       {
         chosenFontData = data
       } else {
@@ -292,13 +302,13 @@ public final class Theme {
       themeStorage.showContentGradient = showContentGradient
     }
   }
-  
+
   public var compactLayoutPadding: Bool {
     didSet {
       themeStorage.compactLayoutPadding = compactLayoutPadding
     }
   }
-  
+
   public var selectedSet: ColorSetName = .iceCubeDark
 
   public static let shared = Theme()
@@ -327,7 +337,7 @@ public final class Theme {
     primaryBackgroundColor = themeStorage.primaryBackgroundColor
     secondaryBackgroundColor = themeStorage.secondaryBackgroundColor
     labelColor = themeStorage.labelColor
-    contrastingTintColor = .red // real work done in computeContrastingTintColor()
+    contrastingTintColor = .red  // real work done in computeContrastingTintColor()
     avatarPosition = themeStorage.avatarPosition
     avatarShape = themeStorage.avatarShape
     storedSet = themeStorage.storedSet

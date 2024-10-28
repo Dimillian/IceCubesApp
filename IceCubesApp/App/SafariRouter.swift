@@ -1,10 +1,10 @@
+import AppAccount
 import DesignSystem
 import Env
 import Models
 import Observation
 import SafariServices
 import SwiftUI
-import AppAccount
 import WebKit
 
 extension View {
@@ -27,21 +27,25 @@ private struct SafariRouter: ViewModifier {
 
   func body(content: Content) -> some View {
     content
-      .environment(\.openURL, OpenURLAction { url in
-        // Open internal URL.
-        guard !isSecondaryColumn else { return .discarded }
-        return routerPath.handle(url: url)
-      })
+      .environment(
+        \.openURL,
+        OpenURLAction { url in
+          // Open internal URL.
+          guard !isSecondaryColumn else { return .discarded }
+          return routerPath.handle(url: url)
+        }
+      )
       .onOpenURL { url in
         // Open external URL (from icecubesapp://)
         guard !isSecondaryColumn else { return }
         if url.absoluteString == "icecubesapp://subclub" {
           #if !os(visionOS)
-          safariManager.dismiss()
+            safariManager.dismiss()
           #endif
           return
         }
-        let urlString = url.absoluteString.replacingOccurrences(of: AppInfo.scheme, with: "https://")
+        let urlString = url.absoluteString.replacingOccurrences(
+          of: AppInfo.scheme, with: "https://")
         guard let url = URL(string: urlString), url.host != nil else { return }
         _ = routerPath.handleDeepLink(url: url)
       }
@@ -57,17 +61,18 @@ private struct SafariRouter: ViewModifier {
               return .handled
             }
           } else if url.query()?.contains("callback=") == false,
-                    url.host() == AppInfo.premiumInstance,
-                    let accountName = appAccount.currentAccount.accountName {
+            url.host() == AppInfo.premiumInstance,
+            let accountName = appAccount.currentAccount.accountName
+          {
             let newURL = url.appending(queryItems: [
               .init(name: "callback", value: "icecubesapp://subclub"),
-              .init(name: "id", value: "@\(accountName)")
+              .init(name: "id", value: "@\(accountName)"),
             ])
-            
+
             #if !os(visionOS)
-            return safariManager.open(newURL)
+              return safariManager.open(newURL)
             #else
-            return .systemAction
+              return .systemAction
             #endif
           }
           #if !targetEnvironment(macCatalyst)
@@ -86,13 +91,13 @@ private struct SafariRouter: ViewModifier {
           #endif
         }
       }
-    #if !os(visionOS)
-      .background {
-        WindowReader { window in
-          safariManager.windowScene = window.windowScene
+      #if !os(visionOS)
+        .background {
+          WindowReader { window in
+            safariManager.windowScene = window.windowScene
+          }
         }
-      }
-    #endif
+      #endif
   }
 }
 
@@ -123,7 +128,7 @@ private struct SafariRouter: ViewModifier {
 
       return .handled
     }
-    
+
     func dismiss() {
       viewController.presentedViewController?.dismiss(animated: true)
       window?.resignKey()

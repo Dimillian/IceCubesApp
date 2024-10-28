@@ -21,17 +21,22 @@ public struct ListAddAccountView: View {
       List {
         ForEach(currentAccount.sortedLists) { list in
           HStack {
-            Toggle(list.title, isOn: .init(get: {
-              viewModel.inLists.contains(where: { $0.id == list.id })
-            }, set: { value in
-              Task {
-                if value {
-                  await viewModel.addToList(list: list)
-                } else {
-                  await viewModel.removeFromList(list: list)
-                }
-              }
-            }))
+            Toggle(
+              list.title,
+              isOn: .init(
+                get: {
+                  viewModel.inLists.contains(where: { $0.id == list.id })
+                },
+                set: { value in
+                  Task {
+                    if value {
+                      await viewModel.addToList(list: list)
+                    } else {
+                      await viewModel.removeFromList(list: list)
+                    }
+                  }
+                })
+            )
             .disabled(viewModel.isLoadingInfo)
             Spacer()
           }

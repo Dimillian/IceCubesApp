@@ -55,7 +55,7 @@ public struct FiltersListView: View {
             }
           }
           #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+            .listRowBackground(theme.primaryBackgroundColor)
           #endif
         }
 
@@ -65,7 +65,7 @@ public struct FiltersListView: View {
           }
         }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor)
         #endif
       }
       .toolbar {
@@ -77,15 +77,15 @@ public struct FiltersListView: View {
         .scrollContentBackground(.hidden)
         .background(theme.secondaryBackgroundColor)
       #endif
-        .task {
-          do {
-            isLoading = true
-            filters = try await client.get(endpoint: ServerFilters.filters, forceVersion: .v2)
-            isLoading = false
-          } catch {
-            isLoading = false
-          }
+      .task {
+        do {
+          isLoading = true
+          filters = try await client.get(endpoint: ServerFilters.filters, forceVersion: .v2)
+          isLoading = false
+        } catch {
+          isLoading = false
         }
+      }
     }
   }
 
@@ -93,8 +93,9 @@ public struct FiltersListView: View {
     if let index = indexes.first {
       Task {
         do {
-          let response = try await client.delete(endpoint: ServerFilters.filter(id: filters[index].id),
-                                                 forceVersion: .v2)
+          let response = try await client.delete(
+            endpoint: ServerFilters.filter(id: filters[index].id),
+            forceVersion: .v2)
           if response?.statusCode == 200 {
             filters.remove(at: index)
           }

@@ -13,7 +13,10 @@ extension StatusEditor {
         self.picker = picker
       }
 
-      func imagePickerController(_: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+      func imagePickerController(
+        _: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]
+      ) {
         guard let selectedImage = info[.originalImage] as? UIImage else { return }
         picker.selectedImage = selectedImage
         picker.dismiss()

@@ -26,7 +26,9 @@ extension StatusEditor {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 40, height: 40)
-                        .accessibilityLabel(emoji.shortcode.replacingOccurrences(of: "_", with: " "))
+                        .accessibilityLabel(
+                          emoji.shortcode.replacingOccurrences(of: "_", with: " ")
+                        )
                         .accessibilityAddTraits(.isButton)
                     } else if state.isLoading {
                       Rectangle()

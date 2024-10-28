@@ -2,21 +2,13 @@ import Foundation
 
 public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable {
   public static func == (lhs: Account, rhs: Account) -> Bool {
-    lhs.id == rhs.id &&
-      lhs.username == rhs.username &&
-      lhs.note.asRawText == rhs.note.asRawText &&
-      lhs.statusesCount == rhs.statusesCount &&
-      lhs.followersCount == rhs.followersCount &&
-      lhs.followingCount == rhs.followingCount &&
-      lhs.acct == rhs.acct &&
-      lhs.displayName == rhs.displayName &&
-      lhs.fields == rhs.fields &&
-      lhs.lastStatusAt == rhs.lastStatusAt &&
-      lhs.discoverable == rhs.discoverable &&
-      lhs.bot == rhs.bot &&
-      lhs.locked == rhs.locked &&
-      lhs.avatar == rhs.avatar &&
-      lhs.header == rhs.header
+    lhs.id == rhs.id && lhs.username == rhs.username && lhs.note.asRawText == rhs.note.asRawText
+      && lhs.statusesCount == rhs.statusesCount && lhs.followersCount == rhs.followersCount
+      && lhs.followingCount == rhs.followingCount && lhs.acct == rhs.acct
+      && lhs.displayName == rhs.displayName && lhs.fields == rhs.fields
+      && lhs.lastStatusAt == rhs.lastStatusAt && lhs.discoverable == rhs.discoverable
+      && lhs.bot == rhs.bot && lhs.locked == rhs.locked && lhs.avatar == rhs.avatar
+      && lhs.header == rhs.header
   }
 
   public func hash(into hasher: inout Hasher) {
@@ -75,7 +67,13 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
     "\(acct)@\(url?.host() ?? "")"
   }
 
-  public init(id: String, username: String, displayName: String?, avatar: URL, header: URL, acct: String, note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int, statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool, emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool, discoverable: Bool? = nil, moved: Account? = nil) {
+  public init(
+    id: String, username: String, displayName: String?, avatar: URL, header: URL, acct: String,
+    note: HTMLString, createdAt: ServerDate, followersCount: Int, followingCount: Int,
+    statusesCount: Int, lastStatusAt: String? = nil, fields: [Account.Field], locked: Bool,
+    emojis: [Emoji], url: URL? = nil, source: Account.Source? = nil, bot: Bool,
+    discoverable: Bool? = nil, moved: Account? = nil
+  ) {
     self.id = id
     self.username = username
     self.displayName = displayName
@@ -158,30 +156,39 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
   }
 
   public static func placeholder() -> Account {
-    .init(id: UUID().uuidString,
-          username: "Username",
-          displayName: "John Mastodon",
-          avatar: URL(string: "https://files.mastodon.social/media_attachments/files/003/134/405/original/04060b07ddf7bb0b.png")!,
-          header: URL(string: "https://files.mastodon.social/media_attachments/files/003/134/405/original/04060b07ddf7bb0b.png")!,
-          acct: "johnm@example.com",
-          note: .init(stringValue: "Some content"),
-          createdAt: ServerDate(),
-          followersCount: 10,
-          followingCount: 10,
-          statusesCount: 10,
-          lastStatusAt: nil,
-          fields: [],
-          locked: false,
-          emojis: [],
-          url: nil,
-          source: nil,
-          bot: false,
-          discoverable: true)
+    .init(
+      id: UUID().uuidString,
+      username: "Username",
+      displayName: "John Mastodon",
+      avatar: URL(
+        string:
+          "https://files.mastodon.social/media_attachments/files/003/134/405/original/04060b07ddf7bb0b.png"
+      )!,
+      header: URL(
+        string:
+          "https://files.mastodon.social/media_attachments/files/003/134/405/original/04060b07ddf7bb0b.png"
+      )!,
+      acct: "johnm@example.com",
+      note: .init(stringValue: "Some content"),
+      createdAt: ServerDate(),
+      followersCount: 10,
+      followingCount: 10,
+      statusesCount: 10,
+      lastStatusAt: nil,
+      fields: [],
+      locked: false,
+      emojis: [],
+      url: nil,
+      source: nil,
+      bot: false,
+      discoverable: true)
   }
 
   public static func placeholders() -> [Account] {
-    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(),
-     .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
+    [
+      .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(),
+      .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(),
+    ]
   }
 }
 
@@ -200,27 +207,32 @@ extension Account {
     }
     return fields.first(where: { $0.value.asRawText.contains(AppInfo.premiumInstance) }) != nil
   }
-  
+
   public var premiumAcct: String? {
     if isPremiumAccount {
       return "@\(acct)"
-    } else if let field = fields.first(where: { $0.value.asRawText.hasSuffix(AppInfo.premiumInstance) }) {
+    } else if let field = fields.first(where: {
+      $0.value.asRawText.hasSuffix(AppInfo.premiumInstance)
+    }) {
       return field.value.asRawText
-    } else if let field = fields.first(where: { $0.value.asRawText.hasPrefix("https://\(AppInfo.premiumInstance)") }),
-                let url = URL(string: field.value.asRawText) {
+    } else if let field = fields.first(where: {
+      $0.value.asRawText.hasPrefix("https://\(AppInfo.premiumInstance)")
+    }),
+      let url = URL(string: field.value.asRawText)
+    {
       return "\(url.lastPathComponent)@\(url.host() ?? "\(AppInfo.premiumInstance)")"
     }
     return nil
   }
-  
+
   public var premiumUsername: String? {
     var username = premiumAcct?.replacingOccurrences(of: "@\(AppInfo.premiumInstance)", with: "")
     username?.removeFirst()
     return username
   }
-  
+
   public var isPremiumAccount: Bool {
     url?.host() == AppInfo.premiumInstance
   }
-  
+
 }

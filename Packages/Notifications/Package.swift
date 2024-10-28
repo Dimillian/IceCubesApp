@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "Notifications",
       targets: ["Notifications"]
-    ),
+    )
   ],
   dependencies: [
     .package(name: "Network", path: "../Network"),
@@ -34,8 +34,8 @@ let package = Package(
         .product(name: "DesignSystem", package: "DesignSystem"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6),
+        .swiftLanguageMode(.v6)
       ]
-    ),
+    )
   ]
 )

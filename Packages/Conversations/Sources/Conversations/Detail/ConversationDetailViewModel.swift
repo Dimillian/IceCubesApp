@@ -23,7 +23,8 @@ import SwiftUI
   func fetchMessages() async {
     guard let client, let lastMessageId = messages.last?.id else { return }
     do {
-      let context: StatusContext = try await client.get(endpoint: Statuses.context(id: lastMessageId))
+      let context: StatusContext = try await client.get(
+        endpoint: Statuses.context(id: lastMessageId))
       isLoadingMessages = false
       messages.insert(contentsOf: context.ancestors, at: 0)
       messages.append(contentsOf: context.descendants)
@@ -36,9 +37,10 @@ import SwiftUI
     var finalText = conversation.accounts.map { "@\($0.acct)" }.joined(separator: " ")
     finalText += " "
     finalText += newMessageText
-    let data = StatusData(status: finalText,
-                          visibility: .direct,
-                          inReplyToId: messages.last?.id)
+    let data = StatusData(
+      status: finalText,
+      visibility: .direct,
+      inReplyToId: messages.last?.id)
     do {
       let status: Status = try await client.post(endpoint: Statuses.postStatus(json: data))
       appendNewStatus(status: status)
@@ -53,15 +55,15 @@ import SwiftUI
 
   func handleEvent(event: any StreamEvent) {
     if let event = event as? StreamEventStatusUpdate,
-       let index = messages.firstIndex(where: { $0.id == event.status.id })
+      let index = messages.firstIndex(where: { $0.id == event.status.id })
     {
       messages[index] = event.status
     } else if let event = event as? StreamEventDelete,
-              let index = messages.firstIndex(where: { $0.id == event.status })
+      let index = messages.firstIndex(where: { $0.id == event.status })
     {
       messages.remove(at: index)
     } else if let event = event as? StreamEventConversation,
-              event.conversation.id == conversation.id
+      event.conversation.id == conversation.id
     {
       conversation = event.conversation
       if conversation.lastStatus != nil {

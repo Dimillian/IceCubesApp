@@ -9,7 +9,9 @@ struct StatusRowReblogView: View {
       HStack(spacing: 2) {
         Image("Rocket.Fill")
         AvatarView(viewModel.status.account.avatar, config: .boost)
-        EmojiTextApp(.init(stringValue: viewModel.status.account.safeDisplayName), emojis: viewModel.status.account.emojis)
+        EmojiTextApp(
+          .init(stringValue: viewModel.status.account.safeDisplayName),
+          emojis: viewModel.status.account.emojis)
         Text("status.row.was-boosted")
       }
       .accessibilityElement(children: .combine)

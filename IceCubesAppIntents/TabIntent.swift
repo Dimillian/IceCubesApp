@@ -17,22 +17,24 @@ enum TabEnum: String, AppEnum, Sendable {
   static let typeDisplayRepresentation: TypeDisplayRepresentation = "Tab"
 
   nonisolated static var caseDisplayRepresentations: [TabEnum: DisplayRepresentation] {
-    [.timeline: .init(title: "Home Timeline"),
-     .trending: .init(title: "Trending Timeline"),
-     .federated: .init(title: "Federated Timeline"),
-     .local: .init(title: "Local Timeline"),
-     .notifications: .init(title: "Notifications"),
-     .mentions: .init(title: "Mentions"),
-     .explore: .init(title: "Explore & Trending"),
-     .messages: .init(title: "Private Messages"),
-     .settings: .init(title: "Settings"),
-     .profile: .init(title: "Profile"),
-     .bookmarks: .init(title: "Bookmarks"),
-     .favorites: .init(title: "Favorites"),
-     .followedTags: .init(title: "Followed Tags"),
-     .lists: .init(title: "Lists"),
-     .links: .init(title: "Trending Links"),
-     .post: .init(title: "New post")]
+    [
+      .timeline: .init(title: "Home Timeline"),
+      .trending: .init(title: "Trending Timeline"),
+      .federated: .init(title: "Federated Timeline"),
+      .local: .init(title: "Local Timeline"),
+      .notifications: .init(title: "Notifications"),
+      .mentions: .init(title: "Mentions"),
+      .explore: .init(title: "Explore & Trending"),
+      .messages: .init(title: "Private Messages"),
+      .settings: .init(title: "Settings"),
+      .profile: .init(title: "Profile"),
+      .bookmarks: .init(title: "Bookmarks"),
+      .favorites: .init(title: "Favorites"),
+      .followedTags: .init(title: "Followed Tags"),
+      .lists: .init(title: "Lists"),
+      .links: .init(title: "Trending Links"),
+      .post: .init(title: "New post"),
+    ]
   }
 
   var toAppTab: AppTab {

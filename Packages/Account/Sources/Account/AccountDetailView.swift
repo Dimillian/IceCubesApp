@@ -52,8 +52,7 @@ public struct AccountDetailView: View {
           .applyAccountDetailsRowStyle(theme: theme)
 
         Picker("", selection: $viewModel.selectedTab) {
-          ForEach(viewModel.tabs, id: \.self)
-          { tab in
+          ForEach(viewModel.tabs, id: \.self) { tab in
             if tab == .boosts {
               Image("Rocket")
                 .tag(tab)
@@ -81,17 +80,20 @@ public struct AccountDetailView: View {
           }
           .onTapGesture {
             if let account = viewModel.account {
-              routerPath.navigate(to: .accountMediaGridView(account: account,
-                                                            initialMediaStatuses: viewModel.statusesMedias))
+              routerPath.navigate(
+                to: .accountMediaGridView(
+                  account: account,
+                  initialMediaStatuses: viewModel.statusesMedias))
             }
           }
           #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+            .listRowBackground(theme.primaryBackgroundColor)
           #endif
         }
-        StatusesListView(fetcher: viewModel,
-                         client: client,
-                         routerPath: routerPath)
+        StatusesListView(
+          fetcher: viewModel,
+          client: client,
+          routerPath: routerPath)
       }
       .environment(\.defaultMinListRowHeight, 0)
       .listStyle(.plain)
@@ -133,7 +135,7 @@ public struct AccountDetailView: View {
     }
     .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent,
-         viewModel.accountId == currentAccount.account?.id
+        viewModel.accountId == currentAccount.account?.id
       {
         viewModel.handleEvent(event: latestEvent, currentAccount: currentAccount)
       }
@@ -146,9 +148,12 @@ public struct AccountDetailView: View {
         }
       }
     }
-    .sheet(isPresented: $isEditingRelationshipNote, content: {
-      EditRelationshipNoteView(accountDetailViewModel: viewModel)
-    })
+    .sheet(
+      isPresented: $isEditingRelationshipNote,
+      content: {
+        EditRelationshipNoteView(accountDetailViewModel: viewModel)
+      }
+    )
     .edgesIgnoringSafeArea(.top)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
@@ -160,15 +165,18 @@ public struct AccountDetailView: View {
   private func makeHeaderView(proxy: ScrollViewProxy?) -> some View {
     switch viewModel.accountState {
     case .loading:
-      AccountDetailHeaderView(viewModel: viewModel,
-                              account: .placeholder(),
-                              scrollViewProxy: proxy)
-        .redacted(reason: .placeholder)
-        .allowsHitTesting(false)
+      AccountDetailHeaderView(
+        viewModel: viewModel,
+        account: .placeholder(),
+        scrollViewProxy: proxy
+      )
+      .redacted(reason: .placeholder)
+      .allowsHitTesting(false)
     case let .data(account):
-      AccountDetailHeaderView(viewModel: viewModel,
-                              account: account,
-                              scrollViewProxy: proxy)
+      AccountDetailHeaderView(
+        viewModel: viewModel,
+        account: account,
+        scrollViewProxy: proxy)
     case let .error(error):
       Text("Error: \(error.localizedDescription)")
     }
@@ -237,23 +245,27 @@ public struct AccountDetailView: View {
         .font(.scaledFootnote)
         .foregroundStyle(.secondary)
         .fontWeight(.semibold)
-        .listRowInsets(.init(top: 0,
-                             leading: 12,
-                             bottom: 0,
-                             trailing: .layoutPadding))
+        .listRowInsets(
+          .init(
+            top: 0,
+            leading: 12,
+            bottom: 0,
+            trailing: .layoutPadding)
+        )
         .listRowSeparator(.hidden)
-      #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
-      #endif
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #endif
       ForEach(viewModel.pinned) { status in
-        StatusRowExternalView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+        StatusRowExternalView(
+          viewModel: .init(status: status, client: client, routerPath: routerPath))
       }
       Rectangle()
-      #if os(visionOS)
-        .fill(Color.clear)
-      #else
-        .fill(theme.secondaryBackgroundColor)
-      #endif
+        #if os(visionOS)
+          .fill(Color.clear)
+        #else
+          .fill(theme.secondaryBackgroundColor)
+        #endif
         .frame(height: 12)
         .listRowInsets(.init())
         .listRowSeparator(.hidden)
@@ -278,10 +290,13 @@ public struct AccountDetailView: View {
         Button {
           if let account = viewModel.account {
             #if targetEnvironment(macCatalyst) || os(visionOS)
-              openWindow(value: WindowDestinationEditor.mentionStatusEditor(account: account, visibility: preferences.postVisibility))
+              openWindow(
+                value: WindowDestinationEditor.mentionStatusEditor(
+                  account: account, visibility: preferences.postVisibility))
             #else
-              routerPath.presentedSheet = .mentionStatusEditor(account: account,
-                                                               visibility: preferences.postVisibility)
+              routerPath.presentedSheet = .mentionStatusEditor(
+                account: account,
+                visibility: preferences.postVisibility)
             #endif
           }
         } label: {
@@ -290,9 +305,10 @@ public struct AccountDetailView: View {
       }
 
       Menu {
-        AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation,
-                                 showTranslateView: $showTranslateView,
-                                 viewModel: viewModel)
+        AccountDetailContextMenu(
+          showBlockConfirmation: $showBlockConfirmation,
+          showTranslateView: $showTranslateView,
+          viewModel: viewModel)
 
         if !viewModel.isCurrentUser {
           Button {
@@ -349,7 +365,10 @@ public struct AccountDetailView: View {
             Divider()
 
             Button {
-              if let url = URL(string: "https://mastometrics.com/auth/login?username=\(account.acct)@\(client.server)&instance=\(client.server)&auto=true") {
+              if let url = URL(
+                string:
+                  "https://mastometrics.com/auth/login?username=\(account.acct)@\(client.server)&instance=\(client.server)&auto=true"
+              ) {
                 openURL(url)
               }
             } label: {
@@ -379,7 +398,8 @@ public struct AccountDetailView: View {
           Button("account.action.block-user-\(account.username)", role: .destructive) {
             Task {
               do {
-                viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
+                viewModel.relationship = try await client.post(
+                  endpoint: Accounts.block(id: account.id))
               } catch {}
             }
           }
@@ -388,7 +408,8 @@ public struct AccountDetailView: View {
         Text("account.action.block-user-confirmation")
       }
       #if canImport(_Translation_SwiftUI)
-      .addTranslateView(isPresented: $showTranslateView, text: viewModel.account?.note.asRawText ?? "")
+        .addTranslateView(
+          isPresented: $showTranslateView, text: viewModel.account?.note.asRawText ?? "")
       #endif
     }
   }
@@ -399,9 +420,9 @@ extension View {
   func applyAccountDetailsRowStyle(theme: Theme) -> some View {
     listRowInsets(.init())
       .listRowSeparator(.hidden)
-    #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-    #endif
+      #if !os(visionOS)
+        .listRowBackground(theme.primaryBackgroundColor)
+      #endif
   }
 }
 

@@ -11,7 +11,7 @@ import SwiftUI
 public struct TimelineView: View {
   @Environment(\.scenePhase) private var scenePhase
   @Environment(\.selectedTabScrollToTop) private var selectedTabScrollToTop
-  
+
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var account
   @Environment(StreamWatcher.self) private var watcher
@@ -20,7 +20,7 @@ public struct TimelineView: View {
 
   @State private var viewModel = TimelineViewModel()
   @State private var contentFilter = TimelineContentFilter.shared
-  
+
   @State private var scrollToIdAnimated: String? = nil
 
   @State private var wasBackgrounded: Bool = false
@@ -33,11 +33,12 @@ public struct TimelineView: View {
 
   private let canFilterTimeline: Bool
 
-  public init(timeline: Binding<TimelineFilter>,
-              pinnedFilters: Binding<[TimelineFilter]>,
-              selectedTagGroup: Binding<TagGroup?>,
-              canFilterTimeline: Bool)
-  {
+  public init(
+    timeline: Binding<TimelineFilter>,
+    pinnedFilters: Binding<[TimelineFilter]>,
+    selectedTagGroup: Binding<TagGroup?>,
+    canFilterTimeline: Bool
+  ) {
     _timeline = timeline
     _pinnedFilters = pinnedFilters
     _selectedTagGroup = selectedTagGroup
@@ -102,8 +103,8 @@ public struct TimelineView: View {
       switch timeline {
       case let .list(list):
         if let accountList = lists.first(where: { $0.id == list.id }),
-           list.id == accountList.id,
-           accountList.title != list.title
+          list.id == accountList.id,
+          accountList.title != list.title
         {
           timeline = .list(list: accountList)
         }
@@ -160,7 +161,7 @@ public struct TimelineView: View {
       }
     }
   }
-  
+
   private var listView: some View {
     ScrollViewReader { proxy in
       List {
@@ -169,7 +170,8 @@ public struct TimelineView: View {
         TimelineTagHeaderView(tag: $viewModel.tag)
         switch viewModel.timeline {
         case .remoteLocal:
-          StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
+          StatusesListView(
+            fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
         default:
           StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
             .environment(\.isHomeTimeline, timeline == .home)
@@ -178,10 +180,10 @@ public struct TimelineView: View {
       .id(client.id)
       .environment(\.defaultMinListRowHeight, 1)
       .listStyle(.plain)
-#if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.primaryBackgroundColor)
-#endif
+      #if !os(visionOS)
+        .scrollContentBackground(.hidden)
+        .background(theme.primaryBackgroundColor)
+      #endif
       .onChange(of: viewModel.scrollToId) { _, newValue in
         if let newValue {
           proxy.scrollTo(newValue, anchor: .top)
@@ -205,7 +207,7 @@ public struct TimelineView: View {
       }
     }
   }
-  
+
   @ViewBuilder
   private var statusesObserver: some View {
     if viewModel.timeline.supportNewestPagination {
@@ -280,8 +282,10 @@ public struct TimelineView: View {
                     group.tags.append(tag)
                   }
                 } label: {
-                  Label(group.title,
-                        systemImage: group.tags.contains(tag) ? "checkmark.rectangle.fill" : "checkmark.rectangle")
+                  Label(
+                    group.title,
+                    systemImage: group.tags.contains(tag)
+                      ? "checkmark.rectangle.fill" : "checkmark.rectangle")
                 }
               }
             }

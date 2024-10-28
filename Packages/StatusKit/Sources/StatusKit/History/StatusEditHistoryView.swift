@@ -29,9 +29,8 @@ public struct StatusEditHistoryView: View {
                   .emojiText.size(Font.scaledBodyFont.emojiSize)
                   .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
                 Group {
-                  Text(edit.createdAt.asDate, style: .date) +
-                    Text("status.summary.at-time") +
-                    Text(edit.createdAt.asDate, style: .time)
+                  Text(edit.createdAt.asDate, style: .date) + Text("status.summary.at-time")
+                    + Text(edit.createdAt.asDate, style: .time)
                 }
                 .font(.footnote)
                 .foregroundStyle(.secondary)

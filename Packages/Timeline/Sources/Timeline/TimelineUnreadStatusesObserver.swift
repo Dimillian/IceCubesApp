@@ -23,7 +23,7 @@ import SwiftUI
 
   func removeStatus(status: Status) {
     if !disableUpdate, let index = pendingStatuses.firstIndex(of: status.id) {
-      pendingStatuses.removeSubrange(index ... (pendingStatuses.count - 1))
+      pendingStatuses.removeSubrange(index...(pendingStatuses.count - 1))
       HapticManager.shared.fireHaptic(.timeline)
     }
   }
@@ -57,7 +57,9 @@ struct TimelineUnreadStatusesView: View {
           }
         }
       }
-      .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
+      .accessibilityLabel(
+        "accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)"
+      )
       .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
       #if os(visionOS)
         .buttonStyle(.bordered)
@@ -66,7 +68,7 @@ struct TimelineUnreadStatusesView: View {
         .buttonStyle(.bordered)
         .background(Material.ultraThick)
       #endif
-        .cornerRadius(8)
+      .cornerRadius(8)
       #if !os(visionOS)
         .foregroundStyle(.secondary)
         .overlay(
@@ -74,8 +76,8 @@ struct TimelineUnreadStatusesView: View {
             .stroke(theme.tintColor, lineWidth: 1)
         )
       #endif
-        .padding(8)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
+      .padding(8)
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
     }
   }
 }

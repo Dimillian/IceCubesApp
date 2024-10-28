@@ -1,5 +1,6 @@
-@testable import Account
 import XCTest
+
+@testable import Account
 
 final class AccountTests: XCTestCase {
   func testExample() throws {

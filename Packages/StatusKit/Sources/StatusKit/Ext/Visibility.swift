@@ -1,12 +1,12 @@
 import Models
 import SwiftUI
 
-public extension Models.Visibility {
-  static var supportDefault: [Self] {
+extension Models.Visibility {
+  public static var supportDefault: [Self] {
     [.pub, .priv, .unlisted]
   }
 
-  var iconName: String {
+  public var iconName: String {
     switch self {
     case .pub:
       "globe.americas"
@@ -19,7 +19,7 @@ public extension Models.Visibility {
     }
   }
 
-  var title: LocalizedStringKey {
+  public var title: LocalizedStringKey {
     switch self {
     case .pub:
       "status.visibility.public"

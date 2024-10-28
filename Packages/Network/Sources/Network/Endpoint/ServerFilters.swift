@@ -29,8 +29,10 @@ public enum ServerFilters: Endpoint {
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .addKeyword(_, keyword, wholeWord):
-      [.init(name: "keyword", value: keyword),
-       .init(name: "whole_word", value: wholeWord ? "true" : "false")]
+      [
+        .init(name: "keyword", value: keyword),
+        .init(name: "whole_word", value: wholeWord ? "true" : "false"),
+      ]
     default:
       nil
     }
@@ -58,11 +60,12 @@ public struct ServerFilterData: Encodable, Sendable {
   // the expiry of a filter
   public let expiresIn: String?
 
-  public init(title: String,
-              context: [ServerFilter.Context],
-              filterAction: ServerFilter.Action,
-              expiresIn: String?)
-  {
+  public init(
+    title: String,
+    context: [ServerFilter.Context],
+    filterAction: ServerFilter.Action,
+    expiresIn: String?
+  ) {
     self.title = title
     self.context = context
     self.filterAction = filterAction

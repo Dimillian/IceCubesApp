@@ -14,7 +14,7 @@ public struct ConversationsListView: View {
 
   @State private var viewModel = ConversationsListViewModel()
 
-  public init() { }
+  public init() {}
 
   private var conversations: Binding<[Conversation]> {
     if viewModel.isLoadingFirstPage {
@@ -44,14 +44,16 @@ public struct ConversationsListView: View {
                 Divider()
               }
             } else if conversations.isEmpty, !viewModel.isLoadingFirstPage, !viewModel.isError {
-              PlaceholderView(iconName: "tray",
-                              title: "conversations.empty.title",
-                              message: "conversations.empty.message")
+              PlaceholderView(
+                iconName: "tray",
+                title: "conversations.empty.title",
+                message: "conversations.empty.message")
             } else if viewModel.isError {
-              ErrorView(title: "conversations.error.title",
-                        message: "conversations.error.message",
-                        buttonTitle: "conversations.error.button")
-              {
+              ErrorView(
+                title: "conversations.error.title",
+                message: "conversations.error.message",
+                buttonTitle: "conversations.error.button"
+              ) {
                 await viewModel.fetchConversations()
               }
             }
@@ -75,8 +77,8 @@ public struct ConversationsListView: View {
         .padding(.top, .layoutPadding)
       }
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.primaryBackgroundColor)
+        .scrollContentBackground(.hidden)
+        .background(theme.primaryBackgroundColor)
       #endif
       .navigationTitle("conversations.navigation-title")
       .navigationBarTitleDisplayMode(.inline)

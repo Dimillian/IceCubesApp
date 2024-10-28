@@ -9,10 +9,12 @@ enum PostVisibility: String, AppEnum {
   case direct, priv, unlisted, pub
 
   public static var caseDisplayRepresentations: [PostVisibility: DisplayRepresentation] {
-    [.direct: "Private",
-     .priv: "Followers Only",
-     .unlisted: "Quiet Public",
-     .pub: "Public"]
+    [
+      .direct: "Private",
+      .priv: "Followers Only",
+      .unlisted: "Quiet Public",
+      .pub: "Public",
+    ]
   }
 
   static var typeDisplayName: LocalizedStringResource { "Visibility" }
@@ -44,12 +46,15 @@ struct InlinePostIntent: AppIntent {
   @Parameter(title: "Post visibility", requestValueDialog: IntentDialog("Visibility of your post"))
   var visibility: PostVisibility
 
-  @Parameter(title: "Post content", requestValueDialog: IntentDialog("Content of the post to be sent to Mastodon"))
+  @Parameter(
+    title: "Post content",
+    requestValueDialog: IntentDialog("Content of the post to be sent to Mastodon"))
   var content: String
 
   @MainActor
   func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
-    let client = Client(server: account.account.server, version: .v1, oauthToken: account.account.oauthToken)
+    let client = Client(
+      server: account.account.server, version: .v1, oauthToken: account.account.oauthToken)
     let status = StatusData(status: content, visibility: visibility.toAppVisibility)
     do {
       let status: Status = try await client.post(endpoint: Statuses.postStatus(json: status))

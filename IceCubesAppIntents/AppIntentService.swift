@@ -4,7 +4,9 @@ import SwiftUI
 @Observable
 public class AppIntentService: @unchecked Sendable {
   struct HandledIntent: Equatable {
-    static func == (lhs: AppIntentService.HandledIntent, rhs: AppIntentService.HandledIntent) -> Bool {
+    static func == (lhs: AppIntentService.HandledIntent, rhs: AppIntentService.HandledIntent)
+      -> Bool
+    {
       lhs.id == rhs.id
     }
 

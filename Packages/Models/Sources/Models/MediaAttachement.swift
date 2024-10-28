@@ -28,13 +28,21 @@ public struct MediaAttachment: Codable, Identifiable, Hashable, Equatable {
     if let supportedType {
       switch supportedType {
       case .image:
-        return NSLocalizedString("accessibility.media.supported-type.image.label", bundle: .main, comment: "A localized description of SupportedType.image")
+        return NSLocalizedString(
+          "accessibility.media.supported-type.image.label", bundle: .main,
+          comment: "A localized description of SupportedType.image")
       case .gifv:
-        return NSLocalizedString("accessibility.media.supported-type.gifv.label", bundle: .main, comment: "A localized description of SupportedType.gifv")
+        return NSLocalizedString(
+          "accessibility.media.supported-type.gifv.label", bundle: .main,
+          comment: "A localized description of SupportedType.gifv")
       case .video:
-        return NSLocalizedString("accessibility.media.supported-type.video.label", bundle: .main, comment: "A localized description of SupportedType.video")
+        return NSLocalizedString(
+          "accessibility.media.supported-type.video.label", bundle: .main,
+          comment: "A localized description of SupportedType.video")
       case .audio:
-        return NSLocalizedString("accessibility.media.supported-type.audio.label", bundle: .main, comment: "A localized description of SupportedType.audio")
+        return NSLocalizedString(
+          "accessibility.media.supported-type.audio.label", bundle: .main,
+          comment: "A localized description of SupportedType.audio")
       }
     }
     return nil
@@ -46,21 +54,23 @@ public struct MediaAttachment: Codable, Identifiable, Hashable, Equatable {
   public let meta: MetaContainer?
 
   public static func imageWith(url: URL) -> MediaAttachment {
-    .init(id: UUID().uuidString,
-          type: "image",
-          url: url,
-          previewUrl: url,
-          description: nil,
-          meta: nil)
+    .init(
+      id: UUID().uuidString,
+      type: "image",
+      url: url,
+      previewUrl: url,
+      description: nil,
+      meta: nil)
   }
 
   public static func videoWith(url: URL) -> MediaAttachment {
-    .init(id: UUID().uuidString,
-          type: "video",
-          url: url,
-          previewUrl: url,
-          description: nil,
-          meta: nil)
+    .init(
+      id: UUID().uuidString,
+      type: "video",
+      url: url,
+      previewUrl: url,
+      description: nil,
+      meta: nil)
   }
 }
 

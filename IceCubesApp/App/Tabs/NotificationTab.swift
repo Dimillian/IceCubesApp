@@ -57,7 +57,8 @@ struct NotificationsTab: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
           switch type {
           case .follow, .follow_request:
-            routerPath.navigate(to: .accountDetailWithAccount(account: newValue.notification.account))
+            routerPath.navigate(
+              to: .accountDetailWithAccount(account: newValue.notification.account))
           default:
             if let status = newValue.notification.status {
               routerPath.navigate(to: .statusDetailWithStatus(status: status))
@@ -81,7 +82,9 @@ struct NotificationsTab: View {
 
   private func clearNotifications() {
     if selectedTab == .notifications || isSecondaryColumn {
-      if let token = appAccount.currentAccount.oauthToken, userPreferences.notificationsCount[token] ?? 0 > 0 {
+      if let token = appAccount.currentAccount.oauthToken,
+        userPreferences.notificationsCount[token] ?? 0 > 0
+      {
         userPreferences.notificationsCount[token] = 0
       }
       if watcher.unreadNotificationsCount > 0 {

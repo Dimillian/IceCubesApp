@@ -16,12 +16,13 @@ public struct ConsolidatedNotification: Identifiable {
 
   public var id: String? { notifications.first?.id }
 
-  public init(notifications: [Notification],
-              type: Notification.NotificationType,
-              createdAt: ServerDate,
-              accounts: [Account],
-              status: Status?)
-  {
+  public init(
+    notifications: [Notification],
+    type: Notification.NotificationType,
+    createdAt: ServerDate,
+    accounts: [Account],
+    status: Status?
+  ) {
     self.notifications = notifications
     self.type = type
     self.createdAt = createdAt
@@ -30,18 +31,21 @@ public struct ConsolidatedNotification: Identifiable {
   }
 
   public static func placeholder() -> ConsolidatedNotification {
-    .init(notifications: [Notification.placeholder()],
-          type: .favourite,
-          createdAt: ServerDate(),
-          accounts: [.placeholder()],
-          status: .placeholder())
+    .init(
+      notifications: [Notification.placeholder()],
+      type: .favourite,
+      createdAt: ServerDate(),
+      accounts: [.placeholder()],
+      status: .placeholder())
   }
 
   public static func placeholders() -> [ConsolidatedNotification] {
-    [.placeholder(), .placeholder(), .placeholder(),
-     .placeholder(), .placeholder(), .placeholder(),
-     .placeholder(), .placeholder(), .placeholder(),
-     .placeholder(), .placeholder(), .placeholder()]
+    [
+      .placeholder(), .placeholder(), .placeholder(),
+      .placeholder(), .placeholder(), .placeholder(),
+      .placeholder(), .placeholder(), .placeholder(),
+      .placeholder(), .placeholder(), .placeholder(),
+    ]
   }
 }
 

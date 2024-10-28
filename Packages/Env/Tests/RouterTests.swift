@@ -1,8 +1,9 @@
-@testable import Env
 import Network
 import SwiftUI
-import XCTest
 import Testing
+import XCTest
+
+@testable import Env
 
 @Test
 @MainActor
@@ -26,8 +27,9 @@ func testRouterTagsURL() {
 @MainActor
 func testRouterLocalStatusURL() {
   let router = RouterPath()
-  let client = Client(server: "mastodon.social",
-                      oauthToken: .init(accessToken: "", tokenType: "", scope: "", createdAt: 0))
+  let client = Client(
+    server: "mastodon.social",
+    oauthToken: .init(accessToken: "", tokenType: "", scope: "", createdAt: 0))
   client.addConnections(["mastodon.social"])
   router.client = client
   let url = URL(string: "https://mastodon.social/status/1010384")!
@@ -39,8 +41,9 @@ func testRouterLocalStatusURL() {
 @MainActor
 func testRouterRemoteStatusURL() {
   let router = RouterPath()
-  let client = Client(server: "mastodon.social",
-                      oauthToken: .init(accessToken: "", tokenType: "", scope: "", createdAt: 0))
+  let client = Client(
+    server: "mastodon.social",
+    oauthToken: .init(accessToken: "", tokenType: "", scope: "", createdAt: 0))
   client.addConnections(["mastodon.social", "mastodon.online"])
   router.client = client
   let url = URL(string: "https://mastodon.online/status/1010384")!

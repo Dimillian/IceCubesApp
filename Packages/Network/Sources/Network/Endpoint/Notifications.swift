@@ -2,10 +2,11 @@ import Foundation
 import Models
 
 public enum Notifications: Endpoint {
-  case notifications(minId: String?,
-                     maxId: String?,
-                     types: [String]?,
-                     limit: Int)
+  case notifications(
+    minId: String?,
+    maxId: String?,
+    types: [String]?,
+    limit: Int)
   case notificationsForAccount(accountId: String, maxId: String?)
   case notification(id: String)
   case policy

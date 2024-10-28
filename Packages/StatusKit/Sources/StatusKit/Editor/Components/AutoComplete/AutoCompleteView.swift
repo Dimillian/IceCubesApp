@@ -19,9 +19,8 @@ extension StatusEditor {
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
 
     var body: some View {
-      if !viewModel.mentionsSuggestions.isEmpty ||
-        !viewModel.tagsSuggestions.isEmpty ||
-        (viewModel.showRecentsTagsInline && !recentTags.isEmpty)
+      if !viewModel.mentionsSuggestions.isEmpty || !viewModel.tagsSuggestions.isEmpty
+        || (viewModel.showRecentsTagsInline && !recentTags.isEmpty)
       {
         VStack {
           HStack {
@@ -31,9 +30,11 @@ extension StatusEditor {
                   Self.MentionsView(viewModel: viewModel)
                 } else {
                   if viewModel.showRecentsTagsInline {
-                    Self.RecentTagsView(viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                    Self.RecentTagsView(
+                      viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
                   } else {
-                    Self.RemoteTagsView(viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                    Self.RemoteTagsView(
+                      viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
                   }
                 }
               }
@@ -47,14 +48,17 @@ extension StatusEditor {
                   isTagSuggestionExpanded.toggle()
                 }
               } label: {
-                Image(systemName: isTagSuggestionExpanded ? "chevron.down.circle" : "chevron.up.circle")
-                  .padding(.trailing, 8)
+                Image(
+                  systemName: isTagSuggestionExpanded ? "chevron.down.circle" : "chevron.up.circle"
+                )
+                .padding(.trailing, 8)
               }
             }
           }
           .frame(height: 40)
           if isTagSuggestionExpanded {
-            Self.ExpandedView(viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+            Self.ExpandedView(
+              viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
           }
         }
         .background(.thinMaterial)

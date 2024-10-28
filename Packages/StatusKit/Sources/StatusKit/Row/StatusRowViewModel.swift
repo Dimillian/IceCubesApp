@@ -61,7 +61,7 @@ import SwiftUI
     didSet {
       // if we are newly blocking or muting the author, force collapse post so it goes away
       if let relationship = authorRelationship,
-         relationship.blocking || relationship.muting
+        relationship.blocking || relationship.muting
       {
         lineLimit = 0
       }
@@ -89,7 +89,8 @@ import SwiftUI
 
   private func recalcCollapse() {
     let hasContentWarning = !status.spoilerText.asRawText.isEmpty
-    let showCollapseButton = collapseLongPosts && isCollapsed && !hasContentWarning
+    let showCollapseButton =
+      collapseLongPosts && isCollapsed && !hasContentWarning
       && finalStatus.content.asRawText.unicodeScalars.count > collapseThresholdLength
     let newlineLimit = showCollapseButton && isCollapsed ? collapsedLines : nil
     if newlineLimit != lineLimit {
@@ -102,8 +103,8 @@ import SwiftUI
   }
 
   var isThread: Bool {
-    status.reblog?.inReplyToId != nil || status.reblog?.inReplyToAccountId != nil ||
-      status.inReplyToId != nil || status.inReplyToAccountId != nil
+    status.reblog?.inReplyToId != nil || status.reblog?.inReplyToAccountId != nil
+      || status.inReplyToId != nil || status.inReplyToAccountId != nil
   }
 
   var url: URL? {
@@ -152,25 +153,27 @@ import SwiftUI
   }
 
   func makeDecorativeGradient(startColor: Color, endColor: Color) -> some View {
-    LinearGradient(stops: [
-      .init(color: startColor.opacity(0.2), location: 0.03),
-      .init(color: startColor.opacity(0.1), location: 0.06),
-      .init(color: startColor.opacity(0.05), location: 0.09),
-      .init(color: startColor.opacity(0.02), location: 0.15),
-      .init(color: endColor, location: 0.25),
-    ],
-    startPoint: .topLeading,
-    endPoint: .bottomTrailing)
+    LinearGradient(
+      stops: [
+        .init(color: startColor.opacity(0.2), location: 0.03),
+        .init(color: startColor.opacity(0.1), location: 0.06),
+        .init(color: startColor.opacity(0.05), location: 0.09),
+        .init(color: startColor.opacity(0.02), location: 0.15),
+        .init(color: endColor, location: 0.25),
+      ],
+      startPoint: .topLeading,
+      endPoint: .bottomTrailing)
   }
 
-  public init(status: Status,
-              client: Client,
-              routerPath: RouterPath,
-              isRemote: Bool = false,
-              showActions: Bool = true,
-              textDisabled: Bool = false,
-              scrollToId: Binding<String?>? = nil)
-  {
+  public init(
+    status: Status,
+    client: Client,
+    routerPath: RouterPath,
+    isRemote: Bool = false,
+    showActions: Bool = true,
+    textDisabled: Bool = false,
+    scrollToId: Binding<String?>? = nil
+  ) {
     self.status = status
     finalStatus = status.reblog ?? status
     self.client = client
@@ -197,13 +200,16 @@ import SwiftUI
     }
 
     userFollowedTag = finalStatus.content.links.first(where: { link in
-      link.type == .hashtag && CurrentAccount.shared.tags.contains(where: { $0.name.lowercased() == link.title.lowercased() })
+      link.type == .hashtag
+        && CurrentAccount.shared.tags.contains(where: {
+          $0.name.lowercased() == link.title.lowercased()
+        })
     })
 
     isFiltered = filter != nil
 
     if let url = embededStatusURL(),
-       let embed = StatusEmbedCache.shared.get(url: url)
+      let embed = StatusEmbedCache.shared.get(url: url)
     {
       isEmbedLoading = false
       embeddedStatus = embed
@@ -237,7 +243,7 @@ import SwiftUI
 
   func goToParent() {
     guard let id = status.inReplyToId else { return }
-    if let _ = scrollToId {
+    if scrollToId != nil {
       scrollToId?.wrappedValue = id
     } else {
       routerPath.navigate(to: .statusDetail(id: id))
@@ -245,16 +251,17 @@ import SwiftUI
   }
 
   func loadAuthorRelationship() async {
-    let relationships: [Relationship]? = try? await client.get(endpoint: Accounts.relationships(ids: [status.reblog?.account.id ?? status.account.id]))
+    let relationships: [Relationship]? = try? await client.get(
+      endpoint: Accounts.relationships(ids: [status.reblog?.account.id ?? status.account.id]))
     authorRelationship = relationships?.first
   }
 
   private func embededStatusURL() -> URL? {
     let content = finalStatus.content
     if !content.statusesURLs.isEmpty,
-       let url = content.statusesURLs.first,
-       !StatusEmbedCache.shared.badStatusesURLs.contains(url),
-       client.hasConnection(with: url)
+      let url = content.statusesURLs.first,
+      !StatusEmbedCache.shared.badStatusesURLs.contains(url),
+      client.hasConnection(with: url)
     {
       return url
     }
@@ -263,7 +270,7 @@ import SwiftUI
 
   func loadEmbeddedStatus() async {
     guard embeddedStatus == nil,
-          let url = embededStatusURL()
+      let url = embededStatusURL()
     else {
       if isEmbedLoading {
         isEmbedLoading = false
@@ -283,11 +290,13 @@ import SwiftUI
       if url.absoluteString.contains(client.server), let id = Int(url.lastPathComponent) {
         embed = try await client.get(endpoint: Statuses.status(id: String(id)))
       } else {
-        let results: SearchResults = try await client.get(endpoint: Search.search(query: url.absoluteString,
-                                                                                  type: .statuses,
-                                                                                  offset: 0,
-                                                                                  following: nil),
-                                                          forceVersion: .v2)
+        let results: SearchResults = try await client.get(
+          endpoint: Search.search(
+            query: url.absoluteString,
+            type: .statuses,
+            offset: 0,
+            following: nil),
+          forceVersion: .v2)
         embed = results.statuses.first
       }
       if let embed {
@@ -340,8 +349,10 @@ import SwiftUI
       withAnimation(.smooth) {
         actionsAccountsFetched = true
       }
-      let favoriters: [Account] = try await client.get(endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
-      let rebloggers: [Account] = try await client.get(endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
+      let favoriters: [Account] = try await client.get(
+        endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
+      let rebloggers: [Account] = try await client.get(
+        endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
       withAnimation(.smooth) {
         self.favoriters = favoriters
         self.rebloggers = rebloggers
@@ -385,7 +396,7 @@ import SwiftUI
     var hasShown = false
     #if canImport(_Translation_SwiftUI)
       if translation == nil,
-         #available(iOS 17.4, *)
+        #available(iOS 17.4, *)
       {
         showAppleTranslation = true
         hasShown = true
@@ -393,7 +404,7 @@ import SwiftUI
     #endif
 
     if !hasShown,
-       translation == nil
+      translation == nil
     {
       if preferredTranslationType == .useDeepl {
         deeplTranslationError = true
@@ -409,8 +420,9 @@ import SwiftUI
     }
 
     let deepLClient = getDeepLClient()
-    let translation = try? await deepLClient.request(target: userLang,
-                                                     text: finalStatus.content.asRawText)
+    let translation = try? await deepLClient.request(
+      target: userLang,
+      text: finalStatus.content.asRawText)
     withAnimation {
       self.translation = translation
       isLoadingTranslation = false
@@ -422,8 +434,10 @@ import SwiftUI
       isLoadingTranslation = true
     }
 
-    let translation: Translation? = try? await client.post(endpoint: Statuses.translate(id: finalStatus.id,
-                                                                                        lang: userLang))
+    let translation: Translation? = try? await client.post(
+      endpoint: Statuses.translate(
+        id: finalStatus.id,
+        lang: userLang))
 
     withAnimation {
       self.translation = translation
@@ -454,11 +468,13 @@ import SwiftUI
   func fetchRemoteStatus() async -> Bool {
     guard isRemote, let remoteStatusURL = URL(string: finalStatus.url ?? "") else { return false }
     isLoadingRemoteContent = true
-    let results: SearchResults? = try? await client.get(endpoint: Search.search(query: remoteStatusURL.absoluteString,
-                                                                                type: .statuses,
-                                                                                offset: nil,
-                                                                                following: nil),
-                                                        forceVersion: .v2)
+    let results: SearchResults? = try? await client.get(
+      endpoint: Search.search(
+        query: remoteStatusURL.absoluteString,
+        type: .statuses,
+        offset: nil,
+        following: nil),
+      forceVersion: .v2)
     if let status = results?.statuses.first {
       localStatusId = status.id
       localStatus = status

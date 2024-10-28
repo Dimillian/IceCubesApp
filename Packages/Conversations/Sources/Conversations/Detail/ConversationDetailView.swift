@@ -37,17 +37,19 @@ public struct ConversationDetailView: View {
             loadingView
           }
           ForEach(viewModel.messages) { message in
-            ConversationMessageView(message: message,
-                                    conversation: viewModel.conversation)
-              .padding(.vertical, 4)
-              .id(message.id)
+            ConversationMessageView(
+              message: message,
+              conversation: viewModel.conversation
+            )
+            .padding(.vertical, 4)
+            .id(message.id)
           }
           bottomAnchorView
         }
         .padding(.horizontal, .layoutPadding)
       }
       #if !os(visionOS)
-      .scrollDismissesKeyboard(.interactively)
+        .scrollDismissesKeyboard(.interactively)
       #endif
       .safeAreaInset(edge: .bottom) {
         inputTextView
@@ -74,32 +76,32 @@ public struct ConversationDetailView: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-      .toolbar {
-        ToolbarItem(placement: .principal) {
-          if viewModel.conversation.accounts.count == 1,
-             let account = viewModel.conversation.accounts.first
-          {
-            EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
-              .font(.scaledHeadline)
-              .foregroundColor(theme.labelColor)
-              .emojiText.size(Font.scaledHeadlineFont.emojiSize)
-              .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
-          } else {
-            Text("Direct message with \(viewModel.conversation.accounts.count) people")
-              .font(.scaledHeadline)
+    .toolbar {
+      ToolbarItem(placement: .principal) {
+        if viewModel.conversation.accounts.count == 1,
+          let account = viewModel.conversation.accounts.first
+        {
+          EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
+            .font(.scaledHeadline)
+            .foregroundColor(theme.labelColor)
+            .emojiText.size(Font.scaledHeadlineFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
+        } else {
+          Text("Direct message with \(viewModel.conversation.accounts.count) people")
+            .font(.scaledHeadline)
+        }
+      }
+    }
+    .onChange(of: watcher.latestEvent?.id) {
+      if let latestEvent = watcher.latestEvent {
+        viewModel.handleEvent(event: latestEvent)
+        DispatchQueue.main.async {
+          withAnimation {
+            scrollProxy?.scrollTo(Constants.bottomAnchor, anchor: .bottom)
           }
         }
       }
-      .onChange(of: watcher.latestEvent?.id) {
-        if let latestEvent = watcher.latestEvent {
-          viewModel.handleEvent(event: latestEvent)
-          DispatchQueue.main.async {
-            withAnimation {
-              scrollProxy?.scrollTo(Constants.bottomAnchor, anchor: .bottom)
-            }
-          }
-        }
-      }
+    }
   }
 
   private var loadingView: some View {
@@ -124,23 +126,26 @@ public struct ConversationDetailView: View {
       HStack(alignment: .bottom, spacing: 8) {
         if viewModel.conversation.lastStatus != nil {
           Button {
-            routerPath.presentedSheet = .replyToStatusEditor(status: viewModel.conversation.lastStatus!)
+            routerPath.presentedSheet = .replyToStatusEditor(
+              status: viewModel.conversation.lastStatus!)
           } label: {
             Image(systemName: "plus")
           }
           .padding(.bottom, 7)
         }
 
-        TextField("conversations.new.message.placeholder", text: $viewModel.newMessageText, axis: .vertical)
-          .focused($isMessageFieldFocused)
-          .keyboardType(.default)
-          .backgroundStyle(.thickMaterial)
-          .padding(6)
-          .overlay(
-            RoundedRectangle(cornerRadius: 14)
-              .stroke(.gray, lineWidth: 1)
-          )
-          .font(.scaledBody)
+        TextField(
+          "conversations.new.message.placeholder", text: $viewModel.newMessageText, axis: .vertical
+        )
+        .focused($isMessageFieldFocused)
+        .keyboardType(.default)
+        .backgroundStyle(.thickMaterial)
+        .padding(6)
+        .overlay(
+          RoundedRectangle(cornerRadius: 14)
+            .stroke(.gray, lineWidth: 1)
+        )
+        .font(.scaledBody)
         if !viewModel.newMessageText.isEmpty {
           Button {
             Task {

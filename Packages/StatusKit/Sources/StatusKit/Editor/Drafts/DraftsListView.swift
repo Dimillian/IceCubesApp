@@ -33,9 +33,9 @@ extension StatusEditor {
               }
             }
             #if os(visionOS)
-            .foregroundStyle(theme.labelColor)
+              .foregroundStyle(theme.labelColor)
             #else
-            .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
+              .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
             #endif
           }
           .onDelete { indexes in

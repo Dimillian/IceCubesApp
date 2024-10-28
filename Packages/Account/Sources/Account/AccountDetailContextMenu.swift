@@ -18,8 +18,9 @@ public struct AccountDetailContextMenu: View {
       Section(account.acct) {
         if !viewModel.isCurrentUser {
           Button {
-            routerPath.presentedSheet = .mentionStatusEditor(account: account,
-                                                             visibility: preferences.postVisibility)
+            routerPath.presentedSheet = .mentionStatusEditor(
+              account: account,
+              visibility: preferences.postVisibility)
           } label: {
             Label("account.action.mention", systemImage: "at")
           }
@@ -37,11 +38,13 @@ public struct AccountDetailContextMenu: View {
             Button {
               Task {
                 do {
-                  viewModel.relationship = try await client.post(endpoint: Accounts.unblock(id: account.id))
+                  viewModel.relationship = try await client.post(
+                    endpoint: Accounts.unblock(id: account.id))
                 } catch {}
               }
             } label: {
-              Label("account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")
+              Label(
+                "account.action.unblock", systemImage: "person.crop.circle.badge.exclamationmark")
             }
           } else {
             Button {
@@ -55,7 +58,8 @@ public struct AccountDetailContextMenu: View {
             Button {
               Task {
                 do {
-                  viewModel.relationship = try await client.post(endpoint: Accounts.unmute(id: account.id))
+                  viewModel.relationship = try await client.post(
+                    endpoint: Accounts.unmute(id: account.id))
                 } catch {}
               }
             } label: {
@@ -67,7 +71,9 @@ public struct AccountDetailContextMenu: View {
                 Button(duration.description) {
                   Task {
                     do {
-                      viewModel.relationship = try await client.post(endpoint: Accounts.mute(id: account.id, json: MuteData(duration: duration.rawValue)))
+                      viewModel.relationship = try await client.post(
+                        endpoint: Accounts.mute(
+                          id: account.id, json: MuteData(duration: duration.rawValue)))
                     } catch {}
                   }
                 }
@@ -78,15 +84,17 @@ public struct AccountDetailContextMenu: View {
           }
 
           if let relationship = viewModel.relationship,
-             relationship.following
+            relationship.following
           {
             if relationship.notifying {
               Button {
                 Task {
                   do {
-                    viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
-                                                                                             notify: false,
-                                                                                             reblogs: relationship.showingReblogs))
+                    viewModel.relationship = try await client.post(
+                      endpoint: Accounts.follow(
+                        id: account.id,
+                        notify: false,
+                        reblogs: relationship.showingReblogs))
                   } catch {}
                 }
               } label: {
@@ -96,9 +104,11 @@ public struct AccountDetailContextMenu: View {
               Button {
                 Task {
                   do {
-                    viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
-                                                                                             notify: true,
-                                                                                             reblogs: relationship.showingReblogs))
+                    viewModel.relationship = try await client.post(
+                      endpoint: Accounts.follow(
+                        id: account.id,
+                        notify: true,
+                        reblogs: relationship.showingReblogs))
                   } catch {}
                 }
               } label: {
@@ -109,9 +119,11 @@ public struct AccountDetailContextMenu: View {
               Button {
                 Task {
                   do {
-                    viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
-                                                                                             notify: relationship.notifying,
-                                                                                             reblogs: false))
+                    viewModel.relationship = try await client.post(
+                      endpoint: Accounts.follow(
+                        id: account.id,
+                        notify: relationship.notifying,
+                        reblogs: false))
                   } catch {}
                 }
               } label: {
@@ -121,9 +133,11 @@ public struct AccountDetailContextMenu: View {
               Button {
                 Task {
                   do {
-                    viewModel.relationship = try await client.post(endpoint: Accounts.follow(id: account.id,
-                                                                                             notify: relationship.notifying,
-                                                                                             reblogs: true))
+                    viewModel.relationship = try await client.post(
+                      endpoint: Accounts.follow(
+                        id: account.id,
+                        notify: relationship.notifying,
+                        reblogs: true))
                   } catch {}
                 }
               } label: {
@@ -159,7 +173,9 @@ public struct AccountDetailContextMenu: View {
           ShareLink(item: url, subject: Text(account.safeDisplayName)) {
             Label("account.action.share", systemImage: "square.and.arrow.up")
           }
-          Button { UIApplication.shared.open(url) } label: {
+          Button {
+            UIApplication.shared.open(url)
+          } label: {
             Label("status.action.view-in-browser", systemImage: "safari")
           }
         }

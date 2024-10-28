@@ -7,7 +7,7 @@ public struct SubClubUser: Sendable, Identifiable, Decodable {
     public let interval: String
     public let intervalCount: Int
     public let unitAmount: Int
-    
+
     public var formattedAmount: String {
       let formatter = NumberFormatter()
       formatter.numberStyle = .currency
@@ -16,7 +16,7 @@ public struct SubClubUser: Sendable, Identifiable, Decodable {
       return formatter.string(from: .init(integerLiteral: unitAmount / 100)) ?? "$NaN"
     }
   }
-  
+
   public let id: String
   public let subscription: Subscription?
 }

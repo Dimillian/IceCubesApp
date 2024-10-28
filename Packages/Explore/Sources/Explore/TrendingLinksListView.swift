@@ -19,9 +19,9 @@ public struct TrendingLinksListView: View {
       ForEach(links) { card in
         StatusRowCardView(card: card)
           .environment(\.isCompact, true)
-        #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
-        #endif
+          #if !os(visionOS)
+            .listRowBackground(theme.primaryBackgroundColor)
+          #endif
           .padding(.vertical, 8)
       }
       NextPageView {
@@ -29,13 +29,13 @@ public struct TrendingLinksListView: View {
         links.append(contentsOf: nextPage)
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     #if os(visionOS)
-    .listStyle(.insetGrouped)
+      .listStyle(.insetGrouped)
     #else
-    .listStyle(.plain)
+      .listStyle(.plain)
     #endif
     .refreshable {
       do {
@@ -43,8 +43,8 @@ public struct TrendingLinksListView: View {
       } catch {}
     }
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.primaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.primaryBackgroundColor)
     #endif
     .navigationTitle("explore.section.trending.links")
     .navigationBarTitleDisplayMode(.inline)

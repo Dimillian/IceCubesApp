@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "Conversations",
       targets: ["Conversations"]
-    ),
+    )
   ],
   dependencies: [
     .package(name: "Models", path: "../Models"),
@@ -32,8 +32,8 @@ let package = Package(
         .product(name: "DesignSystem", package: "DesignSystem"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6),
+        .swiftLanguageMode(.v6)
       ]
-    ),
+    )
   ]
 )

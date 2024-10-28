@@ -27,9 +27,12 @@ struct TimelineTagGroupheaderView: View {
           }
           .scrollIndicators(.hidden)
           Button("status.action.edit") {
-            routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: { group in
-              timeline = .tagGroup(title: group.title, tags: group.tags, symbolName: group.symbolName)
-            })
+            routerPath.presentedSheet = .editTagGroup(
+              tagGroup: group,
+              onSaved: { group in
+                timeline = .tagGroup(
+                  title: group.title, tags: group.tags, symbolName: group.symbolName)
+              })
           }
           .buttonStyle(.bordered)
         }

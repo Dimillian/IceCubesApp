@@ -10,9 +10,9 @@ import StoreKit
 import SwiftUI
 import UIKit
 
-public extension StatusEditor {
+extension StatusEditor {
   @MainActor
-  struct MainView: View {
+  public struct MainView: View {
     @Environment(AppAccountsManager.self) private var appAccounts
     @Environment(CurrentAccount.self) private var currentAccount
     @Environment(Theme.self) private var theme
@@ -27,8 +27,10 @@ public extension StatusEditor {
 
     private var focusedSEVM: ViewModel {
       if case let .followUp(id) = editorFocusState,
-         let sevm = followUpSEVMs.first(where: { $0.id == id })
-      { return sevm }
+        let sevm = followUpSEVMs.first(where: { $0.id == id })
+      {
+        return sevm
+      }
 
       return mainSEVM
     }
@@ -76,71 +78,79 @@ public extension StatusEditor {
           #if !os(visionOS)
             .background(theme.primaryBackgroundColor)
           #endif
-            .safeAreaInset(edge: .bottom) {
-              AutoCompleteView(viewModel: focusedSEVM)
-            }
+          .safeAreaInset(edge: .bottom) {
+            AutoCompleteView(viewModel: focusedSEVM)
+          }
           #if os(visionOS)
             .ornament(attachmentAnchor: .scene(.leading)) {
-              AccessoryView(focusedSEVM: focusedSEVM,
-                            followUpSEVMs: $followUpSEVMs)
+              AccessoryView(
+                focusedSEVM: focusedSEVM,
+                followUpSEVMs: $followUpSEVMs)
             }
           #else
             .safeAreaInset(edge: .bottom) {
-                if presentationDetent == .large || presentationDetent == .medium {
-                  AccessoryView(focusedSEVM: focusedSEVM,
-                                followUpSEVMs: $followUpSEVMs)
-                }
+              if presentationDetent == .large || presentationDetent == .medium {
+                AccessoryView(
+                  focusedSEVM: focusedSEVM,
+                  followUpSEVMs: $followUpSEVMs)
               }
+            }
           #endif
-              .accessibilitySortPriority(1) // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
-              .navigationTitle(focusedSEVM.mode.title)
-              .navigationBarTitleDisplayMode(.inline)
-              .toolbar { ToolbarItems(mainSEVM: mainSEVM,
-                                      focusedSEVM: focusedSEVM,
-                                      followUpSEVMs: followUpSEVMs) }
-              .toolbarBackground(.visible, for: .navigationBar)
-              .alert(
-                "status.error.posting.title",
-                isPresented: $focusedSEVM.showPostingErrorAlert,
-                actions: {
-                  Button("OK") {}
-                }, message: {
-                  Text(mainSEVM.postingError ?? "")
-                }
-              )
-              .interactiveDismissDisabled(mainSEVM.shouldDisplayDismissWarning)
-              .onChange(of: appAccounts.currentClient) { _, newValue in
-                if mainSEVM.mode.isInShareExtension {
-                  currentAccount.setClient(client: newValue)
-                  mainSEVM.client = newValue
-                  for post in followUpSEVMs {
-                    post.client = newValue
-                  }
+          .accessibilitySortPriority(1)  // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
+          .navigationTitle(focusedSEVM.mode.title)
+          .navigationBarTitleDisplayMode(.inline)
+          .toolbar {
+            ToolbarItems(
+              mainSEVM: mainSEVM,
+              focusedSEVM: focusedSEVM,
+              followUpSEVMs: followUpSEVMs)
+          }
+          .toolbarBackground(.visible, for: .navigationBar)
+          .alert(
+            "status.error.posting.title",
+            isPresented: $focusedSEVM.showPostingErrorAlert,
+            actions: {
+              Button("OK") {}
+            },
+            message: {
+              Text(mainSEVM.postingError ?? "")
+            }
+          )
+          .interactiveDismissDisabled(mainSEVM.shouldDisplayDismissWarning)
+          .onChange(of: appAccounts.currentClient) { _, newValue in
+            if mainSEVM.mode.isInShareExtension {
+              currentAccount.setClient(client: newValue)
+              mainSEVM.client = newValue
+              for post in followUpSEVMs {
+                post.client = newValue
+              }
+            }
+          }
+          .onDrop(
+            of: [.image, .video, .gif, .mpeg4Movie, .quickTimeMovie, .movie],
+            delegate: focusedSEVM
+          )
+          .onChange(of: currentAccount.account?.id) {
+            mainSEVM.currentAccount = currentAccount.account
+            for p in followUpSEVMs {
+              p.currentAccount = mainSEVM.currentAccount
+            }
+          }
+          .onChange(of: mainSEVM.visibility) {
+            for p in followUpSEVMs {
+              p.visibility = mainSEVM.visibility
+            }
+          }
+          .onChange(of: followUpSEVMs.count) { oldValue, newValue in
+            if oldValue < newValue {
+              Task {
+                try? await Task.sleep(for: .seconds(0.1))
+                withAnimation(.bouncy(duration: 0.5)) {
+                  scrollID = followUpSEVMs.last?.id
                 }
               }
-              .onDrop(of: [.image, .video, .gif, .mpeg4Movie, .quickTimeMovie, .movie],
-                      delegate: focusedSEVM)
-              .onChange(of: currentAccount.account?.id) {
-                mainSEVM.currentAccount = currentAccount.account
-                for p in followUpSEVMs {
-                  p.currentAccount = mainSEVM.currentAccount
-                }
-              }
-              .onChange(of: mainSEVM.visibility) {
-                for p in followUpSEVMs {
-                  p.visibility = mainSEVM.visibility
-                }
-              }
-              .onChange(of: followUpSEVMs.count) { oldValue, newValue in
-                if oldValue < newValue {
-                  Task {
-                    try? await Task.sleep(for: .seconds(0.1))
-                    withAnimation(.bouncy(duration: 0.5)) {
-                      scrollID = followUpSEVMs.last?.id
-                    }
-                  }
-                }
-              }
+            }
+          }
           if mainSEVM.isPosting {
             ProgressView(value: mainSEVM.postingProgress, total: 100.0)
           }

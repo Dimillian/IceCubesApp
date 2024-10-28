@@ -23,8 +23,10 @@ struct NotificationRowView: View {
           .accessibilityHidden(true)
       } else {
         makeNotificationIconView(type: notification.type)
-          .frame(width: AvatarView.FrameConfig.status.width,
-                 height: AvatarView.FrameConfig.status.height)
+          .frame(
+            width: AvatarView.FrameConfig.status.width,
+            height: AvatarView.FrameConfig.status.height
+          )
           .accessibilityHidden(true)
       }
       VStack(alignment: .leading, spacing: 0) {
@@ -33,7 +35,7 @@ struct NotificationRowView: View {
           .accessibilityHidden(notification.type == .mention)
         makeContent(type: notification.type)
         if notification.type == .follow_request,
-           followRequests.map(\.id).contains(notification.accounts[0].id)
+          followRequests.map(\.id).contains(notification.accounts[0].id)
         {
           FollowRequestButtons(account: notification.accounts[0])
         }
@@ -66,7 +68,10 @@ struct NotificationRowView: View {
     ZStack(alignment: .center) {
       Circle()
         .strokeBorder(Color.white, lineWidth: 1)
-        .background(Circle().foregroundColor(type.tintColor(isPrivate: notification.status?.visibility == .direct)))
+        .background(
+          Circle().foregroundColor(
+            type.tintColor(isPrivate: notification.status?.visibility == .direct))
+        )
         .frame(width: 24, height: 24)
 
       type.icon(isPrivate: notification.status?.visibility == .direct)
@@ -96,32 +101,34 @@ struct NotificationRowView: View {
       }
       if !reasons.contains(.placeholder) {
         HStack(spacing: 0) {
-          EmojiTextApp(.init(stringValue: notification.accounts[0].safeDisplayName),
-                       emojis: notification.accounts[0].emojis,
-                       append: {
-                         (notification.accounts.count > 1
-                           ? Text("notifications-others-count \(notification.accounts.count - 1)")
-                           .font(.scaledSubheadline)
-                           .fontWeight(.regular)
-                           : Text(" ")) +
-                           Text(type.label(count: notification.accounts.count))
-                           .font(.scaledSubheadline)
-                           .fontWeight(.regular) +
-                           Text(" ⸱ ")
-                           .font(.scaledFootnote)
-                           .fontWeight(.regular)
-                           .foregroundStyle(.secondary) +
-                           Text(notification.createdAt.relativeFormatted)
-                           .font(.scaledFootnote)
-                           .fontWeight(.regular)
-                           .foregroundStyle(.secondary)
-                       })
-                       .font(.scaledSubheadline)
-                       .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
-                       .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-                       .fontWeight(.semibold)
-                       .lineLimit(3)
-                       .fixedSize(horizontal: false, vertical: true)
+          EmojiTextApp(
+            .init(stringValue: notification.accounts[0].safeDisplayName),
+            emojis: notification.accounts[0].emojis,
+            append: {
+              (notification.accounts.count > 1
+                ? Text("notifications-others-count \(notification.accounts.count - 1)")
+                  .font(.scaledSubheadline)
+                  .fontWeight(.regular)
+                : Text(" "))
+                + Text(type.label(count: notification.accounts.count))
+                .font(.scaledSubheadline)
+                .fontWeight(.regular)
+                + Text(" ⸱ ")
+                .font(.scaledFootnote)
+                .fontWeight(.regular)
+                .foregroundStyle(.secondary)
+                + Text(notification.createdAt.relativeFormatted)
+                .font(.scaledFootnote)
+                .fontWeight(.regular)
+                .foregroundStyle(.secondary)
+            }
+          )
+          .font(.scaledSubheadline)
+          .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
+          .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+          .fontWeight(.semibold)
+          .lineLimit(3)
+          .fixedSize(horizontal: false, vertical: true)
           if let status = notification.status, notification.type == .mention {
             Group {
               Text(" ⸱ ")
@@ -156,19 +163,25 @@ struct NotificationRowView: View {
     if let status = notification.status {
       HStack {
         if type == .mention {
-          StatusRowExternalView(viewModel: .init(status: status,
-                                                 client: client,
-                                                 routerPath: routerPath,
-                                                 showActions: true))
-            .environment(\.isMediaCompact, false)
+          StatusRowExternalView(
+            viewModel: .init(
+              status: status,
+              client: client,
+              routerPath: routerPath,
+              showActions: true)
+          )
+          .environment(\.isMediaCompact, false)
         } else {
-          StatusRowExternalView(viewModel: .init(status: status,
-                                                 client: client,
-                                                 routerPath: routerPath,
-                                                 showActions: false,
-                                                 textDisabled: true))
-            .lineLimit(4)
-            .environment(\.isMediaCompact, true)
+          StatusRowExternalView(
+            viewModel: .init(
+              status: status,
+              client: client,
+              routerPath: routerPath,
+              showActions: false,
+              textDisabled: true)
+          )
+          .lineLimit(4)
+          .environment(\.isMediaCompact, true)
         }
         Spacer()
       }
@@ -180,18 +193,23 @@ struct NotificationRowView: View {
           .foregroundStyle(.secondary)
 
         if type == .follow {
-          EmojiTextApp(notification.accounts[0].note,
-                       emojis: notification.accounts[0].emojis)
-            .accessibilityLabel(notification.accounts[0].note.asRawText)
-            .lineLimit(3)
-            .font(.scaledCallout)
-            .emojiText.size(Font.scaledCalloutFont.emojiSize)
-            .emojiText.baselineOffset(Font.scaledCalloutFont.emojiBaselineOffset)
-            .foregroundStyle(.secondary)
-            .environment(\.openURL, OpenURLAction { url in
+          EmojiTextApp(
+            notification.accounts[0].note,
+            emojis: notification.accounts[0].emojis
+          )
+          .accessibilityLabel(notification.accounts[0].note.asRawText)
+          .lineLimit(3)
+          .font(.scaledCallout)
+          .emojiText.size(Font.scaledCalloutFont.emojiSize)
+          .emojiText.baselineOffset(Font.scaledCalloutFont.emojiBaselineOffset)
+          .foregroundStyle(.secondary)
+          .environment(
+            \.openURL,
+            OpenURLAction { url in
               routerPath.handle(url: url)
-            })
-            .accessibilityAddTraits(.isButton)
+            }
+          )
+          .accessibilityAddTraits(.isButton)
         }
       }
       .contentShape(Rectangle())

@@ -12,10 +12,11 @@ import UIKit
     public private(set) var windowHeight: CGFloat = UIScreen.main.bounds.size.height
   #endif
 
-  public func scene(_ scene: UIScene,
-                    willConnectTo _: UISceneSession,
-                    options _: UIScene.ConnectionOptions)
-  {
+  public func scene(
+    _ scene: UIScene,
+    willConnectTo _: UISceneSession,
+    options _: UIScene.ConnectionOptions
+  ) {
     guard let windowScene = scene as? UIWindowScene else { return }
     window = windowScene.keyWindow
 
@@ -29,12 +30,12 @@ import UIKit
 
   override public init() {
     super.init()
-    
+
     Task { @MainActor in
       setup()
     }
   }
-  
+
   private func setup() {
     #if os(visionOS)
       windowWidth = window?.bounds.size.width ?? 0
@@ -44,7 +45,7 @@ import UIKit
       windowHeight = window?.bounds.size.height ?? UIScreen.main.bounds.size.height
     #endif
     Self.observedSceneDelegate.insert(self)
-    _ = Self.observer // just for activating the lazy static property
+    _ = Self.observer  // just for activating the lazy static property
   }
 
   private static var observedSceneDelegate: Set<SceneDelegate> = []

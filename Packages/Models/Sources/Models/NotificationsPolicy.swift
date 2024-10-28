@@ -4,7 +4,7 @@ public struct NotificationsPolicy: Codable, Sendable {
   public enum Policy: String, Codable, Sendable, CaseIterable, Hashable {
     case accept, filter, drop
   }
-  
+
   public var forNotFollowing: Policy
   public var forNotFollowers: Policy
   public var forNewAccounts: Policy

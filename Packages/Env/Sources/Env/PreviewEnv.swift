@@ -2,8 +2,8 @@ import Network
 import SwiftUI
 
 @MainActor
-public extension View {
-  func withPreviewsEnv() -> some View {
+extension View {
+  public func withPreviewsEnv() -> some View {
     environment(RouterPath())
       .environment(Client(server: ""))
       .environment(CurrentAccount.shared)

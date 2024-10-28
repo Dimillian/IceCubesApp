@@ -35,20 +35,22 @@ public struct EditAccountView: View {
         .background(theme.secondaryBackgroundColor)
         .scrollDismissesKeyboard(.immediately)
       #endif
-        .navigationTitle("account.edit.navigation-title")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-          toolbarContent
-        }
-        .alert("account.edit.error.save.title",
-               isPresented: $viewModel.saveError,
-               actions: {
-                 Button("alert.button.ok", action: {})
-               }, message: { Text("account.edit.error.save.message") })
-        .task {
-          viewModel.client = client
-          await viewModel.fetchAccount()
-        }
+      .navigationTitle("account.edit.navigation-title")
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        toolbarContent
+      }
+      .alert(
+        "account.edit.error.save.title",
+        isPresented: $viewModel.saveError,
+        actions: {
+          Button("alert.button.ok", action: {})
+        }, message: { Text("account.edit.error.save.message") }
+      )
+      .task {
+        viewModel.client = client
+        await viewModel.fetchAccount()
+      }
     }
   }
 
@@ -61,7 +63,7 @@ public struct EditAccountView: View {
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -138,11 +140,12 @@ public struct EditAccountView: View {
       .listRowInsets(EdgeInsets())
     }
     .listRowBackground(theme.secondaryBackgroundColor)
-    .photosPicker(isPresented: $viewModel.isPhotoPickerPresented,
-                  selection: $viewModel.mediaPickers,
-                  maxSelectionCount: 1,
-                  matching: .any(of: [.images]),
-                  photoLibrary: .shared())
+    .photosPicker(
+      isPresented: $viewModel.isPhotoPickerPresented,
+      selection: $viewModel.mediaPickers,
+      maxSelectionCount: 1,
+      matching: .any(of: [.images]),
+      photoLibrary: .shared())
   }
 
   @ViewBuilder
@@ -156,7 +159,7 @@ public struct EditAccountView: View {
         .frame(maxHeight: 150)
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -178,7 +181,7 @@ public struct EditAccountView: View {
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -188,14 +191,16 @@ public struct EditAccountView: View {
         Label("account.edit.account-settings.private", systemImage: "lock")
       }
       Toggle(isOn: $viewModel.isBot) {
-        Label("account.edit.account-settings.bot", systemImage: "laptopcomputer.trianglebadge.exclamationmark")
+        Label(
+          "account.edit.account-settings.bot",
+          systemImage: "laptopcomputer.trianglebadge.exclamationmark")
       }
       Toggle(isOn: $viewModel.isDiscoverable) {
         Label("account.edit.account-settings.discoverable", systemImage: "magnifyingglass")
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -231,7 +236,7 @@ public struct EditAccountView: View {
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 

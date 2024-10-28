@@ -32,7 +32,10 @@ struct MediaUIZoomableContainer<Content: View>: View {
     @Binding private var currentScale: CGFloat
     @Binding private var tapLocation: CGPoint
 
-    init(scale: Binding<CGFloat>, tapLocation: Binding<CGPoint>, @ViewBuilder content: () -> ScollContent) {
+    init(
+      scale: Binding<CGFloat>, tapLocation: Binding<CGPoint>,
+      @ViewBuilder content: () -> ScollContent
+    ) {
       _currentScale = scale
       _tapLocation = tapLocation
       self.content = content()
@@ -67,15 +70,19 @@ struct MediaUIZoomableContainer<Content: View>: View {
     func updateUIView(_ uiView: UIScrollView, context: Context) {
       context.coordinator.hostingController.rootView = content
 
-      if uiView.zoomScale > uiView.minimumZoomScale { // Scale out
+      if uiView.zoomScale > uiView.minimumZoomScale {  // Scale out
         uiView.setZoomScale(currentScale, animated: true)
-      } else if tapLocation != .zero { // Scale in to a specific point
-        uiView.zoom(to: zoomRect(for: uiView, scale: uiView.maximumZoomScale, center: tapLocation), animated: true)
+      } else if tapLocation != .zero {  // Scale in to a specific point
+        uiView.zoom(
+          to: zoomRect(for: uiView, scale: uiView.maximumZoomScale, center: tapLocation),
+          animated: true)
         DispatchQueue.main.async { tapLocation = .zero }
       }
     }
 
-    @MainActor func zoomRect(for scrollView: UIScrollView, scale: CGFloat, center: CGPoint) -> CGRect {
+    @MainActor func zoomRect(for scrollView: UIScrollView, scale: CGFloat, center: CGPoint)
+      -> CGRect
+    {
       let scrollViewSize = scrollView.bounds.size
 
       let width = scrollViewSize.width / scale

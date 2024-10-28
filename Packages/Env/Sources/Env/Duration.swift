@@ -46,6 +46,9 @@ public enum Duration: Int, CaseIterable {
   }
 
   public static func pollDurations() -> [Duration] {
-    [.fiveMinutes, .thirtyMinutes, .oneHour, .sixHours, .twelveHours, .oneDay, .threeDays, .sevenDays]
+    [
+      .fiveMinutes, .thirtyMinutes, .oneHour, .sixHours, .twelveHours, .oneDay, .threeDays,
+      .sevenDays,
+    ]
   }
 }

@@ -4,7 +4,7 @@ import SwiftUI
 
 struct StatusRowPremiumView: View {
   @Environment(\.isHomeTimeline) private var isHomeTimeline
-  
+
   let viewModel: StatusRowViewModel
 
   var body: some View {

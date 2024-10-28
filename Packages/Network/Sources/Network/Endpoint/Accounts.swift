@@ -11,13 +11,14 @@ public enum Accounts: Endpoint {
   case verifyCredentials
   case updateCredentialsMedia
   case updateCredentials(json: UpdateCredentialsData)
-  case statuses(id: String,
-                sinceId: String?,
-                tag: String?,
-                onlyMedia: Bool,
-                excludeReplies: Bool,
-                excludeReblogs: Bool,
-                pinned: Bool?)
+  case statuses(
+    id: String,
+    sinceId: String?,
+    tag: String?,
+    onlyMedia: Bool,
+    excludeReplies: Bool,
+    excludeReblogs: Bool,
+    pinned: Bool?)
   case relationships(ids: [String])
   case follow(id: String, notify: Bool, reblogs: Bool)
   case unfollow(id: String)
@@ -94,7 +95,7 @@ public enum Accounts: Endpoint {
     switch self {
     case let .lookup(name):
       return [
-        .init(name: "acct", value: name),
+        .init(name: "acct", value: name)
       ]
     case let .statuses(_, sinceId, tag, onlyMedia, excludeReplies, excludeReblogs, pinned):
       var params: [URLQueryItem] = []
@@ -198,14 +199,15 @@ public struct UpdateCredentialsData: Encodable, Sendable {
   public let discoverable: Bool
   public let fieldsAttributes: [String: FieldData]
 
-  public init(displayName: String,
-              note: String,
-              source: UpdateCredentialsData.SourceData,
-              bot: Bool,
-              locked: Bool,
-              discoverable: Bool,
-              fieldsAttributes: [FieldData])
-  {
+  public init(
+    displayName: String,
+    note: String,
+    source: UpdateCredentialsData.SourceData,
+    bot: Bool,
+    locked: Bool,
+    discoverable: Bool,
+    fieldsAttributes: [FieldData]
+  ) {
     self.displayName = displayName
     self.note = note
     self.source = source

@@ -30,10 +30,12 @@ struct NotificationsHeaderFilteredView: View {
         routerPath.navigate(to: .notificationsRequests)
       }
       .listRowBackground(theme.secondaryBackgroundColor)
-      .listRowInsets(.init(top: 12,
-                           leading: .layoutPadding,
-                           bottom: 12,
-                           trailing: .layoutPadding))
+      .listRowInsets(
+        .init(
+          top: 12,
+          leading: .layoutPadding,
+          bottom: 12,
+          trailing: .layoutPadding))
     }
   }
 }

@@ -1,5 +1,3 @@
-
-
 import Foundation
 import SwiftUI
 
@@ -7,8 +5,8 @@ import SwiftUI
 // images named in lower case are Apple's symbols
 // images inamed in CamelCase are custom
 
-public extension Label where Title == Text, Icon == Image {
-  init(_ title: LocalizedStringKey, imageNamed: String) {
+extension Label where Title == Text, Icon == Image {
+  public init(_ title: LocalizedStringKey, imageNamed: String) {
     if imageNamed.lowercased() == imageNamed {
       self.init(title, systemImage: imageNamed)
     } else {

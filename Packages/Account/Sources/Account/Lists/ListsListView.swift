@@ -17,7 +17,7 @@ public struct ListsListView: View {
             .font(.scaledHeadline)
         }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor)
         #endif
       }
       .onDelete { index in
@@ -35,8 +35,8 @@ public struct ListsListView: View {
       await currentAccount.fetchLists()
     }
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
     #endif
     .listStyle(.plain)
     .navigationTitle("timeline.filter.lists")

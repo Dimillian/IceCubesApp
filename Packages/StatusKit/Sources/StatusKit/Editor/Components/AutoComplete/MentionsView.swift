@@ -19,13 +19,15 @@ extension StatusEditor.AutoCompleteView {
           HStack {
             AvatarView(account.avatar, config: AvatarView.FrameConfig.badge)
             VStack(alignment: .leading) {
-              EmojiTextApp(.init(stringValue: account.safeDisplayName),
-                           emojis: account.emojis)
-                .emojiText.size(Font.scaledFootnoteFont.emojiSize)
-                .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
-                .font(.scaledFootnote)
-                .fontWeight(.bold)
-                .foregroundColor(theme.labelColor)
+              EmojiTextApp(
+                .init(stringValue: account.safeDisplayName),
+                emojis: account.emojis
+              )
+              .emojiText.size(Font.scaledFootnoteFont.emojiSize)
+              .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
+              .font(.scaledFootnote)
+              .fontWeight(.bold)
+              .foregroundColor(theme.labelColor)
               Text("@\(account.acct)")
                 .font(.scaledFootnote)
                 .foregroundStyle(theme.tintColor)

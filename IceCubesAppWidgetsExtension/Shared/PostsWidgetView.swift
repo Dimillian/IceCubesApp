@@ -52,16 +52,18 @@ struct PostsWidgetView: View {
   @ViewBuilder
   private func makeStatusView(_ status: Status) -> some View {
     if let url = URL(string: status.url ?? "") {
-      Link(destination: url, label: {
-        VStack(alignment: .leading, spacing: 2) {
-          makeStatusHeaderView(status)
-          Text(status.content.asSafeMarkdownAttributedString)
-            .font(.footnote)
-            .lineLimit(contentLineLimit)
-            .fixedSize(horizontal: false, vertical: true)
-            .padding(.leading, 20)
-        }
-      })
+      Link(
+        destination: url,
+        label: {
+          VStack(alignment: .leading, spacing: 2) {
+            makeStatusHeaderView(status)
+            Text(status.content.asSafeMarkdownAttributedString)
+              .font(.footnote)
+              .lineLimit(contentLineLimit)
+              .fixedSize(horizontal: false, vertical: true)
+              .padding(.leading, 20)
+          }
+        })
     }
   }
 

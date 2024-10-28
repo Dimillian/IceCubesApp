@@ -23,7 +23,7 @@ struct AppShortcuts: AppShortcutsProvider {
     AppShortcut(
       intent: TabIntent(),
       phrases: [
-        "Open \(.applicationName)",
+        "Open \(.applicationName)"
       ],
       shortTitle: "Open Ice Cubes",
       systemImageName: "cube"

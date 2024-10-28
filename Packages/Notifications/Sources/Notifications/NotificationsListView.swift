@@ -21,9 +21,10 @@ public struct NotificationsListView: View {
   let lockedType: Models.Notification.NotificationType?
   let lockedAccountId: String?
 
-  public init(lockedType: Models.Notification.NotificationType? = nil,
-              lockedAccountId: String? = nil)
-  {
+  public init(
+    lockedType: Models.Notification.NotificationType? = nil,
+    lockedAccountId: String? = nil
+  ) {
     self.lockedType = lockedType
     self.lockedAccountId = lockedAccountId
   }
@@ -42,7 +43,9 @@ public struct NotificationsListView: View {
     .listStyle(.plain)
     .toolbar {
       ToolbarItem(placement: .principal) {
-        let title = lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle() ?? "notifications.navigation-title"
+        let title =
+          lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle()
+          ?? "notifications.navigation-title"
         if lockedType == nil {
           Text(title)
             .font(.headline)
@@ -106,43 +109,43 @@ public struct NotificationsListView: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-      .task {
-        viewModel.client = client
-        viewModel.currentAccount = account
-        if let lockedType {
-          viewModel.isLockedType = true
-          viewModel.selectedType = lockedType
-        } else if let lockedAccountId {
-          viewModel.lockedAccountId = lockedAccountId
-        } else {
-          viewModel.loadSelectedType()
+    .task {
+      viewModel.client = client
+      viewModel.currentAccount = account
+      if let lockedType {
+        viewModel.isLockedType = true
+        viewModel.selectedType = lockedType
+      } else if let lockedAccountId {
+        viewModel.lockedAccountId = lockedAccountId
+      } else {
+        viewModel.loadSelectedType()
+      }
+      await viewModel.fetchNotifications(viewModel.selectedType)
+      await viewModel.fetchPolicy()
+    }
+    .refreshable {
+      SoundEffectManager.shared.playSound(.pull)
+      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
+      await viewModel.fetchNotifications(viewModel.selectedType)
+      await viewModel.fetchPolicy()
+      HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
+      SoundEffectManager.shared.playSound(.refresh)
+    }
+    .onChange(of: watcher.latestEvent?.id) {
+      if let latestEvent = watcher.latestEvent {
+        viewModel.handleEvent(selectedType: viewModel.selectedType, event: latestEvent)
+      }
+    }
+    .onChange(of: scenePhase) { _, newValue in
+      switch newValue {
+      case .active:
+        Task {
+          await viewModel.fetchNotifications(viewModel.selectedType)
         }
-        await viewModel.fetchNotifications(viewModel.selectedType)
-        await viewModel.fetchPolicy()
+      default:
+        break
       }
-      .refreshable {
-        SoundEffectManager.shared.playSound(.pull)
-        HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
-        await viewModel.fetchNotifications(viewModel.selectedType)
-        await viewModel.fetchPolicy()
-        HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
-        SoundEffectManager.shared.playSound(.refresh)
-      }
-      .onChange(of: watcher.latestEvent?.id) {
-        if let latestEvent = watcher.latestEvent {
-          viewModel.handleEvent(selectedType: viewModel.selectedType, event: latestEvent)
-        }
-      }
-      .onChange(of: scenePhase) { _, newValue in
-        switch newValue {
-        case .active:
-          Task {
-            await viewModel.fetchNotifications(viewModel.selectedType)
-          }
-        default:
-          break
-        }
-      }
+    }
   }
 
   @ViewBuilder
@@ -150,52 +153,71 @@ public struct NotificationsListView: View {
     switch viewModel.state {
     case .loading:
       ForEach(ConsolidatedNotification.placeholders()) { notification in
-        NotificationRowView(notification: notification,
-                            client: client,
-                            routerPath: routerPath,
-                            followRequests: account.followRequests)
-          .listRowInsets(.init(top: 12,
-                               leading: .layoutPadding + 4,
-                               bottom: 0,
-                               trailing: .layoutPadding))
+        NotificationRowView(
+          notification: notification,
+          client: client,
+          routerPath: routerPath,
+          followRequests: account.followRequests
+        )
+        .listRowInsets(
+          .init(
+            top: 12,
+            leading: .layoutPadding + 4,
+            bottom: 0,
+            trailing: .layoutPadding)
+        )
         #if os(visionOS)
-          .listRowBackground(RoundedRectangle(cornerRadius: 8)
-            .foregroundStyle(.background))
+          .listRowBackground(
+            RoundedRectangle(cornerRadius: 8)
+              .foregroundStyle(.background))
         #else
-            .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor)
         #endif
-            .redacted(reason: .placeholder)
-            .allowsHitTesting(false)
+        .redacted(reason: .placeholder)
+        .allowsHitTesting(false)
       }
 
     case let .display(notifications, nextPageState):
       if notifications.isEmpty {
-        PlaceholderView(iconName: "bell.slash",
-                        title: "notifications.empty.title",
-                        message: "notifications.empty.message")
+        PlaceholderView(
+          iconName: "bell.slash",
+          title: "notifications.empty.title",
+          message: "notifications.empty.message"
+        )
         #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)
         #endif
-          .listSectionSeparator(.hidden)
+        .listSectionSeparator(.hidden)
       } else {
         ForEach(notifications) { notification in
-          NotificationRowView(notification: notification,
-                              client: client,
-                              routerPath: routerPath,
-                              followRequests: account.followRequests)
-            .listRowInsets(.init(top: 12,
-                                 leading: .layoutPadding + 4,
-                                 bottom: 6,
-                                 trailing: .layoutPadding))
+          NotificationRowView(
+            notification: notification,
+            client: client,
+            routerPath: routerPath,
+            followRequests: account.followRequests
+          )
+          .listRowInsets(
+            .init(
+              top: 12,
+              leading: .layoutPadding + 4,
+              bottom: 6,
+              trailing: .layoutPadding)
+          )
           #if os(visionOS)
-            .listRowBackground(RoundedRectangle(cornerRadius: 8)
-              .foregroundStyle(notification.type == .mention && lockedType != .mention ? Material.thick : Material.regular).hoverEffect())
+            .listRowBackground(
+              RoundedRectangle(cornerRadius: 8)
+                .foregroundStyle(
+                  notification.type == .mention && lockedType != .mention
+                    ? Material.thick : Material.regular
+                ).hoverEffect()
+            )
             .listRowHoverEffectDisabled()
           #else
-            .listRowBackground(notification.type == .mention && lockedType != .mention ?
-              theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
+            .listRowBackground(
+              notification.type == .mention && lockedType != .mention
+                ? theme.secondaryBackgroundColor : theme.primaryBackgroundColor)
           #endif
-            .id(notification.id)
+          .id(notification.id)
         }
 
         switch nextPageState {
@@ -205,10 +227,13 @@ public struct NotificationsListView: View {
           NextPageView {
             try await viewModel.fetchNextPage(viewModel.selectedType)
           }
-          .listRowInsets(.init(top: .layoutPadding,
-                               leading: .layoutPadding + 4,
-                               bottom: .layoutPadding,
-                               trailing: .layoutPadding))
+          .listRowInsets(
+            .init(
+              top: .layoutPadding,
+              leading: .layoutPadding + 4,
+              bottom: .layoutPadding,
+              trailing: .layoutPadding)
+          )
           #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
           #endif
@@ -216,14 +241,15 @@ public struct NotificationsListView: View {
       }
 
     case .error:
-      ErrorView(title: "notifications.error.title",
-                message: "notifications.error.message",
-                buttonTitle: "action.retry")
-      {
+      ErrorView(
+        title: "notifications.error.title",
+        message: "notifications.error.message",
+        buttonTitle: "action.retry"
+      ) {
         await viewModel.fetchNotifications(viewModel.selectedType)
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
       .listSectionSeparator(.hidden)
     }

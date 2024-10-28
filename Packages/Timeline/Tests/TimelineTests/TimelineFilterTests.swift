@@ -1,19 +1,23 @@
+import Foundation
 import Models
 import Network
 import Testing
-import Foundation
+
 @testable import Timeline
 
 @Suite("Timeline Filter Tests")
 struct TimelineFilterTests {
-  @Test("All timeline filter can be decoded and encoded",
-        arguments: [TimelineFilter.home,
-                    TimelineFilter.local,
-                    TimelineFilter.federated,
-                    TimelineFilter.remoteLocal(server: "me.dm", filter: .local),
-                    TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: nil),
-                    TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: "test"),
-                    TimelineFilter.hashtag(tag: "test", accountId: nil)])
+  @Test(
+    "All timeline filter can be decoded and encoded",
+    arguments: [
+      TimelineFilter.home,
+      TimelineFilter.local,
+      TimelineFilter.federated,
+      TimelineFilter.remoteLocal(server: "me.dm", filter: .local),
+      TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: nil),
+      TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: "test"),
+      TimelineFilter.hashtag(tag: "test", accountId: nil),
+    ])
   func timelineCanEncodeAndDecode(filter: TimelineFilter) {
     #expect(testCodableOn(filter: filter))
   }

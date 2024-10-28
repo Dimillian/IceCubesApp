@@ -48,7 +48,9 @@ extension StatusEditor {
         Button {
           Task {
             mainSEVM.evaluateLanguages()
-            if preferences.autoDetectPostLanguage, let _ = mainSEVM.languageConfirmationDialogLanguages {
+            if preferences.autoDetectPostLanguage,
+              mainSEVM.languageConfirmationDialogLanguages != nil
+            {
               isLanguageConfirmPresented = true
             } else {
               await postAllStatus()
@@ -61,9 +63,11 @@ extension StatusEditor {
         .buttonStyle(.borderedProminent)
         .disabled(!mainSEVM.canPost || mainSEVM.isPosting)
         .keyboardShortcut(.return, modifiers: .command)
-        .confirmationDialog("", isPresented: $isLanguageConfirmPresented, actions: {
-          languageConfirmationDialog
-        })
+        .confirmationDialog(
+          "", isPresented: $isLanguageConfirmPresented,
+          actions: {
+            languageConfirmationDialog
+          })
       }
 
       ToolbarItem(placement: .navigationBarLeading) {
@@ -72,8 +76,9 @@ extension StatusEditor {
             isDismissAlertPresented = true
           } else {
             close()
-            NotificationCenter.default.post(name: .shareSheetClose,
-                                            object: nil)
+            NotificationCenter.default.post(
+              name: .shareSheetClose,
+              object: nil)
           }
         } label: {
           Image(systemName: "xmark")
@@ -85,14 +90,16 @@ extension StatusEditor {
           actions: {
             Button("status.draft.delete", role: .destructive) {
               close()
-              NotificationCenter.default.post(name: .shareSheetClose,
-                                              object: nil)
+              NotificationCenter.default.post(
+                name: .shareSheetClose,
+                object: nil)
             }
             Button("status.draft.save") {
               context.insert(Draft(content: mainSEVM.statusText.string))
               close()
-              NotificationCenter.default.post(name: .shareSheetClose,
-                                              object: nil)
+              NotificationCenter.default.post(
+                name: .shareSheetClose,
+                object: nil)
             }
             Button("action.cancel", role: .cancel) {}
           }
@@ -109,7 +116,9 @@ extension StatusEditor {
         NotificationCenter.default.post(name: .shareSheetClose, object: nil)
         #if !targetEnvironment(macCatalyst)
           if !mainSEVM.mode.isInShareExtension, !preferences.requestedReview {
-            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+            if let scene = UIApplication.shared.connectedScenes.first(where: {
+              $0.activationState == .foregroundActive
+            }) as? UIWindowScene {
               SKStoreReviewController.requestReview(in: scene)
             }
             preferences.requestedReview = true
@@ -139,9 +148,10 @@ extension StatusEditor {
 
     @ViewBuilder
     private var languageConfirmationDialog: some View {
-      if let (detected: detected, selected: selected) = mainSEVM.languageConfirmationDialogLanguages,
-         let detectedLong = Locale.current.localizedString(forLanguageCode: detected),
-         let selectedLong = Locale.current.localizedString(forLanguageCode: selected)
+      if let (detected: detected, selected: selected) = mainSEVM
+        .languageConfirmationDialogLanguages,
+        let detectedLong = Locale.current.localizedString(forLanguageCode: detected),
+        let selectedLong = Locale.current.localizedString(forLanguageCode: selected)
       {
         Button("status.editor.language-select.confirmation.detected-\(detectedLong)") {
           mainSEVM.selectedLanguage = detected
@@ -160,13 +170,16 @@ extension StatusEditor {
     }
 
     private var draftsListView: some View {
-      DraftsListView(selectedDraft: .init(get: {
-        nil
-      }, set: { draft in
-        if let draft {
-          focusedSEVM.insertStatusText(text: draft.content)
-        }
-      }))
+      DraftsListView(
+        selectedDraft: .init(
+          get: {
+            nil
+          },
+          set: { draft in
+            if let draft {
+              focusedSEVM.insertStatusText(text: draft.content)
+            }
+          }))
     }
   }
 }

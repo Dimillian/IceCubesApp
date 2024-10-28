@@ -19,7 +19,7 @@ struct TranslationSettingsView: View {
             .textContentType(.password)
         }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor)
         #endif
 
         if apiKey.isEmpty {
@@ -30,7 +30,7 @@ struct TranslationSettingsView: View {
             }
           }
           #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+            .listRowBackground(theme.primaryBackgroundColor)
           #endif
         }
       }
@@ -42,11 +42,11 @@ struct TranslationSettingsView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
     #endif
-      .onChange(of: apiKey) {
-        writeNewValue()
-      }
-      .onAppear(perform: updatePrefs)
-      .onAppear(perform: readValue)
+    .onChange(of: apiKey) {
+      writeNewValue()
+    }
+    .onAppear(perform: updatePrefs)
+    .onAppear(perform: readValue)
   }
 
   @ViewBuilder
@@ -58,7 +58,7 @@ struct TranslationSettingsView: View {
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -99,19 +99,20 @@ struct TranslationSettingsView: View {
       Text("settings.translation.auto-detect-post-language-footer")
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
   @ViewBuilder
   private var backgroundAPIKey: some View {
     if preferences.preferredTranslationType != .useDeepl,
-       !apiKey.isEmpty
+      !apiKey.isEmpty
     {
       Section {
         Text("The DeepL API Key is still stored!")
         if preferences.preferredTranslationType == .useServerIfPossible {
-          Text("It can however still be used as a fallback for your instance's translation service.")
+          Text(
+            "It can however still be used as a fallback for your instance's translation service.")
         }
         Button(role: .destructive) {
           withAnimation {
@@ -123,7 +124,7 @@ struct TranslationSettingsView: View {
         }
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
   }

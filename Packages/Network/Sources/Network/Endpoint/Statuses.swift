@@ -71,9 +71,11 @@ public enum Statuses: Endpoint {
       }
       return nil
     case let .report(accountId, statusId, comment):
-      return [.init(name: "account_id", value: accountId),
-              .init(name: "status_ids[]", value: statusId),
-              .init(name: "comment", value: comment)]
+      return [
+        .init(name: "account_id", value: accountId),
+        .init(name: "status_ids[]", value: statusId),
+        .init(name: "comment", value: comment),
+      ]
     default:
       return nil
     }
@@ -127,15 +129,16 @@ public struct StatusData: Encodable, Sendable {
     }
   }
 
-  public init(status: String,
-              visibility: Visibility,
-              inReplyToId: String? = nil,
-              spoilerText: String? = nil,
-              mediaIds: [String]? = nil,
-              poll: PollData? = nil,
-              language: String? = nil,
-              mediaAttributes: [MediaAttribute]? = nil)
-  {
+  public init(
+    status: String,
+    visibility: Visibility,
+    inReplyToId: String? = nil,
+    spoilerText: String? = nil,
+    mediaIds: [String]? = nil,
+    poll: PollData? = nil,
+    language: String? = nil,
+    mediaAttributes: [MediaAttribute]? = nil
+  ) {
     self.status = status
     self.visibility = visibility
     self.inReplyToId = inReplyToId

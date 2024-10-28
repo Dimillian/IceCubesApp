@@ -48,28 +48,43 @@ struct StatusRowContextMenu: View {
         } label: {
           Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
         }
-        Button { Task {
-          HapticManager.shared.fireHaptic(.notification(.success))
-          SoundEffectManager.shared.playSound(.favorite)
-          await statusDataController.toggleFavorite(remoteStatus: nil)
-        } } label: {
-          Label(statusDataController.isFavorited ? "status.action.unfavorite" : "status.action.favorite", systemImage: statusDataController.isFavorited ? "star.fill" : "star")
+        Button {
+          Task {
+            HapticManager.shared.fireHaptic(.notification(.success))
+            SoundEffectManager.shared.playSound(.favorite)
+            await statusDataController.toggleFavorite(remoteStatus: nil)
+          }
+        } label: {
+          Label(
+            statusDataController.isFavorited
+              ? "status.action.unfavorite" : "status.action.favorite",
+            systemImage: statusDataController.isFavorited ? "star.fill" : "star")
         }
-        Button { Task {
-          HapticManager.shared.fireHaptic(.notification(.success))
-          SoundEffectManager.shared.playSound(.boost)
-          await statusDataController.toggleReblog(remoteStatus: nil)
-        } } label: {
+        Button {
+          Task {
+            HapticManager.shared.fireHaptic(.notification(.success))
+            SoundEffectManager.shared.playSound(.boost)
+            await statusDataController.toggleReblog(remoteStatus: nil)
+          }
+        } label: {
           boostLabel
         }
-        .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != account.account?.id)
-        Button { Task {
-          SoundEffectManager.shared.playSound(.bookmark)
-          HapticManager.shared.fireHaptic(.notification(.success))
-          await statusDataController.toggleBookmark(remoteStatus: nil)
-        } } label: {
-          Label(statusDataController.isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
-                systemImage: statusDataController.isBookmarked ? "bookmark.fill" : "bookmark")
+        .disabled(
+          viewModel.status.visibility == .direct
+            || viewModel.status.visibility == .priv
+              && viewModel.status.account.id != account.account?.id
+        )
+        Button {
+          Task {
+            SoundEffectManager.shared.playSound(.bookmark)
+            HapticManager.shared.fireHaptic(.notification(.success))
+            await statusDataController.toggleBookmark(remoteStatus: nil)
+          }
+        } label: {
+          Label(
+            statusDataController.isBookmarked
+              ? "status.action.unbookmark" : "status.action.bookmark",
+            systemImage: statusDataController.isBookmarked ? "bookmark.fill" : "bookmark")
         }
       }
       .controlGroupStyle(.compactMenu)
@@ -89,10 +104,14 @@ struct StatusRowContextMenu: View {
 
     Menu("status.action.share-title") {
       if let url = viewModel.url {
-        ShareLink(item: url,
-                  subject: Text(viewModel.status.reblog?.account.safeDisplayName ?? viewModel.status.account.safeDisplayName),
-                  message: Text(viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText))
-        {
+        ShareLink(
+          item: url,
+          subject: Text(
+            viewModel.status.reblog?.account.safeDisplayName
+              ?? viewModel.status.account.safeDisplayName),
+          message: Text(
+            viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText)
+        ) {
           Label("status.action.share", systemImage: "square.and.arrow.up")
         }
 
@@ -109,13 +128,16 @@ struct StatusRowContextMenu: View {
     }
 
     if let url = viewModel.url {
-      Button { UIApplication.shared.open(url) } label: {
+      Button {
+        UIApplication.shared.open(url)
+      } label: {
         Label("status.action.view-in-browser", systemImage: "safari")
       }
     }
 
     Button {
-      UIPasteboard.general.string = viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText
+      UIPasteboard.general.string =
+        viewModel.status.reblog?.content.asRawText ?? viewModel.status.content.asRawText
     } label: {
       Label("status.action.copy-text", systemImage: "doc.on.doc")
     }
@@ -132,7 +154,9 @@ struct StatusRowContextMenu: View {
       Label("status.action.copy-link", systemImage: "link")
     }
 
-    if let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier {
+    if let lang = preferences.serverPreferences?.postLanguage
+      ?? Locale.current.language.languageCode?.identifier
+    {
       Button {
         Task {
           await viewModel.translate(userLang: lang)
@@ -153,22 +177,28 @@ struct StatusRowContextMenu: View {
             }
           }
         } label: {
-          Label(viewModel.isPinned ? "status.action.unpin" : "status.action.pin", systemImage: viewModel.isPinned ? "pin.fill" : "pin")
+          Label(
+            viewModel.isPinned ? "status.action.unpin" : "status.action.pin",
+            systemImage: viewModel.isPinned ? "pin.fill" : "pin")
         }
         if currentInstance.isEditSupported {
           Button {
             #if targetEnvironment(macCatalyst) || os(visionOS)
-              openWindow(value: WindowDestinationEditor.editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
+              openWindow(
+                value: WindowDestinationEditor.editStatusEditor(
+                  status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
             #else
-              viewModel.routerPath.presentedSheet = .editStatusEditor(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+              viewModel.routerPath.presentedSheet = .editStatusEditor(
+                status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
             #endif
           } label: {
             Label("status.action.edit", systemImage: "pencil")
           }
         }
-        Button(role: .destructive,
-               action: { viewModel.showDeleteAlert = true },
-               label: { Label("status.action.delete", systemImage: "trash") })
+        Button(
+          role: .destructive,
+          action: { viewModel.showDeleteAlert = true },
+          label: { Label("status.action.delete", systemImage: "trash") })
       }
     } else {
       if !viewModel.isRemote {
@@ -177,8 +207,10 @@ struct StatusRowContextMenu: View {
             Button {
               Task {
                 do {
-                  let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
-                  viewModel.authorRelationship = try await client.post(endpoint: Accounts.unmute(id: operationAccount.id))
+                  let operationAccount =
+                    viewModel.status.reblog?.account ?? viewModel.status.account
+                  viewModel.authorRelationship = try await client.post(
+                    endpoint: Accounts.unmute(id: operationAccount.id))
                 } catch {}
               }
             } label: {
@@ -190,8 +222,11 @@ struct StatusRowContextMenu: View {
                 Button(duration.description) {
                   Task {
                     do {
-                      let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
-                      viewModel.authorRelationship = try await client.post(endpoint: Accounts.mute(id: operationAccount.id, json: MuteData(duration: duration.rawValue)))
+                      let operationAccount =
+                        viewModel.status.reblog?.account ?? viewModel.status.account
+                      viewModel.authorRelationship = try await client.post(
+                        endpoint: Accounts.mute(
+                          id: operationAccount.id, json: MuteData(duration: duration.rawValue)))
                     } catch {}
                   }
                 }
@@ -212,7 +247,8 @@ struct StatusRowContextMenu: View {
       }
       Section {
         Button(role: .destructive) {
-          viewModel.routerPath.presentedSheet = .report(status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+          viewModel.routerPath.presentedSheet = .report(
+            status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
         } label: {
           Label("status.action.report", systemImage: "exclamationmark.bubble")
         }
@@ -224,18 +260,27 @@ struct StatusRowContextMenu: View {
   private var accountContactMenuItems: some View {
     Button {
       #if targetEnvironment(macCatalyst) || os(visionOS)
-        openWindow(value: WindowDestinationEditor.mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub))
+        openWindow(
+          value: WindowDestinationEditor.mentionStatusEditor(
+            account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub)
+        )
       #else
-        viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub)
+        viewModel.routerPath.presentedSheet = .mentionStatusEditor(
+          account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .pub)
       #endif
     } label: {
       Label("status.action.mention", systemImage: "at")
     }
     Button {
       #if targetEnvironment(macCatalyst) || os(visionOS)
-        openWindow(value: WindowDestinationEditor.mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .direct))
+        openWindow(
+          value: WindowDestinationEditor.mentionStatusEditor(
+            account: viewModel.status.reblog?.account ?? viewModel.status.account,
+            visibility: .direct))
       #else
-        viewModel.routerPath.presentedSheet = .mentionStatusEditor(account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .direct)
+        viewModel.routerPath.presentedSheet = .mentionStatusEditor(
+          account: viewModel.status.reblog?.account ?? viewModel.status.account, visibility: .direct
+        )
       #endif
     } label: {
       Label("status.action.message", systemImage: "tray.full")
@@ -245,7 +290,8 @@ struct StatusRowContextMenu: View {
         Task {
           do {
             let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
-            viewModel.authorRelationship = try await client.post(endpoint: Accounts.unblock(id: operationAccount.id))
+            viewModel.authorRelationship = try await client.post(
+              endpoint: Accounts.unblock(id: operationAccount.id))
           } catch {}
         }
       } label: {

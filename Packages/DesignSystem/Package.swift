@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "DesignSystem",
       targets: ["DesignSystem"]
-    ),
+    )
   ],
   dependencies: [
     .package(name: "Models", path: "../Models"),
@@ -33,8 +33,8 @@ let package = Package(
         .product(name: "EmojiText", package: "EmojiText"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6),
+        .swiftLanguageMode(.v6)
       ]
-    ),
+    )
   ]
 )

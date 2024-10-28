@@ -42,9 +42,11 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       // to attributed text. Note that ~ for strikethrough is
       // not documented in the syntax docs but is used by
       // AttributedString.
-      main_regex = try? NSRegularExpression(pattern: "([\\*\\`\\~\\[\\\\])", options: .caseInsensitive)
+      main_regex = try? NSRegularExpression(
+        pattern: "([\\*\\`\\~\\[\\\\])", options: .caseInsensitive)
       // don't escape underscores that are between colons, they are most likely custom emoji
-      underscore_regex = try? NSRegularExpression(pattern: "(?!\\B:[^:]*)(_)(?![^:]*:\\B)", options: .caseInsensitive)
+      underscore_regex = try? NSRegularExpression(
+        pattern: "(?!\\B:[^:]*)(_)(?![^:]*:\\B)", options: .caseInsensitive)
 
       asMarkdown = ""
       do {
@@ -56,7 +58,9 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         try document.select("br").after("\n")
         try document.select("p").after("\n\n")
         let html = try document.html()
-        var text = try SwiftSoup.clean(html, "", Whitelist.none(), OutputSettings().prettyPrint(pretty: false)) ?? ""
+        var text =
+          try SwiftSoup.clean(
+            html, "", Whitelist.none(), OutputSettings().prettyPrint(pretty: false)) ?? ""
         // Remove the two last line break added after the last paragraph.
         if text.hasSuffix("\n\n") {
           _ = text.removeLast()
@@ -74,8 +78,9 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     }
 
     do {
-      let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
-                                                            interpretedSyntax: .inlineOnlyPreservingWhitespace)
+      let options = AttributedString.MarkdownParsingOptions(
+        allowsExtendedAttributes: true,
+        interpretedSyntax: .inlineOnlyPreservingWhitespace)
       asSafeMarkdownAttributedString = try AttributedString(markdown: asMarkdown, options: options)
     } catch {
       asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
@@ -90,9 +95,11 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
 
     if parseMarkdown {
       do {
-        let options = AttributedString.MarkdownParsingOptions(allowsExtendedAttributes: true,
-                                                              interpretedSyntax: .inlineOnlyPreservingWhitespace)
-        asSafeMarkdownAttributedString = try AttributedString(markdown: asMarkdown, options: options)
+        let options = AttributedString.MarkdownParsingOptions(
+          allowsExtendedAttributes: true,
+          interpretedSyntax: .inlineOnlyPreservingWhitespace)
+        asSafeMarkdownAttributedString = try AttributedString(
+          markdown: asMarkdown, options: options)
       } catch {
         asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
       }
@@ -110,10 +117,12 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     try container.encode(links, forKey: .links)
   }
 
-  private mutating func handleNode(node: SwiftSoup.Node,
-                                   indent: Int? = 0,
-                                   skipParagraph: Bool = false,
-                                   listCounters: inout [Int]) {
+  private mutating func handleNode(
+    node: SwiftSoup.Node,
+    indent: Int? = 0,
+    skipParagraph: Bool = false,
+    listCounters: inout [Int]
+  ) {
     do {
       if let className = try? node.attr("class") {
         if className == "invisible" {
@@ -137,7 +146,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
           asMarkdown += "\n\n"
         }
       } else if node.nodeName() == "br" {
-        if asMarkdown.count > 0 { // ignore first opening <br>
+        if asMarkdown.count > 0 {  // ignore first opening <br>
           asMarkdown += "\n"
         }
         if (indent ?? 0) > 0 {
@@ -150,8 +159,9 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
             if Int(url.lastPathComponent) != nil {
               statusesURLs.append(url)
             } else if url.host() == "www.threads.net" || url.host() == "threads.net",
-                      url.pathComponents.count == 4,
-                      url.pathComponents[2] == "post" {
+              url.pathComponents.count == 4,
+              url.pathComponents[2] == "post"
+            {
               statusesURLs.append(url)
             }
           }
@@ -175,7 +185,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         }
         if let linkUrl = url {
           linkRef = linkUrl.absoluteString
-          let displayString = asMarkdown[start ..< finish]
+          let displayString = asMarkdown[start..<finish]
           links.append(Link(linkUrl, displayString: String(displayString)))
         }
 
@@ -191,11 +201,16 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
 
         if let underscore_regex, let main_regex {
           //  This is the markdown escaper
-          txt = main_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
-          txt = underscore_regex.stringByReplacingMatches(in: txt, options: [], range: NSRange(location: 0, length: txt.count), withTemplate: "\\\\$1")
+          txt = main_regex.stringByReplacingMatches(
+            in: txt, options: [], range: NSRange(location: 0, length: txt.count),
+            withTemplate: "\\\\$1")
+          txt = underscore_regex.stringByReplacingMatches(
+            in: txt, options: [], range: NSRange(location: 0, length: txt.count),
+            withTemplate: "\\\\$1")
         }
         // Strip newlines and line separators - they should be being sent as <br>s
-        asMarkdown += txt.replacingOccurrences(of: "\n", with: "").replacingOccurrences(of: "\u{2028}", with: "")
+        asMarkdown += txt.replacingOccurrences(of: "\n", with: "").replacingOccurrences(
+          of: "\u{2028}", with: "")
       } else if node.nodeName() == "blockquote" {
         asMarkdown += "\n\n`"
         for nn in node.getChildNodes() {
@@ -218,27 +233,27 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         asMarkdown += "_"
         return
       } else if node.nodeName() == "ul" || node.nodeName() == "ol" {
-        
+
         if skipParagraph {
           asMarkdown += "\n"
         } else {
           asMarkdown += "\n\n"
         }
-        
+
         var listCounters = listCounters
-        
+
         if node.nodeName() == "ol" {
-          listCounters.append(1) // Start numbering for a new ordered list
+          listCounters.append(1)  // Start numbering for a new ordered list
         }
-        
+
         for nn in node.getChildNodes() {
           handleNode(node: nn, indent: (indent ?? 0) + 1, listCounters: &listCounters)
         }
-        
+
         if node.nodeName() == "ol" {
           listCounters.removeLast()
         }
-        
+
         return
       } else if node.nodeName() == "li" {
         asMarkdown += "   "
@@ -248,8 +263,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
           }
           asMarkdown += "- "
         }
-        
-   
+
         if listCounters.isEmpty {
           asMarkdown += "• "
         } else {
@@ -257,7 +271,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
           asMarkdown += "\(listCounters[currentIndex]). "
           listCounters[currentIndex] += 1
         }
-        
+
         for nn in node.getChildNodes() {
           handleNode(node: nn, indent: indent, skipParagraph: true, listCounters: &listCounters)
         }
@@ -307,18 +321,18 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
   }
 }
 
-public extension URL {
+extension URL {
   // It's common to use non-ASCII characters in URLs even though they're technically
   //   invalid characters. Every modern browser handles this by silently encoding
   //   the invalid characters on the user's behalf. However, trying to create a URL
   //   object with un-encoded characters will result in nil so we need to encode the
   //   invalid characters before creating the URL object. The unencoded version
   //   should still be shown in the displayed status.
-  init?(string: String, encodePath: Bool) {
+  public init?(string: String, encodePath: Bool) {
     var encodedUrlString = ""
     if encodePath,
-       string.starts(with: "http://") || string.starts(with: "https://"),
-       var startIndex = string.firstIndex(of: "/")
+      string.starts(with: "http://") || string.starts(with: "https://"),
+      var startIndex = string.firstIndex(of: "/")
     {
       startIndex = string.index(startIndex, offsetBy: 1)
 
@@ -327,17 +341,29 @@ public extension URL {
         encodedUrlString = String(string[...startIndex])
         while let endIndex = string[string.index(after: startIndex)...].firstIndex(of: "/") {
           let componentStartIndex = string.index(after: startIndex)
-          encodedUrlString = encodedUrlString + (string[componentStartIndex ... endIndex].addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")
+          encodedUrlString =
+            encodedUrlString
+            + (string[componentStartIndex...endIndex].addingPercentEncoding(
+              withAllowedCharacters: .urlPathAllowed) ?? "")
           startIndex = endIndex
         }
 
         // The last part of the path may have a query string appended to it
         let componentStartIndex = string.index(after: startIndex)
         if let queryStartIndex = string[componentStartIndex...].firstIndex(of: "?") {
-          encodedUrlString = encodedUrlString + (string[componentStartIndex ..< queryStartIndex].addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")
-          encodedUrlString = encodedUrlString + (string[queryStartIndex...].addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")
+          encodedUrlString =
+            encodedUrlString
+            + (string[componentStartIndex..<queryStartIndex].addingPercentEncoding(
+              withAllowedCharacters: .urlPathAllowed) ?? "")
+          encodedUrlString =
+            encodedUrlString
+            + (string[queryStartIndex...].addingPercentEncoding(
+              withAllowedCharacters: .urlQueryAllowed) ?? "")
         } else {
-          encodedUrlString = encodedUrlString + (string[componentStartIndex...].addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? "")
+          encodedUrlString =
+            encodedUrlString
+            + (string[componentStartIndex...].addingPercentEncoding(
+              withAllowedCharacters: .urlPathAllowed) ?? "")
         }
       }
     }

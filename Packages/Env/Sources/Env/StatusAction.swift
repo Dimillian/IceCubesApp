@@ -7,7 +7,10 @@ public enum StatusAction: String, CaseIterable, Identifiable {
 
   case none, reply, boost, favorite, bookmark, quote
 
-  public func displayName(isReblogged: Bool = false, isFavorited: Bool = false, isBookmarked: Bool = false, privateBoost: Bool = false) -> LocalizedStringKey {
+  public func displayName(
+    isReblogged: Bool = false, isFavorited: Bool = false, isBookmarked: Bool = false,
+    privateBoost: Bool = false
+  ) -> LocalizedStringKey {
     switch self {
     case .none:
       return "settings.swipeactions.status.action.none"
@@ -22,13 +25,18 @@ public enum StatusAction: String, CaseIterable, Identifiable {
 
       return isReblogged ? "status.action.unboost" : "settings.swipeactions.status.action.boost"
     case .favorite:
-      return isFavorited ? "status.action.unfavorite" : "settings.swipeactions.status.action.favorite"
+      return isFavorited
+        ? "status.action.unfavorite" : "settings.swipeactions.status.action.favorite"
     case .bookmark:
-      return isBookmarked ? "status.action.unbookmark" : "settings.swipeactions.status.action.bookmark"
+      return isBookmarked
+        ? "status.action.unbookmark" : "settings.swipeactions.status.action.bookmark"
     }
   }
 
-  public func iconName(isReblogged: Bool = false, isFavorited: Bool = false, isBookmarked: Bool = false, privateBoost: Bool = false) -> String {
+  public func iconName(
+    isReblogged: Bool = false, isFavorited: Bool = false, isBookmarked: Bool = false,
+    privateBoost: Bool = false
+  ) -> String {
     switch self {
     case .none:
       return "slash.circle"

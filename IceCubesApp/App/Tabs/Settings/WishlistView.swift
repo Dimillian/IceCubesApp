@@ -3,6 +3,6 @@ import WishKit
 
 struct WishlistView: View {
   var body: some View {
-    WishKit.view
+    WishKit.FeedbackListView()
   }
 }

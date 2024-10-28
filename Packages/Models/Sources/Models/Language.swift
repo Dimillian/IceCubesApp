@@ -15,7 +15,8 @@ public struct Language: Identifiable, Equatable, Hashable {
       return Language(
         isoCode: lang.identifier,
         nativeName: nativeLocale.localizedString(forLanguageCode: lang.identifier)?.capitalized,
-        localizedName: Locale.current.localizedString(forLanguageCode: lang.identifier)?.localizedCapitalized
+        localizedName: Locale.current.localizedString(forLanguageCode: lang.identifier)?
+          .localizedCapitalized
       )
     }
 }

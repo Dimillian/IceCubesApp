@@ -26,7 +26,7 @@ struct SideBarView<Content: View>: View {
 
   private func badgeFor(tab: AppTab) -> Int {
     if tab == .notifications, selectedTab != tab,
-       let token = appAccounts.currentAccount.oauthToken
+      let token = appAccounts.currentAccount.oauthToken
     {
       return watcher.unreadNotificationsCount + (userPreferences.notificationsCount[token] ?? 0)
     }
@@ -36,8 +36,9 @@ struct SideBarView<Content: View>: View {
   private func makeIconForTab(tab: AppTab) -> some View {
     ZStack(alignment: .topTrailing) {
       HStack {
-        SideBarIcon(systemIconName: tab.iconName,
-                    isSelected: tab == selectedTab)
+        SideBarIcon(
+          systemIconName: tab.iconName,
+          isSelected: tab == selectedTab)
         if userPreferences.isSidebarExpanded {
           Text(tab.title)
             .font(.headline)
@@ -45,14 +46,19 @@ struct SideBarView<Content: View>: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }
       }
-      .frame(width: (userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth) - 24, height: 50)
-      .background(tab == selectedTab ? theme.primaryBackgroundColor : .clear,
-                  in: RoundedRectangle(cornerRadius: 8))
+      .frame(
+        width: (userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth) - 24,
+        height: 50
+      )
+      .background(
+        tab == selectedTab ? theme.primaryBackgroundColor : .clear,
+        in: RoundedRectangle(cornerRadius: 8)
+      )
       .cornerRadius(8)
       .shadow(color: tab == selectedTab ? .black.opacity(0.2) : .clear, radius: 5)
       .overlay(
-          RoundedRectangle(cornerRadius: 8)
-            .stroke(tab == selectedTab ? theme.labelColor.opacity(0.1) : .clear, lineWidth: 1)
+        RoundedRectangle(cornerRadius: 8)
+          .stroke(tab == selectedTab ? theme.labelColor.opacity(0.1) : .clear, lineWidth: 1)
       )
       let badge = badgeFor(tab: tab)
       if badge > 0 {
@@ -76,7 +82,9 @@ struct SideBarView<Content: View>: View {
   private var postButton: some View {
     Button {
       #if targetEnvironment(macCatalyst) || os(visionOS)
-        openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
+        openWindow(
+          value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility)
+        )
       #else
         routerPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
       #endif
@@ -106,21 +114,25 @@ struct SideBarView<Content: View>: View {
     } label: {
       ZStack(alignment: .topTrailing) {
         if userPreferences.isSidebarExpanded {
-          AppAccountView(viewModel: .init(appAccount: account,
-                                          isCompact: false,
-                                          isInSettings: false),
-                         isParentPresented: .constant(false))
+          AppAccountView(
+            viewModel: .init(
+              appAccount: account,
+              isCompact: false,
+              isInSettings: false),
+            isParentPresented: .constant(false))
         } else {
-          AppAccountView(viewModel: .init(appAccount: account,
-                                          isCompact: true,
-                                          isInSettings: false),
-                         isParentPresented: .constant(false))
+          AppAccountView(
+            viewModel: .init(
+              appAccount: account,
+              isCompact: true,
+              isInSettings: false),
+            isParentPresented: .constant(false))
         }
         if !userPreferences.isSidebarExpanded,
-           showBadge,
-           let token = account.oauthToken,
-           let notificationsCount = userPreferences.notificationsCount[token],
-           notificationsCount > 0
+          showBadge,
+          let token = account.oauthToken,
+          let notificationsCount = userPreferences.notificationsCount[token],
+          notificationsCount > 0
         {
           makeBadgeView(count: notificationsCount)
         }
@@ -128,10 +140,13 @@ struct SideBarView<Content: View>: View {
       .padding(.leading, userPreferences.isSidebarExpanded ? 16 : 0)
     }
     .help(accountButtonTitle(accountName: account.accountName))
-    .frame(width: userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth, height: 50)
+    .frame(
+      width: userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth, height: 50
+    )
     .padding(.vertical, 8)
-    .background(selectedTab == .profile && account.id == appAccounts.currentAccount.id ?
-      theme.secondaryBackgroundColor : .clear)
+    .background(
+      selectedTab == .profile && account.id == appAccounts.currentAccount.id
+        ? theme.secondaryBackgroundColor : .clear)
   }
 
   private func accountButtonTitle(accountName: String?) -> LocalizedStringKey {
@@ -174,8 +189,9 @@ struct SideBarView<Content: View>: View {
               tabsView
             } else {
               ForEach(appAccounts.availableAccounts) { account in
-                makeAccountButton(account: account,
-                                  showBadge: account.id != appAccounts.currentAccount.id)
+                makeAccountButton(
+                  account: account,
+                  showBadge: account.id != appAccounts.currentAccount.id)
                 if account.id == appAccounts.currentAccount.id {
                   tabsView
                 }
@@ -186,21 +202,23 @@ struct SideBarView<Content: View>: View {
         .frame(width: userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth)
         .scrollContentBackground(.hidden)
         .background(.thinMaterial)
-        .safeAreaInset(edge: .bottom, content: {
-          HStack(spacing: 16) {
-            postButton
-              .padding(.vertical, 24)
-              .padding(.leading, userPreferences.isSidebarExpanded ? 18 : 0)
-            if userPreferences.isSidebarExpanded {
-              Text("menu.new-post")
-                .font(.subheadline)
-                .foregroundColor(theme.labelColor)
-                .frame(maxWidth: .infinity, alignment: .leading)
+        .safeAreaInset(
+          edge: .bottom,
+          content: {
+            HStack(spacing: 16) {
+              postButton
+                .padding(.vertical, 24)
+                .padding(.leading, userPreferences.isSidebarExpanded ? 18 : 0)
+              if userPreferences.isSidebarExpanded {
+                Text("menu.new-post")
+                  .font(.subheadline)
+                  .foregroundColor(theme.labelColor)
+                  .frame(maxWidth: .infinity, alignment: .leading)
+              }
             }
-          }
-          .frame(width: userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth)
-          .background(.thinMaterial)
-        })
+            .frame(width: userPreferences.isSidebarExpanded ? .sidebarWidthExpanded : .sidebarWidth)
+            .background(.thinMaterial)
+          })
         Divider().edgesIgnoringSafeArea(.all)
       }
       content()

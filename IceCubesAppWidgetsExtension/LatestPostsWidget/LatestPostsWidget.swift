@@ -7,49 +7,70 @@ import WidgetKit
 
 struct LatestPostsWidgetProvider: AppIntentTimelineProvider {
   func placeholder(in _: Context) -> PostsWidgetEntry {
-    .init(date: Date(),
-          title: "Home",
-          statuses: [.placeholder()],
-          images: [:])
+    .init(
+      date: Date(),
+      title: "Home",
+      statuses: [.placeholder()],
+      images: [:])
   }
 
-  func snapshot(for configuration: LatestPostsWidgetConfiguration, in context: Context) async -> PostsWidgetEntry {
+  func snapshot(for configuration: LatestPostsWidgetConfiguration, in context: Context) async
+    -> PostsWidgetEntry
+  {
     if let entry = await timeline(for: configuration, context: context).entries.first {
       return entry
     }
-    return .init(date: Date(),
-                 title: configuration.timeline?.timeline.title ?? "",
-                 statuses: [],
-                 images: [:])
+    return .init(
+      date: Date(),
+      title: configuration.timeline?.timeline.title ?? "",
+      statuses: [],
+      images: [:])
   }
 
-  func timeline(for configuration: LatestPostsWidgetConfiguration, in context: Context) async -> Timeline<PostsWidgetEntry> {
+  func timeline(for configuration: LatestPostsWidgetConfiguration, in context: Context) async
+    -> Timeline<PostsWidgetEntry>
+  {
     await timeline(for: configuration, context: context)
   }
 
-  private func timeline(for configuration: LatestPostsWidgetConfiguration, context: Context) async -> Timeline<PostsWidgetEntry> {
+  private func timeline(for configuration: LatestPostsWidgetConfiguration, context: Context) async
+    -> Timeline<PostsWidgetEntry>
+  {
     do {
       guard let timeline = configuration.timeline, let account = configuration.account else {
-        return Timeline(entries: [.init(date: Date(),
-                                        title: "",
-                                        statuses: [],
-                                        images: [:])],
-                        policy: .atEnd)
+        return Timeline(
+          entries: [
+            .init(
+              date: Date(),
+              title: "",
+              statuses: [],
+              images: [:])
+          ],
+          policy: .atEnd)
       }
-      let statuses = await loadStatuses(for: timeline.timeline,
-                                        account: account,
-                                        widgetFamily: context.family)
+      let statuses = await loadStatuses(
+        for: timeline.timeline,
+        account: account,
+        widgetFamily: context.family)
       let images = try await loadImages(urls: statuses.map { $0.account.avatar })
-      return Timeline(entries: [.init(date: Date(),
-                                      title: timeline.timeline.title,
-                                      statuses: statuses,
-                                      images: images)], policy: .atEnd)
+      return Timeline(
+        entries: [
+          .init(
+            date: Date(),
+            title: timeline.timeline.title,
+            statuses: statuses,
+            images: images)
+        ], policy: .atEnd)
     } catch {
-      return Timeline(entries: [.init(date: Date(),
-                                      title: configuration.timeline?.timeline.title ?? "",
-                                      statuses: [],
-                                      images: [:])],
-                      policy: .atEnd)
+      return Timeline(
+        entries: [
+          .init(
+            date: Date(),
+            title: configuration.timeline?.timeline.title ?? "",
+            statuses: [],
+            images: [:])
+        ],
+        policy: .atEnd)
     }
   }
 
@@ -77,10 +98,11 @@ struct LatestPostsWidget: Widget {
   let kind: String = "LatestPostsWidget"
 
   var body: some WidgetConfiguration {
-    AppIntentConfiguration(kind: kind,
-                           intent: LatestPostsWidgetConfiguration.self,
-                           provider: LatestPostsWidgetProvider())
-    { entry in
+    AppIntentConfiguration(
+      kind: kind,
+      intent: LatestPostsWidgetConfiguration.self,
+      provider: LatestPostsWidgetProvider()
+    ) { entry in
       PostsWidgetView(entry: entry)
         .containerBackground(Color("WidgetBackground").gradient, for: .widget)
     }
@@ -93,8 +115,9 @@ struct LatestPostsWidget: Widget {
 #Preview(as: .systemMedium) {
   LatestPostsWidget()
 } timeline: {
-  PostsWidgetEntry(date: .now,
-                   title: "Mastodon",
-                   statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
-                   images: [:])
+  PostsWidgetEntry(
+    date: .now,
+    title: "Mastodon",
+    statuses: [.placeholder(), .placeholder(), .placeholder(), .placeholder()],
+    images: [:])
 }

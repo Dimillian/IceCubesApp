@@ -1,6 +1,6 @@
 import Foundation
 
-public struct RawStreamEvent: Decodable, Sendable{
+public struct RawStreamEvent: Decodable, Sendable {
   public let event: String
   public let stream: [String]
   public let payload: String

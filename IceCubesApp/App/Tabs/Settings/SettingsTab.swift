@@ -47,51 +47,53 @@ struct SettingsTabs: View {
       #if !os(visionOS)
         .background(theme.secondaryBackgroundColor)
       #endif
-        .navigationTitle(Text("settings.title"))
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
-        .toolbar {
-          if isModal {
-            ToolbarItem {
-              Button {
-                dismiss()
-              } label: {
-                Text("action.done").bold()
-              }
+      .navigationTitle(Text("settings.title"))
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
+      .toolbar {
+        if isModal {
+          ToolbarItem {
+            Button {
+              dismiss()
+            } label: {
+              Text("action.done").bold()
             }
           }
-          if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn, !isModal {
-            SecondaryColumnToolbarItem()
-          }
         }
-        .withAppRouter()
-        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-        .onAppear {
-          startingPoint = RouterPath.settingsStartingPoint
-          RouterPath.settingsStartingPoint = nil
+        if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn,
+          !isModal
+        {
+          SecondaryColumnToolbarItem()
         }
-        .navigationDestination(item: $startingPoint) { targetView in
-          switch targetView {
-          case .display:
-            DisplaySettingsView()
-          case .haptic:
-            HapticSettingsView()
-          case .remoteTimelines:
-            RemoteTimelinesSettingView()
-          case .tagGroups:
-            TagsGroupSettingView()
-          case .recentTags:
-            RecenTagsSettingView()
-          case .content:
-            ContentSettingsView()
-          case .swipeActions:
-            SwipeActionsSettingsView()
-          case .tabAndSidebarEntries:
-            EmptyView()
-          case .translation:
-            TranslationSettingsView()
-          }
+      }
+      .withAppRouter()
+      .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+      .onAppear {
+        startingPoint = RouterPath.settingsStartingPoint
+        RouterPath.settingsStartingPoint = nil
+      }
+      .navigationDestination(item: $startingPoint) { targetView in
+        switch targetView {
+        case .display:
+          DisplaySettingsView()
+        case .haptic:
+          HapticSettingsView()
+        case .remoteTimelines:
+          RemoteTimelinesSettingView()
+        case .tagGroups:
+          TagsGroupSettingView()
+        case .recentTags:
+          RecenTagsSettingView()
+        case .content:
+          ContentSettingsView()
+        case .swipeActions:
+          SwipeActionsSettingsView()
+        case .tabAndSidebarEntries:
+          EmptyView()
+        case .translation:
+          TranslationSettingsView()
         }
+      }
     }
     .onAppear {
       routerPath.client = client
@@ -137,13 +139,13 @@ struct SettingsTabs: View {
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
   private func logoutAccount(account: AppAccount) async {
     if let token = account.oauthToken,
-       let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
+      let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
     {
       let client = Client(server: account.server, oauthToken: token)
       await timelineCache.clearCache(for: client.id)
@@ -188,7 +190,9 @@ struct SettingsTabs: View {
         NavigationLink(destination: TabbarEntriesSettingsView()) {
           Label("settings.general.tabbarEntries", systemImage: "platter.filled.bottom.iphone")
         }
-      } else if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
+      } else if UIDevice.current.userInterfaceIdiom == .pad
+        || UIDevice.current.userInterfaceIdiom == .mac
+      {
         NavigationLink(destination: SidebarEntriesSettingsView()) {
           Label("settings.general.sidebarEntries", systemImage: "sidebar.squares.leading")
         }
@@ -204,7 +208,7 @@ struct SettingsTabs: View {
       #endif
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -245,10 +249,10 @@ struct SettingsTabs: View {
       Text("settings.section.other.footer")
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
-  
+
   @ViewBuilder
   private var postStreamingSection: some View {
     @Bindable var preferences = preferences
@@ -259,13 +263,15 @@ struct SettingsTabs: View {
     } header: {
       Text("Streaming")
     } footer: {
-      Text("Enabling post streaming will automatically add new posts at the top of your home timeline. Disable if you get performance issues.")
+      Text(
+        "Enabling post streaming will automatically add new posts at the top of your home timeline. Disable if you get performance issues."
+      )
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
-  
+
   @ViewBuilder
   private var AISection: some View {
     @Bindable var preferences = preferences
@@ -276,10 +282,12 @@ struct SettingsTabs: View {
     } header: {
       Text("AI")
     } footer: {
-      Text("Disable to hide AI assisted tool options such as copywritting and alt-image description generated using AI. Uses OpenAI API. See our Privacy Policy for more information.")
+      Text(
+        "Disable to hide AI assisted tool options such as copywritting and alt-image description generated using AI. Uses OpenAI API. See our Privacy Policy for more information."
+      )
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -290,7 +298,8 @@ struct SettingsTabs: View {
           Label {
             Text("settings.app.icon")
           } icon: {
-            let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
+            let icon = IconSelectorView.Icon(
+              string: UIApplication.shared.alternateIconName ?? "AppIcon")
             if let image: UIImage = .init(named: icon.previewImageName) {
               Image(uiImage: image)
                 .resizable()
@@ -313,7 +322,9 @@ struct SettingsTabs: View {
         Label("settings.app.support", systemImage: "wand.and.stars")
       }
 
-      if let reviewURL = URL(string: "https://apps.apple.com/app/id\(AppInfo.appStoreAppId)?action=write-review") {
+      if let reviewURL = URL(
+        string: "https://apps.apple.com/app/id\(AppInfo.appStoreAppId)?action=write-review")
+      {
         Link(destination: reviewURL) {
           Label("settings.rate", systemImage: "link")
         }
@@ -326,7 +337,7 @@ struct SettingsTabs: View {
       } label: {
         Label("settings.app.about", systemImage: "info.circle")
       }
-      
+
       NavigationLink {
         WishlistView()
       } label: {
@@ -337,11 +348,12 @@ struct SettingsTabs: View {
       Text("settings.section.app")
     } footer: {
       if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-        Text("settings.section.app.footer \(appVersion)").frame(maxWidth: .infinity, alignment: .center)
+        Text("settings.section.app.footer \(appVersion)").frame(
+          maxWidth: .infinity, alignment: .center)
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -391,7 +403,7 @@ struct SettingsTabs: View {
       Text("Remove all cached images and videos")
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 }

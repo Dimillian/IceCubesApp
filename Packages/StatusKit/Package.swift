@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "StatusKit",
       targets: ["StatusKit"]
-    ),
+    )
   ],
   dependencies: [
     .package(name: "AppAccount", path: "../AppAccount"),
@@ -38,8 +38,8 @@ let package = Package(
         .product(name: "LRUCache", package: "LRUCache"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6),
+        .swiftLanguageMode(.v6)
       ]
-    ),
+    )
   ]
 )

@@ -94,13 +94,14 @@ import SwiftUI
   func save() async {
     isSaving = true
     do {
-      let data = UpdateCredentialsData(displayName: displayName,
-                                       note: note,
-                                       source: .init(privacy: postPrivacy, sensitive: isSensitive),
-                                       bot: isBot,
-                                       locked: isLocked,
-                                       discoverable: isDiscoverable,
-                                       fieldsAttributes: fields.map { .init(name: $0.name, value: $0.value) })
+      let data = UpdateCredentialsData(
+        displayName: displayName,
+        note: note,
+        source: .init(privacy: postPrivacy, sensitive: isSensitive),
+        bot: isBot,
+        locked: isLocked,
+        discoverable: isDiscoverable,
+        fieldsAttributes: fields.map { .init(name: $0.name, value: $0.value) })
       let response = try await client?.patch(endpoint: Accounts.updateCredentials(json: data))
       if response?.statusCode != 200 {
         saveError = true
@@ -137,12 +138,13 @@ import SwiftUI
   private func uploadHeader(data: Data) async -> Bool {
     guard let client else { return false }
     do {
-      let response = try await client.mediaUpload(endpoint: Accounts.updateCredentialsMedia,
-                                                  version: .v1,
-                                                  method: "PATCH",
-                                                  mimeType: "image/jpeg",
-                                                  filename: "header",
-                                                  data: data)
+      let response = try await client.mediaUpload(
+        endpoint: Accounts.updateCredentialsMedia,
+        version: .v1,
+        method: "PATCH",
+        mimeType: "image/jpeg",
+        filename: "header",
+        data: data)
       return response?.statusCode == 200
     } catch {
       return false
@@ -152,12 +154,13 @@ import SwiftUI
   private func uploadAvatar(data: Data) async -> Bool {
     guard let client else { return false }
     do {
-      let response = try await client.mediaUpload(endpoint: Accounts.updateCredentialsMedia,
-                                                  version: .v1,
-                                                  method: "PATCH",
-                                                  mimeType: "image/jpeg",
-                                                  filename: "avatar",
-                                                  data: data)
+      let response = try await client.mediaUpload(
+        endpoint: Accounts.updateCredentialsMedia,
+        version: .v1,
+        method: "PATCH",
+        mimeType: "image/jpeg",
+        filename: "avatar",
+        data: data)
       return response?.statusCode == 200
     } catch {
       return false
@@ -165,18 +168,21 @@ import SwiftUI
   }
 
   private func getItemImageData(item: PhotosPickerItem, for type: ItemType) async -> Data? {
-    guard let imageFile = try? await item.loadTransferable(type: StatusEditor.ImageFileTranseferable.self) else { return nil }
+    guard
+      let imageFile = try? await item.loadTransferable(
+        type: StatusEditor.ImageFileTranseferable.self)
+    else { return nil }
 
     let compressor = StatusEditor.Compressor()
 
     guard let compressedData = await compressor.compressImageFrom(url: imageFile.url),
-          let image = UIImage(data: compressedData),
-          let uploadData = try? await compressor.compressImageForUpload(
-            image,
-            maxSize: 2 * 1024 * 1024, // 2MB
-            maxHeight: type.maxHeight,
-            maxWidth: type.maxWidth
-          )
+      let image = UIImage(data: compressedData),
+      let uploadData = try? await compressor.compressImageForUpload(
+        image,
+        maxSize: 2 * 1024 * 1024,  // 2MB
+        maxHeight: type.maxHeight,
+        maxWidth: type.maxWidth
+      )
     else {
       return nil
     }

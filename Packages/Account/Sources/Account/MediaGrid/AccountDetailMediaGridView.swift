@@ -23,11 +23,14 @@ public struct AccountDetailMediaGridView: View {
 
   public var body: some View {
     ScrollView(.vertical) {
-      LazyVGrid(columns: [.init(.flexible(minimum: 100), spacing: 4),
-                          .init(.flexible(minimum: 100), spacing: 4),
-                          .init(.flexible(minimum: 100), spacing: 4)],
-                spacing: 4)
-      {
+      LazyVGrid(
+        columns: [
+          .init(.flexible(minimum: 100), spacing: 4),
+          .init(.flexible(minimum: 100), spacing: 4),
+          .init(.flexible(minimum: 100), spacing: 4),
+        ],
+        spacing: 4
+      ) {
         ForEach(mediaStatuses) { status in
           GeometryReader { proxy in
             if let url = status.attachment.url {
@@ -60,12 +63,14 @@ public struct AccountDetailMediaGridView: View {
               }
               .contextMenu {
                 Button {
-                  quickLook.prepareFor(selectedMediaAttachment: status.attachment,
-                                       mediaAttachments: status.status.mediaAttachments)
+                  quickLook.prepareFor(
+                    selectedMediaAttachment: status.attachment,
+                    mediaAttachments: status.status.mediaAttachments)
                 } label: {
                   Label("Open Media", systemImage: "photo")
                 }
-                MediaUIShareLink(url: url, type: status.attachment.supportedType == .image ? .image : .av)
+                MediaUIShareLink(
+                  url: url, type: status.attachment.supportedType == .image ? .image : .av)
                 Button {
                   Task {
                     let transferable = MediaUIImageTransferable(url: url)
@@ -104,13 +109,15 @@ public struct AccountDetailMediaGridView: View {
 
   private func fetchNextPage() async throws {
     let newStatuses: [Status] =
-      try await client.get(endpoint: Accounts.statuses(id: account.id,
-                                                       sinceId: mediaStatuses.last?.id,
-                                                       tag: nil,
-                                                       onlyMedia: true,
-                                                       excludeReplies: true,
-                                                       excludeReblogs: true,
-                                                       pinned: nil))
+      try await client.get(
+        endpoint: Accounts.statuses(
+          id: account.id,
+          sinceId: mediaStatuses.last?.id,
+          tag: nil,
+          onlyMedia: true,
+          excludeReplies: true,
+          excludeReblogs: true,
+          pinned: nil))
     mediaStatuses.append(contentsOf: newStatuses.flatMap { $0.asMediaStatus })
   }
 }

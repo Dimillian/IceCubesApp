@@ -30,11 +30,14 @@ struct ContentSettingsView: View {
         }
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Section("settings.content.sharing") {
-        Picker("settings.content.sharing.share-button-behavior", selection: $userPreferences.shareButtonBehavior) {
+        Picker(
+          "settings.content.sharing.share-button-behavior",
+          selection: $userPreferences.shareButtonBehavior
+        ) {
           ForEach(PreferredShareButtonBehavior.allCases, id: \.rawValue) { option in
             Text(option.title)
               .tag(option)
@@ -42,7 +45,7 @@ struct ContentSettingsView: View {
         }
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Section("settings.content.instance-settings") {
@@ -51,7 +54,7 @@ struct ContentSettingsView: View {
         }
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
       .onChange(of: userPreferences.useInstanceContentSettings) { _, newVal in
         if newVal {
@@ -85,21 +88,27 @@ struct ContentSettingsView: View {
         Text("settings.content.collapse-long-posts-hint")
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Section("settings.content.posting") {
-        Picker("settings.content.default-visibility", selection: $userPreferences.appDefaultPostVisibility) {
+        Picker(
+          "settings.content.default-visibility",
+          selection: $userPreferences.appDefaultPostVisibility
+        ) {
           ForEach(Visibility.allCases, id: \.rawValue) { vis in
             Text(vis.title).tag(vis)
           }
         }
         .disabled(userPreferences.useInstanceContentSettings)
 
-        Picker("settings.content.default-reply-visibility", selection: $userPreferences.appDefaultReplyVisibility) {
+        Picker(
+          "settings.content.default-reply-visibility",
+          selection: $userPreferences.appDefaultReplyVisibility
+        ) {
           ForEach(Visibility.allCases, id: \.rawValue) { vis in
-            if UserPreferences.getIntOfVisibility(vis) <=
-              UserPreferences.getIntOfVisibility(userPreferences.postVisibility)
+            if UserPreferences.getIntOfVisibility(vis)
+              <= UserPreferences.getIntOfVisibility(userPreferences.postVisibility)
             {
               Text(vis.title).tag(vis)
             }
@@ -119,7 +128,7 @@ struct ContentSettingsView: View {
         }
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Section("timeline.content-filter.title") {
@@ -137,7 +146,7 @@ struct ContentSettingsView: View {
         }
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     .navigationTitle("settings.content.navigation-title")

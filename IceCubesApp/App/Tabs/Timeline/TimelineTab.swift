@@ -38,17 +38,19 @@ struct TimelineTab: View {
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      TimelineView(timeline: $timeline,
-                   pinnedFilters: $pinnedFilters,
-                   selectedTagGroup: $selectedTagGroup,
-                   canFilterTimeline: canFilterTimeline)
-        .withAppRouter()
-        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-        .toolbar {
-          toolbarView
-        }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
-        .id(client.id)
+      TimelineView(
+        timeline: $timeline,
+        pinnedFilters: $pinnedFilters,
+        selectedTagGroup: $selectedTagGroup,
+        canFilterTimeline: canFilterTimeline
+      )
+      .withAppRouter()
+      .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+      .toolbar {
+        toolbarView
+      }
+      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
+      .id(client.id)
     }
     .onAppear {
       routerPath.client = client
@@ -182,7 +184,8 @@ struct TimelineTab: View {
         Button {
           timeline = .latest
         } label: {
-          Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName())
+          Label(
+            TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName())
         }
       }
       if timeline == .home {
@@ -190,8 +193,9 @@ struct TimelineTab: View {
           timeline = .resume
         } label: {
           VStack {
-            Label(TimelineFilter.resume.localizedTitle(),
-                  systemImage: TimelineFilter.resume.iconName())
+            Label(
+              TimelineFilter.resume.localizedTitle(),
+              systemImage: TimelineFilter.resume.iconName())
           }
         }
       }
@@ -206,10 +210,10 @@ struct TimelineTab: View {
       withAnimation {
         if let index {
           let timeline = pinnedFilters.remove(at: index)
-          Telemetry.signal("timeline.pin.removed", parameters: ["timeline" : timeline.rawValue])
+          Telemetry.signal("timeline.pin.removed", parameters: ["timeline": timeline.rawValue])
         } else {
           pinnedFilters.append(timeline)
-          Telemetry.signal("timeline.pin.added", parameters: ["timeline" : timeline.rawValue])
+          Telemetry.signal("timeline.pin.added", parameters: ["timeline": timeline.rawValue])
         }
       }
     } label: {
@@ -305,11 +309,13 @@ struct TimelineTab: View {
   }
 
   private var contentFilterButton: some View {
-    Button(action: {
-      routerPath.presentedSheet = .timelineContentFilter
-    }, label: {
-      Label("timeline.content-filter.title", systemSymbol: .line3HorizontalDecrease)
-    })
+    Button(
+      action: {
+        routerPath.presentedSheet = .timelineContentFilter
+      },
+      label: {
+        Label("timeline.content-filter.title", systemSymbol: .line3HorizontalDecrease)
+      })
   }
 
   private func resetTimelineFilter() {

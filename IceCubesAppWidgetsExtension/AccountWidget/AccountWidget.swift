@@ -10,24 +10,30 @@ struct AccountWidgetProvider: AppIntentTimelineProvider {
     .init(date: Date(), account: .placeholder(), avatar: nil)
   }
 
-  func snapshot(for configuration: AccountWidgetConfiguration, in _: Context) async -> AccountWidgetEntry {
+  func snapshot(for configuration: AccountWidgetConfiguration, in _: Context) async
+    -> AccountWidgetEntry
+  {
     let account = await fetchAccount(configuration: configuration)
     return .init(date: Date(), account: account, avatar: nil)
   }
 
-  func timeline(for configuration: AccountWidgetConfiguration, in _: Context) async -> Timeline<AccountWidgetEntry> {
+  func timeline(for configuration: AccountWidgetConfiguration, in _: Context) async -> Timeline<
+    AccountWidgetEntry
+  > {
     let account = await fetchAccount(configuration: configuration)
     let images = try? await loadImages(urls: [account.avatar])
-    return .init(entries: [.init(date: Date(), account: account, avatar: images?.first?.value)],
-                 policy: .atEnd)
+    return .init(
+      entries: [.init(date: Date(), account: account, avatar: images?.first?.value)],
+      policy: .atEnd)
   }
 
   private func fetchAccount(configuration: AccountWidgetConfiguration) async -> Account {
     guard let account = configuration.account else {
       return .placeholder()
     }
-    let client = Client(server: account.account.server,
-                        oauthToken: account.account.oauthToken)
+    let client = Client(
+      server: account.account.server,
+      oauthToken: account.account.oauthToken)
     do {
       let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
       return account
@@ -47,10 +53,11 @@ struct AccountWidget: Widget {
   let kind: String = "AccountWidget"
 
   var body: some WidgetConfiguration {
-    AppIntentConfiguration(kind: kind,
-                           intent: AccountWidgetConfiguration.self,
-                           provider: AccountWidgetProvider())
-    { entry in
+    AppIntentConfiguration(
+      kind: kind,
+      intent: AccountWidgetConfiguration.self,
+      provider: AccountWidgetProvider()
+    ) { entry in
       AccountWidgetView(entry: entry)
         .containerBackground(Color("WidgetBackground").gradient, for: .widget)
     }

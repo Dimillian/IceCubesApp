@@ -6,7 +6,10 @@ public struct ErrorView: View {
   public let buttonTitle: LocalizedStringKey
   public let onButtonPress: () async -> Void
 
-  public init(title: LocalizedStringKey, message: LocalizedStringKey, buttonTitle: LocalizedStringKey, onButtonPress: @escaping (() async -> Void)) {
+  public init(
+    title: LocalizedStringKey, message: LocalizedStringKey, buttonTitle: LocalizedStringKey,
+    onButtonPress: @escaping (() async -> Void)
+  ) {
     self.title = title
     self.message = message
     self.buttonTitle = buttonTitle
@@ -46,7 +49,9 @@ public struct ErrorView: View {
 }
 
 #Preview {
-  ErrorView(title: "Error",
-            message: "Error loading. Please try again",
-            buttonTitle: "Retry") {}
+  ErrorView(
+    title: "Error",
+    message: "Error loading. Please try again",
+    buttonTitle: "Retry"
+  ) {}
 }

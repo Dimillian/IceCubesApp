@@ -99,13 +99,13 @@ struct StatusActionButtonStyle: ButtonStyle {
 
     static func generateCells() -> [Cell] {
       let cellCount = 16
-      let velocityRange = 0.6 ... 1.0
-      let scaleRange = 0.5 ... 1.0
-      let alphaRange = 0.6 ... 1.0
+      let velocityRange = 0.6...1.0
+      let scaleRange = 0.5...1.0
+      let alphaRange = 0.6...1.0
 
       let spacing = 2 * .pi / (1.618 + Double(arc4random() % 200) / 10000)
       let initialSpacing = deg2rad(Double(arc4random() % 360))
-      return (0 ..< cellCount).map { index in
+      return (0..<cellCount).map { index in
         Cell(
           id: index,
           angle: initialSpacing + spacing * Double(index),

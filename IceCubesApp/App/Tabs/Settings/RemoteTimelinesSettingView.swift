@@ -22,7 +22,7 @@ struct RemoteTimelinesSettingView: View {
         }
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
       Button {
         routerPath.presentedSheet = .addRemoteLocalTimeline
@@ -30,7 +30,7 @@ struct RemoteTimelinesSettingView: View {
         Label("settings.timeline.add", systemImage: "badge.plus.radiowaves.right")
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     .navigationTitle("settings.general.remote-timelines")
@@ -38,8 +38,8 @@ struct RemoteTimelinesSettingView: View {
     #if !os(visionOS)
       .background(theme.secondaryBackgroundColor)
     #endif
-      .toolbar {
-        EditButton()
-      }
+    .toolbar {
+      EditButton()
+    }
   }
 }

@@ -1,13 +1,15 @@
 import SwiftUI
 
 public let availableColorsSets: [ColorSetCouple] =
-  [.init(light: IceCubeLight(), dark: IceCubeDark()),
-   .init(light: IceCubeNeonLight(), dark: IceCubeNeonDark()),
-   .init(light: DesertLight(), dark: DesertDark()),
-   .init(light: NemesisLight(), dark: NemesisDark()),
-   .init(light: MediumLight(), dark: MediumDark()),
-   .init(light: ConstellationLight(), dark: ConstellationDark()),
-   .init(light: ThreadsLight(), dark: ThreadsDark())]
+  [
+    .init(light: IceCubeLight(), dark: IceCubeDark()),
+    .init(light: IceCubeNeonLight(), dark: IceCubeNeonDark()),
+    .init(light: DesertLight(), dark: DesertDark()),
+    .init(light: NemesisLight(), dark: NemesisDark()),
+    .init(light: MediumLight(), dark: MediumDark()),
+    .init(light: ConstellationLight(), dark: ConstellationDark()),
+    .init(light: ThreadsLight(), dark: ThreadsDark()),
+  ]
 
 public protocol ColorSet: Sendable {
   var name: ColorSetName { get }

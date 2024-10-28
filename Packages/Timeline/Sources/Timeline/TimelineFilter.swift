@@ -122,7 +122,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
     case let .hashtag(tag, _):
       "#\(tag)"
     case let .tagGroup(title, _, _):
-      LocalizedStringKey(title) // ?? not sure since this can't be localized.
+      LocalizedStringKey(title)  // ?? not sure since this can't be localized.
     case let .list(list):
       LocalizedStringKey(list.title)
     case let .remoteLocal(server, _):
@@ -157,20 +157,26 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
     }
   }
 
-  public func endpoint(sinceId: String?,
-                       maxId: String?,
-                       minId: String?,
-                       offset: Int?,
-                       limit: Int?) -> Endpoint {
+  public func endpoint(
+    sinceId: String?,
+    maxId: String?,
+    minId: String?,
+    offset: Int?,
+    limit: Int?
+  ) -> Endpoint {
     switch self {
-    case .federated: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false, limit: limit)
-    case .local: return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true, limit: limit)
+    case .federated:
+      return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false, limit: limit)
+    case .local:
+      return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true, limit: limit)
     case let .remoteLocal(_, filter):
       switch filter {
       case .local:
-        return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: true, limit: limit)
+        return Timelines.pub(
+          sinceId: sinceId, maxId: maxId, minId: minId, local: true, limit: limit)
       case .federated:
-        return Timelines.pub(sinceId: sinceId, maxId: maxId, minId: minId, local: false, limit: limit)
+        return Timelines.pub(
+          sinceId: sinceId, maxId: maxId, minId: minId, local: false, limit: limit)
       case .trending:
         return Trends.statuses(offset: offset)
       }
@@ -178,17 +184,20 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
     case .resume: return Timelines.home(sinceId: nil, maxId: nil, minId: nil, limit: limit)
     case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId, limit: limit)
     case .trending: return Trends.statuses(offset: offset)
-    case let .link(url, _): return Timelines.link(url: url, sinceId: sinceId, maxId: maxId, minId: minId)
-    case let .list(list): return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
+    case let .link(url, _):
+      return Timelines.link(url: url, sinceId: sinceId, maxId: maxId, minId: minId)
+    case let .list(list):
+      return Timelines.list(listId: list.id, sinceId: sinceId, maxId: maxId, minId: minId)
     case let .hashtag(tag, accountId):
       if let accountId {
-        return Accounts.statuses(id: accountId,
-                                 sinceId: nil,
-                                 tag: tag,
-                                 onlyMedia: false,
-                                 excludeReplies: false,
-                                 excludeReblogs: false,
-                                 pinned: nil)
+        return Accounts.statuses(
+          id: accountId,
+          sinceId: nil,
+          tag: tag,
+          onlyMedia: false,
+          excludeReplies: false,
+          excludeReblogs: false,
+          pinned: nil)
       } else {
         return Timelines.hashtag(tag: tag, additional: nil, maxId: maxId, minId: minId)
       }
@@ -321,7 +330,7 @@ extension TimelineFilter: Codable {
 extension TimelineFilter: RawRepresentable {
   public init?(rawValue: String) {
     guard let data = rawValue.data(using: .utf8),
-          let result = try? JSONDecoder().decode(TimelineFilter.self, from: data)
+      let result = try? JSONDecoder().decode(TimelineFilter.self, from: data)
     else {
       return nil
     }
@@ -330,7 +339,7 @@ extension TimelineFilter: RawRepresentable {
 
   public var rawValue: String {
     guard let data = try? JSONEncoder().encode(self),
-          let result = String(data: data, encoding: .utf8)
+      let result = String(data: data, encoding: .utf8)
     else {
       return "[]"
     }
@@ -381,7 +390,7 @@ extension RemoteTimelineFilter: Codable {
 extension RemoteTimelineFilter: RawRepresentable {
   public init?(rawValue: String) {
     guard let data = rawValue.data(using: .utf8),
-          let result = try? JSONDecoder().decode(RemoteTimelineFilter.self, from: data)
+      let result = try? JSONDecoder().decode(RemoteTimelineFilter.self, from: data)
     else {
       return nil
     }
@@ -390,7 +399,7 @@ extension RemoteTimelineFilter: RawRepresentable {
 
   public var rawValue: String {
     guard let data = try? JSONEncoder().encode(self),
-          let result = String(data: data, encoding: .utf8)
+      let result = String(data: data, encoding: .utf8)
     else {
       return "[]"
     }

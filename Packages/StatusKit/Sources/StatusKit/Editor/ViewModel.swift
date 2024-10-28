@@ -7,9 +7,9 @@ import Network
 import PhotosUI
 import SwiftUI
 
-public extension StatusEditor {
+extension StatusEditor {
   @MainActor
-  @Observable class ViewModel: NSObject, Identifiable {
+  @Observable public class ViewModel: NSObject, Identifiable {
     public let id = UUID()
 
     var mode: Mode
@@ -95,7 +95,8 @@ public extension StatusEditor {
           mediaPickers = mediaPickers.prefix(4).map { $0 }
         }
 
-        let removedIDs = oldValue
+        let removedIDs =
+          oldValue
           .filter { !mediaPickers.contains($0) }
           .compactMap(\.itemIdentifier)
         mediaContainers.removeAll { removedIDs.contains($0.id) }
@@ -132,8 +133,8 @@ public extension StatusEditor {
     var allMediaHasDescription: Bool {
       var everyMediaHasAltText = true
       for mediaContainer in mediaContainers {
-        if ((mediaContainer.mediaAttachment?.description) == nil) ||
-          mediaContainer.mediaAttachment?.description?.count == 0
+        if ((mediaContainer.mediaAttachment?.description) == nil)
+          || mediaContainer.mediaAttachment?.description?.count == 0
         {
           everyMediaHasAltText = false
         }
@@ -186,9 +187,9 @@ public extension StatusEditor {
 
     func evaluateLanguages() {
       if let detectedLang = detectLanguage(text: statusText.string),
-         let selectedLanguage,
-         selectedLanguage != "",
-         selectedLanguage != detectedLang
+        let selectedLanguage,
+        selectedLanguage != "",
+        selectedLanguage != detectedLang
       {
         languageConfirmationDialogLanguages = (detected: detectedLang, selected: selectedLanguage)
       } else {
@@ -220,18 +221,20 @@ public extension StatusEditor {
         let postStatus: Status?
         var pollData: StatusData.PollData?
         if let pollOptions = getPollOptionsForAPI() {
-          pollData = .init(options: pollOptions,
-                           multiple: pollVotingFrequency.canVoteMultipleTimes,
-                           expires_in: pollDuration.rawValue)
+          pollData = .init(
+            options: pollOptions,
+            multiple: pollVotingFrequency.canVoteMultipleTimes,
+            expires_in: pollDuration.rawValue)
         }
-        let data = StatusData(status: statusText.string,
-                              visibility: visibility,
-                              inReplyToId: mode.replyToStatus?.id,
-                              spoilerText: spoilerOn ? spoilerText : nil,
-                              mediaIds: mediaContainers.compactMap { $0.mediaAttachment?.id },
-                              poll: pollData,
-                              language: selectedLanguage,
-                              mediaAttributes: mediaAttributes)
+        let data = StatusData(
+          status: statusText.string,
+          visibility: visibility,
+          inReplyToId: mode.replyToStatus?.id,
+          spoilerText: spoilerOn ? spoilerText : nil,
+          mediaIds: mediaContainers.compactMap { $0.mediaAttachment?.id },
+          poll: pollData,
+          language: selectedLanguage,
+          mediaAttributes: mediaAttributes)
         switch mode {
         case .new, .replyTo, .quote, .mention, .shareExtension, .quoteLink, .imageURL:
           postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
@@ -239,7 +242,8 @@ public extension StatusEditor {
             StreamWatcher.shared.emmitPostEvent(for: postStatus)
           }
         case let .edit(status):
-          postStatus = try await client.put(endpoint: Statuses.editStatus(id: status.id, json: data))
+          postStatus = try await client.put(
+            endpoint: Statuses.editStatus(id: status.id, json: data))
           if let postStatus {
             StreamWatcher.shared.emmitEditEvent(for: postStatus)
           }
@@ -349,7 +353,8 @@ public extension StatusEditor {
       case let .edit(status):
         var rawText = status.content.asRawText.escape()
         for mention in status.mentions {
-          rawText = rawText.replacingOccurrences(of: "@\(mention.username)", with: "@\(mention.acct)")
+          rawText = rawText.replacingOccurrences(
+            of: "@\(mention.username)", with: "@\(mention.acct)")
         }
         statusText = .init(string: rawText)
         selectedRange = .init(location: statusText.string.utf16.count, length: 0)
@@ -369,7 +374,8 @@ public extension StatusEditor {
       case let .quote(status):
         embeddedStatus = status
         if let url = embeddedStatusURL {
-          statusText = .init(string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
+          statusText = .init(
+            string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
           selectedRange = .init(location: 0, length: 0)
         }
       case let .quoteLink(link):
@@ -380,11 +386,14 @@ public extension StatusEditor {
 
     private func processText() {
       guard markedTextRange == nil else { return }
-      statusText.addAttributes([.foregroundColor: UIColor(Theme.shared.labelColor),
-                                .font: Font.scaledBodyUIFont,
-                                .backgroundColor: UIColor.clear,
-                                .underlineColor: UIColor.clear],
-                               range: NSMakeRange(0, statusText.string.utf16.count))
+      statusText.addAttributes(
+        [
+          .foregroundColor: UIColor(Theme.shared.labelColor),
+          .font: Font.scaledBodyUIFont,
+          .backgroundColor: UIColor.clear,
+          .underlineColor: UIColor.clear,
+        ],
+        range: NSMakeRange(0, statusText.string.utf16.count))
       let hashtagPattern = "(#+[\\w0-9(_)]{0,})"
       let mentionPattern = "(@+[a-zA-Z0-9(_).-]{1,})"
       let urlPattern = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)"
@@ -395,23 +404,31 @@ public extension StatusEditor {
         let urlRegex = try NSRegularExpression(pattern: urlPattern, options: [])
 
         let range = NSMakeRange(0, statusText.string.utf16.count)
-        var ranges = hashtagRegex.matches(in: statusText.string,
-                                          options: [],
-                                          range: range).map(\.range)
-        ranges.append(contentsOf: mentionRegex.matches(in: statusText.string,
-                                                       options: [],
-                                                       range: range).map(\.range))
+        var ranges = hashtagRegex.matches(
+          in: statusText.string,
+          options: [],
+          range: range
+        ).map(\.range)
+        ranges.append(
+          contentsOf: mentionRegex.matches(
+            in: statusText.string,
+            options: [],
+            range: range
+          ).map(\.range))
 
-        let urlRanges = urlRegex.matches(in: statusText.string,
-                                         options: [],
-                                         range: range).map(\.range)
+        let urlRanges = urlRegex.matches(
+          in: statusText.string,
+          options: [],
+          range: range
+        ).map(\.range)
 
         var foundSuggestionRange = false
         for nsRange in ranges {
-          statusText.addAttributes([.foregroundColor: UIColor(theme?.tintColor ?? .brand)],
-                                   range: nsRange)
+          statusText.addAttributes(
+            [.foregroundColor: UIColor(theme?.tintColor ?? .brand)],
+            range: nsRange)
           if selectedRange.location == (nsRange.location + nsRange.length),
-             let range = Range(nsRange, in: statusText.string)
+            let range = Range(nsRange, in: statusText.string)
           {
             foundSuggestionRange = true
             currentSuggestionRange = nsRange
@@ -430,10 +447,13 @@ public extension StatusEditor {
           numUrls += 1
           totalUrlLength += range.length
 
-          statusText.addAttributes([.foregroundColor: UIColor(theme?.tintColor ?? .brand),
-                                    .underlineStyle: NSUnderlineStyle.single.rawValue,
-                                    .underlineColor: UIColor(theme?.tintColor ?? .brand)],
-                                   range: NSRange(location: range.location, length: range.length))
+          statusText.addAttributes(
+            [
+              .foregroundColor: UIColor(theme?.tintColor ?? .brand),
+              .underlineStyle: NSUnderlineStyle.single.rawValue,
+              .underlineColor: UIColor(theme?.tintColor ?? .brand),
+            ],
+            range: NSRange(location: range.location, length: range.length))
         }
 
         urlLengthAdjustments = totalUrlLength - (maxLengthOfUrl * numUrls)
@@ -459,12 +479,13 @@ public extension StatusEditor {
       isMediasLoading = true
       let url = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).gif")
       try? data.write(to: url)
-      let container = MediaContainer(id: UUID().uuidString,
-                                     image: nil,
-                                     movieTransferable: nil,
-                                     gifTransferable: .init(url: url),
-                                     mediaAttachment: nil,
-                                     error: nil)
+      let container = MediaContainer(
+        id: UUID().uuidString,
+        image: nil,
+        movieTransferable: nil,
+        gifTransferable: .init(url: url),
+        mediaAttachment: nil,
+        error: nil)
       prepareToPost(for: container)
     }
 
@@ -502,8 +523,8 @@ public extension StatusEditor {
                 )
                 prepareToPost(for: container)
               } else if let content = content as? ImageFileTranseferable,
-                        let compressedData = await compressor.compressImageFrom(url: content.url),
-                        let image = UIImage(data: compressedData)
+                let compressedData = await compressor.compressImageFrom(url: content.url),
+                let image = UIImage(data: compressedData)
               {
                 let container = MediaContainer(
                   id: UUID().uuidString,
@@ -564,7 +585,7 @@ public extension StatusEditor {
 
     private func checkEmbed() {
       if let url = embeddedStatusURL,
-         !statusText.string.contains(url.absoluteString)
+        !statusText.string.contains(url.absoluteString)
       {
         embeddedStatus = nil
         mode = .new(text: nil, visibility: visibility)
@@ -590,11 +611,13 @@ public extension StatusEditor {
             }
             showRecentsTagsInline = false
             query.removeFirst()
-            results = try await client.get(endpoint: Search.search(query: query,
-                                                                   type: .hashtags,
-                                                                   offset: 0,
-                                                                   following: nil),
-                                           forceVersion: .v2)
+            results = try await client.get(
+              endpoint: Search.search(
+                query: query,
+                type: .hashtags,
+                offset: 0,
+                following: nil),
+              forceVersion: .v2)
             guard !Task.isCancelled else {
               return
             }
@@ -604,11 +627,13 @@ public extension StatusEditor {
           case "@":
             guard query.utf8.count > 1 else { return }
             query.removeFirst()
-            let accounts: [Account] = try await client.get(endpoint: Search.accountsSearch(query: query,
-                                                                                           type: nil,
-                                                                                           offset: 0,
-                                                                                           following: nil),
-                                                           forceVersion: .v1)
+            let accounts: [Account] = try await client.get(
+              endpoint: Search.accountsSearch(
+                query: query,
+                type: nil,
+                offset: 0,
+                following: nil),
+              forceVersion: .v1)
             guard !Task.isCancelled else {
               return
             }
@@ -623,10 +648,8 @@ public extension StatusEditor {
     }
 
     private func resetAutoCompletion() {
-      if !tagsSuggestions.isEmpty ||
-        !mentionsSuggestions.isEmpty ||
-        currentSuggestionRange != nil ||
-        showRecentsTagsInline
+      if !tagsSuggestions.isEmpty || !mentionsSuggestions.isEmpty || currentSuggestionRange != nil
+        || showRecentsTagsInline
       {
         withAnimation {
           tagsSuggestions = []
@@ -684,7 +707,8 @@ public extension StatusEditor {
       }
     }
 
-    nonisolated func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
+    nonisolated func makeMediaContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer?
+    {
       await withTaskGroup(of: MediaContainer?.self, returning: MediaContainer?.self) { taskGroup in
         taskGroup.addTask(priority: .high) { await Self.makeImageContainer(from: pickerItem) }
         taskGroup.addTask(priority: .high) { await Self.makeGifContainer(from: pickerItem) }
@@ -701,8 +725,10 @@ public extension StatusEditor {
       }
     }
 
-    private static func makeGifContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
-      guard let gifFile = try? await pickerItem.loadTransferable(type: GifFileTranseferable.self) else { return nil }
+    private static func makeGifContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer?
+    {
+      guard let gifFile = try? await pickerItem.loadTransferable(type: GifFileTranseferable.self)
+      else { return nil }
 
       return MediaContainer(
         id: pickerItem.itemIdentifier ?? UUID().uuidString,
@@ -714,8 +740,12 @@ public extension StatusEditor {
       )
     }
 
-    private static func makeMovieContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
-      guard let movieFile = try? await pickerItem.loadTransferable(type: MovieFileTranseferable.self) else { return nil }
+    private static func makeMovieContainer(from pickerItem: PhotosPickerItem) async
+      -> MediaContainer?
+    {
+      guard
+        let movieFile = try? await pickerItem.loadTransferable(type: MovieFileTranseferable.self)
+      else { return nil }
 
       return MediaContainer(
         id: pickerItem.itemIdentifier ?? UUID().uuidString,
@@ -727,13 +757,17 @@ public extension StatusEditor {
       )
     }
 
-    private static func makeImageContainer(from pickerItem: PhotosPickerItem) async -> MediaContainer? {
-      guard let imageFile = try? await pickerItem.loadTransferable(type: ImageFileTranseferable.self) else { return nil }
+    private static func makeImageContainer(from pickerItem: PhotosPickerItem) async
+      -> MediaContainer?
+    {
+      guard
+        let imageFile = try? await pickerItem.loadTransferable(type: ImageFileTranseferable.self)
+      else { return nil }
 
       let compressor = Compressor()
 
       guard let compressedData = await compressor.compressImageFrom(url: imageFile.url),
-            let image = UIImage(data: compressedData)
+        let image = UIImage(data: compressedData)
       else { return nil }
 
       return MediaContainer(
@@ -753,16 +787,17 @@ public extension StatusEditor {
         let compressor = Compressor()
         _ = url.startAccessingSecurityScopedResource()
         if let compressedData = await compressor.compressImageFrom(url: url),
-           let image = UIImage(data: compressedData)
+          let image = UIImage(data: compressedData)
         {
-          containers.append(MediaContainer(
-            id: UUID().uuidString,
-            image: image,
-            movieTransferable: nil,
-            gifTransferable: nil,
-            mediaAttachment: nil,
-            error: nil
-          ))
+          containers.append(
+            MediaContainer(
+              id: UUID().uuidString,
+              image: image,
+              movieTransferable: nil,
+              gifTransferable: nil,
+              mediaAttachment: nil,
+              error: nil
+            ))
         }
 
         url.stopAccessingSecurityScopedResource()
@@ -803,10 +838,11 @@ public extension StatusEditor {
               scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
             }
           } else if let videoURL = originalContainer.movieTransferable?.url,
-                    let compressedVideoURL = await compressor.compressVideo(videoURL),
-                    let data = try? Data(contentsOf: compressedVideoURL)
+            let compressedVideoURL = await compressor.compressVideo(videoURL),
+            let data = try? Data(contentsOf: compressedVideoURL)
           {
-            let uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType())
+            let uploadedMedia = try await uploadMedia(
+              data: data, mimeType: compressedVideoURL.mimeType())
             if let index = indexOf(container: newContainer) {
               mediaContainers[index] = MediaContainer(
                 id: originalContainer.id,
@@ -855,14 +891,18 @@ public extension StatusEditor {
       Task {
         repeat {
           if let client,
-             let index = mediaContainers.firstIndex(where: { $0.mediaAttachment?.id == mediaAttachement.id })
+            let index = mediaContainers.firstIndex(where: {
+              $0.mediaAttachment?.id == mediaAttachement.id
+            })
           {
             guard mediaContainers[index].mediaAttachment?.url == nil else {
               return
             }
             do {
-              let newAttachement: MediaAttachment = try await client.get(endpoint: Media.media(id: mediaAttachement.id,
-                                                                                               json: nil))
+              let newAttachement: MediaAttachment = try await client.get(
+                endpoint: Media.media(
+                  id: mediaAttachement.id,
+                  json: nil))
               if newAttachement.url != nil {
                 let oldContainer = mediaContainers[index]
                 mediaContainers[index] = MediaContainer(
@@ -885,8 +925,10 @@ public extension StatusEditor {
       guard let client, let attachment = container.mediaAttachment else { return }
       if let index = indexOf(container: container) {
         do {
-          let media: MediaAttachment = try await client.put(endpoint: Media.media(id: attachment.id,
-                                                                                  json: .init(description: description)))
+          let media: MediaAttachment = try await client.put(
+            endpoint: Media.media(
+              id: attachment.id,
+              json: .init(description: description)))
           mediaContainers[index] = MediaContainer(
             id: container.id,
             image: nil,
@@ -903,18 +945,21 @@ public extension StatusEditor {
     func editDescription(container: MediaContainer, description: String) async {
       guard let attachment = container.mediaAttachment else { return }
       if indexOf(container: container) != nil {
-        mediaAttributes.append(StatusData.MediaAttribute(id: attachment.id, description: description, thumbnail: nil, focus: nil))
+        mediaAttributes.append(
+          StatusData.MediaAttribute(
+            id: attachment.id, description: description, thumbnail: nil, focus: nil))
       }
     }
 
     private func uploadMedia(data: Data, mimeType: String) async throws -> MediaAttachment? {
       guard let client else { return nil }
-      return try await client.mediaUpload(endpoint: Media.medias,
-                                          version: .v2,
-                                          method: "POST",
-                                          mimeType: mimeType,
-                                          filename: "file",
-                                          data: data)
+      return try await client.mediaUpload(
+        endpoint: Media.medias,
+        version: .v2,
+        method: "POST",
+        mimeType: mimeType,
+        filename: "file",
+        data: data)
     }
 
     // MARK: - Custom emojis
@@ -939,9 +984,13 @@ public extension StatusEditor {
 
           return dict
         }.sorted(by: { lhs, rhs in
-          if rhs.key == "Custom" { false }
-          else if lhs.key == "Custom" { true }
-          else { lhs.key < rhs.key }
+          if rhs.key == "Custom" {
+            false
+          } else if lhs.key == "Custom" {
+            true
+          } else {
+            lhs.key < rhs.key
+          }
         }).forEach { key, value in
           emojiContainers.append(.init(categoryName: key, emojis: value))
         }
@@ -969,9 +1018,9 @@ extension StatusEditor.ViewModel: UITextPasteDelegate {
     _: UITextPasteConfigurationSupporting,
     transform item: UITextPasteItem
   ) {
-    if !item.itemProvider.registeredContentTypes(conformingTo: .image).isEmpty ||
-      !item.itemProvider.registeredContentTypes(conformingTo: .video).isEmpty ||
-      !item.itemProvider.registeredContentTypes(conformingTo: .gif).isEmpty
+    if !item.itemProvider.registeredContentTypes(conformingTo: .image).isEmpty
+      || !item.itemProvider.registeredContentTypes(conformingTo: .video).isEmpty
+      || !item.itemProvider.registeredContentTypes(conformingTo: .gif).isEmpty
     {
       processItemsProvider(items: [item.itemProvider])
       item.setNoResult()

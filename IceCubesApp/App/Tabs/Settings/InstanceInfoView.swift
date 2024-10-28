@@ -38,7 +38,7 @@ public struct InstanceInfoSection: View {
       LabeledContent("instance.info.domains", value: format(instance.stats.domainCount))
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
 
     if let rules = instance.rules {
@@ -48,7 +48,7 @@ public struct InstanceInfoSection: View {
         }
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
   }

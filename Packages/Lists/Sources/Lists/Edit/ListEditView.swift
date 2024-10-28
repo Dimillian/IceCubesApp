@@ -24,9 +24,10 @@ public struct ListEditView: View {
           TextField("list.edit.title", text: $viewModel.title) {
             Task { await viewModel.update() }
           }
-          Picker("list.edit.repliesPolicy",
-                 selection: $viewModel.repliesPolicy)
-          {
+          Picker(
+            "list.edit.repliesPolicy",
+            selection: $viewModel.repliesPolicy
+          ) {
             ForEach(Models.List.RepliesPolicy.allCases) { policy in
               Text(policy.title)
                 .tag(policy)
@@ -35,7 +36,7 @@ public struct ListEditView: View {
           Toggle("list.edit.isExclusive", isOn: $viewModel.isExclusive)
         }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor)
         #endif
         .disabled(viewModel.isUpdating)
         .onChange(of: viewModel.repliesPolicy) { _, _ in
@@ -47,8 +48,9 @@ public struct ListEditView: View {
 
         Section("lists.edit.users-in-list") {
           HStack {
-            TextField("lists.edit.users-search",
-                      text: $viewModel.searchUserQuery)
+            TextField(
+              "lists.edit.users-search",
+              text: $viewModel.searchUserQuery)
             if !viewModel.searchUserQuery.isEmpty {
               Button {
                 viewModel.searchUserQuery = ""
@@ -65,14 +67,14 @@ public struct ListEditView: View {
           }
         }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor)
         #endif
         .disabled(viewModel.isUpdating)
       }
       #if !os(visionOS)
-      .scrollDismissesKeyboard(.immediately)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+        .scrollDismissesKeyboard(.immediately)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
       #endif
       .toolbar {
         ToolbarItem {
@@ -126,10 +128,12 @@ public struct ListEditView: View {
         HStack {
           AvatarView(account.avatar)
           VStack(alignment: .leading) {
-            EmojiTextApp(.init(stringValue: account.safeDisplayName),
-                         emojis: account.emojis)
-              .emojiText.size(Font.scaledBodyFont.emojiSize)
-              .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+            EmojiTextApp(
+              .init(stringValue: account.safeDisplayName),
+              emojis: account.emojis
+            )
+            .emojiText.size(Font.scaledBodyFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
             Text("@\(account.acct)")
               .foregroundStyle(.secondary)
               .font(.scaledFootnote)
@@ -138,25 +142,31 @@ public struct ListEditView: View {
           Spacer()
           if let relationship = viewModel.searchedRelationships[account.id] {
             if relationship.following {
-              Toggle("", isOn: .init(get: {
-                viewModel.accounts.contains(where: { $0.id == account.id })
-              }, set: { addedToList in
-                Task {
-                  if addedToList {
-                    await viewModel.add(account: account)
-                  } else {
-                    await viewModel.delete(account: account)
-                  }
-                }
-              }))
+              Toggle(
+                "",
+                isOn: .init(
+                  get: {
+                    viewModel.accounts.contains(where: { $0.id == account.id })
+                  },
+                  set: { addedToList in
+                    Task {
+                      if addedToList {
+                        await viewModel.add(account: account)
+                      } else {
+                        await viewModel.delete(account: account)
+                      }
+                    }
+                  }))
             } else {
-              FollowButton(viewModel: .init(client: client,
-                                            accountId: account.id,
-                                            relationship: relationship,
-                                            shouldDisplayNotify: false,
-                                            relationshipUpdated: { relationship in
-                                              viewModel.searchedRelationships[account.id] = relationship
-                                            }))
+              FollowButton(
+                viewModel: .init(
+                  client: client,
+                  accountId: account.id,
+                  relationship: relationship,
+                  shouldDisplayNotify: false,
+                  relationshipUpdated: { relationship in
+                    viewModel.searchedRelationships[account.id] = relationship
+                  }))
             }
           }
         }
@@ -173,10 +183,12 @@ public struct ListEditView: View {
         HStack {
           AvatarView(account.avatar)
           VStack(alignment: .leading) {
-            EmojiTextApp(.init(stringValue: account.safeDisplayName),
-                         emojis: account.emojis)
-              .emojiText.size(Font.scaledBodyFont.emojiSize)
-              .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+            EmojiTextApp(
+              .init(stringValue: account.safeDisplayName),
+              emojis: account.emojis
+            )
+            .emojiText.size(Font.scaledBodyFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
             Text("@\(account.acct)")
               .foregroundStyle(.secondary)
               .font(.scaledFootnote)

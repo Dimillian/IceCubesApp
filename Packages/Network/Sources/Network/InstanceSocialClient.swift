@@ -2,8 +2,10 @@ import Foundation
 import Models
 
 public struct InstanceSocialClient: Sendable {
-  private let authorization = "Bearer 8a4xx3D7Hzu1aFnf18qlkH8oU0oZ5ulabXxoS2FtQtwOy8G0DGQhr5PjTIjBnYAmFrSBuE2CcASjFocxJBonY8XGbLySB7MXd9ssrwlRHUXTQh3Z578lE1OfUtafvhML"
-  private let listEndpoint = "https://instances.social/api/1.0/instances/list?count=1000&include_closed=false&include_dead=false&min_active_users=500"
+  private let authorization =
+    "Bearer 8a4xx3D7Hzu1aFnf18qlkH8oU0oZ5ulabXxoS2FtQtwOy8G0DGQhr5PjTIjBnYAmFrSBuE2CcASjFocxJBonY8XGbLySB7MXd9ssrwlRHUXTQh3Z578lE1OfUtafvhML"
+  private let listEndpoint =
+    "https://instances.social/api/1.0/instances/list?count=1000&include_closed=false&include_dead=false&min_active_users=500"
   private let searchEndpoint = "https://instances.social/api/1.0/instances/search"
 
   struct Response: Decodable {
@@ -34,8 +36,8 @@ public struct InstanceSocialClient: Sendable {
   }
 }
 
-private extension Array where Self.Element == InstanceSocial {
-  func sorted(by keyword: String) -> Self {
+extension Array where Self.Element == InstanceSocial {
+  fileprivate func sorted(by keyword: String) -> Self {
     let keyword = keyword.trimmingCharacters(in: .whitespacesAndNewlines)
     var newArray = self
 
@@ -59,10 +61,11 @@ private extension Array where Self.Element == InstanceSocial {
 
     if !keyword.isEmpty {
       newArray.sort { (lhs: InstanceSocial, rhs: InstanceSocial) in
-        if
-          lhs.name.contains(keyword),
+        if lhs.name.contains(keyword),
           !rhs.name.contains(keyword)
-        { return true }
+        {
+          return true
+        }
 
         return false
       }

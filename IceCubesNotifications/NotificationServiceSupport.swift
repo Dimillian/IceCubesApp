@@ -2,18 +2,29 @@ import CryptoKit
 import Foundation
 
 extension NotificationService {
-  static func decrypt(payload: Data, salt: Data, auth: Data, privateKey: P256.KeyAgreement.PrivateKey, publicKey: P256.KeyAgreement.PublicKey) -> Data? {
+  static func decrypt(
+    payload: Data, salt: Data, auth: Data, privateKey: P256.KeyAgreement.PrivateKey,
+    publicKey: P256.KeyAgreement.PublicKey
+  ) -> Data? {
     guard let sharedSecret = try? privateKey.sharedSecretFromKeyAgreement(with: publicKey) else {
       return nil
     }
 
-    let keyMaterial = sharedSecret.hkdfDerivedSymmetricKey(using: SHA256.self, salt: auth, sharedInfo: Data("Content-Encoding: auth\0".utf8), outputByteCount: 32)
+    let keyMaterial = sharedSecret.hkdfDerivedSymmetricKey(
+      using: SHA256.self, salt: auth, sharedInfo: Data("Content-Encoding: auth\0".utf8),
+      outputByteCount: 32)
 
-    let keyInfo = info(type: "aesgcm", clientPublicKey: privateKey.publicKey.x963Representation, serverPublicKey: publicKey.x963Representation)
-    let key = HKDF<SHA256>.deriveKey(inputKeyMaterial: keyMaterial, salt: salt, info: keyInfo, outputByteCount: 16)
+    let keyInfo = info(
+      type: "aesgcm", clientPublicKey: privateKey.publicKey.x963Representation,
+      serverPublicKey: publicKey.x963Representation)
+    let key = HKDF<SHA256>.deriveKey(
+      inputKeyMaterial: keyMaterial, salt: salt, info: keyInfo, outputByteCount: 16)
 
-    let nonceInfo = info(type: "nonce", clientPublicKey: privateKey.publicKey.x963Representation, serverPublicKey: publicKey.x963Representation)
-    let nonce = HKDF<SHA256>.deriveKey(inputKeyMaterial: keyMaterial, salt: salt, info: nonceInfo, outputByteCount: 12)
+    let nonceInfo = info(
+      type: "nonce", clientPublicKey: privateKey.publicKey.x963Representation,
+      serverPublicKey: publicKey.x963Representation)
+    let nonce = HKDF<SHA256>.deriveKey(
+      inputKeyMaterial: keyMaterial, salt: salt, info: nonceInfo, outputByteCount: 12)
 
     let nonceData = nonce.withUnsafeBytes(Array.init)
 

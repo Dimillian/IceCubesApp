@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "Explore",
       targets: ["Explore"]
-    ),
+    )
   ],
   dependencies: [
     .package(name: "Account", path: "../Account"),
@@ -36,8 +36,8 @@ let package = Package(
         .product(name: "DesignSystem", package: "DesignSystem"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6),
+        .swiftLanguageMode(.v6)
       ]
-    ),
+    )
   ]
 )

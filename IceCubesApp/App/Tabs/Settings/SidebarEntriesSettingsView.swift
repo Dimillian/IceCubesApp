@@ -23,7 +23,7 @@ struct SidebarEntriesSettingsView: View {
         .onMove(perform: move)
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     .environment(\.editMode, .constant(.active))

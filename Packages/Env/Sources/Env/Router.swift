@@ -83,7 +83,7 @@ public enum SheetDestination: Identifiable, Hashable {
   public var id: String {
     switch self {
     case .editStatusEditor, .newStatusEditor, .replyToStatusEditor, .quoteStatusEditor,
-         .mentionStatusEditor, .quoteLinkStatusEditor, .prefilledStatusEditor, .imageURL:
+      .mentionStatusEditor, .quoteLinkStatusEditor, .prefilledStatusEditor, .imageURL:
       "statusEditor"
     case .listCreate:
       "listCreate"
@@ -147,8 +147,8 @@ public enum SettingsStartingPoint {
 
   public func handleStatus(status: AnyStatus, url: URL) -> OpenURLAction.Result {
     if url.pathComponents.count == 3, url.pathComponents[1] == "tags",
-       url.host() == status.account.url?.host(),
-       let tag = url.pathComponents.last
+      url.host() == status.account.url?.host(),
+      let tag = url.pathComponents.last
     {
       // OK this test looks weird but it's
       // A 3 component path i.e. ["/", "tags", "tagname"]
@@ -161,9 +161,9 @@ public enum SettingsStartingPoint {
       navigate(to: .accountDetail(id: mention.id))
       return .handled
     } else if let client,
-              client.isAuth,
-              client.hasConnection(with: url),
-              let id = Int(url.lastPathComponent)
+      client.isAuth,
+      client.hasConnection(with: url),
+      let id = Int(url.lastPathComponent)
     {
       if !StatusEmbedCache.shared.badStatusesURLs.contains(url) {
         if url.absoluteString.contains(client.server) {
@@ -179,14 +179,14 @@ public enum SettingsStartingPoint {
 
   public func handle(url: URL) -> OpenURLAction.Result {
     if url.pathComponents.contains(where: { $0 == "tags" }),
-       let tag = url.pathComponents.last
+      let tag = url.pathComponents.last
     {
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
-    } else if url.lastPathComponent.first == "@" ||
-                (url.host() == AppInfo.premiumInstance && url.pathComponents.contains("users")),
-              let host = url.host,
-              !host.hasPrefix("www")
+    } else if url.lastPathComponent.first == "@"
+      || (url.host() == AppInfo.premiumInstance && url.pathComponents.contains("users")),
+      let host = url.host,
+      !host.hasPrefix("www")
     {
       let acct = "\(url.lastPathComponent)@\(host)"
       Task {
@@ -194,9 +194,9 @@ public enum SettingsStartingPoint {
       }
       return .handled
     } else if let client,
-              client.isAuth,
-              client.hasConnection(with: url),
-              let id = Int(url.lastPathComponent)
+      client.isAuth,
+      client.hasConnection(with: url),
+      let id = Int(url.lastPathComponent)
     {
       if url.absoluteString.contains(client.server) {
         navigate(to: .statusDetail(id: String(id)))
@@ -210,8 +210,8 @@ public enum SettingsStartingPoint {
 
   public func handleDeepLink(url: URL) -> OpenURLAction.Result {
     guard let client,
-          client.isAuth,
-          let id = Int(url.lastPathComponent)
+      client.isAuth,
+      let id = Int(url.lastPathComponent)
     else {
       return urlHandler?(url) ?? .systemAction
     }
@@ -261,11 +261,13 @@ public enum SettingsStartingPoint {
 
   public func navigateToAccountFrom(acct: String, url: URL) async {
     guard let client else { return }
-    let results: SearchResults? = try? await client.get(endpoint: Search.search(query: acct,
-                                                                                type: .accounts,
-                                                                                offset: nil,
-                                                                                following: nil),
-                                                        forceVersion: .v2)
+    let results: SearchResults? = try? await client.get(
+      endpoint: Search.search(
+        query: acct,
+        type: .accounts,
+        offset: nil,
+        following: nil),
+      forceVersion: .v2)
     if let account = results?.accounts.first {
       navigate(to: .accountDetailWithAccount(account: account))
     } else {
@@ -275,11 +277,13 @@ public enum SettingsStartingPoint {
 
   public func navigateToAccountFrom(url: URL) async {
     guard let client else { return }
-    let results: SearchResults? = try? await client.get(endpoint: Search.search(query: url.absoluteString,
-                                                                                type: .accounts,
-                                                                                offset: nil,
-                                                                                following: nil),
-                                                        forceVersion: .v2)
+    let results: SearchResults? = try? await client.get(
+      endpoint: Search.search(
+        query: url.absoluteString,
+        type: .accounts,
+        offset: nil,
+        following: nil),
+      forceVersion: .v2)
     if let account = results?.accounts.first {
       navigate(to: .accountDetailWithAccount(account: account))
     } else {

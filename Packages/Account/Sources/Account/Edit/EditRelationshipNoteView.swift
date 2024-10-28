@@ -15,27 +15,31 @@ public struct EditRelationshipNoteView: View {
     NavigationStack {
       Form {
         Section("account.relation.note.label") {
-          TextField("account.relation.note.edit.placeholder", text: $viewModel.note, axis: .vertical)
-            .frame(minHeight: 150, maxHeight: 150, alignment: .top)
+          TextField(
+            "account.relation.note.edit.placeholder", text: $viewModel.note, axis: .vertical
+          )
+          .frame(minHeight: 150, maxHeight: 150, alignment: .top)
         }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor)
         #endif
       }
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.secondaryBackgroundColor)
+        .scrollContentBackground(.hidden)
+        .background(theme.secondaryBackgroundColor)
       #endif
       .navigationTitle("account.relation.note.edit")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         toolbarContent
       }
-      .alert("account.relation.note.edit.error.save.title",
-             isPresented: $viewModel.saveError,
-             actions: {
-               Button("alert.button.ok", action: {})
-             }, message: { Text("account.relation.note.edit.error.save.message") })
+      .alert(
+        "account.relation.note.edit.error.save.title",
+        isPresented: $viewModel.saveError,
+        actions: {
+          Button("alert.button.ok", action: {})
+        }, message: { Text("account.relation.note.edit.error.save.message") }
+      )
       .task {
         viewModel.client = client
         viewModel.relatedAccountId = accountDetailViewModel.accountId

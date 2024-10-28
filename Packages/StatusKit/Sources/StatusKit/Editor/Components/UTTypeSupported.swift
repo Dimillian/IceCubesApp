@@ -118,8 +118,8 @@ extension StatusEditor {
   }
 }
 
-public extension StatusEditor {
-  final class ImageFileTranseferable: Transferable, Sendable {
+extension StatusEditor {
+  public final class ImageFileTranseferable: Transferable, Sendable {
     public let url: URL
 
     init(url: URL) {
@@ -139,8 +139,8 @@ public extension StatusEditor {
   }
 }
 
-public extension ReceivedTransferredFile {
-  var localURL: URL {
+extension ReceivedTransferredFile {
+  public var localURL: URL {
     if isOriginalFile {
       return file
     }
@@ -150,8 +150,8 @@ public extension ReceivedTransferredFile {
   }
 }
 
-public extension URL {
-  func mimeType() -> String {
+extension URL {
+  public func mimeType() -> String {
     if let mimeType = UTType(filenameExtension: pathExtension)?.preferredMIMEType {
       mimeType
     } else {

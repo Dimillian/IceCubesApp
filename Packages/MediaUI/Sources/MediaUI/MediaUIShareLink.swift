@@ -12,8 +12,11 @@ public struct MediaUIShareLink: View, @unchecked Sendable {
   public var body: some View {
     if type == .image {
       let transferable = MediaUIImageTransferable(url: url)
-      ShareLink(item: transferable, preview: .init("status.media.contextmenu.share",
-                                                   image: transferable))
+      ShareLink(
+        item: transferable,
+        preview: .init(
+          "status.media.contextmenu.share",
+          image: transferable))
     } else {
       ShareLink(item: url)
     }

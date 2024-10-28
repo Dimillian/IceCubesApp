@@ -31,7 +31,7 @@ struct StatusRowSpoilerView: View {
       .accessibilityHidden(true)
     }
     .contentShape(Rectangle())
-    .onTapGesture { // make whole row tapable to make up for smaller button size
+    .onTapGesture {  // make whole row tapable to make up for smaller button size
       withAnimation {
         displaySpoiler.toggle()
       }

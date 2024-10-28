@@ -78,7 +78,9 @@ extension StatusEditor {
           } else {
             makeMediaItem(at: 0)
           }
-        } else { pixel(at: 0) }
+        } else {
+          pixel(at: 0)
+        }
         if count > 1 { makeMediaItem(at: 1) } else { pixel(at: 1) }
         if count > 2 { makeMediaItem(at: 2) } else { pixel(at: 2) }
         if count > 3 { makeMediaItem(at: 3) } else { pixel(at: 3) }
@@ -174,8 +176,9 @@ extension StatusEditor {
           Button {
             editingMediaContainer = container
           } label: {
-            Label(container.mediaAttachment?.description?.isEmpty == false ?
-              "status.editor.description.edit" : "status.editor.description.add",
+            Label(
+              container.mediaAttachment?.description?.isEmpty == false
+                ? "status.editor.description.edit" : "status.editor.description.add",
               systemImage: "pencil.line")
           }
         }

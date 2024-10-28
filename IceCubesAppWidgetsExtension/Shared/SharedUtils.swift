@@ -7,17 +7,20 @@ import Timeline
 import UIKit
 import WidgetKit
 
-func loadStatuses(for timeline: TimelineFilter,
-                  account: AppAccountEntity,
-                  widgetFamily: WidgetFamily) async -> [Status]
-{
+func loadStatuses(
+  for timeline: TimelineFilter,
+  account: AppAccountEntity,
+  widgetFamily: WidgetFamily
+) async -> [Status] {
   let client = Client(server: account.account.server, oauthToken: account.account.oauthToken)
   do {
-    var statuses: [Status] = try await client.get(endpoint: timeline.endpoint(sinceId: nil,
-                                                                              maxId: nil,
-                                                                              minId: nil,
-                                                                              offset: nil,
-                                                                              limit: 6))
+    var statuses: [Status] = try await client.get(
+      endpoint: timeline.endpoint(
+        sinceId: nil,
+        maxId: nil,
+        minId: nil,
+        offset: nil,
+        limit: 6))
     statuses = statuses.filter { $0.reblog == nil && !$0.content.asRawText.isEmpty }
     switch widgetFamily {
     case .systemSmall, .systemMedium:

@@ -48,10 +48,11 @@ public struct AppAccountView: View {
   private var fullView: some View {
     Button {
       if appAccounts.currentAccount.id == viewModel.appAccount.id,
-         let account = viewModel.account
+        let account = viewModel.account
       {
         if viewModel.isInSettings {
-          routerPath.navigate(to: .accountSettingsWithAccount(account: account, appAccount: viewModel.appAccount))
+          routerPath.navigate(
+            to: .accountSettingsWithAccount(account: account, appAccount: viewModel.appAccount))
           HapticManager.shared.fireHaptic(.buttonPress)
         } else {
           isParentPresented = false
@@ -76,9 +77,9 @@ public struct AppAccountView: View {
                 .foregroundStyle(.white, .green)
                 .offset(x: 5, y: -5)
             } else if viewModel.showBadge,
-                      let token = viewModel.appAccount.oauthToken,
-                      let notificationsCount = preferences.notificationsCount[token],
-                      notificationsCount > 0
+              let token = viewModel.appAccount.oauthToken,
+              let notificationsCount = preferences.notificationsCount[token],
+              notificationsCount > 0
             {
               ZStack {
                 Circle()

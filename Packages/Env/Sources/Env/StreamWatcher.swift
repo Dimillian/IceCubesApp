@@ -2,8 +2,8 @@ import Combine
 import Foundation
 import Models
 import Network
-import Observation
 import OSLog
+import Observation
 
 @MainActor
 @Observable public class StreamWatcher {
@@ -46,10 +46,12 @@ import OSLog
   }
 
   private func connect() {
-    guard let task = try? client?.makeWebSocketTask(
-      endpoint: Streaming.streaming,
-      instanceStreamingURL: instanceStreamingURL
-    ) else {
+    guard
+      let task = try? client?.makeWebSocketTask(
+        endpoint: Streaming.streaming,
+        instanceStreamingURL: instanceStreamingURL
+      )
+    else {
       return
     }
     self.task = task
@@ -77,7 +79,7 @@ import OSLog
 
   private func sendMessage(message: StreamMessage) {
     if let encodedMessage = try? encoder.encode(message),
-       let stringMessage = String(data: encodedMessage, encoding: .utf8)
+      let stringMessage = String(data: encodedMessage, encoding: .utf8)
     {
       task?.send(.string(stringMessage), completionHandler: { _ in })
     }
@@ -101,7 +103,9 @@ import OSLog
               if let event = self.rawEventToEvent(rawEvent: rawEvent) {
                 self.events.append(event)
                 self.latestEvent = event
-                if let event = event as? StreamEventNotification, event.notification.status?.visibility != .direct {
+                if let event = event as? StreamEventNotification,
+                  event.notification.status?.visibility != .direct
+                {
                   self.unreadNotificationsCount += 1
                 }
               }

@@ -1,6 +1,6 @@
+import AVFoundation
 import Account
 import AppAccount
-import AVFoundation
 import DesignSystem
 import Env
 import KeychainSwift
@@ -32,7 +32,8 @@ struct AppView: View {
     #if os(visionOS)
       tabBarView
     #else
-      if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
+      if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac
+      {
         sidebarView
       } else {
         tabBarView
@@ -54,11 +55,15 @@ struct AppView: View {
 
   @ViewBuilder
   var tabBarView: some View {
-    TabView(selection: .init(get: {
-      selectedTab
-    }, set: { newTab in
-      updateTab(with: newTab)
-    })) {
+    TabView(
+      selection: .init(
+        get: {
+          selectedTab
+        },
+        set: { newTab in
+          updateTab(with: newTab)
+        })
+    ) {
       ForEach(availableTabs) { tab in
         tab.makeContentView(selectedTab: $selectedTab)
           .tabItem {
@@ -78,17 +83,19 @@ struct AppView: View {
     .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
     .environment(\.selectedTabScrollToTop, selectedTabScrollToTop)
   }
-  
+
   private func updateTab(with newTab: AppTab) {
     if newTab == .post {
       #if os(visionOS)
-        openWindow(value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility))
+        openWindow(
+          value: WindowDestinationEditor.newStatusEditor(visibility: userPreferences.postVisibility)
+        )
       #else
         appRouterPath.presentedSheet = .newStatusEditor(visibility: userPreferences.postVisibility)
       #endif
       return
     }
-    
+
     HapticManager.shared.fireHaptic(.tabSelection)
     SoundEffectManager.shared.playSound(.tabSelection)
 
@@ -100,13 +107,13 @@ struct AppView: View {
     } else {
       selectedTabScrollToTop = -1
     }
-    
+
     selectedTab = newTab
   }
 
   private func badgeFor(tab: AppTab) -> Int {
     if tab == .notifications, selectedTab != tab,
-       let token = appAccountsManager.currentAccount.oauthToken
+      let token = appAccountsManager.currentAccount.oauthToken
     {
       return watcher.unreadNotificationsCount + (userPreferences.notificationsCount[token] ?? 0)
     }
@@ -115,29 +122,32 @@ struct AppView: View {
 
   #if !os(visionOS)
     var sidebarView: some View {
-      SideBarView(selectedTab: .init(get: {
-        selectedTab
-      }, set: { newTab in
-        updateTab(with: newTab)
-      }), tabs: availableTabs)
-      {
+      SideBarView(
+        selectedTab: .init(
+          get: {
+            selectedTab
+          },
+          set: { newTab in
+            updateTab(with: newTab)
+          }), tabs: availableTabs
+      ) {
         HStack(spacing: 0) {
           if #available(iOS 18.0, *) {
             baseTabView
-            #if targetEnvironment(macCatalyst)
-            .tabViewStyle(.sidebarAdaptable)
-            .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
-              tabview.sidebar.isHidden = true
-            }
-            #else
-            .tabViewStyle(.tabBarOnly)
-            #endif
+              #if targetEnvironment(macCatalyst)
+                .tabViewStyle(.sidebarAdaptable)
+                .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
+                  tabview.sidebar.isHidden = true
+                }
+              #else
+                .tabViewStyle(.tabBarOnly)
+              #endif
           } else {
             baseTabView
           }
           if horizontalSizeClass == .regular,
-             appAccountsManager.currentClient.isAuth,
-             userPreferences.showiPadSecondaryColumn
+            appAccountsManager.currentClient.isAuth,
+            userPreferences.showiPadSecondaryColumn
           {
             Divider().edgesIgnoringSafeArea(.all)
             notificationsSecondaryColumn
@@ -148,7 +158,7 @@ struct AppView: View {
       .environment(\.selectedTabScrollToTop, selectedTabScrollToTop)
     }
   #endif
-  
+
   private var baseTabView: some View {
     TabView(selection: $selectedTab) {
       ForEach(availableTabs) { tab in
@@ -162,17 +172,16 @@ struct AppView: View {
       }
     }
     #if !os(visionOS)
-    .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
-      tabview.tabBar.isHidden = horizontalSizeClass == .regular
-      tabview.customizableViewControllers = []
-      tabview.moreNavigationController.isNavigationBarHidden = true
-    }
+      .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
+        tabview.tabBar.isHidden = horizontalSizeClass == .regular
+        tabview.customizableViewControllers = []
+        tabview.moreNavigationController.isNavigationBarHidden = true
+      }
     #endif
   }
 
   var notificationsSecondaryColumn: some View {
-    NotificationsTab(selectedTab: .constant(.notifications)
-                     , lockedType: nil)
+    NotificationsTab(selectedTab: .constant(.notifications), lockedType: nil)
       .environment(\.isSecondaryColumn, true)
       .frame(maxWidth: .secondaryColumnWidth)
       .id(appAccountsManager.currentAccount.id)

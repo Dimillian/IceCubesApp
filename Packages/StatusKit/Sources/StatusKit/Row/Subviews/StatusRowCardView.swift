@@ -50,12 +50,14 @@ public struct StatusRowCardView: View {
     } label: {
       if let title = card.title, let url = URL(string: card.url) {
         VStack(alignment: .leading, spacing: 0) {
-          let sitesWithIcons = ["apps.apple.com", "music.apple.com", "podcasts.apple.com", "open.spotify.com"]
+          let sitesWithIcons = [
+            "apps.apple.com", "music.apple.com", "podcasts.apple.com", "open.spotify.com",
+          ]
           if isCompact {
             compactLinkPreview(title, url)
-          } else if UIDevice.current.userInterfaceIdiom == .pad ||
-            UIDevice.current.userInterfaceIdiom == .mac ||
-            UIDevice.current.userInterfaceIdiom == .vision,
+          } else if UIDevice.current.userInterfaceIdiom == .pad
+            || UIDevice.current.userInterfaceIdiom == .mac
+            || UIDevice.current.userInterfaceIdiom == .vision,
             let host = url.host(), sitesWithIcons.contains(host)
           {
             iconLinkPreview(title, url)
@@ -66,38 +68,43 @@ public struct StatusRowCardView: View {
         .frame(maxWidth: maxWidth)
         .fixedSize(horizontal: false, vertical: true)
         #if os(visionOS)
-          .if(!isCompact, transform: { view in
-            view.background(.background)
-          })
+          .if(
+            !isCompact,
+            transform: { view in
+              view.background(.background)
+            }
+          )
           .hoverEffect()
         #else
           .background(isCompact ? .clear : theme.secondaryBackgroundColor)
         #endif
-          .cornerRadius(isCompact ? 0 : 10)
-          .overlay {
-            if !isCompact {
-              RoundedRectangle(cornerRadius: 10)
-                .stroke(.gray.opacity(0.35), lineWidth: 1)
-            }
+        .cornerRadius(isCompact ? 0 : 10)
+        .overlay {
+          if !isCompact {
+            RoundedRectangle(cornerRadius: 10)
+              .stroke(.gray.opacity(0.35), lineWidth: 1)
           }
-          .draggable(url)
-          .contextMenu {
-            ShareLink(item: url) {
-              Label("status.card.share", systemImage: "square.and.arrow.up")
-            }
-            Button { openURL(url) } label: {
-              Label("status.action.view-in-browser", systemImage: "safari")
-            }
-            Divider()
-            Button {
-              UIPasteboard.general.url = url
-            } label: {
-              Label("status.card.copy", systemImage: "doc.on.doc")
-            }
+        }
+        .draggable(url)
+        .contextMenu {
+          ShareLink(item: url) {
+            Label("status.card.share", systemImage: "square.and.arrow.up")
           }
-          .accessibilityElement(children: .combine)
-          .accessibilityAddTraits(.isLink)
-          .accessibilityRemoveTraits(.isStaticText)
+          Button {
+            openURL(url)
+          } label: {
+            Label("status.action.view-in-browser", systemImage: "safari")
+          }
+          Divider()
+          Button {
+            UIPasteboard.general.url = url
+          } label: {
+            Label("status.card.copy", systemImage: "doc.on.doc")
+          }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isLink)
+        .accessibilityRemoveTraits(.isStaticText)
       }
     }
     .buttonStyle(.plain)
@@ -292,7 +299,7 @@ struct DefaultPreviewImage: View {
             .overlay { image.scaledToFit() }
         }
       }
-      .accessibilityHidden(true) // This image is decorative
+      .accessibilityHidden(true)  // This image is decorative
       .clipped()
     }
   }
@@ -306,7 +313,9 @@ struct DefaultPreviewImage: View {
       return calculateSize(proposal)
     }
 
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) {
+    func placeSubviews(
+      in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()
+    ) {
       guard let view = subviews.first else { return }
 
       let size = calculateSize(proposal)
@@ -314,20 +323,21 @@ struct DefaultPreviewImage: View {
     }
 
     private func calculateSize(_ proposal: ProposedViewSize) -> CGSize {
-      var size = switch (proposal.width, proposal.height) {
-      case (nil, nil):
-        CGSize(width: originalWidth, height: originalWidth)
-      case let (nil, .some(height)):
-        CGSize(width: originalWidth, height: min(height, originalWidth))
-      case (0, _):
-        CGSize.zero
-      case let (.some(width), _):
-        if originalWidth == 0 {
-          CGSize(width: width, height: width / 2)
-        } else {
-          CGSize(width: width, height: width / originalWidth * originalHeight)
+      var size =
+        switch (proposal.width, proposal.height) {
+        case (nil, nil):
+          CGSize(width: originalWidth, height: originalWidth)
+        case let (nil, .some(height)):
+          CGSize(width: originalWidth, height: min(height, originalWidth))
+        case (0, _):
+          CGSize.zero
+        case let (.some(width), _):
+          if originalWidth == 0 {
+            CGSize(width: width, height: width / 2)
+          } else {
+            CGSize(width: width, height: width / originalWidth * originalHeight)
+          }
         }
-      }
 
       size.height = min(size.height, 450)
       return size

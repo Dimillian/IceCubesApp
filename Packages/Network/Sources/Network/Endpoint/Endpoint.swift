@@ -6,8 +6,8 @@ public protocol Endpoint: Sendable {
   var jsonValue: Encodable? { get }
 }
 
-public extension Endpoint {
-  var jsonValue: Encodable? {
+extension Endpoint {
+  public var jsonValue: Encodable? {
     nil
   }
 }

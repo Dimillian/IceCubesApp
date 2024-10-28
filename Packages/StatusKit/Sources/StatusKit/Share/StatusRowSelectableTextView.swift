@@ -1,34 +1,34 @@
-import SwiftUI
 import DesignSystem
+import SwiftUI
 
 struct StatusRowSelectableTextView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(Theme.self) private var theme
-  
+
   let content: AttributedString
 
   var body: some View {
     NavigationStack {
       SelectableText(content: content)
         .padding()
-      .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            dismiss()
-          } label: {
-            Text("action.done").bold()
+        .toolbar {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            Button {
+              dismiss()
+            } label: {
+              Text("action.done").bold()
+            }
           }
         }
-      }
-      .navigationTitle("status.action.select-text")
-      .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("status.action.select-text")
+        .navigationBarTitleDisplayMode(.inline)
     }
     .presentationBackground(.ultraThinMaterial)
     .presentationCornerRadius(16)
   }
 }
 
-fileprivate struct SelectableText: UIViewRepresentable {
+private struct SelectableText: UIViewRepresentable {
   let content: AttributedString
 
   func makeUIView(context _: Context) -> UITextView {

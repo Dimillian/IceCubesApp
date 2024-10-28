@@ -97,29 +97,40 @@ extension StatusEditor {
           Image(systemName: "photo.on.rectangle.angled")
         }
       }
-      .photosPicker(isPresented: $isPhotosPickerPresented,
-                    selection: $viewModel.mediaPickers,
-                    maxSelectionCount: currentInstance.instance?.configuration?.statuses.maxMediaAttachments ?? 4,
-                    matching: .any(of: [.images, .videos]),
-                    photoLibrary: .shared())
-      .fileImporter(isPresented: $isFileImporterPresented,
-                    allowedContentTypes: [.image, .video, .movie],
-                    allowsMultipleSelection: true)
-      { result in
+      .photosPicker(
+        isPresented: $isPhotosPickerPresented,
+        selection: $viewModel.mediaPickers,
+        maxSelectionCount: currentInstance.instance?.configuration?.statuses.maxMediaAttachments
+          ?? 4,
+        matching: .any(of: [.images, .videos]),
+        photoLibrary: .shared()
+      )
+      .fileImporter(
+        isPresented: $isFileImporterPresented,
+        allowedContentTypes: [.image, .video, .movie],
+        allowsMultipleSelection: true
+      ) { result in
         if let urls = try? result.get() {
           viewModel.processURLs(urls: urls)
         }
       }
-      .fullScreenCover(isPresented: $isCameraPickerPresented, content: {
-        CameraPickerView(selectedImage: .init(get: {
-          nil
-        }, set: { image in
-          if let image {
-            viewModel.processCameraPhoto(image: image)
-          }
-        }))
-        .background(.black)
-      })
+      .fullScreenCover(
+        isPresented: $isCameraPickerPresented,
+        content: {
+          CameraPickerView(
+            selectedImage: .init(
+              get: {
+                nil
+              },
+              set: { image in
+                if let image {
+                  viewModel.processCameraPhoto(image: image)
+                }
+              })
+          )
+          .background(.black)
+        }
+      )
       .accessibilityLabel("accessibility.editor.button.attach-photo")
       .disabled(viewModel.showPoll)
 
@@ -137,7 +148,8 @@ extension StatusEditor {
         } label: {
           // This is a workaround for an apparent bug in the `face.smiling` SF Symbol.
           // See https://github.com/Dimillian/IceCubesApp/issues/1193
-          let customEmojiSheetIconName = colorScheme == .light ? "face.smiling" : "face.smiling.inverse"
+          let customEmojiSheetIconName =
+            colorScheme == .light ? "face.smiling" : "face.smiling.inverse"
           Image(systemName: customEmojiSheetIconName)
         }
         .accessibilityLabel("accessibility.editor.button.custom-emojis")
@@ -169,13 +181,17 @@ extension StatusEditor {
     private var canAddNewSEVM: Bool {
       guard followUpSEVMs.count < 5 else { return false }
 
-      if followUpSEVMs.isEmpty, // there is only mainSEVM on the editor
-         !focusedSEVM.statusText.string.isEmpty // focusedSEVM is also mainSEVM
-      { return true }
+      if followUpSEVMs.isEmpty,  // there is only mainSEVM on the editor
+        !focusedSEVM.statusText.string.isEmpty  // focusedSEVM is also mainSEVM
+      {
+        return true
+      }
 
       if let lastSEVMs = followUpSEVMs.last,
-         !lastSEVMs.statusText.string.isEmpty
-      { return true }
+        !lastSEVMs.statusText.string.isEmpty
+      {
+        return true
+      }
 
       return false
     }
@@ -186,7 +202,8 @@ extension StatusEditor {
           Button {
             Task {
               isLoadingAIRequest = true
-              await focusedSEVM.runOpenAI(prompt: prompt.toRequestPrompt(text: focusedSEVM.statusText.string))
+              await focusedSEVM.runOpenAI(
+                prompt: prompt.toRequestPrompt(text: focusedSEVM.statusText.string))
               isLoadingAIRequest = false
             }
           } label: {

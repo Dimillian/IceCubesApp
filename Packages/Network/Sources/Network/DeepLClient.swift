@@ -49,9 +49,10 @@ public struct DeepLClient: Sendable {
     let (result, _) = try await URLSession.shared.data(for: request)
     let response = try decoder.decode(Response.self, from: result)
     if let translation = response.translations.first {
-      return .init(content: translation.text.removingPercentEncoding ?? "",
-                   detectedSourceLanguage: translation.detectedSourceLanguage,
-                   provider: "DeepL.com")
+      return .init(
+        content: translation.text.removingPercentEncoding ?? "",
+        detectedSourceLanguage: translation.detectedSourceLanguage,
+        provider: "DeepL.com")
     }
     throw DeepLError.notFound
   }

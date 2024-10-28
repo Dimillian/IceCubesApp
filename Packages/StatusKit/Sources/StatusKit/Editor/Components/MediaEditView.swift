@@ -30,10 +30,12 @@ extension StatusEditor {
       NavigationStack {
         Form {
           Section {
-            TextField("status.editor.media.image-description",
-                      text: $imageDescription,
-                      axis: .vertical)
-              .focused($isFieldFocused)
+            TextField(
+              "status.editor.media.image-description",
+              text: $imageDescription,
+              axis: .vertical
+            )
+            .focused($isFieldFocused)
             if imageDescription.isEmpty {
               generateButton
             }
@@ -83,13 +85,15 @@ extension StatusEditor {
                 isUpdating = true
                 if currentInstance.isEditAltTextSupported, viewModel.mode.isEditing {
                   Task {
-                    await viewModel.editDescription(container: container, description: imageDescription)
+                    await viewModel.editDescription(
+                      container: container, description: imageDescription)
                     dismiss()
                     isUpdating = false
                   }
                 } else {
                   Task {
-                    await viewModel.addDescription(container: container, description: imageDescription)
+                    await viewModel.addDescription(
+                      container: container, description: imageDescription)
                     dismiss()
                     isUpdating = false
                   }
@@ -141,7 +145,7 @@ extension StatusEditor {
         }
       }
       #if canImport(_Translation_SwiftUI)
-      .addTranslateView(isPresented: $showTranslateView, text: imageDescription)
+        .addTranslateView(isPresented: $showTranslateView, text: imageDescription)
       #endif
     }
 

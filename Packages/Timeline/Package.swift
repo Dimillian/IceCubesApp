@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "Timeline",
       targets: ["Timeline"]
-    ),
+    )
   ],
   dependencies: [
     .package(name: "Network", path: "../Network"),
@@ -38,7 +38,7 @@ let package = Package(
         .product(name: "Bodega", package: "Bodega"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6),
+        .swiftLanguageMode(.v6)
       ]
     ),
     .testTarget(

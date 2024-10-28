@@ -31,9 +31,10 @@ import SwiftUI
       isPlaying = false
     }
     guard let player else { return }
-    NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime,
-                                           object: player.currentItem, queue: .main)
-    { _ in
+    NotificationCenter.default.addObserver(
+      forName: .AVPlayerItemDidPlayToEndTime,
+      object: player.currentItem, queue: .main
+    ) { _ in
       Task { @MainActor [weak self] in
         if autoPlay || self?.forceAutoPlay == true {
           self?.play()
@@ -75,7 +76,8 @@ import SwiftUI
   }
 
   deinit {
-    NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
+    NotificationCenter.default.removeObserver(
+      self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
   }
 }
 
@@ -101,27 +103,30 @@ public struct MediaUIAttachmentVideoView: View {
         if isCatalystWindow {
           EmptyView()
         } else {
-          HStack { }
-          .frame(maxWidth: .infinity, maxHeight: .infinity)
-          .contentShape(Rectangle())
-          .onTapGesture {
-            if !preferences.autoPlayVideo && !viewModel.isPlaying {
-              viewModel.play()
-              return
+          HStack {}
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .contentShape(Rectangle())
+            .onTapGesture {
+              if !preferences.autoPlayVideo && !viewModel.isPlaying {
+                viewModel.play()
+                return
+              }
+              #if targetEnvironment(macCatalyst)
+                viewModel.pause()
+                let attachement = MediaAttachment.videoWith(url: viewModel.url)
+                openWindow(
+                  value: WindowDestinationMedia.mediaViewer(
+                    attachments: [attachement], selectedAttachment: attachement))
+              #else
+                isFullScreen = true
+              #endif
             }
-            #if targetEnvironment(macCatalyst)
-              viewModel.pause()
-              let attachement = MediaAttachment.videoWith(url: viewModel.url)
-              openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement], selectedAttachment: attachement))
-            #else
-              isFullScreen = true
-            #endif
-          }
         }
       })
       .onAppear {
-        viewModel.preparePlayer(autoPlay: isFullScreen ? true : preferences.autoPlayVideo,
-                                isCompact: isCompact)
+        viewModel.preparePlayer(
+          autoPlay: isFullScreen ? true : preferences.autoPlayVideo,
+          isCompact: isCompact)
         viewModel.mute(preferences.muteVideo)
       }
       .onDisappear {
@@ -144,13 +149,15 @@ public struct MediaUIAttachmentVideoView: View {
         }
       }
   }
-  
+
   private var modalPreview: some View {
     NavigationStack {
       videoView
         .toolbar {
           ToolbarItem(placement: .topBarLeading) {
-            Button { isFullScreen.toggle() } label: {
+            Button {
+              isFullScreen.toggle()
+            } label: {
               Image(systemName: "xmark.circle")
             }
           }
@@ -188,25 +195,30 @@ public struct MediaUIAttachmentVideoView: View {
   }
 
   private var videoView: some View {
-    VideoPlayer(player: viewModel.player, videoOverlay: {
-      if !preferences.autoPlayVideo,
-         !viewModel.forceAutoPlay,
-         !isFullScreen,
-         !viewModel.isPlaying,
-         !isCompact
-      {
-        Button(action: {
-          viewModel.play()
-        }, label: {
-          Image(systemName: "play.fill")
-            .font(isCompact ? .body : .largeTitle)
-            .foregroundColor(theme.tintColor)
-            .padding(.all, isCompact ? 6 : nil)
-            .background(Circle().fill(.thinMaterial))
-            .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
-        })
+    VideoPlayer(
+      player: viewModel.player,
+      videoOverlay: {
+        if !preferences.autoPlayVideo,
+          !viewModel.forceAutoPlay,
+          !isFullScreen,
+          !viewModel.isPlaying,
+          !isCompact
+        {
+          Button(
+            action: {
+              viewModel.play()
+            },
+            label: {
+              Image(systemName: "play.fill")
+                .font(isCompact ? .body : .largeTitle)
+                .foregroundColor(theme.tintColor)
+                .padding(.all, isCompact ? 6 : nil)
+                .background(Circle().fill(.thinMaterial))
+                .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
+            })
+        }
       }
-    })
+    )
     .accessibilityAddTraits(.startsMediaSession)
     .ignoresSafeArea()
   }

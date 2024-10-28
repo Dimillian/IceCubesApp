@@ -3,19 +3,21 @@ import Models
 import SwiftUI
 
 @MainActor
-public extension View {
-  func statusEditorToolbarItem(routerPath _: RouterPath,
-                               visibility: Models.Visibility) -> some ToolbarContent
-  {
+extension View {
+  public func statusEditorToolbarItem(
+    routerPath _: RouterPath,
+    visibility: Models.Visibility
+  ) -> some ToolbarContent {
     StatusEditorToolbarItem(visibility: visibility)
   }
 }
 
 @MainActor
-public extension ToolbarContent {
-  func statusEditorToolbarItem(routerPath _: RouterPath,
-                               visibility: Models.Visibility) -> some ToolbarContent
-  {
+extension ToolbarContent {
+  public func statusEditorToolbarItem(
+    routerPath _: RouterPath,
+    visibility: Models.Visibility
+  ) -> some ToolbarContent {
     StatusEditorToolbarItem(visibility: visibility)
   }
 }

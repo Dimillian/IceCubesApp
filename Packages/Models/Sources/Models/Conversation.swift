@@ -14,12 +14,15 @@ public struct Conversation: Identifiable, Decodable, Hashable, Equatable {
   }
 
   public static func placeholder() -> Conversation {
-    .init(id: UUID().uuidString, unread: false, lastStatus: .placeholder(), accounts: [.placeholder()])
+    .init(
+      id: UUID().uuidString, unread: false, lastStatus: .placeholder(), accounts: [.placeholder()])
   }
 
   public static func placeholders() -> [Conversation] {
-    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(),
-     .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
+    [
+      .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(),
+      .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(),
+    ]
   }
 }
 

@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "Env",
       targets: ["Env"]
-    ),
+    )
   ],
   dependencies: [
     .package(name: "Models", path: "../Models"),
@@ -29,10 +29,10 @@ let package = Package(
         .product(name: "Models", package: "Models"),
         .product(name: "Network", package: "Network"),
         .product(name: "KeychainSwift", package: "keychain-swift"),
-        .product(name: "TelemetryDeck", package: "SwiftSDK")
+        .product(name: "TelemetryDeck", package: "SwiftSDK"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6),
+        .swiftLanguageMode(.v6)
       ]
     ),
     .testTarget(
