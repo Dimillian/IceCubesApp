@@ -1,0 +1,6 @@
+{
+    "[swift]": {
+      "editor.defaultFormatter": "sweetpad.sweetpad",
+      "editor.formatOnSave": true,
+    },
+}
