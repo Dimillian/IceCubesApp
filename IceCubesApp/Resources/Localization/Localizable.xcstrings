@@ -394,7 +394,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "%@ ya está seleccionado"
           }
         },
         "eu" : {
@@ -630,7 +630,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@ es un nombre de SFSymbol inválido"
           }
         },
         "eu" : {
@@ -20973,16 +20973,16 @@
     },
     "Compact Layout" : {
       "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Affichage compact"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Diseño compacto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Affichage compact"
           }
         }
       }
@@ -23880,16 +23880,16 @@
     },
     "Disable to hide AI assisted tool options such as copywritting and alt-image description generated using AI. Uses OpenAI API. See our Privacy Policy for more information." : {
       "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Désactiver pour cacher les options d'outils d'aideavec l'IA telles que le copywriting et la description d’images générées par l'IA. Utilise l'API OpenAI. Consulter notre Politique de confidentialité pour plus d'informations."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Desactiva para ocultar la herramienta de asistencia de IA como la redacción y la generación de texto alternativo para imágenes con IA. Utiliza la API de OpenAI. Consulta nuestra Política de Privacidad para más información."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Désactiver pour cacher les options d'outils d'aideavec l'IA telles que le copywriting et la description d’images générées par l'IA. Utilise l'API OpenAI. Consulter notre Politique de confidentialité pour plus d'informations."
           }
         },
         "zh-Hans" : {
@@ -23902,16 +23902,16 @@
     },
     "Enabling post streaming will automatically add new posts at the top of your home timeline. Disable if you get performance issues." : {
       "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activer le streaming des messages ajoutera automatiquement de nouveaux messages en haut de votre timeline. Désactiver si vous avez des problèmes de performance."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Activar la actualización automática de publicaciones añadirá publicaciones nuevas a tu cronología principal. Desactívalo si tienes problemas de rendimiento."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activer le streaming des messages ajoutera automatiquement de nouveaux messages en haut de votre timeline. Désactiver si vous avez des problèmes de performance."
           }
         },
         "zh-Hans" : {
@@ -33579,7 +33579,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "Ocultar estás publicaciones de la página principal"
           }
         },
         "eu" : {
@@ -33817,7 +33817,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
+            "value" : "Título"
           }
         },
         "eu" : {
@@ -42140,16 +42140,16 @@
     },
     "Posts streaming" : {
       "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Flux de publications"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Actualización automática de mensajes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flux de publications"
           }
         },
         "zh-Hans" : {
@@ -42450,16 +42450,16 @@
     },
     "Remove all cached images and videos" : {
       "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Supprimer toutes les images et vidéos mises en cache"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Borrar todas las imágenes y vídeos de la caché"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Supprimer toutes les images et vidéos mises en cache"
           }
         }
       }
@@ -52895,7 +52895,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "Personalización de pestañas"
           }
         },
         "eu" : {
@@ -61397,7 +61397,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "Quinta pestaña"
           }
         },
         "eu" : {
@@ -61515,7 +61515,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "Primera pestaña"
           }
         },
         "eu" : {
@@ -61633,7 +61633,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "Cuarta pestaña"
           }
         },
         "eu" : {
@@ -61751,7 +61751,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "Segunda pestaña"
           }
         },
         "eu" : {
@@ -61869,7 +61869,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "Tercera pestaña"
           }
         },
         "eu" : {
@@ -73431,7 +73431,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@count_votes@%#@count_voters@"
+            "value" : "%#@count_votes@ votos de %#@count_voters@ votantes"
           },
           "substitutions" : {
             "count_voters" : {
@@ -77279,16 +77279,16 @@
     },
     "Streaming" : {
       "localizations" : {
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Flux"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Actualización automática"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flux"
           }
         },
         "zh-Hans" : {
