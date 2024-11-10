@@ -33,7 +33,7 @@ struct AppView: View {
     case .vision:
       tabBarView
     case .pad, .mac:
-      #!os(visionOS)
+      #if !os(visionOS)
         sidebarView
       #else
         tabBarView
