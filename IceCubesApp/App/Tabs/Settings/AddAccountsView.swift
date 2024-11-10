@@ -181,7 +181,7 @@ struct AddAccountView: View {
           Spacer()
         }
       }
-      .buttonStyle(.borderedProminent)
+      .buttonStyle(PlainButtonStyle())
     }
     #if !os(visionOS)
       .listRowBackground(theme.tintColor)
