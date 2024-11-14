@@ -185,17 +185,17 @@ private struct SavePhotoToolbarItem: ToolbarContent, @unchecked Sendable {
   }
   
   private func saveImage(url: URL) async -> Bool {
+    guard let image = try? await uiimageFor(url: url) else { return false }
+    
     var status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
     
-    if let image = try? await uiimageFor(url: url) {
-      if status != .authorized {
-        await PHPhotoLibrary.requestAuthorization(for: .addOnly)
-        status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
-      }
-      if status == .authorized {
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-        return true
-      }
+    if status != .authorized {
+      await PHPhotoLibrary.requestAuthorization(for: .addOnly)
+      status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
+    }
+    if status == .authorized {
+      UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+      return true
     }
     return false
   }
