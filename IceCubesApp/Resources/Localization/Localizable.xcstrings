@@ -719,29 +719,6 @@
         }
       }
     },
-    "%@ ist keine valide Instanz" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ no es una instancia válida"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ n'est pas une instance valide"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ не є дійсним екземпляром"
-          }
-        }
-      }
-    },
     "%@ was posted on Mastodon" : {
       "localizations" : {
         "de" : {
@@ -18699,7 +18676,7 @@
     },
     "action.cancel" : {
       "comment" : "MARK: Common strings",
-      "extractionState" : "stale",
+      "extractionState" : "manual",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -41987,59 +41964,6 @@
         }
       }
     },
-    "Post a status" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einen Status veröffentlichen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hacer una publicación"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Argitaratu egoera bat"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Publier un statut"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Posta uno status"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plaats een bericht"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bir durum gönder"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "发布嘟文"
-          }
-        }
-      }
-    },
     "Post a status with an image" : {
       "localizations" : {
         "de" : {
@@ -42210,118 +42134,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "发布内容"
-          }
-        }
-      }
-    },
-    "Post images" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bilder veröffentlichen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Publicar imágenes"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Argitaratu irudiak"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Publier des images"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Posta immagini"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plaats een afbeelding"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resimleri gönder"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "发布图片"
-          }
-        }
-      }
-    },
-    "Post status to Mastodon" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Status auf Mastodon veröffentlichen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hacer una publicación en Mastodon"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Argitaratu egoera Mastodonen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Publier un status sur Mastodon"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Posta uno status su Mastodon"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "글 게시하기"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plaats een statusbericht op Mastodon"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Durumu Mastodon'a gönder"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "向 Mastodon 发布嘟文"
           }
         }
       }
@@ -84312,112 +84124,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mastodon'da görsel içeren bir gönderi oluşturmak için Ice Cubes kullanın"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用 Ice Cubes 向 Mastodon 发布带有图片的嘟文"
-          }
-        }
-      }
-    },
-    "Use Ice Cubes to post a status to Mastodon" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ice Cubes benutzen, um einen Status auf Mastodon zu veröffentlichen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usar Ice Cubes para hacer una publicación en Mastodon"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erabili Ice Cubes Mastodonen egoera bat argitaratzeko"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utilisez Ice Cubes pour publier un statut sur Mastodon"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usa Ice Cubes per postare uno status su Mastodon"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gebruik Ice Cubes om een bericht op Mastodon te plaatsen"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mastodonda durum göndermek için Ice Cubes kullanın"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用 Ice Cubes 向 Mastodon 发布嘟文"
-          }
-        }
-      }
-    },
-    "Use Ice Cubes to post a status with an image to Mastodon" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ice Cubes benutzen, um einen Status mit einem Bild auf Mastodon zu veröffentlichen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usar Ice Cubes para hacer una publicación con una imagen en Mastodon"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erabili Ice Cubes irudi bat duen Mastodonerako bidalketa bat argitaratzeko"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utiliser Ice Cubes pour publier un statut avec une image sur Mastodon"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usa Ice Cubes per postare uno status con un'immagine su Mastodon"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gebruik Ice Cubes om een bericht met een afbeelding op Mastodon te plaatsen"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mastodon'a resim içeren bir durum göndermek için Ice Cubes kullanın"
           }
         },
         "zh-Hans" : {
