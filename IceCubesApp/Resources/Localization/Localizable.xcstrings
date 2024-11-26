@@ -121,6 +121,12 @@
             "value" : "  ⸱  "
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -233,6 +239,12 @@
             "value" : "#%@"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -327,6 +339,12 @@
             "value" : "%@"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "#%@"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -401,6 +419,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ hautatua dago lehendik ere"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ on jo valittu"
           }
         },
         "fr" : {
@@ -521,6 +545,12 @@
             "value" : "%@ badago lehendik ere"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ on jo olemassa"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -639,6 +669,12 @@
             "value" : "%@ ez da baliozko SFSymbol izena"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ei ole kelvollinen SFSymbol -nimi"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -722,6 +758,12 @@
             "value" : "%@ no es una instancia válida"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ei ole kelvollinen instanssi"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -754,6 +796,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ Mastodonen argitaratu da"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ julkaistiin Mastodoniin"
           }
         },
         "fr" : {
@@ -821,6 +869,12 @@
           }
         },
         "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@© 2024 Thomas Ricouard"
+          }
+        },
+        "fi" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@© 2024 Thomas Ricouard"
@@ -1010,7 +1064,8 @@
             "value" : "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "accessibility.app-account.selector.accounts" : {
       "extractionState" : "manual",
@@ -1055,6 +1110,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kontuak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tilit"
           }
         },
         "fr" : {
@@ -1295,6 +1356,12 @@
             "value" : "AA eskaera"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI syöte"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1414,6 +1481,12 @@
             "value" : "Erantsi irudia"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liitä kuva"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1531,6 +1604,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Geratzen diren karaktereak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merkkiä jäljellä"
           }
         },
         "fr" : {
@@ -1771,6 +1850,12 @@
             "value" : "Zirriborroak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luonnokset"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1888,6 +1973,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hizkuntza"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kieli"
           }
         },
         "fr" : {
@@ -2009,6 +2100,12 @@
             "value" : "Bozketa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kysely"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2126,6 +2223,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edukiari buruzko oharra"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sisältövaroitus"
           }
         },
         "fr" : {
@@ -2247,6 +2350,12 @@
             "value" : "Nork ikus dezakeen aldatzen du."
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muuta julkaisun yleisöä."
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2366,6 +2475,12 @@
             "value" : "Ikusgaitasuna"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Näkyvyys"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2483,6 +2598,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ezgaituta"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pois"
           }
         },
         "fr" : {
@@ -2605,6 +2726,12 @@
             "value" : "Gaituta"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Päällä"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2722,6 +2849,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Irudiaren deskribapena: %@"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kuvan vaihtoehtoinen teksti: %@"
           }
         },
         "fr" : {
@@ -2962,6 +3095,12 @@
             "value" : "Audioa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ääni"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3079,6 +3218,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mugimendua duen Gif-a"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animoitu Gif"
           }
         },
         "fr" : {
@@ -3200,6 +3345,12 @@
             "value" : "Irudia"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kuva"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3317,6 +3468,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bideoa"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Video"
           }
         },
         "fr" : {
@@ -3438,6 +3595,12 @@
             "value" : "%@(e)k %@ bultzatu du"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ boostasi %@"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3555,6 +3718,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@(e)k honi erantzun dio:"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ vastasi"
           }
         },
         "fr" : {
@@ -3676,6 +3845,12 @@
             "value" : "Aplikazioa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sovellus"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3793,6 +3968,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ dauka"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sisältää %@"
           }
         },
         "fr" : {
@@ -4033,6 +4214,12 @@
             "value" : "Amaitu gabeko bozketa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aktiivinen kysely"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4150,6 +4337,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bozketaren emaitzak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kyselyn tulokset"
           }
         },
         "fr" : {
@@ -4271,6 +4464,12 @@
             "value" : "%lld. aukera, %lld guztira"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vaihtoehto %lld / %lld"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4388,6 +4587,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hautatua"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valittu"
           }
         },
         "fr" : {
@@ -4509,6 +4714,12 @@
             "value" : "Eduki osoa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koko Sisältö"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -4626,6 +4837,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Irakurri gabe"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lukematon"
           }
         },
         "fr" : {
@@ -4864,6 +5081,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Egiaztatuta"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Varmistettu"
           }
         },
         "fr" : {
@@ -5461,6 +5684,12 @@
             "value" : "Ezarpenak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asetukset"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5578,6 +5807,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gehiago"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisää"
           }
         },
         "fr" : {
@@ -5699,6 +5934,12 @@
             "value" : "Aukerak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valinnat"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -5816,6 +6057,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laster-markak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kirjanmerkit"
           }
         },
         "fr" : {
@@ -5937,6 +6184,12 @@
             "value" : "Gogokoak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suosikit"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6054,6 +6307,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Traolak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tunnisteet"
           }
         },
         "fr" : {
@@ -6175,6 +6434,12 @@
             "value" : "Zerrendak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listat"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6292,6 +6557,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Multimedia"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Media"
           }
         },
         "fr" : {
@@ -6413,6 +6684,12 @@
             "value" : "Bidalketak eta erantzunak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkaisut ja vastaukset"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -6530,6 +6807,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidalketak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkaisut"
           }
         },
         "fr" : {
@@ -6889,6 +7172,12 @@
             "value" : "Profileko argazkia"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profiilikuva"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7127,6 +7416,12 @@
             "value" : "Jaso jakinarazpenak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vastaanota ilmoituksia"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7244,6 +7539,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erakutsi bultzadak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Näytä boostaukset"
           }
         },
         "fr" : {
@@ -7365,6 +7666,12 @@
             "value" : "Blokeatuta"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estetty"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7482,6 +7789,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bot kontua"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottitili"
           }
         },
         "fr" : {
@@ -7603,6 +7916,12 @@
             "value" : "Mutututa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiljennetty"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7722,6 +8041,12 @@
             "value" : "Babestutako kontua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yksityinen tili"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -7838,6 +8163,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gehitu kontua"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisää Tili"
           }
         },
         "fr" : {
@@ -7959,6 +8290,12 @@
             "value" : "%@ traola"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hashtag %@"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8076,6 +8413,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ikustatu %@"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vieraile %@"
           }
         },
         "fr" : {
@@ -8197,6 +8540,12 @@
             "value" : "Berria"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uusi"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8316,6 +8665,12 @@
             "value" : "Sortu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luo"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -8433,6 +8788,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Idatzi"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kirjoita"
           }
         },
         "fr" : {
@@ -8757,6 +9118,24 @@
             }
           }
         },
+        "fi" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld uusi julkaisu"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld uutta julkaisua"
+                }
+              }
+            }
+          }
+        },
         "fr" : {
           "variations" : {
             "plural" : {
@@ -9001,6 +9380,12 @@
             "value" : "Kontua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tili"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9077,6 +9462,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gehitu/Kendu zerrendatik"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisää/Poista listoista"
           }
         },
         "fr" : {
@@ -9198,6 +9589,12 @@
             "value" : "Blokeatu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estä"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9315,6 +9712,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Blokeatu %@"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Block %@"
           }
         },
         "fr" : {
@@ -9672,6 +10075,12 @@
             "value" : "Editatu informazioa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muokkaa tietoja"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9788,6 +10197,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Amaitu saioa"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kirjaudu ulos tilitä"
           }
         },
         "fr" : {
@@ -9909,6 +10324,12 @@
             "value" : "Aipatu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mainitse"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10028,6 +10449,12 @@
             "value" : "Bidali mezua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viesti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10144,6 +10571,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ezarpen gehiago"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisää Asetuksia"
           }
         },
         "fr" : {
@@ -10265,6 +10698,12 @@
             "value" : "Mututu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiljennä"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10382,6 +10821,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ezgaitu jakinarazpenak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laita ilmoitukset pois päältä"
           }
         },
         "fr" : {
@@ -10503,6 +10948,12 @@
             "value" : "Gaitu jakinarazpenak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laita ilmoitukset päälle"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10620,6 +11071,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pribatutasun ezarpenak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yksityisyysasetukset"
           }
         },
         "fr" : {
@@ -10741,6 +11198,12 @@
             "value" : "Ezkutatu bultzadak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piilota Boostaukset"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -10858,6 +11321,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erakutsi bultzadak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Näytä Boostaukset"
           }
         },
         "fr" : {
@@ -10979,6 +11448,12 @@
             "value" : "Partekatu kontua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jaa tämä tili"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11096,6 +11571,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Utzi blokeatzeari"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poista esto"
           }
         },
         "fr" : {
@@ -11217,6 +11698,12 @@
             "value" : "Utzi mututzeari"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poista mykistys"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11334,6 +11821,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aplikazioa ez da instantzia honekin bateragarria une honetan."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tätä instanssia ei tueta tällä hetkellä."
           }
         },
         "fr" : {
@@ -11454,6 +11947,12 @@
             "value" : "Gehitu kontua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisää Tili"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11570,6 +12069,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hasi saioa"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kirjaudu sisään"
           }
         },
         "fr" : {
@@ -11691,6 +12196,12 @@
             "value" : "Blocked accounts"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estetyt tilit"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11810,6 +12321,12 @@
             "value" : "Hauek bultzatu dute:"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boostannut"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -11927,6 +12444,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hauek ere jarraitzen diote:"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seuraajina myös"
           }
         },
         "fr" : {
@@ -12127,6 +12650,24 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld bidalketa"
+                }
+              }
+            }
+          }
+        },
+        "fi" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld julkaisu"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld julkaisua"
                 }
               }
             }
@@ -12485,6 +13026,24 @@
             }
           }
         },
+        "fi" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld kenttä"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld kenttää"
+                }
+              }
+            }
+          }
+        },
         "fr" : {
           "variations" : {
             "plural" : {
@@ -12754,6 +13313,12 @@
             "value" : "Zure buruari buruz"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisätietoja"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -12871,6 +13436,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bot kontua"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bottitili"
           }
         },
         "fr" : {
@@ -12992,6 +13563,12 @@
             "value" : "Aurki zaitzakete"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Löydettävissä"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13111,6 +13688,12 @@
             "value" : "Pribatua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yksityinen"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13228,6 +13811,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kontuaren ezarpenak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tilin asetukset"
           }
         },
         "fr" : {
@@ -13468,6 +14057,12 @@
             "value" : "Editatu abatarra"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muokkaa kuvaa"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13563,6 +14158,12 @@
             "value" : "Ezabatu abatarra"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poista kuva"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -13638,6 +14239,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pantaila izena"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Näyttönimi"
           }
         },
         "fr" : {
@@ -14407,6 +15014,12 @@
             "value" : "Edukia"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sisältö"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14524,6 +15137,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Editatu profila"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muokkaa Profiilia"
           }
         },
         "fr" : {
@@ -14764,6 +15383,12 @@
             "value" : "Defektuzko pribatutasuna"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oletusnäkyvyys"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14881,6 +15506,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidalketen ezarpenak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkaisun asetukset"
           }
         },
         "fr" : {
@@ -15121,6 +15752,12 @@
             "value" : "Hauek gogoko dute:"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suosikikseen lisännyt"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15240,6 +15877,12 @@
             "value" : "Onartu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hyväksy"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15357,6 +16000,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Baztertu"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hylkää"
           }
         },
         "fr" : {
@@ -15597,6 +16246,12 @@
             "value" : "Erabakitzeke dauden eskaerak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odottavat pyynnöt"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15714,6 +16369,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jarraitu"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seuraa"
           }
         },
         "fr" : {
@@ -15835,6 +16496,12 @@
             "value" : "Jarraitzen"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seurataan"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15952,6 +16619,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eskaera eginda"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pyydetty"
           }
         },
         "fr" : {
@@ -16073,6 +16746,12 @@
             "value" : "jarraitzaile"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seuraajat"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16192,6 +16871,12 @@
             "value" : "jarraitzen"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seurattavat"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16309,6 +16994,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Batze-data:"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Liittynyt"
           }
         },
         "fr" : {
@@ -16570,6 +17261,33 @@
                     "stringUnit" : {
                       "state" : "translated",
                       "value" : "%2$@ jarraitzaile"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%#@followers@"
+          },
+          "substitutions" : {
+            "followers" : {
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%2$@ seuraaja"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "translated",
+                      "value" : "%2$@ seuraajaa"
                     }
                   }
                 }
@@ -16927,6 +17645,12 @@
             "value" : "Sortu zerrenda berria"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luo uusi lista"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17044,6 +17768,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sortu zerrenda"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luo lista"
           }
         },
         "fr" : {
@@ -17165,6 +17895,12 @@
             "value" : "Idatzi zerrendaren izena"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anna listallesi nimi"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17282,6 +18018,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ezabatu zerrenda"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poista lista"
           }
         },
         "fr" : {
@@ -17403,6 +18145,12 @@
             "value" : "Zerrendaren izena"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listan nimi"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17520,6 +18268,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@(e)ra aldatu da"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Siirretty paikkaan %@"
           }
         },
         "fr" : {
@@ -17641,6 +18395,12 @@
             "value" : "Muted accounts"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hiljennetyt tilit"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17758,6 +18518,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Finkatutako bidalketa"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kiinnitetty julkaisu"
           }
         },
         "fr" : {
@@ -17879,6 +18645,12 @@
             "value" : "bidalketa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkaisut"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -17996,6 +18768,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jarraitzen dizu"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seuraa sinua"
           }
         },
         "fr" : {
@@ -18117,6 +18895,12 @@
             "value" : "Editatu oharra"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muokkaa Muistiinpanoa"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18234,6 +19018,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Errorea oharra gordetzerakoan, saiatu berriro geroago."
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Virhe tallennettaessa muistiinpanoa, yritä uudelleen."
           }
         },
         "fr" : {
@@ -18355,6 +19145,12 @@
             "value" : "Errorea oharra gordetzerakoan"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Virhe tallennettaessa muistiinpanoa"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18474,6 +19270,12 @@
             "value" : "Idatzi oharra hemen"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisää muistiinpano"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18591,6 +19393,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Oharra:"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muistiinpano:"
           }
         },
         "fr" : {
@@ -18713,6 +19521,12 @@
             "value" : "Utzi"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kumoa"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18832,6 +19646,12 @@
             "value" : "Ezabatu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poista"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -18948,6 +19768,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eginda"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valmis"
           }
         },
         "fr" : {
@@ -19069,6 +19895,12 @@
             "value" : "Saiatu berriro"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yritä uudelleen"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19185,6 +20017,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gorde"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tallenna"
           }
         },
         "fr" : {
@@ -19306,6 +20144,12 @@
             "value" : "Ikusi errorea"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Näytä virhe"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19422,6 +20266,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sortaren ikonoa (SFSymbol izena)"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tunnisteryhmän ikone (SFSymbol -nimi)"
           }
         },
         "fr" : {
@@ -19542,6 +20392,12 @@
             "value" : "Gehitu traolak sortara"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisää tunnisteita ryhmään"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -19658,6 +20514,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Traola"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tunniste"
           }
         },
         "fr" : {
@@ -20014,6 +20876,12 @@
             "value" : "Ez da ikurrik aurkitu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbolia ei löydy"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20131,6 +20999,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Traola-sortaren izena"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tunnisteryhmän otsikko"
           }
         },
         "fr" : {
@@ -20251,6 +21125,12 @@
             "value" : "Titulurik gabe"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tyhjä otsikko"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20369,6 +21249,12 @@
             "value" : "Ez da ikurrik hautatu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Symbolia ei ole valittu"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20451,6 +21337,12 @@
             "value" : "IA"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20501,6 +21393,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ados"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
           }
         },
         "fr" : {
@@ -20619,6 +21517,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Errorea!"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Virhe!"
           }
         },
         "fr" : {
@@ -20793,6 +21697,12 @@
             "value" : "Gehitu kontua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LIsää Tili"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20937,6 +21847,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laster-markak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kirjanmerkit"
           }
         },
         "fr" : {
@@ -21171,6 +22087,12 @@
             "value" : "Ezabatu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poista"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21290,6 +22212,12 @@
             "value" : "Markatu irakurritzat"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Merkitse luetuksi"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21407,6 +22335,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ikusi xehetasunak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Näytä tiedot"
           }
         },
         "fr" : {
@@ -21766,6 +22700,12 @@
             "value" : "Saiatu berriro"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uudelleen"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21883,6 +22823,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Errorea mezuak kargatzean"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Virhe viestiesi lataamisessa"
           }
         },
         "fr" : {
@@ -22123,6 +23069,12 @@
             "value" : "Mezu berriena"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uusin viesti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22359,6 +23311,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mezu berria"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uusi viesti"
           }
         },
         "fr" : {
@@ -23082,6 +24040,54 @@
             }
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%#@count_posts@ julkaisua %#@count_participants@ osallistujalta"
+          },
+          "substitutions" : {
+            "count_participants" : {
+              "argNum" : 2,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "new",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "new",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            },
+            "count_posts" : {
+              "argNum" : 1,
+              "formatSpecifier" : "lld",
+              "variations" : {
+                "plural" : {
+                  "one" : {
+                    "stringUnit" : {
+                      "state" : "new",
+                      "value" : "%arg"
+                    }
+                  },
+                  "other" : {
+                    "stringUnit" : {
+                      "state" : "new",
+                      "value" : "%arg"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23685,6 +24691,12 @@
             "value" : "Gai hautatzailea"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teeman valinta"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23802,6 +24814,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tuten aurreikuspena"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tuuttauksen esikatselu"
           }
         },
         "fr" : {
@@ -24206,6 +25224,12 @@
             "value" : "Biribila"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ympyrä"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24323,6 +25347,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Biribildutako ertzak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pyöristetty"
           }
         },
         "fr" : {
@@ -24444,6 +25474,12 @@
             "value" : "Neuk zehaztuko dut"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "muokattu"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24561,6 +25597,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "5 minutuz"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 minuuttia"
           }
         },
         "fr" : {
@@ -24682,6 +25724,12 @@
             "value" : "Betiko"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "rajaton"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -24799,6 +25847,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Egun batez"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 päivä"
           }
         },
         "fr" : {
@@ -24920,6 +25974,12 @@
             "value" : "Ordubetez"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 tunti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25037,6 +26097,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "7 egunez"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7 päivää"
           }
         },
         "fr" : {
@@ -25158,6 +26224,12 @@
             "value" : "6 orduz"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6 tuntia"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25275,6 +26347,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "30 minutuz"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "30 minuuttia"
           }
         },
         "fr" : {
@@ -25396,6 +26474,12 @@
             "value" : "3 egunez"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 päivää"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25513,6 +26597,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "12 orduz"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12 tuntia"
           }
         },
         "fr" : {
@@ -25634,6 +26724,12 @@
             "value" : "Ezkutatu guztia"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piilota kaikki"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25751,6 +26847,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ezkutatu hunkigarria"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piilota arkaluonteinen"
           }
         },
         "fr" : {
@@ -25872,6 +26974,12 @@
             "value" : "Erakutsi guztia"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Näytä kaikki"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -25989,6 +27097,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Guztia"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaikki"
           }
         },
         "fr" : {
@@ -26110,6 +27224,12 @@
             "value" : "Botoirik gabe"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ei painikkeita"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26227,6 +27347,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Botoiak bakarrik"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vain painikkeet"
           }
         },
         "fr" : {
@@ -26348,6 +27474,12 @@
             "value" : "Trinkoa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiivis"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26465,6 +27597,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Handia"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suuri"
           }
         },
         "fr" : {
@@ -26586,6 +27724,12 @@
             "value" : "Ertaina"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keskikokoinen"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26703,6 +27847,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ikonoa soilik"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vain kuvake"
           }
         },
         "fr" : {
@@ -26824,6 +27974,12 @@
             "value" : "Ikonoa eta testua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kuvake ja teksti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26941,6 +28097,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boto bat baino gehiago"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monta ääntä"
           }
         },
         "fr" : {
@@ -27061,6 +28223,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Boto bakarra"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yksi ääni"
           }
         },
         "fr" : {
@@ -27354,6 +28522,12 @@
             "value" : "Guztia"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaikki"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27471,6 +28645,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Traolak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tunnisteet"
           }
         },
         "fr" : {
@@ -27592,6 +28772,12 @@
             "value" : "Jendea"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihmiset"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27709,6 +28895,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidalketak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkaisut"
           }
         },
         "fr" : {
@@ -27949,6 +29141,12 @@
             "value" : "Ez dago emaitzarik"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ei tuloksia"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28187,6 +29385,12 @@
             "value" : "erabiltzaileak, bidalketak eta traolak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etsi käyttäjiä, julkaisuja ja tunnisteita"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28304,6 +29508,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bilatu zure instantzian"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etsi omasta instanssista"
           }
         },
         "fr" : {
@@ -28425,6 +29635,12 @@
             "value" : "Bidalketak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkaisut"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28542,6 +29758,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gomendatutako erabiltzaileak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ehdotetut käyttäjät"
           }
         },
         "fr" : {
@@ -28663,6 +29885,12 @@
             "value" : "Traolak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tunnisteet"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28780,6 +30008,12 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Gori-gorian dauden estekak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uutiset"
           }
         },
         "fr" : {
@@ -29020,6 +30254,12 @@
             "value" : "Pil-pilean dauden traolak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tunnisteet Nousussa"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29139,6 +30379,12 @@
             "value" : "Erabiltzaileak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Käyttäjät"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29233,6 +30479,12 @@
             "value" : "Gogokoak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suosikit"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29271,6 +30523,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Solicitudes de funciones"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toivotut ominaisuudet"
           }
         },
         "fr" : {
@@ -29388,6 +30646,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ezkutatu guztiz"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piilota täysin"
           }
         },
         "fr" : {
@@ -29509,6 +30773,12 @@
             "value" : "Ezkutatu ohartarazpen batekin"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piilota varoituksella"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29626,6 +30896,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Elkarrizketak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keskustelut"
           }
         },
         "fr" : {
@@ -29747,6 +31023,12 @@
             "value" : "Hasiera eta zerrendak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koti ja listat"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29866,6 +31148,12 @@
             "value" : "Jakinarazpenak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ilmoitukset"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29983,6 +31271,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profilak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profiilit"
           }
         },
         "fr" : {
@@ -30461,6 +31755,12 @@
             "value" : "Iraungitzea"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vanhenee"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30580,6 +31880,12 @@
             "value" : "Data/Ordua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Päiväys/Aika"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30697,6 +32003,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iraupena"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kesto"
           }
         },
         "fr" : {
@@ -30937,6 +32249,12 @@
             "value" : "Gehitu hitz gako berria"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisää uusi tunniste"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31054,6 +32372,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iragazkiaren izena"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisää otsikko"
           }
         },
         "fr" : {
@@ -32077,6 +33401,12 @@
             "value" : "ePosta"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sähköposti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32193,6 +33523,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Izena"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nimi"
           }
         },
         "fr" : {
@@ -32901,6 +34237,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bertsioa"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versio"
           }
         },
         "fr" : {
@@ -34064,6 +35406,12 @@
             "value" : "Zerrendako kideak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listan jäsenet"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34277,6 +35625,12 @@
             "value" : "Zerrendak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listat"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34474,6 +35828,12 @@
             "value" : "Sortu zerrenda berria"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luo uusi lista"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34591,6 +35951,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sortu zerrenda"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luo lista"
           }
         },
         "fr" : {
@@ -34712,6 +36078,12 @@
             "value" : "Zerrendaren ezarpenak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listan asetukset"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34829,6 +36201,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zerrenda honetan dauden erabiltzaileak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Käyttäjät tässä listassa"
           }
         },
         "fr" : {
@@ -34950,6 +36328,12 @@
             "value" : "Bilatu erabiltzaileak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hae käyttäjiä"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35067,6 +36451,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zerrendaren izena"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listan nimi"
           }
         },
         "fr" : {
@@ -35410,6 +36800,12 @@
             "value" : "Letra-tipoa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fontti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35526,6 +36922,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Handiagoa"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Isompi"
           }
         },
         "fr" : {
@@ -35646,6 +37048,12 @@
             "value" : "Txikiagoa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pienempi"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35764,6 +37172,12 @@
             "value" : "GitHub"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "GitHub"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35836,7 +37250,8 @@
             "value" : "GitHub"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "menu.new-post" : {
       "comment" : "MARK: Menu",
@@ -35881,6 +37296,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidalketa berria"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uusi Julkaisu"
           }
         },
         "fr" : {
@@ -36120,6 +37541,12 @@
             "value" : "Ezarpenak..."
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asetukset…"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36214,6 +37641,12 @@
             "value" : "Bidalketa berria"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uusi julkaisu"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36264,6 +37697,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jakinarazpenak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ilmoitukset"
           }
         },
         "fr" : {
@@ -36684,6 +38123,12 @@
             "value" : "Kontu berriak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uudet tilit"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36801,6 +38246,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jarraitzen ez dizun jendea"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ihmiset, jotka eivät seuraa sinua"
           }
         },
         "fr" : {
@@ -38519,6 +39970,12 @@
             "value" : "(e)k jarraitzeko eskaera egin dizu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pyydetty seuraamista"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39196,6 +40653,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "📈 Bozketa amaitu da: "
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "📈 Kysely päättyi: "
           }
         },
         "fr" : {
@@ -40353,6 +41816,12 @@
             "value" : "Jarraipen-eskaerak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seuraamispyyntö"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40470,6 +41939,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aipamenak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maininta"
           }
         },
         "fr" : {
@@ -40710,6 +42185,12 @@
             "value" : "Bultzadak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boostaa"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -40946,6 +42427,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidalketen edizioak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkaisua Muokattu"
           }
         },
         "fr" : {
@@ -41397,6 +42884,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ireki Ice Cubes"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avaa Ice Cubes"
           }
         },
         "fr" : {
@@ -42508,6 +44001,12 @@
             "value" : "Bidali"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lähetä"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42627,6 +44126,12 @@
             "value" : "Informazio gehigarria"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisätietoja"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42743,6 +44248,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Salatu edukia"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raportoi Julkaisu"
           }
         },
         "fr" : {
@@ -42864,6 +44375,12 @@
             "value" : "Ikusi gehiago"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Katso lisää"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42958,6 +44475,12 @@
             "value" : "Hautatutako erlaitza"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valittu välilehti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43008,6 +44531,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidali bidalketa bat"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lähetä julkaisu"
           }
         },
         "fr" : {
@@ -43108,6 +44637,12 @@
             "value" : "Bidali bidalketa Mastodonera"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lähetä julkaisu Mastodoniin"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43152,6 +44687,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ezarpenak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asetukset"
           }
         },
         "fr" : {
@@ -43348,6 +44889,12 @@
             "value" : "Ice Cubes"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ice Cubes"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43464,6 +45011,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Garbitu katxea"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tyhjennä välimuisti"
           }
         },
         "fr" : {
@@ -43583,6 +45136,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gehitu kontua"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisää Tili"
           }
         },
         "fr" : {
@@ -45829,6 +47388,12 @@
             "value" : "Erakutsi deskribapenak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Näytä kuvailutekstit"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -47367,6 +48932,12 @@
             "value" : "Adibidea"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esimerkkijulkaisu"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -47483,6 +49054,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Denbora-lerroaren letra tipoa"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aikajanan Fontti"
           }
         },
         "fr" : {
@@ -48077,6 +49654,12 @@
             "value" : "Erakutsi erabiltzaile izen osoa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Näytä Koko Käyttäjänimi"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -48669,6 +50252,12 @@
             "value" : "Berrezarri defektuzkoa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palauta Oletukset"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -48785,6 +50374,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pantaila"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ulkoasu"
           }
         },
         "fr" : {
@@ -56208,6 +57803,12 @@
             "value" : "Katxea"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Välimuisti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -60223,6 +61824,12 @@
             "value" : "Gogokoa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suosikki"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -60340,6 +61947,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ezer ez"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ei mitään"
           }
         },
         "fr" : {
@@ -61052,6 +62665,12 @@
             "value" : "Erabili gaiaren koloreak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Käytä teeman värejä"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -61286,6 +62905,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sistemaren ezarpenak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Järjestelmäasetukset"
           }
         },
         "fr" : {
@@ -62114,6 +63739,12 @@
             "value" : "Ezarpenak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asetukset"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -62584,6 +64215,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Itzulpenaren ezarpenak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Käännös"
           }
         },
         "fr" : {
@@ -63094,6 +64731,12 @@
             "value" : "Bultzatu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boostaa"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -63332,6 +64975,12 @@
             "value" : "Kopiatu esteka"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopioi linkki"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -63451,6 +65100,12 @@
             "value" : "Kopiatu testua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopioi teksti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -63568,6 +65223,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ezabatu"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poista"
           }
         },
         "fr" : {
@@ -63808,6 +65469,12 @@
             "value" : "Baieztatu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vahvista"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -63925,6 +65592,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Editatu"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muokkaa"
           }
         },
         "fr" : {
@@ -64046,6 +65719,12 @@
             "value" : "Egin gogoko"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suosikki"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -64163,6 +65842,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aipatu"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mainitse"
           }
         },
         "fr" : {
@@ -64284,6 +65969,12 @@
             "value" : "Bidali mezua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viesti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -64401,6 +66092,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Finkatu"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kiinnitä"
           }
         },
         "fr" : {
@@ -64522,6 +66219,12 @@
             "value" : "Argitaratu"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkaisu"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -64639,6 +66342,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aipatu bidalketa"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lainaa tätä julkaisua"
           }
         },
         "fr" : {
@@ -64760,6 +66469,12 @@
             "value" : "Erantzun"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vastaa"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -64877,6 +66592,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Salatu edukia"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Raportoi julkaisu"
           }
         },
         "fr" : {
@@ -64998,6 +66719,12 @@
             "value" : "Zure bidalketa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkaisusi"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -65115,6 +66842,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hautatu testua"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valittu Teksti"
           }
         },
         "fr" : {
@@ -65236,6 +66969,12 @@
             "value" : "Partekatu bidalketa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jaa tämä julkaisu"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -65353,6 +67092,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Partekatu bidalketa irudi gisa"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jaa julkaisu kuvana"
           }
         },
         "fr" : {
@@ -65474,6 +67219,12 @@
             "value" : "Partekatu bidalketaren esteka"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jaa julkaisu linkkinä"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -65591,6 +67342,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Partekatu"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jaa"
           }
         },
         "fr" : {
@@ -65713,6 +67470,12 @@
             "value" : "Itzuli"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Käännä"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -65830,6 +67593,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ erabiliz itzulia"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kääntänyt %@"
           }
         },
         "fr" : {
@@ -65951,6 +67720,12 @@
             "value" : "%@(e)tik %@ erabiliz itzulia"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Käännetty kielestä %@ käyttäen %@"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -66068,6 +67843,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kendu laster-marka"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poista kirjanmerkki"
           }
         },
         "fr" : {
@@ -66189,6 +67970,12 @@
             "value" : "Kendu bultzada"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poista boostaus"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -66306,6 +68093,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Kendu gogokoa"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poista suosikki"
           }
         },
         "fr" : {
@@ -66427,6 +68220,12 @@
             "value" : "Utzi finkatzeari"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poista kiinnitys"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -66544,6 +68343,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ikusi nabigatzailean"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Näytä selaimessa"
           }
         },
         "fr" : {
@@ -66665,6 +68470,12 @@
             "value" : "Kopiatu esteka"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopioi tämä linkki"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -66782,6 +68593,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Partekatu esteka"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jaa tämä linkki"
           }
         },
         "fr" : {
@@ -66903,6 +68720,12 @@
             "value" : "Ezabatu zirriborroa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poista luonnos"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -67020,6 +68843,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gorde zirriborroa"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tallenna luonnos"
           }
         },
         "fr" : {
@@ -67260,6 +69089,12 @@
             "value" : "Zuzendu testua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Korjaa teksti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -67496,6 +69331,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Laburtu testua"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lyhennä teksti"
           }
         },
         "fr" : {
@@ -67736,6 +69577,12 @@
             "value" : "Arakatu fitxategiak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selaa tiedostoja"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -67853,6 +69700,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Egin argazkia"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ota Kuva"
           }
         },
         "fr" : {
@@ -67974,6 +69827,12 @@
             "value" : "Gehitu deskribapena"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lisää kuvaus"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -68093,6 +69952,12 @@
             "value" : "Editatu deskribapena"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muokkaa kuvausta"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -68210,6 +70075,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zirriborroak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luonnokset"
           }
         },
         "fr" : {
@@ -68450,6 +70321,12 @@
             "value" : "Errorea igotzerakoan"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Virhe ladattaessa"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -68688,6 +70565,12 @@
             "value" : "Argitaratu %@(e)z (Antzemandako hizkuntza)"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkaisu kielellä %@ (Tunnistettu kieli)"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -68805,6 +70688,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Argitaratu %@(e)z (Hautatutako hizkuntza)"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkaisu kielellä %@ (Valittu kieli)"
           }
         },
         "fr" : {
@@ -68926,6 +70815,12 @@
             "value" : "Hautatu hizkuntza"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Valitse Kieli"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -69043,6 +70938,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Duela gutxi erabilitakoak"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Viimeksi käytetyt"
           }
         },
         "fr" : {
@@ -69164,6 +71065,12 @@
             "value" : "Editatu irudiak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muokkaa Mediaa"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -69281,6 +71188,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "🤖 Sortu deskribapena"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🤖 Generoi kuvaus"
           }
         },
         "fr" : {
@@ -69402,6 +71315,12 @@
             "value" : "Irudiaren deskribapena"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Median kuvaus "
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -69519,6 +71438,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidalketa editatzen"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muokataan julkaisuasi"
           }
         },
         "fr" : {
@@ -69640,6 +71565,12 @@
             "value" : "Bidalketa berria"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uusi Julkaisu"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -69757,6 +71688,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@(r)en aipamena"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lainataan julkaisua %@"
           }
         },
         "fr" : {
@@ -69878,6 +71815,12 @@
             "value" : "%@(r)i erantzunez"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vastataan julkaisuun %@"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -69995,6 +71938,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Argazki-liburutegia"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kuvakirjasto"
           }
         },
         "fr" : {
@@ -70116,6 +72065,12 @@
             "value" : "Berreskuratu lehengo testua"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palauta edellinen teksti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -70233,6 +72188,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edukiari buruzko oharra"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sisältövaroitus"
           }
         },
         "fr" : {
@@ -70354,6 +72315,12 @@
             "value" : "Zer duzu buruan?"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mitä mielessä?"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -70471,6 +72438,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bidalketaren irismena"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Julkaisun näkyvyys"
           }
         },
         "fr" : {
@@ -70949,6 +72922,12 @@
             "value" : "Errorea argitaratzean"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Virhe julkaistaessa"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -71306,6 +73285,12 @@
             "value" : "Erakutsi edonola ere"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Näytä silti"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -71420,6 +73405,12 @@
           }
         },
         "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ALT"
+          }
+        },
+        "fi" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "ALT"
@@ -71542,6 +73533,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Erakutsi edukia"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Näytä sisältö"
           }
         },
         "fr" : {
@@ -72494,6 +74491,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bozketaren iraupena"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kyselyn Kesto"
           }
         },
         "fr" : {
@@ -77986,6 +79989,12 @@
             "value" : "Jakinarazpenak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ilmoitukset"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -78102,6 +80111,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profila"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profiili"
           }
         },
         "fr" : {
@@ -78458,6 +80473,12 @@
             "value" : "Denbora-lerroa"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aikajana"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -78693,6 +80714,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gehitu edo kendu traola-sortetatik"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "LIsää tai poista tunnisteita ryhmästä"
           }
         },
         "fr" : {
@@ -81566,6 +83593,12 @@
             "value" : "Traola-sortak"
           }
         },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tunnisteryhmät"
+          }
+        },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -81801,6 +83834,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hasiera"
+          }
+        },
+        "fi" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koti"
           }
         },
         "fr" : {
