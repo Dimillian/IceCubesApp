@@ -14,11 +14,12 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   private let routerPath: RouterPath
   private let client: Client
 
-  public init(fetcher: Fetcher,
-              client: Client,
-              routerPath: RouterPath,
-              isRemote: Bool = false)
-  {
+  public init(
+    fetcher: Fetcher,
+    client: Client,
+    routerPath: RouterPath,
+    isRemote: Bool = false
+  ) {
     _fetcher = .init(initialValue: fetcher)
     self.isRemote = isRemote
     self.client = client
@@ -29,34 +30,40 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     switch fetcher.statusesState {
     case .loading:
       ForEach(Status.placeholders()) { status in
-        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
-          .redacted(reason: .placeholder)
-          .allowsHitTesting(false)
+        StatusRowView(
+          viewModel: .init(status: status, client: client, routerPath: routerPath),
+          context: .timeline
+        )
+        .redacted(reason: .placeholder)
+        .allowsHitTesting(false)
       }
     case .error:
-      ErrorView(title: "status.error.title",
-                message: "status.error.loading.message",
-                buttonTitle: "action.retry")
-      {
-        Task {
-          await fetcher.fetchNewestStatuses(pullToRefresh: false)
-        }
+      ErrorView(
+        title: "status.error.title",
+        message: "status.error.loading.message",
+        buttonTitle: "action.retry"
+      ) {
+        await fetcher.fetchNewestStatuses(pullToRefresh: false)
       }
       .listRowBackground(theme.primaryBackgroundColor)
       .listRowSeparator(.hidden)
 
     case let .display(statuses, nextPageState):
-      ForEach(statuses, id: \.id) { status in
-        StatusRowView(viewModel: StatusRowViewModel(status: status,
-                                                    client: client,
-                                                    routerPath: routerPath,
-                                                    isRemote: isRemote))
-          .onAppear {
-            fetcher.statusDidAppear(status: status)
-          }
-          .onDisappear {
-            fetcher.statusDidDisappear(status: status)
-          }
+      ForEach(statuses) { status in
+        StatusRowView(
+          viewModel: StatusRowViewModel(
+            status: status,
+            client: client,
+            routerPath: routerPath,
+            isRemote: isRemote),
+          context: .timeline
+        )
+        .onAppear {
+          fetcher.statusDidAppear(status: status)
+        }
+        .onDisappear {
+          fetcher.statusDidDisappear(status: status)
+        }
       }
       switch nextPageState {
       case .hasNextPage:

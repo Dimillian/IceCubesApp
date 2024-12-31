@@ -26,7 +26,7 @@ struct TagsGroupSettingView: View {
         }
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       Button {
@@ -35,7 +35,7 @@ struct TagsGroupSettingView: View {
         Label("timeline.filter.add-tag-groups", systemImage: "plus")
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     .navigationTitle("timeline.filter.tag-groups")
@@ -43,8 +43,8 @@ struct TagsGroupSettingView: View {
     #if !os(visionOS)
       .background(theme.secondaryBackgroundColor)
     #endif
-      .toolbar {
-        EditButton()
-      }
+    .toolbar {
+      EditButton()
+    }
   }
 }

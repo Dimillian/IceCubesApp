@@ -27,24 +27,24 @@ public struct AccountStatusesListView: View {
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
     #endif
-      .navigationTitle(viewModel.mode.title)
-      .navigationBarTitleDisplayMode(.inline)
-      .refreshable {
-        await viewModel.fetchNewestStatuses(pullToRefresh: true)
-      }
-      .task {
-        guard !isLoaded else { return }
-        viewModel.client = client
+    .navigationTitle(viewModel.mode.title)
+    .navigationBarTitleDisplayMode(.inline)
+    .refreshable {
+      await viewModel.fetchNewestStatuses(pullToRefresh: true)
+    }
+    .task {
+      guard !isLoaded else { return }
+      viewModel.client = client
+      await viewModel.fetchNewestStatuses(pullToRefresh: false)
+      isLoaded = true
+    }
+    .onChange(of: client.id) { _, _ in
+      isLoaded = false
+      viewModel.client = client
+      Task {
         await viewModel.fetchNewestStatuses(pullToRefresh: false)
         isLoaded = true
       }
-      .onChange(of: client.id) { _, _ in
-        isLoaded = false
-        viewModel.client = client
-        Task {
-          await viewModel.fetchNewestStatuses(pullToRefresh: false)
-          isLoaded = true
-        }
-      }
+    }
   }
 }

@@ -6,14 +6,13 @@
 //
 
 import MobileCoreServices
+import Models
+import Network
 import UIKit
 import UniformTypeIdentifiers
 
-import Models
-import Network
-
 // Sample code was sending this from a thread to another, let asume @Sendable for this
-extension NSExtensionContext: @unchecked Sendable {}
+extension NSExtensionContext: @unchecked @retroactive Sendable {}
 
 final class ActionRequestHandler: NSObject, NSExtensionRequestHandling, Sendable {
   enum Error: Swift.Error {
@@ -79,11 +78,17 @@ extension ActionRequestHandler {
         guard itemProvider.hasItemConformingToTypeIdentifier(UTType.propertyList.identifier) else {
           continue
         }
-        guard let dictionary = try await itemProvider.loadItem(forTypeIdentifier: UTType.propertyList.identifier) as? [String: Any] else {
+        guard
+          let dictionary = try await itemProvider.loadItem(
+            forTypeIdentifier: UTType.propertyList.identifier) as? [String: Any]
+        else {
           throw Error.loadedItemHasWrongType
         }
-        let input = dictionary[NSExtensionJavaScriptPreprocessingResultsKey] as! [String: Any]? ?? [:]
-        guard let absoluteStringUrl = input["url"] as? String, let url = URL(string: absoluteStringUrl) else {
+        let input =
+          dictionary[NSExtensionJavaScriptPreprocessingResultsKey] as! [String: Any]? ?? [:]
+        guard let absoluteStringUrl = input["url"] as? String,
+          let url = URL(string: absoluteStringUrl)
+        else {
           throw Error.urlNotFound
         }
         return url
@@ -96,7 +101,8 @@ extension ActionRequestHandler {
   private func output(wrapping deeplink: URL) -> [NSExtensionItem] {
     let results = ["deeplink": deeplink.absoluteString]
     let dictionary = [NSExtensionJavaScriptFinalizeArgumentKey: results]
-    let provider = NSItemProvider(item: dictionary as NSDictionary, typeIdentifier: UTType.propertyList.identifier)
+    let provider = NSItemProvider(
+      item: dictionary as NSDictionary, typeIdentifier: UTType.propertyList.identifier)
     let item = NSExtensionItem()
     item.attachments = [provider]
     return [item]

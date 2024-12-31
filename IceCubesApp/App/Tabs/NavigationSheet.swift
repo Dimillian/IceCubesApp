@@ -17,13 +17,7 @@ struct NavigationSheet<Content: View>: View {
     NavigationStack {
       content()
         .toolbar {
-          ToolbarItem(placement: .navigationBarLeading) {
-            Button {
-              dismiss()
-            } label: {
-              Image(systemName: "xmark.circle")
-            }
-          }
+          CloseToolbarItem()
         }
     }
   }

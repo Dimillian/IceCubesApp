@@ -11,7 +11,9 @@ import QuickLook
 
   private init() {}
 
-  public func prepareFor(selectedMediaAttachment: MediaAttachment, mediaAttachments: [MediaAttachment]) {
+  public func prepareFor(
+    selectedMediaAttachment: MediaAttachment, mediaAttachments: [MediaAttachment]
+  ) {
     self.selectedMediaAttachment = selectedMediaAttachment
     self.mediaAttachments = mediaAttachments
   }

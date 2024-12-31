@@ -51,17 +51,19 @@ import SwiftUI
     didSet {
       if let item = mediaPickers.first {
         Task {
-          if let data = await getItemImageData(item: item) {
-            if isChangingAvatar {
+          if isChangingAvatar {
+            if let data = await getItemImageData(item: item, for: .avatar) {
               _ = await uploadAvatar(data: data)
-            } else if isChangingHeader {
+            }
+            isChangingAvatar = false
+          } else if isChangingHeader {
+            if let data = await getItemImageData(item: item, for: .header) {
               _ = await uploadHeader(data: data)
             }
-            await fetchAccount()
-            isChangingAvatar = false
             isChangingHeader = false
-            mediaPickers = []
           }
+          await fetchAccount()
+          mediaPickers = []
         }
       }
     }
@@ -80,8 +82,8 @@ import SwiftUI
       isBot = account.bot
       isLocked = account.locked
       isDiscoverable = account.discoverable ?? false
-      avatar = account.avatar
-      header = account.header
+      avatar = account.haveAvatar ? account.avatar : nil
+      header = account.haveHeader ? account.header : nil
       fields = account.source?.fields.map { .init(name: $0.name, value: $0.value.asRawText) } ?? []
       withAnimation {
         isLoading = false
@@ -92,13 +94,14 @@ import SwiftUI
   func save() async {
     isSaving = true
     do {
-      let data = UpdateCredentialsData(displayName: displayName,
-                                       note: note,
-                                       source: .init(privacy: postPrivacy, sensitive: isSensitive),
-                                       bot: isBot,
-                                       locked: isLocked,
-                                       discoverable: isDiscoverable,
-                                       fieldsAttributes: fields.map { .init(name: $0.name, value: $0.value) })
+      let data = UpdateCredentialsData(
+        displayName: displayName,
+        note: note,
+        source: .init(privacy: postPrivacy, sensitive: isSensitive),
+        bot: isBot,
+        locked: isLocked,
+        discoverable: isDiscoverable,
+        fieldsAttributes: fields.map { .init(name: $0.name, value: $0.value) })
       let response = try await client?.patch(endpoint: Accounts.updateCredentials(json: data))
       if response?.statusCode != 200 {
         saveError = true
@@ -110,15 +113,38 @@ import SwiftUI
     }
   }
 
+  func deleteAvatar() async -> Bool {
+    guard let client else { return false }
+    do {
+      let response = try await client.delete(endpoint: Profile.deleteAvatar)
+      avatar = nil
+      return response?.statusCode == 200
+    } catch {
+      return false
+    }
+  }
+
+  func deleteHeader() async -> Bool {
+    guard let client else { return false }
+    do {
+      let response = try await client.delete(endpoint: Profile.deleteHeader)
+      header = nil
+      return response?.statusCode == 200
+    } catch {
+      return false
+    }
+  }
+
   private func uploadHeader(data: Data) async -> Bool {
     guard let client else { return false }
     do {
-      let response = try await client.mediaUpload(endpoint: Accounts.updateCredentialsMedia,
-                                                  version: .v1,
-                                                  method: "PATCH",
-                                                  mimeType: "image/jpeg",
-                                                  filename: "header",
-                                                  data: data)
+      let response = try await client.mediaUpload(
+        endpoint: Accounts.updateCredentialsMedia,
+        version: .v1,
+        method: "PATCH",
+        mimeType: "image/jpeg",
+        filename: "header",
+        data: data)
       return response?.statusCode == 200
     } catch {
       return false
@@ -128,28 +154,64 @@ import SwiftUI
   private func uploadAvatar(data: Data) async -> Bool {
     guard let client else { return false }
     do {
-      let response = try await client.mediaUpload(endpoint: Accounts.updateCredentialsMedia,
-                                                  version: .v1,
-                                                  method: "PATCH",
-                                                  mimeType: "image/jpeg",
-                                                  filename: "avatar",
-                                                  data: data)
+      let response = try await client.mediaUpload(
+        endpoint: Accounts.updateCredentialsMedia,
+        version: .v1,
+        method: "PATCH",
+        mimeType: "image/jpeg",
+        filename: "avatar",
+        data: data)
       return response?.statusCode == 200
     } catch {
       return false
     }
   }
 
-  private func getItemImageData(item: PhotosPickerItem) async -> Data? {
-    guard let imageFile = try? await item.loadTransferable(type: StatusEditor.ImageFileTranseferable.self) else { return nil }
+  private func getItemImageData(item: PhotosPickerItem, for type: ItemType) async -> Data? {
+    guard
+      let imageFile = try? await item.loadTransferable(
+        type: StatusEditor.ImageFileTranseferable.self)
+    else { return nil }
 
     let compressor = StatusEditor.Compressor()
 
     guard let compressedData = await compressor.compressImageFrom(url: imageFile.url),
-          let image = UIImage(data: compressedData),
-          let uploadData = try? await compressor.compressImageForUpload(image)
-    else { return nil }
+      let image = UIImage(data: compressedData),
+      let uploadData = try? await compressor.compressImageForUpload(
+        image,
+        maxSize: 2 * 1024 * 1024,  // 2MB
+        maxHeight: type.maxHeight,
+        maxWidth: type.maxWidth
+      )
+    else {
+      return nil
+    }
 
     return uploadData
+  }
+}
+
+extension EditAccountViewModel {
+  private enum ItemType {
+    case avatar
+    case header
+
+    var maxHeight: CGFloat {
+      switch self {
+      case .avatar:
+        400
+      case .header:
+        500
+      }
+    }
+
+    var maxWidth: CGFloat {
+      switch self {
+      case .avatar:
+        400
+      case .header:
+        1500
+      }
+    }
   }
 }

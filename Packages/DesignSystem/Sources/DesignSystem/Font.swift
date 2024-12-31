@@ -2,7 +2,7 @@ import Env
 import SwiftUI
 
 @MainActor
-public extension Font {
+extension Font {
   // See https://gist.github.com/zacwest/916d31da5d03405809c4 for iOS values
   // Custom values for Mac
   private static let title = 28.0
@@ -45,84 +45,85 @@ public extension Font {
     UIFontMetrics.default.scaledValue(for: baseSize * Theme.shared.fontSizeScale)
   }
 
-  static var scaledTitle: Font {
+  public static var scaledTitle: Font {
     customFont(size: userScaledFontSize(baseSize: title), relativeTo: .title)
   }
 
-  static var scaledHeadline: Font {
-    customFont(size: userScaledFontSize(baseSize: headline), relativeTo: .headline).weight(.semibold)
+  public static var scaledHeadline: Font {
+    customFont(size: userScaledFontSize(baseSize: headline), relativeTo: .headline).weight(
+      .semibold)
   }
 
-  static var scaledHeadlineFont: UIFont {
+  public static var scaledHeadlineFont: UIFont {
     customUIFont(size: userScaledFontSize(baseSize: headline))
   }
 
-  static var scaledBodyFocused: Font {
+  public static var scaledBodyFocused: Font {
     customFont(size: userScaledFontSize(baseSize: body + 2), relativeTo: .body)
   }
 
-  static var scaledBodyFocusedFont: UIFont {
+  public static var scaledBodyFocusedFont: UIFont {
     customUIFont(size: userScaledFontSize(baseSize: body + 2))
   }
 
-  static var scaledBody: Font {
+  public static var scaledBody: Font {
     customFont(size: userScaledFontSize(baseSize: body), relativeTo: .body)
   }
 
-  static var scaledBodyFont: UIFont {
+  public static var scaledBodyFont: UIFont {
     customUIFont(size: userScaledFontSize(baseSize: body))
   }
 
-  static var scaledBodyUIFont: UIFont {
+  public static var scaledBodyUIFont: UIFont {
     customUIFont(size: userScaledFontSize(baseSize: body))
   }
 
-  static var scaledCallout: Font {
+  public static var scaledCallout: Font {
     customFont(size: userScaledFontSize(baseSize: callout), relativeTo: .callout)
   }
 
-  static var scaledCalloutFont: UIFont {
+  public static var scaledCalloutFont: UIFont {
     customUIFont(size: userScaledFontSize(baseSize: body))
   }
 
-  static var scaledSubheadline: Font {
+  public static var scaledSubheadline: Font {
     customFont(size: userScaledFontSize(baseSize: subheadline), relativeTo: .subheadline)
   }
 
-  static var scaledSubheadlineFont: UIFont {
+  public static var scaledSubheadlineFont: UIFont {
     customUIFont(size: userScaledFontSize(baseSize: subheadline))
   }
 
-  static var scaledFootnote: Font {
+  public static var scaledFootnote: Font {
     customFont(size: userScaledFontSize(baseSize: footnote), relativeTo: .footnote)
   }
 
-  static var scaledFootnoteFont: UIFont {
+  public static var scaledFootnoteFont: UIFont {
     customUIFont(size: userScaledFontSize(baseSize: footnote))
   }
 
-  static var scaledCaption: Font {
+  public static var scaledCaption: Font {
     customFont(size: userScaledFontSize(baseSize: caption), relativeTo: .caption)
   }
 
-  static var scaledCaptionFont: UIFont {
+  public static var scaledCaptionFont: UIFont {
     customUIFont(size: userScaledFontSize(baseSize: caption))
   }
 }
 
-public extension UIFont {
-  func rounded() -> UIFont {
+extension UIFont {
+  public func rounded() -> UIFont {
     guard let descriptor = fontDescriptor.withDesign(.rounded) else {
       return self
     }
     return UIFont(descriptor: descriptor, size: pointSize)
   }
 
-  var emojiSize: CGFloat {
+  public var emojiSize: CGFloat {
     pointSize
   }
 
-  var emojiBaselineOffset: CGFloat {
+  public var emojiBaselineOffset: CGFloat {
     // Center emoji with capital letter size of font
     -(emojiSize - capHeight) / 2
   }

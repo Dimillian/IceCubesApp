@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "StatusKit",
       targets: ["StatusKit"]
-    ),
+    )
   ],
   dependencies: [
     .package(name: "AppAccount", path: "../AppAccount"),
@@ -38,8 +38,8 @@ let package = Package(
         .product(name: "LRUCache", package: "LRUCache"),
       ],
       swiftSettings: [
-        .enableExperimentalFeature("StrictConcurrency"),
+        .swiftLanguageMode(.v6)
       ]
-    ),
+    )
   ]
 )

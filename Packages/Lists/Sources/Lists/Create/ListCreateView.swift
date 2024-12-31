@@ -24,9 +24,10 @@ public struct ListCreateView: View {
       Form {
         Section("lists.edit.settings") {
           TextField("list.edit.title", text: $title)
-          Picker("list.edit.repliesPolicy",
-                 selection: $repliesPolicy)
-          {
+          Picker(
+            "list.edit.repliesPolicy",
+            selection: $repliesPolicy
+          ) {
             ForEach(Models.List.RepliesPolicy.allCases) { policy in
               Text(policy.title)
                 .tag(policy)
@@ -39,13 +40,17 @@ public struct ListCreateView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
       .toolbar {
+        CancelToolbarItem()
         ToolbarItem {
           Button {
+            let client = client
             Task {
               isSaving = true
-              let _: Models.List = try await client.post(endpoint: Lists.createList(title: title,
-                                                                                    repliesPolicy: repliesPolicy,
-                                                                                    exclusive: isExclusive))
+              let _: Models.List = try await client.post(
+                endpoint: Lists.createList(
+                  title: title,
+                  repliesPolicy: repliesPolicy,
+                  exclusive: isExclusive))
               await currentAccount.fetchLists()
               isSaving = false
               dismiss()

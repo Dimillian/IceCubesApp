@@ -15,16 +15,27 @@ struct StatusRowTextView: View {
   var body: some View {
     VStack {
       HStack {
-        EmojiTextApp(statusDataController.content,
-                     emojis: viewModel.finalStatus.emojis,
-                     language: viewModel.finalStatus.language,
-                     lineLimit: viewModel.lineLimit)
-          .font(isFocused ? .scaledBodyFocused : .scaledBody)
-          .lineSpacing(CGFloat(theme.lineSpacing))
-          .foregroundColor(viewModel.textDisabled ? .gray : theme.labelColor)
-          .emojiText.size(isFocused ? Font.scaledBodyFocusedFont.emojiSize : Font.scaledBodyFont.emojiSize)
-          .emojiText.baselineOffset(isFocused ? Font.scaledBodyFocusedFont.emojiBaselineOffset : Font.scaledBodyFont.emojiBaselineOffset)
-          .environment(\.openURL, OpenURLAction { url in
+        EmojiTextApp(
+          statusDataController.content,
+          emojis: viewModel.finalStatus.emojis,
+          language: viewModel.finalStatus.language,
+          lineLimit: viewModel.lineLimit
+        )
+        .fixedSize(horizontal: false, vertical: true)
+        .font(isFocused ? .scaledBodyFocused : .scaledBody)
+        .lineSpacing(CGFloat(theme.lineSpacing))
+        .foregroundColor(viewModel.textDisabled ? .gray : theme.labelColor)
+        .emojiText.size(
+          isFocused ? Font.scaledBodyFocusedFont.emojiSize : Font.scaledBodyFont.emojiSize
+        )
+        .emojiText.baselineOffset(
+          isFocused
+            ? Font.scaledBodyFocusedFont.emojiBaselineOffset
+            : Font.scaledBodyFont.emojiBaselineOffset
+        )
+        .environment(
+          \.openURL,
+          OpenURLAction { url in
             viewModel.routerPath.handleStatus(status: viewModel.finalStatus, url: url)
           })
       }
@@ -35,7 +46,7 @@ struct StatusRowTextView: View {
 
   @ViewBuilder
   func makeCollapseButton() -> some View {
-    if let _ = viewModel.lineLimit {
+    if viewModel.lineLimit != nil {
       HStack(alignment: .top) {
         Text("status.show-full-post")
           .font(.system(.subheadline, weight: .bold))
@@ -53,7 +64,7 @@ struct StatusRowTextView: View {
         .accessibilityHidden(true)
       }
       .contentShape(Rectangle())
-      .onTapGesture { // make whole row tapable to make up for smaller button size
+      .onTapGesture {  // make whole row tapable to make up for smaller button size
         withAnimation {
           viewModel.isCollapsed.toggle()
         }

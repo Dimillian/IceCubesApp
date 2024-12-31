@@ -1,3 +1,4 @@
+import AppIntents
 import Env
 import MediaUI
 import StatusKit
@@ -22,20 +23,36 @@ extension IceCubesApp {
         .environment(theme)
         .environment(watcher)
         .environment(pushNotificationsService)
+        .environment(appIntentService)
         .environment(\.isSupporter, isSupporter)
         .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
-          MediaUIView(selectedAttachment: selectedMediaAttachment,
-                      attachments: quickLook.mediaAttachments)
+          if #available(iOS 18.0, *) {
+            MediaUIView(
+              selectedAttachment: selectedMediaAttachment,
+              attachments: quickLook.mediaAttachments
+            )
+            .presentationBackground(.ultraThinMaterial)
+            .presentationCornerRadius(16)
+            .presentationSizing(.page)
+            .withEnvironments()
+          } else {
+            MediaUIView(
+              selectedAttachment: selectedMediaAttachment,
+              attachments: quickLook.mediaAttachments
+            )
             .presentationBackground(.ultraThinMaterial)
             .presentationCornerRadius(16)
             .withEnvironments()
+          }
         }
         .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
           if newValue != nil {
             pushNotificationsService.handledNotification = nil
-            if appAccountsManager.currentAccount.oauthToken?.accessToken != newValue?.account.token.accessToken,
-               let account = appAccountsManager.availableAccounts.first(where:
-                 { $0.oauthToken?.accessToken == newValue?.account.token.accessToken })
+            if appAccountsManager.currentAccount.oauthToken?.accessToken
+              != newValue?.account.token.accessToken,
+              let account = appAccountsManager.availableAccounts.first(where: {
+                $0.oauthToken?.accessToken == newValue?.account.token.accessToken
+              })
             {
               appAccountsManager.currentAccount = account
               DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -47,13 +64,14 @@ extension IceCubesApp {
             }
           }
         }
+        .onChange(of: appIntentService.handledIntent) { _, _ in
+          if let intent = appIntentService.handledIntent?.intent {
+            handleIntent(intent)
+            appIntentService.handledIntent = nil
+          }
+        }
         .withModelContainer()
     }
-    #if targetEnvironment(macCatalyst)
-    .defaultSize(width: userPreferences.showiPadSecondaryColumn ? 1100 : 800, height: 1400)
-    #elseif os(visionOS)
-    .defaultSize(width: 800, height: 1200)
-    #endif
     .commands {
       appMenu
     }
@@ -66,6 +84,11 @@ extension IceCubesApp {
         watcher.watch(streams: [.user, .direct])
       }
     }
+    #if targetEnvironment(macCatalyst)
+      .windowResize()
+    #elseif os(visionOS)
+      .defaultSize(width: 800, height: 1200)
+    #endif
   }
 
   @SceneBuilder
@@ -74,7 +97,9 @@ extension IceCubesApp {
       Group {
         switch destination.wrappedValue {
         case let .newStatusEditor(visibility):
-          StatusEditor.MainView(mode: .new(visibility: visibility))
+          StatusEditor.MainView(mode: .new(text: nil, visibility: visibility))
+        case let .prefilledStatusEditor(text, visibility):
+          StatusEditor.MainView(mode: .new(text: text, visibility: visibility))
         case let .editStatusEditor(status):
           StatusEditor.MainView(mode: .edit(status: status))
         case let .quoteStatusEditor(status):
@@ -90,6 +115,8 @@ extension IceCubesApp {
         }
       }
       .withEnvironments()
+      .environment(\.isCatalystWindow, true)
+      .environment(RouterPath())
       .withModelContainer()
       .applyTheme(theme)
       .frame(minWidth: 300, minHeight: 400)
@@ -101,8 +128,9 @@ extension IceCubesApp {
       Group {
         switch destination.wrappedValue {
         case let .mediaViewer(attachments, selectedAttachment):
-          MediaUIView(selectedAttachment: selectedAttachment,
-                      attachments: attachments)
+          MediaUIView(
+            selectedAttachment: selectedAttachment,
+            attachments: attachments)
         case .none:
           EmptyView()
         }
@@ -110,9 +138,43 @@ extension IceCubesApp {
       .withEnvironments()
       .withModelContainer()
       .applyTheme(theme)
+      .environment(\.isCatalystWindow, true)
       .frame(minWidth: 300, minHeight: 400)
     }
     .defaultSize(width: 1200, height: 1000)
     .windowResizability(.contentMinSize)
+  }
+
+  private func handleIntent(_: any AppIntent) {
+    if let postIntent = appIntentService.handledIntent?.intent as? PostIntent {
+      #if os(visionOS) || os(macOS)
+        openWindow(
+          value: WindowDestinationEditor.prefilledStatusEditor(
+            text: postIntent.content ?? "",
+            visibility: userPreferences.postVisibility))
+      #else
+        appRouterPath.presentedSheet = .prefilledStatusEditor(
+          text: postIntent.content ?? "",
+          visibility: userPreferences.postVisibility)
+      #endif
+    } else if let tabIntent = appIntentService.handledIntent?.intent as? TabIntent {
+      selectedTab = tabIntent.tab.toAppTab
+    } else if let imageIntent = appIntentService.handledIntent?.intent as? PostImageIntent,
+      let urls = imageIntent.images?.compactMap({ $0.fileURL })
+    {
+      appRouterPath.presentedSheet = .imageURL(
+        urls: urls,
+        visibility: userPreferences.postVisibility)
+    }
+  }
+}
+
+extension Scene {
+  func windowResize() -> some Scene {
+    if #available(iOS 18.0, *) {
+      return self.windowResizability(.contentSize)
+    } else {
+      return self.defaultSize(width: 1100, height: 1400)
+    }
   }
 }

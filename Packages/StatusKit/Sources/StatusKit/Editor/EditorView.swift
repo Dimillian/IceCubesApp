@@ -55,7 +55,7 @@ extension StatusEditor {
         }
       }
       #if !os(visionOS)
-      .background(theme.primaryBackgroundColor)
+        .background(theme.primaryBackgroundColor)
       #endif
       .focused($editorFocusState, equals: assignedFocusState)
       .onAppear { setupViewModel() }
@@ -77,9 +77,10 @@ extension StatusEditor {
       if let account = currentAccount.account, !viewModel.mode.isEditing {
         HStack {
           if viewModel.mode.isInShareExtension {
-            AppAccountsSelectorView(routerPath: RouterPath(),
-                                    accountCreationEnabled: false,
-                                    avatarConfig: .status)
+            AppAccountsSelectorView(
+              routerPath: RouterPath(),
+              accountCreationEnabled: false,
+              avatarConfig: .status)
           } else {
             AvatarView(account.avatar, config: AvatarView.FrameConfig.status)
               .environment(theme)
@@ -87,8 +88,10 @@ extension StatusEditor {
           }
 
           VStack(alignment: .leading, spacing: 4) {
-            PrivacyMenu(visibility: $viewModel.visibility, tint: isMain ? theme.tintColor : .secondary)
-              .disabled(!isMain)
+            PrivacyMenu(
+              visibility: $viewModel.visibility, tint: isMain ? theme.tintColor : .secondary
+            )
+            .disabled(!isMain)
 
             Text("@\(account.acct)@\(appAccounts.currentClient.server)")
               .font(.scaledFootnote)
@@ -116,7 +119,11 @@ extension StatusEditor {
         $viewModel.statusText,
         getTextView: { textView in viewModel.textView = textView }
       )
-      .placeholder(String(localized: isMain ? "status.editor.text.placeholder" : "status.editor.follow-up.text.placeholder"))
+      .placeholder(
+        String(
+          localized: isMain
+            ? "status.editor.text.placeholder" : "status.editor.follow-up.text.placeholder")
+      )
       .setKeyboardType(preferences.isSocialKeyboardEnabled ? .twitter : .default)
       .padding(.horizontal, .layoutPadding)
       .padding(.vertical)
@@ -126,20 +133,26 @@ extension StatusEditor {
     private var embeddedStatus: some View {
       if let status = viewModel.replyToStatus {
         Divider().padding(.vertical, .statusComponentSpacing)
-        StatusRowView(viewModel: .init(status: status,
-                                       client: client,
-                                       routerPath: RouterPath(),
-                                       showActions: false))
-          .accessibilityLabel(status.content.asRawText)
-          .environment(RouterPath())
-          .allowsHitTesting(false)
-          .environment(\.isStatusFocused, false)
-          .environment(\.isModal, true)
-          .padding(.horizontal, .layoutPadding)
-          .padding(.vertical, .statusComponentSpacing)
+        StatusRowView(
+          viewModel: .init(
+            status: status,
+            client: client,
+            routerPath: RouterPath(),
+            showActions: false),
+          context: .timeline
+        )
+        .accessibilityLabel(status.content.asRawText)
+        .environment(RouterPath())
+        .allowsHitTesting(false)
+        .environment(\.isStatusFocused, false)
+        .environment(\.isModal, true)
+        .padding(.horizontal, .layoutPadding)
+        .padding(.vertical, .statusComponentSpacing)
         #if os(visionOS)
-          .background(RoundedRectangle(cornerRadius: 8)
-            .foregroundStyle(.background))
+          .background(
+            RoundedRectangle(cornerRadius: 8)
+              .foregroundStyle(.background)
+          )
           .buttonStyle(.plain)
           .padding(.layoutPadding)
         #endif
@@ -161,7 +174,9 @@ extension StatusEditor {
 
     @ViewBuilder
     private var characterCountAndLangView: some View {
-      let value = (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500) + viewModel.statusTextCharacterLength
+      let value =
+        (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500)
+        + viewModel.statusTextCharacterLength
       HStack(alignment: .center) {
         LangButton(viewModel: viewModel)
           .padding(.leading, .layoutPadding)
@@ -184,7 +199,9 @@ extension StatusEditor {
           }
           isSpoilerTextFocused = viewModel.id
         } label: {
-          Image(systemName: viewModel.spoilerOn ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
+          Image(
+            systemName: viewModel.spoilerOn
+              ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
         }
         .buttonStyle(.bordered)
         .accessibilityLabel("accessibility.editor.button.spoiler")

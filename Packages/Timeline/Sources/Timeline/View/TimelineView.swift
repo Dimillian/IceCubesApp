@@ -6,11 +6,12 @@ import Network
 import StatusKit
 import SwiftData
 import SwiftUI
-import SwiftUIIntrospect
 
 @MainActor
 public struct TimelineView: View {
   @Environment(\.scenePhase) private var scenePhase
+  @Environment(\.selectedTabScrollToTop) private var selectedTabScrollToTop
+
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var account
   @Environment(StreamWatcher.self) private var watcher
@@ -18,101 +19,51 @@ public struct TimelineView: View {
   @Environment(RouterPath.self) private var routerPath
 
   @State private var viewModel = TimelineViewModel()
-  @State private var prefetcher = TimelineMediaPrefetcher()
   @State private var contentFilter = TimelineContentFilter.shared
 
+  @State private var scrollToIdAnimated: String? = nil
+
   @State private var wasBackgrounded: Bool = false
-  @State private var collectionView: UICollectionView?
 
   @Binding var timeline: TimelineFilter
   @Binding var pinnedFilters: [TimelineFilter]
   @Binding var selectedTagGroup: TagGroup?
-  @Binding var scrollToTopSignal: Int
 
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
   private let canFilterTimeline: Bool
 
-  public init(timeline: Binding<TimelineFilter>,
-              pinnedFilters: Binding<[TimelineFilter]>,
-              selectedTagGroup: Binding<TagGroup?>,
-              scrollToTopSignal: Binding<Int>,
-              canFilterTimeline: Bool)
-  {
+  public init(
+    timeline: Binding<TimelineFilter>,
+    pinnedFilters: Binding<[TimelineFilter]>,
+    selectedTagGroup: Binding<TagGroup?>,
+    canFilterTimeline: Bool
+  ) {
     _timeline = timeline
     _pinnedFilters = pinnedFilters
     _selectedTagGroup = selectedTagGroup
-    _scrollToTopSignal = scrollToTopSignal
     self.canFilterTimeline = canFilterTimeline
   }
 
   public var body: some View {
-    ScrollViewReader { proxy in
-      ZStack(alignment: .top) {
-        List {
-          scrollToTopView
-          TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $timeline)
-          TimelineTagHeaderView(tag: $viewModel.tag)
-          switch viewModel.timeline {
-          case .remoteLocal:
-            StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
-          default:
-            StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
-              .environment(\.isHomeTimeline, timeline == .home)
-          }
-        }
-        .id(client.id)
-        .environment(\.defaultMinListRowHeight, 1)
-        .listStyle(.plain)
-        #if !os(visionOS)
-          .scrollContentBackground(.hidden)
-          .background(theme.primaryBackgroundColor)
-        #endif
-          .introspect(.list, on: .iOS(.v17)) { (collectionView: UICollectionView) in
-            DispatchQueue.main.async {
-              self.collectionView = collectionView
-            }
-            prefetcher.viewModel = viewModel
-            collectionView.isPrefetchingEnabled = true
-            collectionView.prefetchDataSource = prefetcher
-          }
-        if viewModel.timeline.supportNewestPagination {
-          TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver)
+    ZStack(alignment: .top) {
+      listView
+      statusesObserver
+    }
+    .safeAreaInset(edge: .top, spacing: 0) {
+      if canFilterTimeline, !pinnedFilters.isEmpty {
+        VStack(spacing: 0) {
+          TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
+            .padding(.vertical, 8)
+            .padding(.horizontal, .layoutPadding)
+            .background(theme.primaryBackgroundColor.opacity(0.30))
+            .background(Material.ultraThin)
+          Divider()
         }
       }
-      .safeAreaInset(edge: .top, spacing: 0) {
-        if canFilterTimeline, !pinnedFilters.isEmpty {
-          VStack(spacing: 0) {
-            TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
-              .padding(.vertical, 8)
-              .padding(.horizontal, .layoutPadding)
-              .background(theme.primaryBackgroundColor.opacity(0.30))
-              .background(Material.ultraThin)
-            Divider()
-          }
-        }
-      }
-      .if(canFilterTimeline && !pinnedFilters.isEmpty) { view in
-        view.toolbarBackground(.hidden, for: .navigationBar)
-      }
-      .onChange(of: viewModel.scrollToIndex) { _, newValue in
-        if let collectionView,
-           let newValue,
-           let rows = collectionView.dataSource?.collectionView(collectionView, numberOfItemsInSection: 0),
-           rows > newValue
-        {
-          collectionView.scrollToItem(at: .init(row: newValue, section: 0),
-                                      at: .top,
-                                      animated: viewModel.scrollToIndexAnimated)
-          viewModel.scrollToIndexAnimated = false
-          viewModel.scrollToIndex = nil
-        }
-      }
-      .onChange(of: scrollToTopSignal) {
-        withAnimation {
-          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
-        }
-      }
+    }
+    .if(canFilterTimeline && !pinnedFilters.isEmpty) { view in
+      view.toolbarBackground(.hidden, for: .navigationBar)
     }
     .toolbar {
       toolbarTitleView
@@ -152,8 +103,8 @@ public struct TimelineView: View {
       switch timeline {
       case let .list(list):
         if let accountList = lists.first(where: { $0.id == list.id }),
-           list.id == accountList.id,
-           accountList.title != list.title
+          list.id == accountList.id,
+          accountList.title != list.title
         {
           timeline = .list(list: accountList)
         }
@@ -211,6 +162,63 @@ public struct TimelineView: View {
     }
   }
 
+  private var listView: some View {
+    ScrollViewReader { proxy in
+      List {
+        scrollToTopView
+        TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $timeline)
+        TimelineTagHeaderView(tag: $viewModel.tag)
+        switch viewModel.timeline {
+        case .remoteLocal:
+          StatusesListView(
+            fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
+        default:
+          StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
+            .environment(\.isHomeTimeline, timeline == .home)
+        }
+      }
+      .id(client.id)
+      .environment(\.defaultMinListRowHeight, 1)
+      .listStyle(.plain)
+      #if !os(visionOS)
+        .scrollContentBackground(.hidden)
+        .background(theme.primaryBackgroundColor)
+      #endif
+      .onChange(of: viewModel.scrollToId) { _, newValue in
+        if let newValue {
+          proxy.scrollTo(newValue, anchor: .top)
+          viewModel.scrollToId = nil
+        }
+      }
+      .onChange(of: scrollToIdAnimated) { _, newValue in
+        if let newValue {
+          withAnimation {
+            proxy.scrollTo(newValue, anchor: .top)
+            scrollToIdAnimated = nil
+          }
+        }
+      }
+      .onChange(of: selectedTabScrollToTop) { _, newValue in
+        if newValue == 0, routerPath.path.isEmpty {
+          withAnimation {
+            proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
+          }
+        }
+      }
+    }
+  }
+
+  @ViewBuilder
+  private var statusesObserver: some View {
+    if viewModel.timeline.supportNewestPagination {
+      TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver) { statusId in
+        if let statusId {
+          scrollToIdAnimated = statusId
+        }
+      }
+    }
+  }
+
   @ToolbarContentBuilder
   private var toolbarTitleView: some ToolbarContent {
     ToolbarItem(placement: .principal) {
@@ -222,12 +230,18 @@ public struct TimelineView: View {
           Text(timeline.localizedTitle())
             .font(.caption)
             .foregroundStyle(.secondary)
-        case .home:
+        case let .link(url, _):
           Text(timeline.localizedTitle())
             .font(.headline)
+          Text(url.host() ?? url.absoluteString)
+            .font(.caption)
+            .foregroundStyle(.secondary)
         default:
           Text(timeline.localizedTitle())
             .font(.headline)
+          Text(client.server)
+            .font(.caption)
+            .foregroundStyle(.secondary)
         }
       }
       .accessibilityRepresentation {
@@ -268,8 +282,10 @@ public struct TimelineView: View {
                     group.tags.append(tag)
                   }
                 } label: {
-                  Label(group.title,
-                        systemImage: group.tags.contains(tag) ? "checkmark.rectangle.fill" : "checkmark.rectangle")
+                  Label(
+                    group.title,
+                    systemImage: group.tags.contains(tag)
+                      ? "checkmark.rectangle.fill" : "checkmark.rectangle")
                 }
               }
             }

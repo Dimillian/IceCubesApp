@@ -12,9 +12,9 @@ public struct FollowedTagsListView: View {
   public var body: some View {
     List(currentAccount.tags) { tag in
       TagRowView(tag: tag)
-      #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
-      #endif
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #endif
         .padding(.vertical, 4)
     }
     .task {
@@ -24,8 +24,8 @@ public struct FollowedTagsListView: View {
       await currentAccount.fetchFollowedTags()
     }
     #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.secondaryBackgroundColor)
+      .scrollContentBackground(.hidden)
+      .background(theme.secondaryBackgroundColor)
     #endif
     .listStyle(.plain)
     .navigationTitle("timeline.filter.tags")

@@ -44,10 +44,12 @@ struct QuickLookToolbarItem: ToolbarContent, @unchecked Sendable {
   }
 
   private var quickLookDir: URL {
-    try! FileManager.default.url(for: .cachesDirectory,
-                                 in: .userDomainMask,
-                                 appropriateFor: nil,
-                                 create: false)
-      .appending(component: "quicklook")
+    try! FileManager.default.url(
+      for: .cachesDirectory,
+      in: .userDomainMask,
+      appropriateFor: nil,
+      create: false
+    )
+    .appending(component: "quicklook")
   }
 }

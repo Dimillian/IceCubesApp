@@ -16,9 +16,9 @@ struct StatusRowTranslateView: View {
     let statusLang = viewModel.getStatusLang()
 
     if let userLang = preferences.serverPreferences?.postLanguage,
-       preferences.showTranslateButton,
-       !viewModel.finalStatus.content.asRawText.isEmpty,
-       viewModel.translation == nil
+      preferences.showTranslateButton,
+      !viewModel.finalStatus.content.asRawText.isEmpty,
+      viewModel.translation == nil
     {
       return userLang != statusLang
     } else {
@@ -35,11 +35,12 @@ struct StatusRowTranslateView: View {
     }
   }
 
-  var body: some View {
+  @ViewBuilder
+  var translateButton: some View {
     if !isInCaptureMode,
-       !isCompact,
-       let userLang = preferences.serverPreferences?.postLanguage,
-       shouldShowTranslateButton
+      !isCompact,
+      let userLang = preferences.serverPreferences?.postLanguage,
+      shouldShowTranslateButton
     {
       Button {
         Task {
@@ -54,15 +55,34 @@ struct StatusRowTranslateView: View {
       }
       .buttonStyle(.borderless)
     }
+  }
 
-    if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
+  @ViewBuilder
+  var generalTranslateButton: some View {
+    translateButton
+  }
+
+  var body: some View {
+    generalTranslateButton
+      .onChange(of: preferences.preferredTranslationType) { _, _ in
+        withAnimation {
+          viewModel.updatePreferredTranslation()
+        }
+      }
+
+    if let translation = viewModel.translation, !viewModel.isLoadingTranslation,
+      preferences.preferredTranslationType != .useApple
+    {
       GroupBox {
         VStack(alignment: .leading, spacing: 4) {
           Text(translation.content.asSafeMarkdownAttributedString)
             .font(.scaledBody)
-          Text(getLocalizedString(langCode: translation.detectedSourceLanguage, provider: translation.provider))
-            .font(.footnote)
-            .foregroundStyle(.secondary)
+          Text(
+            getLocalizedString(
+              langCode: translation.detectedSourceLanguage, provider: translation.provider)
+          )
+          .font(.footnote)
+          .foregroundStyle(.secondary)
         }
       }
       .fixedSize(horizontal: false, vertical: true)

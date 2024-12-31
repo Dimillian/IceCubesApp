@@ -6,7 +6,6 @@ import SwiftUI
 
 @MainActor
 struct StatusRowHeaderView: View {
-  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.redactionReasons) private var redactionReasons
 
@@ -27,7 +26,11 @@ struct StatusRowHeaderView: View {
       }
     }
     .accessibilityElement(children: .combine)
-    .accessibilityLabel(Text("\(viewModel.finalStatus.account.safeDisplayName)") + Text(", ") + Text(viewModel.finalStatus.createdAt.relativeFormatted))
+    .accessibilityLabel(
+      Text(
+        "\(viewModel.finalStatus.account.safeDisplayName), \(viewModel.finalStatus.createdAt.relativeFormatted)"
+      )
+    )
     .accessibilityAction {
       viewModel.navigateToAccountDetail(account: viewModel.finalStatus.account)
     }
@@ -38,40 +41,47 @@ struct StatusRowHeaderView: View {
     HStack(alignment: .center) {
       if theme.avatarPosition == .top {
         AvatarView(viewModel.finalStatus.account.avatar)
-        #if targetEnvironment(macCatalyst)
-          .accountPopover(viewModel.finalStatus.account)
-        #endif
+          #if targetEnvironment(macCatalyst)
+            .accountPopover(viewModel.finalStatus.account)
+          #endif
       }
       VStack(alignment: .leading, spacing: 2) {
         HStack(alignment: .firstTextBaseline, spacing: 2) {
           Group {
-            EmojiTextApp(viewModel.finalStatus.account.cachedDisplayName,
-                         emojis: viewModel.finalStatus.account.emojis)
-              .font(.scaledSubheadline)
-              .foregroundColor(theme.labelColor)
-              .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
-              .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-              .fontWeight(.semibold)
-              .lineLimit(1)
+            EmojiTextApp(
+              viewModel.finalStatus.account.cachedDisplayName,
+              emojis: viewModel.finalStatus.account.emojis
+            )
+            .fixedSize(horizontal: false, vertical: true)
+            .font(.scaledSubheadline)
+            .foregroundColor(theme.labelColor)
+            .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+            .fontWeight(.semibold)
+            .lineLimit(1)
             #if targetEnvironment(macCatalyst)
               .accountPopover(viewModel.finalStatus.account)
             #endif
 
             if !redactionReasons.contains(.placeholder) {
               accountBadgeView
+                .fixedSize(horizontal: false, vertical: true)
                 .font(.footnote)
             }
           }
           .layoutPriority(1)
         }
         if !redactionReasons.contains(.placeholder) {
-          if (theme.displayFullUsername && theme.avatarPosition == .leading) ||
-            theme.avatarPosition == .top
+          if (theme.displayFullUsername && theme.avatarPosition == .leading)
+            || theme.avatarPosition == .top
           {
-            Text("@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)")
-              .font(.scaledFootnote)
-              .foregroundStyle(.secondary)
-              .lineLimit(1)
+            Text(
+              "@\(theme.displayFullUsername ? viewModel.finalStatus.account.acct : viewModel.finalStatus.account.username)"
+            )
+            .fixedSize(horizontal: false, vertical: true)
+            .font(.scaledFootnote)
+            .foregroundStyle(.secondary)
+            .lineLimit(1)
             #if targetEnvironment(macCatalyst)
               .accountPopover(viewModel.finalStatus.account)
             #endif
@@ -81,21 +91,20 @@ struct StatusRowHeaderView: View {
     }
   }
 
-  private var accountBadgeView: Text {
+  private var accountBadgeView: Text? {
     if (viewModel.status.reblogAsAsStatus ?? viewModel.status).account.bot {
-      return Text(Image(systemName: "poweroutlet.type.b.fill")) + Text(" ")
+      return Text("\(Image(systemName: "poweroutlet.type.b.fill")) ")
     } else if (viewModel.status.reblogAsAsStatus ?? viewModel.status).account.locked {
-      return Text(Image(systemName: "lock.fill")) + Text(" ")
+      return Text("\(Image(systemName: "lock.fill")) ")
     }
-    return Text("")
+    return nil
   }
 
   private var dateView: some View {
-    Group {
-      Text(Image(systemName: viewModel.finalStatus.visibility.iconName)) +
-        Text(" ⸱ ") +
-        Text(viewModel.finalStatus.createdAt.relativeFormatted)
-    }
+    Text(
+      "\(Image(systemName: viewModel.finalStatus.visibility.iconName)) ⸱ \(viewModel.finalStatus.createdAt.relativeFormatted)"
+    )
+    .fixedSize(horizontal: false, vertical: true)
     .font(.scaledFootnote)
     .foregroundStyle(.secondary)
     .lineLimit(1)

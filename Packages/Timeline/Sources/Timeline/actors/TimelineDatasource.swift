@@ -20,11 +20,12 @@ actor TimelineDatasource {
     let showThreads = await contentFilter.showThreads
     let showQuotePosts = await contentFilter.showQuotePosts
     return statuses.filter { status in
-      if status.isHidden ||
-        !showReplies && status.inReplyToId != nil && status.inReplyToAccountId != status.account.id ||
-        !showBoosts && status.reblog != nil ||
-        !showThreads && status.inReplyToAccountId == status.account.id ||
-        !showQuotePosts && !status.content.statusesURLs.isEmpty
+      if status.isHidden
+        || !showReplies && status.inReplyToId != nil
+          && status.inReplyToAccountId != status.account.id
+        || !showBoosts && status.reblog != nil
+        || !showThreads && status.inReplyToAccountId == status.account.id
+        || !showQuotePosts && !status.content.statusesURLs.isEmpty
       {
         return false
       }
@@ -68,11 +69,25 @@ actor TimelineDatasource {
     statuses.insert(contentsOf: contentOf, at: at)
   }
 
+  func remove(after: Status, safeOffset: Int) {
+    if let index = statuses.firstIndex(of: after) {
+      let safeIndex = index + safeOffset
+      if statuses.count > safeIndex {
+        statuses.removeSubrange(safeIndex..<statuses.endIndex)
+      }
+    }
+  }
+
   func replace(_ status: Status, at: Int) {
     statuses[at] = status
   }
 
-  func remove(_ statusId: String) {
-    statuses.removeAll(where: { $0.id == statusId })
+  func remove(_ statusId: String) -> Status? {
+    if let index = statuses.firstIndex(where: { status in
+      status.id == statusId
+    }) {
+      return statuses.remove(at: index)
+    }
+    return nil
   }
 }

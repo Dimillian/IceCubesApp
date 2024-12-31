@@ -72,21 +72,37 @@ struct SupportAppView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
     #endif
-      .alert("settings.support.alert.title", isPresented: $purchaseSuccessDisplayed, actions: {
-        Button { purchaseSuccessDisplayed = false } label: { Text("alert.button.ok") }
-      }, message: {
+    .alert(
+      "settings.support.alert.title", isPresented: $purchaseSuccessDisplayed,
+      actions: {
+        Button {
+          purchaseSuccessDisplayed = false
+        } label: {
+          Text("alert.button.ok")
+        }
+      },
+      message: {
         Text("settings.support.alert.message")
-      })
-      .alert("alert.error", isPresented: $purchaseErrorDisplayed, actions: {
-        Button { purchaseErrorDisplayed = false } label: { Text("alert.button.ok") }
-      }, message: {
-        Text("settings.support.alert.error.message")
-      })
-      .onAppear {
-        loadingProducts = true
-        fetchStoreProducts()
-        refreshUserInfo()
       }
+    )
+    .alert(
+      "alert.error", isPresented: $purchaseErrorDisplayed,
+      actions: {
+        Button {
+          purchaseErrorDisplayed = false
+        } label: {
+          Text("alert.button.ok")
+        }
+      },
+      message: {
+        Text("settings.support.alert.error.message")
+      }
+    )
+    .onAppear {
+      loadingProducts = true
+      fetchStoreProducts()
+      refreshUserInfo()
+    }
   }
 
   private func purchase(product: StoreProduct) async {
@@ -107,7 +123,8 @@ struct SupportAppView: View {
   private func fetchStoreProducts() {
     Purchases.shared.getProducts(Tip.allCases.map(\.productId)) { products in
       subscription = products.first(where: { $0.productIdentifier == Tip.supporter.productId })
-      self.products = products.filter { $0.productIdentifier != Tip.supporter.productId }.sorted(by: { $0.price < $1.price })
+      self.products = products.filter { $0.productIdentifier != Tip.supporter.productId }.sorted(
+        by: { $0.price < $1.price })
       withAnimation {
         loadingProducts = false
       }
@@ -153,7 +170,7 @@ struct SupportAppView: View {
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -166,15 +183,15 @@ struct SupportAppView: View {
           if customerInfo?.entitlements["Supporter"]?.isActive == true {
             Text(Image(systemName: "checkmark.seal.fill"))
               .foregroundColor(theme.tintColor)
-              .baselineOffset(-1) +
-              Text("settings.support.supporter.subscribed")
+              .baselineOffset(-1)
+              + Text("settings.support.supporter.subscribed")
               .font(.scaledSubheadline)
           } else {
             VStack(alignment: .leading) {
               Text(Image(systemName: "checkmark.seal.fill"))
                 .foregroundColor(theme.tintColor)
-                .baselineOffset(-1) +
-                Text(Tip.supporter.title)
+                .baselineOffset(-1)
+                + Text(Tip.supporter.title)
                 .font(.scaledSubheadline)
               Text(Tip.supporter.subtitle)
                 .font(.scaledFootnote)
@@ -192,7 +209,7 @@ struct SupportAppView: View {
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -219,7 +236,7 @@ struct SupportAppView: View {
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -240,7 +257,7 @@ struct SupportAppView: View {
       Text("settings.support.restore-purchase.explanation")
     }
     #if !os(visionOS)
-    .listRowBackground(theme.secondaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
     #endif
   }
 
@@ -262,7 +279,7 @@ struct SupportAppView: View {
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.secondaryBackgroundColor)
+      .listRowBackground(theme.secondaryBackgroundColor)
     #endif
   }
 

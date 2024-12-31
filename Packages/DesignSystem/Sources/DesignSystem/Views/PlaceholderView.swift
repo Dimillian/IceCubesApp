@@ -12,14 +12,16 @@ public struct PlaceholderView: View {
   }
 
   public var body: some View {
-    ContentUnavailableView(title,
-                           systemImage: iconName,
-                           description: Text(message))
+    ContentUnavailableView(
+      title,
+      systemImage: iconName,
+      description: Text(message))
   }
 }
 
 #Preview {
-  PlaceholderView(iconName: "square.and.arrow.up.trianglebadge.exclamationmark",
-                  title: "Nothing to see",
-                  message: "This is a preview. Please try again.")
+  PlaceholderView(
+    iconName: "square.and.arrow.up.trianglebadge.exclamationmark",
+    title: "Nothing to see",
+    message: "This is a preview. Please try again.")
 }

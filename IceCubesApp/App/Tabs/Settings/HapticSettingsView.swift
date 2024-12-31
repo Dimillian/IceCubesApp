@@ -18,7 +18,7 @@ struct HapticSettingsView: View {
         Toggle("settings.haptic.buttons", isOn: $userPreferences.hapticButtonPressEnabled)
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     .navigationTitle("settings.haptic.navigation-title")

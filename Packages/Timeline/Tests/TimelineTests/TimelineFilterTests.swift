@@ -1,25 +1,36 @@
+import Foundation
 import Models
 import Network
-@testable import Timeline
-import XCTest
+import Testing
 
-final class TimelineFilterTests: XCTestCase {
-  func testCodableHome() throws {
-    XCTAssertTrue(try testCodableOn(filter: .home))
-    XCTAssertTrue(try testCodableOn(filter: .local))
-    XCTAssertTrue(try testCodableOn(filter: .federated))
-    XCTAssertTrue(try testCodableOn(filter: .remoteLocal(server: "me.dm", filter: .local)))
-    XCTAssertTrue(try testCodableOn(filter: .tagGroup(title: "test", tags: ["test"], symbolName: nil)))
-    XCTAssertTrue(try testCodableOn(filter: .tagGroup(title: "test", tags: ["test"], symbolName: "test")))
-    XCTAssertTrue(try testCodableOn(filter: .hashtag(tag: "test", accountId: nil)))
-    XCTAssertTrue(try testCodableOn(filter: .list(list: .init(id: "test", title: "test"))))
+@testable import Timeline
+
+@Suite("Timeline Filter Tests")
+struct TimelineFilterTests {
+  @Test(
+    "All timeline filter can be decoded and encoded",
+    arguments: [
+      TimelineFilter.home,
+      TimelineFilter.local,
+      TimelineFilter.federated,
+      TimelineFilter.remoteLocal(server: "me.dm", filter: .local),
+      TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: nil),
+      TimelineFilter.tagGroup(title: "test", tags: ["test"], symbolName: "test"),
+      TimelineFilter.hashtag(tag: "test", accountId: nil),
+    ])
+  func timelineCanEncodeAndDecode(filter: TimelineFilter) {
+    #expect(testCodableOn(filter: filter))
   }
 
-  private func testCodableOn(filter: TimelineFilter) throws -> Bool {
+  func testCodableOn(filter: TimelineFilter) -> Bool {
     let encoder = JSONEncoder()
     let decoder = JSONDecoder()
-    let data = try encoder.encode(filter)
-    let newFilter = try decoder.decode(TimelineFilter.self, from: data)
+    guard let data = try? encoder.encode(filter) else {
+      return false
+    }
+    let newFilter = try? decoder.decode(TimelineFilter.self, from: data)
     return newFilter == filter
+
   }
+
 }

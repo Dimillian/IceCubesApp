@@ -29,7 +29,7 @@ struct RecenTagsSettingView: View {
         }
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     .navigationTitle("settings.general.recent-tags")
@@ -37,8 +37,8 @@ struct RecenTagsSettingView: View {
     #if !os(visionOS)
       .background(theme.secondaryBackgroundColor)
     #endif
-      .toolbar {
-        EditButton()
-      }
+    .toolbar {
+      EditButton()
+    }
   }
 }

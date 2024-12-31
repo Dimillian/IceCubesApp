@@ -21,24 +21,20 @@ public struct AccountDetailView: View {
   @Environment(RouterPath.self) private var routerPath
 
   @State private var viewModel: AccountDetailViewModel
-  @State private var isCurrentUser: Bool = false
   @State private var showBlockConfirmation: Bool = false
   @State private var isEditingRelationshipNote: Bool = false
+  @State private var showTranslateView: Bool = false
 
   @State private var displayTitle: Bool = false
 
-  @Binding var scrollToTopSignal: Int
-
   /// When coming from a URL like a mention tap in a status.
-  public init(accountId: String, scrollToTopSignal: Binding<Int>) {
+  public init(accountId: String) {
     _viewModel = .init(initialValue: .init(accountId: accountId))
-    _scrollToTopSignal = scrollToTopSignal
   }
 
   /// When the account is already fetched by the parent caller.
-  public init(account: Account, scrollToTopSignal: Binding<Int>) {
+  public init(account: Account) {
     _viewModel = .init(initialValue: .init(account: account))
-    _scrollToTopSignal = scrollToTopSignal
   }
 
   public var body: some View {
@@ -56,9 +52,7 @@ public struct AccountDetailView: View {
           .applyAccountDetailsRowStyle(theme: theme)
 
         Picker("", selection: $viewModel.selectedTab) {
-          ForEach(isCurrentUser ? AccountDetailViewModel.Tab.currentAccountTabs : AccountDetailViewModel.Tab.accountTabs,
-                  id: \.self)
-          { tab in
+          ForEach(viewModel.tabs, id: \.self) { tab in
             if tab == .boosts {
               Image("Rocket")
                 .tag(tab)
@@ -78,26 +72,39 @@ public struct AccountDetailView: View {
         if viewModel.selectedTab == .statuses {
           pinnedPostsView
         }
-        StatusesListView(fetcher: viewModel,
-                         client: client,
-                         routerPath: routerPath)
+        if viewModel.selectedTab == .media {
+          HStack {
+            Label("Media Grid", systemImage: "square.grid.2x2")
+            Spacer()
+            Image(systemName: "chevron.right")
+          }
+          .onTapGesture {
+            if let account = viewModel.account {
+              routerPath.navigate(
+                to: .accountMediaGridView(
+                  account: account,
+                  initialMediaStatuses: viewModel.statusesMedias))
+            }
+          }
+          #if !os(visionOS)
+            .listRowBackground(theme.primaryBackgroundColor)
+          #endif
+        }
+        StatusesListView(
+          fetcher: viewModel,
+          client: client,
+          routerPath: routerPath)
       }
-      .environment(\.defaultMinListRowHeight, 1)
+      .environment(\.defaultMinListRowHeight, 0)
       .listStyle(.plain)
       #if !os(visionOS)
         .scrollContentBackground(.hidden)
         .background(theme.primaryBackgroundColor)
       #endif
-        .onChange(of: scrollToTopSignal) {
-          withAnimation {
-            proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
-          }
-        }
     }
     .onAppear {
       guard reasons != .placeholder else { return }
-      isCurrentUser = currentAccount.account?.id == viewModel.accountId
-      viewModel.isCurrentUser = isCurrentUser
+      viewModel.isCurrentUser = currentAccount.account?.id == viewModel.accountId
       viewModel.client = client
 
       // Avoid capturing non-Sendable `self` just to access the view model.
@@ -128,7 +135,7 @@ public struct AccountDetailView: View {
     }
     .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent,
-         viewModel.accountId == currentAccount.account?.id
+        viewModel.accountId == currentAccount.account?.id
       {
         viewModel.handleEvent(event: latestEvent, currentAccount: currentAccount)
       }
@@ -141,9 +148,12 @@ public struct AccountDetailView: View {
         }
       }
     }
-    .sheet(isPresented: $isEditingRelationshipNote, content: {
-      EditRelationshipNoteView(accountDetailViewModel: viewModel)
-    })
+    .sheet(
+      isPresented: $isEditingRelationshipNote,
+      content: {
+        EditRelationshipNoteView(accountDetailViewModel: viewModel)
+      }
+    )
     .edgesIgnoringSafeArea(.top)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
@@ -155,15 +165,18 @@ public struct AccountDetailView: View {
   private func makeHeaderView(proxy: ScrollViewProxy?) -> some View {
     switch viewModel.accountState {
     case .loading:
-      AccountDetailHeaderView(viewModel: viewModel,
-                              account: .placeholder(),
-                              scrollViewProxy: proxy)
-        .redacted(reason: .placeholder)
-        .allowsHitTesting(false)
+      AccountDetailHeaderView(
+        viewModel: viewModel,
+        account: .placeholder(),
+        scrollViewProxy: proxy
+      )
+      .redacted(reason: .placeholder)
+      .allowsHitTesting(false)
     case let .data(account):
-      AccountDetailHeaderView(viewModel: viewModel,
-                              account: account,
-                              scrollViewProxy: proxy)
+      AccountDetailHeaderView(
+        viewModel: viewModel,
+        account: account,
+        scrollViewProxy: proxy)
     case let .error(error):
       Text("Error: \(error.localizedDescription)")
     }
@@ -232,23 +245,27 @@ public struct AccountDetailView: View {
         .font(.scaledFootnote)
         .foregroundStyle(.secondary)
         .fontWeight(.semibold)
-        .listRowInsets(.init(top: 0,
-                             leading: 12,
-                             bottom: 0,
-                             trailing: .layoutPadding))
+        .listRowInsets(
+          .init(
+            top: 0,
+            leading: 12,
+            bottom: 0,
+            trailing: .layoutPadding)
+        )
         .listRowSeparator(.hidden)
-      #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
-      #endif
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #endif
       ForEach(viewModel.pinned) { status in
-        StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
+        StatusRowExternalView(
+          viewModel: .init(status: status, client: client, routerPath: routerPath))
       }
       Rectangle()
-      #if os(visionOS)
-        .fill(Color.clear)
-      #else
-        .fill(theme.secondaryBackgroundColor)
-      #endif
+        #if os(visionOS)
+          .fill(Color.clear)
+        #else
+          .fill(theme.secondaryBackgroundColor)
+        #endif
         .frame(height: 12)
         .listRowInsets(.init())
         .listRowSeparator(.hidden)
@@ -273,10 +290,13 @@ public struct AccountDetailView: View {
         Button {
           if let account = viewModel.account {
             #if targetEnvironment(macCatalyst) || os(visionOS)
-              openWindow(value: WindowDestinationEditor.mentionStatusEditor(account: account, visibility: preferences.postVisibility))
+              openWindow(
+                value: WindowDestinationEditor.mentionStatusEditor(
+                  account: account, visibility: preferences.postVisibility))
             #else
-              routerPath.presentedSheet = .mentionStatusEditor(account: account,
-                                                               visibility: preferences.postVisibility)
+              routerPath.presentedSheet = .mentionStatusEditor(
+                account: account,
+                visibility: preferences.postVisibility)
             #endif
           }
         } label: {
@@ -285,7 +305,10 @@ public struct AccountDetailView: View {
       }
 
       Menu {
-        AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, viewModel: viewModel)
+        AccountDetailContextMenu(
+          showBlockConfirmation: $showBlockConfirmation,
+          showTranslateView: $showTranslateView,
+          viewModel: viewModel)
 
         if !viewModel.isCurrentUser {
           Button {
@@ -295,7 +318,7 @@ public struct AccountDetailView: View {
           }
         }
 
-        if isCurrentUser {
+        if viewModel.isCurrentUser {
           Button {
             routerPath.presentedSheet = .accountEditInfo
           } label: {
@@ -328,7 +351,24 @@ public struct AccountDetailView: View {
             Divider()
 
             Button {
-              if let url = URL(string: "https://mastometrics.com/auth/login?username=\(account.acct)@\(client.server)&instance=\(client.server)&auto=true") {
+              routerPath.navigate(to: .blockedAccounts)
+            } label: {
+              Label("account.blocked", systemImage: "person.crop.circle.badge.xmark")
+            }
+
+            Button {
+              routerPath.navigate(to: .mutedAccounts)
+            } label: {
+              Label("account.muted", systemImage: "person.crop.circle.badge.moon")
+            }
+
+            Divider()
+
+            Button {
+              if let url = URL(
+                string:
+                  "https://mastometrics.com/auth/login?username=\(account.acct)@\(client.server)&instance=\(client.server)&auto=true"
+              ) {
                 openURL(url)
               }
             } label: {
@@ -358,7 +398,8 @@ public struct AccountDetailView: View {
           Button("account.action.block-user-\(account.username)", role: .destructive) {
             Task {
               do {
-                viewModel.relationship = try await client.post(endpoint: Accounts.block(id: account.id))
+                viewModel.relationship = try await client.post(
+                  endpoint: Accounts.block(id: account.id))
               } catch {}
             }
           }
@@ -366,6 +407,10 @@ public struct AccountDetailView: View {
       } message: {
         Text("account.action.block-user-confirmation")
       }
+      #if canImport(_Translation_SwiftUI)
+        .addTranslateView(
+          isPresented: $showTranslateView, text: viewModel.account?.note.asRawText ?? "")
+      #endif
     }
   }
 }
@@ -375,14 +420,14 @@ extension View {
   func applyAccountDetailsRowStyle(theme: Theme) -> some View {
     listRowInsets(.init())
       .listRowSeparator(.hidden)
-    #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-    #endif
+      #if !os(visionOS)
+        .listRowBackground(theme.primaryBackgroundColor)
+      #endif
   }
 }
 
 struct AccountDetailView_Previews: PreviewProvider {
   static var previews: some View {
-    AccountDetailView(account: .placeholder(), scrollToTopSignal: .constant(0))
+    AccountDetailView(account: .placeholder())
   }
 }

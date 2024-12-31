@@ -39,14 +39,16 @@ struct ConversationMessageView: View {
             .emojiText.size(Font.scaledBodyFont.emojiSize)
             .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
             .padding(6)
-            .environment(\.openURL, OpenURLAction { url in
-              routerPath.handleStatus(status: message, url: url)
-            })
+            .environment(
+              \.openURL,
+              OpenURLAction { url in
+                routerPath.handleStatus(status: message, url: url)
+              })
         }
         #if os(visionOS)
-        .background(isOwnMessage ? Material.ultraThick : Material.regular)
+          .background(isOwnMessage ? Material.ultraThick : Material.regular)
         #else
-        .background(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor)
+          .background(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor)
         #endif
         .cornerRadius(8)
         .padding(.leading, isOwnMessage ? 24 : 0)
@@ -77,8 +79,7 @@ struct ConversationMessageView: View {
             Spacer()
           }
           Group {
-            Text(message.createdAt.shortDateFormatted) +
-              Text(" ")
+            Text(message.createdAt.shortDateFormatted) + Text(" ")
             Text(message.createdAt.asDate, style: .time)
           }
           .font(.scaledFootnote)
@@ -122,24 +123,28 @@ struct ConversationMessageView: View {
         } catch {}
       }
     } label: {
-      Label(isLiked ? "status.action.unfavorite" : "status.action.favorite",
-            systemImage: isLiked ? "star.fill" : "star")
+      Label(
+        isLiked ? "status.action.unfavorite" : "status.action.favorite",
+        systemImage: isLiked ? "star.fill" : "star")
     }
-    Button { Task {
-      do {
-        let status: Status
-        if isBookmarked {
-          status = try await client.post(endpoint: Statuses.unbookmark(id: message.id))
-        } else {
-          status = try await client.post(endpoint: Statuses.bookmark(id: message.id))
-        }
-        withAnimation {
-          isBookmarked = status.bookmarked == true
-        }
-      } catch {}
-    } } label: {
-      Label(isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
-            systemImage: isBookmarked ? "bookmark.fill" : "bookmark")
+    Button {
+      Task {
+        do {
+          let status: Status
+          if isBookmarked {
+            status = try await client.post(endpoint: Statuses.unbookmark(id: message.id))
+          } else {
+            status = try await client.post(endpoint: Statuses.bookmark(id: message.id))
+          }
+          withAnimation {
+            isBookmarked = status.bookmarked == true
+          }
+        } catch {}
+      }
+    } label: {
+      Label(
+        isBookmarked ? "status.action.unbookmark" : "status.action.bookmark",
+        systemImage: isBookmarked ? "bookmark.fill" : "bookmark")
     }
     Divider()
     if message.account.id == currentAccount.account?.id {
@@ -151,7 +156,8 @@ struct ConversationMessageView: View {
     } else {
       Section(message.reblog?.account.acct ?? message.account.acct) {
         Button {
-          routerPath.presentedSheet = .mentionStatusEditor(account: message.reblog?.account ?? message.account, visibility: .pub)
+          routerPath.presentedSheet = .mentionStatusEditor(
+            account: message.reblog?.account ?? message.account, visibility: .pub)
         } label: {
           Label("status.action.mention", systemImage: "at")
         }
@@ -182,9 +188,11 @@ struct ConversationMessageView: View {
     GeometryReader { proxy in
       let width = mediaWidth(proxy: proxy)
       if let url = attachement.url {
-        LazyImage(request: makeImageRequest(for: url,
-                                            size: .init(width: width, height: 200)))
-        { state in
+        LazyImage(
+          request: makeImageRequest(
+            for: url,
+            size: .init(width: width, height: 200))
+        ) { state in
           if let image = state.image {
             image
               .resizable()
@@ -206,8 +214,10 @@ struct ConversationMessageView: View {
     .contentShape(Rectangle())
     .onTapGesture {
       #if targetEnvironment(macCatalyst) || os(visionOS)
-        openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
-                                                             selectedAttachment: attachement))
+        openWindow(
+          value: WindowDestinationMedia.mediaViewer(
+            attachments: [attachement],
+            selectedAttachment: attachement))
       #else
         quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
       #endif

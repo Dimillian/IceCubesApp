@@ -25,14 +25,20 @@ public struct MediaUIView: View, @unchecked Sendable {
       .focusable()
       .focused($isFocused)
       .focusEffectDisabled()
-      .onKeyPress(.leftArrow, action: {
-        scrollToPrevious()
-        return .handled
-      })
-      .onKeyPress(.rightArrow, action: {
-        scrollToNext()
-        return .handled
-      })
+      .onKeyPress(
+        .leftArrow,
+        action: {
+          scrollToPrevious()
+          return .handled
+        }
+      )
+      .onKeyPress(
+        .rightArrow,
+        action: {
+          scrollToNext()
+          return .handled
+        }
+      )
       .scrollTargetBehavior(.viewAligned)
       .scrollPosition(id: $scrolledItem)
       .toolbar {
@@ -75,7 +81,9 @@ private struct MediaToolBar: ToolbarContent {
   let data: DisplayData
 
   var body: some ToolbarContent {
-    DismissToolbarItem()
+    #if !targetEnvironment(macCatalyst)
+      DismissToolbarItem()
+    #endif
     QuickLookToolbarItem(itemUrl: data.url)
     AltTextToolbarItem(alt: data.description)
     SavePhotoToolbarItem(url: data.url, type: data.type)
@@ -93,7 +101,6 @@ private struct DismissToolbarItem: ToolbarContent {
       } label: {
         Image(systemName: "xmark.circle")
       }
-      .opacity(0)
       .keyboardShortcut(.cancelAction)
     }
   }
@@ -111,9 +118,10 @@ private struct AltTextToolbarItem: ToolbarContent {
         } label: {
           Text("status.image.alt-text.abbreviation")
         }
-        .alert("status.editor.media.image-description",
-               isPresented: $isAlertDisplayed)
-        {
+        .alert(
+          "status.editor.media.image-description",
+          isPresented: $isAlertDisplayed
+        ) {
           Button("alert.button.ok", action: {})
         } message: {
           Text(alt)
@@ -215,6 +223,7 @@ private struct DisplayView: View {
       MediaUIAttachmentImageView(url: data.url)
     case .av:
       MediaUIAttachmentVideoView(viewModel: .init(url: data.url, forceAutoPlay: true))
+        .ignoresSafeArea()
     }
   }
 }

@@ -22,7 +22,9 @@ extension StatusEditor.AutoCompleteView {
             isTagSuggestionExpanded = false
             viewModel.selectHashtagSuggestion(tag: tag.name)
           }
-          if let index = recentTags.firstIndex(where: { $0.title.lowercased() == tag.name.lowercased() }) {
+          if let index = recentTags.firstIndex(where: {
+            $0.title.lowercased() == tag.name.lowercased()
+          }) {
             recentTags[index].lastUse = Date()
           } else {
             context.insert(RecentTag(title: tag.name))

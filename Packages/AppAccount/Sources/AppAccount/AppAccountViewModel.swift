@@ -32,7 +32,10 @@ import SwiftUI
     }
   }
 
-  public init(appAccount: AppAccount, isCompact: Bool = false, isInSettings: Bool = true, showBadge: Bool = false) {
+  public init(
+    appAccount: AppAccount, isCompact: Bool = false, isInSettings: Bool = true,
+    showBadge: Bool = false
+  ) {
     self.appAccount = appAccount
     self.isCompact = isCompact
     self.isInSettings = isInSettings

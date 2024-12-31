@@ -10,7 +10,10 @@ public struct EmojiTextApp: View {
   private let append: (() -> Text)?
   private let lineLimit: Int?
 
-  public init(_ markdown: HTMLString, emojis: [Emoji], language: String? = nil, lineLimit: Int? = nil, append: (() -> Text)? = nil) {
+  public init(
+    _ markdown: HTMLString, emojis: [Emoji], language: String? = nil, lineLimit: Int? = nil,
+    append: (() -> Text)? = nil
+  ) {
     self.markdown = markdown
     self.emojis = emojis.map { RemoteEmoji(shortcode: $0.shortcode, url: $0.url) }
     self.language = language

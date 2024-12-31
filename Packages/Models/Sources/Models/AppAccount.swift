@@ -18,10 +18,11 @@ public struct AppAccount: Codable, Identifiable, Hashable {
     key
   }
 
-  public init(server: String,
-              accountName: String?,
-              oauthToken: OauthToken? = nil)
-  {
+  public init(
+    server: String,
+    accountName: String?,
+    oauthToken: OauthToken? = nil
+  ) {
     self.server = server
     self.accountName = accountName
     self.oauthToken = oauthToken

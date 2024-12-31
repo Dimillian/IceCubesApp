@@ -18,32 +18,32 @@ public struct AccountsListView: View {
 
   public var body: some View {
     listView
-    #if !os(visionOS)
-    .scrollContentBackground(.hidden)
-    .background(theme.primaryBackgroundColor)
-    #endif
-    .listStyle(.plain)
-    .toolbar {
-      ToolbarItem(placement: .principal) {
-        VStack {
-          Text(viewModel.mode.title)
-            .font(.headline)
-          if let count = viewModel.totalCount {
-            Text(String(count))
-              .font(.footnote)
-              .foregroundStyle(.secondary)
+      #if !os(visionOS)
+        .scrollContentBackground(.hidden)
+        .background(theme.primaryBackgroundColor)
+      #endif
+      .listStyle(.plain)
+      .toolbar {
+        ToolbarItem(placement: .principal) {
+          VStack {
+            Text(viewModel.mode.title)
+              .font(.headline)
+            if let count = viewModel.totalCount {
+              Text(String(count))
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+            }
           }
         }
       }
-    }
-    .navigationTitle(viewModel.mode.title)
-    .navigationBarTitleDisplayMode(.inline)
-    .task {
-      viewModel.client = client
-      guard !didAppear else { return }
-      didAppear = true
-      await viewModel.fetch()
-    }
+      .navigationTitle(viewModel.mode.title)
+      .navigationBarTitleDisplayMode(.inline)
+      .task {
+        viewModel.client = client
+        guard !didAppear else { return }
+        didAppear = true
+        await viewModel.fetch()
+      }
   }
 
   @ViewBuilder
@@ -52,6 +52,9 @@ public struct AccountsListView: View {
       searchableList
     } else {
       standardList
+        .refreshable {
+          await viewModel.fetch()
+        }
     }
   }
 
@@ -59,8 +62,10 @@ public struct AccountsListView: View {
     List {
       listContent
     }
-    .searchable(text: $viewModel.searchQuery,
-                placement: .navigationBarDrawer(displayMode: .always))
+    .searchable(
+      text: $viewModel.searchQuery,
+      placement: .navigationBarDrawer(displayMode: .always)
+    )
     .task(id: viewModel.searchQuery) {
       if !viewModel.searchQuery.isEmpty {
         await viewModel.search()
@@ -89,13 +94,13 @@ public struct AccountsListView: View {
         AccountsListRow(viewModel: .init(account: .placeholder(), relationShip: .placeholder()))
           .redacted(reason: .placeholder)
           .allowsHitTesting(false)
-        #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
-        #endif
+          #if !os(visionOS)
+            .listRowBackground(theme.primaryBackgroundColor)
+          #endif
       }
     case let .display(accounts, relationships, nextPageState):
       if case .followers = viewModel.mode,
-         !currentAccount.followRequests.isEmpty
+        !currentAccount.followRequests.isEmpty
       {
         Section(
           header: Text("account.follow-requests.pending-requests"),
@@ -115,22 +120,33 @@ public struct AccountsListView: View {
               }
             )
             #if !os(visionOS)
-            .listRowBackground(theme.primaryBackgroundColor)
-            #endif
-          }
-        }
-      }
-      Section {
-        ForEach(accounts) { account in
-          if let relationship = relationships.first(where: { $0.id == account.id }) {
-            AccountsListRow(viewModel: .init(account: account,
-                                             relationShip: relationship))
-            #if !os(visionOS)
               .listRowBackground(theme.primaryBackgroundColor)
             #endif
           }
         }
       }
+      Section {
+        if accounts.isEmpty {
+          PlaceholderView(
+            iconName: "person.icloud",
+            title: "No accounts found",
+            message: "This list of accounts is empty"
+          )
+          .listRowSeparator(.hidden)
+        } else {
+          ForEach(accounts) { account in
+            if let relationship = relationships.first(where: { $0.id == account.id }) {
+              AccountsListRow(
+                viewModel: .init(
+                  account: account,
+                  relationShip: relationship))
+            }
+          }
+        }
+      }
+      #if !os(visionOS)
+        .listRowBackground(theme.primaryBackgroundColor)
+      #endif
 
       switch nextPageState {
       case .hasNextPage:
@@ -138,7 +154,7 @@ public struct AccountsListView: View {
           try await viewModel.fetchNextPage()
         }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor)
         #endif
 
       case .none:
@@ -147,17 +163,19 @@ public struct AccountsListView: View {
 
     case let .error(error):
       Text(error.localizedDescription)
-      #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
-      #endif
+        #if !os(visionOS)
+          .listRowBackground(theme.primaryBackgroundColor)
+        #endif
     }
   }
 }
 
 #Preview {
   List {
-    AccountsListRow(viewModel: .init(account: .placeholder(),
-                                     relationShip: .placeholder()))
+    AccountsListRow(
+      viewModel: .init(
+        account: .placeholder(),
+        relationShip: .placeholder()))
   }
   .listStyle(.plain)
   .withPreviewsEnv()

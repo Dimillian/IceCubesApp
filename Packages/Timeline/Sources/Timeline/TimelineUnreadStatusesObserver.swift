@@ -10,7 +10,6 @@ import SwiftUI
   var pendingStatusesCount: Int = 0
 
   var disableUpdate: Bool = false
-  var scrollToIndex: ((Int) -> Void)?
 
   var isLoadingNewStatuses: Bool = false
 
@@ -24,7 +23,7 @@ import SwiftUI
 
   func removeStatus(status: Status) {
     if !disableUpdate, let index = pendingStatuses.firstIndex(of: status.id) {
-      pendingStatuses.removeSubrange(index ... (pendingStatuses.count - 1))
+      pendingStatuses.removeSubrange(index...(pendingStatuses.count - 1))
       HapticManager.shared.fireHaptic(.timeline)
     }
   }
@@ -33,14 +32,16 @@ import SwiftUI
 }
 
 struct TimelineUnreadStatusesView: View {
-  @State var observer: TimelineUnreadStatusesObserver
   @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
+
+  @State var observer: TimelineUnreadStatusesObserver
+  let onButtonTap: (String?) -> Void
 
   var body: some View {
     if observer.pendingStatusesCount > 0 || observer.isLoadingNewStatuses {
       Button {
-        observer.scrollToIndex?(observer.pendingStatusesCount)
+        onButtonTap(observer.pendingStatuses.last)
       } label: {
         HStack(spacing: 8) {
           if observer.isLoadingNewStatuses {
@@ -56,7 +57,9 @@ struct TimelineUnreadStatusesView: View {
           }
         }
       }
-      .accessibilityLabel("accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)")
+      .accessibilityLabel(
+        "accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)"
+      )
       .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
       #if os(visionOS)
         .buttonStyle(.bordered)
@@ -65,7 +68,7 @@ struct TimelineUnreadStatusesView: View {
         .buttonStyle(.bordered)
         .background(Material.ultraThick)
       #endif
-        .cornerRadius(8)
+      .cornerRadius(8)
       #if !os(visionOS)
         .foregroundStyle(.secondary)
         .overlay(
@@ -73,8 +76,8 @@ struct TimelineUnreadStatusesView: View {
             .stroke(theme.tintColor, lineWidth: 1)
         )
       #endif
-        .padding(8)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
+      .padding(8)
+      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
     }
   }
 }

@@ -16,11 +16,12 @@ public struct Notification: Decodable, Identifiable, Equatable {
   }
 
   public static func placeholder() -> Notification {
-    .init(id: UUID().uuidString,
-          type: NotificationType.favourite.rawValue,
-          createdAt: ServerDate(),
-          account: .placeholder(),
-          status: .placeholder())
+    .init(
+      id: UUID().uuidString,
+      type: NotificationType.favourite.rawValue,
+      createdAt: ServerDate(),
+      account: .placeholder(),
+      status: .placeholder())
   }
 }
 

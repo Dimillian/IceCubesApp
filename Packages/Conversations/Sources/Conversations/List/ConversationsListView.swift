@@ -14,11 +14,7 @@ public struct ConversationsListView: View {
 
   @State private var viewModel = ConversationsListViewModel()
 
-  @Binding var scrollToTopSignal: Int
-
-  public init(scrollToTopSignal: Binding<Int>) {
-    _scrollToTopSignal = scrollToTopSignal
-  }
+  public init() {}
 
   private var conversations: Binding<[Conversation]> {
     if viewModel.isLoadingFirstPage {
@@ -48,17 +44,17 @@ public struct ConversationsListView: View {
                 Divider()
               }
             } else if conversations.isEmpty, !viewModel.isLoadingFirstPage, !viewModel.isError {
-              PlaceholderView(iconName: "tray",
-                              title: "conversations.empty.title",
-                              message: "conversations.empty.message")
+              PlaceholderView(
+                iconName: "tray",
+                title: "conversations.empty.title",
+                message: "conversations.empty.message")
             } else if viewModel.isError {
-              ErrorView(title: "conversations.error.title",
-                        message: "conversations.error.message",
-                        buttonTitle: "conversations.error.button")
-              {
-                Task {
-                  await viewModel.fetchConversations()
-                }
+              ErrorView(
+                title: "conversations.error.title",
+                message: "conversations.error.message",
+                buttonTitle: "conversations.error.button"
+              ) {
+                await viewModel.fetchConversations()
               }
             }
 
@@ -81,19 +77,14 @@ public struct ConversationsListView: View {
         .padding(.top, .layoutPadding)
       }
       #if !os(visionOS)
-      .scrollContentBackground(.hidden)
-      .background(theme.primaryBackgroundColor)
+        .scrollContentBackground(.hidden)
+        .background(theme.primaryBackgroundColor)
       #endif
       .navigationTitle("conversations.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
       .onChange(of: watcher.latestEvent?.id) {
         if let latestEvent = watcher.latestEvent {
           viewModel.handleEvent(event: latestEvent)
-        }
-      }
-      .onChange(of: scrollToTopSignal) {
-        withAnimation {
-          proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
         }
       }
       .refreshable {

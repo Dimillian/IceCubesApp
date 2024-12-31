@@ -86,7 +86,7 @@ public struct StatusRowMediaPreviewView: View {
         }
       }
       #if os(visionOS)
-      .hoverEffect()
+        .hoverEffect()
       #endif
     }
   }
@@ -132,8 +132,10 @@ private struct MediaPreview: View {
             image
               .resizable()
               .aspectRatio(contentMode: .fill)
-              .frame(width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
-                     height: imageMaxHeight)
+              .frame(
+                width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
+                height: imageMaxHeight
+              )
               .overlay(
                 RoundedRectangle(cornerRadius: 10)
                   .stroke(.gray.opacity(0.35), lineWidth: 1)
@@ -154,8 +156,10 @@ private struct MediaPreview: View {
           .accessibilityAddTraits(.startsMediaSession)
       }
     }
-    .frame(width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
-           height: imageMaxHeight)
+    .frame(
+      width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
+      height: imageMaxHeight
+    )
     .clipped()
     .cornerRadius(10)
     // #965: do not create overlapping tappable areas, when multiple images are shown
@@ -258,13 +262,14 @@ struct AltTextButton: View {
   @Environment(Theme.self) private var theme
 
   @State private var isDisplayingAlert = false
+  @State private var isDisplayingTranslation = false
 
   var body: some View {
     if !isInCaptureMode,
-       let text,
-       !text.isEmpty,
-       !isCompact,
-       preferences.showAltTextForMedia
+      let text,
+      !text.isEmpty,
+      !isCompact,
+      preferences.showAltTextForMedia
     {
       Button {
         isDisplayingAlert = true
@@ -278,24 +283,33 @@ struct AltTextButton: View {
       .buttonStyle(.borderless)
       .padding(EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7))
       .background(.thinMaterial)
+      #if canImport(_Translation_SwiftUI)
+        .addTranslateView(isPresented: $isDisplayingTranslation, text: text)
+      #endif
       #if os(visionOS)
         .clipShape(Capsule())
       #endif
-        .cornerRadius(4)
-        .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
-        .alert(
-          "status.editor.media.image-description",
-          isPresented: $isDisplayingAlert
-        ) {
-          Button("alert.button.ok", action: {})
-        } message: {
-          Text(text)
-        }
-        .frame(
-          maxWidth: .infinity,
-          maxHeight: .infinity,
-          alignment: .bottomTrailing
-        )
+      .cornerRadius(4)
+      .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
+      .alert(
+        "status.editor.media.image-description",
+        isPresented: $isDisplayingAlert
+      ) {
+        Button("alert.button.ok", action: {})
+        Button("status.action.copy-text", action: { UIPasteboard.general.string = text })
+        #if canImport(_Translation_SwiftUI)
+          if #available(iOS 17.4, *) {
+            Button("status.action.translate", action: { isDisplayingTranslation = true })
+          }
+        #endif
+      } message: {
+        Text(text)
+      }
+      .frame(
+        maxWidth: .infinity,
+        maxHeight: .infinity,
+        alignment: .bottomTrailing
+      )
     }
   }
 }
@@ -361,7 +375,7 @@ struct WrapperForPreview: View {
     VStack {
       ScrollView {
         VStack {
-          ForEach(1 ..< 5) { number in
+          ForEach(1..<5) { number in
             VStack {
               Text("Preview for \(number) item(s)")
               StatusRowMediaPreviewView(
@@ -388,7 +402,8 @@ struct WrapperForPreview: View {
     .padding()
   }
 
-  private static let url = URL(string: "https://www.upwork.com/catalog-images/c5dffd9b5094556adb26e0a193a1c494")!
+  private static let url = URL(
+    string: "https://www.upwork.com/catalog-images/c5dffd9b5094556adb26e0a193a1c494")!
   private static let attachment = MediaAttachment.imageWith(url: url)
   private static let local = Locale(identifier: "en")
 }
@@ -438,9 +453,9 @@ private struct FeaturedImagePreView: View {
               RoundedRectangle(cornerRadius: 10)
                 .stroke(.gray.opacity(0.35), lineWidth: 1)
             )
-          #if os(visionOS)
-            .hoverEffect()
-          #endif
+            #if os(visionOS)
+              .hoverEffect()
+            #endif
         }
       }
       .overlay {
@@ -476,7 +491,9 @@ private struct FeaturedImagePreView: View {
       return calculateSize(proposal)
     }
 
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) {
+    func placeSubviews(
+      in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()
+    ) {
       guard let view = subviews.first else { return }
 
       let size = if let maxSize { maxSize } else { calculateSize(proposal) }
@@ -489,7 +506,8 @@ private struct FeaturedImagePreView: View {
       case (0, _), (_, 0):
         size = CGSize.zero
 
-      case (nil, nil), (nil, .some(.infinity)), (.some(.infinity), .some(.infinity)), (.some(.infinity), nil):
+      case (nil, nil), (nil, .some(.infinity)), (.some(.infinity), .some(.infinity)),
+        (.some(.infinity), nil):
         size = CGSize(width: originalWidth, height: originalWidth)
 
       case let (nil, .some(height)), let (.some(.infinity), .some(height)):

@@ -46,8 +46,9 @@ public class AccountStatusesListViewModel: StatusesFetcher {
     do {
       (statuses, nextPage) = try await client.getWithLink(endpoint: mode.endpoint(sinceId: nil))
       StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
-      statusesState = .display(statuses: statuses,
-                               nextPageState: nextPage?.maxId != nil ? .hasNextPage : .none)
+      statusesState = .display(
+        statuses: statuses,
+        nextPageState: nextPage?.maxId != nil ? .hasNextPage : .none)
     } catch {
       statusesState = .error(error: error)
     }
@@ -59,8 +60,9 @@ public class AccountStatusesListViewModel: StatusesFetcher {
     (newStatuses, nextPage) = try await client.getWithLink(endpoint: mode.endpoint(sinceId: nextId))
     statuses.append(contentsOf: newStatuses)
     StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
-    statusesState = .display(statuses: statuses,
-                             nextPageState: nextPage?.maxId != nil ? .hasNextPage : .none)
+    statusesState = .display(
+      statuses: statuses,
+      nextPageState: nextPage?.maxId != nil ? .hasNextPage : .none)
   }
 
   public func statusDidAppear(status _: Status) {}

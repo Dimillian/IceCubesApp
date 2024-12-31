@@ -7,7 +7,7 @@ import SwiftUI
 @MainActor
 struct AccountPopoverView: View {
   let account: Account
-  let theme: Theme // using `@Environment(Theme.self) will crash the SwiftUI preview
+  let theme: Theme  // using `@Environment(Theme.self) will crash the SwiftUI preview
   private let config: AvatarView.FrameConfig = .account
 
   @Binding var showPopup: Bool
@@ -16,7 +16,8 @@ struct AccountPopoverView: View {
 
   var body: some View {
     VStack(alignment: .leading) {
-      LazyImage(request: ImageRequest(url: account.header)
+      LazyImage(
+        request: ImageRequest(url: account.header)
       ) { state in
         if let image = state.image {
           image.resizable().scaledToFill()
@@ -96,7 +97,9 @@ struct AccountPopoverView: View {
   }
 
   @MainActor
-  private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int, needsBadge: Bool = false) -> some View {
+  private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int, needsBadge: Bool = false)
+    -> some View
+  {
     VStack {
       Text(count, format: .number.notation(.compactName))
         .font(.scaledHeadline)
@@ -112,9 +115,11 @@ struct AccountPopoverView: View {
       Text(title)
         .font(.scaledFootnote)
         .foregroundStyle(.secondary)
-        .alignmentGuide(.bottomAvatar, computeValue: { dimension in
-          dimension[.firstTextBaseline]
-        })
+        .alignmentGuide(
+          .bottomAvatar,
+          computeValue: { dimension in
+            dimension[.firstTextBaseline]
+          })
     }
     .accessibilityElement(children: .ignore)
     .accessibilityLabel(title)
@@ -122,12 +127,14 @@ struct AccountPopoverView: View {
   }
 
   private var adaptiveConfig: AvatarView.FrameConfig {
-    let cornerRadius: CGFloat = if config == .badge || theme.avatarShape == .circle {
-      config.width / 2
-    } else {
-      config.cornerRadius
-    }
-    return AvatarView.FrameConfig(width: config.width, height: config.height, cornerRadius: cornerRadius)
+    let cornerRadius: CGFloat =
+      if config == .badge || theme.avatarShape == .circle {
+        config.width / 2
+      } else {
+        config.cornerRadius
+      }
+    return AvatarView.FrameConfig(
+      width: config.width, height: config.height, cornerRadius: cornerRadius)
   }
 }
 
@@ -156,33 +163,34 @@ public struct AccountPopoverModifier: ViewModifier {
       return AnyView(content)
     }
 
-    return AnyView(content
-      .onHover { hovering in
-        if hovering {
-          toggleTask.cancel()
-          toggleTask = Task {
-            try? await Task.sleep(nanoseconds: NSEC_PER_SEC / 2)
-            guard !Task.isCancelled else { return }
+    return AnyView(
+      content
+        .onHover { hovering in
+          if hovering {
+            toggleTask.cancel()
+            toggleTask = Task {
+              try? await Task.sleep(nanoseconds: NSEC_PER_SEC / 2)
+              guard !Task.isCancelled else { return }
+              if !showPopup {
+                showPopup = true
+              }
+            }
+          } else {
             if !showPopup {
-              showPopup = true
+              toggleTask.cancel()
             }
           }
-        } else {
-          if !showPopup {
-            toggleTask.cancel()
-          }
         }
-      }
-      .hoverEffect(.lift)
-      .popover(isPresented: $showPopup) {
-        AccountPopoverView(
-          account: account,
-          theme: theme,
-          showPopup: $showPopup,
-          autoDismiss: $autoDismiss,
-          toggleTask: $toggleTask
-        )
-      })
+        .hoverEffect(.lift)
+        .popover(isPresented: $showPopup) {
+          AccountPopoverView(
+            account: account,
+            theme: theme,
+            showPopup: $showPopup,
+            autoDismiss: $autoDismiss,
+            toggleTask: $toggleTask
+          )
+        })
   }
 
   init(_ account: Account) {
@@ -190,8 +198,8 @@ public struct AccountPopoverModifier: ViewModifier {
   }
 }
 
-public extension View {
-  func accountPopover(_ account: Account) -> some View {
+extension View {
+  public func accountPopover(_ account: Account) -> some View {
     modifier(AccountPopoverModifier(account))
   }
 }

@@ -23,19 +23,27 @@ extension StatusEditor {
     @State private var didAppear: Bool = false
     @State private var isGeneratingDescription: Bool = false
 
-    @State private var showTranslateButton: Bool = false
+    @State private var showTranslateView: Bool = false
     @State private var isTranslating: Bool = false
 
     var body: some View {
       NavigationStack {
         Form {
           Section {
-            TextField("status.editor.media.image-description",
-                      text: $imageDescription,
-                      axis: .vertical)
-              .focused($isFieldFocused)
-            generateButton
-            translateButton
+            TextField(
+              "status.editor.media.image-description",
+              text: $imageDescription,
+              axis: .vertical
+            )
+            .focused($isFieldFocused)
+            if imageDescription.isEmpty {
+              generateButton
+            }
+            #if canImport(_Translation_SwiftUI)
+              if #available(iOS 17.4, *), !imageDescription.isEmpty {
+                translateButton
+              }
+            #endif
           }
           .listRowBackground(theme.primaryBackgroundColor)
           Section {
@@ -77,13 +85,15 @@ extension StatusEditor {
                 isUpdating = true
                 if currentInstance.isEditAltTextSupported, viewModel.mode.isEditing {
                   Task {
-                    await viewModel.editDescription(container: container, description: imageDescription)
+                    await viewModel.editDescription(
+                      container: container, description: imageDescription)
                     dismiss()
                     isUpdating = false
                   }
                 } else {
                   Task {
-                    await viewModel.addDescription(container: container, description: imageDescription)
+                    await viewModel.addDescription(
+                      container: container, description: imageDescription)
                     dismiss()
                     isUpdating = false
                   }
@@ -111,12 +121,6 @@ extension StatusEditor {
           Task {
             if let description = await generateDescription(url: url) {
               imageDescription = description
-              let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
-              if lang != nil, lang != "en" {
-                withAnimation {
-                  showTranslateButton = true
-                }
-              }
             }
           }
         } label: {
@@ -131,24 +135,18 @@ extension StatusEditor {
 
     @ViewBuilder
     private var translateButton: some View {
-      if showTranslateButton {
-        Button {
-          Task {
-            if let description = await translateDescription() {
-              imageDescription = description
-              withAnimation {
-                showTranslateButton = false
-              }
-            }
-          }
-        } label: {
-          if isTranslating {
-            ProgressView()
-          } else {
-            Text("status.action.translate")
-          }
+      Button {
+        showTranslateView = true
+      } label: {
+        if isTranslating {
+          ProgressView()
+        } else {
+          Text("status.action.translate")
         }
       }
+      #if canImport(_Translation_SwiftUI)
+        .addTranslateView(isPresented: $showTranslateView, text: imageDescription)
+      #endif
     }
 
     private func generateDescription(url: URL) async -> String? {
@@ -157,18 +155,6 @@ extension StatusEditor {
       let response = try? await client.request(.imageDescription(image: url))
       isGeneratingDescription = false
       return response?.trimmedText
-    }
-
-    private func translateDescription() async -> String? {
-      isTranslating = true
-      let userAPIKey = DeepLUserAPIHandler.readIfAllowed()
-      let userAPIFree = UserPreferences.shared.userDeeplAPIFree
-      let deeplClient = DeepLClient(userAPIKey: userAPIKey, userAPIFree: userAPIFree)
-      let lang = preferences.serverPreferences?.postLanguage ?? Locale.current.language.languageCode?.identifier
-      guard let lang else { return nil }
-      let translation = try? await deeplClient.request(target: lang, text: imageDescription)
-      isTranslating = false
-      return translation?.content.asRawText
     }
   }
 }

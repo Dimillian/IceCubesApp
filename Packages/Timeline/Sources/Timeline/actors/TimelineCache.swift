@@ -20,7 +20,8 @@ public actor TimelineCache {
   public func cachedPostsCount(for client: String) async -> Int {
     do {
       let directory = FileManager.Directory.defaultStorageDirectory(appendingPath: client).url
-      let content = try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)
+      let content = try FileManager.default.contentsOfDirectory(
+        at: directory, includingPropertiesForKeys: nil)
       var total: Int = await storageFor(client, "Home").allKeys().count
       for storage in content {
         if !storage.lastPathComponent.hasSuffix("sqlite3") {
@@ -61,7 +62,8 @@ public actor TimelineCache {
   func getStatuses(for client: String, filter: String) async -> [Status]? {
     let engine = storageFor(client, filter)
     do {
-      return try await engine
+      return
+        try await engine
         .readAllData()
         .map { try decoder.decode(Status.self, from: $0) }
         .sorted(by: { $0.createdAt.asDate > $1.createdAt.asDate })
@@ -75,7 +77,8 @@ public actor TimelineCache {
     if filter == "Home" {
       UserDefaults.standard.set(statuses.map { $0.id }, forKey: "timeline-last-seen-\(client.id)")
     } else {
-      UserDefaults.standard.set(statuses.map { $0.id }, forKey: "timeline-last-seen-\(client.id)-\(filter)")
+      UserDefaults.standard.set(
+        statuses.map { $0.id }, forKey: "timeline-last-seen-\(client.id)-\(filter)")
     }
   }
 

@@ -20,16 +20,14 @@ struct NotificationsTab: View {
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(PushNotificationsService.self) private var pushNotificationsService
   @State private var routerPath = RouterPath()
-  @State private var scrollToTopSignal: Int = 0
 
-  @Binding var selectedTab: Tab
-  @Binding var popToRootTab: Tab
+  @Binding var selectedTab: AppTab
 
   let lockedType: Models.Notification.NotificationType?
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      NotificationsListView(lockedType: lockedType, scrollToTopSignal: $scrollToTopSignal)
+      NotificationsListView(lockedType: lockedType)
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
         .toolbar {
@@ -51,15 +49,6 @@ struct NotificationsTab: View {
     }
     .withSafariRouter()
     .environment(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
-      if newValue == .notifications {
-        if routerPath.path.isEmpty {
-          scrollToTopSignal += 1
-        } else {
-          routerPath.path = []
-        }
-      }
-    }
     .onChange(of: selectedTab) { _, _ in
       clearNotifications()
     }
@@ -68,7 +57,8 @@ struct NotificationsTab: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
           switch type {
           case .follow, .follow_request:
-            routerPath.navigate(to: .accountDetailWithAccount(account: newValue.notification.account))
+            routerPath.navigate(
+              to: .accountDetailWithAccount(account: newValue.notification.account))
           default:
             if let status = newValue.notification.status {
               routerPath.navigate(to: .statusDetailWithStatus(status: status))
@@ -92,10 +82,14 @@ struct NotificationsTab: View {
 
   private func clearNotifications() {
     if selectedTab == .notifications || isSecondaryColumn {
-      if let token = appAccount.currentAccount.oauthToken {
+      if let token = appAccount.currentAccount.oauthToken,
+        userPreferences.notificationsCount[token] ?? 0 > 0
+      {
         userPreferences.notificationsCount[token] = 0
       }
-      watcher.unreadNotificationsCount = 0
+      if watcher.unreadNotificationsCount > 0 {
+        watcher.unreadNotificationsCount = 0
+      }
     }
   }
 }

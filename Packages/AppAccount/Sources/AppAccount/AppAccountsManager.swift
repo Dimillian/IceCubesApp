@@ -13,8 +13,9 @@ import SwiftUI
   public var currentAccount: AppAccount {
     didSet {
       Self.latestCurrentAccountKey = currentAccount.id
-      currentClient = .init(server: currentAccount.server,
-                            oauthToken: currentAccount.oauthToken)
+      currentClient = .init(
+        server: currentAccount.server,
+        oauthToken: currentAccount.oauthToken)
     }
   }
 
@@ -29,10 +30,12 @@ import SwiftUI
   public static var shared = AppAccountsManager()
 
   init() {
-    var defaultAccount = AppAccount(server: AppInfo.defaultServer, accountName: nil, oauthToken: nil)
+    var defaultAccount = AppAccount(
+      server: AppInfo.defaultServer, accountName: nil, oauthToken: nil)
     let keychainAccounts = AppAccount.retrieveAll()
     availableAccounts = keychainAccounts
-    if let currentAccount = keychainAccounts.first(where: { $0.id == Self.latestCurrentAccountKey }) {
+    if let currentAccount = keychainAccounts.first(where: { $0.id == Self.latestCurrentAccountKey })
+    {
       defaultAccount = currentAccount
     } else {
       defaultAccount = keychainAccounts.last ?? defaultAccount
@@ -53,9 +56,12 @@ import SwiftUI
     availableAccounts.removeAll(where: { $0.id == account.id })
     account.delete()
     if currentAccount.id == account.id {
-      currentAccount = availableAccounts.first ?? AppAccount(server: AppInfo.defaultServer,
-                                                             accountName: nil,
-                                                             oauthToken: nil)
+      currentAccount =
+        availableAccounts.first
+        ?? AppAccount(
+          server: AppInfo.defaultServer,
+          accountName: nil,
+          oauthToken: nil)
     }
   }
 }

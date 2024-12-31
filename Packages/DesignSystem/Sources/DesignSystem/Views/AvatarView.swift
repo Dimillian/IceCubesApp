@@ -20,11 +20,12 @@ public struct AvatarView: View {
   }
 
   private var adaptiveConfig: FrameConfig {
-    let cornerRadius: CGFloat = if config == .badge || theme.avatarShape == .circle {
-      config.width / 2
-    } else {
-      config.cornerRadius
-    }
+    let cornerRadius: CGFloat =
+      if config == .badge || theme.avatarShape == .circle {
+        config.width / 2
+      } else {
+        config.cornerRadius
+      }
     return FrameConfig(width: config.width, height: config.height, cornerRadius: cornerRadius)
   }
 
@@ -53,6 +54,7 @@ public struct AvatarView: View {
     #endif
     public static let embed = FrameConfig(width: 34, height: 34)
     public static let badge = FrameConfig(width: 28, height: 28, cornerRadius: 14)
+    public static let badgeRounded = FrameConfig(width: 28, height: 28)
     public static let list = FrameConfig(width: 20, height: 20, cornerRadius: 10)
     public static let boost = FrameConfig(width: 12, height: 12, cornerRadius: 6)
   }
@@ -87,10 +89,14 @@ struct PreviewWrapper: View {
     id: UUID().uuidString,
     username: "@clattner_llvm",
     displayName: "Chris Lattner",
-    avatar: URL(string: "https://pbs.twimg.com/profile_images/1484209565788897285/1n6Viahb_400x400.jpg")!,
+    avatar: URL(
+      string: "https://pbs.twimg.com/profile_images/1484209565788897285/1n6Viahb_400x400.jpg")!,
     header: URL(string: "https://pbs.twimg.com/profile_banners/2543588034/1656822255/1500x500")!,
     acct: "clattner_llvm@example.com",
-    note: .init(stringValue: "Building beautiful things @Modular_AI 🔥, lifting the world of production AI/ML software into a new phase of innovation.  We’re hiring! 🚀🧠"),
+    note: .init(
+      stringValue:
+        "Building beautiful things @Modular_AI 🔥, lifting the world of production AI/ML software into a new phase of innovation.  We’re hiring! 🚀🧠"
+    ),
     createdAt: ServerDate(),
     followersCount: 77100,
     followingCount: 167,
@@ -116,7 +122,8 @@ struct AvatarImage: View {
     if reasons == .placeholder {
       AvatarPlaceHolder(config: config)
     } else {
-      LazyImage(request: ImageRequest(url: avatar, processors: [.resize(size: config.size)])
+      LazyImage(
+        request: ImageRequest(url: avatar, processors: [.resize(size: config.size)])
       ) { state in
         if let image = state.image {
           image

@@ -71,7 +71,9 @@ extension StatusEditor.AutoCompleteView {
           ForEach(currentAccount.tags) { tag in
             HStack {
               Button {
-                if let index = recentTags.firstIndex(where: { $0.title.lowercased() == tag.name.lowercased() }) {
+                if let index = recentTags.firstIndex(where: {
+                  $0.title.lowercased() == tag.name.lowercased()
+                }) {
                   recentTags[index].lastUse = Date()
                 } else {
                   context.insert(RecentTag(title: tag.name))

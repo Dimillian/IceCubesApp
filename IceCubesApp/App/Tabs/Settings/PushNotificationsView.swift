@@ -18,78 +18,106 @@ struct PushNotificationsView: View {
   var body: some View {
     Form {
       Section {
-        Toggle(isOn: .init(get: {
-          subscription.isEnabled
-        }, set: { newValue in
-          subscription.isEnabled = newValue
-          if newValue {
-            updateSubscription()
-          } else {
-            deleteSubscription()
-          }
-        })) {
+        Toggle(
+          isOn: .init(
+            get: {
+              subscription.isEnabled
+            },
+            set: { newValue in
+              subscription.isEnabled = newValue
+              if newValue {
+                updateSubscription()
+              } else {
+                deleteSubscription()
+              }
+            })
+        ) {
           Text("settings.push.main-toggle")
         }
       } footer: {
         Text("settings.push.main-toggle.description")
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
 
       if subscription.isEnabled {
         Section {
-          Toggle(isOn: .init(get: {
-            subscription.isMentionNotificationEnabled
-          }, set: { newValue in
-            subscription.isMentionNotificationEnabled = newValue
-            updateSubscription()
-          })) {
+          Toggle(
+            isOn: .init(
+              get: {
+                subscription.isMentionNotificationEnabled
+              },
+              set: { newValue in
+                subscription.isMentionNotificationEnabled = newValue
+                updateSubscription()
+              })
+          ) {
             Label("settings.push.mentions", systemImage: "at")
           }
-          Toggle(isOn: .init(get: {
-            subscription.isFollowNotificationEnabled
-          }, set: { newValue in
-            subscription.isFollowNotificationEnabled = newValue
-            updateSubscription()
-          })) {
+          Toggle(
+            isOn: .init(
+              get: {
+                subscription.isFollowNotificationEnabled
+              },
+              set: { newValue in
+                subscription.isFollowNotificationEnabled = newValue
+                updateSubscription()
+              })
+          ) {
             Label("settings.push.follows", systemImage: "person.badge.plus")
           }
-          Toggle(isOn: .init(get: {
-            subscription.isFavoriteNotificationEnabled
-          }, set: { newValue in
-            subscription.isFavoriteNotificationEnabled = newValue
-            updateSubscription()
-          })) {
+          Toggle(
+            isOn: .init(
+              get: {
+                subscription.isFavoriteNotificationEnabled
+              },
+              set: { newValue in
+                subscription.isFavoriteNotificationEnabled = newValue
+                updateSubscription()
+              })
+          ) {
             Label("settings.push.favorites", systemImage: "star")
           }
-          Toggle(isOn: .init(get: {
-            subscription.isReblogNotificationEnabled
-          }, set: { newValue in
-            subscription.isReblogNotificationEnabled = newValue
-            updateSubscription()
-          })) {
+          Toggle(
+            isOn: .init(
+              get: {
+                subscription.isReblogNotificationEnabled
+              },
+              set: { newValue in
+                subscription.isReblogNotificationEnabled = newValue
+                updateSubscription()
+              })
+          ) {
             Label("settings.push.boosts", image: "Rocket")
           }
-          Toggle(isOn: .init(get: {
-            subscription.isPollNotificationEnabled
-          }, set: { newValue in
-            subscription.isPollNotificationEnabled = newValue
-            updateSubscription()
-          })) {
+          Toggle(
+            isOn: .init(
+              get: {
+                subscription.isPollNotificationEnabled
+              },
+              set: { newValue in
+                subscription.isPollNotificationEnabled = newValue
+                updateSubscription()
+              })
+          ) {
             Label("settings.push.polls", systemImage: "chart.bar")
           }
-          Toggle(isOn: .init(get: {
-            subscription.isNewPostsNotificationEnabled
-          }, set: { newValue in
-            subscription.isNewPostsNotificationEnabled = newValue
-            updateSubscription()
-          })) {
+          Toggle(
+            isOn: .init(
+              get: {
+                subscription.isNewPostsNotificationEnabled
+              },
+              set: { newValue in
+                subscription.isNewPostsNotificationEnabled = newValue
+                updateSubscription()
+              })
+          ) {
             Label("settings.push.new-posts", systemImage: "bubble.right")
           }
         }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor)
         #endif
       }
 
@@ -106,7 +134,7 @@ struct PushNotificationsView: View {
         Text("settings.push.duplicate.footer")
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor)
       #endif
     }
     .navigationTitle("settings.push.navigation-title")
@@ -114,9 +142,9 @@ struct PushNotificationsView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
     #endif
-      .task {
-        await subscription.fetchSubscription()
-      }
+    .task {
+      await subscription.fetchSubscription()
+    }
   }
 
   private func updateSubscription() {

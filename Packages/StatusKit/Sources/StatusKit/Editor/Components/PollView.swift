@@ -24,7 +24,7 @@ extension StatusEditor {
       @Bindable var viewModel = viewModel
       let count = viewModel.pollOptions.count
       VStack {
-        ForEach(0 ..< count, id: \.self) { index in
+        ForEach(0..<count, id: \.self) { index in
           VStack {
             HStack(spacing: 16) {
               TextField("status.poll.option-n \(index + 1)", text: $viewModel.pollOptions[index])

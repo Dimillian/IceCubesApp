@@ -18,14 +18,18 @@ import SwiftUI
 
     @AppStorage("use_instance_content_settings") public var useInstanceContentSettings: Bool = true
     @AppStorage("app_auto_expand_spoilers") public var appAutoExpandSpoilers = false
-    @AppStorage("app_auto_expand_media") public var appAutoExpandMedia: ServerPreferences.AutoExpandMedia = .hideSensitive
-    @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility: Models.Visibility = .pub
-    @AppStorage("app_default_reply_visibility") public var appDefaultReplyVisibility: Models.Visibility = .pub
+    @AppStorage("app_auto_expand_media") public var appAutoExpandMedia:
+      ServerPreferences.AutoExpandMedia = .hideSensitive
+    @AppStorage("app_default_post_visibility") public var appDefaultPostVisibility:
+      Models.Visibility = .pub
+    @AppStorage("app_default_reply_visibility") public var appDefaultReplyVisibility:
+      Models.Visibility = .pub
     @AppStorage("app_default_posts_sensitive") public var appDefaultPostsSensitive = false
     @AppStorage("app_require_alt_text") public var appRequireAltText = false
     @AppStorage("autoplay_video") public var autoPlayVideo = true
     @AppStorage("mute_video") public var muteVideo = true
-    @AppStorage("always_use_deepl") public var alwaysUseDeepl = false
+    @AppStorage("preferred_translation_type") public var preferredTranslationType = TranslationType
+      .useServerIfPossible
     @AppStorage("user_deepl_api_free") public var userDeeplAPIFree = true
     @AppStorage("auto_detect_post_language") public var autoDetectPostLanguage = true
 
@@ -41,18 +45,24 @@ import SwiftUI
 
     @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
 
-    @AppStorage("swipeactions-status-trailing-right") public var swipeActionsStatusTrailingRight = StatusAction.favorite
-    @AppStorage("swipeactions-status-trailing-left") public var swipeActionsStatusTrailingLeft = StatusAction.boost
-    @AppStorage("swipeactions-status-leading-left") public var swipeActionsStatusLeadingLeft = StatusAction.reply
-    @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight = StatusAction.none
+    @AppStorage("swipeactions-status-trailing-right") public var swipeActionsStatusTrailingRight =
+      StatusAction.favorite
+    @AppStorage("swipeactions-status-trailing-left") public var swipeActionsStatusTrailingLeft =
+      StatusAction.boost
+    @AppStorage("swipeactions-status-leading-left") public var swipeActionsStatusLeadingLeft =
+      StatusAction.reply
+    @AppStorage("swipeactions-status-leading-right") public var swipeActionsStatusLeadingRight =
+      StatusAction.none
     @AppStorage("swipeactions-use-theme-color") public var swipeActionsUseThemeColor = false
-    @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle = .iconWithText
+    @AppStorage("swipeactions-icon-style") public var swipeActionsIconStyle: SwipeActionsIconStyle =
+      .iconWithText
 
     @AppStorage("requested_review") public var requestedReview = false
 
     @AppStorage("collapse-long-posts") public var collapseLongPosts = true
 
-    @AppStorage("share-button-behavior") public var shareButtonBehavior: PreferredShareButtonBehavior = .linkOnly
+    @AppStorage("share-button-behavior") public var shareButtonBehavior:
+      PreferredShareButtonBehavior = .linkOnly
 
     @AppStorage("fast_refresh") public var fastRefreshEnabled: Bool = false
 
@@ -61,7 +71,34 @@ import SwiftUI
 
     @AppStorage("show_account_popover") public var showAccountPopover: Bool = true
 
-    init() {}
+    @AppStorage("sidebar_expanded") public var isSidebarExpanded: Bool = false
+
+    @AppStorage("stream_new_posts") public var isPostsStreamingEnabled: Bool = false
+
+    init() {
+      prepareTranslationType()
+    }
+
+    private func prepareTranslationType() {
+      let sharedDefault = UserDefaults.standard
+      if let alwaysUseDeepl = (sharedDefault.object(forKey: "always_use_deepl") as? Bool) {
+        if alwaysUseDeepl {
+          preferredTranslationType = .useDeepl
+        }
+        sharedDefault.removeObject(forKey: "always_use_deepl")
+      }
+      #if canImport(_Translation_SwiftUI)
+        if #unavailable(iOS 17.4),
+          preferredTranslationType == .useApple
+        {
+          preferredTranslationType = .useServerIfPossible
+        }
+      #else
+        if preferredTranslationType == .useApple {
+          preferredTranslationType = .useServerIfPossible
+        }
+      #endif
+    }
   }
 
   public static let sharedDefault = UserDefaults(suiteName: "group.com.thomasricouard.IceCubesApp")
@@ -95,7 +132,9 @@ import SwiftUI
   }
 
   public var pendingLocation: Alignment {
-    let fromLeft = Locale.current.language.characterDirection == .leftToRight ? pendingShownLeft : !pendingShownLeft
+    let fromLeft =
+      Locale.current.language.characterDirection == .leftToRight
+      ? pendingShownLeft : !pendingShownLeft
     if pendingShownAtBottom {
       if fromLeft {
         return .bottomLeading
@@ -183,9 +222,9 @@ import SwiftUI
     }
   }
 
-  public var alwaysUseDeepl: Bool {
+  public var preferredTranslationType: TranslationType {
     didSet {
-      storage.alwaysUseDeepl = alwaysUseDeepl
+      storage.preferredTranslationType = preferredTranslationType
     }
   }
 
@@ -327,6 +366,18 @@ import SwiftUI
     }
   }
 
+  public var isSidebarExpanded: Bool {
+    didSet {
+      storage.isSidebarExpanded = isSidebarExpanded
+    }
+  }
+
+  public var isPostsStreamingEnabled: Bool {
+    didSet {
+      storage.isPostsStreamingEnabled = isPostsStreamingEnabled
+    }
+  }
+
   public func getRealMaxIndent() -> UInt {
     showReplyIndentation ? maxReplyIndentation : 0
   }
@@ -374,7 +425,9 @@ import SwiftUI
     getMinVisibility(getReplyVisibility(), status.visibility)
   }
 
-  private func getMinVisibility(_ vis1: Models.Visibility, _ vis2: Models.Visibility) -> Models.Visibility {
+  private func getMinVisibility(_ vis1: Models.Visibility, _ vis2: Models.Visibility)
+    -> Models.Visibility
+  {
     let no1 = Self.getIntOfVisibility(vis1)
     let no2 = Self.getIntOfVisibility(vis2)
 
@@ -420,7 +473,8 @@ import SwiftUI
   public func reloadNotificationsCount(tokens: [OauthToken]) {
     notificationsCount = [:]
     for token in tokens {
-      notificationsCount[token] = Self.sharedDefault?.integer(forKey: "push_notifications_count_\(token.createdAt)") ?? 0
+      notificationsCount[token] =
+        Self.sharedDefault?.integer(forKey: "push_notifications_count_\(token.createdAt)") ?? 0
     }
   }
 
@@ -474,7 +528,7 @@ import SwiftUI
     appDefaultPostsSensitive = storage.appDefaultPostsSensitive
     appRequireAltText = storage.appRequireAltText
     autoPlayVideo = storage.autoPlayVideo
-    alwaysUseDeepl = storage.alwaysUseDeepl
+    preferredTranslationType = storage.preferredTranslationType
     userDeeplAPIFree = storage.userDeeplAPIFree
     autoDetectPostLanguage = storage.autoDetectPostLanguage
     inAppBrowserReaderView = storage.inAppBrowserReaderView
@@ -501,10 +555,12 @@ import SwiftUI
     showReplyIndentation = storage.showReplyIndentation
     showAccountPopover = storage.showAccountPopover
     muteVideo = storage.muteVideo
+    isSidebarExpanded = storage.isSidebarExpanded
+    isPostsStreamingEnabled = storage.isPostsStreamingEnabled
   }
 }
 
-extension UInt: RawRepresentable {
+extension UInt: @retroactive RawRepresentable {
   public var rawValue: Int {
     Int(self)
   }

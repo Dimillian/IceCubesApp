@@ -18,12 +18,10 @@ struct TimelineTab: View {
   @Environment(UserPreferences.self) private var preferences
   @Environment(Client.self) private var client
   @State private var routerPath = RouterPath()
-  @Binding var popToRootTab: Tab
 
   @State private var didAppear: Bool = false
   @State private var timeline: TimelineFilter = .home
   @State private var selectedTagGroup: TagGroup?
-  @State private var scrollToTopSignal: Int = 0
 
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
@@ -33,26 +31,26 @@ struct TimelineTab: View {
 
   private let canFilterTimeline: Bool
 
-  init(popToRootTab: Binding<Tab>, timeline: TimelineFilter? = nil) {
+  init(timeline: TimelineFilter? = nil) {
     canFilterTimeline = timeline == nil
-    _popToRootTab = popToRootTab
     _timeline = .init(initialValue: timeline ?? .home)
   }
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
-      TimelineView(timeline: $timeline,
-                   pinnedFilters: $pinnedFilters,
-                   selectedTagGroup: $selectedTagGroup,
-                   scrollToTopSignal: $scrollToTopSignal,
-                   canFilterTimeline: canFilterTimeline)
-        .withAppRouter()
-        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-        .toolbar {
-          toolbarView
-        }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
-        .id(client.id)
+      TimelineView(
+        timeline: $timeline,
+        pinnedFilters: $pinnedFilters,
+        selectedTagGroup: $selectedTagGroup,
+        canFilterTimeline: canFilterTimeline
+      )
+      .withAppRouter()
+      .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+      .toolbar {
+        toolbarView
+      }
+      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
+      .id(client.id)
     }
     .onAppear {
       routerPath.client = client
@@ -61,30 +59,21 @@ struct TimelineTab: View {
         if client.isAuth {
           timeline = lastTimelineFilter
         } else {
-          timeline = .federated
+          timeline = .trending
         }
-      }
-      Task {
-        await currentAccount.fetchLists()
       }
       if !client.isAuth {
         routerPath.presentedSheet = .addAccount
       }
+    }
+    .task {
+      await currentAccount.fetchLists()
     }
     .onChange(of: client.isAuth) {
       resetTimelineFilter()
     }
     .onChange(of: currentAccount.account?.id) {
       resetTimelineFilter()
-    }
-    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
-      if newValue == .timeline {
-        if routerPath.path.isEmpty {
-          scrollToTopSignal += 1
-        } else {
-          routerPath.path = []
-        }
-      }
     }
     .onChange(of: client.id) {
       routerPath.path = []
@@ -125,8 +114,10 @@ struct TimelineTab: View {
   private var timelineFilterButton: some View {
     headerGroup
     timelineFiltersButtons
-    listsFiltersButons
-    tagsFiltersButtons
+    if client.isAuth {
+      listsFiltersButons
+      tagsFiltersButtons
+    }
     localTimelinesFiltersButtons
     tagGroupsFiltersButtons
     Divider()
@@ -193,7 +184,8 @@ struct TimelineTab: View {
         Button {
           timeline = .latest
         } label: {
-          Label(TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName())
+          Label(
+            TimelineFilter.latest.localizedTitle(), systemImage: TimelineFilter.latest.iconName())
         }
       }
       if timeline == .home {
@@ -201,8 +193,9 @@ struct TimelineTab: View {
           timeline = .resume
         } label: {
           VStack {
-            Label(TimelineFilter.resume.localizedTitle(),
-                  systemImage: TimelineFilter.resume.iconName())
+            Label(
+              TimelineFilter.resume.localizedTitle(),
+              systemImage: TimelineFilter.resume.iconName())
           }
         }
       }
@@ -216,9 +209,11 @@ struct TimelineTab: View {
     Button {
       withAnimation {
         if let index {
-          pinnedFilters.remove(at: index)
+          let timeline = pinnedFilters.remove(at: index)
+          Telemetry.signal("timeline.pin.removed", parameters: ["timeline": timeline.rawValue])
         } else {
           pinnedFilters.append(timeline)
+          Telemetry.signal("timeline.pin.added", parameters: ["timeline": timeline.rawValue])
         }
       }
     } label: {
@@ -314,18 +309,20 @@ struct TimelineTab: View {
   }
 
   private var contentFilterButton: some View {
-    Button(action: {
-      routerPath.presentedSheet = .timelineContentFilter
-    }, label: {
-      Label("timeline.content-filter.title", systemSymbol: .line3HorizontalDecrease)
-    })
+    Button(
+      action: {
+        routerPath.presentedSheet = .timelineContentFilter
+      },
+      label: {
+        Label("timeline.content-filter.title", systemSymbol: .line3HorizontalDecrease)
+      })
   }
 
   private func resetTimelineFilter() {
     if client.isAuth, canFilterTimeline {
       timeline = lastTimelineFilter
     } else if !client.isAuth {
-      timeline = .federated
+      timeline = .trending
     }
   }
 }

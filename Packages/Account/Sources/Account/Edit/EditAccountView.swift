@@ -35,20 +35,22 @@ public struct EditAccountView: View {
         .background(theme.secondaryBackgroundColor)
         .scrollDismissesKeyboard(.immediately)
       #endif
-        .navigationTitle("account.edit.navigation-title")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-          toolbarContent
-        }
-        .alert("account.edit.error.save.title",
-               isPresented: $viewModel.saveError,
-               actions: {
-                 Button("alert.button.ok", action: {})
-               }, message: { Text("account.edit.error.save.message") })
-        .task {
-          viewModel.client = client
-          await viewModel.fetchAccount()
-        }
+      .navigationTitle("account.edit.navigation-title")
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbar {
+        toolbarContent
+      }
+      .alert(
+        "account.edit.error.save.title",
+        isPresented: $viewModel.saveError,
+        actions: {
+          Button("alert.button.ok", action: {})
+        }, message: { Text("account.edit.error.save.message") }
+      )
+      .task {
+        viewModel.client = client
+        await viewModel.fetchAccount()
+      }
     }
   }
 
@@ -61,7 +63,7 @@ public struct EditAccountView: View {
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -87,28 +89,45 @@ public struct EditAccountView: View {
             .frame(height: 150)
           }
         }
-        if let avatar = viewModel.avatar {
-          ZStack(alignment: .bottomLeading) {
-            AvatarView(avatar, config: .account)
-            Menu {
-              Button("account.edit.avatar") {
-                viewModel.isChangingAvatar = true
-                viewModel.isPhotoPickerPresented = true
-              }
-              Button("account.edit.header") {
-                viewModel.isChangingHeader = true
-                viewModel.isPhotoPickerPresented = true
-              }
-            } label: {
-              Image(systemName: "photo.badge.plus")
-                .foregroundStyle(.white)
+        ZStack(alignment: .bottomLeading) {
+          AvatarView(viewModel.avatar, config: .account)
+          Menu {
+            Button("account.edit.avatar") {
+              viewModel.isChangingAvatar = true
+              viewModel.isPhotoPickerPresented = true
             }
-            .buttonStyle(.borderedProminent)
-            .clipShape(Circle())
-            .offset(x: -8, y: 8)
+            Button("account.edit.header") {
+              viewModel.isChangingHeader = true
+              viewModel.isPhotoPickerPresented = true
+            }
+            if viewModel.avatar != nil || viewModel.header != nil {
+              Divider()
+            }
+            if viewModel.avatar != nil {
+              Button("account.edit.avatar.delete", role: .destructive) {
+                Task {
+                  await viewModel.deleteAvatar()
+                }
+              }
+            }
+            if viewModel.header != nil {
+              Button("account.edit.header.delete", role: .destructive) {
+                Task {
+                  await viewModel.deleteHeader()
+                }
+              }
+            }
+          } label: {
+            Image(systemName: "photo.badge.plus")
+              .foregroundStyle(.white)
           }
+          .buttonStyle(.borderedProminent)
+          .clipShape(Circle())
+          .offset(x: -8, y: 8)
+          .padding(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
         }
       }
+      .frame(minWidth: 0, maxWidth: .infinity)
       .overlay {
         if viewModel.isChangingAvatar || viewModel.isChangingHeader {
           ZStack(alignment: .center) {
@@ -121,11 +140,12 @@ public struct EditAccountView: View {
       .listRowInsets(EdgeInsets())
     }
     .listRowBackground(theme.secondaryBackgroundColor)
-    .photosPicker(isPresented: $viewModel.isPhotoPickerPresented,
-                  selection: $viewModel.mediaPickers,
-                  maxSelectionCount: 1,
-                  matching: .any(of: [.images]),
-                  photoLibrary: .shared())
+    .photosPicker(
+      isPresented: $viewModel.isPhotoPickerPresented,
+      selection: $viewModel.mediaPickers,
+      maxSelectionCount: 1,
+      matching: .any(of: [.images]),
+      photoLibrary: .shared())
   }
 
   @ViewBuilder
@@ -139,7 +159,7 @@ public struct EditAccountView: View {
         .frame(maxHeight: 150)
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -161,7 +181,7 @@ public struct EditAccountView: View {
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -171,14 +191,16 @@ public struct EditAccountView: View {
         Label("account.edit.account-settings.private", systemImage: "lock")
       }
       Toggle(isOn: $viewModel.isBot) {
-        Label("account.edit.account-settings.bot", systemImage: "laptopcomputer.trianglebadge.exclamationmark")
+        Label(
+          "account.edit.account-settings.bot",
+          systemImage: "laptopcomputer.trianglebadge.exclamationmark")
       }
       Toggle(isOn: $viewModel.isDiscoverable) {
         Label("account.edit.account-settings.discoverable", systemImage: "magnifyingglass")
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -214,7 +236,7 @@ public struct EditAccountView: View {
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 

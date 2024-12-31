@@ -35,6 +35,14 @@ import Observation
     version >= 4.1
   }
 
+  public var isNotificationsFilterSupported: Bool {
+    version >= 4.3
+  }
+
+  public var isLinkTimelineSupported: Bool {
+    version >= 4.3
+  }
+
   private init() {}
 
   public func setClient(client: Client) {

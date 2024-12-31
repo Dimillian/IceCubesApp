@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "Account",
       targets: ["Account"]
-    ),
+    )
   ],
   dependencies: [
     .package(name: "Network", path: "../Network"),
@@ -22,6 +22,7 @@ let package = Package(
     .package(name: "StatusKit", path: "../StatusKit"),
     .package(name: "Env", path: "../Env"),
     .package(url: "https://github.com/Dean151/ButtonKit", from: "0.1.1"),
+    .package(url: "https://github.com/dkk/WrappingHStack", from: "2.2.11"),
   ],
   targets: [
     .target(
@@ -32,9 +33,10 @@ let package = Package(
         .product(name: "StatusKit", package: "StatusKit"),
         .product(name: "Env", package: "Env"),
         .product(name: "ButtonKit", package: "ButtonKit"),
+        .product(name: "WrappingHStack", package: "WrappingHStack"),
       ],
       swiftSettings: [
-        .enableExperimentalFeature("StrictConcurrency"),
+        .swiftLanguageMode(.v6)
       ]
     ),
     .testTarget(

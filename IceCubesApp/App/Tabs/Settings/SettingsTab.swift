@@ -28,9 +28,9 @@ struct SettingsTabs: View {
   @State private var cachedRemoved = false
   @State private var timelineCache = TimelineCache()
 
-  @Binding var popToRootTab: Tab
-
   let isModal: Bool
+
+  @State private var startingPoint: SettingsStartingPoint? = nil
 
   var body: some View {
     NavigationStack(path: $routerPath.path) {
@@ -39,31 +39,61 @@ struct SettingsTabs: View {
         accountsSection
         generalSection
         otherSections
+        postStreamingSection
+        AISection
         cacheSection
       }
       .scrollContentBackground(.hidden)
       #if !os(visionOS)
         .background(theme.secondaryBackgroundColor)
       #endif
-        .navigationTitle(Text("settings.title"))
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
-        .toolbar {
-          if isModal {
-            ToolbarItem {
-              Button {
-                dismiss()
-              } label: {
-                Text("action.done").bold()
-              }
+      .navigationTitle(Text("settings.title"))
+      .navigationBarTitleDisplayMode(.inline)
+      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
+      .toolbar {
+        if isModal {
+          ToolbarItem {
+            Button {
+              dismiss()
+            } label: {
+              Text("action.done").bold()
             }
           }
-          if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn, !isModal {
-            SecondaryColumnToolbarItem()
-          }
         }
-        .withAppRouter()
-        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+        if UIDevice.current.userInterfaceIdiom == .pad, !preferences.showiPadSecondaryColumn,
+          !isModal
+        {
+          SecondaryColumnToolbarItem()
+        }
+      }
+      .withAppRouter()
+      .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+      .onAppear {
+        startingPoint = RouterPath.settingsStartingPoint
+        RouterPath.settingsStartingPoint = nil
+      }
+      .navigationDestination(item: $startingPoint) { targetView in
+        switch targetView {
+        case .display:
+          DisplaySettingsView()
+        case .haptic:
+          HapticSettingsView()
+        case .remoteTimelines:
+          RemoteTimelinesSettingView()
+        case .tagGroups:
+          TagsGroupSettingView()
+        case .recentTags:
+          RecenTagsSettingView()
+        case .content:
+          ContentSettingsView()
+        case .swipeActions:
+          SwipeActionsSettingsView()
+        case .tabAndSidebarEntries:
+          EmptyView()
+        case .translation:
+          TranslationSettingsView()
+        }
+      }
     }
     .onAppear {
       routerPath.client = client
@@ -75,11 +105,6 @@ struct SettingsTabs: View {
     }
     .withSafariRouter()
     .environment(routerPath)
-    .onChange(of: $popToRootTab.wrappedValue) { _, newValue in
-      if newValue == .notifications {
-        routerPath.path = []
-      }
-    }
   }
 
   private var accountsSection: some View {
@@ -108,24 +133,25 @@ struct SettingsTabs: View {
           }
         }
       }
+      addAccountButton
       if !appAccountsManager.availableAccounts.isEmpty {
         editAccountButton
       }
-      addAccountButton
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
   private func logoutAccount(account: AppAccount) async {
     if let token = account.oauthToken,
-       let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
+      let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
     {
       let client = Client(server: account.server, oauthToken: token)
       await timelineCache.clearCache(for: client.id)
       await sub.deleteSubscription()
       appAccountsManager.delete(account: account)
+      Telemetry.signal("account.removed")
     }
   }
 
@@ -164,7 +190,9 @@ struct SettingsTabs: View {
         NavigationLink(destination: TabbarEntriesSettingsView()) {
           Label("settings.general.tabbarEntries", systemImage: "platter.filled.bottom.iphone")
         }
-      } else if UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac {
+      } else if UIDevice.current.userInterfaceIdiom == .pad
+        || UIDevice.current.userInterfaceIdiom == .mac
+      {
         NavigationLink(destination: SidebarEntriesSettingsView()) {
           Label("settings.general.sidebarEntries", systemImage: "sidebar.squares.leading")
         }
@@ -180,7 +208,7 @@ struct SettingsTabs: View {
       #endif
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -206,9 +234,6 @@ struct SettingsTabs: View {
         }
         .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
       #endif
-      Toggle(isOn: $preferences.isOpenAIEnabled) {
-        Label("settings.other.hide-openai", systemImage: "faxmachine")
-      }
       Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
         Label("settings.other.social-keyboard", systemImage: "keyboard")
       }
@@ -224,7 +249,45 @@ struct SettingsTabs: View {
       Text("settings.section.other.footer")
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
+    #endif
+  }
+
+  @ViewBuilder
+  private var postStreamingSection: some View {
+    @Bindable var preferences = preferences
+    Section {
+      Toggle(isOn: $preferences.isPostsStreamingEnabled) {
+        Label("Posts streaming", systemImage: "clock.badge")
+      }
+    } header: {
+      Text("Streaming")
+    } footer: {
+      Text(
+        "Enabling post streaming will automatically add new posts at the top of your home timeline. Disable if you get performance issues."
+      )
+    }
+    #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+    #endif
+  }
+
+  @ViewBuilder
+  private var AISection: some View {
+    @Bindable var preferences = preferences
+    Section {
+      Toggle(isOn: $preferences.isOpenAIEnabled) {
+        Label("settings.other.hide-openai", systemImage: "faxmachine")
+      }
+    } header: {
+      Text("AI")
+    } footer: {
+      Text(
+        "Disable to hide AI assisted tool options such as copywritting and alt-image description generated using AI. Uses OpenAI API. See our Privacy Policy for more information."
+      )
+    }
+    #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -235,11 +298,16 @@ struct SettingsTabs: View {
           Label {
             Text("settings.app.icon")
           } icon: {
-            let icon = IconSelectorView.Icon(string: UIApplication.shared.alternateIconName ?? "AppIcon")
-            Image(uiImage: .init(named: icon.appIconName)!)
-              .resizable()
-              .frame(width: 25, height: 25)
-              .cornerRadius(4)
+            let icon = IconSelectorView.Icon(
+              string: UIApplication.shared.alternateIconName ?? "AppIcon")
+            if let image: UIImage = .init(named: icon.previewImageName) {
+              Image(uiImage: image)
+                .resizable()
+                .frame(width: 25, height: 25)
+                .cornerRadius(4)
+            } else {
+              EmptyView()
+            }
           }
         }
       #endif
@@ -254,7 +322,9 @@ struct SettingsTabs: View {
         Label("settings.app.support", systemImage: "wand.and.stars")
       }
 
-      if let reviewURL = URL(string: "https://apps.apple.com/app/id\(AppInfo.appStoreAppId)?action=write-review") {
+      if let reviewURL = URL(
+        string: "https://apps.apple.com/app/id\(AppInfo.appStoreAppId)?action=write-review")
+      {
         Link(destination: reviewURL) {
           Label("settings.rate", systemImage: "link")
         }
@@ -262,19 +332,28 @@ struct SettingsTabs: View {
         .tint(theme.labelColor)
       }
 
-      NavigationLink(destination: AboutView()) {
+      NavigationLink {
+        AboutView()
+      } label: {
         Label("settings.app.about", systemImage: "info.circle")
+      }
+
+      NavigationLink {
+        WishlistView()
+      } label: {
+        Label("Feature Requests", systemImage: "list.bullet.rectangle.portrait")
       }
 
     } header: {
       Text("settings.section.app")
     } footer: {
       if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-        Text("settings.section.app.footer \(appVersion)").frame(maxWidth: .infinity, alignment: .center)
+        Text("settings.section.app.footer \(appVersion)").frame(
+          maxWidth: .infinity, alignment: .center)
       }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 
@@ -282,7 +361,7 @@ struct SettingsTabs: View {
     Button {
       addAccountSheetPresented.toggle()
     } label: {
-      Text("settings.account.add")
+      Label("settings.account.add", systemImage: "person.badge.plus")
     }
     .sheet(isPresented: $addAccountSheetPresented) {
       AddAccountView()
@@ -290,21 +369,23 @@ struct SettingsTabs: View {
   }
 
   private var editAccountButton: some View {
-    Button(role: isEditingAccount ? .none : .destructive) {
+    Button(role: .destructive) {
       withAnimation {
         isEditingAccount.toggle()
       }
     } label: {
       if isEditingAccount {
-        Text("action.done")
+        Label("action.done", systemImage: "person.badge.minus")
+          .foregroundStyle(.red)
       } else {
-        Text("account.action.logout")
+        Label("account.action.logout", systemImage: "person.badge.minus")
+          .foregroundStyle(.red)
       }
     }
   }
 
   private var cacheSection: some View {
-    Section("settings.section.cache") {
+    Section {
       if cachedRemoved {
         Text("action.done")
           .transition(.move(edge: .leading))
@@ -316,9 +397,13 @@ struct SettingsTabs: View {
           }
         }
       }
+    } header: {
+      Text("settings.section.cache")
+    } footer: {
+      Text("Remove all cached images and videos")
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
 }

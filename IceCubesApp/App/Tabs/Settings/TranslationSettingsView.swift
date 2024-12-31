@@ -11,18 +11,15 @@ struct TranslationSettingsView: View {
 
   var body: some View {
     Form {
-      deepLToggle
-      if preferences.alwaysUseDeepl {
+      translationSelector
+      if preferences.preferredTranslationType == .useDeepl {
         Section("settings.translation.user-api-key") {
           deepLPicker
           SecureField("settings.translation.user-api-key", text: $apiKey)
             .textContentType(.password)
         }
-        .onAppear {
-          readValue()
-        }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor)
         #endif
 
         if apiKey.isEmpty {
@@ -33,10 +30,11 @@ struct TranslationSettingsView: View {
             }
           }
           #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
+            .listRowBackground(theme.primaryBackgroundColor)
           #endif
         }
       }
+      backgroundAPIKey
       autoDetectSection
     }
     .navigationTitle("settings.translation.navigation-title")
@@ -44,21 +42,41 @@ struct TranslationSettingsView: View {
       .scrollContentBackground(.hidden)
       .background(theme.secondaryBackgroundColor)
     #endif
-      .onChange(of: apiKey) {
-        writeNewValue()
-      }
-      .onAppear(perform: updatePrefs)
+    .onChange(of: apiKey) {
+      writeNewValue()
+    }
+    .onAppear(perform: updatePrefs)
+    .onAppear(perform: readValue)
   }
 
   @ViewBuilder
-  private var deepLToggle: some View {
+  private var translationSelector: some View {
     @Bindable var preferences = preferences
-    Toggle(isOn: $preferences.alwaysUseDeepl) {
-      Text("settings.translation.always-deepl")
+    Picker("Translation Service", selection: $preferences.preferredTranslationType) {
+      ForEach(allTTCases, id: \.self) { type in
+        Text(type.description).tag(type)
+      }
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
+  }
+
+  var allTTCases: [TranslationType] {
+    TranslationType.allCases.filter { type in
+      if type != .useApple {
+        return true
+      }
+      #if canImport(_Translation_SwiftUI)
+        if #available(iOS 17.4, *) {
+          return true
+        } else {
+          return false
+        }
+      #else
+        return false
+      #endif
+    }
   }
 
   @ViewBuilder
@@ -80,6 +98,35 @@ struct TranslationSettingsView: View {
     } footer: {
       Text("settings.translation.auto-detect-post-language-footer")
     }
+    #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+    #endif
+  }
+
+  @ViewBuilder
+  private var backgroundAPIKey: some View {
+    if preferences.preferredTranslationType != .useDeepl,
+      !apiKey.isEmpty
+    {
+      Section {
+        Text("The DeepL API Key is still stored!")
+        if preferences.preferredTranslationType == .useServerIfPossible {
+          Text(
+            "It can however still be used as a fallback for your instance's translation service.")
+        }
+        Button(role: .destructive) {
+          withAnimation {
+            writeNewValue(value: "")
+            readValue()
+          }
+        } label: {
+          Text("action.delete")
+        }
+      }
+      #if !os(visionOS)
+        .listRowBackground(theme.primaryBackgroundColor)
+      #endif
+    }
   }
 
   private func writeNewValue() {
@@ -91,11 +138,7 @@ struct TranslationSettingsView: View {
   }
 
   private func readValue() {
-    if let apiKey = DeepLUserAPIHandler.readIfAllowed() {
-      self.apiKey = apiKey
-    } else {
-      apiKey = ""
-    }
+    apiKey = DeepLUserAPIHandler.readKey()
   }
 
   private func updatePrefs() {

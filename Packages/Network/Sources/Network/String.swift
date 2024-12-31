@@ -1,7 +1,7 @@
 import Foundation
 
-public extension String {
-  func escape() -> String {
+extension String {
+  public func escape() -> String {
     replacingOccurrences(of: "&amp;", with: "&")
       .replacingOccurrences(of: "&lt;", with: "<")
       .replacingOccurrences(of: "&gt;", with: ">")
@@ -10,7 +10,7 @@ public extension String {
       .replacingOccurrences(of: "&#39;", with: "’")
   }
 
-  func URLSafeBase64ToBase64() -> String {
+  public func URLSafeBase64ToBase64() -> String {
     var base64 = replacingOccurrences(of: "-", with: "+").replacingOccurrences(of: "_", with: "/")
     let countMod4 = count % 4
 

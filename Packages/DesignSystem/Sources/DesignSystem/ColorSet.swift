@@ -1,15 +1,17 @@
 import SwiftUI
 
 public let availableColorsSets: [ColorSetCouple] =
-  [.init(light: IceCubeLight(), dark: IceCubeDark()),
-   .init(light: IceCubeNeonLight(), dark: IceCubeNeonDark()),
-   .init(light: DesertLight(), dark: DesertDark()),
-   .init(light: NemesisLight(), dark: NemesisDark()),
-   .init(light: MediumLight(), dark: MediumDark()),
-   .init(light: ConstellationLight(), dark: ConstellationDark()),
-   .init(light: ThreadsLight(), dark: ThreadsDark())]
+  [
+    .init(light: IceCubeLight(), dark: IceCubeDark()),
+    .init(light: IceCubeNeonLight(), dark: IceCubeNeonDark()),
+    .init(light: DesertLight(), dark: DesertDark()),
+    .init(light: NemesisLight(), dark: NemesisDark()),
+    .init(light: MediumLight(), dark: MediumDark()),
+    .init(light: ConstellationLight(), dark: ConstellationDark()),
+    .init(light: ThreadsLight(), dark: ThreadsDark()),
+  ]
 
-public protocol ColorSet {
+public protocol ColorSet: Sendable {
   var name: ColorSetName { get }
   var scheme: ColorScheme { get }
   var tintColor: Color { get set }
@@ -18,11 +20,11 @@ public protocol ColorSet {
   var labelColor: Color { get set }
 }
 
-public enum ColorScheme: String {
+public enum ColorScheme: String, Sendable {
   case dark, light
 }
 
-public enum ColorSetName: String {
+public enum ColorSetName: String, Sendable {
   case iceCubeDark = "Ice Cube - Dark"
   case iceCubeLight = "Ice Cube - Light"
   case iceCubeNeonDark = "Ice Cube Neon - Dark"
@@ -39,7 +41,7 @@ public enum ColorSetName: String {
   case threadsDark = "Threads - Dark"
 }
 
-public struct ColorSetCouple: Identifiable {
+public struct ColorSetCouple: Identifiable, Sendable {
   public var id: String {
     dark.name.rawValue + light.name.rawValue
   }

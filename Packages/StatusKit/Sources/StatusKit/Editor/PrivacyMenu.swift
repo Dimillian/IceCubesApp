@@ -9,7 +9,9 @@ extension StatusEditor {
     var body: some View {
       Menu {
         ForEach(Models.Visibility.allCases, id: \.self) { vis in
-          Button { visibility = vis } label: {
+          Button {
+            visibility = vis
+          } label: {
             Label(vis.title, systemImage: vis.iconName)
           }
         }

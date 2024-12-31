@@ -1,10 +1,11 @@
 import SwiftUI
+
 #if canImport(UIKit)
   import UIKit
 #endif
 
-public extension View {
-  @MainActor func applyTheme(_ theme: Theme) -> some View {
+extension View {
+  @MainActor public func applyTheme(_ theme: Theme) -> some View {
     modifier(ThemeApplier(theme: theme))
   }
 }
@@ -26,40 +27,46 @@ struct ThemeApplier: ViewModifier {
     content
       .tint(theme.tintColor)
       .preferredColorScheme(actualColorScheme)
-    #if canImport(UIKit)
-      .onAppear {
-        // If theme is never set before set the default store. This should only execute once after install.
-        if !theme.isThemePreviouslySet {
-          theme.applySet(set: colorScheme == .dark ? .iceCubeDark : .iceCubeLight)
-          theme.isThemePreviouslySet = true
-        } else if theme.followSystemColorScheme, theme.isThemePreviouslySet,
-                  let sets = availableColorsSets
-                  .first(where: { $0.light.name == theme.selectedSet || $0.dark.name == theme.selectedSet })
-        {
-          theme.applySet(set: colorScheme == .dark ? sets.dark.name : sets.light.name)
+      #if canImport(UIKit)
+        .onAppear {
+          // If theme is never set before set the default store. This should only execute once after install.
+          if !theme.isThemePreviouslySet {
+            theme.applySet(set: colorScheme == .dark ? .iceCubeDark : .iceCubeLight)
+            theme.isThemePreviouslySet = true
+          } else if theme.followSystemColorScheme, theme.isThemePreviouslySet,
+            let sets =
+              availableColorsSets
+            .first(where: {
+              $0.light.name == theme.selectedSet || $0.dark.name == theme.selectedSet
+            })
+          {
+            theme.applySet(set: colorScheme == .dark ? sets.dark.name : sets.light.name)
+          }
+          setWindowTint(theme.tintColor)
+          setWindowUserInterfaceStyle(from: theme.selectedScheme)
+          setBarsColor(theme.primaryBackgroundColor)
         }
-        setWindowTint(theme.tintColor)
-        setWindowUserInterfaceStyle(from: theme.selectedScheme)
-        setBarsColor(theme.primaryBackgroundColor)
-      }
-      .onChange(of: theme.tintColor) { _, newValue in
-        setWindowTint(newValue)
-      }
-      .onChange(of: theme.primaryBackgroundColor) { _, newValue in
-        setBarsColor(newValue)
-      }
-      .onChange(of: theme.selectedScheme) { _, newValue in
-        setWindowUserInterfaceStyle(from: newValue)
-      }
-      .onChange(of: colorScheme) { _, newColorScheme in
-        if theme.followSystemColorScheme,
-           let sets = availableColorsSets
-           .first(where: { $0.light.name == theme.selectedSet || $0.dark.name == theme.selectedSet })
-        {
-          theme.applySet(set: newColorScheme == .dark ? sets.dark.name : sets.light.name)
+        .onChange(of: theme.tintColor) { _, newValue in
+          setWindowTint(newValue)
         }
-      }
-    #endif
+        .onChange(of: theme.primaryBackgroundColor) { _, newValue in
+          setBarsColor(newValue)
+        }
+        .onChange(of: theme.selectedScheme) { _, newValue in
+          setWindowUserInterfaceStyle(from: newValue)
+        }
+        .onChange(of: colorScheme) { _, newColorScheme in
+          if theme.followSystemColorScheme,
+            let sets =
+              availableColorsSets
+            .first(where: {
+              $0.light.name == theme.selectedSet || $0.dark.name == theme.selectedSet
+            })
+          {
+            theme.applySet(set: newColorScheme == .dark ? sets.dark.name : sets.light.name)
+          }
+        }
+      #endif
   }
 
   #if canImport(UIKit)

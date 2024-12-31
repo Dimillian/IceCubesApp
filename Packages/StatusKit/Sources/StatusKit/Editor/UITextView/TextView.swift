@@ -19,9 +19,10 @@ public struct TextView: View {
   /// Makes a new TextView that supports `NSAttributedString`
   /// - Parameters:
   ///   - text: A binding to the attributed text
-  public init(_ text: Binding<NSMutableAttributedString>,
-              getTextView: ((UITextView) -> Void)? = nil)
-  {
+  public init(
+    _ text: Binding<NSMutableAttributedString>,
+    getTextView: ((UITextView) -> Void)? = nil
+  ) {
     _text = text
     _isEmpty = Binding(
       get: { text.wrappedValue.string.isEmpty },
@@ -42,7 +43,9 @@ public struct TextView: View {
       minHeight: calculatedHeight,
       maxHeight: calculatedHeight
     )
-    .accessibilityValue($text.wrappedValue.string.isEmpty ? (placeholderText ?? "") : $text.wrappedValue.string)
+    .accessibilityValue(
+      $text.wrappedValue.string.isEmpty ? (placeholderText ?? "") : $text.wrappedValue.string
+    )
     .background(
       placeholderView?
         .foregroundColor(Color(.placeholderText))
@@ -60,7 +63,8 @@ public struct TextView: View {
 final class UIKitTextView: UITextView {
   override var keyCommands: [UIKeyCommand]? {
     (super.keyCommands ?? []) + [
-      UIKeyCommand(input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(escape(_:))),
+      UIKeyCommand(
+        input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(escape(_:)))
     ]
   }
 

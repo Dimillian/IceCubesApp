@@ -74,30 +74,30 @@ public struct StatusDetailView: View {
           .scrollContentBackground(.hidden)
           .background(theme.primaryBackgroundColor)
         #endif
-          .onChange(of: viewModel.scrollToId) { _, newValue in
-            if let newValue {
-              viewModel.scrollToId = nil
-              proxy.scrollTo(newValue, anchor: .top)
-            }
+        .onChange(of: viewModel.scrollToId) { _, newValue in
+          if let newValue {
+            viewModel.scrollToId = nil
+            proxy.scrollTo(newValue, anchor: .top)
           }
-          .onAppear {
-            guard !isLoaded else { return }
-            viewModel.client = client
-            viewModel.routerPath = routerPath
-            Task {
-              let result = await viewModel.fetch()
-              isLoaded = true
+        }
+        .onAppear {
+          guard !isLoaded else { return }
+          viewModel.client = client
+          viewModel.routerPath = routerPath
+          Task {
+            let result = await viewModel.fetch()
+            isLoaded = true
 
-              if !result {
-                if let url = viewModel.remoteStatusURL {
-                  await UIApplication.shared.open(url)
-                }
-                DispatchQueue.main.async {
-                  _ = routerPath.path.popLast()
-                }
+            if !result {
+              if let url = viewModel.remoteStatusURL {
+                await UIApplication.shared.open(url)
+              }
+              DispatchQueue.main.async {
+                _ = routerPath.path.popLast()
               }
             }
           }
+        }
       }
       .refreshable {
         Task {
@@ -115,11 +115,13 @@ public struct StatusDetailView: View {
 
   private func makeStatusesListView(statuses: [Status]) -> some View {
     ForEach(statuses) { status in
-      let (indentationLevel, extraInsets) = viewModel.getIndentationLevel(id: status.id, maxIndent: userPreferences.getRealMaxIndent())
-      let viewModel: StatusRowViewModel = .init(status: status,
-                                                client: client,
-                                                routerPath: routerPath,
-                                                scrollToId: $viewModel.scrollToId)
+      let (indentationLevel, extraInsets) = viewModel.getIndentationLevel(
+        id: status.id, maxIndent: userPreferences.getRealMaxIndent())
+      let viewModel: StatusRowViewModel = .init(
+        status: status,
+        client: client,
+        routerPath: routerPath,
+        scrollToId: $viewModel.scrollToId)
       let isFocused = self.viewModel.statusId == status.id
 
       StatusRowView(viewModel: viewModel, context: .detail)
@@ -137,36 +139,30 @@ public struct StatusDetailView: View {
             }
           }
         }
-      #if !os(visionOS)
-        .listRowBackground(viewModel.highlightRowColor)
-      #endif
-        .listRowInsets(.init(top: 12,
-                             leading: .layoutPadding,
-                             bottom: 12,
-                             trailing: .layoutPadding))
     }
   }
 
   private var errorView: some View {
-    ErrorView(title: "status.error.title",
-              message: "status.error.message",
-              buttonTitle: "action.retry")
-    {
-      Task {
-        await viewModel.fetch()
-      }
+    ErrorView(
+      title: "status.error.title",
+      message: "status.error.message",
+      buttonTitle: "action.retry"
+    ) {
+      _ = await viewModel.fetch()
     }
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
     .listRowSeparator(.hidden)
   }
 
   private var loadingDetailView: some View {
     ForEach(Status.placeholders()) { status in
-      StatusRowView(viewModel: .init(status: status, client: client, routerPath: routerPath))
-        .redacted(reason: .placeholder)
-        .allowsHitTesting(false)
+      StatusRowView(
+        viewModel: .init(status: status, client: client, routerPath: routerPath), context: .timeline
+      )
+      .redacted(reason: .placeholder)
+      .allowsHitTesting(false)
     }
   }
 
@@ -181,14 +177,14 @@ public struct StatusDetailView: View {
     #if !os(visionOS)
       .listRowBackground(theme.secondaryBackgroundColor)
     #endif
-      .listRowInsets(.init())
+    .listRowInsets(.init())
   }
 
   private var topPaddingView: some View {
     HStack { EmptyView() }
-    #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-    #endif
+      #if !os(visionOS)
+        .listRowBackground(theme.primaryBackgroundColor)
+      #endif
       .listRowSeparator(.hidden)
       .listRowInsets(.init())
       .frame(height: .layoutPadding)

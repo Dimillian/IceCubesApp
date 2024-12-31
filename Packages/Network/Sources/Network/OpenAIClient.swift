@@ -25,7 +25,7 @@ public struct OpenAIClient {
       public let content: String
     }
 
-    let model = "gpt-3.5-turbo"
+    let model = "gpt-4o-mini"
     let messages: [Message]
 
     let temperature: CGFloat
@@ -52,7 +52,7 @@ public struct OpenAIClient {
       public let content: [MessageContent]
     }
 
-    let model = "gpt-4-vision-preview"
+    let model = "gpt-4o-mini"
     let messages: [Message]
     let maxTokens = 50
   }
@@ -68,18 +68,34 @@ public struct OpenAIClient {
     var request: OpenAIRequest {
       switch self {
       case let .correct(input):
-        ChatRequest(content: "Fix the spelling and grammar mistakes in the following text: \(input)", temperature: 0.2)
+        ChatRequest(
+          content: "Fix the spelling and grammar mistakes in the following text: \(input)",
+          temperature: 0.2)
       case let .addTags(input):
-        ChatRequest(content: "Replace relevant words with camel-cased hashtags in the following text. Don't try to search for context or add hashtags if there is not enough context: \(input)", temperature: 0.1)
+        ChatRequest(
+          content:
+            "Replace relevant words with camel-cased hashtags in the following text. Don't try to search for context or add hashtags if there is not enough context: \(input)",
+          temperature: 0.1)
       case let .insertTags(input):
-        ChatRequest(content: "Return the input with added camel-cased hashtags at the end of the input. Don't try to search for context or add hashtags if there is not enough context: \(input)", temperature: 0.2)
+        ChatRequest(
+          content:
+            "Return the input with added camel-cased hashtags at the end of the input. Don't try to search for context or add hashtags if there is not enough context: \(input)",
+          temperature: 0.2)
       case let .shorten(input):
         ChatRequest(content: "Make a shorter version of this text: \(input)", temperature: 0.5)
       case let .emphasize(input):
         ChatRequest(content: "Make this text catchy, more fun: \(input)", temperature: 1)
       case let .imageDescription(image):
-        VisionRequest(messages: [.init(content: [.init(type: "text", text: "What’s in this image? Be brief, it's for image alt description on a social network. Don't write in the first person.", imageUrl: nil),
-                                                 .init(type: "image_url", text: nil, imageUrl: .init(url: image))])])
+        VisionRequest(messages: [
+          .init(content: [
+            .init(
+              type: "text",
+              text:
+                "What’s in this image? Be brief, it's for image alt description on a social network. Don't write in the first person.",
+              imageUrl: nil),
+            .init(type: "image_url", text: nil, imageUrl: .init(url: image)),
+          ])
+        ])
       }
     }
   }

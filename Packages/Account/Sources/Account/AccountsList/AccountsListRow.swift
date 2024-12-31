@@ -32,11 +32,15 @@ public struct AccountsListRow: View {
 
   @State private var isEditingRelationshipNote: Bool = false
   @State private var showBlockConfirmation: Bool = false
+  @State private var showTranslateView: Bool = false
 
   let isFollowRequest: Bool
   let requestUpdated: (() -> Void)?
 
-  public init(viewModel: AccountsListRowViewModel, isFollowRequest: Bool = false, requestUpdated: (() -> Void)? = nil) {
+  public init(
+    viewModel: AccountsListRowViewModel, isFollowRequest: Bool = false,
+    requestUpdated: (() -> Void)? = nil
+  ) {
     self.viewModel = viewModel
     self.isFollowRequest = isFollowRequest
     self.requestUpdated = requestUpdated
@@ -46,19 +50,23 @@ public struct AccountsListRow: View {
     HStack(alignment: .top) {
       AvatarView(viewModel.account.avatar)
       VStack(alignment: .leading, spacing: 2) {
-        EmojiTextApp(.init(stringValue: viewModel.account.safeDisplayName), emojis: viewModel.account.emojis)
-          .font(.scaledSubheadline)
-          .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
-          .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-          .fontWeight(.semibold)
+        EmojiTextApp(
+          .init(stringValue: viewModel.account.safeDisplayName), emojis: viewModel.account.emojis
+        )
+        .font(.scaledSubheadline)
+        .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
+        .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+        .fontWeight(.semibold)
         Text("@\(viewModel.account.acct)")
           .font(.scaledFootnote)
           .foregroundStyle(Color.secondary)
 
         // First parameter is the number for the plural
         // Second parameter is the formatted string to show
-        Text("account.label.followers \(viewModel.account.followersCount ?? 0) \(viewModel.account.followersCount ?? 0, format: .number.notation(.compactName))")
-          .font(.scaledFootnote)
+        Text(
+          "account.label.followers \(viewModel.account.followersCount ?? 0) \(viewModel.account.followersCount ?? 0, format: .number.notation(.compactName))"
+        )
+        .font(.scaledFootnote)
 
         if let field = viewModel.account.fields.filter({ $0.verifiedAt != nil }).first {
           HStack(spacing: 2) {
@@ -70,9 +78,11 @@ public struct AccountsListRow: View {
               .font(.scaledFootnote)
               .emojiText.size(Font.scaledFootnoteFont.emojiSize)
               .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
-              .environment(\.openURL, OpenURLAction { url in
-                routerPath.handle(url: url)
-              })
+              .environment(
+                \.openURL,
+                OpenURLAction { url in
+                  routerPath.handle(url: url)
+                })
           }
         }
 
@@ -80,24 +90,30 @@ public struct AccountsListRow: View {
           .font(.scaledCaption)
           .emojiText.size(Font.scaledFootnoteFont.emojiSize)
           .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
-          .environment(\.openURL, OpenURLAction { url in
-            routerPath.handle(url: url)
-          })
+          .environment(
+            \.openURL,
+            OpenURLAction { url in
+              routerPath.handle(url: url)
+            })
 
         if isFollowRequest {
-          FollowRequestButtons(account: viewModel.account,
-                               requestUpdated: requestUpdated)
+          FollowRequestButtons(
+            account: viewModel.account,
+            requestUpdated: requestUpdated)
         }
       }
       Spacer()
       if currentAccount.account?.id != viewModel.account.id,
-         let relationShip = viewModel.relationShip
+        let relationShip = viewModel.relationShip
       {
         VStack(alignment: .center) {
-          FollowButton(viewModel: .init(accountId: viewModel.account.id,
-                                        relationship: relationShip,
-                                        shouldDisplayNotify: false,
-                                        relationshipUpdated: { _ in }))
+          FollowButton(
+            viewModel: .init(
+              client: client,
+              accountId: viewModel.account.id,
+              relationship: relationShip,
+              shouldDisplayNotify: false,
+              relationshipUpdated: { _ in }))
         }
       }
     }
@@ -108,14 +124,22 @@ public struct AccountsListRow: View {
     .onTapGesture {
       routerPath.navigate(to: .accountDetailWithAccount(account: viewModel.account))
     }
+    #if canImport(_Translation_SwiftUI)
+      .addTranslateView(isPresented: $showTranslateView, text: viewModel.account.note.asRawText)
+    #endif
     .contextMenu {
-      AccountDetailContextMenu(showBlockConfirmation: $showBlockConfirmation, viewModel: .init(account: viewModel.account))
+      AccountDetailContextMenu(
+        showBlockConfirmation: $showBlockConfirmation,
+        showTranslateView: $showTranslateView,
+        viewModel: .init(account: viewModel.account))
     } preview: {
       List {
-        AccountDetailHeaderView(viewModel: .init(account: viewModel.account),
-                                account: viewModel.account,
-                                scrollViewProxy: nil)
-          .applyAccountDetailsRowStyle(theme: theme)
+        AccountDetailHeaderView(
+          viewModel: .init(account: viewModel.account),
+          account: viewModel.account,
+          scrollViewProxy: nil
+        )
+        .applyAccountDetailsRowStyle(theme: theme)
       }
       .listStyle(.plain)
       .scrollContentBackground(.hidden)

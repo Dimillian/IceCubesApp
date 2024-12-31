@@ -31,7 +31,9 @@ extension StatusEditor {
       }
       .buttonStyle(.bordered)
       .onAppear {
-        viewModel.setInitialLanguageSelection(preference: preferences.recentlyUsedLanguages.first ?? preferences.serverPreferences?.postLanguage)
+        viewModel.setInitialLanguageSelection(
+          preference: preferences.recentlyUsedLanguages.first
+            ?? preferences.serverPreferences?.postLanguage)
       }
       .accessibilityLabel("accessibility.editor.button.language")
       .sheet(isPresented: $isLanguageSheetDisplayed) {
@@ -69,7 +71,8 @@ extension StatusEditor {
     }
 
     @ViewBuilder
-    private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View {
+    private func languageTextView(isoCode: String, nativeName: String?, name: String?) -> some View
+    {
       if let nativeName, let name {
         Text("\(nativeName) (\(name))")
       } else {
@@ -107,7 +110,9 @@ extension StatusEditor {
     }
 
     private var otherLanguages: [Language] {
-      Language.allAvailableLanguages.filter { !preferences.recentlyUsedLanguages.contains($0.isoCode) }
+      Language.allAvailableLanguages.filter {
+        !preferences.recentlyUsedLanguages.contains($0.isoCode)
+      }
     }
 
     private func languageSearchResult(query: String) -> [Language] {

@@ -1,3 +1,4 @@
+import AppAccount
 import DesignSystem
 import EmojiText
 import Env
@@ -16,12 +17,20 @@ struct AccountDetailHeaderView: View {
   @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(AppAccountsManager.self) private var appAccount
   @Environment(\.redactionReasons) private var reasons
   @Environment(\.isSupporter) private var isSupporter: Bool
+  @Environment(\.openURL) private var openURL
+  @Environment(\.colorScheme) private var colorScheme
 
   var viewModel: AccountDetailViewModel
   let account: Account
   let scrollViewProxy: ScrollViewProxy?
+
+  private let premiumTimer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
+  @State private var shouldListenToPremiumTimer: Bool = false
+  @State private var isTipSheetPresented: Bool = false
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -42,6 +51,35 @@ struct AccountDetailHeaderView: View {
         }
       }
       accountInfoView
+      Spacer()
+    }
+    .onChange(of: watcher.latestEvent?.id) {
+      if let latestEvent = watcher.latestEvent,
+        let latestEvent = latestEvent as? StreamEventNotification
+      {
+        if latestEvent.notification.account.id == viewModel.accountId
+          || latestEvent.notification.account.id == viewModel.premiumAccount?.id
+        {
+          Task {
+            if viewModel.account?.isLinkedToPremiumAccount == true {
+              await viewModel.fetchAccount()
+            } else {
+              try? await viewModel.followButtonViewModel?.refreshRelationship()
+            }
+          }
+        }
+      }
+    }
+    .onReceive(premiumTimer) { _ in
+      if shouldListenToPremiumTimer {
+        Task {
+          if viewModel.account?.isLinkedToPremiumAccount == true {
+            await viewModel.fetchAccount()
+          } else {
+            try? await viewModel.followButtonViewModel?.refreshRelationship()
+          }
+        }
+      }
     }
   }
 
@@ -70,7 +108,7 @@ struct AccountDetailHeaderView: View {
       }
     }
     #if !os(visionOS)
-    .background(theme.secondaryBackgroundColor)
+      .background(theme.secondaryBackgroundColor)
     #endif
     .frame(height: Constants.headerHeight)
     .onTapGesture {
@@ -79,10 +117,11 @@ struct AccountDetailHeaderView: View {
       }
       let attachement = MediaAttachment.imageWith(url: account.header)
       #if targetEnvironment(macCatalyst) || os(visionOS)
-        openWindow(value: WindowDestinationMedia.mediaViewer(
-          attachments: [attachement],
-          selectedAttachment: attachement
-        ))
+        openWindow(
+          value: WindowDestinationMedia.mediaViewer(
+            attachments: [attachement],
+            selectedAttachment: attachement
+          ))
       #else
         quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
       #endif
@@ -104,8 +143,10 @@ struct AccountDetailHeaderView: View {
             .resizable()
             .frame(width: 25, height: 25)
             .foregroundColor(theme.tintColor)
-            .offset(x: theme.avatarShape == .circle ? 0 : 10,
-                    y: theme.avatarShape == .circle ? 0 : -10)
+            .offset(
+              x: theme.avatarShape == .circle ? 0 : 10,
+              y: theme.avatarShape == .circle ? 0 : -10
+            )
             .accessibilityRemoveTraits(.isSelected)
             .accessibilityLabel("accessibility.tabs.profile.user-avatar.supporter.label")
         }
@@ -116,10 +157,13 @@ struct AccountDetailHeaderView: View {
         }
         let attachement = MediaAttachment.imageWith(url: account.avatar)
         #if targetEnvironment(macCatalyst) || os(visionOS)
-          openWindow(value: WindowDestinationMedia.mediaViewer(attachments: [attachement],
-                                                               selectedAttachment: attachement))
+          openWindow(
+            value: WindowDestinationMedia.mediaViewer(
+              attachments: [attachement],
+              selectedAttachment: attachement))
         #else
-          quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
+          quickLook.prepareFor(
+            selectedMediaAttachment: attachement, mediaAttachments: [attachement])
         #endif
       }
       .accessibilityElement(children: .combine)
@@ -153,7 +197,8 @@ struct AccountDetailHeaderView: View {
           makeCustomInfoLabel(
             title: "account.followers",
             count: account.followersCount ?? 0,
-            needsBadge: currentAccount.account?.id == account.id && !currentAccount.followRequests.isEmpty
+            needsBadge: currentAccount.account?.id == account.id
+              && !currentAccount.followRequests.isEmpty
           )
         }
         .accessibilityHint("accessibility.tabs.profile.follower-count.hint")
@@ -209,19 +254,21 @@ struct AccountDetailHeaderView: View {
             .accessibilityRespondsToUserInteraction(false)
           movedToView
           joinedAtView
+          if viewModel.account?.isPremiumAccount == true
+            && viewModel.relationship?.following == false
+            || viewModel.account?.isLinkedToPremiumAccount == true
+              && viewModel.premiumRelationship?.following == false
+          {
+            subscribeButton
+          }
         }
         .accessibilityElement(children: .contain)
         .accessibilitySortPriority(1)
 
         Spacer()
-        if let relationship = viewModel.relationship, !viewModel.isCurrentUser {
+        if let followButtonViewModel = viewModel.followButtonViewModel, !viewModel.isCurrentUser {
           HStack {
-            FollowButton(viewModel: .init(accountId: account.id,
-                                          relationship: relationship,
-                                          shouldDisplayNotify: true,
-                                          relationshipUpdated: { relationship in
-                                            viewModel.relationship = relationship
-                                          }))
+            FollowButton(viewModel: followButtonViewModel)
           }
         } else if !viewModel.isCurrentUser {
           ProgressView()
@@ -229,7 +276,7 @@ struct AccountDetailHeaderView: View {
       }
 
       if let note = viewModel.relationship?.note, !note.isEmpty,
-         !viewModel.isCurrentUser
+        !viewModel.isCurrentUser
       {
         makeNoteView(note)
       }
@@ -241,9 +288,12 @@ struct AccountDetailHeaderView: View {
         .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
         .padding(.top, 8)
         .textSelection(.enabled)
-        .environment(\.openURL, OpenURLAction { url in
-          routerPath.handle(url: url)
-        })
+        .environment(
+          \.openURL,
+          OpenURLAction { url in
+            routerPath.handle(url: url)
+          }
+        )
         .accessibilityRespondsToUserInteraction(false)
 
       if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
@@ -251,9 +301,12 @@ struct AccountDetailHeaderView: View {
           VStack(alignment: .leading, spacing: 4) {
             Text(translation.content.asSafeMarkdownAttributedString)
               .font(.scaledBody)
-            Text(getLocalizedStringLabel(langCode: translation.detectedSourceLanguage, provider: translation.provider))
-              .font(.footnote)
-              .foregroundStyle(.secondary)
+            Text(
+              getLocalizedStringLabel(
+                langCode: translation.detectedSourceLanguage, provider: translation.provider)
+            )
+            .font(.footnote)
+            .foregroundStyle(.secondary)
           }
         }
         .fixedSize(horizontal: false, vertical: true)
@@ -274,7 +327,9 @@ struct AccountDetailHeaderView: View {
     }
   }
 
-  private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int, needsBadge: Bool = false) -> some View {
+  private func makeCustomInfoLabel(title: LocalizedStringKey, count: Int, needsBadge: Bool = false)
+    -> some View
+  {
     VStack {
       Text(count, format: .number.notation(.compactName))
         .font(.scaledHeadline)
@@ -313,6 +368,47 @@ struct AccountDetailHeaderView: View {
   }
 
   @ViewBuilder
+  private var subscribeButton: some View {
+    Button {
+      if let subscription = viewModel.subClubUser?.subscription,
+        let accountName = appAccount.currentAccount.accountName,
+        let premiumUsername = account.premiumUsername,
+        let url = URL(
+          string:
+            "https://\(AppInfo.premiumInstance)/@\(premiumUsername)/subscribe?callback=icecubesapp://subclub&id=@\(accountName)&amount=\(subscription.unitAmount)&currency=\(subscription.currency)&theme=\(colorScheme)"
+        )
+      {
+        openURL(url)
+      } else {
+        isTipSheetPresented = true
+        shouldListenToPremiumTimer = true
+      }
+
+      Task {
+        if viewModel.account?.isLinkedToPremiumAccount == true {
+          try? await viewModel.followPremiumAccount()
+        }
+        try? await viewModel.followButtonViewModel?.follow()
+      }
+
+    } label: {
+      if let subscription = viewModel.subClubUser?.subscription {
+        Text("Subscribe \(subscription.formattedAmount) / month")
+      } else {
+        Text("$ Subscribe")
+      }
+    }
+    .buttonStyle(.bordered)
+    .padding(.top, 8)
+    .padding(.bottom, 4)
+    .sheet(isPresented: $isTipSheetPresented) {
+      if let account = viewModel.account {
+        PremiumAcccountSubsciptionSheetView(account: account)
+      }
+    }
+  }
+
+  @ViewBuilder
   private var movedToView: some View {
     if let movedTo = viewModel.account?.moved {
       Button("account.movedto.redirect-\("@\(movedTo.acct)")") {
@@ -331,9 +427,9 @@ struct AccountDetailHeaderView: View {
       Text(note)
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(8)
-      #if !os(visionOS)
-        .background(theme.secondaryBackgroundColor)
-      #endif
+        #if !os(visionOS)
+          .background(theme.secondaryBackgroundColor)
+        #endif
         .cornerRadius(4)
         .overlay(
           RoundedRectangle(cornerRadius: 4)
@@ -363,10 +459,15 @@ struct AccountDetailHeaderView: View {
                   .emojiText.size(Font.scaledBodyFont.emojiSize)
                   .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
                   .foregroundColor(theme.tintColor)
-                  .environment(\.openURL, OpenURLAction { url in
-                    routerPath.handle(url: url)
-                  })
-                  .accessibilityValue(field.verifiedAt != nil ? "accessibility.tabs.profile.fields.verified.label" : "")
+                  .environment(
+                    \.openURL,
+                    OpenURLAction { url in
+                      routerPath.handle(url: url)
+                    }
+                  )
+                  .accessibilityValue(
+                    field.verifiedAt != nil
+                      ? "accessibility.tabs.profile.fields.verified.label" : "")
               }
               .font(.scaledBody)
               if viewModel.fields.last != field {
@@ -377,7 +478,9 @@ struct AccountDetailHeaderView: View {
             Spacer()
           }
           .accessibilityElement(children: .combine)
-          .modifier(ConditionalUserDefinedFieldAccessibilityActionModifier(field: field, routerPath: routerPath))
+          .modifier(
+            ConditionalUserDefinedFieldAccessibilityActionModifier(
+              field: field, routerPath: routerPath))
         }
       }
       .padding(8)
@@ -388,11 +491,11 @@ struct AccountDetailHeaderView: View {
       #else
         .background(theme.secondaryBackgroundColor)
       #endif
-        .cornerRadius(4)
-        .overlay(
-          RoundedRectangle(cornerRadius: 4)
-            .stroke(.gray.opacity(0.35), lineWidth: 1)
-        )
+      .cornerRadius(4)
+      .overlay(
+        RoundedRectangle(cornerRadius: 4)
+          .stroke(.gray.opacity(0.35), lineWidth: 1)
+      )
     }
   }
 }
@@ -422,8 +525,9 @@ private struct ConditionalUserDefinedFieldAccessibilityActionModifier: ViewModif
 
 struct AccountDetailHeaderView_Previews: PreviewProvider {
   static var previews: some View {
-    AccountDetailHeaderView(viewModel: .init(account: .placeholder()),
-                            account: .placeholder(),
-                            scrollViewProxy: nil)
+    AccountDetailHeaderView(
+      viewModel: .init(account: .placeholder()),
+      account: .placeholder(),
+      scrollViewProxy: nil)
   }
 }

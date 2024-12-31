@@ -28,29 +28,34 @@ struct StatusRowContentView: View {
       }
 
       if !reasons.contains(.placeholder),
-         !isCompact,
-         viewModel.isEmbedLoading || viewModel.embeddedStatus != nil
+        !isCompact,
+        viewModel.isEmbedLoading || viewModel.embeddedStatus != nil
       {
         if let embeddedStatus = viewModel.embeddedStatus {
-          StatusEmbeddedView(status: embeddedStatus,
-                             client: viewModel.client,
-                             routerPath: viewModel.routerPath)
-            .fixedSize(horizontal: false, vertical: true)
-            .transition(.opacity)
+          StatusEmbeddedView(
+            status: embeddedStatus,
+            client: viewModel.client,
+            routerPath: viewModel.routerPath
+          )
+          .fixedSize(horizontal: false, vertical: true)
+          .transition(.opacity)
         } else {
-          StatusEmbeddedView(status: Status.placeholder(),
-                             client: viewModel.client,
-                             routerPath: viewModel.routerPath)
-            .fixedSize(horizontal: false, vertical: true)
-            .redacted(reason: .placeholder)
-            .transition(.opacity)
+          StatusEmbeddedView(
+            status: Status.placeholder(),
+            client: viewModel.client,
+            routerPath: viewModel.routerPath
+          )
+          .fixedSize(horizontal: false, vertical: true)
+          .redacted(reason: .placeholder)
+          .transition(.opacity)
         }
       }
 
       if !viewModel.finalStatus.mediaAttachments.isEmpty {
         HStack {
-          StatusRowMediaPreviewView(attachments: viewModel.finalStatus.mediaAttachments,
-                                    sensitive: viewModel.finalStatus.sensitive)
+          StatusRowMediaPreviewView(
+            attachments: viewModel.finalStatus.mediaAttachments,
+            sensitive: viewModel.finalStatus.sensitive)
           if theme.statusDisplayStyle == .compact {
             Spacer()
           }
@@ -60,11 +65,11 @@ struct StatusRowContentView: View {
       }
 
       if let card = viewModel.finalStatus.card,
-         !viewModel.isEmbedLoading,
-         !isCompact,
-         theme.statusDisplayStyle != .compact,
-         viewModel.embeddedStatus == nil,
-         viewModel.finalStatus.mediaAttachments.isEmpty
+        !viewModel.isEmbedLoading,
+        !isCompact,
+        theme.statusDisplayStyle != .compact,
+        viewModel.embeddedStatus == nil,
+        viewModel.finalStatus.mediaAttachments.isEmpty
       {
         StatusRowCardView(card: card)
       }

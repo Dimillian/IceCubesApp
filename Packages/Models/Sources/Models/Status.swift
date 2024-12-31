@@ -78,7 +78,19 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
     filtered?.first?.filter.filterAction == .hide
   }
 
-  public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application?, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
+  public var asMediaStatus: [MediaStatus] {
+    mediaAttachments.map { .init(status: self, attachment: $0) }
+  }
+
+  public init(
+    id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?,
+    reblog: ReblogStatus?, mediaAttachments: [MediaAttachment], mentions: [Mention],
+    repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?,
+    reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?,
+    application: Application?, inReplyToId: String?, inReplyToAccountId: String?,
+    visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?,
+    sensitive: Bool, language: String?
+  ) {
     self.id = id
     self.content = content
     self.account = account
@@ -109,71 +121,77 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   }
 
   public static func placeholder(forSettings: Bool = false, language: String? = nil) -> Status {
-    .init(id: UUID().uuidString,
-          content: .init(stringValue: "Here's to the [#crazy](#) ones. The misfits.\nThe [@rebels](#). The troublemakers.",
-                         parseMarkdown: forSettings),
+    .init(
+      id: UUID().uuidString,
+      content: .init(
+        stringValue:
+          "Here's to the [#crazy](#) ones. The misfits.\nThe [@rebels](#). The troublemakers.",
+        parseMarkdown: forSettings),
 
-          account: .placeholder(),
-          createdAt: ServerDate(),
-          editedAt: nil,
-          reblog: nil,
-          mediaAttachments: [],
-          mentions: [],
-          repliesCount: 34,
-          reblogsCount: 8,
-          favouritesCount: 150,
-          card: nil,
-          favourited: false,
-          reblogged: false,
-          pinned: false,
-          bookmarked: false,
-          emojis: [],
-          url: "https://example.com",
-          application: nil,
-          inReplyToId: nil,
-          inReplyToAccountId: nil,
-          visibility: .pub,
-          poll: nil,
-          spoilerText: .init(stringValue: ""),
-          filtered: [],
-          sensitive: false,
-          language: language)
+      account: .placeholder(),
+      createdAt: ServerDate(),
+      editedAt: nil,
+      reblog: nil,
+      mediaAttachments: [],
+      mentions: [],
+      repliesCount: 34,
+      reblogsCount: 8,
+      favouritesCount: 150,
+      card: nil,
+      favourited: false,
+      reblogged: false,
+      pinned: false,
+      bookmarked: false,
+      emojis: [],
+      url: "https://example.com",
+      application: nil,
+      inReplyToId: nil,
+      inReplyToAccountId: nil,
+      visibility: .pub,
+      poll: nil,
+      spoilerText: .init(stringValue: ""),
+      filtered: [],
+      sensitive: false,
+      language: language)
   }
 
   public static func placeholders() -> [Status] {
-    [.placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(),
-     .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder()]
+    [
+      .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(),
+      .placeholder(), .placeholder(), .placeholder(), .placeholder(), .placeholder(),
+    ]
   }
 
   public var reblogAsAsStatus: Status? {
     if let reblog {
-      return .init(id: reblog.id,
-                   content: reblog.content,
-                   account: reblog.account,
-                   createdAt: reblog.createdAt,
-                   editedAt: reblog.editedAt,
-                   reblog: nil,
-                   mediaAttachments: reblog.mediaAttachments,
-                   mentions: reblog.mentions,
-                   repliesCount: reblog.repliesCount,
-                   reblogsCount: reblog.reblogsCount,
-                   favouritesCount: reblog.favouritesCount,
-                   card: reblog.card,
-                   favourited: reblog.favourited,
-                   reblogged: reblog.reblogged,
-                   pinned: reblog.pinned,
-                   bookmarked: reblog.bookmarked,
-                   emojis: reblog.emojis,
-                   url: reblog.url,
-                   application: reblog.application,
-                   inReplyToId: reblog.inReplyToId,
-                   inReplyToAccountId: reblog.inReplyToAccountId,
-                   visibility: reblog.visibility,
-                   poll: reblog.poll,
-                   spoilerText: reblog.spoilerText,
-                   filtered: reblog.filtered,
-                   sensitive: reblog.sensitive,
-                   language: reblog.language)
+      return .init(
+        id: reblog.id,
+        content: reblog.content,
+        account: reblog.account,
+        createdAt: reblog.createdAt,
+        editedAt: reblog.editedAt,
+        reblog: nil,
+        mediaAttachments: reblog.mediaAttachments,
+        mentions: reblog.mentions,
+        repliesCount: reblog.repliesCount,
+        reblogsCount: reblog.reblogsCount,
+        favouritesCount: reblog.favouritesCount,
+        card: reblog.card,
+        favourited: reblog.favourited,
+        reblogged: reblog.reblogged,
+        pinned: reblog.pinned,
+        bookmarked: reblog.bookmarked,
+        emojis: reblog.emojis,
+        url: reblog.url,
+        application: reblog.application,
+        inReplyToId: reblog.inReplyToId,
+        inReplyToAccountId: reblog.inReplyToAccountId,
+        visibility: reblog.visibility,
+        poll: reblog.poll,
+        spoilerText: reblog.spoilerText,
+        filtered: reblog.filtered,
+        sensitive: reblog.sensitive,
+        language: reblog.language)
     }
     return nil
   }
@@ -219,7 +237,14 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
     filtered?.first?.filter.filterAction == .hide
   }
 
-  public init(id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?, mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int, favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application? = nil, inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?) {
+  public init(
+    id: String, content: HTMLString, account: Account, createdAt: ServerDate, editedAt: ServerDate?,
+    mediaAttachments: [MediaAttachment], mentions: [Mention], repliesCount: Int, reblogsCount: Int,
+    favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?,
+    bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application? = nil,
+    inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?,
+    spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?
+  ) {
     self.id = id
     self.content = content
     self.account = account

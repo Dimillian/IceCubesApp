@@ -1,8 +1,12 @@
 import Foundation
 
 public enum Search: Endpoint {
-  case search(query: String, type: String?, offset: Int?, following: Bool?)
-  case accountsSearch(query: String, type: String?, offset: Int?, following: Bool?)
+  public enum EntityType: String, Sendable {
+    case accounts, hashtags, statuses
+  }
+
+  case search(query: String, type: EntityType?, offset: Int?, following: Bool?)
+  case accountsSearch(query: String, type: EntityType?, offset: Int?, following: Bool?)
 
   public func path() -> String {
     switch self {
@@ -16,10 +20,10 @@ public enum Search: Endpoint {
   public func queryItems() -> [URLQueryItem]? {
     switch self {
     case let .search(query, type, offset, following),
-         let .accountsSearch(query, type, offset, following):
+      let .accountsSearch(query, type, offset, following):
       var params: [URLQueryItem] = [.init(name: "q", value: query)]
       if let type {
-        params.append(.init(name: "type", value: type))
+        params.append(.init(name: "type", value: type.rawValue))
       }
       if let offset {
         params.append(.init(name: "offset", value: String(offset)))

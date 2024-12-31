@@ -30,7 +30,7 @@ public struct TimelineContentFilterView: View {
         }
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor.opacity(0.3))
       #endif
 
       Section {
@@ -46,7 +46,7 @@ public struct TimelineContentFilterView: View {
         }
       }
       #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
+        .listRowBackground(theme.primaryBackgroundColor.opacity(0.3))
       #endif
     }
     .navigationTitle("timeline.content-filter.title")

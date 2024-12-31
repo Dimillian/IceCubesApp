@@ -29,7 +29,7 @@ struct AccountSettingsView: View {
     Form {
       Section {
         Button {
-          routerPath.presentedSheet = .accountFiltersList
+          routerPath.presentedSheet = .accountEditInfo
         } label: {
           Label("account.action.edit-info", systemImage: "pencil")
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -47,20 +47,25 @@ struct AccountSettingsView: View {
           }
           .buttonStyle(.plain)
         }
-        if let subscription = pushNotifications.subscriptions.first(where: { $0.account.token == appAccount.oauthToken }) {
+        if let subscription = pushNotifications.subscriptions.first(where: {
+          $0.account.token == appAccount.oauthToken
+        }) {
           NavigationLink(destination: PushNotificationsView(subscription: subscription)) {
-            Label("settings.general.push-notifications", systemImage: "bell.and.waves.left.and.right")
+            Label(
+              "settings.general.push-notifications", systemImage: "bell.and.waves.left.and.right")
           }
         }
       }
       .listRowBackground(theme.primaryBackgroundColor)
 
       Section {
-        Label("settings.account.cached-posts-\(String(cachedPostsCount))", systemImage: "internaldrive")
+        Label(
+          "settings.account.cached-posts-\(String(cachedPostsCount))", systemImage: "internaldrive")
         Button("settings.account.action.delete-cache", role: .destructive) {
           Task {
             await timelineCache.clearCache(for: appAccountsManager.currentClient.id)
-            cachedPostsCount = await timelineCache.cachedPostsCount(for: appAccountsManager.currentClient.id)
+            cachedPostsCount = await timelineCache.cachedPostsCount(
+              for: appAccountsManager.currentClient.id)
           }
         }
       }
@@ -81,15 +86,18 @@ struct AccountSettingsView: View {
             Task {
               let client = Client(server: appAccount.server, oauthToken: token)
               await timelineCache.clearCache(for: client.id)
-              if let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token }) {
+              if let sub = pushNotifications.subscriptions.first(where: {
+                $0.account.token == token
+              }) {
                 await sub.deleteSubscription()
               }
               appAccountsManager.delete(account: appAccount)
+              Telemetry.signal("account.removed")
               dismiss()
             }
           }
         } label: {
-          Text("account.action.logout")
+          Label("account.action.logout", systemImage: "trash")
             .frame(maxWidth: .infinity)
         }
       }
@@ -105,7 +113,8 @@ struct AccountSettingsView: View {
       }
     }
     .task {
-      cachedPostsCount = await timelineCache.cachedPostsCount(for: appAccountsManager.currentClient.id)
+      cachedPostsCount = await timelineCache.cachedPostsCount(
+        for: appAccountsManager.currentClient.id)
     }
     .navigationTitle(account.safeDisplayName)
     #if !os(visionOS)

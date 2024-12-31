@@ -15,7 +15,8 @@ struct StatusRowSwipeView: View {
   }
 
   func privateBoost() -> Bool {
-    viewModel.status.visibility == .priv && viewModel.status.account.id == currentAccount.account?.id
+    viewModel.status.visibility == .priv
+      && viewModel.status.account.id == currentAccount.account?.id
   }
 
   var viewModel: StatusRowViewModel
@@ -34,11 +35,17 @@ struct StatusRowSwipeView: View {
   private var trailingSwipeActions: some View {
     if preferences.swipeActionsStatusTrailingRight != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingRight)
-        .tint(preferences.swipeActionsStatusTrailingRight.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: true))
+        .tint(
+          preferences.swipeActionsStatusTrailingRight.color(
+            themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor,
+            outside: true))
     }
     if preferences.swipeActionsStatusTrailingLeft != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusTrailingLeft)
-        .tint(preferences.swipeActionsStatusTrailingLeft.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: false))
+        .tint(
+          preferences.swipeActionsStatusTrailingLeft.color(
+            themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor,
+            outside: false))
     }
   }
 
@@ -46,11 +53,17 @@ struct StatusRowSwipeView: View {
   private var leadingSwipeActions: some View {
     if preferences.swipeActionsStatusLeadingLeft != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingLeft)
-        .tint(preferences.swipeActionsStatusLeadingLeft.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: true))
+        .tint(
+          preferences.swipeActionsStatusLeadingLeft.color(
+            themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor,
+            outside: true))
     }
     if preferences.swipeActionsStatusLeadingRight != StatusAction.none, !viewModel.isRemote {
       makeSwipeButton(action: preferences.swipeActionsStatusLeadingRight)
-        .tint(preferences.swipeActionsStatusLeadingRight.color(themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor, outside: false))
+        .tint(
+          preferences.swipeActionsStatusLeadingRight.color(
+            themeTintColor: theme.tintColor, useThemeColor: preferences.swipeActionsUseThemeColor,
+            outside: false))
     }
   }
 
@@ -58,10 +71,13 @@ struct StatusRowSwipeView: View {
   private func makeSwipeButton(action: StatusAction) -> some View {
     switch action {
     case .reply:
-      makeSwipeButtonForRouterPath(action: action, destination: .replyToStatusEditor(status: viewModel.status))
+      makeSwipeButtonForRouterPath(
+        action: action, destination: .replyToStatusEditor(status: viewModel.status))
     case .quote:
-      makeSwipeButtonForRouterPath(action: action, destination: .quoteStatusEditor(status: viewModel.status))
-        .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
+      makeSwipeButtonForRouterPath(
+        action: action, destination: .quoteStatusEditor(status: viewModel.status)
+      )
+      .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
     case .favorite:
       makeSwipeButtonForTask(action: action) {
         await statusDataController.toggleFavorite(remoteStatus: nil)
@@ -70,7 +86,11 @@ struct StatusRowSwipeView: View {
       makeSwipeButtonForTask(action: action, privateBoost: privateBoost()) {
         await statusDataController.toggleReblog(remoteStatus: nil)
       }
-      .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv && viewModel.status.account.id != currentAccount.account?.id)
+      .disabled(
+        viewModel.status.visibility == .direct
+          || viewModel.status.visibility == .priv
+            && viewModel.status.account.id != currentAccount.account?.id
+      )
     case .bookmark:
       makeSwipeButtonForTask(action: action) {
         await statusDataController.toggleBookmark(remoteStatus: nil)
@@ -81,7 +101,9 @@ struct StatusRowSwipeView: View {
   }
 
   @ViewBuilder
-  private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestination) -> some View {
+  private func makeSwipeButtonForRouterPath(action: StatusAction, destination: SheetDestination)
+    -> some View
+  {
     Button {
       HapticManager.shared.fireHaptic(.notification(.success))
       viewModel.routerPath.presentedSheet = destination
@@ -91,42 +113,55 @@ struct StatusRowSwipeView: View {
   }
 
   @ViewBuilder
-  private func makeSwipeButtonForTask(action: StatusAction, privateBoost: Bool = false, task: @escaping () async -> Void) -> some View {
+  private func makeSwipeButtonForTask(
+    action: StatusAction, privateBoost: Bool = false, task: @escaping () async -> Void
+  ) -> some View {
     Button {
       Task {
         HapticManager.shared.fireHaptic(.notification(.success))
         await task()
       }
     } label: {
-      makeSwipeLabel(action: action, style: preferences.swipeActionsIconStyle, privateBoost: privateBoost)
+      makeSwipeLabel(
+        action: action, style: preferences.swipeActionsIconStyle, privateBoost: privateBoost)
     }
   }
 
   @ViewBuilder
-  private func makeSwipeLabel(action: StatusAction, style: UserPreferences.SwipeActionsIconStyle, privateBoost: Bool = false) -> some View {
+  private func makeSwipeLabel(
+    action: StatusAction, style: UserPreferences.SwipeActionsIconStyle, privateBoost: Bool = false
+  ) -> some View {
     switch style {
     case .iconOnly:
-      Label(action.displayName(isReblogged: statusDataController.isReblogged,
-                               isFavorited: statusDataController.isFavorited,
-                               isBookmarked: statusDataController.isBookmarked,
-                               privateBoost: privateBoost),
-            imageNamed: action.iconName(isReblogged: statusDataController.isReblogged,
-                                        isFavorited: statusDataController.isFavorited,
-                                        isBookmarked: statusDataController.isBookmarked,
-                                        privateBoost: privateBoost))
-        .labelStyle(.iconOnly)
-        .environment(\.symbolVariants, .none)
+      Label(
+        action.displayName(
+          isReblogged: statusDataController.isReblogged,
+          isFavorited: statusDataController.isFavorited,
+          isBookmarked: statusDataController.isBookmarked,
+          privateBoost: privateBoost),
+        imageNamed: action.iconName(
+          isReblogged: statusDataController.isReblogged,
+          isFavorited: statusDataController.isFavorited,
+          isBookmarked: statusDataController.isBookmarked,
+          privateBoost: privateBoost)
+      )
+      .labelStyle(.iconOnly)
+      .environment(\.symbolVariants, .none)
     case .iconWithText:
-      Label(action.displayName(isReblogged: statusDataController.isReblogged,
-                               isFavorited: statusDataController.isFavorited,
-                               isBookmarked: statusDataController.isBookmarked,
-                               privateBoost: privateBoost),
-            imageNamed: action.iconName(isReblogged: statusDataController.isReblogged,
-                                        isFavorited: statusDataController.isFavorited,
-                                        isBookmarked: statusDataController.isBookmarked,
-                                        privateBoost: privateBoost))
-        .labelStyle(.titleAndIcon)
-        .environment(\.symbolVariants, .none)
+      Label(
+        action.displayName(
+          isReblogged: statusDataController.isReblogged,
+          isFavorited: statusDataController.isFavorited,
+          isBookmarked: statusDataController.isBookmarked,
+          privateBoost: privateBoost),
+        imageNamed: action.iconName(
+          isReblogged: statusDataController.isReblogged,
+          isFavorited: statusDataController.isFavorited,
+          isBookmarked: statusDataController.isBookmarked,
+          privateBoost: privateBoost)
+      )
+      .labelStyle(.titleAndIcon)
+      .environment(\.symbolVariants, .none)
     }
   }
 }

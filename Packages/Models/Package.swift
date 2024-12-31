@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -14,19 +14,19 @@ let package = Package(
     .library(
       name: "Models",
       targets: ["Models"]
-    ),
+    )
   ],
   dependencies: [
-    .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.4.3"),
+    .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.4.3")
   ],
   targets: [
     .target(
       name: "Models",
       dependencies: [
-        "SwiftSoup",
+        "SwiftSoup"
       ],
       swiftSettings: [
-        .enableExperimentalFeature("StrictConcurrency"),
+        .swiftLanguageMode(.v6)
       ]
     ),
     .testTarget(

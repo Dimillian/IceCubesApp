@@ -35,7 +35,7 @@ public struct StatusPollView: View {
 
   private func isSelected(option: Poll.Option) -> Bool {
     if let optionIndex = viewModel.poll.options.firstIndex(where: { $0.id == option.id }),
-       let _ = viewModel.votes.firstIndex(of: optionIndex)
+      viewModel.votes.firstIndex(of: optionIndex) != nil
     {
       return true
     }
@@ -113,21 +113,25 @@ public struct StatusPollView: View {
       Task { await viewModel.fetchPoll() }
     }
     .accessibilityElement(children: .contain)
-    .accessibilityLabel(viewModel.poll.expired ? "accessibility.status.poll.finished.label" : "accessibility.status.poll.active.label")
+    .accessibilityLabel(
+      viewModel.poll.expired
+        ? "accessibility.status.poll.finished.label" : "accessibility.status.poll.active.label")
   }
 
   func combinedAccessibilityLabel(for option: Poll.Option, index: Int) -> Text {
     let showPercentage = viewModel.poll.expired || viewModel.poll.voted ?? false
-    return Text("accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)") +
-      Text(", ") +
-      Text(option.title) +
-      Text(showPercentage ? ", \(absolutePercent(for: option.votesCount ?? 0))%" : "")
+    return Text(
+      "accessibility.status.poll.option-prefix-\(index + 1)-of-\(viewModel.poll.options.count)")
+      + Text(", ") + Text(option.title)
+      + Text(showPercentage ? ", \(absolutePercent(for: option.votesCount ?? 0))%" : "")
   }
 
   private var footerView: some View {
     HStack(spacing: 0) {
       if viewModel.poll.multiple {
-        Text("status.poll.n-votes-voters \(viewModel.poll.votesCount) \(viewModel.poll.safeVotersCount)")
+        Text(
+          "status.poll.n-votes-voters \(viewModel.poll.votesCount) \(viewModel.poll.safeVotersCount)"
+        )
       } else {
         Text("status.poll.n-votes \(viewModel.poll.votesCount)")
       }
@@ -149,7 +153,7 @@ public struct StatusPollView: View {
   private func makeBarView(for option: Poll.Option, buttonImage: some View) -> some View {
     Button {
       if !viewModel.poll.expired,
-         let index = viewModel.poll.options.firstIndex(where: { $0.id == option.id })
+        let index = viewModel.poll.options.firstIndex(where: { $0.id == option.id })
       {
         withAnimation {
           viewModel.handleSelection(index)
@@ -173,8 +177,10 @@ public struct StatusPollView: View {
         if viewModel.showResults || status.account.id == currentAccount.account?.id {
           _PercentWidthLayout(percent: relativePercent(for: option.votesCount ?? 0)) {
             RoundedRectangle(cornerRadius: 10).foregroundColor(theme.tintColor)
-              .transition(.asymmetric(insertion: .push(from: .leading),
-                                      removal: .push(from: .trailing)))
+              .transition(
+                .asymmetric(
+                  insertion: .push(from: .leading),
+                  removal: .push(from: .trailing)))
           }
         }
       }
@@ -193,9 +199,11 @@ public struct StatusPollView: View {
       return view.sizeThatFits(proposal)
     }
 
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) {
+    func placeSubviews(
+      in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()
+    ) {
       guard let view = subviews.first,
-            let width = proposal.width
+        let width = proposal.width
       else { return }
 
       view.place(

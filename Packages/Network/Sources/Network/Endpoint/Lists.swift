@@ -27,10 +27,12 @@ public enum Lists: Endpoint {
     case .accounts:
       return [.init(name: "limit", value: String(0))]
     case let .createList(title, repliesPolicy, exclusive),
-         let .updateList(_, title, repliesPolicy, exclusive):
-      return [.init(name: "title", value: title),
-              .init(name: "replies_policy", value: repliesPolicy.rawValue),
-              .init(name: "exclusive", value: exclusive ? "true" : "false")]
+      let .updateList(_, title, repliesPolicy, exclusive):
+      return [
+        .init(name: "title", value: title),
+        .init(name: "replies_policy", value: repliesPolicy.rawValue),
+        .init(name: "exclusive", value: exclusive ? "true" : "false"),
+      ]
     case let .updateAccounts(_, accounts):
       var params: [URLQueryItem] = []
       for account in accounts {

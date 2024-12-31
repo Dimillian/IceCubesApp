@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -14,13 +14,13 @@ let package = Package(
     .library(
       name: "DesignSystem",
       targets: ["DesignSystem"]
-    ),
+    )
   ],
   dependencies: [
     .package(name: "Models", path: "../Models"),
     .package(name: "Env", path: "../Env"),
-    .package(url: "https://github.com/kean/Nuke", from: "12.4.0"),
-    .package(url: "https://github.com/divadretlaw/EmojiText", from: "4.0.0"),
+    .package(url: "https://github.com/kean/Nuke", exact: "12.8.0"),
+    .package(url: "https://github.com/divadretlaw/EmojiText", exact: "4.0.0"),
   ],
   targets: [
     .target(
@@ -33,8 +33,8 @@ let package = Package(
         .product(name: "EmojiText", package: "EmojiText"),
       ],
       swiftSettings: [
-        .enableExperimentalFeature("StrictConcurrency"),
+        .swiftLanguageMode(.v6)
       ]
-    ),
+    )
   ]
 )

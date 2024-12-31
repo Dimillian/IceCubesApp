@@ -13,7 +13,9 @@ import SwiftUI
   var routerPath: RouterPath?
 
   enum State {
-    case loading, display(statuses: [Status]), error(error: Error)
+    case loading
+    case display(statuses: [Status])
+    case error(error: Error)
   }
 
   var state: State = .loading
@@ -57,11 +59,13 @@ import SwiftUI
 
   private func fetchRemoteStatus() async -> Bool {
     guard let client, let remoteStatusURL else { return false }
-    let results: SearchResults? = try? await client.get(endpoint: Search.search(query: remoteStatusURL.absoluteString,
-                                                                                type: "statuses",
-                                                                                offset: nil,
-                                                                                following: nil),
-                                                        forceVersion: .v2)
+    let results: SearchResults? = try? await client.get(
+      endpoint: Search.search(
+        query: remoteStatusURL.absoluteString,
+        type: .statuses,
+        offset: nil,
+        following: nil),
+      forceVersion: .v2)
     if let statusId = results?.statuses.first?.id {
       self.statusId = statusId
       await fetchStatusDetail(animate: false)
@@ -114,7 +118,7 @@ import SwiftUI
     indentationLevelPreviousCache = [:]
     for status in statuses {
       if let inReplyToId = status.inReplyToId,
-         let prevIndent = indentationLevelPreviousCache[inReplyToId]
+        let prevIndent = indentationLevelPreviousCache[inReplyToId]
       {
         indentationLevelPreviousCache[status.id] = prevIndent + 1
       } else {
@@ -126,11 +130,11 @@ import SwiftUI
   func handleEvent(event: any StreamEvent, currentAccount: Account?) {
     Task {
       if let event = event as? StreamEventUpdate,
-         event.status.account.id == currentAccount?.id
+        event.status.account.id == currentAccount?.id
       {
         await fetchStatusDetail(animate: true)
       } else if let event = event as? StreamEventStatusUpdate,
-                event.status.account.id == currentAccount?.id
+        event.status.account.id == currentAccount?.id
       {
         await fetchStatusDetail(animate: true)
       } else if event is StreamEventDelete {
@@ -139,7 +143,9 @@ import SwiftUI
     }
   }
 
-  func getIndentationLevel(id: String, maxIndent: UInt) -> (indentationLevel: UInt, extraInset: Double) {
+  func getIndentationLevel(id: String, maxIndent: UInt) -> (
+    indentationLevel: UInt, extraInset: Double
+  ) {
     let level = min(indentationLevelPreviousCache[id] ?? 0, maxIndent)
 
     let barSize = Double(level) * 2

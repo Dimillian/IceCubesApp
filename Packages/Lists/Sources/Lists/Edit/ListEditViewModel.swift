@@ -47,11 +47,13 @@ import SwiftUI
     guard let client else { return }
     do {
       isUpdating = true
-      let list: Models.List = try await client.put(endpoint:
-        Lists.updateList(id: list.id,
-                         title: title,
-                         repliesPolicy: repliesPolicy,
-                         exclusive: isExclusive))
+      let list: Models.List = try await client.put(
+        endpoint:
+          Lists.updateList(
+            id: list.id,
+            title: title,
+            repliesPolicy: repliesPolicy,
+            exclusive: isExclusive))
       self.list = list
       title = list.title
       repliesPolicy = list.repliesPolicy ?? .list
@@ -67,7 +69,8 @@ import SwiftUI
     guard let client else { return }
     do {
       isUpdating = true
-      let response = try await client.post(endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))
+      let response = try await client.post(
+        endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))
       if response?.statusCode == 200 {
         accounts.append(account)
       }
@@ -81,7 +84,8 @@ import SwiftUI
     guard let client else { return }
     do {
       isUpdating = true
-      let response = try await client.delete(endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))
+      let response = try await client.delete(
+        endpoint: Lists.updateAccounts(listId: list.id, accounts: [account.id]))
       if response?.statusCode == 200 {
         accounts.removeAll(where: { $0.id == account.id })
       }
@@ -95,11 +99,13 @@ import SwiftUI
     guard let client, !searchUserQuery.isEmpty else { return }
     do {
       isSearching = true
-      let results: SearchResults = try await client.get(endpoint: Search.search(query: searchUserQuery,
-                                                                                type: nil,
-                                                                                offset: nil,
-                                                                                following: nil),
-                                                        forceVersion: .v2)
+      let results: SearchResults = try await client.get(
+        endpoint: Search.search(
+          query: searchUserQuery,
+          type: nil,
+          offset: nil,
+          following: nil),
+        forceVersion: .v2)
       let relationships: [Relationship] =
         try await client.get(endpoint: Accounts.relationships(ids: results.accounts.map(\.id)))
       searchedRelationships = relationships.reduce(into: [String: Relationship]()) {

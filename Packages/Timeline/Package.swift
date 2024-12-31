@@ -1,4 +1,4 @@
-// swift-tools-version: 5.9
+// swift-tools-version: 6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -14,7 +14,7 @@ let package = Package(
     .library(
       name: "Timeline",
       targets: ["Timeline"]
-    ),
+    )
   ],
   dependencies: [
     .package(name: "Network", path: "../Network"),
@@ -22,8 +22,8 @@ let package = Package(
     .package(name: "Env", path: "../Env"),
     .package(name: "StatusKit", path: "../StatusKit"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
-    .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "1.0.0"),
-    .package(url: "https://github.com/mergesort/Bodega", exact: "2.1.0"),
+    .package(url: "https://github.com/siteline/swiftui-introspect", exact: "1.2.0"),
+    .package(url: "https://github.com/mergesort/Bodega", exact: "2.1.3"),
   ],
   targets: [
     .target(
@@ -38,7 +38,7 @@ let package = Package(
         .product(name: "Bodega", package: "Bodega"),
       ],
       swiftSettings: [
-        .enableExperimentalFeature("StrictConcurrency"),
+        .swiftLanguageMode(.v6)
       ]
     ),
     .testTarget(

@@ -25,6 +25,7 @@ struct TimelineQuickAccessPills: View {
     }
     .scrollClipDisabled()
     .scrollIndicators(.never)
+    .scrollBounceBehavior(.basedOnSize, axes: [.horizontal, .vertical])
     .onChange(of: currentAccount.lists) { _, lists in
       guard client.isAuth else { return }
       var filters = pinnedFilters
@@ -32,7 +33,7 @@ struct TimelineQuickAccessPills: View {
         switch filter {
         case let .list(list):
           if let accountList = lists.first(where: { $0.id == list.id }),
-             accountList.title != list.title
+            accountList.title != list.title
           {
             filters[index] = .list(list: accountList)
           }
@@ -63,17 +64,15 @@ struct TimelineQuickAccessPills: View {
     } label: {
       switch filter {
       case .hashtag:
-        Label(filter.title.replacingOccurrences(of: "#", with: ""),
-              systemImage: filter.iconName())
-          .font(.callout)
+        Label(
+          filter.title.replacingOccurrences(of: "#", with: ""),
+          systemImage: filter.iconName())
       case let .list(list):
         if let list = currentAccount.lists.first(where: { $0.id == list.id }) {
           Label(list.title, systemImage: filter.iconName())
-            .font(.callout)
         }
       default:
         Label(filter.localizedTitle(), systemImage: filter.iconName())
-          .font(.callout)
       }
     }
     .transition(.push(from: .leading).combined(with: .opacity))
@@ -81,9 +80,16 @@ struct TimelineQuickAccessPills: View {
       draggedFilter = filter
       return NSItemProvider()
     }
-    .onDrop(of: [.text], delegate: PillDropDelegate(destinationItem: filter,
-                                                    items: $pinnedFilters,
-                                                    draggedItem: $draggedFilter))
+    .onDrop(
+      of: [.text],
+      delegate: PillDropDelegate(
+        destinationItem: filter,
+        items: $pinnedFilters,
+        draggedItem: $draggedFilter)
+    )
+    .buttonBorderShape(.capsule)
+    .controlSize(.mini)
+
   }
 
   private func isFilterSupported(_ filter: TimelineFilter) -> Bool {
@@ -117,7 +123,9 @@ struct PillDropDelegate: DropDelegate {
         let toIndex = items.firstIndex(of: destinationItem)
         if let toIndex, fromIndex != toIndex {
           withAnimation {
-            self.items.move(fromOffsets: IndexSet(integer: fromIndex), toOffset: toIndex > fromIndex ? (toIndex + 1) : toIndex)
+            self.items.move(
+              fromOffsets: IndexSet(integer: fromIndex),
+              toOffset: toIndex > fromIndex ? (toIndex + 1) : toIndex)
           }
         }
       }

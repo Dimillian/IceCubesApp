@@ -1,19 +1,18 @@
 import Combine
 import Foundation
 import Models
-import Observation
-import os
 import OSLog
+import Observation
 import SwiftUI
+import os
 
 @Observable public final class Client: Equatable, Identifiable, Hashable, @unchecked Sendable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
     let lhsToken = lhs.critical.withLock { $0.oauthToken }
     let rhsToken = rhs.critical.withLock { $0.oauthToken }
 
-    return (lhsToken != nil) == (rhsToken != nil) &&
-      lhs.server == rhs.server &&
-      lhsToken?.accessToken == rhsToken?.accessToken
+    return (lhsToken != nil) == (rhsToken != nil) && lhs.server == rhs.server
+      && lhsToken?.accessToken == rhsToken?.accessToken
   }
 
   public enum Version: String, Sendable {
@@ -93,11 +92,12 @@ import SwiftUI
     }
   }
 
-  private func makeURL(scheme: String = "https",
-                       endpoint: Endpoint,
-                       forceVersion: Version? = nil,
-                       forceServer: String? = nil) throws -> URL
-  {
+  private func makeURL(
+    scheme: String = "https",
+    endpoint: Endpoint,
+    forceVersion: Version? = nil,
+    forceServer: String? = nil
+  ) throws -> URL {
     var components = URLComponents()
     components.scheme = scheme
     components.host = forceServer ?? server
@@ -139,16 +139,20 @@ import SwiftUI
     return makeURLRequest(url: url, endpoint: endpoint, httpMethod: "GET")
   }
 
-  public func get<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
+  public func get<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws
+    -> Entity
+  {
     try await makeEntityRequest(endpoint: endpoint, method: "GET", forceVersion: forceVersion)
   }
 
-  public func getWithLink<Entity: Decodable>(endpoint: Endpoint) async throws -> (Entity, LinkHandler?) {
+  public func getWithLink<Entity: Decodable>(endpoint: Endpoint) async throws -> (
+    Entity, LinkHandler?
+  ) {
     let request = try makeGet(endpoint: endpoint)
     let (data, httpResponse) = try await urlSession.data(for: request)
     var linkHandler: LinkHandler?
     if let response = httpResponse as? HTTPURLResponse,
-       let link = response.allHeaderFields["Link"] as? String
+      let link = response.allHeaderFields["Link"] as? String
     {
       linkHandler = .init(rawLink: link)
     }
@@ -157,11 +161,15 @@ import SwiftUI
     return try (decoder.decode(Entity.self, from: data), linkHandler)
   }
 
-  public func post<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
+  public func post<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws
+    -> Entity
+  {
     try await makeEntityRequest(endpoint: endpoint, method: "POST", forceVersion: forceVersion)
   }
 
-  public func post(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> HTTPURLResponse? {
+  public func post(endpoint: Endpoint, forceVersion: Version? = nil) async throws
+    -> HTTPURLResponse?
+  {
     let url = try makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "POST")
     let (_, httpResponse) = try await urlSession.data(for: request)
@@ -175,21 +183,26 @@ import SwiftUI
     return httpResponse as? HTTPURLResponse
   }
 
-  public func put<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> Entity {
+  public func put<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws
+    -> Entity
+  {
     try await makeEntityRequest(endpoint: endpoint, method: "PUT", forceVersion: forceVersion)
   }
 
-  public func delete(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> HTTPURLResponse? {
+  public func delete(endpoint: Endpoint, forceVersion: Version? = nil) async throws
+    -> HTTPURLResponse?
+  {
     let url = try makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "DELETE")
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
 
-  private func makeEntityRequest<Entity: Decodable>(endpoint: Endpoint,
-                                                    method: String,
-                                                    forceVersion: Version? = nil) async throws -> Entity
-  {
+  private func makeEntityRequest<Entity: Decodable>(
+    endpoint: Endpoint,
+    method: String,
+    forceVersion: Version? = nil
+  ) async throws -> Entity {
     let url = try makeURL(endpoint: endpoint, forceVersion: forceVersion)
     let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let (data, httpResponse) = try await urlSession.data(for: request)
@@ -219,19 +232,24 @@ import SwiftUI
       throw OauthError.missingApp
     }
     guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-          let code = components.queryItems?.first(where: { $0.name == "code" })?.value
+      let code = components.queryItems?.first(where: { $0.name == "code" })?.value
     else {
       throw OauthError.invalidRedirectURL
     }
-    let token: OauthToken = try await post(endpoint: Oauth.token(code: code,
-                                                                 clientId: app.clientId,
-                                                                 clientSecret: app.clientSecret))
+    let token: OauthToken = try await post(
+      endpoint: Oauth.token(
+        code: code,
+        clientId: app.clientId,
+        clientSecret: app.clientSecret))
     critical.withLock { $0.oauthToken = token }
     return token
   }
 
-  public func makeWebSocketTask(endpoint: Endpoint, instanceStreamingURL: URL?) throws -> URLSessionWebSocketTask {
-    let url = try makeURL(scheme: "wss", endpoint: endpoint, forceServer: instanceStreamingURL?.host)
+  public func makeWebSocketTask(endpoint: Endpoint, instanceStreamingURL: URL?) throws
+    -> URLSessionWebSocketTask
+  {
+    let url = try makeURL(
+      scheme: "wss", endpoint: endpoint, forceServer: instanceStreamingURL?.host)
     var subprotocols: [String] = []
     if let oauthToken = critical.withLock({ $0.oauthToken }) {
       subprotocols.append(oauthToken.accessToken)
@@ -239,19 +257,21 @@ import SwiftUI
     return urlSession.webSocketTask(with: url, protocols: subprotocols)
   }
 
-  public func mediaUpload<Entity: Decodable>(endpoint: Endpoint,
-                                             version: Version,
-                                             method: String,
-                                             mimeType: String,
-                                             filename: String,
-                                             data: Data) async throws -> Entity
-  {
-    let request = try makeFormDataRequest(endpoint: endpoint,
-                                          version: version,
-                                          method: method,
-                                          mimeType: mimeType,
-                                          filename: filename,
-                                          data: data)
+  public func mediaUpload<Entity: Decodable>(
+    endpoint: Endpoint,
+    version: Version,
+    method: String,
+    mimeType: String,
+    filename: String,
+    data: Data
+  ) async throws -> Entity {
+    let request = try makeFormDataRequest(
+      endpoint: endpoint,
+      version: version,
+      method: method,
+      mimeType: mimeType,
+      filename: filename,
+      data: data)
     let (data, httpResponse) = try await urlSession.data(for: request)
     logResponseOnError(httpResponse: httpResponse, data: data)
     do {
@@ -264,37 +284,43 @@ import SwiftUI
     }
   }
 
-  public func mediaUpload(endpoint: Endpoint,
-                          version: Version,
-                          method: String,
-                          mimeType: String,
-                          filename: String,
-                          data: Data) async throws -> HTTPURLResponse?
-  {
-    let request = try makeFormDataRequest(endpoint: endpoint,
-                                          version: version,
-                                          method: method,
-                                          mimeType: mimeType,
-                                          filename: filename,
-                                          data: data)
+  public func mediaUpload(
+    endpoint: Endpoint,
+    version: Version,
+    method: String,
+    mimeType: String,
+    filename: String,
+    data: Data
+  ) async throws -> HTTPURLResponse? {
+    let request = try makeFormDataRequest(
+      endpoint: endpoint,
+      version: version,
+      method: method,
+      mimeType: mimeType,
+      filename: filename,
+      data: data)
     let (_, httpResponse) = try await urlSession.data(for: request)
     return httpResponse as? HTTPURLResponse
   }
 
-  private func makeFormDataRequest(endpoint: Endpoint,
-                                   version: Version,
-                                   method: String,
-                                   mimeType: String,
-                                   filename: String,
-                                   data: Data) throws -> URLRequest
-  {
+  private func makeFormDataRequest(
+    endpoint: Endpoint,
+    version: Version,
+    method: String,
+    mimeType: String,
+    filename: String,
+    data: Data
+  ) throws -> URLRequest {
     let url = try makeURL(endpoint: endpoint, forceVersion: version)
     var request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: method)
     let boundary = UUID().uuidString
-    request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+    request.setValue(
+      "multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
     let httpBody = NSMutableData()
     httpBody.append("--\(boundary)\r\n".data(using: .utf8)!)
-    httpBody.append("Content-Disposition: form-data; name=\"\(filename)\"; filename=\"\(filename)\"\r\n".data(using: .utf8)!)
+    httpBody.append(
+      "Content-Disposition: form-data; name=\"\(filename)\"; filename=\"\(filename)\"\r\n".data(
+        using: .utf8)!)
     httpBody.append("Content-Type: \(mimeType)\r\n".data(using: .utf8)!)
     httpBody.append("\r\n".data(using: .utf8)!)
     httpBody.append(data)
@@ -305,7 +331,8 @@ import SwiftUI
 
   private func logResponseOnError(httpResponse: URLResponse, data: Data) {
     if let httpResponse = httpResponse as? HTTPURLResponse, httpResponse.statusCode > 299 {
-      let error = "HTTP Response error: \(httpResponse.statusCode), response: \(httpResponse), data: \(String(data: data, encoding: .utf8) ?? "")"
+      let error =
+        "HTTP Response error: \(httpResponse.statusCode), response: \(httpResponse), data: \(String(data: data, encoding: .utf8) ?? "")"
       logger.error("\(error)")
     }
   }

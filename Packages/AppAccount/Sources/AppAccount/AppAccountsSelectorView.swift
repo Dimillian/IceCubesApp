@@ -31,10 +31,11 @@ public struct AppAccountsSelectorView: View {
     return baseHeight
   }
 
-  public init(routerPath: RouterPath,
-              accountCreationEnabled: Bool = true,
-              avatarConfig: AvatarView.FrameConfig? = nil)
-  {
+  public init(
+    routerPath: RouterPath,
+    accountCreationEnabled: Bool = true,
+    avatarConfig: AvatarView.FrameConfig? = nil
+  ) {
     self.routerPath = routerPath
     self.accountCreationEnabled = accountCreationEnabled
     self.avatarConfig = avatarConfig ?? .badge
@@ -48,14 +49,17 @@ public struct AppAccountsSelectorView: View {
       labelView
         .contentShape(Rectangle())
     }
-    .sheet(isPresented: $isPresented, content: {
-      accountsView.presentationDetents([.height(preferredHeight), .large])
-        .presentationBackground(.thinMaterial)
-        .presentationCornerRadius(16)
-        .onAppear {
-          refreshAccounts()
-        }
-    })
+    .sheet(
+      isPresented: $isPresented,
+      content: {
+        accountsView.presentationDetents([.height(preferredHeight), .large])
+          .presentationBackground(.ultraThinMaterial)
+          .presentationCornerRadius(16)
+          .onAppear {
+            refreshAccounts()
+          }
+      }
+    )
     .onChange(of: currentAccount.account?.id) {
       refreshAccounts()
     }
@@ -92,16 +96,17 @@ public struct AppAccountsSelectorView: View {
     NavigationStack {
       List {
         Section {
-          ForEach(accountsViewModel.sorted { $0.acct < $1.acct }, id: \.appAccount.id) { viewModel in
+          ForEach(accountsViewModel.sorted { $0.acct < $1.acct }, id: \.appAccount.id) {
+            viewModel in
             AppAccountView(viewModel: viewModel, isParentPresented: $isPresented)
           }
           addAccountButton
-          #if os(visionOS)
-          .foregroundStyle(theme.labelColor)
-          #endif
+            #if os(visionOS)
+              .foregroundStyle(theme.labelColor)
+            #endif
         }
         #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
+          .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
         #endif
 
         if accountCreationEnabled {
@@ -111,9 +116,9 @@ public struct AppAccountsSelectorView: View {
             supportButton
           }
           #if os(visionOS)
-          .foregroundStyle(theme.labelColor)
+            .foregroundStyle(theme.labelColor)
           #else
-          .listRowBackground(theme.primaryBackgroundColor)
+            .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
           #endif
         }
       }
@@ -186,7 +191,8 @@ public struct AppAccountsSelectorView: View {
   private func refreshAccounts() {
     accountsViewModel = []
     for account in appAccounts.availableAccounts {
-      let viewModel: AppAccountViewModel = .init(appAccount: account, isInSettings: false, showBadge: true)
+      let viewModel: AppAccountViewModel = .init(
+        appAccount: account, isInSettings: false, showBadge: true)
       accountsViewModel.append(viewModel)
     }
   }

@@ -16,15 +16,15 @@ struct StatusRowDetailView: View {
       Divider()
       HStack {
         Group {
-          Text(viewModel.status.createdAt.asDate, style: .date) +
-            Text("status.summary.at-time") +
-            Text(viewModel.status.createdAt.asDate, style: .time) +
-            Text("  ·")
+          Text(viewModel.status.createdAt.asDate, style: .date) + Text("status.summary.at-time")
+            + Text(viewModel.status.createdAt.asDate, style: .time) + Text("  ·")
           Image(systemName: viewModel.status.visibility.iconName)
             .accessibilityHidden(true)
         }.accessibilityElement(children: .combine)
         Spacer()
-        if let name = viewModel.status.application?.name, let url = viewModel.status.application?.website {
+        if let name = viewModel.status.application?.name,
+          let url = viewModel.status.application?.website
+        {
           Button {
             openURL(url)
           } label: {
@@ -44,10 +44,8 @@ struct StatusRowDetailView: View {
       if let editedAt = viewModel.status.editedAt {
         Divider()
         HStack {
-          Text("status.summary.edited-time") +
-            Text(editedAt.asDate, style: .date) +
-            Text("status.summary.at-time") +
-            Text(editedAt.asDate, style: .time)
+          Text("status.summary.edited-time") + Text(editedAt.asDate, style: .date)
+            + Text("status.summary.at-time") + Text(editedAt.asDate, style: .time)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .onTapGesture {

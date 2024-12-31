@@ -15,34 +15,35 @@ public struct StatusRowView: View {
   @Environment(\.accessibilityVoiceOverEnabled) private var accessibilityVoiceOverEnabled
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.indentationLevel) private var indentationLevel
+  @Environment(\.isHomeTimeline) private var isHomeTimeline
 
+  @Environment(RouterPath.self) private var routerPath: RouterPath
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
 
-  @State private var viewModel: StatusRowViewModel
   @State private var showSelectableText: Bool = false
+  @State private var isShareAsImageSheetPresented: Bool = false
   @State private var isBlockConfirmationPresented = false
 
   public enum Context { case timeline, detail }
-  private let context: Context
 
-  public init(viewModel: StatusRowViewModel, context: Context = .timeline) {
-    _viewModel = .init(initialValue: viewModel)
-    self.context = context
-  }
+  @State public var viewModel: StatusRowViewModel
+  public let context: Context
 
   var contextMenu: some View {
-    StatusRowContextMenu(viewModel: viewModel,
-                         showTextForSelection: $showSelectableText,
-                         isBlockConfirmationPresented: $isBlockConfirmationPresented)
+    StatusRowContextMenu(
+      viewModel: viewModel,
+      showTextForSelection: $showSelectableText,
+      isBlockConfirmationPresented: $isBlockConfirmationPresented,
+      isShareAsImageSheetPresented: $isShareAsImageSheetPresented)
   }
 
   public var body: some View {
     HStack(spacing: 0) {
       if !isCompact {
         HStack(spacing: 3) {
-          ForEach(0 ..< indentationLevel, id: \.self) { level in
+          ForEach(0..<indentationLevel, id: \.self) { level in
             Rectangle()
               .fill(theme.tintColor)
               .frame(width: 2)
@@ -65,15 +66,19 @@ public struct StatusRowView: View {
         } else {
           if !isCompact && context != .detail {
             Group {
+              StatusRowPremiumView(viewModel: viewModel)
               StatusRowTagView(viewModel: viewModel)
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
             }
-            .padding(.leading, theme.avatarPosition == .top ? 0 : AvatarView.FrameConfig.status.width + .statusColumnsSpacing)
+            .padding(
+              .leading,
+              theme.avatarPosition == .top
+                ? 0 : AvatarView.FrameConfig.status.width + .statusColumnsSpacing)
           }
           HStack(alignment: .top, spacing: .statusColumnsSpacing) {
             if !isCompact,
-               theme.avatarPosition == .leading
+              theme.avatarPosition == .leading
             {
               AvatarView(viewModel.finalStatus.account.avatar)
                 .accessibility(addTraits: .isButton)
@@ -99,12 +104,14 @@ public struct StatusRowView: View {
                   }
                 }
               if !reasons.contains(.placeholder),
-                 viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
-                 !isInCaptureMode
+                viewModel.showActions, isFocused || theme.statusActionsDisplay != .none,
+                !isInCaptureMode
               {
-                StatusRowActionsView(isBlockConfirmationPresented: $isBlockConfirmationPresented,
-                                     viewModel: viewModel)
-                  .tint(isFocused ? theme.tintColor : .gray)
+                StatusRowActionsView(
+                  isBlockConfirmationPresented: $isBlockConfirmationPresented,
+                  viewModel: viewModel
+                )
+                .tint(isFocused ? theme.tintColor : .gray)
               }
 
               if isFocused, !isCompact {
@@ -125,6 +132,7 @@ public struct StatusRowView: View {
         }
       }
     }
+    .if(viewModel.url != nil) { $0.draggable(viewModel.url!) }
     .contextMenu {
       contextMenu
         .onAppear {
@@ -146,19 +154,26 @@ public struct StatusRowView: View {
       }
     }
     #if os(visionOS)
-    .listRowBackground(RoundedRectangle(cornerRadius: 8)
-      .foregroundStyle(.background).hoverEffect())
-    .listRowHoverEffectDisabled()
+      .listRowBackground(
+        RoundedRectangle(cornerRadius: 8)
+          .foregroundStyle(.background).hoverEffect()
+      )
+      .listRowHoverEffectDisabled()
     #else
-    .listRowBackground(viewModel.highlightRowColor)
+      .listRowBackground(viewModel.makeBackgroundColor(isHomeTimeline: isHomeTimeline))
     #endif
-    .listRowInsets(.init(top: 0,
-                         leading: .layoutPadding,
-                         bottom: 0,
-                         trailing: .layoutPadding))
+    .listRowInsets(
+      .init(
+        top: 0,
+        leading: .layoutPadding,
+        bottom: 0,
+        trailing: .layoutPadding)
+    )
     .accessibilityElement(children: isFocused ? .contain : .combine)
-    .accessibilityLabel(isFocused == false && accessibilityVoiceOverEnabled
-      ? StatusRowAccessibilityLabel(viewModel: viewModel).finalLabel() : Text(""))
+    .accessibilityLabel(
+      isFocused == false && accessibilityVoiceOverEnabled
+        ? StatusRowAccessibilityLabel(viewModel: viewModel).finalLabel() : Text("")
+    )
     .accessibilityHidden(viewModel.filter?.filter.filterAction == .hide)
     .accessibilityAction {
       guard !isFocused else { return }
@@ -182,28 +197,33 @@ public struct StatusRowView: View {
         remoteContentLoadingView
       }
     }
-    .alert(isPresented: $viewModel.showDeleteAlert, content: {
-      Alert(
-        title: Text("status.action.delete.confirm.title"),
-        message: Text("status.action.delete.confirm.message"),
-        primaryButton: .destructive(
-          Text("status.action.delete"))
-        {
-          Task {
-            await viewModel.delete()
-          }
-        },
-        secondaryButton: .cancel()
-      )
-    })
-    .confirmationDialog("",
-                        isPresented: $isBlockConfirmationPresented)
-    {
+    .alert(
+      isPresented: $viewModel.showDeleteAlert,
+      content: {
+        Alert(
+          title: Text("status.action.delete.confirm.title"),
+          message: Text("status.action.delete.confirm.message"),
+          primaryButton: .destructive(
+            Text("status.action.delete")
+          ) {
+            Task {
+              await viewModel.delete()
+            }
+          },
+          secondaryButton: .cancel()
+        )
+      }
+    )
+    .confirmationDialog(
+      "",
+      isPresented: $isBlockConfirmationPresented
+    ) {
       Button("account.action.block", role: .destructive) {
         Task {
           do {
             let operationAccount = viewModel.status.reblog?.account ?? viewModel.status.account
-            viewModel.authorRelationship = try await client.post(endpoint: Accounts.block(id: operationAccount.id))
+            viewModel.authorRelationship = try await client.post(
+              endpoint: Accounts.block(id: operationAccount.id))
           } catch {}
         }
       }
@@ -212,13 +232,40 @@ public struct StatusRowView: View {
       -100
     }
     .sheet(isPresented: $showSelectableText) {
-      let content = viewModel.status.reblog?.content.asSafeMarkdownAttributedString ?? viewModel.status.content.asSafeMarkdownAttributedString
-      SelectTextView(content: content)
+      let content =
+        viewModel.status.reblog?.content.asSafeMarkdownAttributedString
+        ?? viewModel.status.content.asSafeMarkdownAttributedString
+      StatusRowSelectableTextView(content: content)
     }
     .environment(
-      StatusDataControllerProvider.shared.dataController(for: viewModel.finalStatus,
-                                                         client: viewModel.client)
+      StatusDataControllerProvider.shared.dataController(
+        for: viewModel.finalStatus,
+        client: viewModel.client)
     )
+    .alert(
+      "DeepL couldn't be reached!\nIs the API Key correct?",
+      isPresented: $viewModel.deeplTranslationError
+    ) {
+      Button("alert.button.ok", role: .cancel) {}
+      Button("settings.general.translate") {
+        RouterPath.settingsStartingPoint = .translation
+        routerPath.presentedSheet = .settings
+      }
+    }
+    .alert(
+      "The Translation Service of your Instance couldn't be reached!",
+      isPresented: $viewModel.instanceTranslationError
+    ) {
+      Button("alert.button.ok", role: .cancel) {}
+      Button("settings.general.translate") {
+        RouterPath.settingsStartingPoint = .translation
+        routerPath.presentedSheet = .settings
+      }
+    }
+    #if canImport(_Translation_SwiftUI)
+      .addTranslateView(
+        isPresented: $viewModel.showAppleTranslation, text: viewModel.finalStatus.content.asRawText)
+    #endif
   }
 
   @ViewBuilder
@@ -240,12 +287,14 @@ public struct StatusRowView: View {
         HapticManager.shared.fireHaptic(.notification(.success))
         let attachments = viewModel.finalStatus.mediaAttachments
         #if targetEnvironment(macCatalyst) || os(visionOS)
-          openWindow(value: WindowDestinationMedia.mediaViewer(
-            attachments: attachments,
-            selectedAttachment: attachments[0]
-          ))
+          openWindow(
+            value: WindowDestinationMedia.mediaViewer(
+              attachments: attachments,
+              selectedAttachment: attachments[0]
+            ))
         #else
-          quickLook.prepareFor(selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
+          quickLook.prepareFor(
+            selectedMediaAttachment: attachments[0], mediaAttachments: attachments)
         #endif
       }
     }
@@ -335,20 +384,26 @@ public struct StatusRowView: View {
 
 #Preview {
   List {
-    StatusRowView(viewModel:
-      .init(status: .placeholder(),
-            client: .init(server: ""),
-            routerPath: RouterPath()),
+    StatusRowView(
+      viewModel:
+        .init(
+          status: .placeholder(),
+          client: .init(server: ""),
+          routerPath: RouterPath()),
       context: .timeline)
-    StatusRowView(viewModel:
-      .init(status: .placeholder(),
-            client: .init(server: ""),
-            routerPath: RouterPath()),
+    StatusRowView(
+      viewModel:
+        .init(
+          status: .placeholder(),
+          client: .init(server: ""),
+          routerPath: RouterPath()),
       context: .timeline)
-    StatusRowView(viewModel:
-      .init(status: .placeholder(),
-            client: .init(server: ""),
-            routerPath: RouterPath()),
+    StatusRowView(
+      viewModel:
+        .init(
+          status: .placeholder(),
+          client: .init(server: ""),
+          routerPath: RouterPath()),
       context: .timeline)
   }
   .listStyle(.plain)

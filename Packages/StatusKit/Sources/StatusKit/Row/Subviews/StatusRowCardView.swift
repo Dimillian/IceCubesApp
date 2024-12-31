@@ -9,11 +9,11 @@ import SwiftUI
 public struct StatusRowCardView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.openWindow) private var openWindow
-  @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(\.isCompact) private var isCompact: Bool
 
   @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
+  @Environment(CurrentInstance.self) private var currentInstance
 
   let card: Card
 
@@ -50,12 +50,14 @@ public struct StatusRowCardView: View {
     } label: {
       if let title = card.title, let url = URL(string: card.url) {
         VStack(alignment: .leading, spacing: 0) {
-          let sitesWithIcons = ["apps.apple.com", "music.apple.com", "podcasts.apple.com", "open.spotify.com"]
+          let sitesWithIcons = [
+            "apps.apple.com", "music.apple.com", "podcasts.apple.com", "open.spotify.com",
+          ]
           if isCompact {
             compactLinkPreview(title, url)
-          } else if UIDevice.current.userInterfaceIdiom == .pad ||
-            UIDevice.current.userInterfaceIdiom == .mac ||
-            UIDevice.current.userInterfaceIdiom == .vision,
+          } else if UIDevice.current.userInterfaceIdiom == .pad
+            || UIDevice.current.userInterfaceIdiom == .mac
+            || UIDevice.current.userInterfaceIdiom == .vision,
             let host = url.host(), sitesWithIcons.contains(host)
           {
             iconLinkPreview(title, url)
@@ -66,37 +68,43 @@ public struct StatusRowCardView: View {
         .frame(maxWidth: maxWidth)
         .fixedSize(horizontal: false, vertical: true)
         #if os(visionOS)
-          .if(!isCompact, transform: { view in
-            view.background(.background)
-          })
+          .if(
+            !isCompact,
+            transform: { view in
+              view.background(.background)
+            }
+          )
           .hoverEffect()
         #else
           .background(isCompact ? .clear : theme.secondaryBackgroundColor)
         #endif
-          .cornerRadius(isCompact ? 0 : 10)
-          .overlay {
-            if !isCompact {
-              RoundedRectangle(cornerRadius: 10)
-                .stroke(.gray.opacity(0.35), lineWidth: 1)
-            }
+        .cornerRadius(isCompact ? 0 : 10)
+        .overlay {
+          if !isCompact {
+            RoundedRectangle(cornerRadius: 10)
+              .stroke(.gray.opacity(0.35), lineWidth: 1)
           }
-          .contextMenu {
-            ShareLink(item: url) {
-              Label("status.card.share", systemImage: "square.and.arrow.up")
-            }
-            Button { openURL(url) } label: {
-              Label("status.action.view-in-browser", systemImage: "safari")
-            }
-            Divider()
-            Button {
-              UIPasteboard.general.url = url
-            } label: {
-              Label("status.card.copy", systemImage: "doc.on.doc")
-            }
+        }
+        .draggable(url)
+        .contextMenu {
+          ShareLink(item: url) {
+            Label("status.card.share", systemImage: "square.and.arrow.up")
           }
-          .accessibilityElement(children: .combine)
-          .accessibilityAddTraits(.isLink)
-          .accessibilityRemoveTraits(.isStaticText)
+          Button {
+            openURL(url)
+          } label: {
+            Label("status.action.view-in-browser", systemImage: "safari")
+          }
+          Divider()
+          Button {
+            UIPasteboard.general.url = url
+          } label: {
+            Label("status.card.copy", systemImage: "doc.on.doc")
+          }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isLink)
+        .accessibilityRemoveTraits(.isStaticText)
       }
     }
     .buttonStyle(.plain)
@@ -104,7 +112,7 @@ public struct StatusRowCardView: View {
 
   @ViewBuilder
   private func defaultLinkPreview(_ title: String, _ url: URL) -> some View {
-    if let imageURL = card.image, !isInCaptureMode {
+    if let imageURL = card.image {
       DefaultPreviewImage(url: imageURL, originalWidth: card.width, originalHeight: card.height)
     }
 
@@ -122,6 +130,9 @@ public struct StatusRowCardView: View {
         .font(.scaledFootnote)
         .foregroundColor(theme.tintColor)
         .lineLimit(1)
+      if let account = card.authors?.first?.account {
+        moreFromAccountView(account)
+      }
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(10)
@@ -129,7 +140,7 @@ public struct StatusRowCardView: View {
 
   private func compactLinkPreview(_ title: String, _ url: URL) -> some View {
     HStack(alignment: .top) {
-      if let imageURL = card.image, !isInCaptureMode {
+      if let imageURL = card.image {
         LazyResizableImage(url: imageURL) { state, _ in
           if let image = state.image {
             image
@@ -149,18 +160,39 @@ public struct StatusRowCardView: View {
         .frame(width: imageHeight, height: imageHeight)
       }
       VStack(alignment: .leading, spacing: 6) {
-        Text(title)
-          .font(.scaledHeadline)
-          .lineLimit(3)
-        Text(url.host() ?? url.absoluteString)
+        Text(card.providerName ?? url.host() ?? url.absoluteString)
           .font(.scaledFootnote)
           .foregroundColor(theme.tintColor)
           .lineLimit(1)
+        Text(title)
+          .font(.scaledHeadline)
+          .lineLimit(3)
+        if let account = card.authors?.first?.account {
+          moreFromAccountView(account, divider: false)
+        } else if let authorName = card.authorName, !authorName.isEmpty {
+          Text("by \(authorName)")
+            .font(.scaledFootnote)
+            .foregroundStyle(.secondary)
+            .lineLimit(1)
+        }
         if let history = card.history {
           let uses = history.compactMap { Int($0.accounts) }.reduce(0, +)
           HStack(spacing: 4) {
-            Image(systemName: "bubble.left.and.text.bubble.right")
-            Text("trending-tag-people-talking \(uses)")
+            Button {
+              if currentInstance.isLinkTimelineSupported {
+                routerPath.navigate(to: .linkTimeline(url: url, title: title))
+              }
+            } label: {
+              HStack(spacing: 4) {
+                Image(systemName: "bubble.left.and.text.bubble.right")
+                Text("trending-tag-people-talking \(uses)")
+                if currentInstance.isLinkTimelineSupported {
+                  Image(systemName: "chevron.right")
+                }
+              }
+            }
+            .buttonStyle(.bordered)
+
             Spacer()
             Button {
               #if targetEnvironment(macCatalyst)
@@ -170,11 +202,11 @@ public struct StatusRowCardView: View {
               #endif
             } label: {
               Image(systemName: "quote.opening")
+                .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
           }
           .font(.scaledCaption)
-          .foregroundStyle(.secondary)
           .lineLimit(1)
           .padding(.top, 12)
         }
@@ -186,7 +218,7 @@ public struct StatusRowCardView: View {
   private func iconLinkPreview(_ title: String, _ url: URL) -> some View {
     // ..where the image is known to be a square icon
     HStack {
-      if let imageURL = card.image, !isInCaptureMode {
+      if let imageURL = card.image {
         LazyResizableImage(url: imageURL) { state, _ in
           if let image = state.image {
             image
@@ -222,6 +254,33 @@ public struct StatusRowCardView: View {
       }.padding(16)
     }
   }
+
+  @ViewBuilder
+  private func moreFromAccountView(_ account: Account, divider: Bool = true) -> some View {
+    if divider {
+      Divider()
+    }
+    Button {
+      routerPath.navigate(to: .accountDetailWithAccount(account: account))
+    } label: {
+      HStack(alignment: .center, spacing: 4) {
+        Image(systemName: "link")
+        Text("More from")
+        AvatarView(account.avatar, config: .boost)
+          .padding(.top, 2)
+        EmojiTextApp(account.cachedDisplayName, emojis: account.emojis, lineLimit: 1)
+          .fontWeight(.semibold)
+          .emojiText.size(Font.scaledFootnoteFont.emojiSize)
+          .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
+        Spacer()
+        Image(systemName: "chevron.right")
+      }
+      .font(.scaledFootnote)
+      .lineLimit(1)
+      .padding(.top, 4)
+    }
+    .buttonStyle(.plain)
+  }
 }
 
 struct DefaultPreviewImage: View {
@@ -240,7 +299,7 @@ struct DefaultPreviewImage: View {
             .overlay { image.scaledToFit() }
         }
       }
-      .accessibilityHidden(true) // This image is decorative
+      .accessibilityHidden(true)  // This image is decorative
       .clipped()
     }
   }
@@ -254,7 +313,9 @@ struct DefaultPreviewImage: View {
       return calculateSize(proposal)
     }
 
-    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()) {
+    func placeSubviews(
+      in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache _: inout ()
+    ) {
       guard let view = subviews.first else { return }
 
       let size = calculateSize(proposal)
@@ -262,20 +323,21 @@ struct DefaultPreviewImage: View {
     }
 
     private func calculateSize(_ proposal: ProposedViewSize) -> CGSize {
-      var size = switch (proposal.width, proposal.height) {
-      case (nil, nil):
-        CGSize(width: originalWidth, height: originalWidth)
-      case let (nil, .some(height)):
-        CGSize(width: originalWidth, height: min(height, originalWidth))
-      case (0, _):
-        CGSize.zero
-      case let (.some(width), _):
-        if originalWidth == 0 {
-          CGSize(width: width, height: width / 2)
-        } else {
-          CGSize(width: width, height: width / originalWidth * originalHeight)
+      var size =
+        switch (proposal.width, proposal.height) {
+        case (nil, nil):
+          CGSize(width: originalWidth, height: originalWidth)
+        case let (nil, .some(height)):
+          CGSize(width: originalWidth, height: min(height, originalWidth))
+        case (0, _):
+          CGSize.zero
+        case let (.some(width), _):
+          if originalWidth == 0 {
+            CGSize(width: width, height: width / 2)
+          } else {
+            CGSize(width: width, height: width / originalWidth * originalHeight)
+          }
         }
-      }
 
       size.height = min(size.height, 450)
       return size

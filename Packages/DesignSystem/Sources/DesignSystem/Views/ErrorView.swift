@@ -4,9 +4,12 @@ public struct ErrorView: View {
   public let title: LocalizedStringKey
   public let message: LocalizedStringKey
   public let buttonTitle: LocalizedStringKey
-  public let onButtonPress: () -> Void
+  public let onButtonPress: () async -> Void
 
-  public init(title: LocalizedStringKey, message: LocalizedStringKey, buttonTitle: LocalizedStringKey, onButtonPress: @escaping (() -> Void)) {
+  public init(
+    title: LocalizedStringKey, message: LocalizedStringKey, buttonTitle: LocalizedStringKey,
+    onButtonPress: @escaping (() async -> Void)
+  ) {
     self.title = title
     self.message = message
     self.buttonTitle = buttonTitle
@@ -29,7 +32,9 @@ public struct ErrorView: View {
           .multilineTextAlignment(.center)
           .foregroundStyle(.secondary)
         Button {
-          onButtonPress()
+          Task {
+            await onButtonPress()
+          }
         } label: {
           Text(buttonTitle)
         }
@@ -44,7 +49,9 @@ public struct ErrorView: View {
 }
 
 #Preview {
-  ErrorView(title: "Error",
-            message: "Error loading. Please try again",
-            buttonTitle: "Retry") {}
+  ErrorView(
+    title: "Error",
+    message: "Error loading. Please try again",
+    buttonTitle: "Retry"
+  ) {}
 }
