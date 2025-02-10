@@ -3263,7 +3263,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "图像"
+            "value" : "图片"
           }
         },
         "zh-Hant" : {
@@ -20456,6 +20456,12 @@
             "state" : "translated",
             "value" : "IA"
           }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI"
+          }
         }
       }
     },
@@ -20983,6 +20989,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Affichage compact"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "紧凑布局"
           }
         }
       }
@@ -42460,6 +42472,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Supprimer toutes les images et vidéos mises en cache"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移除全部图片和视频缓存"
           }
         }
       }
