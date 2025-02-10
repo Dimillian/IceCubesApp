@@ -1,5 +1,5 @@
 {
-  "originHash" : "b933ac231fd753e6c88c1c1208a6695dbe1890e81183391bbe8b88db301ec8fd",
+  "originHash" : "abddda7b218623ab46d4d722b51ac7efb1fde3a2d52a474937c9bc70cf8cb8e6",
   "pins" : [
     {
       "identity" : "bodega",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/divadretlaw/EmojiText",
       "state" : {
-        "revision" : "174a7bc7bd75650ad1acb5679dbb754296093de0",
-        "version" : "4.0.0"
+        "revision" : "3b0417959e23307d38fd0f72ba0110daa2122e3f",
+        "version" : "4.2.0"
       }
     },
     {
