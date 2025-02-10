@@ -28,7 +28,11 @@ public struct InstanceInfoSection: View {
   public var body: some View {
     Section("instance.info.section.info") {
       LabeledContent("instance.info.name", value: instance.title)
-      Text(instance.shortDescription)
+      if instance.shortDescription != nil {
+        Text(instance.shortDescription!)
+      } else if instance.description != nil {
+        Text(instance.description!)
+      }
       LabeledContent("instance.info.email", value: instance.email)
       LabeledContent("instance.info.version") {
         Text(instance.version).monospaced()

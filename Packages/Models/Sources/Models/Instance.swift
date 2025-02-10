@@ -34,7 +34,8 @@ public struct Instance: Codable, Sendable {
   }
 
   public let title: String
-  public let shortDescription: String
+  public let description: String?
+  public let shortDescription: String?
   public let email: String
   public let version: String
   public let stats: Stats

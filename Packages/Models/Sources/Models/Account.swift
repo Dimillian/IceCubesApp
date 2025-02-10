@@ -26,7 +26,7 @@ public final class Account: Codable, Identifiable, Hashable, Sendable, Equatable
   }
 
   public struct Source: Codable, Equatable, Sendable {
-    public let privacy: Visibility
+    public let privacy: Visibility?
     public let sensitive: Bool
     public let language: String?
     public let note: String

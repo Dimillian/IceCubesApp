@@ -1,6 +1,13 @@
 import Foundation
 import Models
 
+private struct InstanceAppRequest: Codable, Sendable {
+  public let clientName: String
+  public let redirectUris: String
+  public let scopes: String
+  public let website: String
+}
+
 public enum Apps: Endpoint {
   case registerApp
 
@@ -10,16 +17,15 @@ public enum Apps: Endpoint {
       "apps"
     }
   }
-
+  
   public func queryItems() -> [URLQueryItem]? {
+    nil
+  }
+
+  public var jsonValue: Encodable? {
     switch self {
     case .registerApp:
-      [
-        .init(name: "client_name", value: AppInfo.clientName),
-        .init(name: "redirect_uris", value: AppInfo.scheme),
-        .init(name: "scopes", value: AppInfo.scopes),
-        .init(name: "website", value: AppInfo.weblink),
-      ]
+      InstanceAppRequest(clientName: AppInfo.clientName, redirectUris: AppInfo.scheme, scopes: AppInfo.scopes, website: AppInfo.weblink)
     }
   }
 }
