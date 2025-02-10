@@ -1,5 +1,5 @@
 {
-  "originHash" : "800f54ad2dcf12c6d2dda1b14c463b8c702e2a6461b5cb072611d4016256adb3",
+  "originHash" : "b933ac231fd753e6c88c1c1208a6695dbe1890e81183391bbe8b88db301ec8fd",
   "pins" : [
     {
       "identity" : "bodega",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Dean151/ButtonKit",
       "state" : {
-        "revision" : "d567519b297777c38dee56ef10201fef4962ff75",
-        "version" : "0.4.1"
+        "revision" : "5d049dec3ec474ea2ad79eb4acd066edeacb9953",
+        "version" : "0.6.1"
       }
     },
     {
