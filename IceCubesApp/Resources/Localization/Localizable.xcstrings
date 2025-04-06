@@ -336,7 +336,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "%@"
           }
         },
         "nl" : {
@@ -648,7 +648,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ non è un nome simbolo SF valido"
+            "value" : "%@ non è un nome SFSymbol valido"
           }
         },
         "ja" : {
@@ -734,7 +734,8 @@
             "value" : "%@ не є дійсним екземпляром"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "%@ was posted on Mastodon" : {
       "localizations" : {
@@ -765,7 +766,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ è stato postato su Mastodon"
+            "value" : "%@ è stato pubblicato su Mastodon"
           }
         },
         "nl" : {
@@ -1185,7 +1186,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apre le opzioni."
+            "value" : "Apre schermata opzioni"
           }
         },
         "ja" : {
@@ -1304,7 +1305,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suggerimento IA"
+            "value" : "Prompt IA"
           }
         },
         "ja" : {
@@ -2137,7 +2138,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avviso di spoiler"
+            "value" : "Avviso contenuti"
           }
         },
         "ja" : {
@@ -2494,7 +2495,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Off"
+            "value" : "No"
           }
         },
         "ja" : {
@@ -2614,7 +2615,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "On"
+            "value" : "Sì"
           }
         },
         "ja" : {
@@ -2733,7 +2734,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Descrizione dell'immagine: %@"
+            "value" : "Testo alternativo immagine: %@"
           }
         },
         "ja" : {
@@ -3090,7 +3091,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Gif animata"
+            "value" : "GIF animata"
           }
         },
         "ja" : {
@@ -3447,7 +3448,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ ha condiviso %@"
+            "value" : "%@ ha rebloggato %@"
           }
         },
         "ja" : {
@@ -3923,7 +3924,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri il visualizzatore dei media"
+            "value" : "Apri visualizzatore media"
           }
         },
         "ja" : {
@@ -4161,7 +4162,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Risultati del sondaggio"
+            "value" : "Risultati sondaggio"
           }
         },
         "ja" : {
@@ -4637,7 +4638,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Non letto"
+            "value" : "Da leggere"
           }
         },
         "ja" : {
@@ -5589,7 +5590,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Di più"
+            "value" : "Altro"
           }
         },
         "ja" : {
@@ -6660,7 +6661,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scorre fino all'elenco."
+            "value" : "Scorre fino alla lista."
           }
         },
         "ja" : {
@@ -7255,7 +7256,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra boost"
+            "value" : "Mostra reblog"
           }
         },
         "ja" : {
@@ -7612,7 +7613,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mutato"
+            "value" : "Silenziato"
           }
         },
         "ja" : {
@@ -8087,7 +8088,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri %@"
+            "value" : "Visita %@"
           }
         },
         "ja" : {
@@ -9010,7 +9011,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Account"
           }
         },
         "nl" : {
@@ -9563,7 +9564,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifica i filtri"
+            "value" : "Modifica filtri"
           }
         },
         "ja" : {
@@ -9681,7 +9682,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifica le informazioni"
+            "value" : "Modifica info"
           }
         },
         "ja" : {
@@ -10393,7 +10394,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Disabilita le notifiche"
+            "value" : "Disabilita notifiche"
           }
         },
         "ja" : {
@@ -10512,7 +10513,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abilita le notifiche"
+            "value" : "Abilita notifiche"
           }
         },
         "ja" : {
@@ -10750,7 +10751,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nascondi i boost"
+            "value" : "Nascondi i reblog"
           }
         },
         "ja" : {
@@ -10869,7 +10870,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra i boost"
+            "value" : "Mostra i reblog"
           }
         },
         "ja" : {
@@ -11700,7 +11701,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Blocked accounts"
+            "value" : "Account bloccati"
           }
         },
         "ja" : {
@@ -11819,7 +11820,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Condiviso da"
+            "value" : "Rebloggato da"
           }
         },
         "ja" : {
@@ -12882,7 +12883,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Account gestito da un bot"
+            "value" : "Account bot"
           }
         },
         "ja" : {
@@ -13358,7 +13359,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi un nuovo metadato"
+            "value" : "Aggiungi metadati"
           }
         },
         "ja" : {
@@ -13477,7 +13478,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifica l'avatar"
+            "value" : "Modifica avatar"
           }
         },
         "ja" : {
@@ -13768,7 +13769,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Errore durante il salvataggio del tuo profilo, riprova."
+            "value" : "Errore durante il salvataggio del profilo, riprova."
           }
         },
         "ja" : {
@@ -13887,7 +13888,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Errore durante il salvataggio del tuo profilo"
+            "value" : "Errore durante il salvataggio del profilo"
           }
         },
         "ja" : {
@@ -14006,7 +14007,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifica la copertina"
+            "value" : "Modifica copertina"
           }
         },
         "ja" : {
@@ -14101,7 +14102,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elimina la copertina"
+            "value" : "Elimina copertina"
           }
         },
         "nl" : {
@@ -14654,7 +14655,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Attenzione: queste impostazioni vengono sovrascritte dalle impostazioni globali"
+            "value" : "Attenzione: queste impostazioni vengono sovrascritte dalle impostazioni globali sui contenuti"
           }
         },
         "ja" : {
@@ -15130,7 +15131,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tra i preferiti di"
+            "value" : "Apprezzato da"
           }
         },
         "ja" : {
@@ -15487,7 +15488,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Questi utenti non vedranno i tuoi post finché non li accetterai."
+            "value" : "Quegli utenti non vedranno i tuoi post finché non li accetti."
           }
         },
         "ja" : {
@@ -15606,7 +15607,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Richieste in attesa"
+            "value" : "Richieste in sospeso"
           }
         },
         "ja" : {
@@ -15963,7 +15964,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Richiesto"
+            "value" : "Richiesta inviata"
           }
         },
         "ja" : {
@@ -16082,7 +16083,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Seguito da"
+            "value" : "Seguaci"
           }
         },
         "ja" : {
@@ -16320,7 +16321,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iscritto dal"
+            "value" : "Iscrizione:"
           }
         },
         "ja" : {
@@ -16617,13 +16618,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ follower"
+                      "value" : "%2$@ seguace"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ follower"
+                      "value" : "%2$@ seguaci"
                     }
                   }
                 }
@@ -17293,7 +17294,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cancella lista"
+            "value" : "Elimina lista"
           }
         },
         "ja" : {
@@ -17412,7 +17413,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nome della lista"
+            "value" : "Nome lista"
           }
         },
         "ja" : {
@@ -17531,7 +17532,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Spostato a %@"
+            "value" : "Spostato su %@"
           }
         },
         "ja" : {
@@ -17650,7 +17651,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Account mutati"
+            "value" : "Account silenziati"
           }
         },
         "ja" : {
@@ -18483,7 +18484,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inserisci il testo della nota"
+            "value" : "Inserisci testo nota"
           }
         },
         "ja" : {
@@ -18785,7 +18786,8 @@
             "value" : "取消"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "action.delete" : {
       "extractionState" : "manual",
@@ -18841,7 +18843,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cancella"
+            "value" : "Elimina"
           }
         },
         "ja" : {
@@ -18959,7 +18961,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fatto"
+            "value" : "Fine"
           }
         },
         "ja" : {
@@ -19433,7 +19435,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Icona del gruppo (nome simbolo SF)"
+            "value" : "Icona del gruppo (nome SFSymbol)"
           }
         },
         "ja" : {
@@ -19551,7 +19553,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag aggiunti al gruppo"
+            "value" : "Aggiungi tag al gruppo"
           }
         },
         "ja" : {
@@ -20142,7 +20144,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Titolo del gruppo di tag"
+            "value" : "Titolo gruppo tag"
           }
         },
         "ja" : {
@@ -20456,6 +20458,12 @@
             "state" : "translated",
             "value" : "IA"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "IA"
+          }
         }
       }
     },
@@ -20724,7 +20732,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si è verificato un errore postando su Mastodon, riprova."
+            "value" : "Si è verificato un errore durante la pubblicazione su Mastodon, riprova."
           }
         },
         "nl" : {
@@ -20895,8 +20903,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : ""
+            "state" : "translated",
+            "value" : "AccountApp"
           }
         },
         "nl" : {
@@ -20983,6 +20991,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Affichage compact"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Layout compatto"
           }
         }
       }
@@ -21180,7 +21194,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cancella"
+            "value" : "Elimina"
           }
         },
         "ja" : {
@@ -21299,7 +21313,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Segna come letto"
+            "value" : "Segna come letta"
           }
         },
         "ja" : {
@@ -21418,7 +21432,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vedi i dettagli"
+            "value" : "Visualizza dettagli"
           }
         },
         "ja" : {
@@ -21537,7 +21551,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stai cercando un po' di amore social? Qui troverai tutti i tuoi messaggi diretti e le menzioni private. Divertiti con i messaggi! 📱❤️"
+            "value" : "Sei in cerca di un po’ di affetto digitale? Troverai tutti i tuoi messaggi e menzioni private qui. Tante belle chat! 📱❤️"
           }
         },
         "ja" : {
@@ -21656,7 +21670,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Zero posta in arrivo"
+            "value" : "Non c’è posta per te"
           }
         },
         "ja" : {
@@ -21894,7 +21908,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Errore durante il recupero dei tuoi messaggi"
+            "value" : "Errore durante il caricamento dei messaggi"
           }
         },
         "ja" : {
@@ -23133,7 +23147,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@count_posts@ da %#@count_participants@"
+            "value" : "%#@count_posts@ post da %#@count_participants@ partecipanti"
           },
           "substitutions" : {
             "count_participants" : {
@@ -23144,13 +23158,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg partecipante"
+                      "value" : "%arg"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg partecipanti"
+                      "value" : "%arg"
                     }
                   }
                 }
@@ -23164,13 +23178,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg post "
+                      "value" : "%arg"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg post"
+                      "value" : "%arg"
                     }
                   }
                 }
@@ -23694,7 +23708,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Selettore dei temi"
+            "value" : "Selettore tema"
           }
         },
         "ja" : {
@@ -23813,7 +23827,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Anteprima dei toot"
+            "value" : "Anteprima toot"
           }
         },
         "ja" : {
@@ -23892,6 +23906,12 @@
             "value" : "Désactiver pour cacher les options d'outils d'aideavec l'IA telles que le copywriting et la description d’images générées par l'IA. Utilise l'API OpenAI. Consulter notre Politique de confidentialité pour plus d'informations."
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disabilita per nascondere le opzioni di strumenti basati sull’IA come i suggerimenti di scrittura e la generazione di testo alternativo. Utilizza l’API di OpenAI. Consulta la nostra Politica sulla privacy per maggiori informazioni"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23912,6 +23932,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Activer le streaming des messages ajoutera automatiquement de nouveaux messages en haut de votre timeline. Désactiver si vous avez des problèmes de performance."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abilitare il flusso di post aggiungerà automaticamente nuovi post in cima alla timeline. Disabilita se riscontri problemi di prestazioni."
           }
         },
         "zh-Hans" : {
@@ -23977,7 +24003,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "A fianco"
+            "value" : "A lato"
           }
         },
         "ja" : {
@@ -24453,7 +24479,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Personalizzato"
+            "value" : "personalizzato"
           }
         },
         "ja" : {
@@ -24691,7 +24717,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Infinito"
+            "value" : "infinito"
           }
         },
         "ja" : {
@@ -25762,7 +25788,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nascondi media sensibili"
+            "value" : "Nascondi sensibili"
           }
         },
         "ja" : {
@@ -26119,7 +26145,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nessun pulsante"
+            "value" : "Nessun tasto"
           }
         },
         "ja" : {
@@ -26238,7 +26264,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solo pulsanti"
+            "value" : "Solo tasti"
           }
         },
         "ja" : {
@@ -26476,7 +26502,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Completo"
+            "value" : "Grande"
           }
         },
         "ja" : {
@@ -26714,7 +26740,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solo icone"
+            "value" : "Solo icona"
           }
         },
         "ja" : {
@@ -26833,7 +26859,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Icone e testo"
+            "value" : "Icona e testo"
           }
         },
         "ja" : {
@@ -26952,7 +26978,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voto multiplo"
+            "value" : "Più voti"
           }
         },
         "ja" : {
@@ -27072,7 +27098,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Voto singolo"
+            "value" : "Un voto"
           }
         },
         "ja" : {
@@ -27166,7 +27192,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Esplora & In tendenza"
+            "value" : "Esplora e tendenze"
           }
         },
         "nl" : {
@@ -28077,7 +28103,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Da questo pannello puoi cercare tutto su %@"
+            "value" : "Da questa schermata puoi cercare qualsiasi cosa su %@"
           }
         },
         "ja" : {
@@ -28791,7 +28817,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Link in tendenza"
+            "value" : "Notizie"
           }
         },
         "ja" : {
@@ -29399,7 +29425,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nascondi completamente"
+            "value" : "Nascondi del tutto"
           }
         },
         "ja" : {
@@ -29637,7 +29663,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nelle conversazioni"
+            "value" : "Conversazioni"
           }
         },
         "ja" : {
@@ -29756,7 +29782,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nella home e nelle liste"
+            "value" : "Home e liste"
           }
         },
         "ja" : {
@@ -29875,7 +29901,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nelle notifiche"
+            "value" : "Notifiche"
           }
         },
         "ja" : {
@@ -29994,7 +30020,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nei profili"
+            "value" : "Profili"
           }
         },
         "ja" : {
@@ -30113,7 +30139,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nelle timeline pubbliche"
+            "value" : "Timeline pubbliche"
           }
         },
         "ja" : {
@@ -30232,7 +30258,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Azione del filtro"
+            "value" : "Azione filtro"
           }
         },
         "ja" : {
@@ -30351,7 +30377,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dove applicare il filtro"
+            "value" : "Contesti filtro"
           }
         },
         "ja" : {
@@ -30589,7 +30615,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Data/Orario"
+            "value" : "Data/ora"
           }
         },
         "ja" : {
@@ -30827,7 +30853,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parole chiave del filtro"
+            "value" : "Parole chiave filtro"
           }
         },
         "ja" : {
@@ -30946,7 +30972,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nuova parola chiave"
+            "value" : "Aggiungi una parola chiave"
           }
         },
         "ja" : {
@@ -31065,7 +31091,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Titolo del filtro"
+            "value" : "Titolo filtro"
           }
         },
         "ja" : {
@@ -31688,7 +31714,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solo follower"
+            "value" : "Solo seguaci"
           }
         },
         "nl" : {
@@ -31739,8 +31765,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Timeline Home"
+            "state" : "translated",
+            "value" : "Home"
           }
         },
         "nl" : {
@@ -31844,7 +31870,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Immagine da postare su Mastodon"
+            "value" : "Immagine da pubblicare su Mastodon"
           }
         },
         "tr" : {
@@ -32322,7 +32348,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Informazioni sull'istanza"
+            "value" : "Info istanza"
           }
         },
         "ja" : {
@@ -32558,7 +32584,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Informazioni sull'istanza"
+            "value" : "Info istanza"
           }
         },
         "ja" : {
@@ -32676,7 +32702,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Regolamento dell'istanza"
+            "value" : "Regole istanza"
           }
         },
         "ja" : {
@@ -33384,7 +33410,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "URL dell'istanza"
+            "value" : "URL istanza"
           }
         },
         "ja" : {
@@ -33479,7 +33505,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Può comunque essere usato come alternativa per il servizio di traduzione della tua istanza."
+            "value" : "Può comunque essere usato come alternativa al servizio di traduzione della tua istanza."
           }
         },
         "tr" : {
@@ -34364,7 +34390,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi/Rimuovi %@"
+            "value" : "Aggiungi/rimuovi %@"
           }
         },
         "ja" : {
@@ -34483,7 +34509,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Crea una nuova lista"
+            "value" : "Crea una lista"
           }
         },
         "ja" : {
@@ -34721,7 +34747,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impostazioni della lista"
+            "value" : "Impostazioni lista"
           }
         },
         "ja" : {
@@ -35078,7 +35104,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nome della lista"
+            "value" : "Nome lista"
           }
         },
         "ja" : {
@@ -35197,7 +35223,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inserisci il nome della tua lista"
+            "value" : "Inserisci il nome della lista"
           }
         },
         "ja" : {
@@ -35537,7 +35563,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aumenta"
+            "value" : "Più grande"
           }
         },
         "ja" : {
@@ -35655,7 +35681,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Diminuisci"
+            "value" : "Più piccolo"
           }
         },
         "ja" : {
@@ -36129,7 +36155,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impostazioni..."
+            "value" : "Impostazioni…"
           }
         },
         "ja" : {
@@ -36451,13 +36477,13 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : ", insieme ad un altro, "
+                  "value" : "e %lld altro"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : ", insieme a %lld altri, "
+                  "value" : "e %lld altri"
                 }
               }
             }
@@ -37050,7 +37076,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Messaggi diretti non approvati"
+            "value" : "Messaggi diretti non richiesti"
           }
         },
         "ja" : {
@@ -37765,7 +37791,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si è verificato un errore durante il caricamento delle notifiche, per favore riprova."
+            "value" : "Si è verificato un errore durante il caricamento delle notifiche, riprova."
           }
         },
         "ja" : {
@@ -38066,7 +38092,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ha apprezzato il tuo post"
+            "value" : "ha apprezzato"
           }
         },
         "ja" : {
@@ -38206,7 +38232,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "⭐️ ha inserito nei preferiti: "
+            "value" : "⭐️ Apprezzamenti: "
           }
         },
         "ja" : {
@@ -38388,7 +38414,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ti segue"
+            "value" : "ha iniziato a seguirti"
           }
         },
         "ja" : {
@@ -38647,7 +38673,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🔒 ha chiesto di seguirti: "
+            "value" : "🔒 Richieste di seguirti: "
           }
         },
         "ja" : {
@@ -38766,7 +38792,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "👋 ti segue: "
+            "value" : "👋 Nuovi seguaci: "
           }
         },
         "ja" : {
@@ -39088,7 +39114,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "votazione conclusa"
+            "value" : "sondaggio concluso"
           }
         },
         "ja" : {
@@ -39207,7 +39233,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "📈 Sondaggio chiuso: "
+            "value" : "📈 Sondaggio concluso: "
           }
         },
         "ja" : {
@@ -39389,7 +39415,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ha condiviso"
+            "value" : "ha rebloggato"
           }
         },
         "ja" : {
@@ -39529,7 +39555,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🚀 ha condiviso: "
+            "value" : "🚀 Reblog: "
           }
         },
         "ja" : {
@@ -39648,7 +39674,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ha pubblicato uno stato"
+            "value" : "ha pubblicato un post"
           }
         },
         "ja" : {
@@ -39767,7 +39793,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🖊️ ha postato: "
+            "value" : "🖊️ Nuovi post: "
           }
         },
         "ja" : {
@@ -40005,7 +40031,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ha aggiornato: "
+            "value" : "Aggiornato:"
           }
         },
         "ja" : {
@@ -40124,7 +40150,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Preferiti"
+            "value" : "Apprezzamenti"
           }
         },
         "ja" : {
@@ -40243,7 +40269,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Segui"
+            "value" : "Nuovi seguaci"
           }
         },
         "ja" : {
@@ -40719,7 +40745,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Condivisioni"
+            "value" : "Reblog"
           }
         },
         "ja" : {
@@ -40957,7 +40983,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Post modificati"
+            "value" : "Modifiche post"
           }
         },
         "ja" : {
@@ -41195,7 +41221,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tutto"
+            "value" : "Tutte"
           }
         },
         "ja" : {
@@ -41460,7 +41486,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri in un tab"
+            "value" : "Apri in un pannello"
           }
         },
         "nl" : {
@@ -41512,7 +41538,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apri l'app in un tab specifico"
+            "value" : "Apri l'app in un pannello specifico"
           }
         },
         "nl" : {
@@ -41588,7 +41614,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Caricamento in corso..."
+            "value" : "Carico, carico, carico…"
           }
         },
         "ja" : {
@@ -41706,7 +41732,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Caricamento..."
+            "value" : "Carico…"
           }
         },
         "ja" : {
@@ -41801,7 +41827,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posta uno status"
+            "value" : "Pubblica un post"
           }
         },
         "nl" : {
@@ -41822,7 +41848,8 @@
             "value" : "发布嘟文"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Post a status with an image" : {
       "localizations" : {
@@ -41853,7 +41880,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posta uno status con un'immagine"
+            "value" : "Pubblica un post con un’immagine"
           }
         },
         "nl" : {
@@ -41905,7 +41932,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posta un'immagine su Mastodon"
+            "value" : "Pubblica un'immagine su Mastodon"
           }
         },
         "nl" : {
@@ -41957,7 +41984,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Contenuto del post"
+            "value" : "Contenuto post"
           }
         },
         "nl" : {
@@ -42010,7 +42037,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posta immagini"
+            "value" : "Immagini post"
           }
         },
         "nl" : {
@@ -42031,7 +42058,8 @@
             "value" : "发布图片"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Post status to Mastodon" : {
       "extractionState" : "stale",
@@ -42063,7 +42091,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posta uno status su Mastodon"
+            "value" : "Pubblica post su Mastodon"
           }
         },
         "nl" : {
@@ -42084,7 +42112,8 @@
             "value" : "向 Mastodon 发布嘟文"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Post visibility" : {
       "localizations" : {
@@ -42115,7 +42144,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visibilità del post"
+            "value" : "Visibilità post"
           }
         },
         "nl" : {
@@ -42152,6 +42181,12 @@
             "value" : "Flux de publications"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flusso di post"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42177,7 +42212,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy policy"
+            "value" : "Politica sulla privacy"
           }
         },
         "zh-Hans" : {
@@ -42460,6 +42495,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Supprimer toutes les images et vidéos mises en cache"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rimuovi tutti i video e le immagini dalla cache"
           }
         }
       }
@@ -42754,7 +42795,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Segnala il messaggio"
+            "value" : "Segnala post"
           }
         },
         "ja" : {
@@ -42873,7 +42914,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vedi di più"
+            "value" : "Mostra altro"
           }
         },
         "ja" : {
@@ -42967,7 +43008,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tab selezionato"
+            "value" : "Pannello selezionato"
           }
         },
         "nl" : {
@@ -43071,7 +43112,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invia un post testuale a Mastodon con Ice Cubes"
+            "value" : "Invia un post di testo a Mastodon con Ice Cubes"
           }
         },
         "tr" : {
@@ -43117,7 +43158,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invia un post su Mastodon"
+            "value" : "Invia post a Mastodon"
           }
         },
         "tr" : {
@@ -43239,7 +43280,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes utilizza i seguenti software Open Source"
+            "value" : "Ice Cubes si basa sui seguenti software open-source:"
           }
         },
         "ja" : {
@@ -43475,7 +43516,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cancella la cache"
+            "value" : "Svuota cache"
           }
         },
         "ja" : {
@@ -43594,7 +43635,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi un account"
+            "value" : "Aggiungi account"
           }
         },
         "ja" : {
@@ -43948,7 +43989,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Icona dell'applicazione"
+            "value" : "Icona app"
           }
         },
         "ja" : {
@@ -44067,7 +44108,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Icone create da"
+            "value" : "Icone di"
           }
         },
         "ja" : {
@@ -44422,7 +44463,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sorgente (link GitHub)"
+            "value" : "Sorgente (GitHub)"
           }
         },
         "ja" : {
@@ -44540,7 +44581,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Supporta l'applicazione"
+            "value" : "Supporta l'app"
           }
         },
         "ja" : {
@@ -44658,7 +44699,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Elimina la cache dei media"
+            "value" : "Svuota la cache multimediale"
           }
         },
         "ja" : {
@@ -44894,7 +44935,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I post compressi visualizzano solo alcune righe del contenuto assieme ad un pulsante per visualizzare il post intero"
+            "value" : "I post compressi mostrano solo alcune righe del contenuto assieme a un pulsante per visualizzare il post intero"
           }
         },
         "ja" : {
@@ -45012,7 +45053,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visibilità delle risposte"
+            "value" : "Visibilità risposte"
           }
         },
         "ja" : {
@@ -45248,7 +45289,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visibilità del post"
+            "value" : "Visibilità post"
           }
         },
         "ja" : {
@@ -45366,7 +45407,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visualizzazione dei media"
+            "value" : "Visualizzazione media"
           }
         },
         "ja" : {
@@ -45484,7 +45525,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visualizza sempre i contenuti sensibili"
+            "value" : "Mostra sempre i post sensibili"
           }
         },
         "ja" : {
@@ -45602,7 +45643,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Configurazione dei contenuti del server"
+            "value" : "Impostazioni server"
           }
         },
         "ja" : {
@@ -45838,7 +45879,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra i testi alternativi"
+            "value" : "Mostra testo alternativo"
           }
         },
         "ja" : {
@@ -45956,7 +45997,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impostazioni dei contenuti"
+            "value" : "Contenuti"
           }
         },
         "ja" : {
@@ -46310,7 +46351,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Require Alt Text to Post"
+            "value" : "Richiedi il testo alternativo per pubblicare"
           }
         },
         "ja" : {
@@ -46784,7 +46825,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Comportamento del pulsante di condivisione"
+            "value" : "Comportamento tasto"
           }
         },
         "ja" : {
@@ -46902,7 +46943,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utilizza le impostazioni del server"
+            "value" : "Utilizza impostazioni del server"
           }
         },
         "ja" : {
@@ -47020,7 +47061,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posizione dell'avatar"
+            "value" : "Posizione avatar"
           }
         },
         "ja" : {
@@ -47138,7 +47179,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Forma dell'avatar"
+            "value" : "Forma avatar"
           }
         },
         "ja" : {
@@ -47849,7 +47890,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Dimensione del font: %@"
+            "value" : "Dimensione font: %@"
           }
         },
         "ja" : {
@@ -48086,7 +48127,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visualizza il nome completo"
+            "value" : "Visualizza il nome utente completo"
           }
         },
         "ja" : {
@@ -48205,7 +48246,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Massima indentazione della risposta: %@"
+            "value" : "Rientro risposte massimo: %@"
           }
         },
         "ja" : {
@@ -48323,7 +48364,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impostazioni di visualizzazione"
+            "value" : "Aspetto"
           }
         },
         "ja" : {
@@ -48441,7 +48482,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visualizza il numero di post non letti in basso"
+            "value" : "Mostra tasto dei post in sospeso in basso"
           }
         },
         "ja" : {
@@ -48560,7 +48601,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visualizza il numero di post non letti a sinistra"
+            "value" : "Mostra tasto dei post in sospeso a sinistra"
           }
         },
         "ja" : {
@@ -48678,7 +48719,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ripristina i valori predefiniti"
+            "value" : "Ripristina impostazioni di default"
           }
         },
         "ja" : {
@@ -49725,7 +49766,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I colori personalizzati possono essere impostati solo se l'impostazione per seguire lo schema di colori del sistema è disabilitata"
+            "value" : "I colori personalizzati possono essere impostati solo se si disattiva l’aspetto di sistema"
           }
         },
         "ja" : {
@@ -49843,7 +49884,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra account all'hover"
+            "value" : "Mostra account al passaggio del mouse"
           }
         },
         "ja" : {
@@ -49961,7 +50002,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Attiva la seconda colonna"
+            "value" : "Abilita colonna secondaria"
           }
         },
         "ja" : {
@@ -50080,7 +50121,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra l'intestazione delle risposte"
+            "value" : "Mostra rientro risposte"
           }
         },
         "ja" : {
@@ -50198,7 +50239,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visualizza il nome del tab"
+            "value" : "Mostra nome pannello"
           }
         },
         "ja" : {
@@ -50316,7 +50357,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pulsanti di azione"
+            "value" : "Tasti azione dei post"
           }
         },
         "ja" : {
@@ -50552,7 +50593,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stile dei media"
+            "value" : "Stile media"
           }
         },
         "ja" : {
@@ -50670,7 +50711,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Colore sfondo principale"
+            "value" : "Colore di sfondo"
           }
         },
         "ja" : {
@@ -50788,7 +50829,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Colore sfondo secondario"
+            "value" : "Colore di sfondo secondario"
           }
         },
         "ja" : {
@@ -50906,7 +50947,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Automatico"
+            "value" : "Sistema"
           }
         },
         "ja" : {
@@ -51024,7 +51065,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Colore del testo"
+            "value" : "Colore testo"
           }
         },
         "ja" : {
@@ -51142,7 +51183,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Colore"
+            "value" : "Colore di accento"
           }
         },
         "ja" : {
@@ -51260,7 +51301,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra pulsante per la traduzione"
+            "value" : "Mostra tasto Traduci"
           }
         },
         "ja" : {
@@ -51614,7 +51655,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Utilizza la modalità lettura del browser"
+            "value" : "Modalità Lettura in-app"
           }
         },
         "ja" : {
@@ -51850,7 +51891,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impostazioni dei contenuti"
+            "value" : "Contenuti"
           }
         },
         "ja" : {
@@ -51968,7 +52009,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impostazioni di visualizzazione"
+            "value" : "Visualizzazione"
           }
         },
         "ja" : {
@@ -52204,7 +52245,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Informazioni sull'istanza"
+            "value" : "Informazioni istanza"
           }
         },
         "ja" : {
@@ -52322,7 +52363,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche"
+            "value" : "Notifiche push"
           }
         },
         "ja" : {
@@ -52440,7 +52481,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag usati recentemente"
+            "value" : "Tag usati di recente"
           }
         },
         "ja" : {
@@ -52558,7 +52599,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Timeline remote come locali"
+            "value" : "Timeline locali remote"
           }
         },
         "ja" : {
@@ -52677,7 +52718,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Personalizzazioni della barra laterale"
+            "value" : "Personalizzazione barra laterale"
           }
         },
         "ja" : {
@@ -52795,7 +52836,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Azioni di scorrimento"
+            "value" : "Azioni a scorrimento"
           }
         },
         "ja" : {
@@ -52913,7 +52954,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Personalizzazione dei tab"
+            "value" : "Personalizzazione pannelli"
           }
         },
         "ja" : {
@@ -53031,7 +53072,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impostazioni di traduzione"
+            "value" : "Traduzione"
           }
         },
         "ja" : {
@@ -53149,7 +53190,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pressione dei pulsanti"
+            "value" : "Pressione tasti"
           }
         },
         "ja" : {
@@ -53267,7 +53308,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Impostazioni feedback aptico"
+            "value" : "Feedback aptico"
           }
         },
         "ja" : {
@@ -53385,7 +53426,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Selezione dei tab"
+            "value" : "Selezione pannelli"
           }
         },
         "ja" : {
@@ -53621,7 +53662,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto-play dei video"
+            "value" : "Riproduci automaticamente i video"
           }
         },
         "ja" : {
@@ -53857,7 +53898,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aiuto del 🤖"
+            "value" : "Abilita assistente 🤖"
           }
         },
         "ja" : {
@@ -53975,7 +54016,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Muta i video"
+            "value" : "Silenzia i video"
           }
         },
         "ja" : {
@@ -54093,7 +54134,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tastiera social"
+            "value" : "Usa tastiera social"
           }
         },
         "ja" : {
@@ -54211,7 +54252,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Effetti sonori"
+            "value" : "Riproduci effetti sonori"
           }
         },
         "ja" : {
@@ -54329,7 +54370,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boost"
+            "value" : "Reblog"
           }
         },
         "ja" : {
@@ -54565,7 +54606,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ricevi notifiche duplicate? Prova questo pulsante magico per aggiustarle"
+            "value" : "Ricevi notifiche duplicate? Prova questo tasto magico per aggiustarle"
           }
         },
         "ja" : {
@@ -54683,7 +54724,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifiche duplicate"
+            "value" : "Rimedio per notifiche duplicate"
           }
         },
         "ja" : {
@@ -54919,7 +54960,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nuovi follower"
+            "value" : "Nuovi seguaci"
           }
         },
         "ja" : {
@@ -55155,7 +55196,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ricevi notifiche quando ci sono nuove attività"
+            "value" : "Ricevi notifiche push sulle nuove attività"
           }
         },
         "ja" : {
@@ -55981,7 +56022,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Applicazione"
+            "value" : "App"
           }
         },
         "ja" : {
@@ -56099,7 +56140,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Versione dell'app: %@"
+            "value" : "Versione app: %@"
           }
         },
         "ja" : {
@@ -56571,7 +56612,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "L'aggiornamento rapido disattiva il salvataggio e il caching della posizione della timeline. Caricherà sempre una nuova timeline."
+            "value" : "L'aggiornamento rapido disabilita il salvataggio e il caching della posizione della timeline. Scaricherà sempre una nuova timeline."
           }
         },
         "ja" : {
@@ -56689,7 +56730,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si è verificato un errore mentre processavamo il tuo acquisto in-app, per favore riprova."
+            "value" : "Si è verificato un errore mentre processavamo il tuo acquisto in-app, riprova."
           }
         },
         "ja" : {
@@ -57161,7 +57202,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "👽 Contributo fuori dal mondo"
+            "value" : "👽 Mancia fuori dal mondo"
           }
         },
         "ja" : {
@@ -57279,7 +57320,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ciao! Mi chiamo Thomas e adoro creare applicazioni open source. Ice Cubes è sicuramente uno dei miei progetti di cui sono più orgoglioso al momento e, siamo sinceri, è quello che richiede più lavoro a causa dei continui cambiamenti di Mastodon e dei social media. Se ti stai divertendo ad usare Ice Cubes, considera di fare un piccolo contributo. Te ne sarò grato (e contribuirà a mantenere l'app perfetta per te). 🚀"
+            "value" : "Ehilà! Mi chiamo Thomas e adoro creare applicazioni open source. Ice Cubes è senza dubbio uno dei progetti di cui vado più fiero al momento e, a dirla tutta, è anche quello che richiede più tempo per via dei continui cambiamenti nel mondo di Mastodon e dei social. Se ti stai trovando bene con Ice Cubes, ti invito a lasciare una piccola mancia. Mi farai molto felice (e contribuirai a rendere l’app migliore per tutti). 🚀"
           }
         },
         "ja" : {
@@ -57515,7 +57556,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Piccolo, ma bello, ed è pure buono!"
+            "value" : "Piccola, ma dolce, e pure buona!"
           }
         },
         "ja" : {
@@ -57633,7 +57674,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🍬 Piccolo contributo"
+            "value" : "🍬 Mancia contenuta"
           }
         },
         "ja" : {
@@ -57751,7 +57792,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Caricamento sottotitoli..."
+            "value" : "Carico sottotitolo…"
           }
         },
         "ja" : {
@@ -57869,7 +57910,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy policy"
+            "value" : "Politica sulla privacy"
           }
         },
         "ja" : {
@@ -57987,7 +58028,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ripristina un acquisto"
+            "value" : "Ripristina acquisti"
           }
         },
         "ja" : {
@@ -58105,7 +58146,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ripristina la tua sottoscrizione se non si è sincronizzata automaticamente."
+            "value" : "Ripristina il tuo abbonamento se non è stato sincronizzato in automatico."
           }
         },
         "ja" : {
@@ -58223,7 +58264,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Grazie per essere diventato un supporter Ice Cubes!"
+            "value" : "Grazie per il tuo sostegno a Ice Cubes!"
           }
         },
         "ja" : {
@@ -58341,7 +58382,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "La sottoscrizione ti dà accesso ad un badge \"verificato\" visibile solo a te sul tuo profilo. Si rinnova automaticamente ogni mese a meno che non venga cancellata almeno un giorno prima del successivo rinnovo."
+            "value" : "L’abbonamento è mensile e si rinnova in automatico. Aggiunge un badge di verifica al tuo profilo che solo tu puoi vedere. Gli abbonamenti si rinnovano in automatico a meno che tu non li disdica almeno un giorno prima del rinnovo."
           }
         },
         "ja" : {
@@ -58459,7 +58500,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Inviando un contributo mensile ad Ice Cubes, diventerai un supporter e avrai anche un badge \"verificato\" sul tuo profilo. Solo per i tuoi 👀."
+            "value" : "Inviando una mancia mensile a Ice Cubes si diventa sostenitori, riceverai anche un badge di verifica sul profilo. Solo per i tuoi 👀."
           }
         },
         "ja" : {
@@ -58577,7 +58618,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Diventa un supporter!"
+            "value" : "Sostienici!"
           }
         },
         "ja" : {
@@ -58695,7 +58736,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Condizioni"
+            "value" : "Termini e condizioni"
           }
         },
         "ja" : {
@@ -58813,7 +58854,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sei tutto matto, grazie mille!"
+            "value" : "Sei incredibile, grazie mille!"
           }
         },
         "ja" : {
@@ -58931,7 +58972,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🤯 Contributo generoso"
+            "value" : "🤯 Mancia da matti"
           }
         },
         "ja" : {
@@ -59049,7 +59090,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Adoro il gusto di un buon caffé ❤️"
+            "value" : "Adoro il sapore di un buon caffè ❤️"
           }
         },
         "ja" : {
@@ -59167,7 +59208,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "☕️ Contributo carino"
+            "value" : "☕️ Mancia deliziosa"
           }
         },
         "ja" : {
@@ -59403,7 +59444,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Stile delle icone"
+            "value" : "Stile icone"
           }
         },
         "ja" : {
@@ -59994,7 +60035,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Segnalibro"
+            "value" : "Aggiungi ai segnalibri"
           }
         },
         "ja" : {
@@ -60113,7 +60154,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boost"
+            "value" : "Reblogga"
           }
         },
         "ja" : {
@@ -60232,7 +60273,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Preferito"
+            "value" : "Apprezza"
           }
         },
         "ja" : {
@@ -60707,7 +60748,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Le azioni di swipe sono disponibili scorrendo a destra o a sinistra su un post. L'azione secondaria è disponibile solo se la primaria è impostata."
+            "value" : "Le azioni di scorrimento sono disponibili scorrendo verso sinistra o verso destra su un post. L’azione secondaria è disponibile solo se la primaria è stata impostata."
           }
         },
         "ja" : {
@@ -60825,7 +60866,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scorrimento verso destra"
+            "value" : "Scorrimento a destra"
           }
         },
         "ja" : {
@@ -60943,7 +60984,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scorrimento verso sinistra"
+            "value" : "Scorrimento a sinistra"
           }
         },
         "ja" : {
@@ -61297,7 +61338,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Vai alle impostazioni di sistema"
+            "value" : "Impostazioni di sistema"
           }
         },
         "ja" : {
@@ -61415,7 +61456,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quinto Tab"
+            "value" : "Quinto pannello"
           }
         },
         "ja" : {
@@ -61533,7 +61574,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Primo Tab"
+            "value" : "Primo pannello"
           }
         },
         "ja" : {
@@ -61651,7 +61692,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quarto Tab"
+            "value" : "Quarto pannello"
           }
         },
         "ja" : {
@@ -61769,7 +61810,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Secondo Tab"
+            "value" : "Secondo pannello"
           }
         },
         "ja" : {
@@ -61887,7 +61928,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Terzo Tab"
+            "value" : "Terzo pannello"
           }
         },
         "ja" : {
@@ -62359,7 +62400,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rileva automaticamente la lingua"
+            "value" : "Rileva lingua"
           }
         },
         "ja" : {
@@ -62984,7 +63025,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Salva nei segnalibri"
+            "value" : "Aggiungi ai segnalibri"
           }
         },
         "ja" : {
@@ -63103,7 +63144,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boost"
+            "value" : "Reblogga"
           }
         },
         "ja" : {
@@ -63222,7 +63263,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Condividi con i follower"
+            "value" : "Reblogga per i seguaci"
           }
         },
         "ja" : {
@@ -63341,7 +63382,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Copia il link"
+            "value" : "Copia link"
           }
         },
         "ja" : {
@@ -63460,7 +63501,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Copia il testo"
+            "value" : "Copia testo"
           }
         },
         "ja" : {
@@ -63698,7 +63739,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sei sicuro di voler cancellare questo post?"
+            "value" : "Vuoi eliminare questo post?"
           }
         },
         "ja" : {
@@ -63817,7 +63858,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Richiesta di conferma"
+            "value" : "Conferma"
           }
         },
         "ja" : {
@@ -64531,7 +64572,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invia"
+            "value" : "Pubblica"
           }
         },
         "ja" : {
@@ -64888,7 +64929,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Segnala il post"
+            "value" : "Segnala post"
           }
         },
         "ja" : {
@@ -65364,7 +65405,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Condividi il post come immagine"
+            "value" : "Condividi post come immagine"
           }
         },
         "ja" : {
@@ -65483,7 +65524,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Condividi il link del post"
+            "value" : "Condividi link del post"
           }
         },
         "ja" : {
@@ -66079,7 +66120,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rimuovi il segnalibro"
+            "value" : "Rimuovi dai segnalibri"
           }
         },
         "ja" : {
@@ -66198,7 +66239,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rimuovi il boost"
+            "value" : "Annulla reblog"
           }
         },
         "ja" : {
@@ -66317,7 +66358,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rimuovi l'apprezzamento"
+            "value" : "Annulla apprezzamento"
           }
         },
         "ja" : {
@@ -66436,7 +66477,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Non fissare"
+            "value" : "Togli"
           }
         },
         "ja" : {
@@ -66555,7 +66596,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra nel browser"
+            "value" : "Visualizza nel browser"
           }
         },
         "ja" : {
@@ -66912,7 +66953,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cancella la bozza"
+            "value" : "Elimina bozza"
           }
         },
         "ja" : {
@@ -67031,7 +67072,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Salva la bozza"
+            "value" : "Salva bozza"
           }
         },
         "ja" : {
@@ -67150,7 +67191,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi #hashtag al testo"
+            "value" : "Aggiungi #tag in linea"
           }
         },
         "ja" : {
@@ -67269,7 +67310,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Correggi il testo"
+            "value" : "Correggi testo"
           }
         },
         "ja" : {
@@ -67388,7 +67429,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enfatizza il testo"
+            "value" : "Enfatizza testo"
           }
         },
         "ja" : {
@@ -67507,7 +67548,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Accorcia il testo"
+            "value" : "Accorcia testo"
           }
         },
         "ja" : {
@@ -67626,7 +67667,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi #hashtag dopo il testo"
+            "value" : "Aggiungi #tag alla fine"
           }
         },
         "ja" : {
@@ -67983,7 +68024,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi una descrizione"
+            "value" : "Aggiungi descrizione"
           }
         },
         "ja" : {
@@ -68102,7 +68143,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifica la descrizione"
+            "value" : "Modifica descrizione"
           }
         },
         "ja" : {
@@ -68578,7 +68619,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Digita il proseguimento del tuo contenuto qui."
+            "value" : "Scrivi il contenuto aggiuntivo qui."
           }
         },
         "ja" : {
@@ -68697,7 +68738,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pubblica in %@ (Lingua rilevata)"
+            "value" : "Pubblica in %@ (lingua rilevata)"
           }
         },
         "ja" : {
@@ -68816,7 +68857,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pubblica in %@ (Lingua selezionata)"
+            "value" : "Pubblica in %@ (lingua selezionata)"
           }
         },
         "ja" : {
@@ -68935,7 +68976,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scegli la lingua"
+            "value" : "Seleziona lingua"
           }
         },
         "ja" : {
@@ -69054,7 +69095,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usate recentemente"
+            "value" : "Usate di recente"
           }
         },
         "ja" : {
@@ -69173,7 +69214,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifica l'immagine"
+            "value" : "Modifica media"
           }
         },
         "ja" : {
@@ -69292,7 +69333,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Genera la descrizione"
+            "value" : "🤖 Genera descrizione"
           }
         },
         "ja" : {
@@ -69411,7 +69452,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Descrizione dell'immagine"
+            "value" : "Descrizione media"
           }
         },
         "ja" : {
@@ -69530,7 +69571,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifica post"
+            "value" : "Modifico il post"
           }
         },
         "ja" : {
@@ -70125,7 +70166,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ripristina il testo precedente"
+            "value" : "Ripristina testo precedente"
           }
         },
         "ja" : {
@@ -70244,7 +70285,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Avviso sul contenuto"
+            "value" : "Avviso contenuti"
           }
         },
         "ja" : {
@@ -70482,7 +70523,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visibilità del post"
+            "value" : "Visibilità post"
           }
         },
         "ja" : {
@@ -70601,7 +70642,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si è verificato un errore durante il caricamento dei post, per favore riprova."
+            "value" : "Si è verificato un errore durante il caricamento dei post, riprova."
           }
         },
         "ja" : {
@@ -70720,7 +70761,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si è verificato un errore su questo post, per favore riprova."
+            "value" : "Si è verificato un errore su questo post, riprova."
           }
         },
         "ja" : {
@@ -70839,7 +70880,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your settings require alt text on all media before posting"
+            "value" : "Le tue impostazioni richiedono il testo alternativo su tutti i media prima della pubblicazione."
           }
         },
         "ja" : {
@@ -70958,7 +70999,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Errore nella pubblicazione"
+            "value" : "Errore durante la pubblicazione"
           }
         },
         "ja" : {
@@ -71553,7 +71594,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra il contenuto"
+            "value" : "Mostra contenuto"
           }
         },
         "ja" : {
@@ -72148,7 +72189,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra i contenuti sensibili"
+            "value" : "Mostra contenuti sensibili"
           }
         },
         "ja" : {
@@ -72267,7 +72308,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chiuso"
+            "value" : "Terminato"
           }
         },
         "ja" : {
@@ -72386,7 +72427,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Si chiude in %@"
+            "value" : "Termina fra %@"
           }
         },
         "ja" : {
@@ -72505,7 +72546,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Durata del sondaggio"
+            "value" : "Durata sondaggio"
           }
         },
         "ja" : {
@@ -73575,7 +73616,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@count_votes@ da %#@count_voters@"
+            "value" : "%#@count_votes@ voti da %#@count_voters@ partecipanti"
           },
           "substitutions" : {
             "count_voters" : {
@@ -73586,13 +73627,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg persona"
+                      "value" : "%arg"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg persone"
+                      "value" : "%arg"
                     }
                   }
                 }
@@ -73606,13 +73647,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg voto"
+                      "value" : "%arg"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg voti"
+                      "value" : "%arg"
                     }
                   }
                 }
@@ -74255,7 +74296,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invia il voto"
+            "value" : "Invia voto"
           }
         },
         "ja" : {
@@ -74731,7 +74772,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ha condiviso"
+            "value" : "ha rebloggato"
           }
         },
         "ja" : {
@@ -74850,7 +74891,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Risposta a %@"
+            "value" : "Ha risposto a %@"
           }
         },
         "ja" : {
@@ -74969,7 +75010,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tu hai condiviso"
+            "value" : "Hai rebloggato"
           }
         },
         "ja" : {
@@ -75088,7 +75129,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra il post completo"
+            "value" : "Mostra post intero"
           }
         },
         "ja" : {
@@ -75326,7 +75367,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra di più"
+            "value" : "Mostra altro"
           }
         },
         "ja" : {
@@ -75445,7 +75486,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " alle "
+            "value" : " at "
           }
         },
         "ja" : {
@@ -75901,13 +75942,13 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld boost"
+                  "value" : "%lld reblog"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld boost"
+                  "value" : "%lld reblog"
                 }
               }
             }
@@ -76254,13 +76295,13 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld preferito"
+                  "value" : "%lld apprezzamento"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld preferiti"
+                  "value" : "%lld apprezzamenti"
                 }
               }
             }
@@ -76974,7 +77015,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Solo follower"
+            "value" : "Seguaci"
           }
         },
         "ja" : {
@@ -77212,7 +77253,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ai non appartenenti alle liste"
+            "value" : "Pubblico silenzioso"
           }
         },
         "ja" : {
@@ -77291,6 +77332,12 @@
             "value" : "Flux"
           }
         },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streaming"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
@@ -77328,7 +77375,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : ""
+            "value" : "Pannello"
           }
         },
         "nl" : {
@@ -77523,7 +77570,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Federazione"
+            "value" : "Federata"
           }
         },
         "ja" : {
@@ -78704,7 +78751,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi o rimuovi dai gruppi di tag"
+            "value" : "Aggiungi o rimuovi tag dai gruppi di tag"
           }
         },
         "ja" : {
@@ -79438,7 +79485,7 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "un nuovo post"
+                  "value" : "%lld nuovo post"
                 }
               },
               "other" : {
@@ -79917,7 +79964,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aggiungi una timeline remota come locale"
+            "value" : "Aggiungi una timeline locale remota"
           }
         },
         "ja" : {
@@ -80153,7 +80200,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "URL dell'istanza"
+            "value" : "URL istanza"
           }
         },
         "ja" : {
@@ -80391,7 +80438,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Federazione"
+            "value" : "Federata"
           }
         },
         "ja" : {
@@ -80627,7 +80674,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nuovo gruppo di tag"
+            "value" : "Aggiungi gruppo di tag"
           }
         },
         "ja" : {
@@ -80745,7 +80792,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Modifica un gruppo di tag"
+            "value" : "Modifica gruppo di tag"
           }
         },
         "ja" : {
@@ -81100,7 +81147,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra boost"
+            "value" : "Mostra reblog"
           }
         },
         "ja" : {
@@ -83300,8 +83347,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : ""
+            "state" : "translated",
+            "value" : "FiltroTimeline"
           }
         },
         "tr" : {
@@ -83452,7 +83499,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Timeline delle tendenze"
+            "value" : "Timeline in tendenza"
           }
         },
         "tr" : {
@@ -83622,13 +83669,13 @@
               "one" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld persona ne parla"
+                  "value" : "%lld post"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld persone ne parlano"
+                  "value" : "%lld post"
                 }
               }
             }
@@ -83950,7 +83997,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usa Ice Cubes per postare uno status su Mastodon"
+            "value" : "Usa Ice Cubes per pubblicare un post su Mastodon"
           }
         },
         "nl" : {
@@ -83971,7 +84018,8 @@
             "value" : "使用 Ice Cubes 向 Mastodon 发布嘟文"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Use Ice Cubes to post a status with an image to Mastodon" : {
       "extractionState" : "stale",
@@ -84003,7 +84051,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Usa Ice Cubes per postare uno status con un'immagine su Mastodon"
+            "value" : "Usa Ice Cubes per pubblicare un post con un'immagine su Mastodon"
           }
         },
         "nl" : {
@@ -84024,7 +84072,8 @@
             "value" : "使用 Ice Cubes 向 Mastodon 发布带有图片的嘟文"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "Visibility" : {
       "localizations" : {
@@ -84107,7 +84156,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visibilità del tuo post"
+            "value" : "Visibilità del post"
           }
         },
         "nl" : {
