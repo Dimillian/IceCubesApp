@@ -23937,7 +23937,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Abilitare il flusso di post aggiungerà automaticamente nuovi post in cima alla timeline. Disabilita se riscontri problemi di prestazioni."
+            "value" : "Abilitando lo streaming, i nuovi post verranno aggiunti automaticamente in cima alla home. Disabilita se riscontri problemi di prestazioni."
           }
         },
         "zh-Hans" : {
@@ -42184,7 +42184,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Flusso di post"
+            "value" : "Post in streaming"
           }
         },
         "zh-Hans" : {
@@ -48364,7 +48364,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aspetto"
+            "value" : "Visualizzazione"
           }
         },
         "ja" : {
