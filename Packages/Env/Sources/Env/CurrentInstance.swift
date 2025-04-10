@@ -28,7 +28,7 @@ import Observation
   }
 
   public var isEditSupported: Bool {
-    version >= 4
+    version >= 3.5
   }
 
   public var isEditAltTextSupported: Bool {
