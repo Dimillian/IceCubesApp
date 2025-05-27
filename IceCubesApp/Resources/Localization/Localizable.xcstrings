@@ -339,6 +339,12 @@
             "value" : ""
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -749,6 +755,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ è stato postato su Mastodon"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게시됨: %@"
           }
         },
         "nl" : {
@@ -1305,7 +1317,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "AI 글 작성 도우미"
+            "value" : "글 작성 도우미"
           }
         },
         "nb" : {
@@ -2376,7 +2388,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "글 공개 범위"
+            "value" : "공개 범위"
           }
         },
         "nb" : {
@@ -3448,7 +3460,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@님이 다음 글을 부스트함: %@"
+            "value" : "%@님이 글을 부스트함: %@"
           }
         },
         "nb" : {
@@ -5471,7 +5483,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "앱 설정"
+            "value" : "설정"
           }
         },
         "nb" : {
@@ -6423,7 +6435,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "글 및 답글"
+            "value" : "글과 답글"
           }
         },
         "nb" : {
@@ -8088,7 +8100,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "다음 링크 방문: %@"
+            "value" : "링크 방문: %@"
           }
         },
         "nb" : {
@@ -8805,7 +8817,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld개 새 글"
                 }
               },
@@ -9000,6 +9012,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "계정"
           }
         },
         "nl" : {
@@ -11706,8 +11724,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Blocked accounts"
+            "state" : "translated",
+            "value" : "차단한 계정"
           }
         },
         "nb" : {
@@ -12186,7 +12204,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld개 글"
                 }
               },
@@ -12539,7 +12557,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld개 항목"
                 }
               },
@@ -13570,6 +13588,12 @@
             "value" : "Elimina avatar"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프로필 사진 삭제"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14103,6 +14127,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Elimina la copertina"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "헤더 사진 삭제"
           }
         },
         "nl" : {
@@ -17549,8 +17579,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "계정 이동함: %@"
           }
         },
         "nb" : {
@@ -17668,8 +17698,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Muted accounts"
+            "state" : "translated",
+            "value" : "뮤트한 계정"
           }
         },
         "nb" : {
@@ -20344,6 +20374,12 @@
             "value" : "IA"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "생성형 AI"
+          }
+        },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20632,6 +20668,12 @@
             "value" : "Si è verificato un errore postando su Mastodon, riprova."
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글을 게시하지 못했습니다. 다시 시도해주세요."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20810,6 +20852,12 @@
             "value" : ""
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppAccount"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20868,6 +20916,12 @@
             "value" : "Segnalibri"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "보관함에 추가한 글"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20906,6 +20960,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Affichage compact"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "여백 넓게 표시"
           }
         },
         "zh-Hant" : {
@@ -20960,6 +21020,12 @@
             "value" : "Componi un post"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글 작성 화면 열기"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21012,6 +21078,12 @@
             "value" : "Componi un post per Mastodon"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글 작성 화면 열기"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21062,6 +21134,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contenuto del post da inviare a Mastodon"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게시할 글 내용"
           }
         },
         "tr" : {
@@ -21508,7 +21586,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "메시지를 찾고 있나요? 여기에서 다이렉트 메시지와 비공개 언급을 확인할 수 있어요. 친구에게 메시지를 먼저 보내보세요! 📱❤️"
+            "value" : "메시지를 찾고 있나요? 여기에서 메시지와 비공개 언급을 확인할 수 있어요. 친구에게 메시지를 먼저 보내보세요! 📱❤️"
           }
         },
         "nb" : {
@@ -22222,7 +22300,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "다이렉트 메시지"
+            "value" : "메시지"
           }
         },
         "nb" : {
@@ -22655,6 +22733,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile raggiungere DeepL! La chiave API è corretta?"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL에 접속하지 못했습니다. API 키를 정확하게 입력했는지 확인해주세요."
           }
         },
         "nl" : {
@@ -23182,7 +23266,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@count_posts@  %#@count_participants@"
+            "value" : "%#@count_posts@ (%#@count_participants@이 이야기 중)"
           },
           "substitutions" : {
             "count_participants" : {
@@ -23193,7 +23277,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "(%arg명이 이야기 중)"
+                      "value" : "%arg명"
                     }
                   }
                 }
@@ -23207,7 +23291,7 @@
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg 개 글 "
+                      "value" : "%arg개 글"
                     }
                   }
                 }
@@ -23857,6 +23941,12 @@
             "value" : "Désactiver pour cacher les options d'outils d'aideavec l'IA telles que le copywriting et la description d’images générées par l'IA. Utilise l'API OpenAI. Consulter notre Politique de confidentialité pour plus d'informations."
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI 도우미 표시 옵션을 끄면 글 간결하게 바꾸기, 미디어 설명 생성과 같은 생성형 AI를 활용한 기능이 표시되지 않습니다. AI 도우미는 OpenAI API를 사용합니다. 자세한 내용은 개인정보 처리방침을 확인해주세요."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23889,6 +23979,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Activer le streaming des messages ajoutera automatiquement de nouveaux messages en haut de votre timeline. Désactiver si vous avez des problèmes de performance."
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글 스트리밍 옵션을 켜면 홈에서 새 글이 올라올 때마다 자동으로 표시합니다. 성능 문제가 발생한다면 이 옵션을 끄세요."
           }
         },
         "tr" : {
@@ -27158,6 +27254,12 @@
             "value" : "Esplora & In tendenza"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "둘러보기"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28797,7 +28899,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "뜨고 있는 링크"
           }
         },
@@ -29240,6 +29342,12 @@
             "value" : "Preferiti"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "좋아요한 글"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29284,6 +29392,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Richieste di funzionalità"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기능 추가 요청"
           }
         },
         "tr" : {
@@ -29336,6 +29450,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Timeline federata"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "연합"
           }
         },
         "nl" : {
@@ -29787,7 +29907,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "홈 및 리스트"
+            "value" : "홈과 리스트"
           }
         },
         "nb" : {
@@ -31658,6 +31778,12 @@
             "value" : "Tag seguiti"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팔로우한 태그"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31714,6 +31840,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Solo follower"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "팔로워만"
           }
         },
         "nl" : {
@@ -31774,6 +31906,12 @@
             "value" : "Timeline Home"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "홈"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31830,6 +31968,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Immagine"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지"
           }
         },
         "nl" : {
@@ -31890,6 +32034,12 @@
             "value" : "Immagine da postare su Mastodon"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "첨부할 이미지"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31941,6 +32091,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Istanza"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마스토돈 서버"
           }
         },
         "nl" : {
@@ -33537,6 +33693,12 @@
             "value" : "Può comunque essere usato come alternativa per il servizio di traduzione della tua istanza."
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API 키를 삭제하지 않으면, 마스토돈 서버의 번역 서비스를 사용할 수 없을 때 DeepL을 사용합니다."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33582,6 +33744,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chiave"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key"
           }
         },
         "nl" : {
@@ -33676,7 +33844,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "홈 타임라인에서 이 리스트의 글 숨김"
+            "value" : "홈에서 이 리스트의 글 숨김"
           }
         },
         "nb" : {
@@ -34354,6 +34522,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Liste"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "리스트"
           }
         },
         "nl" : {
@@ -35367,6 +35541,12 @@
             "value" : "Timeline locale"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로컬"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35423,6 +35603,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Menzioni"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "언급"
           }
         },
         "nl" : {
@@ -36226,7 +36412,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "앱 설정..."
+            "value" : "설정…"
           }
         },
         "nb" : {
@@ -36311,6 +36497,12 @@
             "value" : "Nuovo post"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "새 글"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36367,6 +36559,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notifiche"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림"
           }
         },
         "nl" : {
@@ -36801,8 +36999,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "새 계정이 보낸 알림"
           }
         },
         "nb" : {
@@ -36920,8 +37118,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "나를 팔로우하지 않는 계정이 보낸 알림"
           }
         },
         "nb" : {
@@ -37039,8 +37237,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "내가 팔로우하지 않는 계정이 보낸 알림"
           }
         },
         "nb" : {
@@ -37158,8 +37356,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "내 메시지의 답글이 아닌 메시지 알림"
           }
         },
         "nb" : {
@@ -37277,8 +37475,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "가려진 알림"
           }
         },
         "nb" : {
@@ -37396,8 +37594,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "알림 필터"
           }
         },
         "nb" : {
@@ -37515,8 +37713,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "종류별 설정"
           }
         },
         "nb" : {
@@ -41508,6 +41706,12 @@
             "value" : "Apri Ice Cubes"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앱 열기"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41566,6 +41770,12 @@
             "value" : "Apri in un tab"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "탭 열기"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41622,6 +41832,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apri l'app in un tab specifico"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 탭을 엽니다."
           }
         },
         "nl" : {
@@ -41715,7 +41931,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "로딩, 로딩, 또 로딩..."
+            "value" : "로딩, 로딩, 또 로딩…"
           }
         },
         "nb" : {
@@ -41833,7 +42049,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "로드 중..."
+            "value" : "로드 중…"
           }
         },
         "nb" : {
@@ -41918,6 +42134,12 @@
             "value" : "Posta uno status con un'immagine"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지와 글 게시"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41974,6 +42196,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Posta un'immagine su Mastodon"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글 작성 화면 열고 이미지 첨부하기"
           }
         },
         "nl" : {
@@ -42034,6 +42262,12 @@
             "value" : "Contenuto del post"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내용"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42092,6 +42326,12 @@
             "value" : "Visibilità del post"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "공개 범위"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42132,6 +42372,12 @@
             "value" : "Flux de publications"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글 스트리밍"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42170,6 +42416,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privacy policy"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개인정보 처리방침"
           }
         },
         "tr" : {
@@ -42222,6 +42474,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privato"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "언급된 사용자만 (메시지)"
           }
         },
         "nl" : {
@@ -42282,6 +42540,12 @@
             "value" : "Messaggi privati"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "메시지"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42338,6 +42602,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profilo"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프로필"
           }
         },
         "nl" : {
@@ -42398,6 +42668,12 @@
             "value" : "Pubblico"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "공개"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42456,6 +42732,12 @@
             "value" : "Pubblico silenzioso"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "공개 타임라인에서만 숨김"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42494,6 +42776,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Supprimer toutes les images et vidéos mises en cache"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "캐시 데이터로 저장된 모든 미디어를 삭제합니다."
           }
         },
         "zh-Hant" : {
@@ -43022,6 +43310,12 @@
             "value" : "Tab selezionato"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "열 탭"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43078,6 +43372,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Invia un post"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글 게시"
           }
         },
         "nl" : {
@@ -43138,6 +43438,12 @@
             "value" : "Invia un post testuale a Mastodon con Ice Cubes"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ice Cubes로 마스토돈에 글을 작성합니다."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43190,6 +43496,12 @@
             "value" : "Invia un post su Mastodon"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글 게시하기"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43240,6 +43552,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impostazione"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정"
           }
         },
         "nl" : {
@@ -46404,7 +46722,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Require Alt Text to Post"
+            "value" : "미디어 설명 없이는 게시하지 않음"
           }
         },
         "nb" : {
@@ -46641,7 +46959,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "링크 및 본문 공유"
+            "value" : "링크와 본문 공유"
           }
         },
         "nb" : {
@@ -49819,7 +50137,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "시스템 설정에 맞춤 옵션이 꺼져 있을 때만 색상을 직접 고를 수 있습니다."
+            "value" : "시스템 설정에 맞춤 옵션을 껐을 때만 색상을 직접 고를 수 있습니다."
           }
         },
         "nb" : {
@@ -56665,7 +56983,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "타임라인 당길 때 완전히 새로고침 옵션이 켜져 있으면 마지막으로 본 타임라인 위치가 저장되지 않고, 새로고침할 때마다 타임라인을 완전히 새롭게 불러옵니다."
+            "value" : "타임라인 당길 때 완전히 새로고침 옵션을 켜면 마지막으로 본 타임라인 위치가 저장되지 않고, 새로고침할 때마다 타임라인을 완전히 새롭게 불러옵니다."
           }
         },
         "nb" : {
@@ -57845,7 +58163,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "로드 중..."
+            "value" : "로드 중…"
           }
         },
         "nb" : {
@@ -60801,7 +61119,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "글을 오른쪽이나 왼쪽으로 쓸어넘겨 원하는 동작을 실행할 수 있습니다. 보조 동작은 주 동작이 설정되어 있을 때만 추가할 수 있습니다."
+            "value" : "글을 오른쪽이나 왼쪽으로 쓸어넘겨 원하는 동작을 실행할 수 있습니다. 보조 동작은 주 동작을 설정했을 때만 추가할 수 있습니다."
           }
         },
         "nb" : {
@@ -61391,7 +61709,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "시스템 설정"
+            "value" : "설정 앱에서 열기"
           }
         },
         "nb" : {
@@ -62217,7 +62535,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "앱 설정"
+            "value" : "설정"
           }
         },
         "nb" : {
@@ -62571,7 +62889,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "글을 게시하기 전에 Ice Cubes가 지정한 글 언어와 인식된 글 언어가 동일한지 비교한 뒤, 다른 경우 필요에 따라 언어를 변경할 수 있도록 적절한 언어를 제안합니다."
+            "value" : "글을 게시하기 전에 지정한 글 언어와 인식된 글 언어가 동일한지 비교한 뒤, 다른 경우 필요에 따라 언어를 변경할 수 있도록 적절한 언어를 제안합니다."
           }
         },
         "nb" : {
@@ -62806,7 +63124,7 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "이 기능을 사용하려면 DeepL에서 발급받은 API 키가 있어야 합니다."
           }
         },
@@ -62996,6 +63314,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mostra gradiente del contenuto"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "부스트된 글에 그라디언트 표시"
           }
         },
         "tr" : {
@@ -65345,7 +65669,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "링크 및 본문 공유"
+            "value" : "링크와 본문 공유"
           }
         },
         "nb" : {
@@ -69392,7 +69716,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🤖 설명 생성"
+            "value" : "설명 생성 🤖"
           }
         },
         "nb" : {
@@ -70463,7 +70787,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "무슨 생각을 하고 계신가요?"
+            "value" : "무슨 생각 하세요?"
           }
         },
         "nb" : {
@@ -70582,7 +70906,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "글 공개 범위"
+            "value" : "공개 범위"
           }
         },
         "nb" : {
@@ -70939,7 +71263,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your settings require alt text on all media before posting"
+            "value" : "모든 미디어에 설명을 달지 않으면 게시하지 않도록 설정했습니다."
           }
         },
         "nb" : {
@@ -73084,7 +73408,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld표"
                 }
               },
@@ -76024,7 +76348,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "부스트 %lld회"
                 }
               },
@@ -76377,7 +76701,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "좋아요 %lld회"
                 }
               },
@@ -76730,7 +77054,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "답글 %lld개"
                 }
               },
@@ -76955,7 +77279,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "언급된 사용자만"
+            "value" : "언급된 사용자만 (메시지)"
           }
         },
         "nb" : {
@@ -77379,6 +77703,12 @@
             "value" : "Flux"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "스트리밍"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -77429,6 +77759,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : ""
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "탭"
           }
         },
         "nl" : {
@@ -77877,7 +78213,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "언급"
           }
         },
         "nb" : {
@@ -78348,8 +78684,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
+            "state" : "translated",
+            "value" : "프로필 (%@)"
           }
         },
         "nb" : {
@@ -78467,7 +78803,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "앱 설정"
+            "value" : "설정"
           }
         },
         "nb" : {
@@ -79063,7 +79399,7 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
+                  "state" : "translated",
                   "value" : "%lld개 글"
                 }
               },
@@ -79248,6 +79584,12 @@
             "value" : "Telemetria"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사용 정보 수집"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -79286,6 +79628,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Telemetria di TelemetryDeck"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TelemetryDeck을 통해 사용 정보 수집됨"
           }
         },
         "tr" : {
@@ -79339,6 +79687,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La chiave API DeepL è ancora salvata!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL API 키가 아직 저장되어 있습니다!"
           }
         },
         "nl" : {
@@ -79398,6 +79752,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile raggiungere il servizio di traduzione della tua istanza!"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마스토돈 서버의 번역 서비스가 응답하지 않습니다!"
           }
         },
         "nl" : {
@@ -79953,7 +80313,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ 유효한 인스턴스가 아닙니다"
+            "value" : "%@: 유효한 서버가 아닙니다"
           }
         },
         "nb" : {
@@ -80425,7 +80785,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "글 종류별 필터"
+            "value" : "글 필터"
           }
         },
         "nb" : {
@@ -82752,8 +83112,8 @@
         },
         "ko" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@arg1@개 최근 글 (%#@arg2@명이 이야기 중)"
+            "state" : "translated",
+            "value" : "%#@arg1@ (%#@arg2@이 이야기 중)"
           },
           "substitutions" : {
             "arg1" : {
@@ -82763,8 +83123,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg개 최근 글"
                     }
                   }
                 }
@@ -82777,8 +83137,8 @@
                 "plural" : {
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg명"
                     }
                   }
                 }
@@ -83446,6 +83806,12 @@
             "value" : ""
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TimelineFilter"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83497,6 +83863,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Servizio di traduzione"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사용할 번역 서비스"
           }
         },
         "nl" : {
@@ -83557,6 +83929,12 @@
             "value" : "Link in tendenza"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "뜨고 있는 링크"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83613,6 +83991,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Timeline delle tendenze"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "뜨고 있는"
           }
         },
         "tr" : {
@@ -83823,14 +84207,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : ""
+                  "state" : "translated",
+                  "value" : "%lld개 글"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : ""
+                  "state" : "translated",
+                  "value" : "%lld개 글"
                 }
               }
             }
@@ -84026,6 +84410,12 @@
             "value" : "Usa Ice Cubes per comporre un post per Mastodon"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글 작성 화면을 엽니다."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -84076,6 +84466,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usa Ice Cubes per comporre un post con un'immagine per Mastodon"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글 작성 화면을 열고 이미지를 첨부합니다."
           }
         },
         "tr" : {
@@ -84130,6 +84526,12 @@
             "value" : "Visibilità"
           }
         },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "공개 범위"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -84180,6 +84582,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visibilità del tuo post"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "공개 범위"
           }
         },
         "nl" : {
