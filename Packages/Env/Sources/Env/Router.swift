@@ -190,12 +190,13 @@ public enum SettingsStartingPoint {
   }
 
   public func handle(url: URL) -> OpenURLAction.Result {
-    if url.pathComponents.contains(where: { $0 == "tags" }),
+    if url.pathComponents.contains(where: { $0 == "tags" || $0 == "tag" }),
       let tag = url.pathComponents.last
     {
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
-    } else if url.lastPathComponent.first == "@"
+    }
+    else if url.lastPathComponent.first == "@"
       || (url.host() == AppInfo.premiumInstance && url.pathComponents.contains("users")),
       let host = url.host,
       !host.hasPrefix("www")
