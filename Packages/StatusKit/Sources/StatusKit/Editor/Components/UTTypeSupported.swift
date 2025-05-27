@@ -18,16 +18,20 @@ extension StatusEditor {
       } else if let transferable = await getImageTansferable(item: item) {
         return transferable
       } else {
-        let result = try await item.loadItem(forTypeIdentifier: value)
-        if let url = result as? URL {
-          return url.absoluteString
-        } else if let text = result as? String {
-          return text
-        } else if let image = result as? UIImage {
-          return image
+        return await withCheckedContinuation { continuation in
+          item.loadItem(forTypeIdentifier: value) { result, error in
+            if let url = result as? URL {
+              continuation.resume(returning: url.absoluteString)
+            } else if let text = result as? String {
+              continuation.resume(returning: text)
+            } else if let image = result as? UIImage {
+              continuation.resume(returning: image)
+            } else {
+              continuation.resume(returning: nil)
+            }
+          }
         }
       }
-      return nil
     }
 
     private func getVideoTransferable(item: NSItemProvider) async -> MovieFileTranseferable? {
