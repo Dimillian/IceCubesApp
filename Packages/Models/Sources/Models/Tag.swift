@@ -19,11 +19,27 @@ public struct Tag: Codable, Identifiable, Equatable, Hashable {
   public let history: [History]
 
   public var totalUses: Int {
-    history.compactMap { Int($0.uses) }.reduce(0, +)
+    return history.compactMap { Int($0.uses) }.reduce(0, +)
   }
 
   public var totalAccounts: Int {
-    history.compactMap { Int($0.accounts) }.reduce(0, +)
+    return history.compactMap { Int($0.accounts) }.reduce(0, +)
+  }
+  
+  public init(from decoder: any Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    name = try container.decode(String.self, forKey: .name)
+    url = try container.decode(String.self, forKey: .url)
+    do {
+      history = try container.decode([History].self, forKey: .history)
+    } catch DecodingError.keyNotFound {
+      history = []
+    }
+    do {
+      following = try container.decode(Bool.self, forKey: .following)
+    } catch DecodingError.keyNotFound {
+      following = false
+    }
   }
 }
 

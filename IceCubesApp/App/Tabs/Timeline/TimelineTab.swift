@@ -138,6 +138,7 @@ struct TimelineTab: View {
     if canFilterTimeline {
       ToolbarTitleMenu {
         timelineFilterButton
+          .tint(.label)
       }
     }
     if client.isAuth {

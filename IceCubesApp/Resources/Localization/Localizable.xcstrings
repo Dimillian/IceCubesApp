@@ -362,6 +362,12 @@
             "state" : "translated",
             "value" : "%@"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
         }
       }
     },
@@ -773,6 +779,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ 已在 Mastodon 发布"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 已在 Mastodon 上發表"
           }
         }
       }
@@ -3252,7 +3264,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "图像"
+            "value" : "图片"
           }
         },
         "zh-Hant" : {
@@ -7542,7 +7554,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "機器人帳戶"
+            "value" : "機器人帳號"
           }
         }
       }
@@ -9024,6 +9036,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "账户"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "帳號"
           }
         }
       }
@@ -11518,7 +11536,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "新增帳戶"
+            "value" : "新增帳號"
           }
         }
       }
@@ -11754,8 +11772,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Blocked accounts"
+            "state" : "translated",
+            "value" : "已封鎖帳號"
           }
         }
       }
@@ -13593,6 +13611,12 @@
             "state" : "translated",
             "value" : "删除头像"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "刪除頭像"
+          }
         }
       }
     },
@@ -14127,6 +14151,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "删除横幅"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "刪除橫幅圖片"
           }
         }
       }
@@ -17716,8 +17746,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Muted accounts"
+            "state" : "translated",
+            "value" : "已靜音帳號"
           }
         }
       }
@@ -18670,126 +18700,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "備註："
-          }
-        }
-      }
-    },
-    "action.cancel" : {
-      "comment" : "MARK: Common strings",
-      "extractionState" : "manual",
-      "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Скасаваць"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel·la"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abbrechen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utzi"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Annuler"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Annulla"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "キャンセル"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "취소"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Annuleer"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anuluj"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "İptal Et"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Відміна"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
           }
         }
       }
@@ -20469,6 +20379,24 @@
             "state" : "translated",
             "value" : "생성형 AI"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "人工智慧"
+          }
+        },
+        "zh-Hans" : {
+           "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AI"
+          }
         }
       }
     },
@@ -20763,6 +20691,12 @@
             "state" : "translated",
             "value" : "在向 Mastodon 发表嘟文时出错，请重试。"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Mastodon 上發表時發生錯誤，請稍待重試。"
+          }
         }
       }
     },
@@ -20941,6 +20875,12 @@
             "state" : "translated",
             "value" : "App 账户"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App 帳號"
+          }
         }
       }
     },
@@ -20999,6 +20939,12 @@
             "state" : "translated",
             "value" : "书签"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "書籤"
+          }
         }
       }
     },
@@ -21020,6 +20966,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "여백 넓게 표시"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "精簡排版"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "紧凑布局"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sıkışık Düzen"
           }
         }
       }
@@ -21073,6 +21037,12 @@
             "state" : "translated",
             "value" : "撰写一篇嘟文"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "發表嘟文"
+          }
         }
       }
     },
@@ -21125,6 +21095,12 @@
             "state" : "translated",
             "value" : "向 Mastodon 撰写一篇嘟文"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Mastodon 上發表嘟文"
+          }
         }
       }
     },
@@ -21176,6 +21152,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "发布到 Mastodon 的嘟文内容"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Mastodon 上發表的內文"
           }
         }
       }
@@ -22776,6 +22758,12 @@
             "state" : "translated",
             "value" : "无法连接 DeepL！\n你的 API 密钥是正确的吗？"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無法聯繫 DeepL！API 密鑰正確嗎？"
+          }
         }
       }
     },
@@ -23959,10 +23947,22 @@
             "value" : "AI 도우미 표시 옵션을 끄면 글 간결하게 바꾸기, 미디어 설명 생성과 같은 생성형 AI를 활용한 기능이 표시되지 않습니다. AI 도우미는 OpenAI API를 사용합니다. 자세한 내용은 개인정보 처리방침을 확인해주세요."
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resim altı açıklama ve telif hakkı yazımını AI yardımcı araçları ile desteklemeyi devre dışı bırakır. OpenAI API’ı kullanır. Daha fazlasını öğrenmek için Gizlilik Politikamıza göz atın."
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "禁用以隐藏AI辅助工具选项，例如使用AI生成文案和图片描述文本。内容使用 OpenAI API 生成。如需了解更多信息，请参阅我们的隐私政策。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "停用將隱藏如寫作和圖片描述等生成人工智慧工具。本功能利用 OpenAI API，詳情請見隱私政策。"
           }
         }
       }
@@ -23987,10 +23987,22 @@
             "value" : "글 스트리밍 옵션을 켜면 홈에서 새 글이 올라올 때마다 자동으로 표시합니다. 성능 문제가 발생한다면 이 옵션을 끄세요."
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yayın akışını etkinleştirmek, gönderileri otomatik olarak akışın tepesine ekler. Performans sorunları yaşıyorsanız kapatın."
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "启用流式传输会自动将新嘟文添加到主页时间线的顶部。如果出现性能问题，请禁用此功能。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "嘟文串流將自動把新嘟文加入您時間軸頂端。如果遭遇效能問題請停用。"
           }
         }
       }
@@ -27265,6 +27277,12 @@
             "state" : "translated",
             "value" : "探索 & 当下流行"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "探索與流行"
+          }
         }
       }
     },
@@ -28929,8 +28947,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "流行連結"
+            "state" : "translated",
+            "value" : "新聞"
           }
         }
       }
@@ -29347,6 +29365,12 @@
             "state" : "translated",
             "value" : "喜欢"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最愛"
+          }
         }
       }
     },
@@ -29376,10 +29400,22 @@
             "value" : "기능 추가 요청"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yenilik İstekleri"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "功能请求"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "功能請求"
           }
         }
       }
@@ -29438,6 +29474,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "跨站时间线"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "聯邦時間軸"
           }
         }
       }
@@ -31759,6 +31801,12 @@
             "state" : "translated",
             "value" : "正在关注的标签"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已跟隨標籤"
+          }
         }
       }
     },
@@ -31816,6 +31864,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "仅关注者"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "限跟隨者"
           }
         }
       }
@@ -31875,6 +31929,12 @@
             "state" : "translated",
             "value" : "主页时间线"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "主時間軸"
+          }
         }
       }
     },
@@ -31933,6 +31993,12 @@
             "state" : "translated",
             "value" : "图片"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "影像"
+          }
         }
       }
     },
@@ -31984,6 +32050,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "向 Mastodon 发布的图片"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Mastodon 上發表的影像"
           }
         }
       }
@@ -32043,6 +32115,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "服务器"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "伺服器"
           }
         }
       }
@@ -33632,6 +33710,12 @@
             "state" : "translated",
             "value" : "它仍可作为你所在服务器的备用翻译服务。"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "它仍可用為您伺服器翻譯服務的後備。"
+          }
         }
       }
     },
@@ -33684,6 +33768,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "密钥"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "密鑰"
           }
         }
       }
@@ -34453,6 +34543,12 @@
           }
         },
         "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "列表"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "列表"
@@ -35468,6 +35564,12 @@
             "state" : "translated",
             "value" : "本地时间线"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本站時間軸"
+          }
         }
       }
     },
@@ -35522,6 +35624,12 @@
           }
         },
         "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "提及"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "提及"
@@ -36412,6 +36520,12 @@
             "state" : "translated",
             "value" : "新嘟文"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新嘟文"
+          }
         }
       }
     },
@@ -36466,6 +36580,12 @@
           }
         },
         "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知"
+          }
+        },
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "通知"
@@ -36927,8 +37047,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "新帳號"
           }
         }
       }
@@ -37046,8 +37166,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "不跟隨您的用戶"
           }
         }
       }
@@ -37165,8 +37285,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "您不跟隨的用戶"
           }
         }
       }
@@ -37284,8 +37404,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "未邀私訊"
           }
         }
       }
@@ -37403,8 +37523,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "經過濾的通知"
           }
         }
       }
@@ -37522,8 +37642,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "通知過濾器"
           }
         }
       }
@@ -37641,8 +37761,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "過濾掉此類通知⋯"
           }
         }
       }
@@ -41609,6 +41729,12 @@
             "state" : "translated",
             "value" : "打开 Ice Cubes"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開啟 Ice Cubes"
+          }
         }
       }
     },
@@ -41667,6 +41793,12 @@
             "state" : "translated",
             "value" : "打开标签页"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在標籤裡開啟"
+          }
         }
       }
     },
@@ -41724,6 +41856,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "在特定标签页上打开应用"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開啟至特定頁籤"
           }
         }
       }
@@ -42019,6 +42157,12 @@
             "state" : "translated",
             "value" : "发布带有图片的嘟文"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "發表現狀圖像"
+          }
         }
       }
     },
@@ -42076,6 +42220,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "向 Mastodon 发布图片"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Mastodon 上發表影像"
           }
         }
       }
@@ -42135,6 +42285,12 @@
             "state" : "translated",
             "value" : "发布内容"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "發表內容"
+          }
         }
       }
     },
@@ -42193,6 +42349,12 @@
             "state" : "translated",
             "value" : "嘟文可见范围"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "嘟文能見度"
+          }
         }
       }
     },
@@ -42216,10 +42378,22 @@
             "value" : "글 스트리밍"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yayın Akışı"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "启用嘟文流式传输"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "嘟文串流"
           }
         }
       }
@@ -42250,10 +42424,22 @@
             "value" : "개인정보 처리방침"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gizlilik Sözleşmesi"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "隐私政策"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "隱私政策"
           }
         }
       }
@@ -42313,6 +42499,12 @@
             "state" : "translated",
             "value" : "特定的人"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "私人"
+          }
         }
       }
     },
@@ -42370,6 +42562,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "私信"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "私訊"
           }
         }
       }
@@ -42429,6 +42627,12 @@
             "state" : "translated",
             "value" : "个人资料"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "個人檔案"
+          }
         }
       }
     },
@@ -42486,6 +42690,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "公开"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開放"
           }
         }
       }
@@ -42545,6 +42755,12 @@
             "state" : "translated",
             "value" : "悄悄公开"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "悄悄公開"
+          }
         }
       }
     },
@@ -42566,6 +42782,24 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "캐시 데이터로 저장된 모든 미디어를 삭제합니다."
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "刪除快取記憶裡所有影像和視訊"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移除全部图片和视频缓存"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Önbellekteki tüm resim ve videoları kaldırın"
           }
         }
       }
@@ -43099,6 +43333,12 @@
             "state" : "translated",
             "value" : "选择标签页"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "選取頁籤"
+          }
         }
       }
     },
@@ -43157,6 +43397,12 @@
             "state" : "translated",
             "value" : "发送嘟文"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "發表嘟文"
+          }
         }
       }
     },
@@ -43209,6 +43455,12 @@
             "state" : "translated",
             "value" : "使用 Ice Cubes 向 Mastodon 发布文本嘟文"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用 Ice Cubes 在 Mastodon 上發表文字"
+          }
         }
       }
     },
@@ -43260,6 +43512,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "发送嘟文至 Mastodon"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在 Mastodon 上發表嘟文"
           }
         }
       }
@@ -43318,6 +43576,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "设置"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定"
           }
         }
       }
@@ -43790,7 +44054,7 @@
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "新增帳戶"
+            "value" : "新增帳號"
           }
         }
       }
@@ -62908,7 +63172,7 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "本功能需有 DeepL API 密鑰"
           }
         }
@@ -63068,6 +63332,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "启用渐变嘟文背景"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "顯示內容漸層效果"
           }
         }
       }
@@ -77439,10 +77709,22 @@
             "value" : "스트리밍"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yayında"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "流式传输"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "串流"
           }
         }
       }
@@ -77501,6 +77783,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "标签页"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "頁籤"
           }
         }
       }
@@ -78444,8 +78732,8 @@
         },
         "zh-Hant" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
+            "state" : "translated",
+            "value" : "個人檔案（%@）"
           }
         }
       }
@@ -79302,10 +79590,22 @@
             "value" : "사용 정보 수집"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetri"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "数据采集"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "遙測數據"
           }
         }
       }
@@ -79336,10 +79636,22 @@
             "value" : "TelemetryDeck을 통해 사용 정보 수집됨"
           }
         },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TelemetryDeck tarafından telemetri"
+          }
+        },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "数据采集服务由 TelemetryDeck 提供"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TelemetryDeck 遙測"
           }
         }
       }
@@ -79400,6 +79712,12 @@
             "state" : "translated",
             "value" : "DeepL API 密钥已存储！"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL 密鑰仍然儲存著！"
+          }
         }
       }
     },
@@ -79458,6 +79776,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无法连接你的服务器的翻译服务！"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無法聯繫本站的翻譯服務！"
           }
         }
       }
@@ -83499,6 +83823,12 @@
             "state" : "translated",
             "value" : "时间线过滤器"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時間軸過濾器"
+          }
         }
       }
     },
@@ -83558,6 +83888,12 @@
             "state" : "translated",
             "value" : "翻译服务"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻譯服務"
+          }
         }
       }
     },
@@ -83616,6 +83952,12 @@
             "state" : "translated",
             "value" : "当下流行的链接"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "流行連結"
+          }
         }
       }
     },
@@ -83667,6 +84009,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "当下流行时间线"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "流行時間軸"
           }
         }
       }
@@ -84015,14 +84363,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld 人議論中"
+                  "state" : "translated",
+                  "value" : "%lld 篇議論"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld 人議論中"
+                  "state" : "translated",
+                  "value" : "%lld 篇議論"
                 }
               }
             }
@@ -84079,6 +84427,12 @@
             "state" : "translated",
             "value" : "使用 Ice Cubes 向 Mastodon 发布嘟文"
           }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用 Ice Cubes 在 Mastodon 上發表嘟文"
+          }
         }
       }
     },
@@ -84130,6 +84484,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "使用 Ice Cubes 向 Mastodon 发布带有图片的嘟文"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用 Ice Cubes 在 Mastodon 上發表圖像"
           }
         }
       }
@@ -84249,7 +84609,416 @@
           }
         }
       }
-    }
+    },
+        "Use Ice Cubes to post a status to Mastodon" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ice Cubes benutzen, um einen Status auf Mastodon zu veröffentlichen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usar Ice Cubes para hacer una publicación en Mastodon"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erabili Ice Cubes Mastodonen egoera bat argitaratzeko"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilisez Ice Cubes pour publier un statut sur Mastodon"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa Ice Cubes per postare uno status su Mastodon"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebruik Ice Cubes om een bericht op Mastodon te plaatsen"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonda durum göndermek için Ice Cubes kullanın"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用 Ice Cubes 向 Mastodon 发布嘟文"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用 Ice Cubes 在 Mastodon 上發表狀態"
+          }
+        }
+      }
+    },
+    "Use Ice Cubes to post a status with an image to Mastodon" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ice Cubes benutzen, um einen Status mit einem Bild auf Mastodon zu veröffentlichen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usar Ice Cubes para hacer una publicación con una imagen en Mastodon"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erabili Ice Cubes irudi bat duen Mastodonerako bidalketa bat argitaratzeko"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utiliser Ice Cubes pour publier un statut avec une image sur Mastodon"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usa Ice Cubes per postare uno status con un'immagine su Mastodon"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gebruik Ice Cubes om een bericht met een afbeelding op Mastodon te plaatsen"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodon'a resim içeren bir durum göndermek için Ice Cubes kullanın"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用 Ice Cubes 向 Mastodon 发布带有图片的嘟文"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用 Ice Cubes 在 Mastodon 上發表含影像的狀態"
+          }
+        }
+      }
+    },
+    "Post images" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilder veröffentlichen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicar imágenes"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu irudiak"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publier des images"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posta immagini"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plaats een afbeelding"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resimleri gönder"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发布图片"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可見度"
+          }
+        }
+      }
+    },
+    "Post status to Mastodon" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status auf Mastodon veröffentlichen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hacer una publicación en Mastodon"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu egoera Mastodonen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publier un status sur Mastodon"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posta uno status su Mastodon"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plaats een statusbericht op Mastodon"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durumu Mastodon'a gönder"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "向 Mastodon 发布嘟文"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有誰能看到您的嘟文"
+          }
+        }
+      }
+    },
+    "Post a status" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Einen Status veröffentlichen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hacer una publicación"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Argitaratu egoera bat"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publier un statut"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Posta uno status"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plaats een bericht"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bir durum gönder"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "发布嘟文"
+          }
+        }
+      }
+    },
+        "action.cancel" : {
+      "comment" : "MARK: Common strings",
+      "extractionState" : "stale",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel·la"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulla"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キャンセル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuleer"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anuluj"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İptal Et"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відміна"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
   },
   "version" : "1.0"
 }
