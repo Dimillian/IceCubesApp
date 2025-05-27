@@ -1,7 +1,7 @@
-import UIKit
+import Foundation
 
 extension Notification.Name {
-  public static let shareSheetClose = NSNotification.Name("shareSheetClose")
+  public static let shareSheetClose = Notification.Name("shareSheetClose")
   public static let refreshTimeline = Notification.Name("refreshTimeline")
   public static let homeTimeline = Notification.Name("homeTimeline")
   public static let trendingTimeline = Notification.Name("trendingTimeline")

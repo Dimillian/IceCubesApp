@@ -1,5 +1,5 @@
 {
-  "originHash" : "abddda7b218623ab46d4d722b51ac7efb1fde3a2d52a474937c9bc70cf8cb8e6",
+  "originHash" : "9d42c0a5696b2ea2df5db9f4f0bcf2ed56558636f36278a222b188cc2df705a7",
   "pins" : [
     {
       "identity" : "bodega",
@@ -56,9 +56,9 @@
       }
     },
     {
-      "identity" : "purchases-ios",
+      "identity" : "purchases-ios-spm",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/RevenueCat/purchases-ios",
+      "location" : "https://github.com/RevenueCat/purchases-ios-spm",
       "state" : {
         "revision" : "adde1aa9c5fdb8cb9178ae1eed0981adcff07dd3",
         "version" : "5.21.0"
