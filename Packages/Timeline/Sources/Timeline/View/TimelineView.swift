@@ -113,6 +113,7 @@ public struct TimelineView: View {
       }
     }
     .onChange(of: timeline) { oldValue, newValue in
+      guard oldValue != newValue else { return }
       switch newValue {
       case let .remoteLocal(server, _):
         viewModel.client = Client(server: server)
@@ -130,7 +131,8 @@ public struct TimelineView: View {
       }
       viewModel.timeline = newValue
     }
-    .onChange(of: viewModel.timeline) { _, newValue in
+    .onChange(of: viewModel.timeline) { oldValue, newValue in
+      guard oldValue != newValue, timeline != newValue else { return }
       timeline = newValue
     }
     .onChange(of: contentFilter.showReplies) { _, _ in
