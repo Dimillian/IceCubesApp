@@ -20,7 +20,7 @@ let package = Package(
     .package(name: "Models", path: "../Models"),
     .package(name: "Env", path: "../Env"),
     .package(url: "https://github.com/kean/Nuke", exact: "12.8.0"),
-    .package(url: "https://github.com/divadretlaw/EmojiText", exact: "4.0.0"),
+    .package(url: "https://github.com/divadretlaw/EmojiText", exact: "4.2.0"),
   ],
   targets: [
     .target(

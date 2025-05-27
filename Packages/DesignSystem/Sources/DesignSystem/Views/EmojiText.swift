@@ -3,16 +3,17 @@ import Foundation
 import Models
 import SwiftUI
 
+@MainActor
 public struct EmojiTextApp: View {
   private let markdown: HTMLString
   private let emojis: [any CustomEmoji]
   private let language: String?
-  private let append: (() -> Text)?
+  private let append: (@Sendable () -> Text)?
   private let lineLimit: Int?
 
   public init(
     _ markdown: HTMLString, emojis: [Emoji], language: String? = nil, lineLimit: Int? = nil,
-    append: (() -> Text)? = nil
+    append: (@Sendable () -> Text)? = nil
   ) {
     self.markdown = markdown
     self.emojis = emojis.map { RemoteEmoji(shortcode: $0.shortcode, url: $0.url) }
@@ -24,9 +25,7 @@ public struct EmojiTextApp: View {
   public var body: some View {
     if let append {
       EmojiText(markdown: markdown.asMarkdown, emojis: emojis)
-        .append {
-          append()
-        }
+        .append(text: append)
         .lineLimit(lineLimit)
     } else if emojis.isEmpty {
       Text(markdown.asSafeMarkdownAttributedString)

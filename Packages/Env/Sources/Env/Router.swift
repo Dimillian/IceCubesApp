@@ -146,7 +146,8 @@ public enum SettingsStartingPoint {
   }
 
   public func handleStatus(status: AnyStatus, url: URL) -> OpenURLAction.Result {
-    if url.pathComponents.count == 3, url.pathComponents[1] == "tags",
+    if url.pathComponents.count == 3,
+      url.pathComponents[1] == "tags" || url.pathComponents[1] == "tag",
       url.host() == status.account.url?.host(),
       let tag = url.pathComponents.last
     {
@@ -155,6 +156,17 @@ public enum SettingsStartingPoint {
       // That is on the same host as the person that posted the tag,
       // i.e. not a link that matches the pattern but elsewhere on the internet
       // In those circumstances, hijack the link and goto the tags page instead
+      // The second is "tags" on Mastodon and "tag" on Akkoma.
+      navigate(to: .hashTag(tag: tag, account: nil))
+      return .handled
+    } else if url.pathComponents.count == 4,
+      url.pathComponents[1] == "discover",
+      url.pathComponents[2] == "tags",
+      url.host() == status.account.url?.host(),
+      let tag = url.pathComponents.last
+    {
+      // Similar to above, but for ["/", "discover", "tags", "tagname"]
+      // as used in Pixelfed
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
     } else if let mention = status.mentions.first(where: { $0.url == url }) {

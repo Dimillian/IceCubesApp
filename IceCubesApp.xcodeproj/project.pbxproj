@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2773E6072DA805F5000E6E38 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 2773E6062DA805F5000E6E38 /* RevenueCat */; };
 		9F295540292B6C3400E0E81B /* Timeline in Frameworks */ = {isa = PBXBuildFile; productRef = 9F29553F292B6C3400E0E81B /* Timeline */; };
 		9F2A540E2969A0B0009B2D7C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2A540D2969A0B0009B2D7C /* StoreKit.framework */; };
 		9F2A541D296AB631009B2D7C /* IceCubesNotifications.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 9F2A5416296AB631009B2D7C /* IceCubesNotifications.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -47,7 +48,6 @@
 		9FC2A38F2B49D1AA00DFD1C1 /* StatusKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9FC2A38E2B49D1AA00DFD1C1 /* StatusKit */; };
 		9FD542E72962D2FF0045321A /* Lists in Frameworks */ = {isa = PBXBuildFile; productRef = 9FD542E62962D2FF0045321A /* Lists */; };
 		9FE3DB57296FEFCA00628CB0 /* AppAccount in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE3DB56296FEFCA00628CB0 /* AppAccount */; };
-		9FE6A42E2BD043A90055D388 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = 9FE6A42D2BD043A90055D388 /* RevenueCat */; };
 		9FFF677C299B7B2C00FE700A /* Notifications in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677B299B7B2C00FE700A /* Notifications */; };
 		9FFF6780299B7D2B00FE700A /* DesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF677F299B7D2B00FE700A /* DesignSystem */; };
 		9FFF6782299B7D3A00FE700A /* Account in Frameworks */ = {isa = PBXBuildFile; productRef = 9FFF6781299B7D3A00FE700A /* Account */; };
@@ -278,8 +278,8 @@
 				9F398AAB2935FFDB00A889F2 /* Models in Frameworks */,
 				9F5E581929545BE700A53960 /* Env in Frameworks */,
 				DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */,
-				9FE6A42E2BD043A90055D388 /* RevenueCat in Frameworks */,
 				9F9191592C6DDF20001C89E7 /* WishKit in Frameworks */,
+				2773E6072DA805F5000E6E38 /* RevenueCat in Frameworks */,
 				9F295540292B6C3400E0E81B /* Timeline in Frameworks */,
 				9F35DB4A29506FA100B3281A /* Notifications in Frameworks */,
 				9FC2A38B2B49D19A00DFD1C1 /* StatusKit in Frameworks */,
@@ -474,8 +474,8 @@
 				9FE3DB56296FEFCA00628CB0 /* AppAccount */,
 				DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */,
 				9FC2A38A2B49D19A00DFD1C1 /* StatusKit */,
-				9FE6A42D2BD043A90055D388 /* RevenueCat */,
 				9F9191582C6DDF20001C89E7 /* WishKit */,
+				2773E6062DA805F5000E6E38 /* RevenueCat */,
 			);
 			productName = IceCubesApp;
 			productReference = 9FBFE639292A715500C250E9 /* Ice Cubes.app */;
@@ -562,8 +562,8 @@
 			packageReferences = (
 				9FAE4ACC29379A5A00772766 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */,
-				9FE6A42C2BD043A80055D388 /* XCRemoteSwiftPackageReference "purchases-ios" */,
 				9F9191572C6DDF20001C89E7 /* XCRemoteSwiftPackageReference "wishkit-ios" */,
+				2773E6052DA805F5000E6E38 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
 			);
 			productRefGroup = 9FBFE63A292A715500C250E9 /* Products */;
 			projectDirPath = "";
@@ -1058,6 +1058,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload photos & videos to attach to your Mastodon posts.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2024 Thomas Ricouard";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Ice Cubes would like to save the selected photo in your photo library.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload photos & videos to Mastodon";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -1125,6 +1126,7 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Upload photos & videos to attach to your Mastodon posts.";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "© 2024 Thomas Ricouard";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Ice Cubes would like to save the selected photo in your photo library.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Upload photos & videos to Mastodon";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -1297,6 +1299,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2773E6052DA805F5000E6E38 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.21.0;
+			};
+		};
 		9F9191572C6DDF20001C89E7 /* XCRemoteSwiftPackageReference "wishkit-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wishkit/wishkit-ios.git";
@@ -1313,14 +1323,6 @@
 				kind = branch;
 			};
 		};
-		9FE6A42C2BD043A80055D388 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RevenueCat/purchases-ios";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.40.1;
-			};
-		};
 		DA0B24F92A6876D40045BDD7 /* XCRemoteSwiftPackageReference "SFSafeSymbols" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SFSafeSymbols/SFSafeSymbols";
@@ -1332,6 +1334,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2773E6062DA805F5000E6E38 /* RevenueCat */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2773E6052DA805F5000E6E38 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCat;
+		};
 		9F29553F292B6C3400E0E81B /* Timeline */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Timeline;
@@ -1459,11 +1466,6 @@
 		9FE3DB56296FEFCA00628CB0 /* AppAccount */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppAccount;
-		};
-		9FE6A42D2BD043A90055D388 /* RevenueCat */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9FE6A42C2BD043A80055D388 /* XCRemoteSwiftPackageReference "purchases-ios" */;
-			productName = RevenueCat;
 		};
 		9FFF677B299B7B2C00FE700A /* Notifications */ = {
 			isa = XCSwiftPackageProductDependency;

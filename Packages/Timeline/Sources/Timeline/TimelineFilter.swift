@@ -38,6 +38,10 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
   case link(url: URL, title: String)
   case latest
   case resume
+  
+  public static func == (lhs: TimelineFilter, rhs: TimelineFilter) -> Bool {
+    lhs.id == rhs.id
+  }
 
   public var id: String {
     switch self {

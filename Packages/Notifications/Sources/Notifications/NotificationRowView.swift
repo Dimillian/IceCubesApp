@@ -104,24 +104,7 @@ struct NotificationRowView: View {
           EmojiTextApp(
             .init(stringValue: notification.accounts[0].safeDisplayName),
             emojis: notification.accounts[0].emojis,
-            append: {
-              (notification.accounts.count > 1
-                ? Text("notifications-others-count \(notification.accounts.count - 1)")
-                  .font(.scaledSubheadline)
-                  .fontWeight(.regular)
-                : Text(" "))
-                + Text(type.label(count: notification.accounts.count))
-                .font(.scaledSubheadline)
-                .fontWeight(.regular)
-                + Text(" ⸱ ")
-                .font(.scaledFootnote)
-                .fontWeight(.regular)
-                .foregroundStyle(.secondary)
-                + Text(notification.createdAt.relativeFormatted)
-                .font(.scaledFootnote)
-                .fontWeight(.regular)
-                .foregroundStyle(.secondary)
-            }
+            append: { makeAppendView(type: type) }
           )
           .font(.scaledSubheadline)
           .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
@@ -156,6 +139,27 @@ struct NotificationRowView: View {
       }
     }
     .accessibilityElement(children: .combine)
+  }
+  
+  nonisolated private func makeAppendView(type: Models.Notification.NotificationType) -> Text {
+    if notification.accounts.count > 1 {
+      Text("notifications-others-count \(notification.accounts.count - 1)")
+        .font(.subheadline)
+        .fontWeight(.regular)
+    } else {
+      Text(" ")
+      + Text(type.label(count: notification.accounts.count))
+        .font(.subheadline)
+      .fontWeight(.regular)
+      + Text(" ⸱ ")
+        .font(.footnote)
+      .fontWeight(.regular)
+      .foregroundStyle(.secondary)
+      + Text(notification.createdAt.relativeFormatted)
+        .font(.footnote)
+      .fontWeight(.regular)
+      .foregroundStyle(.secondary)
+    }
   }
 
   @ViewBuilder
