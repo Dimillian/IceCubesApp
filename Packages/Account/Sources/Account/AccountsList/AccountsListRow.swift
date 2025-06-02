@@ -1,3 +1,4 @@
+import AppAccount
 import Combine
 import DesignSystem
 import EmojiText
@@ -27,6 +28,8 @@ public struct AccountsListRow: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(Client.self) private var client
   @Environment(QuickLook.self) private var quickLook
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(AppAccountsManager.self) private var appAccount
 
   @State var viewModel: AccountsListRowViewModel
 
@@ -149,6 +152,8 @@ public struct AccountsListRow: View {
       .environment(client)
       .environment(quickLook)
       .environment(routerPath)
+      .environment(watcher)
+      .environment(appAccount)
     }
   }
 }
