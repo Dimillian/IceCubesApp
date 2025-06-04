@@ -121,6 +121,8 @@ public struct StatusRowView: View {
           }
         }
       }
+      .frame(maxWidth: 1000)
+      .frame(maxWidth: .infinity, alignment: .center)
       .padding(.init(top: isCompact ? 6 : 12, leading: 0, bottom: isFocused ? 12 : 6, trailing: 0))
     }
     .onAppear {
