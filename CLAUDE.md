@@ -101,10 +101,12 @@ The codebase contains legacy MVVM patterns, but **new features should NOT use Vi
    }
    ```
 
-2. **Use Environment for Dependency Injection**
-   - Services, clients, and shared state go in Environment
-   - Access via `@Environment(ServiceType.self)`
-   - Initialize at app level and inject down the view hierarchy
+2. **Use Environment Appropriately**
+   - **App-wide services**: Router, Theme, CurrentAccount, Client, etc. - use `@Environment`
+   - **Feature-specific services**: Timeline services, single-view logic - use `let` properties with `@Observable`
+   - Rule: Environment for cross-app/cross-feature dependencies, let properties for single-feature services
+   - Access app-wide via `@Environment(ServiceType.self)`
+   - Feature services: `private let myService = MyObservableService()`
 
 3. **Local State Management**
    - Use `@State` for view-specific state
