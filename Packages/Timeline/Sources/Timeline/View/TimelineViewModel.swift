@@ -53,9 +53,13 @@ import SwiftUI
   var tag: Tag?
 
   // Internal source of truth for a timeline.
+  @ObservationIgnored
   private(set) var datasource = TimelineDatasource()
   private let statusFetcher: TimelineStatusFetching
+
+  @ObservationIgnored
   private let cache = TimelineCache()
+
   private var isCacheEnabled: Bool {
     canFilterTimeline && timeline.supportNewestPagination && client?.isAuth == true
   }
