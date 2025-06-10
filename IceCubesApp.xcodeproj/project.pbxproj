@@ -1304,7 +1304,7 @@
 			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.21.0;
+				minimumVersion = 5.28.0;
 			};
 		};
 		9F9191572C6DDF20001C89E7 /* XCRemoteSwiftPackageReference "wishkit-ios" */ = {
