@@ -97,6 +97,7 @@ extension StatusEditor {
                         followUpSEVMs: $followUpSEVMs)
                     }
                   }
+                  .padding(.bottom, 8)
                 } else {
                   AccessoryView(
                     focusedSEVM: focusedSEVM,
