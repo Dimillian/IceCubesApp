@@ -154,13 +154,11 @@ struct AppView: View {
       ) {
         HStack(spacing: 0) {
           baseTabView
+            .tabViewStyle(.tabBarOnly)
             #if targetEnvironment(macCatalyst)
-              .tabViewStyle(.sidebarAdaptable)
               .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
                 tabview.sidebar.isHidden = true
               }
-            #else
-              .tabViewStyle(.tabBarOnly)
             #endif
           if horizontalSizeClass == .regular,
             appAccountsManager.currentClient.isAuth,

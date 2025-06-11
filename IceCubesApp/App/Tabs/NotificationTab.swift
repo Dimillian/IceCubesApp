@@ -45,7 +45,9 @@ struct NotificationsTab: View {
     }
     .onAppear {
       routerPath.client = client
-      clearNotifications()
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        clearNotifications()
+      }
     }
     .withSafariRouter()
     .environment(routerPath)
