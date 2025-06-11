@@ -7,7 +7,7 @@ let package = Package(
   name: "AppAccount",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v17),
+    .iOS(.v18),
     .visionOS(.v1),
   ],
   products: [

@@ -27,6 +27,9 @@ struct AppView: View {
   @State var iosTabs = iOSTabs.shared
   @State var sidebarTabs = SidebarTabs.shared
   @State var selectedTabScrollToTop: Int = -1
+  @State var timeline: TimelineFilter = .home
+  
+  @AppStorage("timeline_pinned_filters") private var pinnedFilters: [TimelineFilter] = []
 
   var body: some View {
     switch UIDevice.current.userInterfaceIdiom {
@@ -39,7 +42,17 @@ struct AppView: View {
         tabBarView
       #endif
     default:
-      tabBarView
+      if #available(iOS 26, *) {
+        tabBarView
+          .tabViewBottomAccessory {
+            if !pinnedFilters.isEmpty {
+              TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
+            }
+          }
+          .tabBarMinimizeBehavior(.onScrollDown)
+      } else {
+        tabBarView
+      }
     }
   }
 
@@ -67,7 +80,7 @@ struct AppView: View {
         })
     ) {
       ForEach(availableTabs) { tab in
-        tab.makeContentView(selectedTab: $selectedTab)
+        tab.makeContentView(homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
           .tabItem {
             if userPreferences.showiPhoneTabLabel {
               tab.label
@@ -134,19 +147,15 @@ struct AppView: View {
           }), tabs: availableTabs
       ) {
         HStack(spacing: 0) {
-          if #available(iOS 18.0, *) {
-            baseTabView
-              #if targetEnvironment(macCatalyst)
-                .tabViewStyle(.sidebarAdaptable)
-                .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
-                  tabview.sidebar.isHidden = true
-                }
-              #else
-                .tabViewStyle(.tabBarOnly)
-              #endif
-          } else {
-            baseTabView
-          }
+          baseTabView
+            #if targetEnvironment(macCatalyst)
+              .tabViewStyle(.sidebarAdaptable)
+              .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
+                tabview.sidebar.isHidden = true
+              }
+            #else
+              .tabViewStyle(.tabBarOnly)
+            #endif
           if horizontalSizeClass == .regular,
             appAccountsManager.currentClient.isAuth,
             userPreferences.showiPadSecondaryColumn
@@ -165,7 +174,7 @@ struct AppView: View {
     TabView(selection: $selectedTab) {
       ForEach(availableTabs) { tab in
         tab
-          .makeContentView(selectedTab: $selectedTab)
+          .makeContentView(homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
           .toolbar(horizontalSizeClass == .regular ? .hidden : .visible, for: .tabBar)
           .tabItem {
             tab.label

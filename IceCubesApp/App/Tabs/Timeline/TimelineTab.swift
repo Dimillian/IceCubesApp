@@ -20,20 +20,22 @@ struct TimelineTab: View {
   @State private var routerPath = RouterPath()
 
   @State private var didAppear: Bool = false
-  @State private var timeline: TimelineFilter = .home
   @State private var selectedTagGroup: TagGroup?
-
-  @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
-  @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
+  
+  @Binding var timeline: TimelineFilter
+  @Binding var pinnedFilters: [TimelineFilter]
 
   @AppStorage("last_timeline_filter") var lastTimelineFilter: TimelineFilter = .home
-  @AppStorage("timeline_pinned_filters") private var pinnedFilters: [TimelineFilter] = []
-
+  
+  @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
+  @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
+  
   private let canFilterTimeline: Bool
 
-  init(timeline: TimelineFilter? = nil) {
-    canFilterTimeline = timeline == nil
-    _timeline = .init(initialValue: timeline ?? .home)
+  init(canFilterTimeline: Bool = false, timeline: Binding<TimelineFilter>, pinedFilters: Binding<[TimelineFilter]> = .constant([])) {
+    self.canFilterTimeline = canFilterTimeline
+    _timeline = timeline
+    _pinnedFilters = pinedFilters
   }
 
   var body: some View {

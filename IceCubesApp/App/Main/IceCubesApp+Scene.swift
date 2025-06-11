@@ -26,24 +26,14 @@ extension IceCubesApp {
         .environment(appIntentService)
         .environment(\.isSupporter, isSupporter)
         .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
-          if #available(iOS 18.0, *) {
-            MediaUIView(
-              selectedAttachment: selectedMediaAttachment,
-              attachments: quickLook.mediaAttachments
-            )
-            .presentationBackground(.ultraThinMaterial)
-            .presentationCornerRadius(16)
-            .presentationSizing(.page)
-            .withEnvironments()
-          } else {
-            MediaUIView(
-              selectedAttachment: selectedMediaAttachment,
-              attachments: quickLook.mediaAttachments
-            )
-            .presentationBackground(.ultraThinMaterial)
-            .presentationCornerRadius(16)
-            .withEnvironments()
-          }
+          MediaUIView(
+            selectedAttachment: selectedMediaAttachment,
+            attachments: quickLook.mediaAttachments
+          )
+          .presentationBackground(.ultraThinMaterial)
+          .presentationCornerRadius(16)
+          .presentationSizing(.page)
+          .withEnvironments()
         }
         .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
           if newValue != nil {
@@ -171,10 +161,6 @@ extension IceCubesApp {
 
 extension Scene {
   func windowResize() -> some Scene {
-    if #available(iOS 18.0, *) {
-      return self.windowResizability(.contentSize)
-    } else {
-      return self.defaultSize(width: 1100, height: 1400)
-    }
+    return self.windowResizability(.contentSize)
   }
 }

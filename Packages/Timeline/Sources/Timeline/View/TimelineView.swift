@@ -32,6 +32,16 @@ public struct TimelineView: View {
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
   private let canFilterTimeline: Bool
+  
+  private var toolbarBackgroundVisibility: SwiftUI.Visibility {
+    if #available(iOS 26, *) {
+      return .visible
+    }
+    if canFilterTimeline, !pinnedFilters.isEmpty {
+      return .hidden
+    }
+    return .visible
+  }
 
   public init(
     timeline: Binding<TimelineFilter>,
@@ -51,7 +61,7 @@ public struct TimelineView: View {
       statusesObserver
     }
     .safeAreaInset(edge: .top, spacing: 0) {
-      if canFilterTimeline, !pinnedFilters.isEmpty {
+      if #unavailable(iOS 26), canFilterTimeline, !pinnedFilters.isEmpty {
         VStack(spacing: 0) {
           TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
             .padding(.vertical, 8)
@@ -62,9 +72,7 @@ public struct TimelineView: View {
         }
       }
     }
-    .if(canFilterTimeline && !pinnedFilters.isEmpty) { view in
-      view.toolbarBackground(.hidden, for: .navigationBar)
-    }
+    .toolbarBackground(toolbarBackgroundVisibility, for: .navigationBar)
     .toolbar {
       toolbarTitleView
       toolbarTagGroupButton
