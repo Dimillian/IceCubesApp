@@ -78,9 +78,6 @@ extension StatusEditor {
           #if !os(visionOS)
             .background(theme.primaryBackgroundColor)
           #endif
-          .safeAreaInset(edge: .bottom) {
-            AutoCompleteView(viewModel: focusedSEVM)
-          }
           #if os(visionOS)
             .ornament(attachmentAnchor: .scene(.leading)) {
               AccessoryView(
@@ -90,9 +87,23 @@ extension StatusEditor {
           #else
             .safeAreaInset(edge: .bottom) {
               if presentationDetent == .large || presentationDetent == .medium {
-                AccessoryView(
-                  focusedSEVM: focusedSEVM,
-                  followUpSEVMs: $followUpSEVMs)
+                if #available(iOS 26.0, *) {
+                  GlassEffectContainer(spacing: 10) {
+                    VStack(spacing: 10) {
+                      AutoCompleteView(viewModel: focusedSEVM)
+                      
+                      AccessoryView(
+                        focusedSEVM: focusedSEVM,
+                        followUpSEVMs: $followUpSEVMs)
+                    }
+                  }
+                } else {
+                  AccessoryView(
+                    focusedSEVM: focusedSEVM,
+                    followUpSEVMs: $followUpSEVMs)
+                  
+                  AutoCompleteView(viewModel: focusedSEVM)
+                }
               }
             }
           #endif

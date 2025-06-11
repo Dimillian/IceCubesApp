@@ -27,7 +27,7 @@ extension StatusEditor {
 
     var body: some ToolbarContent {
       if !mainSEVM.mode.isInShareExtension {
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItemGroup(placement: .topBarTrailing) {
           Button {
             isDraftsSheetDisplayed = true
           } label: {
@@ -41,33 +41,31 @@ extension StatusEditor {
               draftsListView
             }
           }
-        }
-      }
-
-      ToolbarItem(placement: .navigationBarTrailing) {
-        Button {
-          Task {
-            mainSEVM.evaluateLanguages()
-            if preferences.autoDetectPostLanguage,
-              mainSEVM.languageConfirmationDialogLanguages != nil
-            {
-              isLanguageConfirmPresented = true
-            } else {
-              await postAllStatus()
+          
+          Button {
+            Task {
+              mainSEVM.evaluateLanguages()
+              if preferences.autoDetectPostLanguage,
+                mainSEVM.languageConfirmationDialogLanguages != nil
+              {
+                isLanguageConfirmPresented = true
+              } else {
+                await postAllStatus()
+              }
             }
+          } label: {
+            Image(systemName: "paperplane.fill")
+              .bold()
           }
-        } label: {
-          Image(systemName: "paperplane.fill")
-            .bold()
+          .buttonStyle(.borderedProminent)
+          .disabled(!mainSEVM.canPost || mainSEVM.isPosting)
+          .keyboardShortcut(.return, modifiers: .command)
+          .confirmationDialog(
+            "", isPresented: $isLanguageConfirmPresented,
+            actions: {
+              languageConfirmationDialog
+            })
         }
-        .buttonStyle(.borderedProminent)
-        .disabled(!mainSEVM.canPost || mainSEVM.isPosting)
-        .keyboardShortcut(.return, modifiers: .command)
-        .confirmationDialog(
-          "", isPresented: $isLanguageConfirmPresented,
-          actions: {
-            languageConfirmationDialog
-          })
       }
 
       ToolbarItem(placement: .navigationBarLeading) {

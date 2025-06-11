@@ -35,13 +35,20 @@ extension StatusEditor {
         .cornerRadius(8)
         .padding(.trailing, 78)
       #else
-        Divider()
-        HStack {
+        if #available(iOS 26, *) {
           contentView
+            .padding(.vertical, 8)
+            .glassEffect()
+            .padding(.horizontal, 16)
+        } else {
+          Divider()
+          HStack {
+            contentView
+          }
+          .frame(height: 20)
+          .padding(.vertical, 12)
+          .background(.ultraThickMaterial)
         }
-        .frame(height: 20)
-        .padding(.vertical, 12)
-        .background(.ultraThickMaterial)
       #endif
     }
 

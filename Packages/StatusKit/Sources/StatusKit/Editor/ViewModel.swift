@@ -1029,5 +1029,3 @@ extension StatusEditor.ViewModel: UITextPasteDelegate {
     }
   }
 }
-
-extension PhotosPickerItem: @unchecked @retroactive Sendable {}
