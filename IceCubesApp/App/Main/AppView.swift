@@ -47,6 +47,12 @@ struct AppView: View {
           .tabViewBottomAccessory {
             if !pinnedFilters.isEmpty {
               TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
+                .padding(.horizontal, 8)
+                .onChange(of: timeline) { _, _ in
+                  if selectedTab != .timeline {
+                    selectedTab = .timeline
+                  }
+                }
             }
           }
           .tabBarMinimizeBehavior(.onScrollDown)
