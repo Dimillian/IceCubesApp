@@ -28,7 +28,7 @@ struct AppView: View {
   @State var sidebarTabs = SidebarTabs.shared
   @State var selectedTabScrollToTop: Int = -1
   @State var timeline: TimelineFilter = .home
-  
+
   @AppStorage("timeline_pinned_filters") private var pinnedFilters: [TimelineFilter] = []
 
   var body: some View {
@@ -55,7 +55,7 @@ struct AppView: View {
                 }
             }
           }
-          .tabBarMinimizeBehavior(.onScrollDown)
+          .tabBarMinimizeBehavior(.never)
       } else {
         tabBarView
       }
@@ -86,18 +86,20 @@ struct AppView: View {
         })
     ) {
       ForEach(availableTabs) { tab in
-        tab.makeContentView(homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
-          .tabItem {
-            if userPreferences.showiPhoneTabLabel {
-              tab.label
-                .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
-            } else {
-              Image(systemName: tab.iconName)
-            }
+        tab.makeContentView(
+          homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters
+        )
+        .tabItem {
+          if userPreferences.showiPhoneTabLabel {
+            tab.label
+              .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+          } else {
+            Image(systemName: tab.iconName)
           }
-          .tag(tab)
-          .badge(badgeFor(tab: tab))
-          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
+        }
+        .tag(tab)
+        .badge(badgeFor(tab: tab))
+        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
       }
     }
     .id(appAccountsManager.currentClient.id)
@@ -178,7 +180,9 @@ struct AppView: View {
     TabView(selection: $selectedTab) {
       ForEach(availableTabs) { tab in
         tab
-          .makeContentView(homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+          .makeContentView(
+            homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters
+          )
           .toolbar(horizontalSizeClass == .regular ? .hidden : .visible, for: .tabBar)
           .tabItem {
             tab.label
