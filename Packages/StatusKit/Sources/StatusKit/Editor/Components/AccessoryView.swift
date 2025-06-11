@@ -37,8 +37,8 @@ extension StatusEditor {
       #else
         if #available(iOS 26, *) {
           contentView
-            .padding(.vertical, 8)
-            .glassEffect()
+            .padding(.vertical, 16)
+            .glassEffect(.regular.tint(theme.primaryBackgroundColor.opacity(0.2)))
             .padding(.horizontal, 16)
         } else {
           Divider()
@@ -102,8 +102,10 @@ extension StatusEditor {
           ProgressView()
         } else {
           Image(systemName: "photo.on.rectangle.angled")
+            .foregroundStyle(theme.tintColor)
         }
       }
+      .buttonStyle(.plain)
       .photosPicker(
         isPresented: $isPhotosPickerPresented,
         selection: $viewModel.mediaPickers,
@@ -231,8 +233,10 @@ extension StatusEditor {
         } else {
           Image(systemName: "faxmachine")
             .accessibilityLabel("accessibility.editor.button.ai-prompt")
+            .foregroundStyle(theme.tintColor)
         }
       }
+      .buttonStyle(.plain)
     }
   }
 }
