@@ -1,6 +1,7 @@
 {
-    "[swift]": {
-      "editor.defaultFormatter": "sweetpad.sweetpad",
-      "editor.formatOnSave": true,
-    },
+  "[swift]": {
+    "editor.defaultFormatter": "sweetpad.sweetpad",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 2
+  },
 }
