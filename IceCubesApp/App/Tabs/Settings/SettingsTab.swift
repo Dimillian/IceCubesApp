@@ -240,9 +240,6 @@ struct SettingsTabs: View {
       Toggle(isOn: $preferences.soundEffectEnabled) {
         Label("settings.other.sound-effect", systemImage: "hifispeaker")
       }
-      Toggle(isOn: $preferences.fastRefreshEnabled) {
-        Label("settings.other.fast-refresh", systemImage: "arrow.clockwise")
-      }
     } header: {
       Text("settings.section.other")
     } footer: {

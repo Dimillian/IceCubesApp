@@ -54415,6 +54415,7 @@
       }
     },
     "settings.other.fast-refresh" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {

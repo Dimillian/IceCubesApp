@@ -64,7 +64,6 @@ import SwiftUI
     @AppStorage("share-button-behavior") public var shareButtonBehavior:
       PreferredShareButtonBehavior = .linkOnly
 
-    @AppStorage("fast_refresh") public var fastRefreshEnabled: Bool = false
 
     @AppStorage("max_reply_indentation") public var maxReplyIndentation: UInt = 7
     @AppStorage("show_reply_indentation") public var showReplyIndentation: Bool = true
@@ -342,11 +341,6 @@ import SwiftUI
     }
   }
 
-  public var fastRefreshEnabled: Bool {
-    didSet {
-      storage.fastRefreshEnabled = fastRefreshEnabled
-    }
-  }
 
   public var maxReplyIndentation: UInt {
     didSet {
@@ -550,7 +544,6 @@ import SwiftUI
     shareButtonBehavior = storage.shareButtonBehavior
     pendingShownAtBottom = storage.pendingShownAtBottom
     pendingShownLeft = storage.pendingShownLeft
-    fastRefreshEnabled = storage.fastRefreshEnabled
     maxReplyIndentation = storage.maxReplyIndentation
     showReplyIndentation = storage.showReplyIndentation
     showAccountPopover = storage.showAccountPopover

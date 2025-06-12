@@ -157,7 +157,7 @@ extension TimelineViewModel: GapLoadingFetcher {
   func pullToRefresh() async {
     timelineTask?.cancel()
 
-    if !timeline.supportNewestPagination || UserPreferences.shared.fastRefreshEnabled {
+    if !timeline.supportNewestPagination {
       await reset()
     }
     await fetchNewestStatuses(pullToRefresh: true)
@@ -166,9 +166,6 @@ extension TimelineViewModel: GapLoadingFetcher {
   func refreshTimeline() {
     timelineTask?.cancel()
     timelineTask = Task {
-      if UserPreferences.shared.fastRefreshEnabled {
-        await reset()
-      }
       await fetchNewestStatuses(pullToRefresh: false)
     }
   }
@@ -225,8 +222,7 @@ extension TimelineViewModel: GapLoadingFetcher {
     // Else we fetch top most page from the API.
     if timeline.supportNewestPagination,
       let cachedStatuses = await getCachedStatuses(),
-      !cachedStatuses.isEmpty,
-      !UserPreferences.shared.fastRefreshEnabled
+      !cachedStatuses.isEmpty
     {
       await datasource.set(cachedStatuses)
       let items = await datasource.getFilteredItems()
