@@ -34,7 +34,7 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
         maxId: nil,
         minId: nil,
         offset: 0,
-        limit: 40))
+        limit: 50))
   }
 
   func fetchNewPages(client: Client?, timeline: TimelineFilter, minId: String, maxPages: Int)
@@ -43,8 +43,13 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
     guard let client = client else { throw StatusFetcherError.noClientAvailable }
     var allStatuses: [Status] = []
     var latestMinId = minId
+    let targetCount = 50
+    
     for _ in 1...maxPages {
       if Task.isCancelled { break }
+      
+      // If we already have enough statuses, stop fetching
+      if allStatuses.count >= targetCount { break }
 
       let newStatuses: [Status] = try await client.get(
         endpoint: timeline.endpoint(
@@ -52,7 +57,7 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
           maxId: nil,
           minId: latestMinId,
           offset: nil,
-          limit: 40
+          limit: min(40, targetCount - allStatuses.count)
         ))
 
       if newStatuses.isEmpty { break }

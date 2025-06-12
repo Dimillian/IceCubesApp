@@ -65,6 +65,34 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
           fetcher.statusDidDisappear(status: status)
         }
       }
+      
+    case let .displayWithGaps(items, nextPageState):
+      ForEach(items) { item in
+        switch item {
+        case .status(let status):
+          StatusRowView(
+            viewModel: StatusRowViewModel(
+              status: status,
+              client: client,
+              routerPath: routerPath,
+              isRemote: isRemote),
+            context: .timeline
+          )
+          .onAppear {
+            fetcher.statusDidAppear(status: status)
+          }
+          .onDisappear {
+            fetcher.statusDidDisappear(status: status)
+          }
+          
+        case .gap(let gap):
+          if let gapLoader = fetcher as? GapLoadingFetcher {
+            TimelineGapView(gap: gap) {
+              await gapLoader.loadGap(gap: gap)
+            }
+          }
+        }
+      }
       switch nextPageState {
       case .hasNextPage:
         NextPageView {
