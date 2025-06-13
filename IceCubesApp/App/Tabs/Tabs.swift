@@ -78,6 +78,16 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
       EmptyView()
     }
   }
+  
+  var tabPlacement: TabPlacement {
+    switch self {
+    case .timeline, .notifications, .explore, .links, .profile:
+      return .pinned
+    default:
+      return .sidebarOnly
+    }
+  }
+   
 
   @ViewBuilder
   var label: some View {

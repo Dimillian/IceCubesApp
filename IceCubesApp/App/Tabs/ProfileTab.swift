@@ -21,7 +21,6 @@ struct ProfileTab: View {
         AccountDetailView(account: account)
           .withAppRouter()
           .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
           .id(account.id)
       } else {
         AccountDetailView(account: .placeholder())

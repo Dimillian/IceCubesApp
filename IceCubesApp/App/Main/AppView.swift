@@ -85,20 +85,13 @@ struct AppView: View {
         })
     ) {
       ForEach(availableTabs) { tab in
-        tab.makeContentView(
-          homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters
-        )
-        .tabItem {
-          if userPreferences.showiPhoneTabLabel {
-            tab.label
-              .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
-          } else {
-            Image(systemName: tab.iconName)
-          }
+        Tab(value: tab, role: tab == .post ? .search : .none) {
+          tab.makeContentView(homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+        } label: {
+          tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
         }
-        .tag(tab)
+        .tabPlacement(tab.tabPlacement)
         .badge(badgeFor(tab: tab))
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
       }
     }
     .id(appAccountsManager.currentClient.id)

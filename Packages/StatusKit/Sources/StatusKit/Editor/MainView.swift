@@ -117,7 +117,6 @@ extension StatusEditor {
               focusedSEVM: focusedSEVM,
               followUpSEVMs: followUpSEVMs)
           }
-          .toolbarBackground(.visible, for: .navigationBar)
           .alert(
             "status.error.posting.title",
             isPresented: $focusedSEVM.showPostingErrorAlert,
