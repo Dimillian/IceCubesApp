@@ -273,10 +273,16 @@ extension TimelineViewModel: GapLoadingFetcher {
       return
     }
 
-    // Check if these are actually new compared to our current timeline
+    guard let latestStatus = await datasource.get().first(where: { $0.id == latestStatus }) else {
+      canStreamEvents = true
+      timeline = .latest
+      return
+    }
+    
     let currentIds = await datasource.get().map(\.id)
     let actuallyNewStatuses = newestStatuses.filter { status in
-      !currentIds.contains(where: { $0 == status.id })
+      !currentIds.contains(where: { $0 == status.id }) &&
+      status.createdAt.asDate < latestStatus.createdAt.asDate
     }
 
     guard !actuallyNewStatuses.isEmpty else {
@@ -289,7 +295,7 @@ extension TimelineViewModel: GapLoadingFetcher {
     // Pass the original count to determine if we need a gap
     await updateTimelineWithNewStatuses(
       actuallyNewStatuses, 
-      latestStatus: latestStatus,
+      latestStatus: latestStatus.id,
       fetchedCount: newestStatuses.count
     )
     canStreamEvents = true
@@ -504,7 +510,9 @@ extension TimelineViewModel {
   private func handleUpdateEvent(_ event: StreamEventUpdate, client: Client) async {
     guard timeline == .home,
       UserPreferences.shared.isPostsStreamingEnabled,
-      await !datasource.contains(statusId: event.status.id)
+      await !datasource.contains(statusId: event.status.id),
+      let topStatus = await datasource.get().first,
+      topStatus.createdAt.asDate < event.status.createdAt.asDate
     else { return }
 
     pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
