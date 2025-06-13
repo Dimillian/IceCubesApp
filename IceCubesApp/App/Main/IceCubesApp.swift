@@ -141,6 +141,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     super.buildMenu(with: builder)
     builder.remove(menu: .document)
     builder.remove(menu: .toolbar)
-    builder.remove(menu: .sidebar)
   }
 }
