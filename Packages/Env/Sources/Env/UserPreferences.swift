@@ -72,8 +72,6 @@ import SwiftUI
 
     @AppStorage("sidebar_expanded") public var isSidebarExpanded: Bool = false
 
-    @AppStorage("stream_new_posts") public var isPostsStreamingEnabled: Bool = false
-
     init() {
       prepareTranslationType()
     }
@@ -366,12 +364,6 @@ import SwiftUI
     }
   }
 
-  public var isPostsStreamingEnabled: Bool {
-    didSet {
-      storage.isPostsStreamingEnabled = isPostsStreamingEnabled
-    }
-  }
-
   public func getRealMaxIndent() -> UInt {
     showReplyIndentation ? maxReplyIndentation : 0
   }
@@ -549,7 +541,6 @@ import SwiftUI
     showAccountPopover = storage.showAccountPopover
     muteVideo = storage.muteVideo
     isSidebarExpanded = storage.isSidebarExpanded
-    isPostsStreamingEnabled = storage.isPostsStreamingEnabled
   }
 }
 

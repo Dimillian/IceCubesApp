@@ -272,17 +272,10 @@ extension TimelineViewModel: GapLoadingFetcher {
       canStreamEvents = true
       return
     }
-
-    guard let latestStatus = await datasource.get().first(where: { $0.id == latestStatus }) else {
-      canStreamEvents = true
-      timeline = .latest
-      return
-    }
     
     let currentIds = await datasource.get().map(\.id)
     let actuallyNewStatuses = newestStatuses.filter { status in
-      !currentIds.contains(where: { $0 == status.id }) &&
-      status.createdAt.asDate < latestStatus.createdAt.asDate
+      !currentIds.contains(where: { $0 == status.id })
     }
 
     guard !actuallyNewStatuses.isEmpty else {
@@ -295,7 +288,7 @@ extension TimelineViewModel: GapLoadingFetcher {
     // Pass the original count to determine if we need a gap
     await updateTimelineWithNewStatuses(
       actuallyNewStatuses, 
-      latestStatus: latestStatus.id,
+      latestStatus: latestStatus,
       fetchedCount: newestStatuses.count
     )
     canStreamEvents = true
@@ -496,8 +489,6 @@ extension TimelineViewModel {
     guard let client = client, canStreamEvents, isTimelineVisible else { return }
 
     switch event {
-    case let updateEvent as StreamEventUpdate:
-      await handleUpdateEvent(updateEvent, client: client)
     case let deleteEvent as StreamEventDelete:
       await handleDeleteEvent(deleteEvent)
     case let statusUpdateEvent as StreamEventStatusUpdate:
@@ -507,6 +498,8 @@ extension TimelineViewModel {
     }
   }
 
+  // Post streaming insertion is disabled for now.
+  /*
   private func handleUpdateEvent(_ event: StreamEventUpdate, client: Client) async {
     guard timeline == .home,
       UserPreferences.shared.isPostsStreamingEnabled,
@@ -521,6 +514,7 @@ extension TimelineViewModel {
     StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
     await updateStatusesStateWithAnimation()
   }
+   */
 
   private func handleDeleteEvent(_ event: StreamEventDelete) async {
     if await datasource.remove(event.status) != nil {

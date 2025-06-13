@@ -39,7 +39,6 @@ struct SettingsTabs: View {
         accountsSection
         generalSection
         otherSections
-        postStreamingSection
         AISection
         cacheSection
       }
@@ -244,25 +243,6 @@ struct SettingsTabs: View {
       Text("settings.section.other")
     } footer: {
       Text("settings.section.other.footer")
-    }
-    #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-    #endif
-  }
-
-  @ViewBuilder
-  private var postStreamingSection: some View {
-    @Bindable var preferences = preferences
-    Section {
-      Toggle(isOn: $preferences.isPostsStreamingEnabled) {
-        Label("Posts streaming", systemImage: "clock.badge")
-      }
-    } header: {
-      Text("Streaming")
-    } footer: {
-      Text(
-        "Enabling post streaming will automatically add new posts at the top of your home timeline. Disable if you get performance issues."
-      )
     }
     #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
