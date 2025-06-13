@@ -65,6 +65,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
           fetcher.statusDidDisappear(status: status)
         }
       }
+      makeNextPageRow(nextPageState: nextPageState)
       
     case let .displayWithGaps(items, nextPageState):
       ForEach(items) { item in
@@ -86,26 +87,39 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
           }
           
         case .gap(let gap):
-          if let gapLoader = fetcher as? GapLoadingFetcher {
-            TimelineGapView(gap: gap) {
-              await gapLoader.loadGap(gap: gap)
+          ZStack {
+            if let gapLoader = fetcher as? GapLoadingFetcher {
+              TimelineGapView(gap: gap) {
+                await gapLoader.loadGap(gap: gap)
+              }
             }
           }
+          .background(theme.primaryBackgroundColor)
+          .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+          .listRowSeparator(.hidden)
         }
       }
+      makeNextPageRow(nextPageState: nextPageState)
+    }
+  }
+  
+  @ViewBuilder
+  private func makeNextPageRow(nextPageState: StatusesState.PagingState) -> some View {
+    ZStack {
       switch nextPageState {
       case .hasNextPage:
         NextPageView {
           try await fetcher.fetchNextPage()
         }
         .padding(.horizontal, .layoutPadding)
-        #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
-        #endif
 
       case .none:
         EmptyView()
       }
     }
+    .listRowSeparator(.hidden, edges: .all)
+    #if !os(visionOS)
+    .listRowBackground(theme.primaryBackgroundColor)
+    #endif
   }
 }
