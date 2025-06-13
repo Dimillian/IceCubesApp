@@ -160,7 +160,7 @@ public struct StatusRowView: View {
       )
       .listRowHoverEffectDisabled()
     #else
-      .listRowBackground(viewModel.makeBackgroundColor(isHomeTimeline: isHomeTimeline))
+      .listRowBackground(viewModel.backgroundColor)
     #endif
     .listRowInsets(
       .init(

@@ -63626,6 +63626,7 @@
       }
     },
     "Show Content Gradient" : {
+      "extractionState" : "stale",
       "localizations" : {
         "es" : {
           "stringUnit" : {

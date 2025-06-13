@@ -4,6 +4,15 @@ public enum TimelineItem: Identifiable, Equatable, Sendable {
   case status(Status)
   case gap(TimelineGap)
   
+  public var status: Status? {
+    switch self {
+    case .status(let status):
+      return status
+    default:
+      return nil
+    }
+  }
+  
   public var id: String {
     switch self {
     case .status(let status):

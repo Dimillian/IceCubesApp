@@ -69,36 +69,51 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       
     case let .displayWithGaps(items, nextPageState):
       ForEach(items) { item in
-        switch item {
-        case .status(let status):
-          StatusRowView(
-            viewModel: StatusRowViewModel(
-              status: status,
-              client: client,
-              routerPath: routerPath,
-              isRemote: isRemote),
-            context: .timeline
-          )
-          .onAppear {
-            fetcher.statusDidAppear(status: status)
-          }
-          .onDisappear {
-            fetcher.statusDidDisappear(status: status)
-          }
-          
-        case .gap(let gap):
-          ZStack {
-            if let gapLoader = fetcher as? GapLoadingFetcher {
-              TimelineGapView(gap: gap) {
-                await gapLoader.loadGap(gap: gap)
+        ZStack {
+          switch item {
+          case .status(let status):
+            StatusRowView(
+              viewModel: StatusRowViewModel(
+                status: status,
+                client: client,
+                routerPath: routerPath,
+                isRemote: isRemote),
+              context: .timeline
+            )
+            .onAppear {
+              fetcher.statusDidAppear(status: status)
+            }
+            .onDisappear {
+              fetcher.statusDidDisappear(status: status)
+            }
+            
+          case .gap(let gap):
+            ZStack {
+              if let gapLoader = fetcher as? GapLoadingFetcher {
+                TimelineGapView(gap: gap) {
+                  await gapLoader.loadGap(gap: gap)
+                }
               }
             }
           }
-          .background(theme.primaryBackgroundColor)
-          .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-          .listRowSeparator(.hidden)
         }
-      }
+        #if os(visionOS)
+          .listRowBackground(
+            RoundedRectangle(cornerRadius: 8)
+              .foregroundStyle(.background).hoverEffect()
+          )
+          .listRowHoverEffectDisabled()
+        #else
+          .listRowBackground(makeBackgroundColorFor(status: item.status))
+        #endif
+        .listRowInsets(
+          .init(
+            top: 0,
+            leading: .layoutPadding,
+            bottom: 0,
+            trailing: .layoutPadding)
+        )
+              }
       makeNextPageRow(nextPageState: nextPageState)
     }
   }
@@ -121,5 +136,22 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     #if !os(visionOS)
     .listRowBackground(theme.primaryBackgroundColor)
     #endif
+  }
+  
+  @ViewBuilder
+  private func makeBackgroundColorFor(status: Status?) -> some View {
+    if let status {
+      if status.visibility == .direct {
+        theme.tintColor.opacity(0.15)
+      } else if status.mentions.first(where: { $0.id == CurrentAccount.shared.account?.id }) != nil  {
+        theme.secondaryBackgroundColor
+      } else if status.account.isPremiumAccount {
+        Color.yellow.opacity(0.4)
+      } else {
+        theme.primaryBackgroundColor
+      }
+    } else {
+      theme.primaryBackgroundColor
+    }
   }
 }

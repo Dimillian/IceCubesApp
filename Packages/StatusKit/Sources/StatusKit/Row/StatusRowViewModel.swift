@@ -111,33 +111,6 @@ import SwiftUI
     (status.reblog?.url ?? status.url).flatMap(URL.init(string:))
   }
 
-  @ViewBuilder
-  func makeBackgroundColor(isHomeTimeline: Bool) -> some View {
-    if isHomeTimeline, theme.showContentGradient {
-      homeBackgroundColor
-    } else {
-      backgroundColor
-    }
-  }
-
-  @ViewBuilder
-  var homeBackgroundColor: some View {
-    if status.visibility == .direct {
-      theme.tintColor.opacity(0.15)
-    } else if userMentionned {
-      theme.secondaryBackgroundColor
-    } else {
-      if status.account.isPremiumAccount {
-        makeDecorativeGradient(startColor: .yellow, endColor: theme.primaryBackgroundColor)
-      } else if userFollowedTag != nil {
-        makeDecorativeGradient(startColor: .teal, endColor: theme.primaryBackgroundColor)
-      } else if status.reblog != nil {
-        makeDecorativeGradient(startColor: theme.tintColor, endColor: theme.primaryBackgroundColor)
-      } else {
-        theme.primaryBackgroundColor
-      }
-    }
-  }
 
   @ViewBuilder
   var backgroundColor: some View {
