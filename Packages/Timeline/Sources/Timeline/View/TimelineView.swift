@@ -32,7 +32,7 @@ public struct TimelineView: View {
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
   private let canFilterTimeline: Bool
-  
+
   private var toolbarBackgroundVisibility: SwiftUI.Visibility {
     if #available(iOS 26, *) {
       return .hidden

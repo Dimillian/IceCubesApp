@@ -35,20 +35,23 @@ extension View {
       case let .conversationDetail(conversation):
         ConversationDetailView(conversation: conversation)
       case let .hashTag(tag, accountId):
-        TimelineView(timeline: .constant(.hashtag(tag: tag, accountId: accountId)),
-                     pinnedFilters: .constant([]),
-                     selectedTagGroup: .constant(nil),
-                     canFilterTimeline: false)
+        TimelineView(
+          timeline: .constant(.hashtag(tag: tag, accountId: accountId)),
+          pinnedFilters: .constant([]),
+          selectedTagGroup: .constant(nil),
+          canFilterTimeline: false)
       case let .list(list):
-        TimelineView(timeline: .constant(.list(list: list)),
-                     pinnedFilters: .constant([]),
-                     selectedTagGroup: .constant(nil),
-                     canFilterTimeline: false)
+        TimelineView(
+          timeline: .constant(.list(list: list)),
+          pinnedFilters: .constant([]),
+          selectedTagGroup: .constant(nil),
+          canFilterTimeline: false)
       case let .linkTimeline(url, title):
-        TimelineView(timeline: .constant(.link(url: url, title: title)),
-                     pinnedFilters: .constant([]),
-                     selectedTagGroup: .constant(nil),
-                     canFilterTimeline: false)
+        TimelineView(
+          timeline: .constant(.link(url: url, title: title)),
+          pinnedFilters: .constant([]),
+          selectedTagGroup: .constant(nil),
+          canFilterTimeline: false)
       case let .following(id):
         AccountsListView(mode: .following(accountId: id))
       case let .followers(id):
@@ -60,10 +63,11 @@ extension View {
       case let .accountsList(accounts):
         AccountsListView(mode: .accountsList(accounts: accounts))
       case .trendingTimeline:
-        TimelineView(timeline: .constant(.trending),
-                     pinnedFilters: .constant([]),
-                     selectedTagGroup: .constant(nil),
-                     canFilterTimeline: false)
+        TimelineView(
+          timeline: .constant(.trending),
+          pinnedFilters: .constant([]),
+          selectedTagGroup: .constant(nil),
+          canFilterTimeline: false)
       case let .trendingLinks(cards):
         TrendingLinksListView(cards: cards)
       case let .tagsList(tags):
@@ -71,8 +75,9 @@ extension View {
       case .notificationsRequests:
         NotificationsRequestsListView()
       case let .notificationForAccount(accountId):
-        NotificationsListView(lockedType: nil,
-                              lockedAccountId: accountId)
+        NotificationsListView(
+          lockedType: nil,
+          lockedAccountId: accountId)
       case .blockedAccounts:
         AccountsListView(mode: .blocked)
       case .mutedAccounts:
@@ -134,7 +139,9 @@ extension View {
           .withEnvironments()
           .preferredColorScheme(Theme.shared.selectedScheme == .dark ? .dark : .light)
       case .accountPushNotficationsSettings:
-        if let subscription = PushNotificationsService.shared.subscriptions.first(where: { $0.account.token == AppAccountsManager.shared.currentAccount.oauthToken }) {
+        if let subscription = PushNotificationsService.shared.subscriptions.first(where: {
+          $0.account.token == AppAccountsManager.shared.currentAccount.oauthToken
+        }) {
           NavigationSheet { PushNotificationsView(subscription: subscription) }
             .withEnvironments()
         } else {
@@ -216,19 +223,25 @@ struct ActivityView: UIViewControllerRepresentable {
       image
     }
 
-    func activityViewController(_: UIActivityViewController,
-                                itemForActivityType _: UIActivity.ActivityType?) -> Any?
-    {
+    func activityViewController(
+      _: UIActivityViewController,
+      itemForActivityType _: UIActivity.ActivityType?
+    ) -> Any? {
       nil
     }
   }
 
-  func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityView>) -> UIActivityViewController {
-    UIActivityViewController(activityItems: [image, LinkDelegate(image: image, status: status)],
-                             applicationActivities: nil)
+  func makeUIViewController(context _: UIViewControllerRepresentableContext<ActivityView>)
+    -> UIActivityViewController
+  {
+    UIActivityViewController(
+      activityItems: [image, LinkDelegate(image: image, status: status)],
+      applicationActivities: nil)
   }
 
-  func updateUIViewController(_: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>) {}
+  func updateUIViewController(
+    _: UIActivityViewController, context _: UIViewControllerRepresentableContext<ActivityView>
+  ) {}
 }
 
 extension URL: @retroactive Identifiable {

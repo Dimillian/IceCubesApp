@@ -66,7 +66,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
         }
       }
       makeNextPageRow(nextPageState: nextPageState)
-      
+
     case let .displayWithGaps(items, nextPageState):
       ForEach(items) { item in
         ZStack {
@@ -86,7 +86,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
             .onDisappear {
               fetcher.statusDidDisappear(status: status)
             }
-            
+
           case .gap(let gap):
             ZStack {
               if let gapLoader = fetcher as? GapLoadingFetcher {
@@ -113,11 +113,17 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
             bottom: 0,
             trailing: .layoutPadding)
         )
-              }
+        .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
+          return -100
+        }
+        .alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
+          return viewDimensions.width + 100
+        }
+      }
       makeNextPageRow(nextPageState: nextPageState)
     }
   }
-  
+
   @ViewBuilder
   private func makeNextPageRow(nextPageState: StatusesState.PagingState) -> some View {
     ZStack {
@@ -134,16 +140,20 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     }
     .listRowSeparator(.hidden, edges: .all)
     #if !os(visionOS)
-    .listRowBackground(theme.primaryBackgroundColor)
+      .listRowBackground(theme.primaryBackgroundColor)
     #endif
+    .alignmentGuide(.listRowSeparatorLeading) { _ in
+      -100
+    }
   }
-  
+
   @ViewBuilder
   private func makeBackgroundColorFor(status: Status?) -> some View {
     if let status {
       if status.visibility == .direct {
         theme.tintColor.opacity(0.15)
-      } else if status.mentions.first(where: { $0.id == CurrentAccount.shared.account?.id }) != nil  {
+      } else if status.mentions.first(where: { $0.id == CurrentAccount.shared.account?.id }) != nil
+      {
         theme.secondaryBackgroundColor
       } else if status.account.isPremiumAccount {
         Color.yellow.opacity(0.4)

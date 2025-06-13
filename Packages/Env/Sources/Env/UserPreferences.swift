@@ -64,7 +64,6 @@ import SwiftUI
     @AppStorage("share-button-behavior") public var shareButtonBehavior:
       PreferredShareButtonBehavior = .linkOnly
 
-
     @AppStorage("max_reply_indentation") public var maxReplyIndentation: UInt = 7
     @AppStorage("show_reply_indentation") public var showReplyIndentation: Bool = true
 
@@ -338,7 +337,6 @@ import SwiftUI
       storage.shareButtonBehavior = shareButtonBehavior
     }
   }
-
 
   public var maxReplyIndentation: UInt {
     didSet {

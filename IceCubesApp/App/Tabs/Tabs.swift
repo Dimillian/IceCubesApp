@@ -32,7 +32,10 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
   }
 
   @ViewBuilder
-  func makeContentView(homeTimeline: Binding<TimelineFilter>, selectedTab: Binding<AppTab>, pinnedFilters: Binding<[TimelineFilter]>) -> some View {
+  func makeContentView(
+    homeTimeline: Binding<TimelineFilter>, selectedTab: Binding<AppTab>,
+    pinnedFilters: Binding<[TimelineFilter]>
+  ) -> some View {
     switch self {
     case .timeline:
       TimelineTab(canFilterTimeline: true, timeline: homeTimeline, pinedFilters: pinnedFilters)
@@ -78,7 +81,7 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
       EmptyView()
     }
   }
-  
+
   var tabPlacement: TabPlacement {
     switch self {
     case .timeline, .notifications, .explore, .links, .profile:
@@ -87,7 +90,6 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
       return .sidebarOnly
     }
   }
-   
 
   @ViewBuilder
   var label: some View {

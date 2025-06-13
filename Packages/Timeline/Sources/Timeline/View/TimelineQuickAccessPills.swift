@@ -14,7 +14,7 @@ public struct TimelineQuickAccessPills: View {
   @Binding var timeline: TimelineFilter
 
   @State private var draggedFilter: TimelineFilter?
-  
+
   public init(pinnedFilters: Binding<[TimelineFilter]>, timeline: Binding<TimelineFilter>) {
     _pinnedFilters = pinnedFilters
     _timeline = timeline

@@ -91,7 +91,7 @@ extension StatusEditor {
                   GlassEffectContainer(spacing: 10) {
                     VStack(spacing: 10) {
                       AutoCompleteView(viewModel: focusedSEVM)
-                      
+
                       AccessoryView(
                         focusedSEVM: focusedSEVM,
                         followUpSEVMs: $followUpSEVMs)
@@ -102,7 +102,7 @@ extension StatusEditor {
                   AccessoryView(
                     focusedSEVM: focusedSEVM,
                     followUpSEVMs: $followUpSEVMs)
-                  
+
                   AutoCompleteView(viewModel: focusedSEVM)
                 }
               }

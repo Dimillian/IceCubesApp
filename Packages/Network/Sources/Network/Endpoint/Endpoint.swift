@@ -15,7 +15,7 @@ extension Endpoint {
 extension Endpoint {
   func makePaginationParam(sinceId: String?, maxId: String?, mindId: String?) -> [URLQueryItem]? {
     var params: [URLQueryItem] = []
-    
+
     if let sinceId {
       params.append(.init(name: "since_id", value: sinceId))
     }
@@ -25,7 +25,7 @@ extension Endpoint {
     if let mindId {
       params.append(.init(name: "min_id", value: mindId))
     }
-    
+
     return params.isEmpty ? nil : params
   }
 }

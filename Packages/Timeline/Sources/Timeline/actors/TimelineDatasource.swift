@@ -17,7 +17,7 @@ actor TimelineDatasource {
       return nil
     }
   }
-  
+
   func getItems() -> [TimelineItem] {
     items
   }
@@ -33,7 +33,7 @@ actor TimelineDatasource {
     }
     return filtered
   }
-  
+
   func getFilteredItems() async -> [TimelineItem] {
     let contentFilter = await TimelineContentFilter.shared
     var filtered: [TimelineItem] = []
@@ -59,7 +59,7 @@ actor TimelineDatasource {
   }
 
   // MARK: - Status Finding Helpers
-  
+
   private func findStatusIndex(id: String) -> Int? {
     items.firstIndex(where: { item in
       if case .status(let status) = item {
@@ -68,7 +68,7 @@ actor TimelineDatasource {
       return false
     })
   }
-  
+
   private func findGapIndex(id: String) -> Int? {
     items.firstIndex(where: { item in
       if case .gap(let gap) = item {
@@ -77,7 +77,7 @@ actor TimelineDatasource {
       return false
     })
   }
-  
+
   // MARK: - Status Operations
 
   func indexOf(statusId: String) -> Int? {
@@ -122,41 +122,44 @@ actor TimelineDatasource {
 
   func remove(_ statusId: String) -> Status? {
     guard let index = findStatusIndex(id: statusId),
-          case .status(let status) = items.remove(at: index) else {
+      case .status(let status) = items.remove(at: index)
+    else {
       return nil
     }
     return status
   }
-  
+
   // MARK: - Gap Operations
-  
+
   func insertGap(_ gap: TimelineGap, at index: Int) {
     items.insert(.gap(gap), at: index)
   }
-  
+
   func replaceGap(id: String, with statuses: [Status]) {
     guard let gapIndex = findGapIndex(id: id) else { return }
     items.remove(at: gapIndex)
     items.insert(contentsOf: statuses.map { .status($0) }, at: gapIndex)
   }
-  
+
   func updateGapLoadingState(id: String, isLoading: Bool) {
     guard let gapIndex = findGapIndex(id: id),
-          case .gap(var gap) = items[gapIndex] else { return }
+      case .gap(var gap) = items[gapIndex]
+    else { return }
     gap.isLoading = isLoading
     items[gapIndex] = .gap(gap)
   }
-  
+
   // MARK: - Private Helpers
-  
+
   private func shouldShowStatus(_ status: Status, filter: TimelineContentFilter) async -> Bool {
     let showReplies = await filter.showReplies
     let showBoosts = await filter.showBoosts
     let showThreads = await filter.showThreads
     let showQuotePosts = await filter.showQuotePosts
-    
+
     return !status.isHidden
-      && (showReplies || status.inReplyToId == nil || status.inReplyToAccountId == status.account.id)
+      && (showReplies || status.inReplyToId == nil
+        || status.inReplyToAccountId == status.account.id)
       && (showBoosts || status.reblog == nil)
       && (showThreads || status.inReplyToAccountId != status.account.id)
       && (showQuotePosts || status.content.statusesURLs.isEmpty)

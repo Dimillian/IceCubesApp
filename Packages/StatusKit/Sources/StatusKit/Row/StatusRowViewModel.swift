@@ -111,7 +111,6 @@ import SwiftUI
     (status.reblog?.url ?? status.url).flatMap(URL.init(string:))
   }
 
-
   @ViewBuilder
   var backgroundColor: some View {
     if status.visibility == .direct {

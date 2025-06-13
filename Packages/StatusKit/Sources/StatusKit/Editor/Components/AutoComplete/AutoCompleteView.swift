@@ -17,12 +17,15 @@ extension StatusEditor {
     @State private var isTagSuggestionExpanded: Bool = false
 
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
-    
+
     var body: some View {
       if #available(iOS 26, *) {
         contentView
           .padding(.vertical, 8)
-          .glassEffect(.regular.tint(theme.primaryBackgroundColor.opacity(0.2)), in: RoundedRectangle(cornerRadius: 8))
+          .glassEffect(
+            .regular.tint(theme.primaryBackgroundColor.opacity(0.2)),
+            in: RoundedRectangle(cornerRadius: 8)
+          )
           .padding(.horizontal, 16)
       } else {
         contentView

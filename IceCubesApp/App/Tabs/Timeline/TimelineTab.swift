@@ -21,18 +21,21 @@ struct TimelineTab: View {
 
   @State private var didAppear: Bool = false
   @State private var selectedTagGroup: TagGroup?
-  
+
   @Binding var timeline: TimelineFilter
   @Binding var pinnedFilters: [TimelineFilter]
 
   @AppStorage("last_timeline_filter") var lastTimelineFilter: TimelineFilter = .home
-  
+
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
-  
+
   private let canFilterTimeline: Bool
 
-  init(canFilterTimeline: Bool = false, timeline: Binding<TimelineFilter>, pinedFilters: Binding<[TimelineFilter]> = .constant([])) {
+  init(
+    canFilterTimeline: Bool = false, timeline: Binding<TimelineFilter>,
+    pinedFilters: Binding<[TimelineFilter]> = .constant([])
+  ) {
     self.canFilterTimeline = canFilterTimeline
     _timeline = timeline
     _pinnedFilters = pinedFilters

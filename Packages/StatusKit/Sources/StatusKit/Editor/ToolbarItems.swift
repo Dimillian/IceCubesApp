@@ -41,7 +41,7 @@ extension StatusEditor {
               draftsListView
             }
           }
-          
+
           Button {
             Task {
               mainSEVM.evaluateLanguages()

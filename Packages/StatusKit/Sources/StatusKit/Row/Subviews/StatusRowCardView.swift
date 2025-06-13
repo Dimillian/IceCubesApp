@@ -113,7 +113,8 @@ public struct StatusRowCardView: View {
   @ViewBuilder
   private func defaultLinkPreview(_ title: String, _ url: URL) -> some View {
     if let imageURL = card.image {
-      DefaultPreviewImage(url: imageURL, originalWidth: card.width ?? 0, originalHeight: card.height ?? 0)
+      DefaultPreviewImage(
+        url: imageURL, originalWidth: card.width ?? 0, originalHeight: card.height ?? 0)
     }
 
     VStack(alignment: .leading, spacing: 4) {

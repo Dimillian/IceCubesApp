@@ -51,10 +51,11 @@ struct AppView: View {
       } else {
         tabBarView
       }
-      
+
       if horizontalSizeClass == .regular,
-         appAccountsManager.currentClient.isAuth,
-         userPreferences.showiPadSecondaryColumn {
+        appAccountsManager.currentClient.isAuth,
+        userPreferences.showiPadSecondaryColumn
+      {
         Divider().edgesIgnoringSafeArea(.all)
         notificationsSecondaryColumn
       }
@@ -86,7 +87,8 @@ struct AppView: View {
     ) {
       ForEach(availableTabs) { tab in
         Tab(value: tab, role: tab == .post ? .search : .none) {
-          tab.makeContentView(homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+          tab.makeContentView(
+            homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
         } label: {
           tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
         }

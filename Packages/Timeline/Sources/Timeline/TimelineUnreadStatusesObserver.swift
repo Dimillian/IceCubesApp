@@ -41,36 +41,36 @@ struct TimelineUnreadStatusesView: View {
   var body: some View {
     if #available(iOS 26, *) {
       buttonBody
-      #if os(visionOS)
-        .buttonStyle(.bordered)
-        .tint(Material.ultraThick)
-      #else
-        .buttonStyle(.glass)
-      #endif
-      .padding(8)
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
+        #if os(visionOS)
+          .buttonStyle(.bordered)
+          .tint(Material.ultraThick)
+        #else
+          .buttonStyle(.glass)
+        #endif
+        .padding(8)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
     } else {
       buttonBody
-      #if os(visionOS)
-        .buttonStyle(.bordered)
-        .tint(Material.ultraThick)
-      #else
-        .buttonStyle(.bordered)
-        .background(Material.ultraThick)
-      #endif
-      .cornerRadius(8)
-      #if !os(visionOS)
-        .foregroundStyle(.secondary)
-        .overlay(
-          RoundedRectangle(cornerRadius: 8)
-            .stroke(theme.tintColor, lineWidth: 1)
-        )
-      #endif
-      .padding(8)
-      .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
+        #if os(visionOS)
+          .buttonStyle(.bordered)
+          .tint(Material.ultraThick)
+        #else
+          .buttonStyle(.bordered)
+          .background(Material.ultraThick)
+        #endif
+        .cornerRadius(8)
+        #if !os(visionOS)
+          .foregroundStyle(.secondary)
+          .overlay(
+            RoundedRectangle(cornerRadius: 8)
+              .stroke(theme.tintColor, lineWidth: 1)
+          )
+        #endif
+        .padding(8)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
     }
   }
-  
+
   @ViewBuilder
   var buttonBody: some View {
     if observer.pendingStatusesCount > 0 || observer.isLoadingNewStatuses {

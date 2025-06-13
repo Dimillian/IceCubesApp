@@ -44,10 +44,10 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
     var allStatuses: [Status] = []
     var latestMinId = minId
     let targetCount = 50
-    
+
     for _ in 1...maxPages {
       if Task.isCancelled { break }
-      
+
       // If we already have enough statuses, stop fetching
       if allStatuses.count >= targetCount { break }
 

@@ -10,10 +10,8 @@ struct TimelineGapView: View {
 
   var body: some View {
     VStack(spacing: 12) {
-      Divider()
       HStack {
         Spacer()
-
         if gap.isLoading {
           ProgressView()
             .progressViewStyle(.circular)
@@ -36,8 +34,7 @@ struct TimelineGapView: View {
 
         Spacer()
       }
-      .padding(.vertical, 12)
-      Divider()
+      .padding(.vertical, 24)
     }
   }
 }
