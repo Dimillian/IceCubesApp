@@ -275,7 +275,7 @@ extension TimelineViewModel: GapLoadingFetcher {
     
     let currentIds = await datasource.get().map(\.id)
     let actuallyNewStatuses = newestStatuses.filter { status in
-      !currentIds.contains(where: { $0 == status.id })
+      !currentIds.contains(where: { $0 == status.id }) && status.id > latestStatus
     }
 
     guard !actuallyNewStatuses.isEmpty else {
