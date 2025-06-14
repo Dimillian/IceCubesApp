@@ -50,6 +50,7 @@ extension StatusEditor {
                 viewModel: mainSEVM,
                 followUpSEVMs: $followUpSEVMs,
                 editingMediaContainer: $editingMediaContainer,
+                presentationDetent: $presentationDetent,
                 editorFocusState: $editorFocusState,
                 assignedFocusState: .main,
                 isMain: true
@@ -63,6 +64,7 @@ extension StatusEditor {
                   viewModel: sevm,
                   followUpSEVMs: $followUpSEVMs,
                   editingMediaContainer: $editingMediaContainer,
+                  presentationDetent: $presentationDetent,
                   editorFocusState: $editorFocusState,
                   assignedFocusState: .followUp(index: sevm.id),
                   isMain: false
@@ -76,7 +78,7 @@ extension StatusEditor {
           .animation(.bouncy(duration: 0.3), value: editorFocusState)
           .animation(.bouncy(duration: 0.3), value: followUpSEVMs)
           #if !os(visionOS)
-            .background(theme.primaryBackgroundColor)
+            .background(presentationDetent == .large ? theme.primaryBackgroundColor : .clear)
           #endif
           #if os(visionOS)
             .ornament(attachmentAnchor: .scene(.leading)) {
@@ -170,7 +172,7 @@ extension StatusEditor {
       .sheet(item: $editingMediaContainer) { container in
         StatusEditor.MediaEditView(viewModel: focusedSEVM, container: container)
       }
-      .presentationDetents([.large, .height(100)], selection: $presentationDetent)
+      .presentationDetents([.large, .height(200)], selection: $presentationDetent)
       .presentationBackgroundInteraction(.enabled)
     }
   }

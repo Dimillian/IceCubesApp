@@ -86,7 +86,7 @@ struct AppView: View {
         })
     ) {
       ForEach(availableTabs) { tab in
-        Tab(value: tab, role: tab == .post ? .search : .none) {
+        Tab(value: tab, role: tab == .post || tab == .explore ? .search : .none) {
           tab.makeContentView(
             homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
         } label: {
