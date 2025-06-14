@@ -27,19 +27,38 @@ struct AppView: View {
   @State var iosTabs = iOSTabs.shared
   @State var sidebarTabs = SidebarTabs.shared
   @State var selectedTabScrollToTop: Int = -1
+  @State var timeline: TimelineFilter = .home
+
+  @AppStorage("timeline_pinned_filters") private var pinnedFilters: [TimelineFilter] = []
 
   var body: some View {
-    switch UIDevice.current.userInterfaceIdiom {
-    case .vision:
-      tabBarView
-    case .pad, .mac:
-      #if !os(visionOS)
-        sidebarView
-      #else
+    HStack(spacing: 0) {
+      if #available(iOS 26, *) {
         tabBarView
-      #endif
-    default:
-      tabBarView
+          .tabViewBottomAccessory {
+            if !pinnedFilters.isEmpty {
+              TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
+                .padding(.horizontal, 8)
+                .onChange(of: timeline) { _, _ in
+                  if selectedTab != .timeline {
+                    selectedTab = .timeline
+                  }
+                }
+            }
+          }
+          .tabBarMinimizeBehavior(.never)
+          .tabViewStyle(.sidebarAdaptable)
+      } else {
+        tabBarView
+      }
+
+      if horizontalSizeClass == .regular,
+        appAccountsManager.currentClient.isAuth,
+        userPreferences.showiPadSecondaryColumn
+      {
+        Divider().edgesIgnoringSafeArea(.all)
+        notificationsSecondaryColumn
+      }
     }
   }
 
@@ -67,18 +86,14 @@ struct AppView: View {
         })
     ) {
       ForEach(availableTabs) { tab in
-        tab.makeContentView(selectedTab: $selectedTab)
-          .tabItem {
-            if userPreferences.showiPhoneTabLabel {
-              tab.label
-                .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
-            } else {
-              Image(systemName: tab.iconName)
-            }
-          }
-          .tag(tab)
-          .badge(badgeFor(tab: tab))
-          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
+        Tab(value: tab, role: tab == .post || tab == .explore ? .search : .none) {
+          tab.makeContentView(
+            homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+        } label: {
+          tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+        }
+        .tabPlacement(tab.tabPlacement)
+        .badge(badgeFor(tab: tab))
       }
     }
     .id(appAccountsManager.currentClient.id)
@@ -120,66 +135,6 @@ struct AppView: View {
       return watcher.unreadNotificationsCount + (userPreferences.notificationsCount[token] ?? 0)
     }
     return 0
-  }
-
-  #if !os(visionOS)
-    var sidebarView: some View {
-      SideBarView(
-        selectedTab: .init(
-          get: {
-            selectedTab
-          },
-          set: { newTab in
-            updateTab(with: newTab)
-          }), tabs: availableTabs
-      ) {
-        HStack(spacing: 0) {
-          if #available(iOS 18.0, *) {
-            baseTabView
-              #if targetEnvironment(macCatalyst)
-                .tabViewStyle(.sidebarAdaptable)
-                .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
-                  tabview.sidebar.isHidden = true
-                }
-              #else
-                .tabViewStyle(.tabBarOnly)
-              #endif
-          } else {
-            baseTabView
-          }
-          if horizontalSizeClass == .regular,
-            appAccountsManager.currentClient.isAuth,
-            userPreferences.showiPadSecondaryColumn
-          {
-            Divider().edgesIgnoringSafeArea(.all)
-            notificationsSecondaryColumn
-          }
-        }
-      }
-      .environment(appRouterPath)
-      .environment(\.selectedTabScrollToTop, selectedTabScrollToTop)
-    }
-  #endif
-
-  private var baseTabView: some View {
-    TabView(selection: $selectedTab) {
-      ForEach(availableTabs) { tab in
-        tab
-          .makeContentView(selectedTab: $selectedTab)
-          .toolbar(horizontalSizeClass == .regular ? .hidden : .visible, for: .tabBar)
-          .tabItem {
-            tab.label
-          }
-          .tag(tab)
-      }
-    }
-    #if !os(visionOS)
-      .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
-        tabview.tabBar.isHidden = horizontalSizeClass == .regular
-        tabview.customizableViewControllers = []
-        tabview.moreNavigationController.isNavigationBarHidden = true
-      }
-    #endif
   }
 
   var notificationsSecondaryColumn: some View {

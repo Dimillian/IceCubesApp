@@ -35,13 +35,20 @@ extension StatusEditor {
         .cornerRadius(8)
         .padding(.trailing, 78)
       #else
-        Divider()
-        HStack {
+        if #available(iOS 26, *) {
           contentView
+            .padding(.vertical, 16)
+            .glassEffect(.regular.tint(theme.primaryBackgroundColor.opacity(0.2)))
+            .padding(.horizontal, 16)
+        } else {
+          Divider()
+          HStack {
+            contentView
+          }
+          .frame(height: 20)
+          .padding(.vertical, 12)
+          .background(.ultraThickMaterial)
         }
-        .frame(height: 20)
-        .padding(.vertical, 12)
-        .background(.ultraThickMaterial)
       #endif
     }
 
@@ -95,8 +102,10 @@ extension StatusEditor {
           ProgressView()
         } else {
           Image(systemName: "photo.on.rectangle.angled")
+            .foregroundStyle(theme.tintColor)
         }
       }
+      .buttonStyle(.plain)
       .photosPicker(
         isPresented: $isPhotosPickerPresented,
         selection: $viewModel.mediaPickers,
@@ -224,8 +233,10 @@ extension StatusEditor {
         } else {
           Image(systemName: "faxmachine")
             .accessibilityLabel("accessibility.editor.button.ai-prompt")
+            .foregroundStyle(theme.tintColor)
         }
       }
+      .buttonStyle(.plain)
     }
   }
 }

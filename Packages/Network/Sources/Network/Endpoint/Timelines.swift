@@ -31,14 +31,14 @@ public enum Timelines: Endpoint {
         params.append(.init(name: "limit", value: String(limit)))
       }
       return params
-    case let .home(sinceId, maxId, mindId, limit):
-      var params = makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: mindId) ?? []
+    case let .home(sinceId, maxId, minId, limit):
+      var params = makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: minId) ?? []
       if let limit {
         params.append(.init(name: "limit", value: String(limit)))
       }
       return params
-    case let .list(_, sinceId, maxId, mindId):
-      return makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: mindId)
+    case let .list(_, sinceId, maxId, minId):
+      return makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: minId)
     case let .hashtag(_, additional, maxId, minId):
       var params = makePaginationParam(sinceId: nil, maxId: maxId, mindId: minId) ?? []
       params.append(

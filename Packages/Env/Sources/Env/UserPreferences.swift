@@ -64,16 +64,12 @@ import SwiftUI
     @AppStorage("share-button-behavior") public var shareButtonBehavior:
       PreferredShareButtonBehavior = .linkOnly
 
-    @AppStorage("fast_refresh") public var fastRefreshEnabled: Bool = false
-
     @AppStorage("max_reply_indentation") public var maxReplyIndentation: UInt = 7
     @AppStorage("show_reply_indentation") public var showReplyIndentation: Bool = true
 
     @AppStorage("show_account_popover") public var showAccountPopover: Bool = true
 
     @AppStorage("sidebar_expanded") public var isSidebarExpanded: Bool = false
-
-    @AppStorage("stream_new_posts") public var isPostsStreamingEnabled: Bool = false
 
     init() {
       prepareTranslationType()
@@ -342,12 +338,6 @@ import SwiftUI
     }
   }
 
-  public var fastRefreshEnabled: Bool {
-    didSet {
-      storage.fastRefreshEnabled = fastRefreshEnabled
-    }
-  }
-
   public var maxReplyIndentation: UInt {
     didSet {
       storage.maxReplyIndentation = maxReplyIndentation
@@ -369,12 +359,6 @@ import SwiftUI
   public var isSidebarExpanded: Bool {
     didSet {
       storage.isSidebarExpanded = isSidebarExpanded
-    }
-  }
-
-  public var isPostsStreamingEnabled: Bool {
-    didSet {
-      storage.isPostsStreamingEnabled = isPostsStreamingEnabled
     }
   }
 
@@ -550,13 +534,11 @@ import SwiftUI
     shareButtonBehavior = storage.shareButtonBehavior
     pendingShownAtBottom = storage.pendingShownAtBottom
     pendingShownLeft = storage.pendingShownLeft
-    fastRefreshEnabled = storage.fastRefreshEnabled
     maxReplyIndentation = storage.maxReplyIndentation
     showReplyIndentation = storage.showReplyIndentation
     showAccountPopover = storage.showAccountPopover
     muteVideo = storage.muteVideo
     isSidebarExpanded = storage.isSidebarExpanded
-    isPostsStreamingEnabled = storage.isPostsStreamingEnabled
   }
 }
 

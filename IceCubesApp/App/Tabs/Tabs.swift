@@ -5,6 +5,7 @@ import Explore
 import Foundation
 import StatusKit
 import SwiftUI
+import Timeline
 
 @MainActor
 enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
@@ -31,16 +32,19 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
   }
 
   @ViewBuilder
-  func makeContentView(selectedTab: Binding<AppTab>) -> some View {
+  func makeContentView(
+    homeTimeline: Binding<TimelineFilter>, selectedTab: Binding<AppTab>,
+    pinnedFilters: Binding<[TimelineFilter]>
+  ) -> some View {
     switch self {
     case .timeline:
-      TimelineTab()
+      TimelineTab(canFilterTimeline: true, timeline: homeTimeline, pinedFilters: pinnedFilters)
     case .trending:
-      TimelineTab(timeline: .trending)
+      TimelineTab(timeline: .constant(.trending))
     case .local:
-      TimelineTab(timeline: .local)
+      TimelineTab(timeline: .constant(.local))
     case .federated:
-      TimelineTab(timeline: .federated)
+      TimelineTab(timeline: .constant(.federated))
     case .notifications:
       NotificationsTab(selectedTab: selectedTab, lockedType: nil)
     case .mentions:
@@ -75,6 +79,15 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
       VStack {}
     case .other:
       EmptyView()
+    }
+  }
+
+  var tabPlacement: TabPlacement {
+    switch self {
+    case .timeline, .notifications, .explore, .links, .profile:
+      return .pinned
+    default:
+      return .sidebarOnly
     }
   }
 

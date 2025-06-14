@@ -14,6 +14,7 @@ extension StatusEditor {
     @Environment(CurrentInstance.self) private var currentInstance
     @Environment(AppAccountsManager.self) private var appAccounts
     @Environment(Client.self) private var client
+    
     #if targetEnvironment(macCatalyst)
       @Environment(\.dismissWindow) private var dismissWindow
     #else
@@ -23,6 +24,7 @@ extension StatusEditor {
     @Bindable var viewModel: ViewModel
     @Binding var followUpSEVMs: [ViewModel]
     @Binding var editingMediaContainer: MediaContainer?
+    @Binding var presentationDetent: PresentationDetent
 
     @FocusState<UUID?> var isSpoilerTextFocused: UUID?
     @FocusState<EditorFocusState?>.Binding var editorFocusState: EditorFocusState?
@@ -55,7 +57,7 @@ extension StatusEditor {
         }
       }
       #if !os(visionOS)
-        .background(theme.primaryBackgroundColor)
+        .background(presentationDetent == .large ? theme.primaryBackgroundColor : .clear)
       #endif
       .focused($editorFocusState, equals: assignedFocusState)
       .onAppear { setupViewModel() }

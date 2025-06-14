@@ -5,7 +5,7 @@ import Network
 import SwiftUI
 
 @MainActor
-struct TimelineQuickAccessPills: View {
+public struct TimelineQuickAccessPills: View {
   @Environment(Client.self) private var client
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
@@ -15,7 +15,12 @@ struct TimelineQuickAccessPills: View {
 
   @State private var draggedFilter: TimelineFilter?
 
-  var body: some View {
+  public init(pinnedFilters: Binding<[TimelineFilter]>, timeline: Binding<TimelineFilter>) {
+    _pinnedFilters = pinnedFilters
+    _timeline = timeline
+  }
+
+  public var body: some View {
     ScrollView(.horizontal) {
       HStack {
         ForEach(pinnedFilters) { filter in

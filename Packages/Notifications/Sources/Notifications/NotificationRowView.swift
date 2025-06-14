@@ -140,7 +140,7 @@ struct NotificationRowView: View {
     }
     .accessibilityElement(children: .combine)
   }
-  
+
   nonisolated private func makeAppendView(type: Models.Notification.NotificationType) -> Text {
     if notification.accounts.count > 1 {
       Text("notifications-others-count \(notification.accounts.count - 1)")
@@ -148,17 +148,17 @@ struct NotificationRowView: View {
         .fontWeight(.regular)
     } else {
       Text(" ")
-      + Text(type.label(count: notification.accounts.count))
+        + Text(type.label(count: notification.accounts.count))
         .font(.subheadline)
-      .fontWeight(.regular)
-      + Text(" ⸱ ")
+        .fontWeight(.regular)
+        + Text(" ⸱ ")
         .font(.footnote)
-      .fontWeight(.regular)
-      .foregroundStyle(.secondary)
-      + Text(notification.createdAt.relativeFormatted)
+        .fontWeight(.regular)
+        .foregroundStyle(.secondary)
+        + Text(notification.createdAt.relativeFormatted)
         .font(.footnote)
-      .fontWeight(.regular)
-      .foregroundStyle(.secondary)
+        .fontWeight(.regular)
+        .foregroundStyle(.secondary)
     }
   }
 

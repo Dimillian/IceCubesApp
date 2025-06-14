@@ -19,7 +19,6 @@ struct ExploreTab: View {
       ExploreView()
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .toolbar {
           ToolbarTab(routerPath: $routerPath)
         }

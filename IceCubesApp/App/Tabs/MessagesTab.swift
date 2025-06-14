@@ -24,7 +24,6 @@ struct MessagesTab: View {
         .toolbar {
           ToolbarTab(routerPath: $routerPath)
         }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .id(client.id)
     }
     .onChange(of: client.id) {

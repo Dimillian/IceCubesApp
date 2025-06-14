@@ -19,6 +19,22 @@ extension StatusEditor {
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
 
     var body: some View {
+      if #available(iOS 26, *) {
+        contentView
+          .padding(.vertical, 8)
+          .glassEffect(
+            .regular.tint(theme.primaryBackgroundColor.opacity(0.2)),
+            in: RoundedRectangle(cornerRadius: 8)
+          )
+          .padding(.horizontal, 16)
+      } else {
+        contentView
+          .background(.thinMaterial)
+      }
+    }
+
+    @ViewBuilder
+    var contentView: some View {
       if !viewModel.mentionsSuggestions.isEmpty || !viewModel.tagsSuggestions.isEmpty
         || (viewModel.showRecentsTagsInline && !recentTags.isEmpty)
       {
@@ -61,7 +77,6 @@ extension StatusEditor {
               viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
           }
         }
-        .background(.thinMaterial)
       }
     }
   }

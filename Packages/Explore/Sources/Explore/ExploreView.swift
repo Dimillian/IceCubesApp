@@ -20,10 +20,8 @@ public struct ExploreView: View {
     ScrollViewReader { proxy in
       List {
         scrollToTopView
-          .padding(.bottom, 4)
         if !viewModel.isLoaded {
           quickAccessView
-            .padding(.bottom, 5)
           loadingView
         } else if !viewModel.searchQuery.isEmpty {
           if let results = viewModel.results[viewModel.searchQuery] {
@@ -92,7 +90,7 @@ public struct ExploreView: View {
           SoundEffectManager.shared.playSound(.refresh)
         }
       }
-      .listStyle(.plain)
+      .listStyle(.grouped)
       #if !os(visionOS)
         .scrollContentBackground(.hidden)
         .background(theme.secondaryBackgroundColor)

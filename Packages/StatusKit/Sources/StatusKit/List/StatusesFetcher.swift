@@ -10,6 +10,7 @@ public enum StatusesState {
 
   case loading
   case display(statuses: [Status], nextPageState: StatusesState.PagingState)
+  case displayWithGaps(items: [TimelineItem], nextPageState: StatusesState.PagingState)
   case error(error: Error)
 }
 
@@ -20,4 +21,9 @@ public protocol StatusesFetcher {
   func fetchNextPage() async throws
   func statusDidAppear(status: Status)
   func statusDidDisappear(status: Status)
+}
+
+@MainActor
+public protocol GapLoadingFetcher: StatusesFetcher {
+  func loadGap(gap: TimelineGap) async
 }

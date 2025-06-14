@@ -1,9 +1,9 @@
 import AVFoundation
 import Models
 import Nuke
+import Photos
 import QuickLook
 import SwiftUI
-import Photos
 
 public struct MediaUIView: View, @unchecked Sendable {
   private let data: [DisplayData]
@@ -190,12 +190,12 @@ private struct SavePhotoToolbarItem: ToolbarContent, @unchecked Sendable {
     }
     return nil
   }
-  
+
   private func saveImage(url: URL) async -> Bool {
     guard let image = try? await uiimageFor(url: url) else { return false }
-    
+
     var status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
-    
+
     if status != .authorized {
       await PHPhotoLibrary.requestAuthorization(for: .addOnly)
       status = PHPhotoLibrary.authorizationStatus(for: .addOnly)
