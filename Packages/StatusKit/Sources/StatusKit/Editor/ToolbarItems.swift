@@ -30,47 +30,47 @@ extension StatusEditor {
     }
 
     var body: some ToolbarContent {
-      if !mainSEVM.mode.isInShareExtension {
-        ToolbarItemGroup(placement: .topBarTrailing) {
-          Button {
-            isDraftsSheetDisplayed = true
-          } label: {
-            Image(systemName: "pencil.and.list.clipboard")
-          }
-          .accessibilityLabel("accessibility.editor.button.drafts")
-          .sheet(isPresented: $isDraftsSheetDisplayed) {
-            if UIDevice.current.userInterfaceIdiom == .phone {
-              draftsListView
-            } else {
-              draftsListView
-            }
-          }
-
-          Button {
-            Task {
-              guard !isSendingDisabled else { return }
-              mainSEVM.evaluateLanguages()
-              if preferences.autoDetectPostLanguage,
-                mainSEVM.languageConfirmationDialogLanguages != nil
-              {
-                isLanguageConfirmPresented = true
-              } else {
-                await postAllStatus()
-              }
-            }
-          } label: {
-            Image(systemName: "paperplane.fill")
-              .bold()
-          }
-          .buttonBorderShape(.circle)
-          .buttonStyle(.borderedProminent)
-          .keyboardShortcut(.return, modifiers: .command)
-          .confirmationDialog(
-            "", isPresented: $isLanguageConfirmPresented,
-            actions: {
-              languageConfirmationDialog
-            })
+      ToolbarItemGroup(placement: .topBarTrailing) {
+        Button {
+          isDraftsSheetDisplayed = true
+        } label: {
+          Image(systemName: "pencil.and.list.clipboard")
         }
+        .accessibilityLabel("accessibility.editor.button.drafts")
+        .sheet(isPresented: $isDraftsSheetDisplayed) {
+          if UIDevice.current.userInterfaceIdiom == .phone {
+            draftsListView
+          } else {
+            draftsListView
+          }
+        }
+
+        Button {
+          Task {
+            guard !isSendingDisabled else { return }
+            mainSEVM.evaluateLanguages()
+            if preferences.autoDetectPostLanguage,
+              mainSEVM.languageConfirmationDialogLanguages != nil
+            {
+              isLanguageConfirmPresented = true
+            } else {
+              await postAllStatus()
+            }
+          }
+        } label: {
+          Image(systemName: "paperplane")
+            .symbolVariant(isSendingDisabled ? .none : .fill)
+            .tint(isSendingDisabled ? .secondary : theme.tintColor)
+            .bold()
+        }
+        .buttonBorderShape(.circle)
+        .buttonStyle(.borderedProminent)
+        .keyboardShortcut(.return, modifiers: .command)
+        .confirmationDialog(
+          "", isPresented: $isLanguageConfirmPresented,
+          actions: {
+            languageConfirmationDialog
+          })
       }
 
       ToolbarItem(placement: .navigationBarLeading) {
