@@ -54,7 +54,7 @@
 		DA0B24FB2A6876D50045BDD7 /* SFSafeSymbols in Frameworks */ = {isa = PBXBuildFile; productRef = DA0B24FA2A6876D50045BDD7 /* SFSafeSymbols */; };
 		E92817FA298443D600875FD1 /* Models in Frameworks */ = {isa = PBXBuildFile; productRef = E92817F9298443D600875FD1 /* Models */; };
 		E92817FC298443D600875FD1 /* Network in Frameworks */ = {isa = PBXBuildFile; productRef = E92817FB298443D600875FD1 /* Network */; };
-		E9DB78982E004E4C004EAC2E /* Icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = E9DB78972E004E4C004EAC2E /* Icon.icon */; };
+		E9DB78982E004E4C004EAC2E /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = E9DB78972E004E4C004EAC2E /* AppIcon.icon */; };
 		E9DF41FC29830FEC0003AAD2 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9DF41FB29830FEC0003AAD2 /* UniformTypeIdentifiers.framework */; };
 		E9DF420729830FEC0003AAD2 /* IceCubesActionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */; platformFilters = (ios, maccatalyst, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -133,7 +133,7 @@
 		9FE0346A2ADD59AC00529EA8 /* MediaUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MediaUI; path = Packages/MediaUI; sourceTree = "<group>"; };
 		9FE3DB55296FEF5800628CB0 /* AppAccount */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AppAccount; path = Packages/AppAccount; sourceTree = "<group>"; };
 		DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = IceCubesApp.xcconfig; sourceTree = "<group>"; };
-		E9DB78972E004E4C004EAC2E /* Icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = Icon.icon; sourceTree = "<group>"; };
+		E9DB78972E004E4C004EAC2E /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IceCubesActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9DF41FB29830FEC0003AAD2 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -304,7 +304,7 @@
 		9FBFE630292A715500C250E9 = {
 			isa = PBXGroup;
 			children = (
-				E9DB78972E004E4C004EAC2E /* Icon.icon */,
+				E9DB78972E004E4C004EAC2E /* AppIcon.icon */,
 				DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */,
 				9F7D939529800B0300EE6B7A /* IceCubesApp-release.xcconfig */,
 				9FF305C02CCA8569007B6B8F /* IceCubesApp */,
@@ -608,7 +608,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9DB78982E004E4C004EAC2E /* Icon.icon in Resources */,
+				E9DB78982E004E4C004EAC2E /* AppIcon.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1041,7 +1041,7 @@
 		9FBFE649292A715600C250E9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				ASSETCATALOG_COMPILER_STANDALONE_ICON_BEHAVIOR = all;
@@ -1109,7 +1109,7 @@
 		9FBFE64A292A715600C250E9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = Icon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				ASSETCATALOG_COMPILER_STANDALONE_ICON_BEHAVIOR = all;
