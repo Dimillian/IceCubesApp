@@ -385,13 +385,14 @@ public struct AccountDetailView: View {
           }
         }
       } label: {
-        Image(systemName: "ellipsis.circle")
+        Image(systemName: "ellipsis")
           .accessibilityLabel("accessibility.tabs.profile.options.label")
           .accessibilityInputLabels([
             LocalizedStringKey("accessibility.tabs.profile.options.label"),
             LocalizedStringKey("accessibility.tabs.profile.options.inputLabel1"),
             LocalizedStringKey("accessibility.tabs.profile.options.inputLabel2"),
           ])
+          .foregroundStyle(theme.tintColor)
       }
       .confirmationDialog("Block User", isPresented: $showBlockConfirmation) {
         if let account = viewModel.account {
@@ -407,6 +408,7 @@ public struct AccountDetailView: View {
       } message: {
         Text("account.action.block-user-confirmation")
       }
+      .tint(.label)
       #if canImport(_Translation_SwiftUI)
         .addTranslateView(
           isPresented: $showTranslateView, text: viewModel.account?.note.asRawText ?? "")

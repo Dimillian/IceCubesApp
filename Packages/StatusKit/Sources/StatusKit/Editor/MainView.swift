@@ -172,7 +172,7 @@ extension StatusEditor {
       .sheet(item: $editingMediaContainer) { container in
         StatusEditor.MediaEditView(viewModel: focusedSEVM, container: container)
       }
-      .presentationDetents([.large, .height(200)], selection: $presentationDetent)
+      .presentationDetents([.large, .height(230)], selection: $presentationDetent)
       .presentationBackgroundInteraction(.enabled)
     }
   }

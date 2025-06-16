@@ -135,7 +135,7 @@ public struct ExploreView: View {
         }
         .buttonStyle(.bordered)
       }
-      .padding(.horizontal, 16)
+      .padding(16)
     }
     .scrollIndicators(.never)
     .listRowInsets(EdgeInsets())
