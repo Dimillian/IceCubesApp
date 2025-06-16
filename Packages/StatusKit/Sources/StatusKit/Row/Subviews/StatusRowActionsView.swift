@@ -215,6 +215,7 @@ struct StatusRowActionsView: View {
             .menuStyle(.button)
             .buttonStyle(.borderless)
             .foregroundStyle(.secondary)
+            .tint(.primary)
             .contentShape(Rectangle())
             .accessibilityLabel("status.action.context-menu")
           } else {

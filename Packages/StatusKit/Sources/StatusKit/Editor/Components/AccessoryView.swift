@@ -169,7 +169,8 @@ extension StatusEditor {
       }
 
       if preferences.isOpenAIEnabled {
-        AIMenu.disabled(!viewModel.canPost)
+        AIMenu
+          .disabled(!viewModel.canPost)
       }
 
       Spacer()
@@ -233,7 +234,7 @@ extension StatusEditor {
         } else {
           Image(systemName: "faxmachine")
             .accessibilityLabel("accessibility.editor.button.ai-prompt")
-            .foregroundStyle(theme.tintColor)
+            .foregroundStyle(focusedSEVM.canPost ? theme.tintColor : .secondary)
         }
       }
       .buttonStyle(.plain)

@@ -24,6 +24,10 @@ extension StatusEditor {
     #else
       @Environment(\.dismiss) private var dismiss
     #endif
+    
+    var isSendingDisabled: Bool {
+      !mainSEVM.canPost || mainSEVM.isPosting
+    }
 
     var body: some ToolbarContent {
       if !mainSEVM.mode.isInShareExtension {
@@ -44,6 +48,7 @@ extension StatusEditor {
 
           Button {
             Task {
+              guard !isSendingDisabled else { return }
               mainSEVM.evaluateLanguages()
               if preferences.autoDetectPostLanguage,
                 mainSEVM.languageConfirmationDialogLanguages != nil
@@ -57,8 +62,8 @@ extension StatusEditor {
             Image(systemName: "paperplane.fill")
               .bold()
           }
+          .buttonBorderShape(.circle)
           .buttonStyle(.borderedProminent)
-          .disabled(!mainSEVM.canPost || mainSEVM.isPosting)
           .keyboardShortcut(.return, modifiers: .command)
           .confirmationDialog(
             "", isPresented: $isLanguageConfirmPresented,
@@ -81,6 +86,7 @@ extension StatusEditor {
         } label: {
           Image(systemName: "xmark")
         }
+        .tint(.red)
         .keyboardShortcut(.cancelAction)
         .confirmationDialog(
           "",

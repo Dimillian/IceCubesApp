@@ -16,19 +16,32 @@ extension StatusEditor {
           }
         }
       } label: {
-        HStack {
-          Label(visibility.title, systemImage: visibility.iconName)
-            .accessibilityLabel("accessibility.editor.privacy.label")
-            .accessibilityValue(visibility.title)
-            .accessibilityHint("accessibility.editor.privacy.hint")
-          Image(systemName: "chevron.down")
+        if #available(iOS 26.0, *) {
+          HStack {
+            Label(visibility.title, systemImage: visibility.iconName)
+              .accessibilityLabel("accessibility.editor.privacy.label")
+              .accessibilityValue(visibility.title)
+              .accessibilityHint("accessibility.editor.privacy.hint")
+            Image(systemName: "chevron.down")
+          }
+          .font(.scaledFootnote)
+          .padding(8)
+          .glassEffect()
+        } else {
+          HStack {
+            Label(visibility.title, systemImage: visibility.iconName)
+              .accessibilityLabel("accessibility.editor.privacy.label")
+              .accessibilityValue(visibility.title)
+              .accessibilityHint("accessibility.editor.privacy.hint")
+            Image(systemName: "chevron.down")
+          }
+          .font(.scaledFootnote)
+          .padding(4)
+          .overlay(
+            RoundedRectangle(cornerRadius: 8)
+              .stroke(tint, lineWidth: 1)
+          )
         }
-        .font(.scaledFootnote)
-        .padding(4)
-        .overlay(
-          RoundedRectangle(cornerRadius: 8)
-            .stroke(tint, lineWidth: 1)
-        )
       }
     }
   }
