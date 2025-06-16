@@ -220,7 +220,6 @@ struct StatusRowActionsView: View {
             .accessibilityLabel("status.action.context-menu")
           } else {
             actionButton(action: action)
-            Spacer()
           }
         }
       }
