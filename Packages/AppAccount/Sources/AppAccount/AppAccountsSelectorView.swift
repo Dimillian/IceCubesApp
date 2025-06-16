@@ -113,7 +113,7 @@ public struct AppAccountsSelectorView: View {
             #endif
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
+          .listRowBackground(theme.secondaryBackgroundColor.opacity(0.8))
         #endif
 
         if accountCreationEnabled {
@@ -125,7 +125,7 @@ public struct AppAccountsSelectorView: View {
           #if os(visionOS)
             .foregroundStyle(theme.labelColor)
           #else
-            .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
+            .listRowBackground(theme.secondaryBackgroundColor.opacity(0.8))
           #endif
         }
       }
