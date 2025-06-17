@@ -35,8 +35,9 @@ extension StatusEditor {
 
     @ViewBuilder
     var contentView: some View {
-      if !viewModel.mentionsSuggestions.isEmpty || !viewModel.tagsSuggestions.isEmpty
-        || (viewModel.showRecentsTagsInline && !recentTags.isEmpty)
+      if !viewModel.mentionsSuggestions.isEmpty ||
+          !viewModel.tagsSuggestions.isEmpty ||
+          viewModel.showRecentsTagsInline
       {
         VStack {
           HStack {
@@ -45,7 +46,10 @@ extension StatusEditor {
                 if !viewModel.mentionsSuggestions.isEmpty {
                   Self.MentionsView(viewModel: viewModel)
                 } else {
-                  if viewModel.showRecentsTagsInline {
+                  if #available(iOS 26, *), Assistant.isAvailable {
+                    Self.SuggestedTagsView(viewModel: viewModel,
+                                           isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                  } else if viewModel.showRecentsTagsInline {
                     Self.RecentTagsView(
                       viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
                   } else {

@@ -39,7 +39,6 @@ struct SettingsTabs: View {
         accountsSection
         generalSection
         otherSections
-        AISection
         cacheSection
       }
       .scrollContentBackground(.hidden)
@@ -247,26 +246,7 @@ struct SettingsTabs: View {
       .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
-
-  @ViewBuilder
-  private var AISection: some View {
-    @Bindable var preferences = preferences
-    Section {
-      Toggle(isOn: $preferences.isOpenAIEnabled) {
-        Label("settings.other.hide-openai", systemImage: "faxmachine")
-      }
-    } header: {
-      Text("AI")
-    } footer: {
-      Text(
-        "Disable to hide AI assisted tool options such as copywritting and alt-image description generated using AI. Uses OpenAI API. See our Privacy Policy for more information."
-      )
-    }
-    #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-    #endif
-  }
-
+  
   private var appSection: some View {
     Section {
       #if !targetEnvironment(macCatalyst) && !os(visionOS)

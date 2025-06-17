@@ -1,56 +1,82 @@
 import Foundation
 import Network
 import SwiftUI
-import Playgrounds
 import FoundationModels
 
 extension StatusEditor {
+  @available(iOS 26.0, *)
+  @MainActor
+  public struct Assistant {
+    private static let model = SystemLanguageModel.default
+    
+    public static var isAvailable: Bool {
+      return model.isAvailable
+    }
+
+    @Generable
+    struct Tags {
+      @Guide(description: "The value of the hashtags, must be camelCased and prefixed with a # symbol.")
+      @Guide(.count(5))
+      let values: [String]
+    }
+    
+    private let session = LanguageModelSession(model: .init(useCase: .general)) {
+      """
+      Your job is to assist the user in writting social media posts. 
+      The users is writting for the Mastodon platforms, where posts are usually not longer than 500 characters.
+      """
+    }
+    
+    func generateTags(from message: String) async -> Tags {
+      do {
+        let response = try await session.respond(to: "Generate a list of hashtags for this social media post: \(message).", generating: Tags.self)
+        return response.content
+      } catch {
+        return .init(values: [])
+      }
+    }
+    
+    func correct(message: String) async -> String? {
+      do {
+        let response = try await session.respond(to: "Fix the spelling and grammar mistakes in the following text: \(message).", options: .init(temperature: 0.3))
+        return response.content
+      } catch {
+        return nil
+      }
+    }
+    
+    func shorten(message: String) async -> String? {
+      do {
+        let response = try await session.respond(to: "Make a shorter version of this text: \(message).", options: .init(temperature: 0.3))
+        return response.content
+      } catch {
+        return nil
+      }
+    }
+    
+    func emphasize(message: String) async -> String? {
+      do {
+        let response = try await session.respond(to: "Make this text catchy, more fun: \(message).", options: .init(temperature: 2.0))
+        return response.content
+      } catch {
+        return nil
+      }
+    }
+  }
+  
   enum AIPrompt: CaseIterable {
-    case correct, fit, emphasize, addTags, insertTags
+    case correct, fit, emphasize
 
     @ViewBuilder
     var label: some View {
       switch self {
       case .correct:
         Label("status.editor.ai-prompt.correct", systemImage: "text.badge.checkmark")
-      case .addTags:
-        Label("status.editor.ai-prompt.add-tags", systemImage: "number")
-      case .insertTags:
-        Label("status.editor.ai-prompt.insert-tags", systemImage: "number")
       case .fit:
         Label("status.editor.ai-prompt.fit", systemImage: "text.badge.minus")
       case .emphasize:
         Label("status.editor.ai-prompt.emphasize", systemImage: "text.badge.star")
       }
     }
-
-    func toRequestPrompt(text: String) -> OpenAIClient.Prompt {
-      switch self {
-      case .correct:
-        .correct(input: text)
-      case .addTags:
-        .addTags(input: text)
-      case .insertTags:
-        .insertTags(input: text)
-      case .fit:
-        .shorten(input: text)
-      case .emphasize:
-        .emphasize(input: text)
-      }
-    }
-  }
-}
-
-#Playground {
-  if #available(iOS 26.0, *) {
-    let session = LanguageModelSession()
-    let input = "This is a cool SwiftUI app!"
-    do {
-      let response = try await session.respond(to: "Generate a list of hashtag for thos social media message: \(input)")
-    } catch {
-      print("Error generating response: \(error)")
-    }
-  } else {
-    // Fallback on earlier versions
   }
 }

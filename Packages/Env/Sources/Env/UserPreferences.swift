@@ -11,7 +11,6 @@ import SwiftUI
     @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
     @AppStorage("show_pending_at_bottom") public var pendingShownAtBottom: Bool = false
     @AppStorage("show_pending_left") public var pendingShownLeft: Bool = false
-    @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
 
     @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
     @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = false
@@ -143,12 +142,6 @@ import SwiftUI
       } else {
         return .topTrailing
       }
-    }
-  }
-
-  public var isOpenAIEnabled: Bool {
-    didSet {
-      storage.isOpenAIEnabled = isOpenAIEnabled
     }
   }
 
@@ -501,7 +494,6 @@ import SwiftUI
   private init() {
     preferredBrowser = storage.preferredBrowser
     showTranslateButton = storage.showTranslateButton
-    isOpenAIEnabled = storage.isOpenAIEnabled
     recentlyUsedLanguages = storage.recentlyUsedLanguages
     isSocialKeyboardEnabled = storage.isSocialKeyboardEnabled
     useInstanceContentSettings = storage.useInstanceContentSettings

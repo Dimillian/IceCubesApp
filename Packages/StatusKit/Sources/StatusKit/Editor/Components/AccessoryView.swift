@@ -168,9 +168,8 @@ extension StatusEditor {
         }
       }
 
-      if preferences.isOpenAIEnabled {
-        AIMenu
-          .disabled(!viewModel.canPost)
+      if #available(iOS 26, *), Assistant.isAvailable  {
+        AssistantMenu.disabled(!viewModel.canPost)
       }
 
       Spacer()
@@ -206,14 +205,14 @@ extension StatusEditor {
       return false
     }
 
-    private var AIMenu: some View {
+    @available(iOS 26, *)
+    private var AssistantMenu: some View {
       Menu {
         ForEach(AIPrompt.allCases, id: \.self) { prompt in
           Button {
             Task {
               isLoadingAIRequest = true
-              await focusedSEVM.runOpenAI(
-                prompt: prompt.toRequestPrompt(text: focusedSEVM.statusText.string))
+              await focusedSEVM.runAssistant(prompt: prompt)
               isLoadingAIRequest = false
             }
           } label: {

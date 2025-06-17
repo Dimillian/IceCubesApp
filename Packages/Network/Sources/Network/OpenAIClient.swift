@@ -19,23 +19,6 @@ public struct OpenAIClient {
     return decoder
   }
 
-  public struct ChatRequest: OpenAIRequest {
-    public struct Message: Encodable {
-      public let role = "user"
-      public let content: String
-    }
-
-    let model = "gpt-4o-mini"
-    let messages: [Message]
-
-    let temperature: CGFloat
-
-    public init(content: String, temperature: CGFloat) {
-      messages = [.init(content: content)]
-      self.temperature = temperature
-    }
-  }
-
   public struct VisionRequest: OpenAIRequest {
     public struct Message: Encodable {
       public struct MessageContent: Encodable {
@@ -58,33 +41,10 @@ public struct OpenAIClient {
   }
 
   public enum Prompt {
-    case correct(input: String)
-    case shorten(input: String)
-    case emphasize(input: String)
-    case addTags(input: String)
-    case insertTags(input: String)
     case imageDescription(image: URL)
 
     var request: OpenAIRequest {
       switch self {
-      case let .correct(input):
-        ChatRequest(
-          content: "Fix the spelling and grammar mistakes in the following text: \(input)",
-          temperature: 0.2)
-      case let .addTags(input):
-        ChatRequest(
-          content:
-            "Replace relevant words with camel-cased hashtags in the following text. Don't try to search for context or add hashtags if there is not enough context: \(input)",
-          temperature: 0.1)
-      case let .insertTags(input):
-        ChatRequest(
-          content:
-            "Return the input with added camel-cased hashtags at the end of the input. Don't try to search for context or add hashtags if there is not enough context: \(input)",
-          temperature: 0.2)
-      case let .shorten(input):
-        ChatRequest(content: "Make a shorter version of this text: \(input)", temperature: 0.5)
-      case let .emphasize(input):
-        ChatRequest(content: "Make this text catchy, more fun: \(input)", temperature: 1)
       case let .imageDescription(image):
         VisionRequest(messages: [
           .init(content: [
@@ -143,8 +103,6 @@ public struct OpenAIClient {
 
 extension OpenAIClient: Sendable {}
 extension OpenAIClient.Prompt: Sendable {}
-extension OpenAIClient.ChatRequest: Sendable {}
-extension OpenAIClient.ChatRequest.Message: Sendable {}
 extension OpenAIClient.Response: Sendable {}
 extension OpenAIClient.Response.Choice: Sendable {}
 extension OpenAIClient.Response.Choice.Message: Sendable {}

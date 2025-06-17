@@ -61,7 +61,7 @@ extension StatusEditor {
         selectedRange = range
       }
     }
-
+    
     private var urlLengthAdjustments: Int = 0
     private let maxLengthOfUrl = 23
 
@@ -668,19 +668,32 @@ extension StatusEditor {
 
     func selectHashtagSuggestion(tag: String) {
       if let range = currentSuggestionRange {
+        var tag = tag
+        if tag.hasPrefix("#") {
+          tag.removeFirst()
+        }
         replaceTextWith(text: "#\(tag) ", inRange: range)
       }
     }
 
-    // MARK: - OpenAI Prompt
+    // MARK: - Assistant Prompt
 
-    func runOpenAI(prompt: OpenAIClient.Prompt) async {
-      do {
-        let client = OpenAIClient()
-        let response = try await client.request(prompt)
+    @available(iOS 26.0, *)
+    func runAssistant(prompt: AIPrompt) async {
+      let assistant = Assistant()
+      var newStatusText: String?
+      switch prompt {
+      case .correct:
+        newStatusText = await assistant.correct(message: statusText.string)
+      case .emphasize:
+        newStatusText = await assistant.emphasize(message: statusText.string)
+      case .fit:
+        newStatusText = await assistant.shorten(message: statusText.string)
+      }
+      if let newStatusText {
         backupStatusText = statusText
-        replaceTextWith(text: response.trimmedText)
-      } catch {}
+        replaceTextWith(text: newStatusText)
+      }
     }
 
     // MARK: - Media related function
