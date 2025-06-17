@@ -1,6 +1,8 @@
 import Foundation
 import Network
 import SwiftUI
+import Playgrounds
+import FoundationModels
 
 extension StatusEditor {
   enum AIPrompt: CaseIterable {
@@ -36,5 +38,19 @@ extension StatusEditor {
         .emphasize(input: text)
       }
     }
+  }
+}
+
+#Playground {
+  if #available(iOS 26.0, *) {
+    let session = LanguageModelSession()
+    let input = "This is a cool SwiftUI app!"
+    do {
+      let response = try await session.respond(to: "Generate a list of hashtag for thos social media message: \(input)")
+    } catch {
+      print("Error generating response: \(error)")
+    }
+  } else {
+    // Fallback on earlier versions
   }
 }
