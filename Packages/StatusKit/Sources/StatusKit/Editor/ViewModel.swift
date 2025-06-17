@@ -6,6 +6,7 @@ import NaturalLanguage
 import Network
 import PhotosUI
 import SwiftUI
+import FoundationModels
 
 extension StatusEditor {
   @MainActor
@@ -681,18 +682,26 @@ extension StatusEditor {
     @available(iOS 26.0, *)
     func runAssistant(prompt: AIPrompt) async {
       let assistant = Assistant()
-      var newStatusText: String?
+      var newStream: LanguageModelSession.ResponseStream<String>?
       switch prompt {
       case .correct:
-        newStatusText = await assistant.correct(message: statusText.string)
+        newStream = await assistant.correct(message: statusText.string)
       case .emphasize:
-        newStatusText = await assistant.emphasize(message: statusText.string)
+        newStream = await assistant.emphasize(message: statusText.string)
       case .fit:
-        newStatusText = await assistant.shorten(message: statusText.string)
+        newStream = await assistant.shorten(message: statusText.string)
       }
-      if let newStatusText {
+      if let newStream {
         backupStatusText = statusText
-        replaceTextWith(text: newStatusText)
+        do {
+          for try await content in newStream {
+            replaceTextWith(text: content)
+          }
+        } catch {
+          if let backupStatusText {
+            replaceTextWith(text: backupStatusText.string)
+          }
+        }
       }
     }
 

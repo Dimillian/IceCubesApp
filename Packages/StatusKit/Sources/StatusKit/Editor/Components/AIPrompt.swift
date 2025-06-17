@@ -36,31 +36,17 @@ extension StatusEditor {
       }
     }
     
-    func correct(message: String) async -> String? {
-      do {
-        let response = try await session.respond(to: "Fix the spelling and grammar mistakes in the following text: \(message).", options: .init(temperature: 0.3))
-        return response.content
-      } catch {
-        return nil
-      }
+    func correct(message: String) async -> LanguageModelSession.ResponseStream<String>? {
+      session.streamResponse(to: "Fix the spelling and grammar mistakes in the following text: \(message).",
+                                              options: .init(temperature: 0.3))
     }
     
-    func shorten(message: String) async -> String? {
-      do {
-        let response = try await session.respond(to: "Make a shorter version of this text: \(message).", options: .init(temperature: 0.3))
-        return response.content
-      } catch {
-        return nil
-      }
+    func shorten(message: String) async -> LanguageModelSession.ResponseStream<String>? {
+      session.streamResponse(to: "Make a shorter version of this text: \(message).", options: .init(temperature: 0.3))
     }
     
-    func emphasize(message: String) async -> String? {
-      do {
-        let response = try await session.respond(to: "Make this text catchy, more fun: \(message).", options: .init(temperature: 2.0))
-        return response.content
-      } catch {
-        return nil
-      }
+    func emphasize(message: String) async -> LanguageModelSession.ResponseStream<String>? {
+      session.streamResponse(to: "Make this text catchy, more fun: \(message).", options: .init(temperature: 2.0))
     }
   }
   
