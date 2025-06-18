@@ -21,6 +21,22 @@ extension StatusEditor {
     @Binding var showPoll: Bool
 
     var body: some View {
+      if #available(iOS 26.0, *) {
+        contentView
+          .glassEffect(.regular.tint(theme.tintColor.opacity(0.1)),
+                       in: RoundedRectangle(cornerRadius: 6))
+      } else {
+        contentView
+          .background(
+            RoundedRectangle(cornerRadius: 6.0)
+              .stroke(theme.secondaryBackgroundColor.opacity(0.6), lineWidth: 1)
+              .background(theme.primaryBackgroundColor.opacity(0.3))
+          )
+      }
+    }
+    
+    @ViewBuilder
+    private var contentView: some View {
       @Bindable var viewModel = viewModel
       let count = viewModel.pollOptions.count
       VStack {
@@ -81,13 +97,10 @@ extension StatusEditor {
             }
           }
         }
-        .padding(.horizontal)
+        .padding(.leading, 9)
+        .padding(.trailing, 34)
+        .padding(.vertical, 8)
       }
-      .background(
-        RoundedRectangle(cornerRadius: 6.0)
-          .stroke(theme.secondaryBackgroundColor.opacity(0.6), lineWidth: 1)
-          .background(theme.primaryBackgroundColor.opacity(0.3))
-      )
     }
 
     private func addChoice(at index: Int) {

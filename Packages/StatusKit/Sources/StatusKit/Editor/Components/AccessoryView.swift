@@ -209,7 +209,7 @@ extension StatusEditor {
     private var AssistantMenu: some View {
       Menu {
         ForEach(AIPrompt.allCases, id: \.self) { prompt in
-          if case AIPrompt.rewriteWithTone(let tone) = prompt {
+          if case AIPrompt.rewriteWithTone = prompt {
             Menu {
               ForEach(Assistant.Tone.allCases, id: \.self) { tone in
                 Button {

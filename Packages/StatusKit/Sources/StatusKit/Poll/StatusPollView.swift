@@ -106,6 +106,7 @@ public struct StatusPollView: View {
       }
 
       footerView
+        .padding(.top, 4)
 
     }.onAppear {
       viewModel.instance = currentInstance.instance

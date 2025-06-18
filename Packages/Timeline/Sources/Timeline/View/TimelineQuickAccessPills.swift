@@ -58,8 +58,14 @@ public struct TimelineQuickAccessPills: View {
       makeButton(filter)
         .buttonStyle(.borderedProminent)
     } else {
-      makeButton(filter)
-        .buttonStyle(.bordered)
+      if #available(iOS 26.0, *) {
+        makeButton(filter)
+          .foregroundStyle(theme.labelColor)
+          .buttonStyle(.glass)
+      } else {
+        makeButton(filter)
+          .buttonStyle(.bordered)
+      }
     }
   }
 
