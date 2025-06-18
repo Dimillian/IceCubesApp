@@ -209,14 +209,32 @@ extension StatusEditor {
     private var AssistantMenu: some View {
       Menu {
         ForEach(AIPrompt.allCases, id: \.self) { prompt in
-          Button {
-            Task {
-              isLoadingAIRequest = true
-              await focusedSEVM.runAssistant(prompt: prompt)
-              isLoadingAIRequest = false
+          if case AIPrompt.rewriteWithTone(let tone) = prompt {
+            Menu {
+              ForEach(Assistant.Tone.allCases, id: \.self) { tone in
+                Button {
+                  isLoadingAIRequest = true
+                  Task {
+                    await focusedSEVM.runAssistant(prompt: prompt)
+                    isLoadingAIRequest = false
+                  }
+                } label: {
+                  tone.label
+                }
+              }
+            } label: {
+              prompt.label
             }
-          } label: {
-            prompt.label
+          } else {
+            Button {
+              isLoadingAIRequest = true
+              Task {
+                await focusedSEVM.runAssistant(prompt: prompt)
+                isLoadingAIRequest = false
+              }
+            } label: {
+              prompt.label
+            }
           }
         }
         if let backup = focusedSEVM.backupStatusText {

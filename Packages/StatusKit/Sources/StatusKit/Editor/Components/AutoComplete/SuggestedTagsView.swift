@@ -44,6 +44,10 @@ extension StatusEditor.AutoCompleteView {
             }) {
               recentTags[index].lastUse = Date()
             } else {
+              var tag = tag
+              if tag.first == "#" {
+                tag.removeFirst()
+              }
               context.insert(RecentTag(title: tag))
             }
           } label: {

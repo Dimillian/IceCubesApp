@@ -9,6 +9,28 @@ extension StatusEditor {
   public struct Assistant {
     private static let model = SystemLanguageModel.default
     
+    enum Tone: String, CaseIterable {
+      case professional = "Professional and formal"
+      case casual = "Casual and friendly"
+      case humorous = "Witty and humorous"
+      case educational = "Educational and informative"
+      
+      @ViewBuilder
+      var label: some View {
+        switch self {
+        case .professional:
+          Label("Profesional", systemImage: "suitcase")
+        case .casual:
+          Label("Casual", systemImage: "face.smiling")
+        case .humorous:
+          Label("Humorous", systemImage: "party.popper")
+        case .educational:
+          Label("Educational", systemImage: "book.closed")
+        }
+      }
+    }
+
+    
     public static var isAvailable: Bool {
       return model.isAvailable
     }
@@ -51,11 +73,25 @@ extension StatusEditor {
     func emphasize(message: String) async -> LanguageModelSession.ResponseStream<String>? {
       Self.session.streamResponse(to: "Make this text catchy, more fun: \(message).", options: .init(temperature: 2.0))
     }
+    
+    func adjustTone(message: String, to tone: Tone) async -> LanguageModelSession.ResponseStream<String>? {
+        Self.session.streamResponse(to: "Rewrite this text to be more \(tone.rawValue): \(message)",
+                                  options: .init(temperature: 0.8))
+    }
+    
+    func contentWarning(message: String) async -> LanguageModelSession.ResponseStream<String>? {
+      Self.session.streamResponse(to: "Analyze if this post needs a content warning for sensitive topics. Common CWs include: politics, mental health, food, violence, spoilers. \(message).")
+    }
   }
   
-  enum AIPrompt: CaseIterable {
-    case correct, fit, emphasize
-
+  @available(iOS 26.0, *)
+  enum AIPrompt: CaseIterable, Hashable {
+    static var allCases: [StatusEditor.AIPrompt] {
+      [.correct, .fit, .emphasize, .contentWarning, .rewriteWithTone(tone: .professional)]
+    }
+    
+    case correct, fit, emphasize, contentWarning, rewriteWithTone(tone: Assistant.Tone)
+    
     @ViewBuilder
     var label: some View {
       switch self {
@@ -65,6 +101,10 @@ extension StatusEditor {
         Label("status.editor.ai-prompt.fit", systemImage: "text.badge.minus")
       case .emphasize:
         Label("status.editor.ai-prompt.emphasize", systemImage: "text.badge.star")
+      case .contentWarning:
+        Label("Generate content warning", systemImage: "exclamationmark.triangle")
+      case .rewriteWithTone:
+        Label("Rewrite with tone", systemImage: "pencil.and.scribble")
       }
     }
   }
