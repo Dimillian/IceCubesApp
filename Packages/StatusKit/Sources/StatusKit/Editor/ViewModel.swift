@@ -173,6 +173,10 @@ extension StatusEditor {
 
     init(mode: Mode) {
       self.mode = mode
+      
+      if #available(iOS 26.0, *), Assistant.isAvailable {
+        Assistant.prewarm()
+      }
     }
 
     func setInitialLanguageSelection(preference: String?) {

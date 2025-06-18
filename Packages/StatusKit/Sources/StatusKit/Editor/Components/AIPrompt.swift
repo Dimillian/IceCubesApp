@@ -12,15 +12,18 @@ extension StatusEditor {
     public static var isAvailable: Bool {
       return model.isAvailable
     }
+    
+    public static func prewarm() {
+      session.prewarm()
+    }
 
     @Generable
     struct Tags {
-      @Guide(description: "The value of the hashtags, must be camelCased and prefixed with a # symbol.")
-      @Guide(.count(5))
+      @Guide(description: "The value of the hashtags, must be camelCased and prefixed with a # symbol.", .count(5))
       let values: [String]
     }
     
-    private let session = LanguageModelSession(model: .init(useCase: .general)) {
+    private static let session = LanguageModelSession(model: .init(useCase: .general)) {
       """
       Your job is to assist the user in writting social media posts. 
       The users is writting for the Mastodon platforms, where posts are usually not longer than 500 characters.
@@ -29,7 +32,7 @@ extension StatusEditor {
     
     func generateTags(from message: String) async -> Tags {
       do {
-        let response = try await session.respond(to: "Generate a list of hashtags for this social media post: \(message).", generating: Tags.self)
+        let response = try await Self.session.respond(to: "Generate a list of hashtags for this social media post: \(message).", generating: Tags.self)
         return response.content
       } catch {
         return .init(values: [])
@@ -37,16 +40,16 @@ extension StatusEditor {
     }
     
     func correct(message: String) async -> LanguageModelSession.ResponseStream<String>? {
-      session.streamResponse(to: "Fix the spelling and grammar mistakes in the following text: \(message).",
+      Self.session.streamResponse(to: "Fix the spelling and grammar mistakes in the following text: \(message).",
                                               options: .init(temperature: 0.3))
     }
     
     func shorten(message: String) async -> LanguageModelSession.ResponseStream<String>? {
-      session.streamResponse(to: "Make a shorter version of this text: \(message).", options: .init(temperature: 0.3))
+      Self.session.streamResponse(to: "Make a shorter version of this text: \(message).", options: .init(temperature: 0.3))
     }
     
     func emphasize(message: String) async -> LanguageModelSession.ResponseStream<String>? {
-      session.streamResponse(to: "Make this text catchy, more fun: \(message).", options: .init(temperature: 2.0))
+      Self.session.streamResponse(to: "Make this text catchy, more fun: \(message).", options: .init(temperature: 2.0))
     }
   }
   
