@@ -87,7 +87,7 @@ extension StatusEditor {
   @available(iOS 26.0, *)
   enum AIPrompt: CaseIterable, Hashable {
     static var allCases: [StatusEditor.AIPrompt] {
-      [.correct, .fit, .emphasize, .contentWarning, .rewriteWithTone(tone: .professional)]
+      [contentWarning, .rewriteWithTone(tone: .professional), .correct, .fit, .emphasize]
     }
     
     case correct, fit, emphasize, contentWarning, rewriteWithTone(tone: Assistant.Tone)
@@ -102,7 +102,7 @@ extension StatusEditor {
       case .emphasize:
         Label("status.editor.ai-prompt.emphasize", systemImage: "text.badge.star")
       case .contentWarning:
-        Label("Generate content warning", systemImage: "exclamationmark.triangle")
+        Label("Content warning", systemImage: "exclamationmark.triangle")
       case .rewriteWithTone:
         Label("Rewrite with tone", systemImage: "pencil.and.scribble")
       }
