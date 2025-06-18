@@ -694,35 +694,19 @@ extension StatusEditor {
         newStream = await assistant.emphasize(message: statusText.string)
       case .fit:
         newStream = await assistant.shorten(message: statusText.string)
-      case .contentWarning:
-        newStream = await assistant.shorten(message: statusText.string)
       case let .rewriteWithTone(tone):
         newStream = await assistant.adjustTone(message: statusText.string, to: tone)
       }
       
       if let newStream {
-        if prompt == .contentWarning {
-          withAnimation {
-            spoilerOn = true
+        backupStatusText = statusText
+        do {
+          for try await content in newStream {
+            replaceTextWith(text: content)
           }
-          do {
-            for try await content in newStream {
-              spoilerText = content
-            }
-          } catch {
-            spoilerOn = false
-            spoilerText = ""
-          }
-        } else {
-          backupStatusText = statusText
-          do {
-            for try await content in newStream {
-              replaceTextWith(text: content)
-            }
-          } catch {
-            if let backupStatusText {
-              replaceTextWith(text: backupStatusText.string)
-            }
+        } catch {
+          if let backupStatusText {
+            replaceTextWith(text: backupStatusText.string)
           }
         }
       }

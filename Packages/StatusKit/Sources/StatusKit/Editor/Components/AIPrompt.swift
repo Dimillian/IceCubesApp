@@ -49,6 +49,7 @@ extension StatusEditor {
       """
       Your job is to assist the user in writting social media posts. 
       The users is writting for the Mastodon platforms, where posts are usually not longer than 500 characters.
+      Don't return any context, only the requestesd content without quote mark.
       """
     }
     
@@ -71,26 +72,22 @@ extension StatusEditor {
     }
     
     func emphasize(message: String) async -> LanguageModelSession.ResponseStream<String>? {
-      Self.session.streamResponse(to: "Make this text catchy, more fun: \(message).", options: .init(temperature: 2.0))
+      Self.session.streamResponse(to: "Make this text catchy, more fun, be insane: \(message).", options: .init(temperature: 2.0))
     }
     
     func adjustTone(message: String, to tone: Tone) async -> LanguageModelSession.ResponseStream<String>? {
-        Self.session.streamResponse(to: "Rewrite this text to be more \(tone.rawValue): \(message)",
+        Self.session.streamResponse(to: "Rewrite this text to be more \(tone.rawValue). Here is the message to rewrite: \(message)",
                                   options: .init(temperature: 0.8))
-    }
-    
-    func contentWarning(message: String) async -> LanguageModelSession.ResponseStream<String>? {
-      Self.session.streamResponse(to: "Analyze if this post needs a content warning for sensitive topics. Common CWs include: politics, mental health, food, violence, spoilers. \(message).")
     }
   }
   
   @available(iOS 26.0, *)
   enum AIPrompt: CaseIterable, Hashable {
     static var allCases: [StatusEditor.AIPrompt] {
-      [contentWarning, .rewriteWithTone(tone: .professional), .correct, .fit, .emphasize]
+      [.rewriteWithTone(tone: .professional), .correct, .fit, .emphasize]
     }
     
-    case correct, fit, emphasize, contentWarning, rewriteWithTone(tone: Assistant.Tone)
+    case correct, fit, emphasize, rewriteWithTone(tone: Assistant.Tone)
     
     @ViewBuilder
     var label: some View {
@@ -101,8 +98,6 @@ extension StatusEditor {
         Label("status.editor.ai-prompt.fit", systemImage: "text.badge.minus")
       case .emphasize:
         Label("status.editor.ai-prompt.emphasize", systemImage: "text.badge.star")
-      case .contentWarning:
-        Label("Content warning", systemImage: "exclamationmark.triangle")
       case .rewriteWithTone:
         Label("Rewrite with tone", systemImage: "pencil.and.scribble")
       }
