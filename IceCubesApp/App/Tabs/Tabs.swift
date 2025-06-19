@@ -269,14 +269,14 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
 
 @MainActor
 enum SidebarSections: Int, Identifiable {
-  case timeline, activities, account, app, loggedOutTabs, iosTabs, visionOSTabs, lists, tags
+  case timeline, activities, account, app, loggedOutTabs, iosTabs, visionOSTabs, lists, tags, localTimeline, tagGroup
   
   nonisolated var id: Int {
     rawValue
   }
   
   static var macOrIpadOSSections: [SidebarSections] {
-    [.timeline, .activities, .account, .lists, .tags, .app]
+    [.timeline, .activities, .account, .lists, .tags]
   }
   
   var title: String {
@@ -293,6 +293,10 @@ enum SidebarSections: Int, Identifiable {
       "Lists"
     case .tags:
       "Followed Hashtags"
+    case .localTimeline:
+      "Local Timelines"
+    case .tagGroup:
+      "Tag Groups"
     case .loggedOutTabs, .iosTabs, .visionOSTabs:
       ""
     }
@@ -318,6 +322,8 @@ enum SidebarSections: Int, Identifiable {
       return CurrentAccount.shared.lists.map { .anyTimelineFilter(filter: .list(list: $0)) }
     case .tags:
       return CurrentAccount.shared.tags.map { .anyTimelineFilter(filter: .hashtag(tag: $0.name, accountId: nil)) }
+    case .localTimeline, .tagGroup:
+      return []
     }
   }
 }

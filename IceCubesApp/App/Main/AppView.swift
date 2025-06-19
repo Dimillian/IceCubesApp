@@ -10,9 +10,12 @@ import RevenueCat
 import StatusKit
 import SwiftUI
 import Timeline
+import Models
+import SwiftData
 
 @MainActor
 struct AppView: View {
+  @Environment(\.modelContext) private var context
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(Theme.self) private var theme
@@ -30,6 +33,9 @@ struct AppView: View {
   @State var timeline: TimelineFilter = .home
 
   @AppStorage("timeline_pinned_filters") private var pinnedFilters: [TimelineFilter] = []
+  
+  @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
+  @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
   var body: some View {
     HStack(spacing: 0) {
@@ -72,7 +78,15 @@ struct AppView: View {
     } else if UIDevice.current.userInterfaceIdiom == .vision {
       return [SidebarSections.visionOSTabs]
     }
-    return SidebarSections.macOrIpadOSSections
+    var sections = SidebarSections.macOrIpadOSSections
+    if !localTimelines.isEmpty {
+      sections.append(.localTimeline)
+    }
+    if !tagGroups.isEmpty {
+      sections.append(.tagGroup)
+    }
+    sections.append(.app)
+    return sections
   }
 
   @ViewBuilder
@@ -88,15 +102,41 @@ struct AppView: View {
     ) {
       ForEach(availableSections) { section in
         TabSection(section.title) {
-          ForEach(section.tabs) { tab in
-            Tab(value: tab, role: tab == .explore ? .search : .none) {
-              tab.makeContentView(
-                homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
-            } label: {
-              tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+          if section == .localTimeline {
+            ForEach(localTimelines) { timeline in
+              let tab = AppTab.anyTimelineFilter(filter: .remoteLocal(server: timeline.instance, filter: .local))
+              Tab(value: tab) {
+                tab.makeContentView(
+                  homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+              } label: {
+                tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+              }
+              .tabPlacement(tab.tabPlacement)
             }
-            .tabPlacement(tab.tabPlacement)
-            .badge(badgeFor(tab: tab))
+          } else if section == .tagGroup {
+            ForEach(tagGroups) { tagGroup in
+              let tab = AppTab.anyTimelineFilter(filter: TimelineFilter.tagGroup(title: tagGroup.title,
+                                                                                 tags: tagGroup.tags,
+                                                                                 symbolName: tagGroup.symbolName))
+              Tab(value: tab) {
+                tab.makeContentView(
+                  homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+              } label: {
+                tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+              }
+              .tabPlacement(tab.tabPlacement)
+            }
+          } else {
+            ForEach(section.tabs) { tab in
+              Tab(value: tab, role: tab == .explore ? .search : .none) {
+                tab.makeContentView(
+                  homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+              } label: {
+                tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+              }
+              .tabPlacement(tab.tabPlacement)
+              .badge(badgeFor(tab: tab))
+            }
           }
         }
         .tabPlacement(.sidebarOnly)
