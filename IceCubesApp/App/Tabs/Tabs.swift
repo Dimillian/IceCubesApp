@@ -33,7 +33,8 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
 
   @ViewBuilder
   func makeContentView(
-    homeTimeline: Binding<TimelineFilter>, selectedTab: Binding<AppTab>,
+    homeTimeline: Binding<TimelineFilter>,
+    selectedTab: Binding<AppTab>,
     pinnedFilters: Binding<[TimelineFilter]>
   ) -> some View {
     switch self {
@@ -178,49 +179,49 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
 }
 
 @MainActor
-@Observable
-class SidebarTabs {
-  struct SidedebarTab: Hashable, Codable {
-    let tab: AppTab
-    var enabled: Bool
+enum SidebarSections: Int, Identifiable {
+  case timeline, activities, account, app, loggedOutTabs, iosTabs, visionOSTabs
+  
+  nonisolated var id: Int {
+    rawValue
   }
-
-  class Storage {
-    @AppStorage("sidebar_tabs") var tabs: [SidedebarTab] = [
-      .init(tab: .timeline, enabled: true),
-      .init(tab: .trending, enabled: true),
-      .init(tab: .federated, enabled: true),
-      .init(tab: .local, enabled: true),
-      .init(tab: .notifications, enabled: true),
-      .init(tab: .mentions, enabled: true),
-      .init(tab: .messages, enabled: true),
-      .init(tab: .explore, enabled: true),
-      .init(tab: .bookmarks, enabled: true),
-      .init(tab: .favorites, enabled: true),
-      .init(tab: .followedTags, enabled: true),
-      .init(tab: .lists, enabled: true),
-      .init(tab: .links, enabled: true),
-
-      .init(tab: .settings, enabled: true),
-      .init(tab: .profile, enabled: true),
-    ]
+  
+  static var macOrIpadOSSections: [SidebarSections] {
+    [.timeline, .activities, .account, .app]
   }
-
-  private let storage = Storage()
-  public static let shared = SidebarTabs()
-
-  var tabs: [SidedebarTab] {
-    didSet {
-      storage.tabs = tabs
+  
+  var title: String {
+    switch self {
+    case .timeline:
+      "Timeline"
+    case .activities:
+      "Activities"
+    case .account:
+      "Account"
+    case .app:
+      "App"
+    case .loggedOutTabs, .iosTabs, .visionOSTabs:
+      ""
     }
   }
-
-  func isEnabled(_ tab: AppTab) -> Bool {
-    tabs.first(where: { $0.tab.id == tab.id })?.enabled == true
-  }
-
-  private init() {
-    tabs = storage.tabs
+  
+  var tabs: [AppTab] {
+    switch self {
+    case .timeline:
+      return [.timeline, .trending, .local, .federated, .links, .explore]
+    case .activities:
+      return [.notifications, .mentions, .messages]
+    case .account:
+      return [.profile, .bookmarks, .favorites, .followedTags, .lists]
+    case .app:
+      return [.settings]
+    case .loggedOutTabs:
+      return [.timeline, .settings]
+    case .iosTabs:
+      return iOSTabs.shared.tabs
+    case .visionOSTabs:
+      return AppTab.visionOSTab()
+    }
   }
 }
 

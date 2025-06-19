@@ -25,7 +25,6 @@ struct AppView: View {
   @Binding var appRouterPath: RouterPath
 
   @State var iosTabs = iOSTabs.shared
-  @State var sidebarTabs = SidebarTabs.shared
   @State var selectedTabScrollToTop: Int = -1
   @State var timeline: TimelineFilter = .home
 
@@ -50,6 +49,7 @@ struct AppView: View {
           .tabViewStyle(.sidebarAdaptable)
       } else {
         tabBarView
+          .tabViewStyle(.sidebarAdaptable)
       }
 
       if horizontalSizeClass == .regular,
@@ -62,16 +62,16 @@ struct AppView: View {
     }
   }
 
-  var availableTabs: [AppTab] {
+  var availableSections: [SidebarSections] {
     guard appAccountsManager.currentClient.isAuth else {
-      return AppTab.loggedOutTab()
+      return [SidebarSections.loggedOutTabs]
     }
     if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
-      return iosTabs.tabs
+      return [SidebarSections.iosTabs]
     } else if UIDevice.current.userInterfaceIdiom == .vision {
-      return AppTab.visionOSTab()
+      return [SidebarSections.visionOSTabs]
     }
-    return sidebarTabs.tabs.map { $0.tab }
+    return SidebarSections.macOrIpadOSSections
   }
 
   @ViewBuilder
@@ -85,15 +85,20 @@ struct AppView: View {
           updateTab(with: newTab)
         })
     ) {
-      ForEach(availableTabs) { tab in
-        Tab(value: tab, role: tab == .post || tab == .explore ? .search : .none) {
-          tab.makeContentView(
-            homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
-        } label: {
-          tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+      ForEach(availableSections) { section in
+        TabSection(section.title) {
+          ForEach(section.tabs) { tab in
+            Tab(value: tab, role: tab == .explore ? .search : .none) {
+              tab.makeContentView(
+                homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+            } label: {
+              tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+            }
+            .tabPlacement(tab.tabPlacement)
+            .badge(badgeFor(tab: tab))
+          }
         }
-        .tabPlacement(tab.tabPlacement)
-        .badge(badgeFor(tab: tab))
+        .tabPlacement(.sidebarOnly)
       }
     }
     .id(appAccountsManager.currentClient.id)

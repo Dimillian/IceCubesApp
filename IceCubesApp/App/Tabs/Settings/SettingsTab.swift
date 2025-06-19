@@ -187,12 +187,6 @@ struct SettingsTabs: View {
         NavigationLink(destination: TabbarEntriesSettingsView()) {
           Label("settings.general.tabbarEntries", systemImage: "platter.filled.bottom.iphone")
         }
-      } else if UIDevice.current.userInterfaceIdiom == .pad
-        || UIDevice.current.userInterfaceIdiom == .mac
-      {
-        NavigationLink(destination: SidebarEntriesSettingsView()) {
-          Label("settings.general.sidebarEntries", systemImage: "sidebar.squares.leading")
-        }
       }
       NavigationLink(destination: TranslationSettingsView()) {
         Label("settings.general.translate", systemImage: "captions.bubble")
