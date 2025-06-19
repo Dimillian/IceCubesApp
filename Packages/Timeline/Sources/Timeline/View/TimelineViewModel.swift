@@ -204,7 +204,7 @@ extension TimelineViewModel: GapLoadingFetcher {
       }
     } catch {
       if await datasource.isEmpty {
-        statusesState = .error(error: error)
+        statusesState = .error(error: .noData)
       }
       canStreamEvents = true
     }

@@ -3,15 +3,19 @@ import Models
 import Observation
 import SwiftUI
 
-public enum StatusesState {
-  public enum PagingState {
+public enum StatusesState: Equatable, Sendable {
+  public enum PagingState: Equatable, Sendable {
     case hasNextPage, none
+  }
+  
+  public enum ErrorState: Equatable, Sendable {
+    case noData
   }
 
   case loading
   case display(statuses: [Status], nextPageState: StatusesState.PagingState)
   case displayWithGaps(items: [TimelineItem], nextPageState: StatusesState.PagingState)
-  case error(error: Error)
+  case error(error: ErrorState)
 }
 
 @MainActor

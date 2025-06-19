@@ -248,7 +248,7 @@ import SwiftUI
       }
       reloadTabState()
     } catch {
-      statusesState = .error(error: error)
+      statusesState = .error(error: .noData)
     }
   }
 
