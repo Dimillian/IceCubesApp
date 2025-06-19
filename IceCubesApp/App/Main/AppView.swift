@@ -17,6 +17,7 @@ struct AppView: View {
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
+  @Environment(CurrentAccount.self) private var currentAccount
 
   @Environment(\.openWindow) var openWindow
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -122,7 +123,7 @@ struct AppView: View {
     SoundEffectManager.shared.playSound(.tabSelection)
 
     if selectedTab == newTab {
-      selectedTabScrollToTop = newTab.rawValue
+      selectedTabScrollToTop = newTab.id
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
         selectedTabScrollToTop = -1
       }

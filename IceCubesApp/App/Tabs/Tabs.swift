@@ -6,9 +6,10 @@ import Foundation
 import StatusKit
 import SwiftUI
 import Timeline
+import Env
 
 @MainActor
-enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
+enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
   case timeline, notifications, mentions, explore, messages, settings, other
   case trending, federated, local
   case profile
@@ -18,9 +19,91 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
   case followedTags
   case lists
   case links
-
+  case anyTimelineFilter(filter: TimelineFilter)
+  
   nonisolated var id: Int {
-    rawValue
+    return switch self {
+    case .timeline: 0
+    case .notifications: 1
+    case .mentions: 2
+    case .explore: 3
+    case .messages: 4
+    case .settings: 5
+    case .other: 6
+    case .trending: 7
+    case .federated: 8
+    case .local: 9
+    case .profile: 10
+    case .bookmarks: 11
+    case .favorites: 12
+    case .post: 13
+    case .followedTags: 14
+    case .lists: 15
+    case .links: 16
+    case .anyTimelineFilter(let filter):
+      filter.hashValue
+    }
+  }
+  
+  nonisolated static var allCases: [AppTab] {
+    [.timeline,
+      .notifications,
+      .mentions,
+      .explore,
+      .messages,
+      .settings,
+      .other,
+      .trending,
+      .federated,
+      .local,
+      .profile,
+      .bookmarks,
+      .favorites,
+      .post,
+      .followedTags,
+      .lists,
+      .links]
+  }
+  
+  init(with id: Int) {
+    switch id {
+    case 0:
+      self = .timeline
+    case 1:
+      self = .notifications
+    case 2:
+      self = .mentions
+    case 3:
+      self = .explore
+    case 4:
+      self = .messages
+    case 5:
+      self = .settings
+    case 6:
+      self = .other
+    case 7:
+      self = .trending
+    case 8:
+      self = .federated
+    case 9:
+      self = .local
+    case 10:
+      self = .profile
+    case 11:
+      self = .bookmarks
+    case 12:
+      self = .favorites
+    case 13:
+      self = .post
+    case 14:
+      self = .followedTags
+    case 15:
+      self = .lists
+    case 16:
+      self = .links
+    default:
+      self = .other
+    }
   }
 
   static func loggedOutTab() -> [AppTab] {
@@ -38,6 +121,8 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
     pinnedFilters: Binding<[TimelineFilter]>
   ) -> some View {
     switch self {
+    case let .anyTimelineFilter(filter):
+      TimelineTab(timeline: .constant(filter))
     case .timeline:
       TimelineTab(canFilterTimeline: true, timeline: homeTimeline, pinedFilters: pinnedFilters)
     case .trending:
@@ -101,6 +186,8 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
 
   var title: LocalizedStringKey {
     switch self {
+    case let .anyTimelineFilter(filter):
+      filter.localizedTitle()
     case .timeline:
       "tab.timeline"
     case .trending:
@@ -140,6 +227,8 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
 
   var iconName: String {
     switch self {
+    case let .anyTimelineFilter(filter):
+      filter.iconName()
     case .timeline:
       "rectangle.stack"
     case .trending:
@@ -180,14 +269,14 @@ enum AppTab: Int, Identifiable, Hashable, CaseIterable, Codable {
 
 @MainActor
 enum SidebarSections: Int, Identifiable {
-  case timeline, activities, account, app, loggedOutTabs, iosTabs, visionOSTabs
+  case timeline, activities, account, app, loggedOutTabs, iosTabs, visionOSTabs, lists, tags
   
   nonisolated var id: Int {
     rawValue
   }
   
   static var macOrIpadOSSections: [SidebarSections] {
-    [.timeline, .activities, .account, .app]
+    [.timeline, .activities, .account, .lists, .tags, .app]
   }
   
   var title: String {
@@ -200,6 +289,10 @@ enum SidebarSections: Int, Identifiable {
       "Account"
     case .app:
       "App"
+    case .lists:
+      "Lists"
+    case .tags:
+      "Followed Hashtags"
     case .loggedOutTabs, .iosTabs, .visionOSTabs:
       ""
     }
@@ -212,7 +305,7 @@ enum SidebarSections: Int, Identifiable {
     case .activities:
       return [.notifications, .mentions, .messages]
     case .account:
-      return [.profile, .bookmarks, .favorites, .followedTags, .lists]
+      return [.profile, .bookmarks, .favorites]
     case .app:
       return [.settings]
     case .loggedOutTabs:
@@ -221,6 +314,10 @@ enum SidebarSections: Int, Identifiable {
       return iOSTabs.shared.tabs
     case .visionOSTabs:
       return AppTab.visionOSTab()
+    case .lists:
+      return CurrentAccount.shared.lists.map { .anyTimelineFilter(filter: .list(list: $0)) }
+    case .tags:
+      return CurrentAccount.shared.tags.map { .anyTimelineFilter(filter: .hashtag(tag: $0.name, accountId: nil)) }
     }
   }
 }
@@ -233,11 +330,11 @@ class iOSTabs {
   }
 
   class Storage {
-    @AppStorage(TabEntries.first.rawValue) var firstTab = AppTab.timeline
-    @AppStorage(TabEntries.second.rawValue) var secondTab = AppTab.notifications
-    @AppStorage(TabEntries.third.rawValue) var thirdTab = AppTab.explore
-    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = AppTab.links
-    @AppStorage(TabEntries.fifth.rawValue) var fifthTab = AppTab.profile
+    @AppStorage(TabEntries.first.rawValue) var firstTab = AppTab.timeline.id
+    @AppStorage(TabEntries.second.rawValue) var secondTab = AppTab.notifications.id
+    @AppStorage(TabEntries.third.rawValue) var thirdTab = AppTab.explore.id
+    @AppStorage(TabEntries.fourth.rawValue) var fourthTab = AppTab.links.id
+    @AppStorage(TabEntries.fifth.rawValue) var fifthTab = AppTab.profile.id
   }
 
   private let storage = Storage()
@@ -249,39 +346,39 @@ class iOSTabs {
 
   var firstTab: AppTab {
     didSet {
-      storage.firstTab = firstTab
+      storage.firstTab = firstTab.id
     }
   }
 
   var secondTab: AppTab {
     didSet {
-      storage.secondTab = secondTab
+      storage.secondTab = secondTab.id
     }
   }
 
   var thirdTab: AppTab {
     didSet {
-      storage.thirdTab = thirdTab
+      storage.thirdTab = thirdTab.id
     }
   }
 
   var fourthTab: AppTab {
     didSet {
-      storage.fourthTab = fourthTab
+      storage.fourthTab = fourthTab.id
     }
   }
 
   var fifthTab: AppTab {
     didSet {
-      storage.fifthTab = fifthTab
+      storage.fifthTab = fifthTab.id
     }
   }
 
   private init() {
-    firstTab = storage.firstTab
-    secondTab = storage.secondTab
-    thirdTab = storage.thirdTab
-    fourthTab = storage.fourthTab
-    fifthTab = storage.fifthTab
+    firstTab = .init(with: storage.firstTab)
+    secondTab = .init(with: storage.secondTab)
+    thirdTab = .init(with: storage.thirdTab)
+    fourthTab = .init(with: storage.fourthTab)
+    fifthTab = .init(with: storage.fifthTab)
   }
 }
