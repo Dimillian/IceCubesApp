@@ -325,6 +325,7 @@ import SwiftUI
   }
 
   func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
+    guard let client else { return }
     if let event = event as? StreamEventUpdate {
       if event.status.account.id == currentAccount.account?.id {
         if (event.status.inReplyToId == nil && selectedTab == .statuses)
@@ -339,6 +340,7 @@ import SwiftUI
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } else if let event = event as? StreamEventStatusUpdate {
       if let originalIndex = statuses.firstIndex(where: { $0.id == event.status.id }) {
+        StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
         statuses[originalIndex] = event.status
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
