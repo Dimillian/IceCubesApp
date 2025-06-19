@@ -47,7 +47,7 @@ extension StatusEditor {
                   Self.MentionsView(viewModel: viewModel)
                 } else {
                   #if !targetEnvironment(macCatalyst)
-                  if #available(iOS 26, *), Assistant.isAvailable {
+                  if #available(iOS 26, *), Assistant.isAvailable, viewModel.tagsSuggestions.isEmpty {
                     Self.SuggestedTagsView(viewModel: viewModel,
                                            isTagSuggestionExpanded: $isTagSuggestionExpanded)
                   } else if viewModel.showRecentsTagsInline {
