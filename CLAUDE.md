@@ -8,6 +8,12 @@ IceCubesApp is a multiplatform Mastodon client built entirely in SwiftUI. It's a
 
 ## Build Commands
 
+### Building for iOS Simulator
+To build IceCubesApp for iPhone 16 Pro simulator:
+```bash
+mcp__XcodeBuildMCP__build_sim_name_proj projectPath: "/Users/thomas/Documents/Dev/Open Source/IceCubesApp/IceCubesApp.xcodeproj" scheme: "IceCubesApp" simulatorName: "iPhone 16 Pro"
+```
+
 
 ### Running Tests
 - **All tests**: Run through Xcode's Test navigator
@@ -253,6 +259,7 @@ struct NotificationsView: View {
 - Use Combine for simple async operations
 - Fight SwiftUI's update mechanism
 - Overcomplicate simple features
+- **Nest @Observable objects within other @Observable objects** - This breaks SwiftUI's observation system. Initialize services at the view level instead.
 
 ### Testing Strategy
 

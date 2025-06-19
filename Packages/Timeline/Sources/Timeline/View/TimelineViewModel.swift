@@ -307,7 +307,7 @@ extension TimelineViewModel: GapLoadingFetcher {
     // 2. AND we have a significant number of actually new statuses
     if fetchedCount >= 40 && newStatuses.count >= 40, let oldestNewStatus = newStatuses.last {
       // Create a gap to load statuses between the oldest new status and our previous top
-      let gap = TimelineGap(sinceId: latestStatus, maxId: oldestNewStatus.id)
+      let gap = TimelineGap(sinceId: latestStatus, maxId: oldestNewStatus.id, direction: .downward)
       // Insert the gap after all the new statuses
       await datasource.insertGap(gap, at: newStatuses.count)
     }
@@ -453,9 +453,8 @@ extension TimelineViewModel: GapLoadingFetcher {
     }
   }
 
-  private func createGapForOlderStatuses(sinceId: String? = nil, maxId: String, at index: Int) async
-  {
-    let gap = TimelineGap(sinceId: sinceId, maxId: maxId)
+  private func createGapForOlderStatuses(sinceId: String? = nil, maxId: String, at index: Int) async {
+    let gap = TimelineGap(sinceId: sinceId, maxId: maxId, direction: .downward)
     await datasource.insertGap(gap, at: index)
   }
 }
