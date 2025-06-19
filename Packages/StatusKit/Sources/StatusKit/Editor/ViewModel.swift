@@ -6,7 +6,9 @@ import NaturalLanguage
 import Network
 import PhotosUI
 import SwiftUI
+#if !targetEnvironment(macCatalyst)
 import FoundationModels
+#endif
 
 extension StatusEditor {
   @MainActor
@@ -174,9 +176,11 @@ extension StatusEditor {
     init(mode: Mode) {
       self.mode = mode
       
+      #if !targetEnvironment(macCatalyst)
       if #available(iOS 26.0, *), Assistant.isAvailable {
         Assistant.prewarm()
       }
+      #endif
     }
 
     func setInitialLanguageSelection(preference: String?) {
@@ -685,6 +689,7 @@ extension StatusEditor {
 
     @available(iOS 26.0, *)
     func runAssistant(prompt: AIPrompt) async {
+      #if !targetEnvironment(macCatalyst)
       let assistant = Assistant()
       var newStream: LanguageModelSession.ResponseStream<String>?
       switch prompt {
@@ -710,6 +715,7 @@ extension StatusEditor {
           }
         }
       }
+      #endif
     }
 
     // MARK: - Media related function

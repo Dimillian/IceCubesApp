@@ -46,6 +46,7 @@ extension StatusEditor {
                 if !viewModel.mentionsSuggestions.isEmpty {
                   Self.MentionsView(viewModel: viewModel)
                 } else {
+                  #if !targetEnvironment(macCatalyst)
                   if #available(iOS 26, *), Assistant.isAvailable {
                     Self.SuggestedTagsView(viewModel: viewModel,
                                            isTagSuggestionExpanded: $isTagSuggestionExpanded)
@@ -56,6 +57,15 @@ extension StatusEditor {
                     Self.RemoteTagsView(
                       viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
                   }
+                  #else
+                  if viewModel.showRecentsTagsInline {
+                    Self.RecentTagsView(
+                      viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                  } else {
+                    Self.RemoteTagsView(
+                      viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                  }
+                  #endif
                 }
               }
               .padding(.horizontal, .layoutPadding)

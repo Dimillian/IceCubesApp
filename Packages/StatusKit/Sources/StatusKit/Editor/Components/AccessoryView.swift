@@ -168,9 +168,11 @@ extension StatusEditor {
         }
       }
 
+      #if !targetEnvironment(macCatalyst)
       if #available(iOS 26, *), Assistant.isAvailable  {
         AssistantMenu.disabled(!viewModel.canPost)
       }
+      #endif
 
       Spacer()
 

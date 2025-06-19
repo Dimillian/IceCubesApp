@@ -1,14 +1,14 @@
 import Foundation
 import Network
 import SwiftUI
+#if !targetEnvironment(macCatalyst)
 import FoundationModels
+#endif
 
 extension StatusEditor {
   @available(iOS 26.0, *)
   @MainActor
   public struct Assistant {
-    private static let model = SystemLanguageModel.default
-    
     enum Tone: String, CaseIterable {
       case professional = "Professional and formal"
       case casual = "Casual and friendly"
@@ -29,8 +29,10 @@ extension StatusEditor {
         }
       }
     }
-
     
+    #if !targetEnvironment(macCatalyst)
+    private static let model = SystemLanguageModel.default
+        
     public static var isAvailable: Bool {
       return model.isAvailable
     }
@@ -79,6 +81,7 @@ extension StatusEditor {
         Self.session.streamResponse(to: "Rewrite this text to be more \(tone.rawValue). Here is the message to rewrite: \(message)",
                                   options: .init(temperature: 0.8))
     }
+    #endif
   }
   
   @available(iOS 26.0, *)

@@ -6,6 +6,7 @@ import SwiftData
 import SwiftUI
 
 extension StatusEditor.AutoCompleteView {
+  #if !targetEnvironment(macCatalyst)
   @available(iOS 26.0, *)
   struct SuggestedTagsView: View {
     enum ViewState {
@@ -62,4 +63,5 @@ extension StatusEditor.AutoCompleteView {
       }
     }
   }
+  #endif
 }
