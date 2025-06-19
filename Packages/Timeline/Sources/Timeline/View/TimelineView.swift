@@ -80,7 +80,6 @@ public struct TimelineView: View {
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       viewModel.canFilterTimeline = canFilterTimeline
-      viewModel.isTimelineVisible = true
 
       if viewModel.client == nil {
         viewModel.client = client
@@ -89,7 +88,6 @@ public struct TimelineView: View {
       viewModel.timeline = timeline
     }
     .onDisappear {
-      viewModel.isTimelineVisible = false
       viewModel.saveMarker()
     }
     .refreshable {

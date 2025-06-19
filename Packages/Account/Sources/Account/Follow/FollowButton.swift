@@ -32,8 +32,11 @@ import SwiftUI
 
   func follow() async throws {
     do {
-      relationship = try await client.post(
+      let newRelationship: Relationship = try await client.post(
         endpoint: Accounts.follow(id: accountId, notify: false, reblogs: true))
+      withAnimation(.bouncy) {
+        relationship = newRelationship
+      }
       relationshipUpdated(relationship)
     } catch {
       throw error
@@ -42,7 +45,10 @@ import SwiftUI
 
   func unfollow() async throws {
     do {
-      relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
+      let newRelationship: Relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
+      withAnimation(.bouncy) {
+        relationship = newRelationship
+      }
       relationshipUpdated(relationship)
     } catch {
       throw error
@@ -94,53 +100,109 @@ public struct FollowButton: View {
   }
 
   public var body: some View {
-    VStack(alignment: .trailing) {
-      AsyncButton {
-        if viewModel.relationship.following || viewModel.relationship.requested {
-          try await viewModel.unfollow()
-        } else {
-          try await viewModel.follow()
+    if #available(iOS 26.0, *) {
+      GlassEffectContainer {
+        VStack(alignment: .trailing) {
+          AsyncButton {
+            if viewModel.relationship.following || viewModel.relationship.requested {
+              try await viewModel.unfollow()
+            } else {
+              try await viewModel.follow()
+            }
+          } label: {
+            if viewModel.relationship.requested == true {
+              Text("account.follow.requested")
+            } else {
+              Text(
+                viewModel.relationship.following ? "account.follow.following" : "account.follow.follow"
+              )
+              .accessibilityLabel("account.follow.following")
+              .accessibilityValue(
+                viewModel.relationship.following
+                ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+            }
+          }
+          .glassEffect()
+          if viewModel.relationship.following,
+             viewModel.shouldDisplayNotify
+          {
+            HStack {
+              AsyncButton {
+                try await viewModel.toggleNotify()
+              } label: {
+                Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
+              }
+              .accessibilityLabel("accessibility.tabs.profile.user-notifications.label")
+              .accessibilityValue(
+                viewModel.relationship.notifying
+                ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+              .glassEffect()
+              AsyncButton {
+                try await viewModel.toggleReboosts()
+              } label: {
+                Image(viewModel.relationship.showingReblogs ? "Rocket.Fill" : "Rocket")
+              }
+              .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
+              .accessibilityValue(
+                viewModel.relationship.showingReblogs
+                ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+              .glassEffect()
+            }
+            .asyncButtonStyle(.none)
+            .disabledWhenLoading()
+          }
         }
-      } label: {
-        if viewModel.relationship.requested == true {
-          Text("account.follow.requested")
-        } else {
-          Text(
-            viewModel.relationship.following ? "account.follow.following" : "account.follow.follow"
-          )
-          .accessibilityLabel("account.follow.following")
-          .accessibilityValue(
-            viewModel.relationship.following
+        .buttonStyle(.bordered)
+      }
+    } else {
+      VStack(alignment: .trailing) {
+        AsyncButton {
+          if viewModel.relationship.following || viewModel.relationship.requested {
+            try await viewModel.unfollow()
+          } else {
+            try await viewModel.follow()
+          }
+        } label: {
+          if viewModel.relationship.requested == true {
+            Text("account.follow.requested")
+          } else {
+            Text(
+              viewModel.relationship.following ? "account.follow.following" : "account.follow.follow"
+            )
+            .accessibilityLabel("account.follow.following")
+            .accessibilityValue(
+              viewModel.relationship.following
               ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+          }
+        }
+        if viewModel.relationship.following,
+           viewModel.shouldDisplayNotify
+        {
+          HStack {
+            AsyncButton {
+              try await viewModel.toggleNotify()
+            } label: {
+              Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
+            }
+            .accessibilityLabel("accessibility.tabs.profile.user-notifications.label")
+            .accessibilityValue(
+              viewModel.relationship.notifying
+              ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+            AsyncButton {
+              try await viewModel.toggleReboosts()
+            } label: {
+              Image(viewModel.relationship.showingReblogs ? "Rocket.Fill" : "Rocket")
+            }
+            .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
+            .accessibilityValue(
+              viewModel.relationship.showingReblogs
+              ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+          }
+          .asyncButtonStyle(.none)
+          .disabledWhenLoading()
         }
       }
-      if viewModel.relationship.following,
-        viewModel.shouldDisplayNotify
-      {
-        HStack {
-          AsyncButton {
-            try await viewModel.toggleNotify()
-          } label: {
-            Image(systemName: viewModel.relationship.notifying ? "bell.fill" : "bell")
-          }
-          .accessibilityLabel("accessibility.tabs.profile.user-notifications.label")
-          .accessibilityValue(
-            viewModel.relationship.notifying
-              ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
-          AsyncButton {
-            try await viewModel.toggleReboosts()
-          } label: {
-            Image(viewModel.relationship.showingReblogs ? "Rocket.Fill" : "Rocket")
-          }
-          .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
-          .accessibilityValue(
-            viewModel.relationship.showingReblogs
-              ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
-        }
-        .asyncButtonStyle(.none)
-        .disabledWhenLoading()
-      }
+      .buttonStyle(.bordered)
     }
-    .buttonStyle(.bordered)
   }
 }

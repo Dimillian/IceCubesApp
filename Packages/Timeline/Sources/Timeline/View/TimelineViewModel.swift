@@ -94,7 +94,6 @@ import SwiftUI
     client?.server ?? "Error"
   }
 
-  var isTimelineVisible: Bool = false
   let pendingStatusesObserver: TimelineUnreadStatusesObserver = .init()
   var marker: Marker.Content?
 
@@ -264,7 +263,6 @@ extension TimelineViewModel: GapLoadingFetcher {
       timeline: timeline)
 
     guard !newestStatuses.isEmpty,
-      isTimelineVisible,
       !Task.isCancelled,
       initialTimeline == timeline
     else {
@@ -491,7 +489,7 @@ extension TimelineViewModel {
 
 extension TimelineViewModel {
   func handleEvent(event: any StreamEvent) async {
-    guard let client = client, canStreamEvents, isTimelineVisible else { return }
+    guard let client = client, canStreamEvents else { return }
 
     switch event {
     case let deleteEvent as StreamEventDelete:

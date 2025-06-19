@@ -13,7 +13,6 @@ struct Tests {
     let client = Client(server: "localhost")
     subject.client = client
     subject.timeline = .home
-    subject.isTimelineVisible = true
     subject.timelineTask?.cancel()
     return subject
   }
