@@ -22,17 +22,28 @@ struct NotificationRowView: View {
         makeAvatarView(type: notification.type)
           .accessibilityHidden(true)
       } else {
-        makeNotificationIconView(type: notification.type)
-          .frame(
-            width: AvatarView.FrameConfig.status.width,
-            height: AvatarView.FrameConfig.status.height
-          )
-          .accessibilityHidden(true)
+        if #available(iOS 26.0, *) {
+          makeNotificationIconView(type: notification.type, showBorder: false)
+            .frame(
+              width: AvatarView.FrameConfig.status.width,
+              height: AvatarView.FrameConfig.status.height
+            )
+            .accessibilityHidden(true)
+            .glassEffect(.regular.tint(notification.type.tintColor(isPrivate: notification.status?.visibility == .direct)))
+        } else {
+          makeNotificationIconView(type: notification.type)
+            .frame(
+              width: AvatarView.FrameConfig.status.width,
+              height: AvatarView.FrameConfig.status.height
+            )
+            .accessibilityHidden(true)
+        }
       }
       VStack(alignment: .leading, spacing: 0) {
         makeMainLabel(type: notification.type)
           // The main label is redundant for mentions
           .accessibilityHidden(notification.type == .mention)
+          .padding(.trailing, -.layoutPadding)
         makeContent(type: notification.type)
         if notification.type == .follow_request,
           followRequests.map(\.id).contains(notification.accounts[0].id)
@@ -55,8 +66,18 @@ struct NotificationRowView: View {
   private func makeAvatarView(type: Models.Notification.NotificationType) -> some View {
     ZStack(alignment: .topLeading) {
       AvatarView(notification.accounts[0].avatar)
-      makeNotificationIconView(type: type)
-        .offset(x: -8, y: -8)
+      if #available(iOS 26.0, *) {
+        makeNotificationIconView(type: type, showBorder: false)
+          .frame(
+            width: AvatarView.FrameConfig.status.width / 1.7,
+            height: AvatarView.FrameConfig.status.height / 1.7,
+          )
+          .glassEffect(.regular.tint(notification.type.tintColor(isPrivate: notification.status?.visibility == .direct)))
+          .offset(x: -8, y: -8)
+      } else {
+        makeNotificationIconView(type: type)
+          .offset(x: -8, y: -8)
+      }
     }
     .contentShape(Rectangle())
     .onTapGesture {
@@ -64,20 +85,19 @@ struct NotificationRowView: View {
     }
   }
 
-  private func makeNotificationIconView(type: Models.Notification.NotificationType) -> some View {
+  private func makeNotificationIconView(type: Models.Notification.NotificationType, showBorder: Bool = true) -> some View {
     ZStack(alignment: .center) {
       Circle()
-        .strokeBorder(Color.white, lineWidth: 1)
+        .strokeBorder(showBorder ? Color.white : Color.clear, lineWidth: 1)
         .background(
-          Circle().foregroundColor(
-            type.tintColor(isPrivate: notification.status?.visibility == .direct))
+          Circle().foregroundColor(showBorder ? type.tintColor(isPrivate: notification.status?.visibility == .direct) : .clear)
         )
-        .frame(width: 24, height: 24)
+        .frame(width: showBorder ? 28 : 20, height: showBorder ? 28 : 20)
 
       type.icon(isPrivate: notification.status?.visibility == .direct)
         .resizable()
         .scaledToFit()
-        .frame(width: 12, height: 12)
+        .frame(width: 16, height: 16)
         .foregroundColor(.white)
     }
   }
@@ -97,7 +117,8 @@ struct NotificationRowView: View {
           }
           .padding(.leading, 1)
           .frame(height: AvatarView.FrameConfig.status.size.height + 2)
-        }.offset(y: -1)
+        }
+        .offset(y: -1)
       }
       if !reasons.contains(.placeholder) {
         HStack(spacing: 0) {
