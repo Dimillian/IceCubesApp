@@ -10,7 +10,6 @@ import SwiftUI
 @MainActor
 public struct TimelineView: View {
   @Environment(\.scenePhase) private var scenePhase
-  @Environment(\.selectedTabScrollToTop) private var selectedTabScrollToTop
 
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var account
@@ -28,8 +27,6 @@ public struct TimelineView: View {
   @Binding var timeline: TimelineFilter
   @Binding var pinnedFilters: [TimelineFilter]
   @Binding var selectedTagGroup: TagGroup?
-
-  @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
   private let canFilterTimeline: Bool
 
@@ -57,8 +54,18 @@ public struct TimelineView: View {
 
   public var body: some View {
     ZStack(alignment: .top) {
-      listView
-      statusesObserver
+      TimelineListView(viewModel: viewModel,
+                       timeline: $timeline,
+                       pinnedFilters: $pinnedFilters,
+                       selectedTagGroup: $selectedTagGroup,
+                       scrollToIdAnimated: $scrollToIdAnimated)
+      if viewModel.timeline.supportNewestPagination {
+        TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver) { statusId in
+          if let statusId {
+            scrollToIdAnimated = statusId
+          }
+        }
+      }
     }
     .safeAreaInset(edge: .top, spacing: 0) {
       if #unavailable(iOS 26), canFilterTimeline, !pinnedFilters.isEmpty {
@@ -74,8 +81,8 @@ public struct TimelineView: View {
     }
     .toolbarBackground(toolbarBackgroundVisibility, for: .navigationBar)
     .toolbar {
-      toolbarTitleView
-      toolbarTagGroupButton
+      TimelineToolbarTitleView(timeline: $timeline, canFilterTimeline: canFilterTimeline)
+      TimelineToolbarTagGroupButton(timeline: $timeline)
     }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
@@ -168,153 +175,5 @@ public struct TimelineView: View {
         break
       }
     }
-  }
-
-  private var listView: some View {
-    ScrollViewReader { proxy in
-      List {
-        scrollToTopView
-        TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $timeline)
-        TimelineTagHeaderView(tag: $viewModel.tag)
-        switch viewModel.timeline {
-        case .remoteLocal:
-          StatusesListView(
-            fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
-        default:
-          StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
-            .environment(\.isHomeTimeline, timeline == .home)
-        }
-      }
-      .id(client.id)
-      .environment(\.defaultMinListRowHeight, 1)
-      .listStyle(.plain)
-      #if !os(visionOS)
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
-      #endif
-      .onChange(of: viewModel.scrollToId) { _, newValue in
-        if let newValue {
-          proxy.scrollTo(newValue, anchor: .top)
-          viewModel.scrollToId = nil
-        }
-      }
-      .onChange(of: scrollToIdAnimated) { _, newValue in
-        if let newValue {
-          withAnimation {
-            proxy.scrollTo(newValue, anchor: .top)
-            scrollToIdAnimated = nil
-          }
-        }
-      }
-      .onChange(of: selectedTabScrollToTop) { _, newValue in
-        if newValue == 0, routerPath.path.isEmpty {
-          withAnimation {
-            proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
-          }
-        }
-      }
-    }
-  }
-
-  @ViewBuilder
-  private var statusesObserver: some View {
-    if viewModel.timeline.supportNewestPagination {
-      TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver) { statusId in
-        if let statusId {
-          scrollToIdAnimated = statusId
-        }
-      }
-    }
-  }
-
-  @ToolbarContentBuilder
-  private var toolbarTitleView: some ToolbarContent {
-    ToolbarItem(placement: .principal) {
-      VStack(alignment: .center) {
-        switch timeline {
-        case let .remoteLocal(_, filter):
-          Text(filter.localizedTitle())
-            .font(.headline)
-          Text(timeline.localizedTitle())
-            .font(.caption)
-            .foregroundStyle(.secondary)
-        case let .link(url, _):
-          Text(timeline.localizedTitle())
-            .font(.headline)
-          Text(url.host() ?? url.absoluteString)
-            .font(.caption)
-            .foregroundStyle(.secondary)
-        default:
-          Text(timeline.localizedTitle())
-            .font(.headline)
-          Text(client.server)
-            .font(.caption)
-            .foregroundStyle(.secondary)
-        }
-      }
-      .accessibilityRepresentation {
-        switch timeline {
-        case let .remoteLocal(_, filter):
-          if canFilterTimeline {
-            Menu(filter.localizedTitle()) {}
-          } else {
-            Text(filter.localizedTitle())
-          }
-        default:
-          if canFilterTimeline {
-            Menu(timeline.localizedTitle()) {}
-          } else {
-            Text(timeline.localizedTitle())
-          }
-        }
-      }
-      .accessibilityAddTraits(.isHeader)
-      .accessibilityRemoveTraits(.isButton)
-      .accessibilityRespondsToUserInteraction(canFilterTimeline)
-    }
-  }
-
-  @ToolbarContentBuilder
-  private var toolbarTagGroupButton: some ToolbarContent {
-    ToolbarItem(placement: .topBarTrailing) {
-      switch timeline {
-      case let .hashtag(tag, _):
-        if !tagGroups.isEmpty {
-          Menu {
-            Section("tag-groups.edit.section.title") {
-              ForEach(tagGroups) { group in
-                Button {
-                  if group.tags.contains(tag) {
-                    group.tags.removeAll(where: { $0 == tag })
-                  } else {
-                    group.tags.append(tag)
-                  }
-                } label: {
-                  Label(
-                    group.title,
-                    systemImage: group.tags.contains(tag)
-                      ? "checkmark.rectangle.fill" : "checkmark.rectangle")
-                }
-              }
-            }
-          } label: {
-            Image(systemName: "ellipsis")
-          }
-        }
-      default:
-        EmptyView()
-      }
-    }
-  }
-
-  private var scrollToTopView: some View {
-    ScrollToView()
-      .frame(height: pinnedFilters.isEmpty ? .layoutPadding : 0)
-      .onAppear {
-        viewModel.scrollToTopVisible = true
-      }
-      .onDisappear {
-        viewModel.scrollToTopVisible = false
-      }
   }
 }
