@@ -15,10 +15,10 @@ public enum Notifications: Endpoint {
   case acceptRequests(ids: [String])
   case dismissRequests(ids: [String])
   case clear
-  
+
   // V2 Grouped Notifications API
   case notificationsV2(
-    minId: String?,
+    sinceId: String?,
     maxId: String?,
     types: [String]?,
     excludeTypes: [String]?,
@@ -39,7 +39,7 @@ public enum Notifications: Endpoint {
     switch self {
     case .notifications, .notificationsForAccount:
       "notifications"
-    case let .notification(id):
+    case .notification(let id):
       "notifications/\(id)"
     case .policy, .putPolicy:
       "notifications/policy"
@@ -53,11 +53,11 @@ public enum Notifications: Endpoint {
       "notifications/clear"
     case .notificationsV2:
       "notifications"
-    case let .notificationGroupV2(groupKey):
+    case .notificationGroupV2(let groupKey):
       "notifications/\(groupKey)"
-    case let .dismissNotificationGroupV2(groupKey):
+    case .dismissNotificationGroupV2(let groupKey):
       "notifications/\(groupKey)/dismiss"
-    case let .notificationGroupAccountsV2(groupKey):
+    case .notificationGroupAccountsV2(let groupKey):
       "notifications/\(groupKey)/accounts"
     case .unreadCountV2:
       "notifications/unread_count"
@@ -66,7 +66,7 @@ public enum Notifications: Endpoint {
 
   public var jsonValue: (any Encodable)? {
     switch self {
-    case let .putPolicy(policy):
+    case .putPolicy(let policy):
       return policy
     default:
       return nil
@@ -75,11 +75,11 @@ public enum Notifications: Endpoint {
 
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case let .notificationsForAccount(accountId, maxId):
+    case .notificationsForAccount(let accountId, let maxId):
       var params = makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil) ?? []
       params.append(.init(name: "account_id", value: accountId))
       return params
-    case let .notifications(mindId, maxId, types, limit):
+    case .notifications(let mindId, let maxId, let types, let limit):
       var params = makePaginationParam(sinceId: nil, maxId: maxId, mindId: mindId) ?? []
       params.append(.init(name: "limit", value: String(limit)))
       if let types {
@@ -88,10 +88,12 @@ public enum Notifications: Endpoint {
         }
       }
       return params
-    case let .acceptRequests(ids), let .dismissRequests(ids):
+    case .acceptRequests(let ids), .dismissRequests(let ids):
       return ids.map { URLQueryItem(name: "id[]", value: $0) }
-    case let .notificationsV2(minId, maxId, types, excludeTypes, accountId, groupedTypes, expandAccounts):
-      var params = makePaginationParam(sinceId: nil, maxId: maxId, mindId: minId) ?? []
+    case .notificationsV2(
+      let sinceId, let maxId, let types, let excludeTypes, let accountId, let groupedTypes,
+      let expandAccounts):
+      var params = makePaginationParam(sinceId: sinceId, maxId: maxId, mindId: nil) ?? []
       if let types {
         for type in types {
           params.append(.init(name: "types[]", value: type))
@@ -114,7 +116,7 @@ public enum Notifications: Endpoint {
         params.append(.init(name: "expand_accounts", value: expandAccounts))
       }
       return params
-    case let .unreadCountV2(limit, types, excludeTypes, accountId, groupedTypes):
+    case .unreadCountV2(let limit, let types, let excludeTypes, let accountId, let groupedTypes):
       var params: [URLQueryItem] = []
       params.append(.init(name: "limit", value: String(limit)))
       if let types {
