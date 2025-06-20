@@ -193,44 +193,7 @@ import SwiftUI
     )
 
     // Merge new notifications at the top, similar to streaming logic
-    for newGroup in results.consolidated.reversed() {
-      if let groupKey = newGroup.groupKey {
-        // Check if we already have this group
-        if let existingIndex = consolidatedNotifications.firstIndex(where: {
-          $0.groupKey == groupKey
-        }) {
-          // Merge into existing group - add new accounts if not present
-          let existingGroup = consolidatedNotifications[existingIndex]
-          var updatedAccounts = existingGroup.accounts
-
-          for newAccount in newGroup.accounts {
-            if !updatedAccounts.contains(where: { $0.id == newAccount.id }) {
-              updatedAccounts.insert(newAccount, at: 0)
-            }
-          }
-
-          // Create updated consolidated notification
-          let updatedGroup = ConsolidatedNotification(
-            notifications: existingGroup.notifications,
-            type: existingGroup.type,
-            createdAt: newGroup.createdAt,  // Use the newer date
-            accounts: updatedAccounts,
-            status: existingGroup.status,
-            groupKey: groupKey
-          )
-
-          // Remove old and insert updated at the top
-          consolidatedNotifications.remove(at: existingIndex)
-          consolidatedNotifications.insert(updatedGroup, at: 0)
-        } else {
-          // New group, insert at the top
-          consolidatedNotifications.insert(newGroup, at: 0)
-        }
-      } else {
-        // No group key, just insert at the top
-        consolidatedNotifications.insert(newGroup, at: 0)
-      }
-    }
+    mergeV2Notifications(results.consolidated)
   }
 
   // MARK: - V1 API Helpers
@@ -354,79 +317,47 @@ import SwiftUI
     let hasMore: Bool
   }
 
-  private func fetchGroupedNotifications(
-    client: Client,
-    sinceId: String?,
-    maxId: String?,
-    selectedType: Models.Notification.NotificationType?
-  ) async throws -> GroupedNotificationsFetchResult {
-    // Determine which types can be grouped
-    let groupableTypes = ["favourite", "follow", "reblog"]
-    let groupedTypes = selectedType == nil ? groupableTypes : []
+  /// Merges new V2 notifications into the existing consolidated notifications list
+  /// This handles both refresh and streaming scenarios
+  private func mergeV2Notifications(_ newGroups: [ConsolidatedNotification]) {
+    for newGroup in newGroups.reversed() {
+      if let groupKey = newGroup.groupKey {
+        // Check if we already have this group
+        if let existingIndex = consolidatedNotifications.firstIndex(where: {
+          $0.groupKey == groupKey
+        }) {
+          // Merge into existing group - add new accounts if not present
+          let existingGroup = consolidatedNotifications[existingIndex]
+          var updatedAccounts = existingGroup.accounts
 
-    let results: Models.GroupedNotificationsResults = try await client.get(
-      endpoint: Notifications.notificationsV2(
-        sinceId: sinceId,
-        maxId: maxId,
-        types: selectedType != nil ? [selectedType!.rawValue] : nil,
-        excludeTypes: queryTypes,
-        accountId: nil, groupedTypes: groupedTypes,
-        expandAccounts: "full"
-      ),
-      forceVersion: .v2
-    )
-
-    // Convert grouped notifications to consolidated format
-    var consolidated: [ConsolidatedNotification] = []
-    for group in results.notificationGroups {
-      let accounts = group.sampleAccountIds.compactMap { accountId in
-        results.accounts.first { $0.id == accountId }
-      }
-      let status = group.statusId.flatMap { statusId in
-        results.statuses.first { $0.id == statusId }
-      }
-
-      if let notificationType = Models.Notification.NotificationType(rawValue: group.type),
-        !accounts.isEmpty
-      {
-        // For V2 API, we create a simplified consolidated notification
-        // The group represents already consolidated notifications
-        // We use the most recent notification ID to maintain compatibility
-        let placeholderNotification = Models.Notification.placeholder()
-
-        // Parse the date from the group's latestPageNotificationAt
-        let createdAt: ServerDate
-        if let dateString = group.latestPageNotificationAt {
-          // ServerDate can decode from a string directly
-          let decoder = JSONDecoder()
-          if let data = try? JSONEncoder().encode(dateString),
-            let serverDate = try? decoder.decode(ServerDate.self, from: data)
-          {
-            createdAt = serverDate
-          } else {
-            createdAt = ServerDate()
+          for newAccount in newGroup.accounts {
+            if !updatedAccounts.contains(where: { $0.id == newAccount.id }) {
+              updatedAccounts.insert(newAccount, at: 0)
+            }
           }
-        } else {
-          createdAt = ServerDate()
-        }
 
-        consolidated.append(
-          ConsolidatedNotification(
-            notifications: [placeholderNotification],  // Use placeholder for ID tracking
-            type: notificationType,
-            createdAt: createdAt,
-            accounts: accounts,
-            status: status,
-            groupKey: group.groupKey
-          ))
+          // Create updated consolidated notification
+          let updatedGroup = ConsolidatedNotification(
+            notifications: existingGroup.notifications,
+            type: existingGroup.type,
+            createdAt: newGroup.createdAt,  // Use the newer date
+            accounts: updatedAccounts,
+            status: existingGroup.status,
+            groupKey: groupKey
+          )
+
+          // Remove old and insert updated at the top
+          consolidatedNotifications.remove(at: existingIndex)
+          consolidatedNotifications.insert(updatedGroup, at: 0)
+        } else {
+          // New group, insert at the top
+          consolidatedNotifications.insert(newGroup, at: 0)
+        }
+      } else {
+        // No group key, just insert at the top
+        consolidatedNotifications.insert(newGroup, at: 0)
       }
     }
-
-    return GroupedNotificationsFetchResult(
-      consolidated: consolidated,
-      lastGroup: results.notificationGroups.last,
-      hasMore: results.notificationGroups.count >= 40
-    )
   }
 
   // MARK: - Streaming Events
@@ -504,41 +435,92 @@ import SwiftUI
   ) async {
     guard let groupKey = event.notification.groupKey else { return }
 
-    // Find existing group with the same group_key
-    if let index = consolidatedNotifications.firstIndex(where: { $0.groupKey == groupKey }) {
-      // Merge into existing group
-      let existingGroup = consolidatedNotifications[index]
+    // Create a consolidated notification from the streaming event
+    let newGroup = ConsolidatedNotification(
+      notifications: [event.notification],
+      type: event.notification.supportedType ?? .favourite,
+      createdAt: event.notification.createdAt,
+      accounts: [event.notification.account],
+      status: event.notification.status,
+      groupKey: groupKey
+    )
 
-      // Add the new account to the group if not already present
-      if !existingGroup.accounts.contains(where: { $0.id == event.notification.account.id }) {
-        var updatedAccounts = existingGroup.accounts
-        updatedAccounts.insert(event.notification.account, at: 0)  // Add new account at the beginning
+    // Use the shared merging logic
+    mergeV2Notifications([newGroup])
+  }
 
-        // Create updated consolidated notification
-        let updatedGroup = ConsolidatedNotification(
-          notifications: existingGroup.notifications,
-          type: existingGroup.type,
-          createdAt: event.notification.createdAt,  // Use the new notification's date
-          accounts: updatedAccounts,
-          status: existingGroup.status,
-          groupKey: groupKey
-        )
+  private func fetchGroupedNotifications(
+    client: Client,
+    sinceId: String?,
+    maxId: String?,
+    selectedType: Models.Notification.NotificationType?
+  ) async throws -> GroupedNotificationsFetchResult {
+    // Determine which types can be grouped
+    let groupableTypes = ["favourite", "follow", "reblog"]
+    let groupedTypes = selectedType == nil ? groupableTypes : []
 
-        // Remove old and insert updated at the top
-        consolidatedNotifications.remove(at: index)
-        consolidatedNotifications.insert(updatedGroup, at: 0)
+    let results: Models.GroupedNotificationsResults = try await client.get(
+      endpoint: Notifications.notificationsV2(
+        sinceId: sinceId,
+        maxId: maxId,
+        types: selectedType != nil ? [selectedType!.rawValue] : nil,
+        excludeTypes: queryTypes,
+        accountId: nil, groupedTypes: groupedTypes,
+        expandAccounts: "full"
+      ),
+      forceVersion: .v2
+    )
+
+    // Convert grouped notifications to consolidated format
+    var consolidated: [ConsolidatedNotification] = []
+    for group in results.notificationGroups {
+      let accounts = group.sampleAccountIds.compactMap { accountId in
+        results.accounts.first { $0.id == accountId }
       }
-    } else {
-      // No existing group found, create new one at the top
-      let newGroup = ConsolidatedNotification(
-        notifications: [event.notification],
-        type: event.notification.supportedType ?? .favourite,
-        createdAt: event.notification.createdAt,
-        accounts: [event.notification.account],
-        status: event.notification.status,
-        groupKey: groupKey
-      )
-      consolidatedNotifications.insert(newGroup, at: 0)
+      let status = group.statusId.flatMap { statusId in
+        results.statuses.first { $0.id == statusId }
+      }
+
+      if let notificationType = Models.Notification.NotificationType(rawValue: group.type),
+        !accounts.isEmpty
+      {
+        // For V2 API, we create a simplified consolidated notification
+        // The group represents already consolidated notifications
+        // We use the most recent notification ID to maintain compatibility
+        let placeholderNotification = Models.Notification.placeholder()
+
+        // Parse the date from the group's latestPageNotificationAt
+        let createdAt: ServerDate
+        if let dateString = group.latestPageNotificationAt {
+          // ServerDate can decode from a string directly
+          let decoder = JSONDecoder()
+          if let data = try? JSONEncoder().encode(dateString),
+            let serverDate = try? decoder.decode(ServerDate.self, from: data)
+          {
+            createdAt = serverDate
+          } else {
+            createdAt = ServerDate()
+          }
+        } else {
+          createdAt = ServerDate()
+        }
+
+        consolidated.append(
+          ConsolidatedNotification(
+            notifications: [placeholderNotification],  // Use placeholder for ID tracking
+            type: notificationType,
+            createdAt: createdAt,
+            accounts: accounts,
+            status: status,
+            groupKey: group.groupKey
+          ))
+      }
     }
+
+    return GroupedNotificationsFetchResult(
+      consolidated: consolidated,
+      lastGroup: results.notificationGroups.last,
+      hasMore: results.notificationGroups.count >= 40
+    )
   }
 }
