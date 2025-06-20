@@ -179,15 +179,15 @@ extension StatusEditor {
       HStack(alignment: .center) {
         if #available(iOS 26.0, *) {
           LangButton(viewModel: viewModel)
-            .glassEffect()
+            .glassEffect(.regular.interactive())
           pollButton
-            .glassEffect()
+            .glassEffect(.regular.interactive())
           spoilerButton
-            .glassEffect()
+            .glassEffect(.regular.interactive())
           Spacer()
           characterCount
             .padding(8)
-            .glassEffect()
+            .glassEffect(.regular.interactive())
         } else {
           LangButton(viewModel: viewModel)
           pollButton
