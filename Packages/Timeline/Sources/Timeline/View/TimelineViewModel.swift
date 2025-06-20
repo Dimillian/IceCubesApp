@@ -213,7 +213,8 @@ extension TimelineViewModel: GapLoadingFetcher {
   private func fetchFirstPage(client: Client) async throws {
     pendingStatusesObserver.pendingStatuses = []
 
-    if await datasource.isEmpty {
+    let datasourceIsEmpty = await datasource.isEmpty
+    if datasourceIsEmpty {
       statusesState = .loading
     }
 
@@ -246,7 +247,7 @@ extension TimelineViewModel: GapLoadingFetcher {
       await updateDatasourceAndState(statuses: statuses, client: client, replaceExisting: true)
 
       // If we got 40 or more statuses, there might be older ones - create a gap
-      if statuses.count >= 40, let oldestStatus = statuses.last {
+      if statuses.count >= 40, let oldestStatus = statuses.last, !datasourceIsEmpty {
         await createGapForOlderStatuses(maxId: oldestStatus.id, at: statuses.count)
       }
     }
