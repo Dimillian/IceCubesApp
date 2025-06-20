@@ -77,6 +77,7 @@ import SwiftUI
   }
 
   private var consolidatedNotifications: [ConsolidatedNotification] = []
+  private var lastNotificationGroup: Models.NotificationGroup?
 
   func fetchNotifications(_ selectedType: Models.Notification.NotificationType?) async {
     guard let client, let currentAccount else { return }
@@ -84,37 +85,67 @@ import SwiftUI
       var nextPageState: State.PagingState = .hasNextPage
       if consolidatedNotifications.isEmpty {
         state = .loading
-        let notifications: [Models.Notification]
-        if let lockedAccountId {
-          notifications = try await client.get(
-            endpoint: Notifications.notificationsForAccount(
-              accountId: lockedAccountId,
-              maxId: nil))
+        
+        // Use V2 API if available and not locked to specific account
+        if CurrentInstance.shared.isGroupedNotificationsSupported, lockedAccountId == nil {
+          let results = try await fetchGroupedNotifications(
+            client: client,
+            minId: nil,
+            maxId: nil,
+            selectedType: selectedType
+          )
+          consolidatedNotifications = results.consolidated
+          lastNotificationGroup = results.lastGroup
+          nextPageState = results.hasMore ? .hasNextPage : .none
         } else {
-          notifications = try await client.get(
-            endpoint: Notifications.notifications(
-              minId: nil,
-              maxId: nil,
-              types: queryTypes,
-              limit: Constants.notificationLimit))
+          // Fallback to V1 API
+          let notifications: [Models.Notification]
+          if let lockedAccountId {
+            notifications = try await client.get(
+              endpoint: Notifications.notificationsForAccount(
+                accountId: lockedAccountId,
+                maxId: nil))
+          } else {
+            notifications = try await client.get(
+              endpoint: Notifications.notifications(
+                minId: nil,
+                maxId: nil,
+                types: queryTypes,
+                limit: Constants.notificationLimit))
+          }
+          consolidatedNotifications = await notifications.consolidated(selectedType: selectedType)
+          nextPageState = notifications.count < Constants.notificationLimit ? .none : .hasNextPage
         }
-        consolidatedNotifications = await notifications.consolidated(selectedType: selectedType)
         markAsRead()
-        nextPageState = notifications.count < Constants.notificationLimit ? .none : .hasNextPage
       } else if let firstId = consolidatedNotifications.first?.id {
-        var newNotifications: [Models.Notification] = await fetchNewPages(
-          minId: firstId, maxPages: 10)
-        nextPageState =
-          consolidatedNotifications.notificationCount < Constants.notificationLimit
-          ? .none : .hasNextPage
-        newNotifications = newNotifications.filter { notification in
-          !consolidatedNotifications.contains(where: { $0.id == notification.id })
-        }
+        if CurrentInstance.shared.isGroupedNotificationsSupported, lockedAccountId == nil {
+          // For V2 API pull-to-refresh: completely reset and fetch first page
+          // This avoids complex merging logic with grouped notifications
+          let results = try await fetchGroupedNotifications(
+            client: client,
+            minId: nil,
+            maxId: nil,
+            selectedType: selectedType
+          )
+          consolidatedNotifications = results.consolidated
+          lastNotificationGroup = results.lastGroup
+          nextPageState = results.hasMore ? .hasNextPage : .none
+        } else {
+          // Use V1 API
+          var newNotifications: [Models.Notification] = await fetchNewPages(
+            minId: firstId, maxPages: 10)
+          nextPageState =
+            consolidatedNotifications.notificationCount < Constants.notificationLimit
+            ? .none : .hasNextPage
+          newNotifications = newNotifications.filter { notification in
+            !consolidatedNotifications.contains(where: { $0.id == notification.id })
+          }
 
-        await consolidatedNotifications.insert(
-          contentsOf: newNotifications.consolidated(selectedType: selectedType),
-          at: 0
-        )
+          consolidatedNotifications.insert(
+            contentsOf: await newNotifications.consolidated(selectedType: selectedType),
+            at: 0
+          )
+        }
       }
 
       if consolidatedNotifications.contains(where: { $0.type == .follow_request }) {
@@ -162,30 +193,52 @@ import SwiftUI
 
   func fetchNextPage(_ selectedType: Models.Notification.NotificationType?) async throws {
     guard let client else { return }
-    guard let lastId = consolidatedNotifications.last?.notificationIds.last else { return }
-    let newNotifications: [Models.Notification]
-    if let lockedAccountId {
-      newNotifications =
-        try await client.get(
-          endpoint: Notifications.notificationsForAccount(accountId: lockedAccountId, maxId: lastId)
-        )
+    
+    if CurrentInstance.shared.isGroupedNotificationsSupported, lockedAccountId == nil {
+      // Use V2 API with group-based pagination
+      guard let lastGroup = lastNotificationGroup else { return }
+      let results = try await fetchGroupedNotifications(
+        client: client,
+        minId: nil,
+        maxId: String(lastGroup.mostRecentNotificationId),
+        selectedType: selectedType
+      )
+      consolidatedNotifications.append(contentsOf: results.consolidated)
+      lastNotificationGroup = results.lastGroup
+      
+      if consolidatedNotifications.contains(where: { $0.type == .follow_request }) {
+        await currentAccount?.fetchFollowerRequests()
+      }
+      state = .display(
+        notifications: consolidatedNotifications,
+        nextPageState: results.hasMore ? .hasNextPage : .none)
     } else {
-      newNotifications =
-        try await client.get(
-          endpoint: Notifications.notifications(
-            minId: nil,
-            maxId: lastId,
-            types: queryTypes,
-            limit: Constants.notificationLimit))
+      // Use V1 API
+      guard let lastId = consolidatedNotifications.last?.notificationIds.last else { return }
+      let newNotifications: [Models.Notification]
+      if let lockedAccountId {
+        newNotifications =
+          try await client.get(
+            endpoint: Notifications.notificationsForAccount(accountId: lockedAccountId, maxId: lastId)
+          )
+      } else {
+        newNotifications =
+          try await client.get(
+            endpoint: Notifications.notifications(
+              minId: nil,
+              maxId: lastId,
+              types: queryTypes,
+              limit: Constants.notificationLimit))
+      }
+      consolidatedNotifications.append(
+        contentsOf: await newNotifications.consolidated(selectedType: selectedType))
+      if consolidatedNotifications.contains(where: { $0.type == .follow_request }) {
+        await currentAccount?.fetchFollowerRequests()
+      }
+      state = .display(
+        notifications: consolidatedNotifications,
+        nextPageState: newNotifications.count < Constants.notificationLimit ? .none : .hasNextPage)
     }
-    await consolidatedNotifications.append(
-      contentsOf: newNotifications.consolidated(selectedType: selectedType))
-    if consolidatedNotifications.contains(where: { $0.type == .follow_request }) {
-      await currentAccount?.fetchFollowerRequests()
-    }
-    state = .display(
-      notifications: consolidatedNotifications,
-      nextPageState: newNotifications.count < Constants.notificationLimit ? .none : .hasNextPage)
   }
 
   func markAsRead() {
@@ -197,6 +250,84 @@ import SwiftUI
         let _: Marker = try await client.post(endpoint: Markers.markNotifications(lastReadId: id))
       } catch {}
     }
+  }
+  
+  private struct GroupedNotificationsFetchResult {
+    let consolidated: [ConsolidatedNotification]
+    let lastGroup: Models.NotificationGroup?
+    let hasMore: Bool
+  }
+  
+  private func fetchGroupedNotifications(
+    client: Client,
+    minId: String?,
+    maxId: String?,
+    selectedType: Models.Notification.NotificationType?
+  ) async throws -> GroupedNotificationsFetchResult {
+    // Determine which types can be grouped
+    let groupableTypes = ["favourite", "follow", "reblog"]
+    let groupedTypes = selectedType == nil ? groupableTypes : []
+    
+    let results: Models.GroupedNotificationsResults = try await client.get(
+      endpoint: Notifications.notificationsV2(
+        minId: minId,
+        maxId: maxId,
+        types: selectedType != nil ? [selectedType!.rawValue] : nil,
+        excludeTypes: queryTypes,
+        accountId: nil,     groupedTypes: groupedTypes,
+        expandAccounts: "full"
+      ),
+      forceVersion: .v2
+    )
+    
+    // Convert grouped notifications to consolidated format
+    var consolidated: [ConsolidatedNotification] = []
+    for group in results.notificationGroups {
+      let accounts = group.sampleAccountIds.compactMap { accountId in
+        results.accounts.first { $0.id == accountId }
+      }
+      let status = group.statusId.flatMap { statusId in
+        results.statuses.first { $0.id == statusId }
+      }
+      
+      if let notificationType = Models.Notification.NotificationType(rawValue: group.type),
+         !accounts.isEmpty {
+        // For V2 API, we create a simplified consolidated notification
+        // The group represents already consolidated notifications
+        // We use the most recent notification ID to maintain compatibility
+        let placeholderNotification = Models.Notification.placeholder()
+        
+        // Parse the date from the group's latestPageNotificationAt
+        let createdAt: ServerDate
+        if let dateString = group.latestPageNotificationAt {
+          // ServerDate can decode from a string directly
+          let decoder = JSONDecoder()
+          if let data = try? JSONEncoder().encode(dateString),
+             let serverDate = try? decoder.decode(ServerDate.self, from: data) {
+            createdAt = serverDate
+          } else {
+            createdAt = ServerDate()
+          }
+        } else {
+          createdAt = ServerDate()
+        }
+        
+        consolidated.append(ConsolidatedNotification(
+          notifications: [placeholderNotification], // Use placeholder for ID tracking
+          type: notificationType,
+          createdAt: createdAt,
+          accounts: accounts,
+          status: status,
+          groupKey: group.groupKey
+        ))
+      }
+    }
+    
+    return GroupedNotificationsFetchResult(
+      consolidated: consolidated,
+      lastGroup: results.notificationGroups.last,
+      hasMore: results.notificationGroups.count >= 40
+    )
   }
 
   func fetchPolicy() async {
@@ -213,33 +344,75 @@ import SwiftUI
         !consolidatedNotifications.flatMap(\.notificationIds).contains(event.notification.id),
         selectedType == nil || selectedType?.rawValue == event.notification.type
       {
-        if event.notification.isConsolidable(selectedType: selectedType),
-          !consolidatedNotifications.isEmpty
-        {
-          if let index = consolidatedNotifications.firstIndex(where: {
-            $0.type == event.notification.supportedType
-              && $0.status?.id == event.notification.status?.id
-          }) {
-            let latestConsolidatedNotification = consolidatedNotifications.remove(at: index)
-            await consolidatedNotifications.insert(
-              contentsOf: ([event.notification] + latestConsolidatedNotification.notifications)
-                .consolidated(selectedType: selectedType),
-              at: 0
-            )
+        // Handle V2 API streaming with group_key
+        if CurrentInstance.shared.isGroupedNotificationsSupported,
+           let groupKey = event.notification.groupKey {
+          // Find existing group with the same group_key
+          if let index = consolidatedNotifications.firstIndex(where: { $0.groupKey == groupKey }) {
+            // Merge into existing group
+            let existingGroup = consolidatedNotifications[index]
+            
+            // Add the new account to the group if not already present
+            if !existingGroup.accounts.contains(where: { $0.id == event.notification.account.id }) {
+              var updatedAccounts = existingGroup.accounts
+              updatedAccounts.insert(event.notification.account, at: 0) // Add new account at the beginning
+              
+              // Create updated consolidated notification
+              let updatedGroup = ConsolidatedNotification(
+                notifications: existingGroup.notifications,
+                type: existingGroup.type,
+                createdAt: event.notification.createdAt, // Use the new notification's date
+                accounts: updatedAccounts,
+                status: existingGroup.status,
+                groupKey: groupKey
+              )
+              
+              // Remove old and insert updated at the top
+              consolidatedNotifications.remove(at: index)
+              consolidatedNotifications.insert(updatedGroup, at: 0)
+            }
           } else {
-            let latestConsolidatedNotification = consolidatedNotifications.removeFirst()
-            await consolidatedNotifications.insert(
-              contentsOf: ([event.notification] + latestConsolidatedNotification.notifications)
-                .consolidated(selectedType: selectedType),
+            // No existing group found, create new one at the top
+            let newGroup = ConsolidatedNotification(
+              notifications: [event.notification],
+              type: event.notification.supportedType ?? .favourite,
+              createdAt: event.notification.createdAt,
+              accounts: [event.notification.account],
+              status: event.notification.status,
+              groupKey: groupKey
+            )
+            consolidatedNotifications.insert(newGroup, at: 0)
+          }
+        } else {
+          // V1 API behavior (existing implementation)
+          if event.notification.isConsolidable(selectedType: selectedType),
+            !consolidatedNotifications.isEmpty
+          {
+            if let index = consolidatedNotifications.firstIndex(where: {
+              $0.type == event.notification.supportedType
+                && $0.status?.id == event.notification.status?.id
+            }) {
+              let latestConsolidatedNotification = consolidatedNotifications.remove(at: index)
+              consolidatedNotifications.insert(
+                contentsOf: await ([event.notification] + latestConsolidatedNotification.notifications)
+                  .consolidated(selectedType: selectedType),
+                at: 0
+              )
+            } else {
+              let latestConsolidatedNotification = consolidatedNotifications.removeFirst()
+              consolidatedNotifications.insert(
+                contentsOf: await ([event.notification] + latestConsolidatedNotification.notifications)
+                  .consolidated(selectedType: selectedType),
+                at: 0
+              )
+            }
+          } else {
+            // Otherwise, just insert the new notification
+            consolidatedNotifications.insert(
+              contentsOf: await [event.notification].consolidated(selectedType: selectedType),
               at: 0
             )
           }
-        } else {
-          // Otherwise, just insert the new notification
-          await consolidatedNotifications.insert(
-            contentsOf: [event.notification].consolidated(selectedType: selectedType),
-            at: 0
-          )
         }
 
         if event.notification.supportedType == .follow_request, let currentAccount {
