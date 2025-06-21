@@ -21,6 +21,7 @@ let package = Package(
     .package(name: "Network", path: "../Network"),
     .package(name: "Env", path: "../Env"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
+    .package(name: "StatusKit", path: "../StatusKit"),
   ],
   targets: [
     .target(
@@ -30,6 +31,7 @@ let package = Package(
         .product(name: "Network", package: "Network"),
         .product(name: "Env", package: "Env"),
         .product(name: "DesignSystem", package: "DesignSystem"),
+        .product(name: "StatusKit", package: "StatusKit"),
       ],
       swiftSettings: [
         .swiftLanguageMode(.v6)
