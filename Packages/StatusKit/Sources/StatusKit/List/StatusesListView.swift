@@ -65,19 +65,103 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
           fetcher.statusDidDisappear(status: status)
         }
       }
+      makeNextPageRow(nextPageState: nextPageState)
+
+    case let .displayWithGaps(items, nextPageState):
+      ForEach(items) { item in
+        ZStack {
+          switch item {
+          case .status(let status):
+            StatusRowView(
+              viewModel: StatusRowViewModel(
+                status: status,
+                client: client,
+                routerPath: routerPath,
+                isRemote: isRemote),
+              context: .timeline
+            )
+            .onAppear {
+              fetcher.statusDidAppear(status: status)
+            }
+            .onDisappear {
+              fetcher.statusDidDisappear(status: status)
+            }
+
+          case .gap(let gap):
+            ZStack {
+              if let gapLoader = fetcher as? GapLoadingFetcher {
+                TimelineGapView(gap: gap) {
+                  await gapLoader.loadGap(gap: gap)
+                }
+              }
+            }
+          }
+        }
+        #if os(visionOS)
+          .listRowBackground(
+            RoundedRectangle(cornerRadius: 8)
+              .foregroundStyle(.background).hoverEffect()
+          )
+          .listRowHoverEffectDisabled()
+        #else
+          .listRowBackground(makeBackgroundColorFor(status: item.status))
+        #endif
+        .listRowInsets(
+          .init(
+            top: 0,
+            leading: .layoutPadding,
+            bottom: 0,
+            trailing: .layoutPadding)
+        )
+        .alignmentGuide(.listRowSeparatorLeading) { viewDimensions in
+          return -100
+        }
+        .alignmentGuide(.listRowSeparatorTrailing) { viewDimensions in
+          return viewDimensions.width + 100
+        }
+      }
+      makeNextPageRow(nextPageState: nextPageState)
+    }
+  }
+
+  @ViewBuilder
+  private func makeNextPageRow(nextPageState: StatusesState.PagingState) -> some View {
+    ZStack {
       switch nextPageState {
       case .hasNextPage:
         NextPageView {
           try await fetcher.fetchNextPage()
         }
         .padding(.horizontal, .layoutPadding)
-        #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
-        #endif
 
       case .none:
         EmptyView()
       }
+    }
+    .listRowSeparator(.hidden, edges: .all)
+    #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+    #endif
+    .alignmentGuide(.listRowSeparatorLeading) { _ in
+      -100
+    }
+  }
+
+  @ViewBuilder
+  private func makeBackgroundColorFor(status: Status?) -> some View {
+    if let status {
+      if status.visibility == .direct {
+        theme.tintColor.opacity(0.15)
+      } else if status.mentions.first(where: { $0.id == CurrentAccount.shared.account?.id }) != nil
+      {
+        theme.secondaryBackgroundColor
+      } else if status.account.isPremiumAccount {
+        Color.yellow.opacity(0.4)
+      } else {
+        theme.primaryBackgroundColor
+      }
+    } else {
+      theme.primaryBackgroundColor
     }
   }
 }

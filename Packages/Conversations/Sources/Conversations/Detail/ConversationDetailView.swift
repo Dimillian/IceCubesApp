@@ -52,7 +52,15 @@ public struct ConversationDetailView: View {
         .scrollDismissesKeyboard(.interactively)
       #endif
       .safeAreaInset(edge: .bottom) {
-        inputTextView
+        ConversationInputView(
+          newMessageText: $viewModel.newMessageText,
+          conversation: viewModel.conversation,
+          isSendingMessage: viewModel.isSendingMessage,
+          onSendMessage: {
+            await viewModel.postMessage()
+          },
+          isMessageFieldFocused: $isMessageFieldFocused
+        )
       }
       .onAppear {
         scrollProxy = proxy
@@ -116,55 +124,8 @@ public struct ConversationDetailView: View {
   private var bottomAnchorView: some View {
     Rectangle()
       .fill(Color.clear)
-      .frame(height: 40)
+      .frame(height: 10)
       .id(Constants.bottomAnchor)
       .accessibilityHidden(true)
-  }
-
-  private var inputTextView: some View {
-    VStack {
-      HStack(alignment: .bottom, spacing: 8) {
-        if viewModel.conversation.lastStatus != nil {
-          Button {
-            routerPath.presentedSheet = .replyToStatusEditor(
-              status: viewModel.conversation.lastStatus!)
-          } label: {
-            Image(systemName: "plus")
-          }
-          .padding(.bottom, 7)
-        }
-
-        TextField(
-          "conversations.new.message.placeholder", text: $viewModel.newMessageText, axis: .vertical
-        )
-        .focused($isMessageFieldFocused)
-        .keyboardType(.default)
-        .backgroundStyle(.thickMaterial)
-        .padding(6)
-        .overlay(
-          RoundedRectangle(cornerRadius: 14)
-            .stroke(.gray, lineWidth: 1)
-        )
-        .font(.scaledBody)
-        if !viewModel.newMessageText.isEmpty {
-          Button {
-            Task {
-              guard !viewModel.isSendingMessage else { return }
-              await viewModel.postMessage()
-            }
-          } label: {
-            if viewModel.isSendingMessage {
-              ProgressView()
-            } else {
-              Image(systemName: "paperplane")
-            }
-          }
-          .keyboardShortcut(.return, modifiers: .command)
-          .padding(.bottom, 6)
-        }
-      }
-      .padding(8)
-    }
-    .background(.thinMaterial)
   }
 }

@@ -19,8 +19,25 @@ extension StatusEditor {
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
 
     var body: some View {
-      if !viewModel.mentionsSuggestions.isEmpty || !viewModel.tagsSuggestions.isEmpty
-        || (viewModel.showRecentsTagsInline && !recentTags.isEmpty)
+      if #available(iOS 26, *) {
+        contentView
+          .padding(.vertical, 8)
+          .glassEffect(
+            .regular.tint(theme.primaryBackgroundColor.opacity(0.2)),
+            in: RoundedRectangle(cornerRadius: 8)
+          )
+          .padding(.horizontal, 16)
+      } else {
+        contentView
+          .background(.thinMaterial)
+      }
+    }
+
+    @ViewBuilder
+    var contentView: some View {
+      if !viewModel.mentionsSuggestions.isEmpty ||
+          !viewModel.tagsSuggestions.isEmpty ||
+          viewModel.showRecentsTagsInline
       {
         VStack {
           HStack {
@@ -29,6 +46,18 @@ extension StatusEditor {
                 if !viewModel.mentionsSuggestions.isEmpty {
                   Self.MentionsView(viewModel: viewModel)
                 } else {
+                  #if !targetEnvironment(macCatalyst)
+                  if #available(iOS 26, *), Assistant.isAvailable, viewModel.tagsSuggestions.isEmpty {
+                    Self.SuggestedTagsView(viewModel: viewModel,
+                                           isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                  } else if viewModel.showRecentsTagsInline {
+                    Self.RecentTagsView(
+                      viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                  } else {
+                    Self.RemoteTagsView(
+                      viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                  }
+                  #else
                   if viewModel.showRecentsTagsInline {
                     Self.RecentTagsView(
                       viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
@@ -36,6 +65,7 @@ extension StatusEditor {
                     Self.RemoteTagsView(
                       viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
                   }
+                  #endif
                 }
               }
               .padding(.horizontal, .layoutPadding)
@@ -61,7 +91,6 @@ extension StatusEditor {
               viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
           }
         }
-        .background(.thinMaterial)
       }
     }
   }

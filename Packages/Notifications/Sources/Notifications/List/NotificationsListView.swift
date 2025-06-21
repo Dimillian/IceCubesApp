@@ -96,6 +96,12 @@ public struct NotificationsListView: View {
               Label("notifications.content-filter.title", systemImage: "line.3.horizontal.decrease")
             }
           }
+          Divider()
+          Button {
+            routerPath.navigate(to: .conversations)
+          } label: {
+            Label("Direct Messages", systemImage: "message")
+          }
         }
       }
     }
@@ -177,7 +183,7 @@ public struct NotificationsListView: View {
         .allowsHitTesting(false)
       }
 
-    case let .display(notifications, nextPageState):
+    case .display(let notifications, let nextPageState):
       if notifications.isEmpty {
         PlaceholderView(
           iconName: "bell.slash",

@@ -17,7 +17,7 @@ public enum Apps: Endpoint {
       "apps"
     }
   }
-  
+
   public func queryItems() -> [URLQueryItem]? {
     nil
   }
@@ -25,7 +25,9 @@ public enum Apps: Endpoint {
   public var jsonValue: Encodable? {
     switch self {
     case .registerApp:
-      InstanceAppRequest(clientName: AppInfo.clientName, redirectUris: AppInfo.scheme, scopes: AppInfo.scopes, website: AppInfo.weblink)
+      InstanceAppRequest(
+        clientName: AppInfo.clientName, redirectUris: AppInfo.scheme, scopes: AppInfo.scopes,
+        website: AppInfo.weblink)
     }
   }
 }

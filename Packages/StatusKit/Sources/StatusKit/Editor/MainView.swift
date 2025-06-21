@@ -50,6 +50,7 @@ extension StatusEditor {
                 viewModel: mainSEVM,
                 followUpSEVMs: $followUpSEVMs,
                 editingMediaContainer: $editingMediaContainer,
+                presentationDetent: $presentationDetent,
                 editorFocusState: $editorFocusState,
                 assignedFocusState: .main,
                 isMain: true
@@ -63,6 +64,7 @@ extension StatusEditor {
                   viewModel: sevm,
                   followUpSEVMs: $followUpSEVMs,
                   editingMediaContainer: $editingMediaContainer,
+                  presentationDetent: $presentationDetent,
                   editorFocusState: $editorFocusState,
                   assignedFocusState: .followUp(index: sevm.id),
                   isMain: false
@@ -76,11 +78,8 @@ extension StatusEditor {
           .animation(.bouncy(duration: 0.3), value: editorFocusState)
           .animation(.bouncy(duration: 0.3), value: followUpSEVMs)
           #if !os(visionOS)
-            .background(theme.primaryBackgroundColor)
+            .background(presentationDetent == .large ? theme.primaryBackgroundColor : .clear)
           #endif
-          .safeAreaInset(edge: .bottom) {
-            AutoCompleteView(viewModel: focusedSEVM)
-          }
           #if os(visionOS)
             .ornament(attachmentAnchor: .scene(.leading)) {
               AccessoryView(
@@ -90,9 +89,24 @@ extension StatusEditor {
           #else
             .safeAreaInset(edge: .bottom) {
               if presentationDetent == .large || presentationDetent == .medium {
-                AccessoryView(
-                  focusedSEVM: focusedSEVM,
-                  followUpSEVMs: $followUpSEVMs)
+                if #available(iOS 26.0, *) {
+                  GlassEffectContainer(spacing: 10) {
+                    VStack(spacing: 10) {
+                      AutoCompleteView(viewModel: focusedSEVM)
+
+                      AccessoryView(
+                        focusedSEVM: focusedSEVM,
+                        followUpSEVMs: $followUpSEVMs)
+                    }
+                  }
+                  .padding(.bottom, 8)
+                } else {
+                  AccessoryView(
+                    focusedSEVM: focusedSEVM,
+                    followUpSEVMs: $followUpSEVMs)
+
+                  AutoCompleteView(viewModel: focusedSEVM)
+                }
               }
             }
           #endif
@@ -105,7 +119,6 @@ extension StatusEditor {
               focusedSEVM: focusedSEVM,
               followUpSEVMs: followUpSEVMs)
           }
-          .toolbarBackground(.visible, for: .navigationBar)
           .alert(
             "status.error.posting.title",
             isPresented: $focusedSEVM.showPostingErrorAlert,
@@ -159,7 +172,7 @@ extension StatusEditor {
       .sheet(item: $editingMediaContainer) { container in
         StatusEditor.MediaEditView(viewModel: focusedSEVM, container: container)
       }
-      .presentationDetents([.large, .height(100)], selection: $presentationDetent)
+      .presentationDetents([.large, .height(230)], selection: $presentationDetent)
       .presentationBackgroundInteraction(.enabled)
     }
   }

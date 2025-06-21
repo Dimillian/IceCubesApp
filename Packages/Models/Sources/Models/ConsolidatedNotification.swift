@@ -14,20 +14,25 @@ public struct ConsolidatedNotification: Identifiable {
   public let accounts: [Account]
   public let status: Status?
 
-  public var id: String? { notifications.first?.id }
+  public var id: String? { notifications.first?.id ?? groupKey }
+  
+  // For V2 API compatibility
+  public var groupKey: String?
 
   public init(
     notifications: [Notification],
     type: Notification.NotificationType,
     createdAt: ServerDate,
     accounts: [Account],
-    status: Status?
+    status: Status?,
+    groupKey: String? = nil
   ) {
     self.notifications = notifications
     self.type = type
     self.createdAt = createdAt
     self.accounts = accounts
     self.status = status ?? nil
+    self.groupKey = groupKey
   }
 
   public static func placeholder() -> ConsolidatedNotification {

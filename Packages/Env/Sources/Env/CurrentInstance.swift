@@ -43,6 +43,10 @@ import Observation
     version >= 4.3
   }
 
+  public var isGroupedNotificationsSupported: Bool {
+    version >= 4.3
+  }
+
   private init() {}
 
   public func setClient(client: Client) {

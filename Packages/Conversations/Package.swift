@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -7,7 +7,7 @@ let package = Package(
   name: "Conversations",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v17),
+    .iOS(.v18),
     .visionOS(.v1),
   ],
   products: [
@@ -21,6 +21,7 @@ let package = Package(
     .package(name: "Network", path: "../Network"),
     .package(name: "Env", path: "../Env"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
+    .package(name: "StatusKit", path: "../StatusKit"),
   ],
   targets: [
     .target(
@@ -30,6 +31,7 @@ let package = Package(
         .product(name: "Network", package: "Network"),
         .product(name: "Env", package: "Env"),
         .product(name: "DesignSystem", package: "DesignSystem"),
+        .product(name: "StatusKit", package: "StatusKit"),
       ],
       swiftSettings: [
         .swiftLanguageMode(.v6)

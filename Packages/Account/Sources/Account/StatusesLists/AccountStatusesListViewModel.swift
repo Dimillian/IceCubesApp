@@ -50,7 +50,7 @@ public class AccountStatusesListViewModel: StatusesFetcher {
         statuses: statuses,
         nextPageState: nextPage?.maxId != nil ? .hasNextPage : .none)
     } catch {
-      statusesState = .error(error: error)
+      statusesState = .error(error: .noData)
     }
   }
 

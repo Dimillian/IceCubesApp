@@ -13,8 +13,6 @@ import SwiftUI
 
   var nextPage: LinkHandler?
 
-  var scrollToTopVisible: Bool = false
-
   public init() {}
 
   func fetchConversations() async {

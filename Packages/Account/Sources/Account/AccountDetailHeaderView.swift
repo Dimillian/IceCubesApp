@@ -41,13 +41,23 @@ struct AccountDetailHeaderView: View {
             headerImageView
           }
         if viewModel.relationship?.followedBy == true {
-          Text("account.relation.follows-you")
-            .font(.scaledFootnote)
-            .fontWeight(.semibold)
-            .padding(4)
-            .background(.ultraThinMaterial)
-            .cornerRadius(4)
-            .padding(8)
+          if #available(iOS 26.0, *) {
+            Text("account.relation.follows-you")
+              .font(.scaledFootnote)
+              .fontWeight(.semibold)
+              .padding(8)
+              .glassEffect()
+              .cornerRadius(4)
+              .padding(8)
+          } else {
+            Text("account.relation.follows-you")
+                       .font(.scaledFootnote)
+                       .fontWeight(.semibold)
+                       .padding(4)
+                       .background(.ultraThinMaterial)
+                       .cornerRadius(4)
+                       .padding(8)
+          }
         }
       }
       accountInfoView
@@ -266,13 +276,14 @@ struct AccountDetailHeaderView: View {
         .accessibilitySortPriority(1)
 
         Spacer()
-        if let followButtonViewModel = viewModel.followButtonViewModel, !viewModel.isCurrentUser {
-          HStack {
+        HStack {
+          if let followButtonViewModel = viewModel.followButtonViewModel, !viewModel.isCurrentUser {
             FollowButton(viewModel: followButtonViewModel)
+          } else if !viewModel.isCurrentUser {
+            ProgressView()
           }
-        } else if !viewModel.isCurrentUser {
-          ProgressView()
         }
+        .padding(.top, 4)
       }
 
       if let note = viewModel.relationship?.note, !note.isEmpty,

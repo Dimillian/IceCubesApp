@@ -17,92 +17,85 @@ struct ConversationsListRow: View {
   var viewModel: ConversationsListViewModel
 
   var body: some View {
-    Button {
+    VStack(alignment: .leading) {
+      HStack(alignment: .top, spacing: 8) {
+        AvatarView(conversation.accounts.first!.avatar)
+          .accessibilityHidden(true)
+        VStack(alignment: .leading, spacing: 4) {
+          HStack {
+            EmojiTextApp(
+              .init(
+                stringValue: conversation.accounts.map(\.safeDisplayName).joined(separator: ", ")),
+              emojis: conversation.accounts.flatMap(\.emojis)
+            )
+            .font(.scaledSubheadline)
+            .foregroundColor(theme.labelColor)
+            .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
+            .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
+            .fontWeight(.semibold)
+            .foregroundColor(theme.labelColor)
+            .multilineTextAlignment(.leading)
+            Spacer()
+            if conversation.unread {
+              Circle()
+                .foregroundColor(theme.tintColor)
+                .frame(width: 10, height: 10)
+                .accessibilityRepresentation {
+                  Text("accessibility.tabs.messages.unread.label")
+                }
+                .accessibilitySortPriority(1)
+            }
+            if let message = conversation.lastStatus {
+              HStack {
+                Text(message.createdAt.relativeFormatted)
+                Image(systemName: "chevron.right")
+              }
+              .foregroundStyle(.secondary)
+              .font(.scaledFootnote)
+            }
+          }
+          EmojiTextApp(
+            conversation.lastStatus?.content ?? HTMLString(stringValue: ""),
+            emojis: conversation.lastStatus?.emojis ?? []
+          )
+          .multilineTextAlignment(.leading)
+          .font(.scaledBody)
+          .foregroundColor(theme.labelColor)
+          .emojiText.size(Font.scaledBodyFont.emojiSize)
+          .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+          .accessibilityLabel(conversation.lastStatus?.content.asRawText ?? "")
+        }
+        Spacer()
+      }
+    }
+    .contextMenu {
+      contextMenu
+        .accessibilityHidden(true)
+    }
+    .accessibilityElement(children: .combine)
+    .accessibilityActions {
+      replyAction
+      contextMenu
+      accessibilityActions
+    }
+    .accessibilityAction(.magicTap) {
+      if let lastStatus = conversation.lastStatus {
+        HapticManager.shared.fireHaptic(.notification(.success))
+        #if targetEnvironment(macCatalyst) || os(visionOS)
+          openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: lastStatus))
+        #else
+          routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
+        #endif
+      }
+    }
+    .contentShape(Rectangle())
+    .onTapGesture {
       Task {
         await viewModel.markAsRead(conversation: conversation)
       }
       routerPath.navigate(to: .conversationDetail(conversation: conversation))
-    } label: {
-      VStack(alignment: .leading) {
-        HStack(alignment: .top, spacing: 8) {
-          AvatarView(conversation.accounts.first!.avatar)
-            .accessibilityHidden(true)
-          VStack(alignment: .leading, spacing: 4) {
-            HStack {
-              EmojiTextApp(
-                .init(
-                  stringValue: conversation.accounts.map(\.safeDisplayName).joined(separator: ", ")),
-                emojis: conversation.accounts.flatMap(\.emojis)
-              )
-              .font(.scaledSubheadline)
-              .foregroundColor(theme.labelColor)
-              .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
-              .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-              .fontWeight(.semibold)
-              .foregroundColor(theme.labelColor)
-              .multilineTextAlignment(.leading)
-              Spacer()
-              if conversation.unread {
-                Circle()
-                  .foregroundColor(theme.tintColor)
-                  .frame(width: 10, height: 10)
-                  .accessibilityRepresentation {
-                    Text("accessibility.tabs.messages.unread.label")
-                  }
-                  .accessibilitySortPriority(1)
-              }
-              if let message = conversation.lastStatus {
-                Text(message.createdAt.relativeFormatted)
-                  .font(.scaledFootnote)
-              }
-            }
-            EmojiTextApp(
-              conversation.lastStatus?.content ?? HTMLString(stringValue: ""),
-              emojis: conversation.lastStatus?.emojis ?? []
-            )
-            .multilineTextAlignment(.leading)
-            .font(.scaledBody)
-            .foregroundColor(theme.labelColor)
-            .emojiText.size(Font.scaledBodyFont.emojiSize)
-            .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
-            .accessibilityLabel(conversation.lastStatus?.content.asRawText ?? "")
-          }
-          Spacer()
-        }
-        .padding(.top, 4)
-        if conversation.lastStatus != nil {
-          actionsView
-            .padding(.bottom, 4)
-            .accessibilityHidden(true)
-        }
-      }
-      .contextMenu {
-        contextMenu
-          .accessibilityHidden(true)
-      }
-      .accessibilityElement(children: .combine)
-      .accessibilityActions {
-        replyAction
-        contextMenu
-        accessibilityActions
-      }
-      .accessibilityAction(.magicTap) {
-        if let lastStatus = conversation.lastStatus {
-          HapticManager.shared.fireHaptic(.notification(.success))
-          #if targetEnvironment(macCatalyst) || os(visionOS)
-            openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: lastStatus))
-          #else
-            routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
-          #endif
-        }
-      }
     }
-    .buttonStyle(.plain)
-    .hoverEffectDisabled()
-  }
-
-  private var actionsView: some View {
-    HStack(spacing: 12) {
+    .swipeActions(edge: .leading, allowsFullSwipe: true) {
       Button {
         if let lastStatus = conversation.lastStatus {
           HapticManager.shared.fireHaptic(.notification(.success))
@@ -113,31 +106,25 @@ struct ConversationsListRow: View {
           #endif
         }
       } label: {
-        Image(systemName: "arrowshape.turn.up.left.fill")
-      }
-      Menu {
-        contextMenu
-      } label: {
-        Image(systemName: "ellipsis")
-          .frame(width: 30, height: 30)
-          .contentShape(Rectangle())
+        Label("Reply", systemImage: "arrowshape.turn.up.left.fill")
       }
     }
-    .padding(.leading, 48)
-    .foregroundStyle(.secondary)
+    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+      markAsReadAction
+      deleteAction
+    }
+    .listRowInsets(
+      .init(
+        top: 16,
+        leading: .layoutPadding + 4,
+        bottom: 16,
+        trailing: .layoutPadding)
+    )
   }
 
   @ViewBuilder
   private var contextMenu: some View {
-    if conversation.unread {
-      Button {
-        Task {
-          await viewModel.markAsRead(conversation: conversation)
-        }
-      } label: {
-        Label("conversations.action.mark-read", systemImage: "eye")
-      }
-    }
+    markAsReadAction
 
     if let message = conversation.lastStatus {
       Section("conversations.latest.message") {
@@ -163,17 +150,36 @@ struct ConversationsListRow: View {
             routerPath.presentedSheet = .report(status: message.reblogAsAsStatus ?? message)
           } label: {
             Label("status.action.report", systemImage: "exclamationmark.bubble")
+              .tint(.red)
           }
         }
       }
     }
+    deleteAction
+  }
 
+  @ViewBuilder
+  private var markAsReadAction: some View {
+    if conversation.unread {
+      Button {
+        Task {
+          await viewModel.markAsRead(conversation: conversation)
+        }
+      } label: {
+        Label("conversations.action.mark-read", systemImage: "eye")
+      }
+      .tint(.blue)
+    }
+  }
+
+  private var deleteAction: some View {
     Button(role: .destructive) {
       Task {
         await viewModel.delete(conversation: conversation)
       }
     } label: {
       Label("conversations.action.delete", systemImage: "trash")
+        .tint(.red)
     }
   }
 

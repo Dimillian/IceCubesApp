@@ -18,7 +18,7 @@ public struct StatusRowMediaPreviewView: View {
 
   @State private var isQuickLookLoading: Bool = false
 
-  init(attachments: [MediaAttachment], sensitive: Bool) {
+  public init(attachments: [MediaAttachment], sensitive: Bool) {
     self.attachments = attachments
     self.sensitive = sensitive
   }
@@ -510,7 +510,7 @@ private struct FeaturedImagePreView: View {
         (.some(.infinity), nil):
         size = CGSize(width: originalWidth, height: originalWidth)
 
-      case let (nil, .some(height)), let (.some(.infinity), .some(height)):
+      case (nil, .some(let height)), (.some(.infinity), .some(let height)):
         let minHeight = min(height, originalWidth)
         if originalHeight == 0 {
           size = CGSize.zero
@@ -518,14 +518,14 @@ private struct FeaturedImagePreView: View {
           size = CGSize(width: originalWidth * minHeight / originalHeight, height: minHeight)
         }
 
-      case let (.some(width), .some(.infinity)), let (.some(width), nil):
+      case (.some(let width), .some(.infinity)), (.some(let width), nil):
         if originalWidth == 0 {
           size = CGSize(width: width, height: width)
         } else {
           size = CGSize(width: width, height: width / originalWidth * originalHeight)
         }
 
-      case let (.some(width), .some(height)):
+      case (.some(let width), .some(let height)):
         // intrinsic size of image fits just fine
         if originalWidth <= width, originalHeight <= height {
           size = CGSize(width: originalWidth, height: originalHeight)

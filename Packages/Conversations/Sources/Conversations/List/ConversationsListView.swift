@@ -25,98 +25,78 @@ public struct ConversationsListView: View {
   }
 
   public var body: some View {
-    ScrollViewReader { proxy in
-      ScrollView {
-        scrollToTopView
-        LazyVStack {
-          Group {
-            if !conversations.isEmpty || viewModel.isLoadingFirstPage {
-              ForEach(conversations) { $conversation in
-                if viewModel.isLoadingFirstPage {
-                  ConversationsListRow(conversation: $conversation, viewModel: viewModel)
-                    .padding(.horizontal, .layoutPadding)
-                    .redacted(reason: .placeholder)
-                    .allowsHitTesting(false)
-                } else {
-                  ConversationsListRow(conversation: $conversation, viewModel: viewModel)
-                    .padding(.horizontal, .layoutPadding)
-                }
-                Divider()
-              }
-            } else if conversations.isEmpty, !viewModel.isLoadingFirstPage, !viewModel.isError {
-              PlaceholderView(
-                iconName: "tray",
-                title: "conversations.empty.title",
-                message: "conversations.empty.message")
-            } else if viewModel.isError {
-              ErrorView(
-                title: "conversations.error.title",
-                message: "conversations.error.message",
-                buttonTitle: "conversations.error.button"
-              ) {
-                await viewModel.fetchConversations()
-              }
-            }
-
-            if viewModel.nextPage != nil {
-              HStack {
-                Spacer()
-                ProgressView()
-                Spacer()
-              }
-              .onAppear {
-                if !viewModel.isLoadingNextPage {
-                  Task {
-                    await viewModel.fetchNextPage()
-                  }
-                }
-              }
-            }
+    List {
+      if !conversations.isEmpty || viewModel.isLoadingFirstPage {
+        ForEach(conversations) { $conversation in
+          if viewModel.isLoadingFirstPage {
+            ConversationsListRow(conversation: $conversation, viewModel: viewModel)
+              .redacted(reason: .placeholder)
+              .allowsHitTesting(false)
+          } else {
+            ConversationsListRow(conversation: $conversation, viewModel: viewModel)
           }
         }
-        .padding(.top, .layoutPadding)
-      }
-      #if !os(visionOS)
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
-      #endif
-      .navigationTitle("conversations.navigation-title")
-      .navigationBarTitleDisplayMode(.inline)
-      .onChange(of: watcher.latestEvent?.id) {
-        if let latestEvent = watcher.latestEvent {
-          viewModel.handleEvent(event: latestEvent)
-        }
-      }
-      .refreshable {
-        // note: this Task wrapper should not be necessary, but it reportedly crashes without it
-        // when refreshing on an empty list
-        Task {
-          SoundEffectManager.shared.playSound(.pull)
-          HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
+        .listSectionSeparator(.hidden, edges: .top)
+      } else if conversations.isEmpty, !viewModel.isLoadingFirstPage, !viewModel.isError {
+        PlaceholderView(
+          iconName: "tray",
+          title: "conversations.empty.title",
+          message: "conversations.empty.message")
+      } else if viewModel.isError {
+        ErrorView(
+          title: "conversations.error.title",
+          message: "conversations.error.message",
+          buttonTitle: "conversations.error.button"
+        ) {
           await viewModel.fetchConversations()
-          HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
-          SoundEffectManager.shared.playSound(.refresh)
         }
       }
-      .onAppear {
-        viewModel.client = client
-        if client.isAuth {
-          Task {
-            await viewModel.fetchConversations()
+
+      if viewModel.nextPage != nil {
+        HStack {
+          Spacer()
+          ProgressView()
+          Spacer()
+        }
+        .onAppear {
+          if !viewModel.isLoadingNextPage {
+            Task {
+              await viewModel.fetchNextPage()
+            }
           }
         }
       }
     }
-  }
-
-  private var scrollToTopView: some View {
-    ScrollToView()
-      .frame(height: .scrollToViewHeight)
-      .onAppear {
-        viewModel.scrollToTopVisible = true
+    .listStyle(.plain)
+    #if !os(visionOS)
+      .scrollContentBackground(.hidden)
+      .background(theme.primaryBackgroundColor)
+    #endif
+    .navigationTitle("conversations.navigation-title")
+    .navigationBarTitleDisplayMode(.inline)
+    .onChange(of: watcher.latestEvent?.id) {
+      if let latestEvent = watcher.latestEvent {
+        viewModel.handleEvent(event: latestEvent)
       }
-      .onDisappear {
-        viewModel.scrollToTopVisible = false
+    }
+    .refreshable {
+      // note: this Task wrapper should not be necessary, but it reportedly crashes without it
+      // when refreshing on an empty list
+      Task {
+        SoundEffectManager.shared.playSound(.pull)
+        HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
+        await viewModel.fetchConversations()
+        HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
+        SoundEffectManager.shared.playSound(.refresh)
       }
+    }
+    .onAppear {
+      viewModel.client = client
+      if client.isAuth {
+        Task {
+          await viewModel.fetchConversations()
+        }
+      }
+    }
   }
 }
