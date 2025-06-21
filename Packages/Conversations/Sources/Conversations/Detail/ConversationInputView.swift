@@ -72,7 +72,7 @@ struct ConversationInputView: View {
       .focused($isMessageFieldFocused)
       .keyboardType(.default)
       .padding(12)
-      .glassEffect(in: .rect(cornerRadius: 18))
+      .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 18))
       .padding(.bottom, 6)
     } else {
       TextField(
