@@ -67,7 +67,6 @@ struct ConversationsListRow: View {
         }
         Spacer()
       }
-      .padding(.vertical, 8)
     }
     .contextMenu {
       contextMenu
@@ -96,19 +95,36 @@ struct ConversationsListRow: View {
       }
       routerPath.navigate(to: .conversationDetail(conversation: conversation))
     }
+    .swipeActions(edge: .leading, allowsFullSwipe: true) {
+      Button {
+        if let lastStatus = conversation.lastStatus {
+          HapticManager.shared.fireHaptic(.notification(.success))
+          #if targetEnvironment(macCatalyst) || os(visionOS)
+            openWindow(value: WindowDestinationEditor.replyToStatusEditor(status: lastStatus))
+          #else
+            routerPath.presentedSheet = .replyToStatusEditor(status: lastStatus)
+          #endif
+        }
+      } label: {
+        Label("Reply", systemImage: "arrowshape.turn.up.left.fill")
+      }
+    }
+    .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+      markAsReadAction
+      deleteAction
+    }
+    .listRowInsets(
+      .init(
+        top: 16,
+        leading: .layoutPadding + 4,
+        bottom: 16,
+        trailing: .layoutPadding)
+    )
   }
 
   @ViewBuilder
   private var contextMenu: some View {
-    if conversation.unread {
-      Button {
-        Task {
-          await viewModel.markAsRead(conversation: conversation)
-        }
-      } label: {
-        Label("conversations.action.mark-read", systemImage: "eye")
-      }
-    }
+    markAsReadAction
 
     if let message = conversation.lastStatus {
       Section("conversations.latest.message") {
@@ -134,17 +150,36 @@ struct ConversationsListRow: View {
             routerPath.presentedSheet = .report(status: message.reblogAsAsStatus ?? message)
           } label: {
             Label("status.action.report", systemImage: "exclamationmark.bubble")
+              .tint(.red)
           }
         }
       }
     }
+    deleteAction
+  }
 
+  @ViewBuilder
+  private var markAsReadAction: some View {
+    if conversation.unread {
+      Button {
+        Task {
+          await viewModel.markAsRead(conversation: conversation)
+        }
+      } label: {
+        Label("conversations.action.mark-read", systemImage: "eye")
+      }
+      .tint(.blue)
+    }
+  }
+
+  private var deleteAction: some View {
     Button(role: .destructive) {
       Task {
         await viewModel.delete(conversation: conversation)
       }
     } label: {
       Label("conversations.action.delete", systemImage: "trash")
+        .tint(.red)
     }
   }
 

@@ -124,7 +124,7 @@ public struct ConversationDetailView: View {
   private var bottomAnchorView: some View {
     Rectangle()
       .fill(Color.clear)
-      .frame(height: 40)
+      .frame(height: 10)
       .id(Constants.bottomAnchor)
       .accessibilityHidden(true)
   }
