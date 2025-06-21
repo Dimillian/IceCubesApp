@@ -127,9 +127,11 @@ public struct ConversationDetailView: View {
       GlassEffectContainer {
         HStack(alignment: .bottom, spacing: 8) {
           attachmentButton
+            .buttonBorderShape(.circle)
             .buttonStyle(.glass)
           textField
           sendButton
+            .buttonBorderShape(.circle)
             .buttonStyle(.glass)
         }
         .padding(8)
@@ -154,7 +156,12 @@ public struct ConversationDetailView: View {
         routerPath.presentedSheet = .replyToStatusEditor(
           status: viewModel.conversation.lastStatus!)
       } label: {
-        Image(systemName: "plus")
+        if #available(iOS 26.0, *) {
+          Image(systemName: "plus")
+            .padding(6)
+        } else {
+          Image(systemName: "plus")
+        }
       }
       .padding(.bottom, 7)
     }
@@ -170,8 +177,8 @@ public struct ConversationDetailView: View {
       .font(.scaledBody)
       .focused($isMessageFieldFocused)
       .keyboardType(.default)
-      .padding(6)
-      .glassEffect(in: .rect(cornerRadius: 14))
+      .padding(12)
+      .glassEffect(in: .rect(cornerRadius: 18))
       .padding(.bottom, 6)
     } else {
       TextField(
@@ -199,10 +206,23 @@ public struct ConversationDetailView: View {
             await viewModel.postMessage()
           }
         } label: {
-          if viewModel.isSendingMessage {
-            ProgressView()
+          if #available(iOS 26.0, *) {
+            HStack {
+              if viewModel.isSendingMessage {
+                ProgressView()
+              } else {
+                Image(systemName: "paperplane")
+              }
+            }
+            .padding(6)
           } else {
-            Image(systemName: "paperplane")
+            HStack {
+              if viewModel.isSendingMessage {
+                ProgressView()
+              } else {
+                Image(systemName: "paperplane")
+              }
+            }
           }
         }
         .keyboardShortcut(.return, modifiers: .command)
