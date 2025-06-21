@@ -29,6 +29,7 @@ public enum RouterDestination: Hashable {
   case notificationForAccount(accountId: String)
   case blockedAccounts
   case mutedAccounts
+  case conversations
 }
 
 public enum WindowDestinationEditor: Hashable, Codable {
