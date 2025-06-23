@@ -22,7 +22,7 @@ public struct AccountDetailView: View {
 
   private let accountId: String
   private let initialAccount: Account?
-  
+
   @State private var viewState: AccountDetailState = .loading
   @State private var account: Account?
   @State private var relationship: Relationship?
@@ -33,7 +33,7 @@ public struct AccountDetailView: View {
   @State private var translation: Translation?
   @State private var isLoadingTranslation = false
   @State private var isCurrentUser: Bool = false
-  
+
   @State private var showBlockConfirmation: Bool = false
   @State private var isEditingRelationshipNote: Bool = false
   @State private var showTranslateView: Bool = false
@@ -62,9 +62,9 @@ public struct AccountDetailView: View {
         makeHeaderView(proxy: proxy)
           .applyAccountDetailsRowStyle(theme: theme)
           .padding(.bottom, -20)
-        familiarFollowersView
+        FamiliarFollowersView(familiarFollowers: familiarFollowers)
           .applyAccountDetailsRowStyle(theme: theme)
-        featuredTagsView
+        FeaturedTagsView(featuredTags: featuredTags, accountId: accountId)
           .applyAccountDetailsRowStyle(theme: theme)
 
         if let tabManager {
@@ -93,7 +93,7 @@ public struct AccountDetailView: View {
     .onAppear {
       guard reasons != .placeholder else { return }
       isCurrentUser = currentAccount.account?.id == accountId
-      
+
       if let initialAccount {
         account = initialAccount
         viewState = .display(account: initialAccount, featuredTags: [], relationships: [])
@@ -178,7 +178,15 @@ public struct AccountDetailView: View {
     .edgesIgnoringSafeArea(.top)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      toolbarContent
+      AccountDetailToolbar(
+        account: account,
+        displayTitle: displayTitle,
+        isCurrentUser: isCurrentUser,
+        relationship: $relationship,
+        showBlockConfirmation: $showBlockConfirmation,
+        showTranslateView: $showTranslateView,
+        isEditingRelationshipNote: $isEditingRelationshipNote
+      )
     }
   }
 
@@ -243,205 +251,6 @@ public struct AccountDetailView: View {
     }
   }
 
-  @ViewBuilder
-  private var featuredTagsView: some View {
-    if !featuredTags.isEmpty {
-      ScrollView(.horizontal, showsIndicators: false) {
-        HStack(spacing: 4) {
-          if !featuredTags.isEmpty {
-            ForEach(featuredTags) { tag in
-              Button {
-                routerPath.navigate(to: .hashTag(tag: tag.name, account: accountId))
-              } label: {
-                VStack(alignment: .leading, spacing: 0) {
-                  Text("#\(tag.name)")
-                    .font(.scaledCallout)
-                  Text("account.detail.featured-tags-n-posts \(tag.statusesCountInt)")
-                    .font(.caption2)
-                }
-              }.buttonStyle(.bordered)
-            }
-          }
-        }
-        .padding(.leading, .layoutPadding)
-      }
-    }
-  }
-
-  @ViewBuilder
-  private var familiarFollowersView: some View {
-    if !familiarFollowers.isEmpty {
-      VStack(alignment: .leading, spacing: 2) {
-        Text("account.detail.familiar-followers")
-          .font(.scaledHeadline)
-          .padding(.leading, .layoutPadding)
-          .accessibilityAddTraits(.isHeader)
-        ScrollView(.horizontal, showsIndicators: false) {
-          LazyHStack(spacing: 0) {
-            ForEach(familiarFollowers) { account in
-              Button {
-                routerPath.navigate(to: .accountDetailWithAccount(account: account))
-              } label: {
-                AvatarView(account.avatar, config: .badge)
-                  .padding(.leading, -4)
-                  .accessibilityLabel(account.safeDisplayName)
-              }
-              .accessibilityAddTraits(.isImage)
-              .buttonStyle(.plain)
-            }
-          }
-          .padding(.leading, .layoutPadding + 4)
-        }
-      }
-      .padding(.top, 2)
-      .padding(.bottom, 12)
-    }
-  }
-
-  @ToolbarContentBuilder
-  private var toolbarContent: some ToolbarContent {
-    ToolbarItem(placement: .principal) {
-      if let account = account, displayTitle {
-        VStack {
-          Text(account.displayName ?? "").font(.headline)
-          Text("account.detail.featured-tags-n-posts \(account.statusesCount ?? 0)")
-            .font(.footnote)
-            .foregroundStyle(.secondary)
-        }
-      }
-    }
-    ToolbarItemGroup(placement: .navigationBarTrailing) {
-      if !isCurrentUser {
-        Button {
-          if let account = account {
-            #if targetEnvironment(macCatalyst) || os(visionOS)
-              openWindow(
-                value: WindowDestinationEditor.mentionStatusEditor(
-                  account: account, visibility: preferences.postVisibility))
-            #else
-              routerPath.presentedSheet = .mentionStatusEditor(
-                account: account,
-                visibility: preferences.postVisibility)
-            #endif
-          }
-        } label: {
-          Image(systemName: "arrowshape.turn.up.left")
-        }
-      }
-
-      Menu {
-        AccountDetailContextMenu(
-          showBlockConfirmation: $showBlockConfirmation,
-          showTranslateView: $showTranslateView,
-          account: account,
-          relationship: $relationship,
-          isCurrentUser: isCurrentUser)
-
-        if !isCurrentUser {
-          Button {
-            isEditingRelationshipNote = true
-          } label: {
-            Label("account.relation.note.edit", systemImage: "pencil")
-          }
-        }
-
-        if isCurrentUser {
-          Button {
-            routerPath.presentedSheet = .accountEditInfo
-          } label: {
-            Label("account.action.edit-info", systemImage: "pencil")
-          }
-
-          Button {
-            if let url = URL(string: "https://\(client.server)/settings/privacy") {
-              openURL(url)
-            }
-          } label: {
-            Label("account.action.privacy-settings", systemImage: "lock")
-          }
-
-          if currentInstance.isFiltersSupported {
-            Button {
-              routerPath.presentedSheet = .accountFiltersList
-            } label: {
-              Label("account.action.edit-filters", systemImage: "line.3.horizontal.decrease.circle")
-            }
-          }
-
-          Button {
-            routerPath.presentedSheet = .accountPushNotficationsSettings
-          } label: {
-            Label("settings.push.navigation-title", systemImage: "bell")
-          }
-
-          if let account = account {
-            Divider()
-
-            Button {
-              routerPath.navigate(to: .blockedAccounts)
-            } label: {
-              Label("account.blocked", systemImage: "person.crop.circle.badge.xmark")
-            }
-
-            Button {
-              routerPath.navigate(to: .mutedAccounts)
-            } label: {
-              Label("account.muted", systemImage: "person.crop.circle.badge.moon")
-            }
-
-            Divider()
-
-            Button {
-              if let url = URL(
-                string:
-                  "https://mastometrics.com/auth/login?username=\(account.acct)@\(client.server)&instance=\(client.server)&auto=true"
-              ) {
-                openURL(url)
-              }
-            } label: {
-              Label("Mastometrics", systemImage: "chart.xyaxis.line")
-            }
-
-            Divider()
-          }
-
-          Button {
-            routerPath.presentedSheet = .settings
-          } label: {
-            Label("settings.title", systemImage: "gear")
-          }
-        }
-      } label: {
-        Image(systemName: "ellipsis")
-          .accessibilityLabel("accessibility.tabs.profile.options.label")
-          .accessibilityInputLabels([
-            LocalizedStringKey("accessibility.tabs.profile.options.label"),
-            LocalizedStringKey("accessibility.tabs.profile.options.inputLabel1"),
-            LocalizedStringKey("accessibility.tabs.profile.options.inputLabel2"),
-          ])
-          .foregroundStyle(theme.tintColor)
-      }
-      .confirmationDialog("Block User", isPresented: $showBlockConfirmation) {
-        if let account = account {
-          Button("account.action.block-user-\(account.username)", role: .destructive) {
-            Task {
-              do {
-                relationship = try await client.post(
-                  endpoint: Accounts.block(id: account.id))
-              } catch {}
-            }
-          }
-        }
-      } message: {
-        Text("account.action.block-user-confirmation")
-      }
-      .tint(.label)
-      #if canImport(_Translation_SwiftUI)
-        .addTranslateView(
-          isPresented: $showTranslateView, text: account?.note.asRawText ?? "")
-      #endif
-    }
-  }
 }
 
 extension View {
@@ -468,18 +277,19 @@ extension AccountDetailView {
     let featuredTags: [FeaturedTag]
     let relationships: [Relationship]
   }
-  
+
   private func fetchAccount() async {
     do {
       let data = try await fetchAccountData(accountId: accountId, client: client)
-      
-      viewState = .display(account: data.account, featuredTags: data.featuredTags, relationships: data.relationships)
+
+      viewState = .display(
+        account: data.account, featuredTags: data.featuredTags, relationships: data.relationships)
       account = data.account
       fields = data.account.fields
       featuredTags = data.featuredTags
       featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
       relationship = data.relationships.first
-      
+
       if let relationship {
         if let existingFollowButtonViewModel = followButtonViewModel {
           existingFollowButtonViewModel.relationship = relationship
@@ -502,7 +312,7 @@ extension AccountDetailView {
       }
     }
   }
-  
+
   private func fetchAccountData(accountId: String, client: Client) async throws -> AccountData {
     async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
     async let featuredTags: [FeaturedTag] = client.get(
@@ -527,7 +337,7 @@ extension AccountDetailView {
       featuredTags: featuredTags,
       relationships: [])
   }
-  
+
   private func fetchFamiliarFollowers() async {
     let familiarFollowersResponse: [FamiliarAccounts]? = try? await client.get(
       endpoint: Accounts.familiarFollowers(withAccount: accountId))
