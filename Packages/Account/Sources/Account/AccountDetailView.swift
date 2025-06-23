@@ -24,6 +24,7 @@ public struct AccountDetailView: View {
   @State private var showBlockConfirmation: Bool = false
   @State private var isEditingRelationshipNote: Bool = false
   @State private var showTranslateView: Bool = false
+  @State private var tabManager: AccountTabManager?
 
   @State private var displayTitle: Bool = false
 
@@ -51,49 +52,21 @@ public struct AccountDetailView: View {
         featuredTagsView
           .applyAccountDetailsRowStyle(theme: theme)
 
-        Picker("", selection: $viewModel.selectedTab) {
-          ForEach(viewModel.tabs, id: \.self) { tab in
-            if tab == .boosts {
-              Image("Rocket")
-                .tag(tab)
-                .accessibilityLabel(tab.accessibilityLabel)
-            } else {
-              Image(systemName: tab.iconName)
-                .tag(tab)
-                .accessibilityLabel(tab.accessibilityLabel)
-            }
-          }
-        }
-        .pickerStyle(.segmented)
-        .padding(.layoutPadding)
-        .applyAccountDetailsRowStyle(theme: theme)
-        .id("status")
+        if let tabManager {
+          makeTabPicker(tabManager: tabManager)
+            .pickerStyle(.segmented)
+            .padding(.layoutPadding)
+            .applyAccountDetailsRowStyle(theme: theme)
+            .id("status")
 
-        if viewModel.selectedTab == .statuses {
-          pinnedPostsView
+          let fetcher = tabManager.getFetcher(for: tabManager.selectedTab)
+          tabManager.selectedTab.makeView(
+            fetcher: fetcher,
+            client: client,
+            routerPath: routerPath,
+            account: viewModel.account
+          )
         }
-        if viewModel.selectedTab == .media {
-          HStack {
-            Label("Media Grid", systemImage: "square.grid.2x2")
-            Spacer()
-            Image(systemName: "chevron.right")
-          }
-          .onTapGesture {
-            if let account = viewModel.account {
-              routerPath.navigate(
-                to: .accountMediaGridView(
-                  account: account,
-                  initialMediaStatuses: viewModel.statusesMedias))
-            }
-          }
-          #if !os(visionOS)
-            .listRowBackground(theme.primaryBackgroundColor)
-          #endif
-        }
-        StatusesListView(
-          fetcher: viewModel,
-          client: client,
-          routerPath: routerPath)
       }
       .environment(\.defaultMinListRowHeight, 0)
       .listStyle(.plain)
@@ -107,18 +80,33 @@ public struct AccountDetailView: View {
       viewModel.isCurrentUser = currentAccount.account?.id == viewModel.accountId
       viewModel.client = client
 
-      // Avoid capturing non-Sendable `self` just to access the view model.
-      let viewModel = viewModel
-      Task {
-        await withTaskGroup(of: Void.self) { group in
-          group.addTask { await viewModel.fetchAccount() }
-          group.addTask {
-            if await viewModel.statuses.isEmpty {
-              await viewModel.fetchNewestStatuses(pullToRefresh: false)
+      if tabManager == nil {
+        tabManager = AccountTabManager(
+          accountId: viewModel.accountId,
+          client: client,
+          isCurrentUser: viewModel.isCurrentUser
+        )
+      }
+
+      if let tabManager {
+        Task {
+          await withTaskGroup(of: Void.self) { group in
+            group.addTask {
+              await viewModel.fetchAccount()
             }
-          }
-          if !viewModel.isCurrentUser {
-            group.addTask { await viewModel.fetchFamilliarFollowers() }
+            switch tabManager.currentTabFetcher.statusesState {
+            case .loading, .error:
+              group.addTask {
+                await tabManager.currentTabFetcher.fetchNewestStatuses(pullToRefresh: false)
+              }
+            default:
+              break
+            }
+            if !viewModel.isCurrentUser {
+              group.addTask {
+                await viewModel.fetchFamilliarFollowers()
+              }
+            }
           }
         }
       }
@@ -128,16 +116,22 @@ public struct AccountDetailView: View {
         SoundEffectManager.shared.playSound(.pull)
         HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
         await viewModel.fetchAccount()
-        await viewModel.fetchNewestStatuses(pullToRefresh: true)
+        if let tabManager {
+          await tabManager.refreshCurrentTab()
+        }
         HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
         SoundEffectManager.shared.playSound(.refresh)
       }
     }
     .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent,
-        viewModel.accountId == currentAccount.account?.id
+        viewModel.accountId == currentAccount.account?.id,
+        let tabManager
       {
-        viewModel.handleEvent(event: latestEvent, currentAccount: currentAccount)
+        // Handle stream events directly with the current tab's fetcher
+        if let fetcher = tabManager.currentTabFetcher as? AccountTabFetcher {
+          fetcher.handleEvent(event: latestEvent, currentAccount: currentAccount)
+        }
       }
     }
     .onChange(of: routerPath.presentedSheet) { oldValue, newValue in
@@ -162,6 +156,32 @@ public struct AccountDetailView: View {
   }
 
   @ViewBuilder
+  private func makeTabPicker(tabManager: AccountTabManager) -> some View {
+    Picker(
+      "",
+      selection: .init(
+        get: { tabManager.selectedTabId },
+        set: { newTabId in
+          if let newTab = tabManager.availableTabs.first(where: { $0.id == newTabId }) {
+            tabManager.selectedTab = newTab
+          }
+        })
+    ) {
+      ForEach(tabManager.availableTabs, id: \.id) { tab in
+        if tab.id == "boosts" {
+          Image("Rocket")
+            .tag(tab.id as String?)
+            .accessibilityLabel(tab.accessibilityLabel)
+        } else {
+          Image(systemName: tab.iconName)
+            .tag(tab.id as String?)
+            .accessibilityLabel(tab.accessibilityLabel)
+        }
+      }
+    }
+  }
+
+  @ViewBuilder
   private func makeHeaderView(proxy: ScrollViewProxy?) -> some View {
     switch viewModel.accountState {
     case .loading:
@@ -172,12 +192,12 @@ public struct AccountDetailView: View {
       )
       .redacted(reason: .placeholder)
       .allowsHitTesting(false)
-    case let .data(account):
+    case .data(let account):
       AccountDetailHeaderView(
         viewModel: viewModel,
         account: account,
         scrollViewProxy: proxy)
-    case let .error(error):
+    case .error(let error):
       Text("Error: \(error.localizedDescription)")
     }
   }
@@ -234,42 +254,6 @@ public struct AccountDetailView: View {
       }
       .padding(.top, 2)
       .padding(.bottom, 12)
-    }
-  }
-
-  @ViewBuilder
-  private var pinnedPostsView: some View {
-    if !viewModel.pinned.isEmpty {
-      Label("account.post.pinned", systemImage: "pin.fill")
-        .accessibilityAddTraits(.isHeader)
-        .font(.scaledFootnote)
-        .foregroundStyle(.secondary)
-        .fontWeight(.semibold)
-        .listRowInsets(
-          .init(
-            top: 0,
-            leading: 12,
-            bottom: 0,
-            trailing: .layoutPadding)
-        )
-        .listRowSeparator(.hidden)
-        #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor)
-        #endif
-      ForEach(viewModel.pinned) { status in
-        StatusRowExternalView(
-          viewModel: .init(status: status, client: client, routerPath: routerPath))
-      }
-      Rectangle()
-        #if os(visionOS)
-          .fill(Color.clear)
-        #else
-          .fill(theme.secondaryBackgroundColor)
-        #endif
-        .frame(height: 12)
-        .listRowInsets(.init())
-        .listRowSeparator(.hidden)
-        .accessibilityHidden(true)
     }
   }
 

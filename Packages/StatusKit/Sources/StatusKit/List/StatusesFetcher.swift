@@ -7,7 +7,7 @@ public enum StatusesState: Equatable, Sendable {
   public enum PagingState: Equatable, Sendable {
     case hasNextPage, none
   }
-  
+
   public enum ErrorState: Equatable, Sendable {
     case noData
   }
@@ -19,7 +19,7 @@ public enum StatusesState: Equatable, Sendable {
 }
 
 @MainActor
-public protocol StatusesFetcher {
+public protocol StatusesFetcher: Sendable {
   var statusesState: StatusesState { get }
   func fetchNewestStatuses(pullToRefresh: Bool) async
   func fetchNextPage() async throws
