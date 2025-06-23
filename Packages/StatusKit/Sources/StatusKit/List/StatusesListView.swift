@@ -48,7 +48,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       .listRowBackground(theme.primaryBackgroundColor)
       .listRowSeparator(.hidden)
 
-    case let .display(statuses, nextPageState):
+    case .display(let statuses, let nextPageState):
       ForEach(statuses) { status in
         StatusRowView(
           viewModel: StatusRowViewModel(
@@ -67,7 +67,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       }
       makeNextPageRow(nextPageState: nextPageState)
 
-    case let .displayWithGaps(items, nextPageState):
+    case .displayWithGaps(let items, let nextPageState):
       ForEach(items) { item in
         ZStack {
           switch item {
@@ -155,8 +155,6 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       } else if status.mentions.first(where: { $0.id == CurrentAccount.shared.account?.id }) != nil
       {
         theme.secondaryBackgroundColor
-      } else if status.account.isPremiumAccount {
-        Color.yellow.opacity(0.4)
       } else {
         theme.primaryBackgroundColor
       }

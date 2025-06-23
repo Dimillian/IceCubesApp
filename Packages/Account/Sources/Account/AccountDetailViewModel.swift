@@ -18,7 +18,7 @@ import SwiftUI
   }
 
   enum Tab: Int {
-    case statuses, favorites, bookmarks, replies, boosts, media, premiumPosts
+    case statuses, favorites, bookmarks, replies, boosts, media
 
     static var currentAccountTabs: [Tab] {
       [.statuses, .replies, .boosts, .favorites, .bookmarks]
@@ -26,10 +26,6 @@ import SwiftUI
 
     static var accountTabs: [Tab] {
       [.statuses, .replies, .boosts, .media]
-    }
-
-    static var premiumAccountTabs: [Tab] {
-      [.statuses, .premiumPosts, .replies, .boosts, .media]
     }
 
     var iconName: String {
@@ -40,7 +36,6 @@ import SwiftUI
       case .replies: "bubble.left.and.bubble.right"
       case .boosts: ""
       case .media: "photo.on.rectangle.angled"
-      case .premiumPosts: "dollarsign"
       }
     }
 
@@ -52,7 +47,6 @@ import SwiftUI
       case .replies: "accessibility.tabs.profile.picker.posts-and-replies"
       case .boosts: "accessibility.tabs.profile.picker.boosts"
       case .media: "accessibility.tabs.profile.picker.media"
-      case .premiumPosts: "Premium Posts"
       }
     }
   }
@@ -60,8 +54,6 @@ import SwiftUI
   var tabs: [Tab] {
     if isCurrentUser {
       return Tab.currentAccountTabs
-    } else if account?.isLinkedToPremiumAccount == true && premiumAccount != nil {
-      return Tab.premiumAccountTabs
     } else {
       return Tab.accountTabs
     }
@@ -80,16 +72,10 @@ import SwiftUI
   var fields: [Account.Field] = []
   var familiarFollowers: [Account] = []
 
-  // Sub.club stuff
-  var premiumAccount: Account?
-  var premiumRelationship: Relationship?
-  var subClubUser: SubClubUser?
-  private let subClubClient = SubClubClient()
-
   var selectedTab = Tab.statuses {
     didSet {
       switch selectedTab {
-      case .statuses, .replies, .boosts, .media, .premiumPosts:
+      case .statuses, .replies, .boosts, .media:
         tabTask?.cancel()
         tabTask = Task {
           await fetchNewestStatuses(pullToRefresh: false)
@@ -142,7 +128,6 @@ import SwiftUI
       let data = try await fetchAccountData(accountId: accountId, client: client)
 
       accountState = .data(account: data.account)
-      try await fetchPremiumAccount(fromAccount: data.account, client: client)
       account = data.account
       fields = data.account.fields
       featuredTags = data.featuredTags
@@ -207,14 +192,10 @@ import SwiftUI
     do {
       statusesState = .loading
       boosts = []
-      var accountIdToFetch = accountId
-      if selectedTab == .premiumPosts, let accountId = premiumAccount?.id {
-        accountIdToFetch = accountId
-      }
       statuses =
         try await client.get(
           endpoint: Accounts.statuses(
-            id: accountIdToFetch,
+            id: accountId,
             sinceId: nil,
             tag: nil,
             onlyMedia: selectedTab == .media,
@@ -255,16 +236,12 @@ import SwiftUI
   func fetchNextPage() async throws {
     guard let client else { return }
     switch selectedTab {
-    case .statuses, .replies, .boosts, .media, .premiumPosts:
+    case .statuses, .replies, .boosts, .media:
       guard let lastId = statuses.last?.id else { return }
-      var accountIdToFetch = accountId
-      if selectedTab == .premiumPosts, let accountId = premiumAccount?.id {
-        accountIdToFetch = accountId
-      }
       let newStatuses: [Status] =
         try await client.get(
           endpoint: Accounts.statuses(
-            id: accountIdToFetch,
+            id: accountId,
             sinceId: lastId,
             tag: nil,
             onlyMedia: selectedTab == .media,
@@ -307,7 +284,7 @@ import SwiftUI
 
   private func reloadTabState() {
     switch selectedTab {
-    case .statuses, .replies, .media, .premiumPosts:
+    case .statuses, .replies, .media:
       statusesState = .display(
         statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
     case .boosts:
@@ -340,7 +317,8 @@ import SwiftUI
       statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
     } else if let event = event as? StreamEventStatusUpdate {
       if let originalIndex = statuses.firstIndex(where: { $0.id == event.status.id }) {
-        StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
+        StatusDataControllerProvider.shared.updateDataControllers(
+          for: [event.status], client: client)
         statuses[originalIndex] = event.status
         statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
       }
@@ -350,42 +328,4 @@ import SwiftUI
   func statusDidAppear(status _: Models.Status) {}
 
   func statusDidDisappear(status _: Status) {}
-}
-
-extension AccountDetailViewModel {
-  private func fetchPremiumAccount(fromAccount: Account, client: Client) async throws {
-    if fromAccount.isLinkedToPremiumAccount, let acct = fromAccount.premiumAcct {
-      let results: SearchResults? = try await client.get(
-        endpoint: Search.search(
-          query: acct,
-          type: .accounts,
-          offset: nil,
-          following: nil),
-        forceVersion: .v2)
-      if let premiumAccount = results?.accounts.first {
-        self.premiumAccount = premiumAccount
-        await fetchSubClubAccount(premiumUsername: premiumAccount.username)
-        let relationships: [Relationship] = try await client.get(
-          endpoint: Accounts.relationships(ids: [premiumAccount.id]))
-        self.premiumRelationship = relationships.first
-      }
-    } else if fromAccount.isPremiumAccount {
-      await fetchSubClubAccount(premiumUsername: fromAccount.username)
-    }
-  }
-
-  func followPremiumAccount() async throws {
-    if let premiumAccount {
-      premiumRelationship = try await client?.post(
-        endpoint: Accounts.follow(
-          id: premiumAccount.id,
-          notify: false,
-          reblogs: true))
-    }
-  }
-
-  private func fetchSubClubAccount(premiumUsername: String) async {
-    let user = await subClubClient.getUser(username: premiumUsername)
-    subClubUser = user
-  }
 }

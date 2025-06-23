@@ -28,10 +28,6 @@ struct AccountDetailHeaderView: View {
   let account: Account
   let scrollViewProxy: ScrollViewProxy?
 
-  private let premiumTimer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
-  @State private var shouldListenToPremiumTimer: Bool = false
-  @State private var isTipSheetPresented: Bool = false
-
   var body: some View {
     VStack(alignment: .leading) {
       ZStack(alignment: .bottomTrailing) {
@@ -51,12 +47,12 @@ struct AccountDetailHeaderView: View {
               .padding(8)
           } else {
             Text("account.relation.follows-you")
-                       .font(.scaledFootnote)
-                       .fontWeight(.semibold)
-                       .padding(4)
-                       .background(.ultraThinMaterial)
-                       .cornerRadius(4)
-                       .padding(8)
+              .font(.scaledFootnote)
+              .fontWeight(.semibold)
+              .padding(4)
+              .background(.ultraThinMaterial)
+              .cornerRadius(4)
+              .padding(8)
           }
         }
       }
@@ -67,25 +63,8 @@ struct AccountDetailHeaderView: View {
       if let latestEvent = watcher.latestEvent,
         let latestEvent = latestEvent as? StreamEventNotification
       {
-        if latestEvent.notification.account.id == viewModel.accountId
-          || latestEvent.notification.account.id == viewModel.premiumAccount?.id
-        {
+        if latestEvent.notification.account.id == viewModel.accountId {
           Task {
-            if viewModel.account?.isLinkedToPremiumAccount == true {
-              await viewModel.fetchAccount()
-            } else {
-              try? await viewModel.followButtonViewModel?.refreshRelationship()
-            }
-          }
-        }
-      }
-    }
-    .onReceive(premiumTimer) { _ in
-      if shouldListenToPremiumTimer {
-        Task {
-          if viewModel.account?.isLinkedToPremiumAccount == true {
-            await viewModel.fetchAccount()
-          } else {
             try? await viewModel.followButtonViewModel?.refreshRelationship()
           }
         }
@@ -264,13 +243,6 @@ struct AccountDetailHeaderView: View {
             .accessibilityRespondsToUserInteraction(false)
           movedToView
           joinedAtView
-          if viewModel.account?.isPremiumAccount == true
-            && viewModel.relationship?.following == false
-            || viewModel.account?.isLinkedToPremiumAccount == true
-              && viewModel.premiumRelationship?.following == false
-          {
-            subscribeButton
-          }
         }
         .accessibilityElement(children: .contain)
         .accessibilitySortPriority(1)
@@ -375,47 +347,6 @@ struct AccountDetailHeaderView: View {
       .font(.footnote)
       .padding(.top, 6)
       .accessibilityElement(children: .combine)
-    }
-  }
-
-  @ViewBuilder
-  private var subscribeButton: some View {
-    Button {
-      if let subscription = viewModel.subClubUser?.subscription,
-        let accountName = appAccount.currentAccount.accountName,
-        let premiumUsername = account.premiumUsername,
-        let url = URL(
-          string:
-            "https://\(AppInfo.premiumInstance)/@\(premiumUsername)/subscribe?callback=icecubesapp://subclub&id=@\(accountName)&amount=\(subscription.unitAmount)&currency=\(subscription.currency)&theme=\(colorScheme)"
-        )
-      {
-        openURL(url)
-      } else {
-        isTipSheetPresented = true
-        shouldListenToPremiumTimer = true
-      }
-
-      Task {
-        if viewModel.account?.isLinkedToPremiumAccount == true {
-          try? await viewModel.followPremiumAccount()
-        }
-        try? await viewModel.followButtonViewModel?.follow()
-      }
-
-    } label: {
-      if let subscription = viewModel.subClubUser?.subscription {
-        Text("Subscribe \(subscription.formattedAmount) / month")
-      } else {
-        Text("$ Subscribe")
-      }
-    }
-    .buttonStyle(.bordered)
-    .padding(.top, 8)
-    .padding(.bottom, 4)
-    .sheet(isPresented: $isTipSheetPresented) {
-      if let account = viewModel.account {
-        PremiumAcccountSubsciptionSheetView(account: account)
-      }
     }
   }
 
