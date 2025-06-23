@@ -17,10 +17,10 @@ struct IconSelectorView: View {
     }
 
     case primary = 0
-    case alt1, alt2, alt3
+    case alt1, alt2
     
     // Unused icons.
-    case alt4, alt5, alt6, alt7, alt8
+    case alt3, alt4, alt5, alt6, alt7, alt8
     case alt9, alt10, alt11, alt12, alt13
     case alt14, alt15, alt17, atl18, alt19
     
@@ -58,7 +58,7 @@ struct IconSelectorView: View {
       IconSelector(
         title: "\("settings.app.icon.designed-by".localized) Erich Jurgens",
         icons: [
-          .alt2, .alt3
+          .alt2
         ]),
       IconSelector(
         title: "\("settings.app.icon.designed-by".localized) Albert Kinng",

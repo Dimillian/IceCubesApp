@@ -57,6 +57,7 @@
 		E9DB78982E004E4C004EAC2E /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = E9DB78972E004E4C004EAC2E /* AppIcon.icon */; };
 		E9DF41FC29830FEC0003AAD2 /* UniformTypeIdentifiers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9DF41FB29830FEC0003AAD2 /* UniformTypeIdentifiers.framework */; };
 		E9DF420729830FEC0003AAD2 /* IceCubesActionExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */; platformFilters = (ios, maccatalyst, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		E9FB0AC42E09AF5E002D232F /* AppIconAlternate2.icon in Resources */ = {isa = PBXBuildFile; fileRef = E9FB0AC32E09AF5E002D232F /* AppIconAlternate2.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,7 @@
 		E9DB78972E004E4C004EAC2E /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		E9DF41FA29830FEC0003AAD2 /* IceCubesActionExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = IceCubesActionExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9DF41FB29830FEC0003AAD2 /* UniformTypeIdentifiers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UniformTypeIdentifiers.framework; path = System/Library/Frameworks/UniformTypeIdentifiers.framework; sourceTree = SDKROOT; };
+		E9FB0AC32E09AF5E002D232F /* AppIconAlternate2.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = AppIconAlternate2.icon; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -305,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				E9DB78972E004E4C004EAC2E /* AppIcon.icon */,
+				E9FB0AC32E09AF5E002D232F /* AppIconAlternate2.icon */,
 				DD31E2E5297FB68B00A4BE29 /* IceCubesApp.xcconfig */,
 				9F7D939529800B0300EE6B7A /* IceCubesApp-release.xcconfig */,
 				9FF305C02CCA8569007B6B8F /* IceCubesApp */,
@@ -609,6 +612,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9DB78982E004E4C004EAC2E /* AppIcon.icon in Resources */,
+				E9FB0AC42E09AF5E002D232F /* AppIconAlternate2.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
