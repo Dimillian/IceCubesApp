@@ -15,11 +15,15 @@ public struct NotificationsListView: View {
   @Environment(CurrentAccount.self) private var account
   @Environment(CurrentInstance.self) private var currentInstance
 
-  @State private var viewModel = NotificationsViewModel()
+  @State private var dataSource = NotificationsListDataSource()
+  @State private var viewState: NotificationsListState = .loading
+  @State private var selectedType: Models.Notification.NotificationType?
+  @State private var policy: Models.NotificationsPolicy?
   @State private var isNotificationsPolicyPresented: Bool = false
 
   let lockedType: Models.Notification.NotificationType?
   let lockedAccountId: String?
+  let isLockedType: Bool
 
   public init(
     lockedType: Models.Notification.NotificationType? = nil,
@@ -27,16 +31,16 @@ public struct NotificationsListView: View {
   ) {
     self.lockedType = lockedType
     self.lockedAccountId = lockedAccountId
+    self.isLockedType = lockedType != nil
   }
 
   public var body: some View {
     List {
-      scrollToTopView
-      topPaddingView
-      if lockedAccountId == nil, let summary = viewModel.policy?.summary {
+      if lockedAccountId == nil, let summary = policy?.summary {
         NotificationsHeaderFilteredView(filteredNotifications: summary)
       }
       notificationsView
+        .listSectionSeparator(.hidden, edges: .top)
     }
     .id(account.account?.id)
     .environment(\.defaultMinListRowHeight, 1)
@@ -44,7 +48,7 @@ public struct NotificationsListView: View {
     .toolbar {
       ToolbarItem(placement: .principal) {
         let title =
-          lockedType?.menuTitle() ?? viewModel.selectedType?.menuTitle()
+          lockedType?.menuTitle() ?? selectedType?.menuTitle()
           ?? "notifications.navigation-title"
         if lockedType == nil {
           Text(title)
@@ -66,9 +70,9 @@ public struct NotificationsListView: View {
       if lockedType == nil && lockedAccountId == nil {
         ToolbarTitleMenu {
           Button {
-            viewModel.selectedType = nil
+            selectedType = nil
             Task {
-              await viewModel.fetchNotifications(viewModel.selectedType)
+              await fetchNotifications()
             }
           } label: {
             Label("notifications.navigation-title", systemImage: "bell.fill")
@@ -76,9 +80,9 @@ public struct NotificationsListView: View {
           Divider()
           ForEach(Notification.NotificationType.allCases, id: \.self) { type in
             Button {
-              viewModel.selectedType = type
+              selectedType = type
               Task {
-                await viewModel.fetchNotifications(viewModel.selectedType)
+                await fetchNotifications()
               }
             } label: {
               Label {
@@ -116,47 +120,51 @@ public struct NotificationsListView: View {
       .background(theme.primaryBackgroundColor)
     #endif
     .task {
-      viewModel.client = client
-      viewModel.currentAccount = account
       if let lockedType {
-        viewModel.isLockedType = true
-        viewModel.selectedType = lockedType
-      } else if let lockedAccountId {
-        viewModel.lockedAccountId = lockedAccountId
-      } else {
-        viewModel.loadSelectedType()
+        selectedType = lockedType
       }
-      await viewModel.fetchNotifications(viewModel.selectedType)
-      await viewModel.fetchPolicy()
+      await fetchNotifications()
+      policy = await dataSource.fetchPolicy(client: client)
     }
     .refreshable {
       SoundEffectManager.shared.playSound(.pull)
       HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
-      await viewModel.fetchNotifications(viewModel.selectedType)
-      await viewModel.fetchPolicy()
+      await fetchNotifications()
+      policy = await dataSource.fetchPolicy(client: client)
       HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.7))
       SoundEffectManager.shared.playSound(.refresh)
     }
     .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent {
-        viewModel.handleEvent(selectedType: viewModel.selectedType, event: latestEvent)
+        Task {
+          await handleStreamEvent(latestEvent)
+        }
       }
     }
     .onChange(of: scenePhase) { _, newValue in
       switch newValue {
       case .active:
         Task {
-          await viewModel.fetchNotifications(viewModel.selectedType)
+          await fetchNotifications()
         }
       default:
         break
+      }
+    }
+    .onChange(of: client) { oldValue, newValue in
+      guard oldValue.id != newValue.id else { return }
+      dataSource.reset()
+      viewState = .loading
+      Task {
+        await fetchNotifications()
+        policy = await dataSource.fetchPolicy(client: client)
       }
     }
   }
 
   @ViewBuilder
   private var notificationsView: some View {
-    switch viewModel.state {
+    switch viewState {
     case .loading:
       ForEach(ConsolidatedNotification.placeholders()) { notification in
         NotificationRowView(
@@ -231,7 +239,7 @@ public struct NotificationsListView: View {
           EmptyView()
         case .hasNextPage:
           NextPageView {
-            try await viewModel.fetchNextPage(viewModel.selectedType)
+            await fetchNextPage()
           }
           .listRowInsets(
             .init(
@@ -252,7 +260,7 @@ public struct NotificationsListView: View {
         message: "notifications.error.message",
         buttonTitle: "action.retry"
       ) {
-        await viewModel.fetchNotifications(viewModel.selectedType)
+        await fetchNotifications()
       }
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
@@ -260,24 +268,67 @@ public struct NotificationsListView: View {
       .listSectionSeparator(.hidden)
     }
   }
+}
 
-  private var topPaddingView: some View {
-    HStack {}
-      .listRowBackground(Color.clear)
-      .listRowSeparator(.hidden)
-      .listRowInsets(.init())
-      .frame(height: .layoutPadding)
-      .accessibilityHidden(true)
+extension NotificationsListView {
+  private func fetchNotifications() async {
+    do {
+      let result = try await dataSource.fetchNotifications(
+        client: client,
+        selectedType: selectedType,
+        lockedAccountId: lockedAccountId
+      )
+
+      withAnimation {
+        viewState = .display(
+          notifications: result.notifications,
+          nextPageState: result.nextPageState
+        )
+      }
+
+      if result.containsFollowRequests {
+        await account.fetchFollowerRequests()
+      }
+    } catch {
+      viewState = .error(error: error)
+    }
   }
 
-  private var scrollToTopView: some View {
-    ScrollToView()
-      .frame(height: .scrollToViewHeight)
-      .onAppear {
-        viewModel.scrollToTopVisible = true
+  private func fetchNextPage() async {
+    do {
+      let result = try await dataSource.fetchNextPage(
+        client: client,
+        selectedType: selectedType,
+        lockedAccountId: lockedAccountId
+      )
+
+      viewState = .display(
+        notifications: result.notifications,
+        nextPageState: result.nextPageState
+      )
+
+      if result.containsFollowRequests {
+        await account.fetchFollowerRequests()
       }
-      .onDisappear {
-        viewModel.scrollToTopVisible = false
+    } catch {}
+  }
+
+  private func handleStreamEvent(_ event: any StreamEvent) async {
+    if let result = await dataSource.handleStreamEvent(
+      event: event,
+      selectedType: selectedType,
+      lockedAccountId: lockedAccountId
+    ) {
+      withAnimation {
+        viewState = .display(
+          notifications: result.notifications,
+          nextPageState: .hasNextPage
+        )
       }
+
+      if result.containsFollowRequest {
+        await account.fetchFollowerRequests()
+      }
+    }
   }
 }
