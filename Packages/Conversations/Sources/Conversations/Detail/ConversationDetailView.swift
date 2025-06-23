@@ -31,10 +31,7 @@ public struct ConversationDetailView: View {
 
   public init(conversation: Conversation) {
     _dataSource = .init(initialValue: .init(conversation: conversation))
-    _viewState = .init(
-      initialValue: .display(
-        messages: conversation.lastStatus != nil ? [conversation.lastStatus!] : [],
-        conversation: conversation))
+    _viewState = .init(initialValue: .loading)
   }
 
   public var body: some View {
