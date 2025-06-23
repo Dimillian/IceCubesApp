@@ -14,7 +14,10 @@ struct ConversationsListRow: View {
   @Environment(CurrentAccount.self) private var currentAccount
 
   @Binding var conversation: Conversation
-  var viewModel: ConversationsListViewModel
+  let onMarkAsRead: (Conversation) async -> Void
+  let onDelete: (Conversation) async -> Void
+  let onFavorite: (Conversation) async -> Void
+  let onBookmark: (Conversation) async -> Void
 
   var body: some View {
     VStack(alignment: .leading) {
@@ -91,7 +94,7 @@ struct ConversationsListRow: View {
     .contentShape(Rectangle())
     .onTapGesture {
       Task {
-        await viewModel.markAsRead(conversation: conversation)
+        await onMarkAsRead(conversation)
       }
       routerPath.navigate(to: .conversationDetail(conversation: conversation))
     }
@@ -163,7 +166,7 @@ struct ConversationsListRow: View {
     if conversation.unread {
       Button {
         Task {
-          await viewModel.markAsRead(conversation: conversation)
+          await onMarkAsRead(conversation)
         }
       } label: {
         Label("conversations.action.mark-read", systemImage: "eye")
@@ -175,7 +178,7 @@ struct ConversationsListRow: View {
   private var deleteAction: some View {
     Button(role: .destructive) {
       Task {
-        await viewModel.delete(conversation: conversation)
+        await onDelete(conversation)
       }
     } label: {
       Label("conversations.action.delete", systemImage: "trash")
@@ -187,7 +190,7 @@ struct ConversationsListRow: View {
   private var likeAndBookmark: some View {
     Button {
       Task {
-        await viewModel.favorite(conversation: conversation)
+        await onFavorite(conversation)
       }
     } label: {
       Label(
@@ -197,7 +200,7 @@ struct ConversationsListRow: View {
     }
     Button {
       Task {
-        await viewModel.bookmark(conversation: conversation)
+        await onBookmark(conversation)
       }
     } label: {
       Label(
