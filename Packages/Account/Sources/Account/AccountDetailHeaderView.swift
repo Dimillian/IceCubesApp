@@ -24,8 +24,15 @@ struct AccountDetailHeaderView: View {
   @Environment(\.openURL) private var openURL
   @Environment(\.colorScheme) private var colorScheme
 
-  var viewModel: AccountDetailViewModel
   let account: Account
+  @Binding var relationship: Relationship?
+  @Binding var fields: [Account.Field]
+  @Binding var familiarFollowers: [Account]
+  @Binding var followButtonViewModel: FollowButtonViewModel?
+  @Binding var translation: Translation?
+  @Binding var isLoadingTranslation: Bool
+  let isCurrentUser: Bool
+  let accountId: String
   let scrollViewProxy: ScrollViewProxy?
 
   var body: some View {
@@ -36,7 +43,7 @@ struct AccountDetailHeaderView: View {
           .overlay {
             headerImageView
           }
-        if viewModel.relationship?.followedBy == true {
+        if relationship?.followedBy == true {
           if #available(iOS 26.0, *) {
             Text("account.relation.follows-you")
               .font(.scaledFootnote)
@@ -63,9 +70,9 @@ struct AccountDetailHeaderView: View {
       if let latestEvent = watcher.latestEvent,
         let latestEvent = latestEvent as? StreamEventNotification
       {
-        if latestEvent.notification.account.id == viewModel.accountId {
+        if latestEvent.notification.account.id == accountId {
           Task {
-            try? await viewModel.followButtonViewModel?.refreshRelationship()
+            try? await followButtonViewModel?.refreshRelationship()
           }
         }
       }
@@ -127,7 +134,7 @@ struct AccountDetailHeaderView: View {
       ZStack(alignment: .topTrailing) {
         AvatarView(account.avatar, config: .account)
           .accessibilityLabel("accessibility.tabs.profile.user-avatar.label")
-        if viewModel.isCurrentUser, isSupporter {
+        if isCurrentUser, isSupporter {
           Image(systemName: "checkmark.seal.fill")
             .resizable()
             .frame(width: 25, height: 25)
@@ -223,13 +230,13 @@ struct AccountDetailHeaderView: View {
                   .font(.footnote)
               }.accessibilityLabel("accessibility.tabs.profile.user.account-private.label")
             }
-            if viewModel.relationship?.blocking == true {
+            if relationship?.blocking == true {
               ZStack {
                 Text(Image(systemName: "person.crop.circle.badge.xmark.fill"))
                   .font(.footnote)
               }.accessibilityLabel("accessibility.tabs.profile.user.account-blocked.label")
             }
-            if viewModel.relationship?.muting == true {
+            if relationship?.muting == true {
               ZStack {
                 Text(Image(systemName: "speaker.slash.fill"))
                   .font(.footnote)
@@ -249,17 +256,17 @@ struct AccountDetailHeaderView: View {
 
         Spacer()
         HStack {
-          if let followButtonViewModel = viewModel.followButtonViewModel, !viewModel.isCurrentUser {
+          if let followButtonViewModel = followButtonViewModel, !isCurrentUser {
             FollowButton(viewModel: followButtonViewModel)
-          } else if !viewModel.isCurrentUser {
+          } else if !isCurrentUser {
             ProgressView()
           }
         }
         .padding(.top, 4)
       }
 
-      if let note = viewModel.relationship?.note, !note.isEmpty,
-        !viewModel.isCurrentUser
+      if let note = relationship?.note, !note.isEmpty,
+        !isCurrentUser
       {
         makeNoteView(note)
       }
@@ -279,7 +286,7 @@ struct AccountDetailHeaderView: View {
         )
         .accessibilityRespondsToUserInteraction(false)
 
-      if let translation = viewModel.translation, !viewModel.isLoadingTranslation {
+      if let translation = translation, !isLoadingTranslation {
         GroupBox {
           VStack(alignment: .leading, spacing: 4) {
             Text(translation.content.asSafeMarkdownAttributedString)
@@ -336,7 +343,7 @@ struct AccountDetailHeaderView: View {
 
   @ViewBuilder
   private var joinedAtView: some View {
-    if let joinedAt = viewModel.account?.createdAt.asDate {
+    let joinedAt = account.createdAt.asDate
       HStack(spacing: 4) {
         Image(systemName: "calendar")
           .accessibilityHidden(true)
@@ -347,12 +354,11 @@ struct AccountDetailHeaderView: View {
       .font(.footnote)
       .padding(.top, 6)
       .accessibilityElement(children: .combine)
-    }
   }
 
   @ViewBuilder
   private var movedToView: some View {
-    if let movedTo = viewModel.account?.moved {
+    if let movedTo = account.moved {
       Button("account.movedto.redirect-\("@\(movedTo.acct)")") {
         routerPath.navigate(to: .accountDetailWithAccount(account: movedTo))
       }
@@ -382,12 +388,12 @@ struct AccountDetailHeaderView: View {
 
   @ViewBuilder
   private var fieldsView: some View {
-    if !viewModel.fields.isEmpty {
+    if !fields.isEmpty {
       VStack(alignment: .leading) {
-        ForEach(viewModel.fields) { field in
+        ForEach(fields) { field in
           HStack {
             VStack(alignment: .leading, spacing: 2) {
-              EmojiTextApp(.init(stringValue: field.name), emojis: viewModel.account?.emojis ?? [])
+              EmojiTextApp(.init(stringValue: field.name), emojis: account.emojis)
                 .emojiText.size(Font.scaledHeadlineFont.emojiSize)
                 .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
                 .font(.scaledHeadline)
@@ -397,7 +403,7 @@ struct AccountDetailHeaderView: View {
                     .foregroundColor(Color.green.opacity(0.80))
                     .accessibilityHidden(true)
                 }
-                EmojiTextApp(field.value, emojis: viewModel.account?.emojis ?? [])
+                EmojiTextApp(field.value, emojis: account.emojis)
                   .emojiText.size(Font.scaledBodyFont.emojiSize)
                   .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
                   .foregroundColor(theme.tintColor)
@@ -412,7 +418,7 @@ struct AccountDetailHeaderView: View {
                       ? "accessibility.tabs.profile.fields.verified.label" : "")
               }
               .font(.scaledBody)
-              if viewModel.fields.last != field {
+              if fields.last != field {
                 Divider()
                   .padding(.vertical, 4)
               }
@@ -468,8 +474,15 @@ private struct ConditionalUserDefinedFieldAccessibilityActionModifier: ViewModif
 struct AccountDetailHeaderView_Previews: PreviewProvider {
   static var previews: some View {
     AccountDetailHeaderView(
-      viewModel: .init(account: .placeholder()),
       account: .placeholder(),
+      relationship: .constant(nil),
+      fields: .constant([]),
+      familiarFollowers: .constant([]),
+      followButtonViewModel: .constant(nil),
+      translation: .constant(nil),
+      isLoadingTranslation: .constant(false),
+      isCurrentUser: false,
+      accountId: "123",
       scrollViewProxy: nil)
   }
 }

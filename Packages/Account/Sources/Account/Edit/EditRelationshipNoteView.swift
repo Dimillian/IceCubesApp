@@ -1,4 +1,5 @@
 import DesignSystem
+import Models
 import Network
 import SwiftUI
 
@@ -8,7 +9,10 @@ public struct EditRelationshipNoteView: View {
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
 
-  @State var accountDetailViewModel: AccountDetailViewModel
+  let accountId: String
+  let relationship: Relationship?
+  let onSave: () -> Void
+  
   @State private var viewModel = EditRelationshipNoteViewModel()
 
   public var body: some View {
@@ -42,8 +46,8 @@ public struct EditRelationshipNoteView: View {
       )
       .task {
         viewModel.client = client
-        viewModel.relatedAccountId = accountDetailViewModel.accountId
-        viewModel.note = accountDetailViewModel.relationship?.note ?? ""
+        viewModel.relatedAccountId = accountId
+        viewModel.note = relationship?.note ?? ""
       }
     }
   }
@@ -60,7 +64,7 @@ public struct EditRelationshipNoteView: View {
       Button {
         Task {
           await viewModel.save()
-          await accountDetailViewModel.fetchAccount()
+          onSave()
           dismiss()
         }
       } label: {

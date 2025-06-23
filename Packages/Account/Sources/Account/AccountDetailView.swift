@@ -20,7 +20,20 @@ public struct AccountDetailView: View {
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
 
-  @State private var viewModel: AccountDetailViewModel
+  private let accountId: String
+  private let initialAccount: Account?
+  
+  @State private var viewState: AccountDetailState = .loading
+  @State private var account: Account?
+  @State private var relationship: Relationship?
+  @State private var featuredTags: [FeaturedTag] = []
+  @State private var familiarFollowers: [Account] = []
+  @State private var fields: [Account.Field] = []
+  @State private var followButtonViewModel: FollowButtonViewModel?
+  @State private var translation: Translation?
+  @State private var isLoadingTranslation = false
+  @State private var isCurrentUser: Bool = false
+  
   @State private var showBlockConfirmation: Bool = false
   @State private var isEditingRelationshipNote: Bool = false
   @State private var showTranslateView: Bool = false
@@ -30,12 +43,14 @@ public struct AccountDetailView: View {
 
   /// When coming from a URL like a mention tap in a status.
   public init(accountId: String) {
-    _viewModel = .init(initialValue: .init(accountId: accountId))
+    self.accountId = accountId
+    self.initialAccount = nil
   }
 
   /// When the account is already fetched by the parent caller.
   public init(account: Account) {
-    _viewModel = .init(initialValue: .init(account: account))
+    self.accountId = account.id
+    self.initialAccount = account
   }
 
   public var body: some View {
@@ -47,7 +62,7 @@ public struct AccountDetailView: View {
         makeHeaderView(proxy: proxy)
           .applyAccountDetailsRowStyle(theme: theme)
           .padding(.bottom, -20)
-        familiarFollowers
+        familiarFollowersView
           .applyAccountDetailsRowStyle(theme: theme)
         featuredTagsView
           .applyAccountDetailsRowStyle(theme: theme)
@@ -64,7 +79,7 @@ public struct AccountDetailView: View {
             fetcher: fetcher,
             client: client,
             routerPath: routerPath,
-            account: viewModel.account
+            account: account
           )
         }
       }
@@ -77,14 +92,18 @@ public struct AccountDetailView: View {
     }
     .onAppear {
       guard reasons != .placeholder else { return }
-      viewModel.isCurrentUser = currentAccount.account?.id == viewModel.accountId
-      viewModel.client = client
+      isCurrentUser = currentAccount.account?.id == accountId
+      
+      if let initialAccount {
+        account = initialAccount
+        viewState = .display(account: initialAccount, featuredTags: [], relationships: [])
+      }
 
       if tabManager == nil {
         tabManager = AccountTabManager(
-          accountId: viewModel.accountId,
+          accountId: accountId,
           client: client,
-          isCurrentUser: viewModel.isCurrentUser
+          isCurrentUser: isCurrentUser
         )
       }
 
@@ -92,7 +111,7 @@ public struct AccountDetailView: View {
         Task {
           await withTaskGroup(of: Void.self) { group in
             group.addTask {
-              await viewModel.fetchAccount()
+              await fetchAccount()
             }
             switch tabManager.currentTabFetcher.statusesState {
             case .loading, .error:
@@ -102,9 +121,9 @@ public struct AccountDetailView: View {
             default:
               break
             }
-            if !viewModel.isCurrentUser {
+            if !isCurrentUser {
               group.addTask {
-                await viewModel.fetchFamilliarFollowers()
+                await fetchFamiliarFollowers()
               }
             }
           }
@@ -115,7 +134,7 @@ public struct AccountDetailView: View {
       Task {
         SoundEffectManager.shared.playSound(.pull)
         HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
-        await viewModel.fetchAccount()
+        await fetchAccount()
         if let tabManager {
           await tabManager.refreshCurrentTab()
         }
@@ -125,7 +144,7 @@ public struct AccountDetailView: View {
     }
     .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent,
-        viewModel.accountId == currentAccount.account?.id,
+        accountId == currentAccount.account?.id,
         let tabManager
       {
         // Handle stream events directly with the current tab's fetcher
@@ -137,7 +156,7 @@ public struct AccountDetailView: View {
     .onChange(of: routerPath.presentedSheet) { oldValue, newValue in
       if oldValue == .accountEditInfo || newValue == .accountEditInfo {
         Task {
-          await viewModel.fetchAccount()
+          await fetchAccount()
           await preferences.refreshServerPreferences()
         }
       }
@@ -145,7 +164,15 @@ public struct AccountDetailView: View {
     .sheet(
       isPresented: $isEditingRelationshipNote,
       content: {
-        EditRelationshipNoteView(accountDetailViewModel: viewModel)
+        EditRelationshipNoteView(
+          accountId: accountId,
+          relationship: relationship,
+          onSave: {
+            Task {
+              await fetchAccount()
+            }
+          }
+        )
       }
     )
     .edgesIgnoringSafeArea(.top)
@@ -183,19 +210,33 @@ public struct AccountDetailView: View {
 
   @ViewBuilder
   private func makeHeaderView(proxy: ScrollViewProxy?) -> some View {
-    switch viewModel.accountState {
+    switch viewState {
     case .loading:
       AccountDetailHeaderView(
-        viewModel: viewModel,
         account: .placeholder(),
+        relationship: $relationship,
+        fields: $fields,
+        familiarFollowers: $familiarFollowers,
+        followButtonViewModel: $followButtonViewModel,
+        translation: $translation,
+        isLoadingTranslation: $isLoadingTranslation,
+        isCurrentUser: isCurrentUser,
+        accountId: accountId,
         scrollViewProxy: proxy
       )
       .redacted(reason: .placeholder)
       .allowsHitTesting(false)
-    case .data(let account):
+    case .display(let account, _, _):
       AccountDetailHeaderView(
-        viewModel: viewModel,
         account: account,
+        relationship: $relationship,
+        fields: $fields,
+        familiarFollowers: $familiarFollowers,
+        followButtonViewModel: $followButtonViewModel,
+        translation: $translation,
+        isLoadingTranslation: $isLoadingTranslation,
+        isCurrentUser: isCurrentUser,
+        accountId: accountId,
         scrollViewProxy: proxy)
     case .error(let error):
       Text("Error: \(error.localizedDescription)")
@@ -204,13 +245,13 @@ public struct AccountDetailView: View {
 
   @ViewBuilder
   private var featuredTagsView: some View {
-    if !viewModel.featuredTags.isEmpty {
+    if !featuredTags.isEmpty {
       ScrollView(.horizontal, showsIndicators: false) {
         HStack(spacing: 4) {
-          if !viewModel.featuredTags.isEmpty {
-            ForEach(viewModel.featuredTags) { tag in
+          if !featuredTags.isEmpty {
+            ForEach(featuredTags) { tag in
               Button {
-                routerPath.navigate(to: .hashTag(tag: tag.name, account: viewModel.accountId))
+                routerPath.navigate(to: .hashTag(tag: tag.name, account: accountId))
               } label: {
                 VStack(alignment: .leading, spacing: 0) {
                   Text("#\(tag.name)")
@@ -228,8 +269,8 @@ public struct AccountDetailView: View {
   }
 
   @ViewBuilder
-  private var familiarFollowers: some View {
-    if !viewModel.familiarFollowers.isEmpty {
+  private var familiarFollowersView: some View {
+    if !familiarFollowers.isEmpty {
       VStack(alignment: .leading, spacing: 2) {
         Text("account.detail.familiar-followers")
           .font(.scaledHeadline)
@@ -237,7 +278,7 @@ public struct AccountDetailView: View {
           .accessibilityAddTraits(.isHeader)
         ScrollView(.horizontal, showsIndicators: false) {
           LazyHStack(spacing: 0) {
-            ForEach(viewModel.familiarFollowers) { account in
+            ForEach(familiarFollowers) { account in
               Button {
                 routerPath.navigate(to: .accountDetailWithAccount(account: account))
               } label: {
@@ -260,7 +301,7 @@ public struct AccountDetailView: View {
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
     ToolbarItem(placement: .principal) {
-      if let account = viewModel.account, displayTitle {
+      if let account = account, displayTitle {
         VStack {
           Text(account.displayName ?? "").font(.headline)
           Text("account.detail.featured-tags-n-posts \(account.statusesCount ?? 0)")
@@ -270,9 +311,9 @@ public struct AccountDetailView: View {
       }
     }
     ToolbarItemGroup(placement: .navigationBarTrailing) {
-      if !viewModel.isCurrentUser {
+      if !isCurrentUser {
         Button {
-          if let account = viewModel.account {
+          if let account = account {
             #if targetEnvironment(macCatalyst) || os(visionOS)
               openWindow(
                 value: WindowDestinationEditor.mentionStatusEditor(
@@ -292,9 +333,11 @@ public struct AccountDetailView: View {
         AccountDetailContextMenu(
           showBlockConfirmation: $showBlockConfirmation,
           showTranslateView: $showTranslateView,
-          viewModel: viewModel)
+          account: account,
+          relationship: $relationship,
+          isCurrentUser: isCurrentUser)
 
-        if !viewModel.isCurrentUser {
+        if !isCurrentUser {
           Button {
             isEditingRelationshipNote = true
           } label: {
@@ -302,7 +345,7 @@ public struct AccountDetailView: View {
           }
         }
 
-        if viewModel.isCurrentUser {
+        if isCurrentUser {
           Button {
             routerPath.presentedSheet = .accountEditInfo
           } label: {
@@ -331,7 +374,7 @@ public struct AccountDetailView: View {
             Label("settings.push.navigation-title", systemImage: "bell")
           }
 
-          if let account = viewModel.account {
+          if let account = account {
             Divider()
 
             Button {
@@ -379,11 +422,11 @@ public struct AccountDetailView: View {
           .foregroundStyle(theme.tintColor)
       }
       .confirmationDialog("Block User", isPresented: $showBlockConfirmation) {
-        if let account = viewModel.account {
+        if let account = account {
           Button("account.action.block-user-\(account.username)", role: .destructive) {
             Task {
               do {
-                viewModel.relationship = try await client.post(
+                relationship = try await client.post(
                   endpoint: Accounts.block(id: account.id))
               } catch {}
             }
@@ -395,7 +438,7 @@ public struct AccountDetailView: View {
       .tint(.label)
       #if canImport(_Translation_SwiftUI)
         .addTranslateView(
-          isPresented: $showTranslateView, text: viewModel.account?.note.asRawText ?? "")
+          isPresented: $showTranslateView, text: account?.note.asRawText ?? "")
       #endif
     }
   }
@@ -415,5 +458,79 @@ extension View {
 struct AccountDetailView_Previews: PreviewProvider {
   static var previews: some View {
     AccountDetailView(account: .placeholder())
+  }
+}
+
+// MARK: - Data Fetching
+extension AccountDetailView {
+  private struct AccountData {
+    let account: Account
+    let featuredTags: [FeaturedTag]
+    let relationships: [Relationship]
+  }
+  
+  private func fetchAccount() async {
+    do {
+      let data = try await fetchAccountData(accountId: accountId, client: client)
+      
+      viewState = .display(account: data.account, featuredTags: data.featuredTags, relationships: data.relationships)
+      account = data.account
+      fields = data.account.fields
+      featuredTags = data.featuredTags
+      featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
+      relationship = data.relationships.first
+      
+      if let relationship {
+        if let existingFollowButtonViewModel = followButtonViewModel {
+          existingFollowButtonViewModel.relationship = relationship
+        } else {
+          followButtonViewModel = .init(
+            client: client,
+            accountId: accountId,
+            relationship: relationship,
+            shouldDisplayNotify: true,
+            relationshipUpdated: { relationship in
+              self.relationship = relationship
+            })
+        }
+      }
+    } catch {
+      if let account {
+        viewState = .display(account: account, featuredTags: [], relationships: [])
+      } else {
+        viewState = .error(error: error)
+      }
+    }
+  }
+  
+  private func fetchAccountData(accountId: String, client: Client) async throws -> AccountData {
+    async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
+    async let featuredTags: [FeaturedTag] = client.get(
+      endpoint: Accounts.featuredTags(id: accountId))
+    if client.isAuth, !isCurrentUser {
+      async let relationships: [Relationship] = client.get(
+        endpoint: Accounts.relationships(ids: [accountId]))
+      do {
+        return try await .init(
+          account: account,
+          featuredTags: featuredTags,
+          relationships: relationships)
+      } catch {
+        return try await .init(
+          account: account,
+          featuredTags: [],
+          relationships: relationships)
+      }
+    }
+    return try await .init(
+      account: account,
+      featuredTags: featuredTags,
+      relationships: [])
+  }
+  
+  private func fetchFamiliarFollowers() async {
+    let familiarFollowersResponse: [FamiliarAccounts]? = try? await client.get(
+      endpoint: Accounts.familiarFollowers(withAccount: accountId))
+    self.familiarFollowers = familiarFollowersResponse?.first?.accounts ?? []
   }
 }

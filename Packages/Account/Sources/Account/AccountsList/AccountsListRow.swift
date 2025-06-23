@@ -131,12 +131,21 @@ public struct AccountsListRow: View {
       AccountDetailContextMenu(
         showBlockConfirmation: $showBlockConfirmation,
         showTranslateView: $showTranslateView,
-        viewModel: .init(account: viewModel.account))
+        account: viewModel.account,
+        relationship: .constant(viewModel.relationShip),
+        isCurrentUser: false)
     } preview: {
       List {
         AccountDetailHeaderView(
-          viewModel: .init(account: viewModel.account),
           account: viewModel.account,
+          relationship: .constant(viewModel.relationShip),
+          fields: .constant([]),
+          familiarFollowers: .constant([]),
+          followButtonViewModel: .constant(nil),
+          translation: .constant(nil),
+          isLoadingTranslation: .constant(false),
+          isCurrentUser: false,
+          accountId: viewModel.account.id,
           scrollViewProxy: nil
         )
         .applyAccountDetailsRowStyle(theme: theme)

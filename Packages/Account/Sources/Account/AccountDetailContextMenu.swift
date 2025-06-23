@@ -1,4 +1,5 @@
 import Env
+import Models
 import Network
 import SwiftUI
 
@@ -11,12 +12,14 @@ public struct AccountDetailContextMenu: View {
   @Binding var showBlockConfirmation: Bool
   @Binding var showTranslateView: Bool
 
-  var viewModel: AccountDetailViewModel
+  var account: Account?
+  @Binding var relationship: Relationship?
+  let isCurrentUser: Bool
 
   public var body: some View {
-    if let account = viewModel.account {
+    if let account = account {
       Section(account.acct) {
-        if !viewModel.isCurrentUser {
+        if !isCurrentUser {
           Button {
             routerPath.presentedSheet = .mentionStatusEditor(
               account: account,
@@ -34,11 +37,11 @@ public struct AccountDetailContextMenu: View {
             Divider()
           #endif
 
-          if viewModel.relationship?.blocking == true {
+          if relationship?.blocking == true {
             Button {
               Task {
                 do {
-                  viewModel.relationship = try await client.post(
+                  relationship = try await client.post(
                     endpoint: Accounts.unblock(id: account.id))
                 } catch {}
               }
@@ -54,11 +57,11 @@ public struct AccountDetailContextMenu: View {
             }
           }
 
-          if viewModel.relationship?.muting == true {
+          if relationship?.muting == true {
             Button {
               Task {
                 do {
-                  viewModel.relationship = try await client.post(
+                  relationship = try await client.post(
                     endpoint: Accounts.unmute(id: account.id))
                 } catch {}
               }
@@ -71,7 +74,7 @@ public struct AccountDetailContextMenu: View {
                 Button(duration.description) {
                   Task {
                     do {
-                      viewModel.relationship = try await client.post(
+                      relationship = try await client.post(
                         endpoint: Accounts.mute(
                           id: account.id, json: MuteData(duration: duration.rawValue)))
                     } catch {}
@@ -83,18 +86,18 @@ public struct AccountDetailContextMenu: View {
             }
           }
 
-          if let relationship = viewModel.relationship,
-            relationship.following
+          if let relationshipValue = relationship,
+            relationshipValue.following
           {
-            if relationship.notifying {
+            if relationshipValue.notifying {
               Button {
                 Task {
                   do {
-                    viewModel.relationship = try await client.post(
+                    relationship = try await client.post(
                       endpoint: Accounts.follow(
                         id: account.id,
                         notify: false,
-                        reblogs: relationship.showingReblogs))
+                        reblogs: relationshipValue.showingReblogs))
                   } catch {}
                 }
               } label: {
@@ -104,25 +107,25 @@ public struct AccountDetailContextMenu: View {
               Button {
                 Task {
                   do {
-                    viewModel.relationship = try await client.post(
+                    relationship = try await client.post(
                       endpoint: Accounts.follow(
                         id: account.id,
                         notify: true,
-                        reblogs: relationship.showingReblogs))
+                        reblogs: relationshipValue.showingReblogs))
                   } catch {}
                 }
               } label: {
                 Label("account.action.notify-enable", systemImage: "bell")
               }
             }
-            if relationship.showingReblogs {
+            if relationshipValue.showingReblogs {
               Button {
                 Task {
                   do {
-                    viewModel.relationship = try await client.post(
+                    relationship = try await client.post(
                       endpoint: Accounts.follow(
                         id: account.id,
-                        notify: relationship.notifying,
+                        notify: relationshipValue.notifying,
                         reblogs: false))
                   } catch {}
                 }
@@ -133,10 +136,10 @@ public struct AccountDetailContextMenu: View {
               Button {
                 Task {
                   do {
-                    viewModel.relationship = try await client.post(
+                    relationship = try await client.post(
                       endpoint: Accounts.follow(
                         id: account.id,
-                        notify: relationship.notifying,
+                        notify: relationshipValue.notifying,
                         reblogs: true))
                   } catch {}
                 }
@@ -161,7 +164,7 @@ public struct AccountDetailContextMenu: View {
           }
         #endif
 
-        if viewModel.relationship?.following == true {
+        if relationship?.following == true {
           Button {
             routerPath.presentedSheet = .listAddAccount(account: account)
           } label: {
