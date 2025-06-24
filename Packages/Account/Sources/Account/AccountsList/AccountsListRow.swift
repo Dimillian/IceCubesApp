@@ -138,9 +138,8 @@ public struct AccountsListRow: View {
       List {
         AccountDetailHeaderView(
           account: viewModel.account,
-          relationship: .constant(viewModel.relationShip),
-          fields: .constant([]),
-          familiarFollowers: .constant([]),
+          relationship: viewModel.relationShip,
+          fields: [],
           followButtonViewModel: .constant(nil),
           translation: .constant(nil),
           isLoadingTranslation: .constant(false),

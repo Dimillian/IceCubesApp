@@ -12,7 +12,7 @@ struct AccountDetailToolbar: ToolbarContent {
   @Environment(Theme.self) private var theme
   @Environment(Client.self) private var client
   @Environment(RouterPath.self) private var routerPath
-  
+
   let account: Account?
   let displayTitle: Bool
   let isCurrentUser: Bool
@@ -20,7 +20,7 @@ struct AccountDetailToolbar: ToolbarContent {
   @Binding var showBlockConfirmation: Bool
   @Binding var showTranslateView: Bool
   @Binding var isEditingRelationshipNote: Bool
-  
+
   var body: some ToolbarContent {
     ToolbarItem(placement: .principal) {
       if let account = account, displayTitle {
@@ -32,7 +32,7 @@ struct AccountDetailToolbar: ToolbarContent {
         }
       }
     }
-    
+
     ToolbarItemGroup(placement: .navigationBarTrailing) {
       if !isCurrentUser {
         Button {
@@ -116,7 +116,7 @@ private struct CurrentUserMenuItems: View {
   let currentInstance: CurrentInstance
   let routerPath: RouterPath
   let openURL: (URL) -> Void
-  
+
   var body: some View {
     Button {
       routerPath.presentedSheet = .accountEditInfo

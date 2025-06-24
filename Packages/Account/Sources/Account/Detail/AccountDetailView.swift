@@ -21,14 +21,10 @@ public struct AccountDetailView: View {
   @Environment(RouterPath.self) private var routerPath
 
   private let accountId: String
-  private let initialAccount: Account?
 
   @State private var viewState: AccountDetailState = .loading
-  @State private var account: Account?
   @State private var relationship: Relationship?
-  @State private var featuredTags: [FeaturedTag] = []
   @State private var familiarFollowers: [Account] = []
-  @State private var fields: [Account.Field] = []
   @State private var followButtonViewModel: FollowButtonViewModel?
   @State private var translation: Translation?
   @State private var isLoadingTranslation = false
@@ -44,13 +40,14 @@ public struct AccountDetailView: View {
   /// When coming from a URL like a mention tap in a status.
   public init(accountId: String) {
     self.accountId = accountId
-    self.initialAccount = nil
+    _viewState = .init(initialValue: .loading)
   }
 
   /// When the account is already fetched by the parent caller.
   public init(account: Account) {
     self.accountId = account.id
-    self.initialAccount = account
+    _viewState = .init(
+      initialValue: .display(account: account, featuredTags: [], relationships: [], fields: []))
   }
 
   public var body: some View {
@@ -62,25 +59,30 @@ public struct AccountDetailView: View {
         makeHeaderView(proxy: proxy)
           .applyAccountDetailsRowStyle(theme: theme)
           .padding(.bottom, -20)
-        FamiliarFollowersView(familiarFollowers: familiarFollowers)
-          .applyAccountDetailsRowStyle(theme: theme)
-        FeaturedTagsView(featuredTags: featuredTags, accountId: accountId)
-          .applyAccountDetailsRowStyle(theme: theme)
 
-        if let tabManager {
-          makeTabPicker(tabManager: tabManager)
-            .pickerStyle(.segmented)
-            .padding(.layoutPadding)
+        switch viewState {
+        case .display(let account, let featuredTags, _, _):
+          FamiliarFollowersView(familiarFollowers: familiarFollowers)
             .applyAccountDetailsRowStyle(theme: theme)
-            .id("status")
+          FeaturedTagsView(featuredTags: featuredTags, accountId: accountId)
+            .applyAccountDetailsRowStyle(theme: theme)
+          if let tabManager {
+            makeTabPicker(tabManager: tabManager)
+              .pickerStyle(.segmented)
+              .padding(.layoutPadding)
+              .applyAccountDetailsRowStyle(theme: theme)
+              .id("status")
 
-          let fetcher = tabManager.getFetcher(for: tabManager.selectedTab)
-          tabManager.selectedTab.makeView(
-            fetcher: fetcher,
-            client: client,
-            routerPath: routerPath,
-            account: account
-          )
+            let fetcher = tabManager.getFetcher(for: tabManager.selectedTab)
+            tabManager.selectedTab.makeView(
+              fetcher: fetcher,
+              client: client,
+              routerPath: routerPath,
+              account: account
+            )
+          }
+        default:
+          EmptyView()
         }
       }
       .environment(\.defaultMinListRowHeight, 0)
@@ -93,11 +95,6 @@ public struct AccountDetailView: View {
     .onAppear {
       guard reasons != .placeholder else { return }
       isCurrentUser = currentAccount.account?.id == accountId
-
-      if let initialAccount {
-        account = initialAccount
-        viewState = .display(account: initialAccount, featuredTags: [], relationships: [])
-      }
 
       if tabManager == nil {
         tabManager = AccountTabManager(
@@ -178,15 +175,22 @@ public struct AccountDetailView: View {
     .edgesIgnoringSafeArea(.top)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      AccountDetailToolbar(
-        account: account,
-        displayTitle: displayTitle,
-        isCurrentUser: isCurrentUser,
-        relationship: $relationship,
-        showBlockConfirmation: $showBlockConfirmation,
-        showTranslateView: $showTranslateView,
-        isEditingRelationshipNote: $isEditingRelationshipNote
-      )
+      switch viewState {
+      case .display(let account, _, _, _):
+        AccountDetailToolbar(
+          account: account,
+          displayTitle: displayTitle,
+          isCurrentUser: isCurrentUser,
+          relationship: $relationship,
+          showBlockConfirmation: $showBlockConfirmation,
+          showTranslateView: $showTranslateView,
+          isEditingRelationshipNote: $isEditingRelationshipNote
+        )
+      default:
+        ToolbarItem {
+          EmptyView()
+        }
+      }
     }
   }
 
@@ -222,9 +226,8 @@ public struct AccountDetailView: View {
     case .loading:
       AccountDetailHeaderView(
         account: .placeholder(),
-        relationship: $relationship,
-        fields: $fields,
-        familiarFollowers: $familiarFollowers,
+        relationship: relationship,
+        fields: [],
         followButtonViewModel: $followButtonViewModel,
         translation: $translation,
         isLoadingTranslation: $isLoadingTranslation,
@@ -234,12 +237,11 @@ public struct AccountDetailView: View {
       )
       .redacted(reason: .placeholder)
       .allowsHitTesting(false)
-    case .display(let account, _, _):
+    case .display(let account, _, _, let fields):
       AccountDetailHeaderView(
         account: account,
-        relationship: $relationship,
-        fields: $fields,
-        familiarFollowers: $familiarFollowers,
+        relationship: relationship,
+        fields: fields,
         followButtonViewModel: $followButtonViewModel,
         translation: $translation,
         isLoadingTranslation: $isLoadingTranslation,
@@ -282,13 +284,15 @@ extension AccountDetailView {
     do {
       let data = try await fetchAccountData(accountId: accountId, client: client)
 
-      viewState = .display(
-        account: data.account, featuredTags: data.featuredTags, relationships: data.relationships)
-      account = data.account
-      fields = data.account.fields
-      featuredTags = data.featuredTags
+      var featuredTags = data.featuredTags
       featuredTags.sort { $0.statusesCountInt > $1.statusesCountInt }
       relationship = data.relationships.first
+
+      viewState = .display(
+        account: data.account,
+        featuredTags: featuredTags,
+        relationships: data.relationships,
+        fields: data.account.fields)
 
       if let relationship {
         if let existingFollowButtonViewModel = followButtonViewModel {
@@ -305,8 +309,8 @@ extension AccountDetailView {
         }
       }
     } catch {
-      if let account {
-        viewState = .display(account: account, featuredTags: [], relationships: [])
+      if case .display(let account, _, _, _) = viewState {
+        viewState = .display(account: account, featuredTags: [], relationships: [], fields: [])
       } else {
         viewState = .error(error: error)
       }

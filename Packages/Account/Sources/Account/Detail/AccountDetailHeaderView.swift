@@ -25,9 +25,8 @@ struct AccountDetailHeaderView: View {
   @Environment(\.colorScheme) private var colorScheme
 
   let account: Account
-  @Binding var relationship: Relationship?
-  @Binding var fields: [Account.Field]
-  @Binding var familiarFollowers: [Account]
+  let relationship: Relationship?
+  let fields: [Account.Field]
   @Binding var followButtonViewModel: FollowButtonViewModel?
   @Binding var translation: Translation?
   @Binding var isLoadingTranslation: Bool
@@ -54,13 +53,12 @@ struct AccountDetailHeaderView: View {
     }
   }
 
-
   private var accountAvatarView: some View {
     HStack {
       AccountAvatarView(account: account, isCurrentUser: isCurrentUser)
-      
+
       Spacer()
-      
+
       AccountStatsView(account: account, scrollViewProxy: scrollViewProxy)
     }
   }
@@ -68,7 +66,7 @@ struct AccountDetailHeaderView: View {
   private var accountInfoView: some View {
     Group {
       accountAvatarView
-      
+
       AccountInfoView(
         account: account,
         relationship: relationship,
@@ -77,28 +75,21 @@ struct AccountDetailHeaderView: View {
         translation: $translation,
         isLoadingTranslation: $isLoadingTranslation
       )
-      
+
       AccountFieldsView(fields: fields, account: account)
     }
     .padding(.horizontal, .layoutPadding)
     .offset(y: -40)
   }
 
-
-
-
-
-
 }
-
 
 struct AccountDetailHeaderView_Previews: PreviewProvider {
   static var previews: some View {
     AccountDetailHeaderView(
       account: .placeholder(),
-      relationship: .constant(nil),
-      fields: .constant([]),
-      familiarFollowers: .constant([]),
+      relationship: nil,
+      fields: [],
       followButtonViewModel: .constant(nil),
       translation: .constant(nil),
       isLoadingTranslation: .constant(false),
