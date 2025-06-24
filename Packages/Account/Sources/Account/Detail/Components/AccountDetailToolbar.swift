@@ -50,6 +50,7 @@ struct AccountDetailToolbar: ToolbarContent {
         } label: {
           Image(systemName: "arrowshape.turn.up.left")
         }
+        .foregroundStyle(.primary)
       }
 
       Menu {
@@ -85,8 +86,9 @@ struct AccountDetailToolbar: ToolbarContent {
             LocalizedStringKey("accessibility.tabs.profile.options.inputLabel1"),
             LocalizedStringKey("accessibility.tabs.profile.options.inputLabel2"),
           ])
-          .foregroundStyle(theme.tintColor)
       }
+      .foregroundStyle(.primary)
+      .tint(.primary)
       .confirmationDialog("Block User", isPresented: $showBlockConfirmation) {
         if let account = account {
           Button("account.action.block-user-\(account.username)", role: .destructive) {
@@ -101,7 +103,6 @@ struct AccountDetailToolbar: ToolbarContent {
       } message: {
         Text("account.action.block-user-confirmation")
       }
-      .tint(.label)
       #if canImport(_Translation_SwiftUI)
         .addTranslateView(
           isPresented: $showTranslateView, text: account?.note.asRawText ?? "")
