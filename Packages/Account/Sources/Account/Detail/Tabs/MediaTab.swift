@@ -1,9 +1,9 @@
-import SwiftUI
+import DesignSystem
+import Env
 import Models
 import Network
 import StatusKit
-import Env
-import DesignSystem
+import SwiftUI
 
 struct MediaTab: AccountTabProtocol {
   let id = "media"
@@ -11,14 +11,17 @@ struct MediaTab: AccountTabProtocol {
   let accessibilityLabel: LocalizedStringKey = "accessibility.tabs.profile.picker.media"
   let isAvailableForCurrentUser = false
   let isAvailableForOtherUsers = true
-  
-  func createFetcher(accountId: String, client: Client, isCurrentUser: Bool) -> any StatusesFetcher {
+
+  func createFetcher(accountId: String, client: Client, isCurrentUser: Bool) -> any StatusesFetcher
+  {
     MediaTabFetcher(accountId: accountId, client: client, isCurrentUser: isCurrentUser)
   }
-  
-  func makeView(fetcher: any StatusesFetcher, client: Client, routerPath: RouterPath, account: Account?) -> AnyView {
-    AnyView(
-      MediaTabView(fetcher: fetcher as! MediaTabFetcher, client: client, routerPath: routerPath, account: account)
+
+  func makeView(
+    fetcher: any StatusesFetcher, client: Client, routerPath: RouterPath, account: Account?
+  ) -> some View {
+    MediaTabView(
+      fetcher: fetcher as! MediaTabFetcher, client: client, routerPath: routerPath, account: account
     )
   }
 }
@@ -29,7 +32,7 @@ private class MediaTabFetcher: AccountTabFetcher {
   var statusesMedias: [MediaStatus] {
     statuses.filter { !$0.mediaAttachments.isEmpty }.flatMap { $0.asMediaStatus }
   }
-  
+
   override func fetchNewestStatuses(pullToRefresh: Bool) async {
     do {
       statusesState = .loading
@@ -44,17 +47,17 @@ private class MediaTabFetcher: AccountTabFetcher {
           pinned: nil
         )
       )
-      
+
       StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
       updateStatusesState(with: statuses, hasMore: statuses.count >= 20)
     } catch {
       statusesState = .error(error: .noData)
     }
   }
-  
+
   override func fetchNextPage() async throws {
     guard let lastId = statuses.last?.id else { return }
-    
+
     let newStatuses: [Status] = try await client.get(
       endpoint: Accounts.statuses(
         id: accountId,
@@ -66,7 +69,7 @@ private class MediaTabFetcher: AccountTabFetcher {
         pinned: nil
       )
     )
-    
+
     statuses.append(contentsOf: newStatuses)
     StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
     updateStatusesState(with: statuses, hasMore: newStatuses.count >= 20)
@@ -78,9 +81,9 @@ private struct MediaTabView: View {
   let client: Client
   let routerPath: RouterPath
   let account: Account?
-  
+
   @Environment(Theme.self) private var theme
-  
+
   var body: some View {
     Group {
       HStack {
@@ -101,7 +104,7 @@ private struct MediaTabView: View {
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
       #endif
-      
+
       AnyStatusesListView(
         fetcher: fetcher,
         client: client,

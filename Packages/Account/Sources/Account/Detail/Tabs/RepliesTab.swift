@@ -1,8 +1,8 @@
-import SwiftUI
+import Env
 import Models
 import Network
 import StatusKit
-import Env
+import SwiftUI
 
 struct RepliesTab: AccountTabProtocol {
   let id = "replies"
@@ -10,18 +10,19 @@ struct RepliesTab: AccountTabProtocol {
   let accessibilityLabel: LocalizedStringKey = "accessibility.tabs.profile.picker.posts-and-replies"
   let isAvailableForCurrentUser = true
   let isAvailableForOtherUsers = true
-  
-  func createFetcher(accountId: String, client: Client, isCurrentUser: Bool) -> any StatusesFetcher {
+
+  func createFetcher(accountId: String, client: Client, isCurrentUser: Bool) -> any StatusesFetcher
+  {
     RepliesTabFetcher(accountId: accountId, client: client, isCurrentUser: isCurrentUser)
   }
-  
-  func makeView(fetcher: any StatusesFetcher, client: Client, routerPath: RouterPath, account: Account?) -> AnyView {
-    AnyView(
-      AnyStatusesListView(
-        fetcher: fetcher,
-        client: client,
-        routerPath: routerPath
-      )
+
+  func makeView(
+    fetcher: any StatusesFetcher, client: Client, routerPath: RouterPath, account: Account?
+  ) -> some View {
+    AnyStatusesListView(
+      fetcher: fetcher,
+      client: client,
+      routerPath: routerPath
     )
   }
 }
@@ -43,17 +44,17 @@ private class RepliesTabFetcher: AccountTabFetcher {
           pinned: nil
         )
       )
-      
+
       StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
       updateStatusesState(with: statuses, hasMore: statuses.count >= 20)
     } catch {
       statusesState = .error(error: .noData)
     }
   }
-  
+
   override func fetchNextPage() async throws {
     guard let lastId = statuses.last?.id else { return }
-    
+
     let newStatuses: [Status] = try await client.get(
       endpoint: Accounts.statuses(
         id: accountId,
@@ -65,7 +66,7 @@ private class RepliesTabFetcher: AccountTabFetcher {
         pinned: nil
       )
     )
-    
+
     statuses.append(contentsOf: newStatuses)
     StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
     updateStatusesState(with: statuses, hasMore: newStatuses.count >= 20)

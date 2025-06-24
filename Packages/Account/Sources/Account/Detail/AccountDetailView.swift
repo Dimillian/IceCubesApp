@@ -73,13 +73,13 @@ public struct AccountDetailView: View {
               .applyAccountDetailsRowStyle(theme: theme)
               .id("status")
 
-            let fetcher = tabManager.getFetcher(for: tabManager.selectedTab)
-            tabManager.selectedTab.makeView(
-              fetcher: fetcher,
-              client: client,
-              routerPath: routerPath,
-              account: account
-            )
+            AnyView(
+              tabManager.selectedTab.makeView(
+                fetcher: tabManager.getFetcher(for: tabManager.selectedTab),
+                client: client,
+                routerPath: routerPath,
+                account: account
+              ))
           }
         default:
           EmptyView()

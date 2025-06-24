@@ -19,11 +19,9 @@ struct StatusesTab: AccountTabProtocol {
 
   func makeView(
     fetcher: any StatusesFetcher, client: Client, routerPath: RouterPath, account: Account?
-  ) -> AnyView {
-    AnyView(
-      StatusesTabView(
-        fetcher: fetcher as! StatusesTabFetcher, client: client, routerPath: routerPath)
-    )
+  ) -> some View {
+    StatusesTabView(
+      fetcher: fetcher as! StatusesTabFetcher, client: client, routerPath: routerPath)
   }
 }
 
@@ -87,11 +85,11 @@ private class StatusesTabFetcher: AccountTabFetcher {
     StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
     updateStatusesState(with: statuses, hasMore: newStatuses.count >= 20)
   }
-  
+
   override func handleEvent(event: any StreamEvent, currentAccount: CurrentAccount) {
     // Handle pinned posts updates in addition to the base implementation
     super.handleEvent(event: event, currentAccount: currentAccount)
-    
+
     if let event = event as? StreamEventDelete {
       pinned.removeAll(where: { $0.id == event.status })
     } else if let event = event as? StreamEventStatusUpdate {

@@ -290,7 +290,9 @@ extension NotificationsListView {
         await account.fetchFollowerRequests()
       }
     } catch {
-      viewState = .error(error: error)
+      if !Task.isCancelled {
+        viewState = .error(error: error)
+      }
     }
   }
 
