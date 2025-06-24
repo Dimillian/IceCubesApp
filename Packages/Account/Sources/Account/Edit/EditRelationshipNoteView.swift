@@ -13,14 +13,16 @@ public struct EditRelationshipNoteView: View {
   let relationship: Relationship?
   let onSave: () -> Void
   
-  @State private var viewModel = EditRelationshipNoteViewModel()
+  @State private var note: String = ""
+  @State private var isSaving: Bool = false
+  @State private var saveError: Bool = false
 
   public var body: some View {
     NavigationStack {
       Form {
         Section("account.relation.note.label") {
           TextField(
-            "account.relation.note.edit.placeholder", text: $viewModel.note, axis: .vertical
+            "account.relation.note.edit.placeholder", text: $note, axis: .vertical
           )
           .frame(minHeight: 150, maxHeight: 150, alignment: .top)
         }
@@ -39,15 +41,13 @@ public struct EditRelationshipNoteView: View {
       }
       .alert(
         "account.relation.note.edit.error.save.title",
-        isPresented: $viewModel.saveError,
+        isPresented: $saveError,
         actions: {
           Button("alert.button.ok", action: {})
         }, message: { Text("account.relation.note.edit.error.save.message") }
       )
       .task {
-        viewModel.client = client
-        viewModel.relatedAccountId = accountId
-        viewModel.note = relationship?.note ?? ""
+        note = relationship?.note ?? ""
       }
     }
   }
@@ -63,17 +63,32 @@ public struct EditRelationshipNoteView: View {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         Task {
-          await viewModel.save()
+          await save()
           onSave()
           dismiss()
         }
       } label: {
-        if viewModel.isSaving {
+        if isSaving {
           ProgressView()
         } else {
           Text("action.save").bold()
         }
       }
+    }
+  }
+}
+
+extension EditRelationshipNoteView {
+  private func save() async {
+    isSaving = true
+    do {
+      _ = try await client.post(
+        endpoint: Accounts.relationshipNote(
+          id: accountId, json: RelationshipNoteData(note: note)))
+      isSaving = false
+    } catch {
+      isSaving = false
+      saveError = true
     }
   }
 }
