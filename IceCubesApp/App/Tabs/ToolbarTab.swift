@@ -15,36 +15,13 @@ struct ToolbarTab: ToolbarContent {
 
   var body: some ToolbarContent {
     if !isSecondaryColumn {
-      if horizontalSizeClass == .regular {
-        ToolbarItem(placement: .topBarLeading) {
-          if UIDevice.current.userInterfaceIdiom == .pad
-            || UIDevice.current.userInterfaceIdiom == .mac
-          {
-            Button {
-              withAnimation {
-                userPreferences.isSidebarExpanded.toggle()
-              }
-            } label: {
-              if userPreferences.isSidebarExpanded {
-                Image(systemName: "sidebar.squares.left")
-              } else {
-                Image(systemName: "sidebar.left")
-              }
-            }
-          }
-        }
-      }
       statusEditorToolbarItem(
         routerPath: routerPath,
         visibility: userPreferences.postVisibility)
-      if UIDevice.current.userInterfaceIdiom != .pad
-        || (UIDevice.current.userInterfaceIdiom == .pad && horizontalSizeClass == .compact)
-      {
-        ToolbarItem(placement: .navigationBarLeading) {
-          AppAccountsSelectorView(
-            routerPath: routerPath,
-            avatarConfig: theme.avatarShape == .circle ? .badge : .badgeRounded)
-        }
+      ToolbarItem(placement: .navigationBarLeading) {
+        AppAccountsSelectorView(
+          routerPath: routerPath,
+          avatarConfig: theme.avatarShape == .circle ? .badge : .badgeRounded)
       }
     }
     if UIDevice.current.userInterfaceIdiom == .pad && horizontalSizeClass == .regular {

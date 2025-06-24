@@ -24,29 +24,30 @@ extension StatusEditor {
     #else
       @Environment(\.dismiss) private var dismiss
     #endif
+    
+    var isSendingDisabled: Bool {
+      !mainSEVM.canPost || mainSEVM.isPosting
+    }
 
     var body: some ToolbarContent {
-      if !mainSEVM.mode.isInShareExtension {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            isDraftsSheetDisplayed = true
-          } label: {
-            Image(systemName: "pencil.and.list.clipboard")
-          }
-          .accessibilityLabel("accessibility.editor.button.drafts")
-          .sheet(isPresented: $isDraftsSheetDisplayed) {
-            if UIDevice.current.userInterfaceIdiom == .phone {
-              draftsListView
-            } else {
-              draftsListView
-            }
+      ToolbarItemGroup(placement: .topBarTrailing) {
+        Button {
+          isDraftsSheetDisplayed = true
+        } label: {
+          Image(systemName: "pencil.and.list.clipboard")
+        }
+        .accessibilityLabel("accessibility.editor.button.drafts")
+        .sheet(isPresented: $isDraftsSheetDisplayed) {
+          if UIDevice.current.userInterfaceIdiom == .phone {
+            draftsListView
+          } else {
+            draftsListView
           }
         }
-      }
 
-      ToolbarItem(placement: .navigationBarTrailing) {
         Button {
           Task {
+            guard !isSendingDisabled else { return }
             mainSEVM.evaluateLanguages()
             if preferences.autoDetectPostLanguage,
               mainSEVM.languageConfirmationDialogLanguages != nil
@@ -57,11 +58,13 @@ extension StatusEditor {
             }
           }
         } label: {
-          Image(systemName: "paperplane.fill")
+          Image(systemName: "paperplane")
+            .symbolVariant(isSendingDisabled ? .none : .fill)
+            .tint(isSendingDisabled ? .secondary : theme.tintColor)
             .bold()
         }
+        .buttonBorderShape(.circle)
         .buttonStyle(.borderedProminent)
-        .disabled(!mainSEVM.canPost || mainSEVM.isPosting)
         .keyboardShortcut(.return, modifiers: .command)
         .confirmationDialog(
           "", isPresented: $isLanguageConfirmPresented,
@@ -83,6 +86,7 @@ extension StatusEditor {
         } label: {
           Image(systemName: "xmark")
         }
+        .tint(.red)
         .keyboardShortcut(.cancelAction)
         .confirmationDialog(
           "",
@@ -119,7 +123,7 @@ extension StatusEditor {
             if let scene = UIApplication.shared.connectedScenes.first(where: {
               $0.activationState == .foregroundActive
             }) as? UIWindowScene {
-              SKStoreReviewController.requestReview(in: scene)
+              AppStore.requestReview(in: scene)
             }
             preferences.requestedReview = true
           }

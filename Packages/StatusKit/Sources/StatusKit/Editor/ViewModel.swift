@@ -7,6 +7,10 @@ import Network
 import PhotosUI
 import SwiftUI
 
+#if !targetEnvironment(macCatalyst)
+  import FoundationModels
+#endif
+
 extension StatusEditor {
   @MainActor
   @Observable public class ViewModel: NSObject, Identifiable {
@@ -172,11 +176,17 @@ extension StatusEditor {
 
     init(mode: Mode) {
       self.mode = mode
+
+      #if !targetEnvironment(macCatalyst)
+        if #available(iOS 26.0, *), Assistant.isAvailable {
+          Assistant.prewarm()
+        }
+      #endif
     }
 
     func setInitialLanguageSelection(preference: String?) {
       switch mode {
-      case let .edit(status), let .quote(status):
+      case .edit(let status), .quote(let status):
         selectedLanguage = status.language
       default:
         break
@@ -241,7 +251,7 @@ extension StatusEditor {
           if let postStatus {
             StreamWatcher.shared.emmitPostEvent(for: postStatus)
           }
-        case let .edit(status):
+        case .edit(let status):
           postStatus = try await client.put(
             endpoint: Statuses.editStatus(id: status.id, json: data))
           if let postStatus {
@@ -295,6 +305,9 @@ extension StatusEditor {
       string.mutableString.insert(text, at: inRange.location)
       statusText = string
       selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
+      if let textView {
+        textView.delegate?.textViewDidChange?(textView)
+      }
     }
 
     func replaceTextWith(text: String) {
@@ -304,24 +317,24 @@ extension StatusEditor {
 
     func prepareStatusText() {
       switch mode {
-      case let .new(text, visibility):
+      case .new(let text, let visibility):
         if let text {
           statusText = .init(string: text)
           selectedRange = .init(location: text.utf16.count, length: 0)
         }
         self.visibility = visibility
-      case let .shareExtension(items):
+      case .shareExtension(let items):
         itemsProvider = items
         visibility = .pub
         processItemsProvider(items: items)
-      case let .imageURL(urls, visibility):
+      case .imageURL(let urls, let visibility):
         Task {
           for container in await Self.makeImageContainer(from: urls) {
             prepareToPost(for: container)
           }
         }
         self.visibility = visibility
-      case let .replyTo(status):
+      case .replyTo(let status):
         var mentionString = ""
         if (status.reblog?.account.acct ?? status.account.acct) != currentAccount?.acct {
           mentionString = "@\(status.reblog?.account.acct ?? status.account.acct)"
@@ -346,11 +359,11 @@ extension StatusEditor {
           spoilerOn = true
           spoilerText = status.spoilerText.asRawText
         }
-      case let .mention(account, visibility):
+      case .mention(let account, let visibility):
         statusText = .init(string: "@\(account.acct) ")
         self.visibility = visibility
         selectedRange = .init(location: statusText.string.utf16.count, length: 0)
-      case let .edit(status):
+      case .edit(let status):
         var rawText = status.content.asRawText.escape()
         for mention in status.mentions {
           rawText = rawText.replacingOccurrences(
@@ -371,14 +384,14 @@ extension StatusEditor {
             error: nil
           )
         }
-      case let .quote(status):
+      case .quote(let status):
         embeddedStatus = status
         if let url = embeddedStatusURL {
           statusText = .init(
             string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
           selectedRange = .init(location: 0, length: 0)
         }
-      case let .quoteLink(link):
+      case .quoteLink(let link):
         statusText = .init(string: "\n\n\(link)")
         selectedRange = .init(location: 0, length: 0)
       }
@@ -668,19 +681,45 @@ extension StatusEditor {
 
     func selectHashtagSuggestion(tag: String) {
       if let range = currentSuggestionRange {
+        var tag = tag
+        if tag.hasPrefix("#") {
+          tag.removeFirst()
+        }
         replaceTextWith(text: "#\(tag) ", inRange: range)
       }
     }
 
-    // MARK: - OpenAI Prompt
+    // MARK: - Assistant Prompt
 
-    func runOpenAI(prompt: OpenAIClient.Prompt) async {
-      do {
-        let client = OpenAIClient()
-        let response = try await client.request(prompt)
-        backupStatusText = statusText
-        replaceTextWith(text: response.trimmedText)
-      } catch {}
+    @available(iOS 26.0, *)
+    func runAssistant(prompt: AIPrompt) async {
+      #if !targetEnvironment(macCatalyst)
+        let assistant = Assistant()
+        var newStream: LanguageModelSession.ResponseStream<String>?
+        switch prompt {
+        case .correct:
+          newStream = await assistant.correct(message: statusText.string)
+        case .emphasize:
+          newStream = await assistant.emphasize(message: statusText.string)
+        case .fit:
+          newStream = await assistant.shorten(message: statusText.string)
+        case .rewriteWithTone(let tone):
+          newStream = await assistant.adjustTone(message: statusText.string, to: tone)
+        }
+
+        if let newStream {
+          backupStatusText = statusText
+          do {
+            for try await content in newStream {
+              replaceTextWith(text: content)
+            }
+          } catch {
+            if let backupStatusText {
+              replaceTextWith(text: backupStatusText.string)
+            }
+          }
+        }
+      #endif
     }
 
     // MARK: - Media related function
@@ -1029,5 +1068,3 @@ extension StatusEditor.ViewModel: UITextPasteDelegate {
     }
   }
 }
-
-extension PhotosPickerItem: @unchecked @retroactive Sendable {}

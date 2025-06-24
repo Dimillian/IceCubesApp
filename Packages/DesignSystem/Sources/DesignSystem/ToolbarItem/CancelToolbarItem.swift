@@ -7,8 +7,12 @@ public struct CancelToolbarItem: ToolbarContent {
 
   public var body: some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
-      Button("action.cancel", role: .cancel, action: { dismiss() })
-        .keyboardShortcut(.cancelAction)
+      Button(role: .cancel) {
+        dismiss()
+      } label: {
+        Label("action.cancel", systemImage: "xmark")
+      }
+      .tint(.red)
     }
   }
 }

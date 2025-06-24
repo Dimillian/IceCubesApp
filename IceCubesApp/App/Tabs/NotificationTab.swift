@@ -40,12 +40,13 @@ struct NotificationsTab: View {
           }
           ToolbarTab(routerPath: $routerPath)
         }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .id(client.id)
     }
     .onAppear {
       routerPath.client = client
-      clearNotifications()
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        clearNotifications()
+      }
     }
     .withSafariRouter()
     .environment(routerPath)
