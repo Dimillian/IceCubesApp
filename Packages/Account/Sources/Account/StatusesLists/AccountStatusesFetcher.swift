@@ -6,41 +6,18 @@ import SwiftUI
 
 @MainActor
 @Observable
-public class AccountStatusesListViewModel: StatusesFetcher {
-  public enum Mode {
-    case bookmarks, favorites
-
-    var title: LocalizedStringKey {
-      switch self {
-      case .bookmarks:
-        "accessibility.tabs.profile.picker.bookmarks"
-      case .favorites:
-        "accessibility.tabs.profile.picker.favorites"
-      }
-    }
-
-    func endpoint(sinceId: String?) -> Endpoint {
-      switch self {
-      case .bookmarks:
-        Accounts.bookmarks(sinceId: sinceId)
-      case .favorites:
-        Accounts.favorites(sinceId: sinceId)
-      }
-    }
-  }
-
-  let mode: Mode
-  public var statusesState: StatusesState = .loading
+class AccountStatusesFetcher: StatusesFetcher {
+  let mode: AccountStatusesListView.Mode
+  var statusesState: StatusesState = .loading
   var statuses: [Status] = []
   var nextPage: LinkHandler?
-
   var client: Client?
 
-  init(mode: Mode) {
+  init(mode: AccountStatusesListView.Mode) {
     self.mode = mode
   }
 
-  public func fetchNewestStatuses(pullToRefresh _: Bool) async {
+  func fetchNewestStatuses(pullToRefresh: Bool) async {
     guard let client else { return }
     statusesState = .loading
     do {
@@ -54,7 +31,7 @@ public class AccountStatusesListViewModel: StatusesFetcher {
     }
   }
 
-  public func fetchNextPage() async throws {
+  func fetchNextPage() async throws {
     guard let client, let nextId = nextPage?.maxId else { return }
     var newStatuses: [Status] = []
     (newStatuses, nextPage) = try await client.getWithLink(endpoint: mode.endpoint(sinceId: nextId))
@@ -65,7 +42,7 @@ public class AccountStatusesListViewModel: StatusesFetcher {
       nextPageState: nextPage?.maxId != nil ? .hasNextPage : .none)
   }
 
-  public func statusDidAppear(status _: Status) {}
+  func statusDidAppear(status: Status) {}
 
-  public func statusDidDisappear(status _: Status) {}
+  func statusDidDisappear(status: Status) {}
 }
