@@ -77,6 +77,7 @@ public struct NotificationsListView: View {
           } label: {
             Label("notifications.navigation-title", systemImage: "bell.fill")
           }
+          .tint(.label)
           Divider()
           ForEach(Notification.NotificationType.allCases, id: \.self) { type in
             Button {
@@ -91,6 +92,7 @@ public struct NotificationsListView: View {
                 type.icon(isPrivate: false)
               }
             }
+            .tint(.label)
           }
           if currentInstance.isNotificationsFilterSupported {
             Divider()
@@ -99,6 +101,7 @@ public struct NotificationsListView: View {
             } label: {
               Label("notifications.content-filter.title", systemImage: "line.3.horizontal.decrease")
             }
+            .tint(.label)
           }
           Divider()
           Button {
@@ -106,6 +109,7 @@ public struct NotificationsListView: View {
           } label: {
             Label("Direct Messages", systemImage: "message")
           }
+          .tint(.label)
         }
       }
     }

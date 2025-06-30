@@ -89,41 +89,42 @@ extension StatusEditor {
       .scrollTargetLayout()
     }
 
+    @ViewBuilder
     private func makeMediaItem(at index: Int) -> some View {
       let container = viewModel.mediaContainers[index]
 
-      return Menu {
-        makeImageMenu(container: container)
-      } label: {
-        RoundedRectangle(cornerRadius: 8).fill(.clear)
-          .overlay {
-            if let attachement = container.mediaAttachment {
-              makeRemoteMediaView(mediaAttachement: attachement)
-            } else if container.image != nil {
-              makeLocalImageView(container: container)
-            } else if let error = container.error as? ServerError {
-              makeErrorView(error: error)
-            } else {
-              placeholderView
-            }
+      RoundedRectangle(cornerRadius: 8)
+        .fill(.clear)
+        .overlay {
+          if let attachement = container.mediaAttachment {
+            makeRemoteMediaView(mediaAttachement: attachement)
+          } else if container.image != nil {
+            makeLocalImageView(container: container)
+          } else if let error = container.error as? ServerError {
+            makeErrorView(error: error)
+          } else {
+            placeholderView
           }
-      }
-      .alert("alert.error", isPresented: $isErrorDisplayed) {
-        Button("Ok", action: {})
-      } message: {
-        Text(container.error?.localizedDescription ?? "")
-      }
-      .overlay(alignment: .bottomTrailing) {
-        makeAltMarker(container: container)
-      }
-      .overlay(alignment: .topTrailing) {
-        makeDiscardMarker(container: container)
-      }
-      .clipShape(RoundedRectangle(cornerRadius: 8))
-      .frame(minWidth: count == 1 ? nil : containerWidth, maxWidth: 600)
-      .id(container.id)
-      .matchedGeometryEffect(id: container.id, in: mediaSpace, anchor: .leading)
-      .matchedGeometryEffect(id: index, in: mediaSpace, anchor: .leading)
+        }
+        .contextMenu {
+          makeImageMenu(container: container)
+        }
+        .alert("alert.error", isPresented: $isErrorDisplayed) {
+          Button("Ok", action: {})
+        } message: {
+          Text(container.error?.localizedDescription ?? "")
+        }
+        .overlay(alignment: .bottomTrailing) {
+          makeAltMarker(container: container)
+        }
+        .overlay(alignment: .topTrailing) {
+          makeDiscardMarker(container: container)
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .frame(minWidth: count == 1 ? nil : containerWidth, maxWidth: 600)
+        .id(container.id)
+        .matchedGeometryEffect(id: container.id, in: mediaSpace, anchor: .leading)
+        .matchedGeometryEffect(id: index, in: mediaSpace, anchor: .leading)
     }
 
     private func makeLocalImageView(container: MediaContainer) -> some View {
@@ -204,30 +205,56 @@ extension StatusEditor {
       }
     }
 
+    @ViewBuilder
     private func makeAltMarker(container: MediaContainer) -> some View {
-      Button {
-        editingMediaContainer = container
-      } label: {
-        Text("status.image.alt-text.abbreviation")
-          .font(.caption2)
+      if #available(iOS 26.0, *) {
+        Button {
+          editingMediaContainer = container
+        } label: {
+          Text("status.image.alt-text.abbreviation")
+            .font(.caption2)
+            .padding(4)
+        }
+        .buttonStyle(.glass)
+        .padding()
+      } else {
+        Button {
+          editingMediaContainer = container
+        } label: {
+          Text("status.image.alt-text.abbreviation")
+            .font(.caption2)
+        }
+        .padding(8)
+        .background(.thinMaterial)
+        .cornerRadius(8)
+        .padding(4)
       }
-      .padding(8)
-      .background(.thinMaterial)
-      .cornerRadius(8)
-      .padding(4)
     }
 
+    @ViewBuilder
     private func makeDiscardMarker(container: MediaContainer) -> some View {
-      Button(role: .destructive) {
-        deleteAction(container: container)
-      } label: {
-        Image(systemName: "xmark")
-          .font(.caption2)
-          .foregroundStyle(.tint)
-          .padding(8)
-          .background(Circle().fill(.thinMaterial))
+      if #available(iOS 26.0, *) {
+        Button(role: .destructive) {
+          deleteAction(container: container)
+        } label: {
+          Image(systemName: "xmark")
+            .font(.caption2)
+            .padding(4)
+        }
+        .buttonStyle(.glass)
+        .padding()
+      } else {
+        Button(role: .destructive) {
+          deleteAction(container: container)
+        } label: {
+          Image(systemName: "xmark")
+            .font(.caption2)
+            .foregroundStyle(.tint)
+            .padding(8)
+            .background(Circle().fill(.thinMaterial))
+        }
+        .padding(4)
       }
-      .padding(4)
     }
 
     private func deleteAction(container: MediaContainer) {

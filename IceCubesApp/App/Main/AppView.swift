@@ -5,25 +5,25 @@ import DesignSystem
 import Env
 import KeychainSwift
 import MediaUI
+import Models
 import Network
 import RevenueCat
 import StatusKit
+import SwiftData
 import SwiftUI
 import Timeline
-import Models
-import SwiftData
 
 @MainActor
 struct AppView: View {
   @Environment(\.modelContext) private var context
+  @Environment(\.openWindow) var openWindow
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
   @Environment(CurrentAccount.self) private var currentAccount
-
-  @Environment(\.openWindow) var openWindow
-  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
   @Binding var selectedTab: AppTab
   @Binding var appRouterPath: RouterPath
@@ -33,7 +33,7 @@ struct AppView: View {
   @State var timeline: TimelineFilter = .home
 
   @AppStorage("timeline_pinned_filters") private var pinnedFilters: [TimelineFilter] = []
-  
+
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
@@ -104,7 +104,8 @@ struct AppView: View {
         TabSection(section.title) {
           if section == .localTimeline {
             ForEach(localTimelines) { timeline in
-              let tab = AppTab.anyTimelineFilter(filter: .remoteLocal(server: timeline.instance, filter: .local))
+              let tab = AppTab.anyTimelineFilter(
+                filter: .remoteLocal(server: timeline.instance, filter: .local))
               Tab(value: tab) {
                 tab.makeContentView(
                   homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
@@ -115,9 +116,11 @@ struct AppView: View {
             }
           } else if section == .tagGroup {
             ForEach(tagGroups) { tagGroup in
-              let tab = AppTab.anyTimelineFilter(filter: TimelineFilter.tagGroup(title: tagGroup.title,
-                                                                                 tags: tagGroup.tags,
-                                                                                 symbolName: tagGroup.symbolName))
+              let tab = AppTab.anyTimelineFilter(
+                filter: TimelineFilter.tagGroup(
+                  title: tagGroup.title,
+                  tags: tagGroup.tags,
+                  symbolName: tagGroup.symbolName))
               Tab(value: tab) {
                 tab.makeContentView(
                   homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
