@@ -28,7 +28,7 @@ struct ConversationInputView: View {
           textField
           sendButton
             .buttonBorderShape(.circle)
-            .buttonStyle(.glass)
+            .buttonStyle(.glassProminent)
         }
         .padding(8)
       }

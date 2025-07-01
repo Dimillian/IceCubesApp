@@ -45,32 +45,13 @@ extension StatusEditor {
           }
         }
 
-        Button {
-          Task {
-            guard !isSendingDisabled else { return }
-            mainSEVM.evaluateLanguages()
-            if preferences.autoDetectPostLanguage,
-              mainSEVM.languageConfirmationDialogLanguages != nil
-            {
-              isLanguageConfirmPresented = true
-            } else {
-              await postAllStatus()
-            }
-          }
-        } label: {
-          Image(systemName: "paperplane")
-            .symbolVariant(isSendingDisabled ? .none : .fill)
-            .tint(isSendingDisabled ? .secondary : theme.tintColor)
-            .bold()
+        if #available(iOS 26, *) {
+          sendButton
+            .buttonStyle(.glassProminent)
+        } else {
+          sendButton
+            .buttonStyle(.borderedProminent)
         }
-        .buttonBorderShape(.circle)
-        .buttonStyle(.borderedProminent)
-        .keyboardShortcut(.return, modifiers: .command)
-        .confirmationDialog(
-          "", isPresented: $isLanguageConfirmPresented,
-          actions: {
-            languageConfirmationDialog
-          })
       }
 
       ToolbarItem(placement: .navigationBarLeading) {
@@ -109,6 +90,34 @@ extension StatusEditor {
           }
         )
       }
+    }
+    
+    private var sendButton: some View {
+      Button {
+        Task {
+          guard !isSendingDisabled else { return }
+          mainSEVM.evaluateLanguages()
+          if preferences.autoDetectPostLanguage,
+            mainSEVM.languageConfirmationDialogLanguages != nil
+          {
+            isLanguageConfirmPresented = true
+          } else {
+            await postAllStatus()
+          }
+        }
+      } label: {
+        Image(systemName: "paperplane")
+          .symbolVariant(isSendingDisabled ? .none : .fill)
+          .tint(isSendingDisabled ? .secondary : theme.tintColor)
+          .bold()
+      }
+      .buttonBorderShape(.circle)
+      .keyboardShortcut(.return, modifiers: .command)
+      .confirmationDialog(
+        "", isPresented: $isLanguageConfirmPresented,
+        actions: {
+          languageConfirmationDialog
+        })
     }
 
     @discardableResult
