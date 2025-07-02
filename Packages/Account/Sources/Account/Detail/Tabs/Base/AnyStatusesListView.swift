@@ -49,8 +49,8 @@ struct AnyStatusesListView: View {
       }
       .listRowBackground(theme.primaryBackgroundColor)
       .listRowSeparator(.hidden)
-    case let .displayWithGaps(items, nextPageState):
-      Text("Gap loading not supported in this view")
+    case .displayWithGaps:
+      EmptyView()
     }
   }
   

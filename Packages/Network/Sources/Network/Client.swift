@@ -5,8 +5,9 @@ import OSLog
 import Observation
 import SwiftUI
 import os
-
-@Observable public final class Client: Equatable, Identifiable, Hashable, @unchecked Sendable {
+  
+@Observable
+public final class Client: Equatable, Identifiable, Hashable, Sendable {
   public static func == (lhs: Client, rhs: Client) -> Bool {
     let lhsToken = lhs.critical.withLock { $0.oauthToken }
     let rhsToken = rhs.critical.withLock { $0.oauthToken }
