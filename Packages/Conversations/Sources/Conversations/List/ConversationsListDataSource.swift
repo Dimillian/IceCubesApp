@@ -1,6 +1,6 @@
 import Foundation
 import Models
-import Network
+import NetworkClient
 
 @MainActor
 public final class ConversationsListDataSource {

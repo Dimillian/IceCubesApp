@@ -2,7 +2,7 @@ import Account
 import DesignSystem
 import EmojiText
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor

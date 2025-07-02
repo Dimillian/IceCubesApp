@@ -1,6 +1,6 @@
 import Foundation
 import Models
-import Network
+import NetworkClient
 
 protocol TimelineStatusFetching: Sendable {
   func fetchFirstPage(

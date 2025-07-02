@@ -3,7 +3,7 @@ import AppIntents
 import Env
 import Foundation
 import Models
-import Network
+import NetworkClient
 import Timeline
 
 public struct ListEntity: Identifiable, AppEntity {

@@ -3,7 +3,7 @@ import CryptoKit
 import Foundation
 import KeychainSwift
 import Models
-import Network
+import NetworkClient
 import Observation
 import SwiftUI
 import UserNotifications

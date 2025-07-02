@@ -1,5 +1,5 @@
 import SwiftUI
-import Network
+import NetworkClient
 
 struct TimelineToolbarTitleView: ToolbarContent {
   @Environment(Client.self) private var client

@@ -1,4 +1,4 @@
-import Network
+import NetworkClient
 import SwiftUI
 import Testing
 import XCTest

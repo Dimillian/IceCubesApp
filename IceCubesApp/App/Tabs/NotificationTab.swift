@@ -2,7 +2,7 @@ import AppAccount
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import Notifications
 import SwiftUI
 import Timeline

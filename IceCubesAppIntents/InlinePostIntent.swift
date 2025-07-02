@@ -3,7 +3,7 @@ import AppIntents
 import Env
 import Foundation
 import Models
-import Network
+import NetworkClient
 
 enum PostVisibility: String, AppEnum {
   case direct, priv, unlisted, pub

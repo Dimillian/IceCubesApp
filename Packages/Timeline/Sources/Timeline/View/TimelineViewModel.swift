@@ -1,6 +1,6 @@
 import Env
 import Models
-import Network
+import NetworkClient
 import Observation
 import StatusKit
 import SwiftUI

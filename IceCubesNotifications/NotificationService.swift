@@ -4,7 +4,7 @@ import Env
 import Intents
 import KeychainSwift
 import Models
-import Network
+import NetworkClient
 import Notifications
 import UIKit
 import UserNotifications

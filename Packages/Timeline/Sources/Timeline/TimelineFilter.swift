@@ -1,6 +1,6 @@
 import Foundation
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable, Sendable {

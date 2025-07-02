@@ -17,7 +17,7 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(name: "Network", path: "../Network"),
+    .package(name: "NetworkClient", path: "../NetworkClient"),
     .package(name: "Models", path: "../Models"),
     .package(name: "Env", path: "../Env"),
     .package(name: "StatusKit", path: "../StatusKit"),
@@ -27,7 +27,7 @@ let package = Package(
     .target(
       name: "Notifications",
       dependencies: [
-        .product(name: "Network", package: "Network"),
+        .product(name: "NetworkClient", package: "NetworkClient"),
         .product(name: "Models", package: "Models"),
         .product(name: "Env", package: "Env"),
         .product(name: "StatusKit", package: "StatusKit"),

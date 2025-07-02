@@ -1,7 +1,7 @@
 import DesignSystem
 import Env
 import Foundation
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor

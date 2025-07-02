@@ -3,7 +3,7 @@ import DesignSystem
 import Env
 import Explore
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor

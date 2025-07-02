@@ -1,6 +1,6 @@
 import SwiftUI
 import StatusKit
-import Network
+import NetworkClient
 import Env
 import Models
 import DesignSystem

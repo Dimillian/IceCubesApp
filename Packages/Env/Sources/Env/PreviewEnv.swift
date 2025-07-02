@@ -1,4 +1,4 @@
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor

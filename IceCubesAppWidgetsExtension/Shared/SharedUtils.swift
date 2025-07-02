@@ -1,7 +1,7 @@
 import AppAccount
 import Foundation
 import Models
-import Network
+import NetworkClient
 import StatusKit
 import Timeline
 import UIKit

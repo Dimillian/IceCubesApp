@@ -5,7 +5,7 @@ import DesignSystem
 import Env
 import KeychainSwift
 import MediaUI
-import Network
+import NetworkClient
 import RevenueCat
 import StatusKit
 import SwiftUI

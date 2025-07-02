@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-  name: "Network",
+  name: "NetworkClient",
   defaultLocalization: "en",
   platforms: [
     .iOS(.v18),
@@ -12,8 +12,8 @@ let package = Package(
   ],
   products: [
     .library(
-      name: "Network",
-      targets: ["Network"]
+      name: "NetworkClient",
+      targets: ["NetworkClient"]
     )
   ],
   dependencies: [
@@ -21,7 +21,7 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "Network",
+      name: "NetworkClient",
       dependencies: [
         .product(name: "Models", package: "Models")
       ],
@@ -30,8 +30,8 @@ let package = Package(
       ]
     ),
     .testTarget(
-      name: "NetworkTests",
-      dependencies: ["Network"]
+      name: "NetworkClientTests",
+      dependencies: ["NetworkClient"]
     ),
   ]
 )

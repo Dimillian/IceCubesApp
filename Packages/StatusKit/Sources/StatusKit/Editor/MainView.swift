@@ -3,7 +3,7 @@ import DesignSystem
 import EmojiText
 import Env
 import Models
-import Network
+import NetworkClient
 import NukeUI
 import PhotosUI
 import StoreKit

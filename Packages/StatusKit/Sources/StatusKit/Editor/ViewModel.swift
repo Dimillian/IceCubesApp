@@ -3,7 +3,7 @@ import DesignSystem
 import Env
 import Models
 import NaturalLanguage
-import Network
+import NetworkClient
 import PhotosUI
 import SwiftUI
 

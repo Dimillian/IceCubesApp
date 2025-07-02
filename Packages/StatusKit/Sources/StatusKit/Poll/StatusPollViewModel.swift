@@ -1,6 +1,6 @@
 import Combine
 import Models
-import Network
+import NetworkClient
 import Observation
 import SwiftUI
 

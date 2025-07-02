@@ -2,7 +2,7 @@ import DesignSystem
 import Env
 import MediaUI
 import Models
-import Network
+import NetworkClient
 import NukeUI
 import SwiftUI
 

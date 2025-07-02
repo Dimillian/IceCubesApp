@@ -1,5 +1,5 @@
 import Models
-import Network
+import NetworkClient
 import Testing
 import XCTest
 

@@ -1,5 +1,5 @@
 import Foundation
-import Network
+import NetworkClient
 import SwiftUI
 #if !targetEnvironment(macCatalyst)
 import FoundationModels

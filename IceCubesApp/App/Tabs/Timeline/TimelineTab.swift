@@ -3,7 +3,7 @@ import Combine
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftData
 import SwiftUI
 import Timeline

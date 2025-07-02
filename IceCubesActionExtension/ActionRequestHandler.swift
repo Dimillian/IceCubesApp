@@ -7,7 +7,7 @@
 
 import MobileCoreServices
 import Models
-import Network
+import NetworkClient
 import UIKit
 import UniformTypeIdentifiers
 
