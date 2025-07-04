@@ -33,34 +33,42 @@ struct ConversationMessageView: View {
               routerPath.navigate(to: .accountDetailWithAccount(account: message.account))
             }
         }
-        VStack(alignment: .leading) {
-          EmojiTextApp(message.content, emojis: message.emojis)
-            .font(.scaledBody)
-            .foregroundColor(theme.labelColor)
-            .emojiText.size(Font.scaledBodyFont.emojiSize)
-            .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
-            .padding(6)
-            .environment(
-              \.openURL,
-              OpenURLAction { url in
-                routerPath.handleStatus(status: message, url: url)
-              })
-        }
-        #if os(visionOS)
-          .background(isOwnMessage ? Material.ultraThick : Material.regular)
-        #else
-          .background(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor)
-        #endif
-        .cornerRadius(8)
-        .padding(.leading, isOwnMessage ? 24 : 0)
-        .padding(.trailing, isOwnMessage ? 0 : 24)
-        .overlay {
-          if isLiked, message.account.id != currentAccount.account?.id {
-            likeView
+        if #available(iOS 26.0, *) {
+          textView
+          #if os(visionOS)
+            .background(isOwnMessage ? Material.ultraThick : Material.regular)
+          #else
+            .glassEffect(.regular.tint(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor),
+                          in: RoundedRectangle(cornerRadius: 8))
+          #endif
+          .padding(.leading, isOwnMessage ? 24 : 0)
+          .padding(.trailing, isOwnMessage ? 0 : 24)
+          .overlay {
+            if isLiked, message.account.id != currentAccount.account?.id {
+              likeView
+            }
           }
-        }
-        .contextMenu {
-          contextMenu
+          .contextMenu {
+            contextMenu
+          }
+        } else {
+          textView
+          #if os(visionOS)
+            .background(isOwnMessage ? Material.ultraThick : Material.regular)
+          #else
+            .background(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor)
+          #endif
+          .cornerRadius(8)
+          .padding(.leading, isOwnMessage ? 24 : 0)
+          .padding(.trailing, isOwnMessage ? 0 : 24)
+          .overlay {
+            if isLiked, message.account.id != currentAccount.account?.id {
+              likeView
+            }
+          }
+          .contextMenu {
+            contextMenu
+          }
         }
 
         if !isOwnMessage {
@@ -183,6 +191,24 @@ struct ConversationMessageView: View {
           .offset(x: -16, y: -7)
         Spacer()
       }
+    }
+  }
+  
+  @ViewBuilder
+  private var textView: some View {
+    let isOwnMessage = message.account.id == currentAccount.account?.id
+    VStack(alignment: .leading) {
+      EmojiTextApp(message.content, emojis: message.emojis)
+        .font(.scaledBody)
+        .foregroundColor(theme.labelColor)
+        .emojiText.size(Font.scaledBodyFont.emojiSize)
+        .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+        .padding(6)
+        .environment(
+          \.openURL,
+          OpenURLAction { url in
+            routerPath.handleStatus(status: message, url: url)
+          })
     }
   }
 }
