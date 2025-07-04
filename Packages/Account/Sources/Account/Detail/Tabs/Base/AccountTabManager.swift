@@ -17,7 +17,7 @@ public class AccountTabManager {
   ]
 
   public let accountId: String
-  public let client: Client
+  public let client: MastodonClient
   public var isCurrentUser: Bool
 
   public var availableTabs: [any AccountTabProtocol] {
@@ -41,7 +41,7 @@ public class AccountTabManager {
   private var currentFetcher: (any StatusesFetcher)?
   private var fetchers: [String: any StatusesFetcher] = [:]
 
-  public init(accountId: String, client: Client, isCurrentUser: Bool) {
+  public init(accountId: String, client: MastodonClient, isCurrentUser: Bool) {
     self.accountId = accountId
     self.client = client
     self.isCurrentUser = isCurrentUser

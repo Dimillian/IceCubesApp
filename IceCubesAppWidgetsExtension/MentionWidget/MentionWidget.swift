@@ -48,7 +48,7 @@ struct MentionsWidgetProvider: AppIntentTimelineProvider {
           ],
           policy: .atEnd)
       }
-      let client = Client(
+      let client = MastodonClient(
         server: account.account.server,
         oauthToken: account.account.oauthToken)
       var excludedTypes = Models.Notification.NotificationType.allCases

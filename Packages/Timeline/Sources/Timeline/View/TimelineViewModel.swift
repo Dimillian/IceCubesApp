@@ -78,7 +78,7 @@ import SwiftUI
   @ObservationIgnored
   var canFilterTimeline: Bool = true
 
-  var client: Client? {
+  var client: MastodonClient? {
     didSet {
       if oldValue != client {
         Task {
@@ -210,7 +210,7 @@ extension TimelineViewModel: GapLoadingFetcher {
   }
 
   // Hydrate statuses in the Timeline when statuses are empty.
-  private func fetchFirstPage(client: Client) async throws {
+  private func fetchFirstPage(client: MastodonClient) async throws {
     pendingStatusesObserver.pendingStatuses = []
 
     let datasourceIsEmpty = await datasource.isEmpty
@@ -254,7 +254,7 @@ extension TimelineViewModel: GapLoadingFetcher {
   }
 
   // Fetch pages from the top most status of the timeline.
-  private func fetchNewPagesFrom(latestStatus: String, client: Client) async throws {
+  private func fetchNewPagesFrom(latestStatus: String, client: MastodonClient) async throws {
     canStreamEvents = false
     let initialTimeline = timeline
 
@@ -425,7 +425,7 @@ extension TimelineViewModel: GapLoadingFetcher {
 
   // MARK: - Helper Methods
 
-  private func updateDatasourceAndState(statuses: [Status], client: Client, replaceExisting: Bool)
+  private func updateDatasourceAndState(statuses: [Status], client: MastodonClient, replaceExisting: Bool)
     async
   {
     StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
@@ -504,7 +504,7 @@ extension TimelineViewModel {
 
   // Post streaming insertion is disabled for now.
   /*
-  private func handleUpdateEvent(_ event: StreamEventUpdate, client: Client) async {
+  private func handleUpdateEvent(_ event: StreamEventUpdate, client: MastodonClient) async {
     guard timeline == .home,
       UserPreferences.shared.isPostsStreamingEnabled,
       await !datasource.contains(statusId: event.status.id),
@@ -527,7 +527,7 @@ extension TimelineViewModel {
     }
   }
 
-  private func handleStatusUpdateEvent(_ event: StreamEventStatusUpdate, client: Client) async {
+  private func handleStatusUpdateEvent(_ event: StreamEventStatusUpdate, client: MastodonClient) async {
     guard let originalIndex = await datasource.indexOf(statusId: event.status.id) else { return }
 
     StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)

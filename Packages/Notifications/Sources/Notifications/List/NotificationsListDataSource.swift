@@ -29,7 +29,7 @@ public final class NotificationsListDataSource {
   }
   
   public func fetchNotifications(
-    client: Client,
+    client: MastodonClient,
     selectedType: Models.Notification.NotificationType?,
     lockedAccountId: String?
   ) async throws -> FetchResult {
@@ -74,7 +74,7 @@ public final class NotificationsListDataSource {
   }
   
   public func fetchNextPage(
-    client: Client,
+    client: MastodonClient,
     selectedType: Models.Notification.NotificationType?,
     lockedAccountId: String?
   ) async throws -> FetchResult {
@@ -101,14 +101,14 @@ public final class NotificationsListDataSource {
     )
   }
   
-  public func fetchPolicy(client: Client) async -> Models.NotificationsPolicy? {
+  public func fetchPolicy(client: MastodonClient) async -> Models.NotificationsPolicy? {
     try? await client.get(endpoint: Notifications.policy, forceVersion: .v2)
   }
   
   // MARK: - V1 API Methods
   
   private func fetchNotificationsV1(
-    client: Client,
+    client: MastodonClient,
     selectedType: Models.Notification.NotificationType?,
     lockedAccountId: String?
   ) async throws {
@@ -132,7 +132,7 @@ public final class NotificationsListDataSource {
   }
   
   private func refreshNotificationsV1(
-    client: Client,
+    client: MastodonClient,
     selectedType: Models.Notification.NotificationType?,
     lockedAccountId: String?
   ) async throws {
@@ -156,7 +156,7 @@ public final class NotificationsListDataSource {
   }
   
   private func fetchNextPageV1(
-    client: Client,
+    client: MastodonClient,
     selectedType: Models.Notification.NotificationType?,
     lockedAccountId: String?
   ) async throws {
@@ -183,7 +183,7 @@ public final class NotificationsListDataSource {
   }
   
   private func fetchNewPages(
-    client: Client,
+    client: MastodonClient,
     minId: String,
     maxPages: Int,
     selectedType: Models.Notification.NotificationType?,
@@ -220,7 +220,7 @@ public final class NotificationsListDataSource {
   // MARK: - V2 API Methods
   
   private func fetchNotificationsV2(
-    client: Client,
+    client: MastodonClient,
     selectedType: Models.Notification.NotificationType?
   ) async throws {
     let results = try await fetchGroupedNotifications(
@@ -234,7 +234,7 @@ public final class NotificationsListDataSource {
   }
   
   private func refreshNotificationsV2(
-    client: Client,
+    client: MastodonClient,
     selectedType: Models.Notification.NotificationType?
   ) async throws {
     guard let firstGroup = consolidatedNotifications.first else { return }
@@ -252,7 +252,7 @@ public final class NotificationsListDataSource {
   }
   
   private func fetchNextPageV2(
-    client: Client,
+    client: MastodonClient,
     selectedType: Models.Notification.NotificationType?
   ) async throws {
     guard let lastGroup = lastNotificationGroup else { return }
@@ -363,7 +363,7 @@ public final class NotificationsListDataSource {
     return nil
   }
   
-  private func markAsRead(client: Client) {
+  private func markAsRead(client: MastodonClient) {
     guard let id = consolidatedNotifications.first?.notifications.first?.id else { return }
     
     Task {
@@ -415,7 +415,7 @@ public final class NotificationsListDataSource {
   }
   
   private func fetchGroupedNotifications(
-    client: Client,
+    client: MastodonClient,
     sinceId: String?,
     maxId: String?,
     selectedType: Models.Notification.NotificationType?

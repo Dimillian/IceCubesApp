@@ -10,7 +10,7 @@ import SwiftUI
 public struct AccountDetailMediaGridView: View {
   @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(QuickLook.self) private var quickLook
 
   let account: Account

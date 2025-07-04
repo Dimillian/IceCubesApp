@@ -11,7 +11,7 @@ struct ExploreTab: View {
   @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var preferences
   @Environment(CurrentAccount.self) private var currentAccount
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @State private var routerPath = RouterPath()
 
   var body: some View {

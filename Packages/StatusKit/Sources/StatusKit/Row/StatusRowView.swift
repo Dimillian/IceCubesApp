@@ -20,7 +20,7 @@ public struct StatusRowView: View {
   @Environment(RouterPath.self) private var routerPath: RouterPath
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
 
   @State private var showSelectableText: Bool = false
   @State private var isShareAsImageSheetPresented: Bool = false

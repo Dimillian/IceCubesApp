@@ -6,7 +6,7 @@ import SwiftUI
 
 @MainActor
 public struct NotificationsRequestsListView: View {
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(Theme.self) private var theme
   @Environment(RouterPath.self) private var routerPath
 
@@ -184,7 +184,7 @@ public struct NotificationsRequestsListView: View {
     }
   }
 
-  private func fetchRequests(_ client: Client) async {
+  private func fetchRequests(_ client: MastodonClient) async {
     do {
       viewState = try .requests(await client.get(endpoint: Notifications.requests))
     } catch {
@@ -192,17 +192,17 @@ public struct NotificationsRequestsListView: View {
     }
   }
 
-  private func acceptRequest(_ client: Client, _ request: NotificationsRequest) async {
+  private func acceptRequest(_ client: MastodonClient, _ request: NotificationsRequest) async {
     _ = try? await client.post(endpoint: Notifications.acceptRequests(ids: [request.id]))
     await fetchRequests(client)
   }
 
-  private func dismissRequest(_ client: Client, _ request: NotificationsRequest) async {
+  private func dismissRequest(_ client: MastodonClient, _ request: NotificationsRequest) async {
     _ = try? await client.post(endpoint: Notifications.dismissRequests(ids: [request.id]))
     await fetchRequests(client)
   }
 
-  private func acceptSelectedRequests(_ client: Client) async {
+  private func acceptSelectedRequests(_ client: MastodonClient) async {
     isProcessingRequests = true
     _ = try? await client.post(
       endpoint: Notifications.acceptRequests(ids: selectedRequests.map { $0.id }))
@@ -210,7 +210,7 @@ public struct NotificationsRequestsListView: View {
     isProcessingRequests = false
   }
 
-  private func rejectSelectedRequests(_ client: Client) async {
+  private func rejectSelectedRequests(_ client: MastodonClient) async {
     isProcessingRequests = true
     _ = try? await client.post(
       endpoint: Notifications.dismissRequests(ids: selectedRequests.map { $0.id }))

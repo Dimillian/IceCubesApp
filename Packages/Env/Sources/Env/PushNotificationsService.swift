@@ -170,7 +170,7 @@ extension PushNotificationsService: UNUserNotificationCenterDelegate {
       return
     }
     do {
-      let client = Client(server: account.account.server, oauthToken: account.account.token)
+      let client = MastodonClient(server: account.account.server, oauthToken: account.account.token)
       let notification: Models.Notification =
         try await client.get(
           endpoint: Notifications.notification(id: String(mastodonPushNotification.notificationID)))
@@ -231,7 +231,7 @@ extension Data {
 
   public func updateSubscription() async {
     guard let pushToken else { return }
-    let client = Client(server: account.server, oauthToken: account.token)
+    let client = MastodonClient(server: account.server, oauthToken: account.token)
     do {
       var listenerURL = PushNotificationsService.Constants.endpoint
       listenerURL += "/push/"
@@ -261,7 +261,7 @@ extension Data {
   }
 
   public func deleteSubscription() async {
-    let client = Client(server: account.server, oauthToken: account.token)
+    let client = MastodonClient(server: account.server, oauthToken: account.token)
     do {
       _ = try await client.delete(endpoint: Push.subscription)
       subscription = nil
@@ -275,7 +275,7 @@ extension Data {
   }
 
   public func fetchSubscription() async {
-    let client = Client(server: account.server, oauthToken: account.token)
+    let client = MastodonClient(server: account.server, oauthToken: account.token)
     do {
       subscription = try await client.get(endpoint: Push.subscription)
       isEnabled = subscription != nil

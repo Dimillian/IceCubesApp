@@ -47,7 +47,7 @@ struct IceCubesApp: App {
     otherScenes
   }
 
-  func setNewClientsInEnv(client: Client) {
+  func setNewClientsInEnv(client: MastodonClient) {
     currentAccount.setClient(client: client)
     currentInstance.setClient(client: client)
     userPreferences.setClient(client: client)

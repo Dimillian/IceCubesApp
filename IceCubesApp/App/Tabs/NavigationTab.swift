@@ -12,7 +12,7 @@ struct NavigationTab<Content: View>: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
 
   var content: () -> Content
 

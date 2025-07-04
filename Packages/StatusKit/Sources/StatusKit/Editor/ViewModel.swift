@@ -18,7 +18,7 @@ extension StatusEditor {
 
     var mode: Mode
 
-    var client: Client?
+    var client: MastodonClient?
     var currentAccount: Account? {
       didSet {
         if itemsProvider != nil {

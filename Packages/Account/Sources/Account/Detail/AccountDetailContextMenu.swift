@@ -4,7 +4,7 @@ import NetworkClient
 import SwiftUI
 
 public struct AccountDetailContextMenu: View {
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(UserPreferences.self) private var preferences

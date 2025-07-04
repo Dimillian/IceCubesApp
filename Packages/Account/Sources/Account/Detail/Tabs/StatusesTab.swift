@@ -12,13 +12,13 @@ struct StatusesTab: AccountTabProtocol {
   let isAvailableForCurrentUser = true
   let isAvailableForOtherUsers = true
 
-  func createFetcher(accountId: String, client: Client, isCurrentUser: Bool) -> any StatusesFetcher
+  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool) -> any StatusesFetcher
   {
     StatusesTabFetcher(accountId: accountId, client: client, isCurrentUser: isCurrentUser)
   }
 
   func makeView(
-    fetcher: any StatusesFetcher, client: Client, routerPath: RouterPath, account: Account?
+    fetcher: any StatusesFetcher, client: MastodonClient, routerPath: RouterPath, account: Account?
   ) -> some View {
     StatusesTabView(
       fetcher: fetcher as! StatusesTabFetcher, client: client, routerPath: routerPath)
@@ -102,7 +102,7 @@ private class StatusesTabFetcher: AccountTabFetcher {
 
 private struct StatusesTabView: View {
   let fetcher: StatusesTabFetcher
-  let client: Client
+  let client: MastodonClient
   let routerPath: RouterPath
 
   @Environment(Theme.self) private var theme

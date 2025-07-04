@@ -52,7 +52,7 @@ extension URL {
         guard let host = host() else {
           throw ActionRequestHandler.Error.noHost
         }
-        let _: Instance = try await Client(server: host).get(endpoint: Instances.instance)
+        let _: Instance = try await MastodonClient(server: host).get(endpoint: Instances.instance)
         return true
       } catch {
         return false

@@ -7,8 +7,8 @@ import SwiftUI
 import os
   
 @Observable
-public final class Client: Equatable, Identifiable, Hashable, Sendable {
-  public static func == (lhs: Client, rhs: Client) -> Bool {
+public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
+  public static func == (lhs: MastodonClient, rhs: MastodonClient) -> Bool {
     let lhsToken = lhs.critical.withLock { $0.oauthToken }
     let rhsToken = rhs.critical.withLock { $0.oauthToken }
 

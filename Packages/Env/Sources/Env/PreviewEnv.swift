@@ -5,7 +5,7 @@ import SwiftUI
 extension View {
   public func withPreviewsEnv() -> some View {
     environment(RouterPath())
-      .environment(Client(server: ""))
+      .environment(MastodonClient(server: ""))
       .environment(CurrentAccount.shared)
       .environment(UserPreferences.shared)
       .environment(CurrentInstance.shared)

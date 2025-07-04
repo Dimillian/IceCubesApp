@@ -9,7 +9,7 @@ public struct ReportView: View {
   @Environment(\.dismiss) private var dismiss
 
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
 
   let status: Status
   @State private var commentText: String = ""

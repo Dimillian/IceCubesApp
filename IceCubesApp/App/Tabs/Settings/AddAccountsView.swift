@@ -25,7 +25,7 @@ struct AddAccountView: View {
   @State private var instanceName: String = ""
   @State private var instance: Instance?
   @State private var isSigninIn = false
-  @State private var signInClient: Client?
+  @State private var signInClient: MastodonClient?
   @State private var instances: [InstanceSocial] = []
   @State private var instanceFetchError: LocalizedStringKey?
   @State private var instanceSocialClient = InstanceSocialClient()
@@ -123,7 +123,7 @@ struct AddAccountView: View {
 
           do {
             // bare bones preflight for domain validity
-            let instanceDetailClient = Client(server: sanitizedName)
+            let instanceDetailClient = MastodonClient(server: sanitizedName)
             if instanceDetailClient.server.contains("."),
               instanceDetailClient.server.last != "."
             {
@@ -294,7 +294,7 @@ struct AddAccountView: View {
     }
     do {
       let oauthToken = try await client.continueOauthFlow(url: url)
-      let client = Client(server: client.server, oauthToken: oauthToken)
+      let client = MastodonClient(server: client.server, oauthToken: oauthToken)
       let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
       Telemetry.signal("account.added")
       appAccountsManager.add(

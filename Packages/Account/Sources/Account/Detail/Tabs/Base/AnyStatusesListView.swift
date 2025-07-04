@@ -7,7 +7,7 @@ import DesignSystem
 
 struct AnyStatusesListView: View {
   let fetcher: any StatusesFetcher
-  let client: Client
+  let client: MastodonClient
   let routerPath: RouterPath
   
   @Environment(Theme.self) private var theme

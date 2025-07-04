@@ -11,7 +11,7 @@ import SwiftUI
 struct TimelineListView: View {
   @Environment(\.selectedTabScrollToTop) private var selectedTabScrollToTop
   
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
   

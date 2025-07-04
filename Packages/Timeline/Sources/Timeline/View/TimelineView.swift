@@ -14,7 +14,7 @@ public struct TimelineView: View {
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var account
   @Environment(StreamWatcher.self) private var watcher
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(RouterPath.self) private var routerPath
 
   @State private var viewModel = TimelineViewModel()
@@ -129,12 +129,12 @@ public struct TimelineView: View {
       guard oldValue != newValue else { return }
       switch newValue {
       case let .remoteLocal(server, _):
-        viewModel.client = Client(server: server)
+        viewModel.client = MastodonClient(server: server)
       default:
         switch oldValue {
         case let .remoteLocal(server, _):
           if newValue == .latest {
-            viewModel.client = Client(server: server)
+            viewModel.client = MastodonClient(server: server)
           } else {
             viewModel.client = client
           }

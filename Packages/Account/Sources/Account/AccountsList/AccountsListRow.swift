@@ -9,7 +9,7 @@ import SwiftUI
 
 @MainActor
 @Observable public class AccountsListRowViewModel {
-  var client: Client?
+  var client: MastodonClient?
 
   var account: Account
   var relationShip: Relationship?
@@ -25,7 +25,7 @@ public struct AccountsListRow: View {
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(RouterPath.self) private var routerPath
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(QuickLook.self) private var quickLook
 
   @State var viewModel: AccountsListRowViewModel

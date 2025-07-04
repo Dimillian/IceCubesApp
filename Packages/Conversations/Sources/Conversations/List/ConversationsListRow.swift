@@ -8,7 +8,7 @@ import SwiftUI
 struct ConversationsListRow: View {
   @Environment(\.openWindow) private var openWindow
 
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount

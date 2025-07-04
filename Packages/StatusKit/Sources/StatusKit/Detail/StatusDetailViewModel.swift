@@ -9,7 +9,7 @@ import SwiftUI
   public var statusId: String?
   public var remoteStatusURL: URL?
 
-  var client: Client?
+  var client: MastodonClient?
   var routerPath: RouterPath?
 
   enum State {
@@ -108,7 +108,7 @@ import SwiftUI
     }
   }
 
-  private func fetchContextData(client: Client, statusId: String) async throws -> ContextData {
+  private func fetchContextData(client: MastodonClient, statusId: String) async throws -> ContextData {
     async let status: Status = client.get(endpoint: Statuses.status(id: statusId))
     async let context: StatusContext = client.get(endpoint: Statuses.context(id: statusId))
     return try await .init(status: status, context: context)

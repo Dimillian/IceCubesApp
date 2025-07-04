@@ -100,7 +100,7 @@ import SwiftUI
   public static let shared = UserPreferences()
   private let storage = Storage()
 
-  private var client: Client?
+  private var client: MastodonClient?
 
   public var preferredBrowser: PreferredBrowser {
     didSet {
@@ -457,7 +457,7 @@ import SwiftUI
 
   public var serverPreferences: ServerPreferences?
 
-  public func setClient(client: Client) {
+  public func setClient(client: MastodonClient) {
     self.client = client
     Task {
       await refreshServerPreferences()

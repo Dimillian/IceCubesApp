@@ -53,7 +53,7 @@ struct InlinePostIntent: AppIntent {
 
   @MainActor
   func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
-    let client = Client(
+    let client = MastodonClient(
       server: account.account.server, version: .v1, oauthToken: account.account.oauthToken)
     let status = StatusData(status: content, visibility: visibility.toAppVisibility)
     do {

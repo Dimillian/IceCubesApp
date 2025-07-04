@@ -16,7 +16,7 @@ struct TimelineTab: View {
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(UserPreferences.self) private var preferences
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @State private var routerPath = RouterPath()
 
   @State private var didAppear: Bool = false

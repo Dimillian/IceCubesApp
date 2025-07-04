@@ -16,7 +16,7 @@ import SwiftUI
   let textDisabled: Bool
   let finalStatus: AnyStatus
 
-  let client: Client
+  let client: MastodonClient
   let routerPath: RouterPath
 
   let userFollowedTag: HTMLString.Link?
@@ -137,7 +137,7 @@ import SwiftUI
 
   public init(
     status: Status,
-    client: Client,
+    client: MastodonClient,
     routerPath: RouterPath,
     isRemote: Bool = false,
     showActions: Bool = true,

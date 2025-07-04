@@ -44,7 +44,7 @@ public struct DefaultListEntityQuery: EntityQuery {
     guard let account = account?.account.account else {
       return []
     }
-    let client = Client(server: account.server, oauthToken: account.oauthToken)
+    let client = MastodonClient(server: account.server, oauthToken: account.oauthToken)
     do {
       let lists: [Models.List] = try await client.get(endpoint: Lists.lists)
       return lists

@@ -62,7 +62,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
     hasher.combine(id)
   }
 
-  public static func availableTimeline(client: Client) -> [TimelineFilter] {
+  public static func availableTimeline(client: MastodonClient) -> [TimelineFilter] {
     if !client.isAuth {
       return [.local, .federated, .trending]
     }

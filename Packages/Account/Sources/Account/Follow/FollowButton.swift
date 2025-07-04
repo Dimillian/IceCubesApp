@@ -9,7 +9,7 @@ import SwiftUI
 
 @MainActor
 @Observable public class FollowButtonViewModel {
-  let client: Client
+  let client: MastodonClient
 
   public let accountId: String
   public let shouldDisplayNotify: Bool
@@ -17,7 +17,7 @@ import SwiftUI
   public var relationship: Relationship
 
   public init(
-    client: Client,
+    client: MastodonClient,
     accountId: String,
     relationship: Relationship,
     shouldDisplayNotify: Bool,
@@ -92,7 +92,7 @@ import SwiftUI
 }
 
 public struct FollowButton: View {
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @State private var viewModel: FollowButtonViewModel
 
   public init(viewModel: FollowButtonViewModel) {

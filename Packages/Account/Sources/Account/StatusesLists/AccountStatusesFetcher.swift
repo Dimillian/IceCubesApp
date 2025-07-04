@@ -11,7 +11,7 @@ class AccountStatusesFetcher: StatusesFetcher {
   var statusesState: StatusesState = .loading
   var statuses: [Status] = []
   var nextPage: LinkHandler?
-  var client: Client?
+  var client: MastodonClient?
 
   init(mode: AccountStatusesListView.Mode) {
     self.mode = mode

@@ -12,11 +12,11 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   // Whether this status is on a remote local timeline (many actions are unavailable if so)
   private let isRemote: Bool
   private let routerPath: RouterPath
-  private let client: Client
+  private let client: MastodonClient
 
   public init(
     fetcher: Fetcher,
-    client: Client,
+    client: MastodonClient,
     routerPath: RouterPath,
     isRemote: Bool = false
   ) {

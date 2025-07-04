@@ -11,13 +11,13 @@ struct BookmarksTab: AccountTabProtocol {
   let isAvailableForCurrentUser = true
   let isAvailableForOtherUsers = false
 
-  func createFetcher(accountId: String, client: Client, isCurrentUser: Bool) -> any StatusesFetcher
+  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool) -> any StatusesFetcher
   {
     BookmarksTabFetcher(accountId: accountId, client: client, isCurrentUser: isCurrentUser)
   }
 
   @ViewBuilder func makeView(
-    fetcher: any StatusesFetcher, client: Client, routerPath: RouterPath, account: Account?
+    fetcher: any StatusesFetcher, client: MastodonClient, routerPath: RouterPath, account: Account?
   ) -> some View {
     AnyStatusesListView(
       fetcher: fetcher,

@@ -12,7 +12,7 @@ struct NotificationRowView: View {
   @Environment(\.redactionReasons) private var reasons
 
   let notification: ConsolidatedNotification
-  let client: Client
+  let client: MastodonClient
   let routerPath: RouterPath
   let followRequests: [Account]
 

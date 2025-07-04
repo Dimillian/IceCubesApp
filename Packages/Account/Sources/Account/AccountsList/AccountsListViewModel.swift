@@ -34,7 +34,7 @@ public enum AccountsListMode {
 
 @MainActor
 @Observable class AccountsListViewModel {
-  var client: Client?
+  var client: MastodonClient?
 
   let mode: AccountsListMode
 

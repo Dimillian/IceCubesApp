@@ -45,7 +45,7 @@ func testRouterTagsPixelfedURL() {
 @MainActor
 func testRouterLocalStatusURL() {
   let router = RouterPath()
-  let client = Client(
+  let client = MastodonClient(
     server: "mastodon.social",
     oauthToken: .init(accessToken: "", tokenType: "", scope: "", createdAt: 0))
   client.addConnections(["mastodon.social"])
@@ -59,7 +59,7 @@ func testRouterLocalStatusURL() {
 @MainActor
 func testRouterRemoteStatusURL() {
   let router = RouterPath()
-  let client = Client(
+  let client = MastodonClient(
     server: "mastodon.social",
     oauthToken: .init(accessToken: "", tokenType: "", scope: "", createdAt: 0))
   client.addConnections(["mastodon.social", "mastodon.online"])

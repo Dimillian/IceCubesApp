@@ -11,7 +11,7 @@ import SwiftUI
 struct ProfileTab: View {
   @Environment(AppAccountsManager.self) private var appAccount
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount
   @State private var routerPath = RouterPath()
 

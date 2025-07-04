@@ -22,7 +22,7 @@ public final class ConversationsListDataSource {
     let hasNextPage: Bool
   }
   
-  public func fetchConversations(client: Client) async throws -> FetchResult {
+  public func fetchConversations(client: MastodonClient) async throws -> FetchResult {
     let (newConversations, newNextPage): ([Conversation], LinkHandler?) = try await client.getWithLink(
       endpoint: Conversations.conversations(maxId: nil)
     )
@@ -41,7 +41,7 @@ public final class ConversationsListDataSource {
     )
   }
   
-  public func fetchNextPage(client: Client) async throws -> FetchResult {
+  public func fetchNextPage(client: MastodonClient) async throws -> FetchResult {
     guard let maxId = nextPage?.maxId else {
       return FetchResult(conversations: conversations, hasNextPage: false)
     }
@@ -64,7 +64,7 @@ public final class ConversationsListDataSource {
     )
   }
   
-  public func markAsRead(client: Client, conversation: Conversation) async -> Conversation {
+  public func markAsRead(client: MastodonClient, conversation: Conversation) async -> Conversation {
     _ = try? await client.post(endpoint: Conversations.read(id: conversation.id))
     
     // Update the conversation in our local state
@@ -82,7 +82,7 @@ public final class ConversationsListDataSource {
     return updatedConversation
   }
   
-  public func delete(client: Client, conversation: Conversation) async throws -> [Conversation] {
+  public func delete(client: MastodonClient, conversation: Conversation) async throws -> [Conversation] {
     _ = try? await client.delete(endpoint: Conversations.delete(id: conversation.id))
     
     // Remove from local state
@@ -91,7 +91,7 @@ public final class ConversationsListDataSource {
     return conversations
   }
   
-  public func toggleFavorite(client: Client, conversation: Conversation) async throws -> Conversation {
+  public func toggleFavorite(client: MastodonClient, conversation: Conversation) async throws -> Conversation {
     guard let message = conversation.lastStatus else { return conversation }
     
     let endpoint: Endpoint = if message.favourited ?? false {
@@ -109,7 +109,7 @@ public final class ConversationsListDataSource {
     return updatedConversation
   }
   
-  public func toggleBookmark(client: Client, conversation: Conversation) async throws -> Conversation {
+  public func toggleBookmark(client: MastodonClient, conversation: Conversation) async throws -> Conversation {
     guard let message = conversation.lastStatus else { return conversation }
     
     let endpoint: Endpoint = if message.bookmarked ?? false {

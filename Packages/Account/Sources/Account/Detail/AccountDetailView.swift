@@ -17,7 +17,7 @@ public struct AccountDetailView: View {
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(RouterPath.self) private var routerPath
 
   private let accountId: String
@@ -317,7 +317,7 @@ extension AccountDetailView {
     }
   }
 
-  private func fetchAccountData(accountId: String, client: Client) async throws -> AccountData {
+  private func fetchAccountData(accountId: String, client: MastodonClient) async throws -> AccountData {
     async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
     async let featuredTags: [FeaturedTag] = client.get(
       endpoint: Accounts.featuredTags(id: accountId))

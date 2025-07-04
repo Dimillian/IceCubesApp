@@ -10,7 +10,7 @@ public struct FiltersListView: View {
 
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var account
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
 
   @State private var isLoading: Bool = true
   @State private var filters: [ServerFilter] = []
@@ -89,7 +89,7 @@ public struct FiltersListView: View {
     }
   }
 
-  private func deleteFilter(_ client: Client, indexes: IndexSet) {
+  private func deleteFilter(_ client: MastodonClient, indexes: IndexSet) {
     if let index = indexes.first {
       Task {
         do {

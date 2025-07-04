@@ -31,7 +31,7 @@ struct DisplaySettingsView: View {
 
   private let previewStatusViewModel = StatusRowViewModel(
     status: Status.placeholder(forSettings: true, language: "la"),
-    client: Client(server: ""),
+    client: MastodonClient(server: ""),
     routerPath: RouterPath())  // translate from latin button
 
   var body: some View {

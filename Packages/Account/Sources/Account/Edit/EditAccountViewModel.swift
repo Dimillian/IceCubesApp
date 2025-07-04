@@ -18,7 +18,7 @@ import SwiftUI
     }
   }
 
-  public var client: Client?
+  public var client: MastodonClient?
 
   var displayName: String = ""
   var note: String = ""

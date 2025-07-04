@@ -8,7 +8,7 @@ import Observation
 @Observable public class CurrentInstance {
   public private(set) var instance: Instance?
 
-  private var client: Client?
+  private var client: MastodonClient?
 
   public static let shared = CurrentInstance()
 
@@ -49,7 +49,7 @@ import Observation
 
   private init() {}
 
-  public func setClient(client: Client) {
+  public func setClient(client: MastodonClient) {
     self.client = client
   }
 

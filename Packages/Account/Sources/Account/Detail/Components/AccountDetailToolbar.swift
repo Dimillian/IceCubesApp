@@ -10,7 +10,7 @@ struct AccountDetailToolbar: ToolbarContent {
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(UserPreferences.self) private var preferences
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(RouterPath.self) private var routerPath
 
   let account: Account?
@@ -113,7 +113,7 @@ struct AccountDetailToolbar: ToolbarContent {
 
 private struct CurrentUserMenuItems: View {
   let account: Account?
-  let client: Client
+  let client: MastodonClient
   let currentInstance: CurrentInstance
   let routerPath: RouterPath
   let openURL: (URL) -> Void

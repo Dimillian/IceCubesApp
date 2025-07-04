@@ -16,7 +16,7 @@ struct AccountSettingsView: View {
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(Theme.self) private var theme
   @Environment(AppAccountsManager.self) private var appAccountsManager
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(RouterPath.self) private var routerPath
 
   @State private var cachedPostsCount: Int = 0
@@ -84,7 +84,7 @@ struct AccountSettingsView: View {
         Button(role: .destructive) {
           if let token = appAccount.oauthToken {
             Task {
-              let client = Client(server: appAccount.server, oauthToken: token)
+              let client = MastodonClient(server: appAccount.server, oauthToken: token)
               await timelineCache.clearCache(for: client.id)
               if let sub = pushNotifications.subscriptions.first(where: {
                 $0.account.token == token

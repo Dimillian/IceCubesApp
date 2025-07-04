@@ -12,13 +12,13 @@ struct MediaTab: AccountTabProtocol {
   let isAvailableForCurrentUser = false
   let isAvailableForOtherUsers = true
 
-  func createFetcher(accountId: String, client: Client, isCurrentUser: Bool) -> any StatusesFetcher
+  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool) -> any StatusesFetcher
   {
     MediaTabFetcher(accountId: accountId, client: client, isCurrentUser: isCurrentUser)
   }
 
   func makeView(
-    fetcher: any StatusesFetcher, client: Client, routerPath: RouterPath, account: Account?
+    fetcher: any StatusesFetcher, client: MastodonClient, routerPath: RouterPath, account: Account?
   ) -> some View {
     MediaTabView(
       fetcher: fetcher as! MediaTabFetcher, client: client, routerPath: routerPath, account: account
@@ -78,7 +78,7 @@ private class MediaTabFetcher: AccountTabFetcher {
 
 private struct MediaTabView: View {
   let fetcher: MediaTabFetcher
-  let client: Client
+  let client: MastodonClient
   let routerPath: RouterPath
   let account: Account?
 

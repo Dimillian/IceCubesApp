@@ -9,7 +9,7 @@ public struct ConversationsListView: View {
   @Environment(UserPreferences.self) private var preferences
   @Environment(RouterPath.self) private var routerPath
   @Environment(StreamWatcher.self) private var watcher
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(Theme.self) private var theme
 
   @State private var dataSource = ConversationsListDataSource()

@@ -11,7 +11,7 @@ import SwiftUI
 struct MessagesTab: View {
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(AppAccountsManager.self) private var appAccount
   @State private var routerPath = RouterPath()

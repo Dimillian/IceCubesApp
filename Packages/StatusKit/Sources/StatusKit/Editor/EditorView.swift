@@ -13,7 +13,7 @@ extension StatusEditor {
     @Environment(CurrentAccount.self) private var currentAccount
     @Environment(CurrentInstance.self) private var currentInstance
     @Environment(AppAccountsManager.self) private var appAccounts
-    @Environment(Client.self) private var client
+    @Environment(MastodonClient.self) private var client
     
     #if targetEnvironment(macCatalyst)
       @Environment(\.dismissWindow) private var dismissWindow
