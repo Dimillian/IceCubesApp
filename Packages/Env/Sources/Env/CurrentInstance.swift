@@ -1,14 +1,14 @@
 import Combine
 import Foundation
 import Models
-import Network
+import NetworkClient
 import Observation
 
 @MainActor
 @Observable public class CurrentInstance {
   public private(set) var instance: Instance?
 
-  private var client: Client?
+  private var client: MastodonClient?
 
   public static let shared = CurrentInstance()
 
@@ -43,9 +43,13 @@ import Observation
     version >= 4.3
   }
 
+  public var isGroupedNotificationsSupported: Bool {
+    version >= 4.3
+  }
+
   private init() {}
 
-  public func setClient(client: Client) {
+  public func setClient(client: MastodonClient) {
     self.client = client
   }
 

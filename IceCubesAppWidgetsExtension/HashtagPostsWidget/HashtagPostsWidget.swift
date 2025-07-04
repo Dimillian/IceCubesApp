@@ -1,6 +1,6 @@
 import DesignSystem
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 import Timeline
 import WidgetKit

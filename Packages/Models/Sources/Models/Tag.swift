@@ -25,7 +25,7 @@ public struct Tag: Codable, Identifiable, Equatable, Hashable {
   public var totalAccounts: Int {
     return history.compactMap { Int($0.accounts) }.reduce(0, +)
   }
-  
+
   public init(from decoder: any Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     name = try container.decode(String.self, forKey: .name)

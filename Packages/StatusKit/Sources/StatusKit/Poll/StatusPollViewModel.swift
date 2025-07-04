@@ -1,12 +1,12 @@
 import Combine
 import Models
-import Network
+import NetworkClient
 import Observation
 import SwiftUI
 
 @MainActor
 @Observable public class StatusPollViewModel {
-  public var client: Client?
+  public var client: MastodonClient?
   public var instance: Instance?
 
   var poll: Poll

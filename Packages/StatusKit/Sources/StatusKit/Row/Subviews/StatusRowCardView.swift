@@ -113,7 +113,8 @@ public struct StatusRowCardView: View {
   @ViewBuilder
   private func defaultLinkPreview(_ title: String, _ url: URL) -> some View {
     if let imageURL = card.image {
-      DefaultPreviewImage(url: imageURL, originalWidth: card.width ?? 0, originalHeight: card.height ?? 0)
+      DefaultPreviewImage(
+        url: imageURL, originalWidth: card.width ?? 0, originalHeight: card.height ?? 0)
     }
 
     VStack(alignment: .leading, spacing: 4) {
@@ -141,7 +142,7 @@ public struct StatusRowCardView: View {
   private func compactLinkPreview(_ title: String, _ url: URL) -> some View {
     HStack(alignment: .top) {
       if let imageURL = card.image {
-        LazyResizableImage(url: imageURL) { state, _ in
+        LazyResizableImage(url: imageURL) { state in
           if let image = state.image {
             image
               .resizable()
@@ -219,7 +220,7 @@ public struct StatusRowCardView: View {
     // ..where the image is known to be a square icon
     HStack {
       if let imageURL = card.image {
-        LazyResizableImage(url: imageURL) { state, _ in
+        LazyResizableImage(url: imageURL) { state in
           if let image = state.image {
             image
               .resizable()
@@ -292,7 +293,7 @@ struct DefaultPreviewImage: View {
 
   var body: some View {
     _Layout(originalWidth: originalWidth, originalHeight: originalHeight) {
-      LazyResizableImage(url: url) { state, _ in
+      LazyResizableImage(url: url) { state in
         if let image = state.image?.resizable() {
           Rectangle().fill(theme.secondaryBackgroundColor)
             .overlay { image.scaledToFill().blur(radius: 50) }

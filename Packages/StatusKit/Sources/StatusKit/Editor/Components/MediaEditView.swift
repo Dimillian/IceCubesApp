@@ -1,7 +1,7 @@
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 extension StatusEditor {
@@ -116,7 +116,7 @@ extension StatusEditor {
 
     @ViewBuilder
     private var generateButton: some View {
-      if let url = container.mediaAttachment?.url, preferences.isOpenAIEnabled {
+      if let url = container.mediaAttachment?.url {
         Button {
           Task {
             if let description = await generateDescription(url: url) {

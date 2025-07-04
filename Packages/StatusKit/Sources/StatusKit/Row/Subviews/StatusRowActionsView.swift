@@ -1,7 +1,7 @@
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
@@ -10,7 +10,7 @@ struct StatusRowActionsView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(StatusDataController.self) private var statusDataController
   @Environment(UserPreferences.self) private var userPreferences
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(SceneDelegate.self) private var sceneDelegate
 
   @Environment(\.openWindow) private var openWindow
@@ -215,11 +215,11 @@ struct StatusRowActionsView: View {
             .menuStyle(.button)
             .buttonStyle(.borderless)
             .foregroundStyle(.secondary)
+            .tint(.primary)
             .contentShape(Rectangle())
             .accessibilityLabel("status.action.context-menu")
           } else {
             actionButton(action: action)
-            Spacer()
           }
         }
       }

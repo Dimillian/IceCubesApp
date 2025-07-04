@@ -1,7 +1,7 @@
 import Combine
 import DesignSystem
 import Models
-import Network
+import NetworkClient
 import Observation
 import SwiftUI
 
@@ -11,7 +11,7 @@ import SwiftUI
   private static var accountsCache: [String: Account] = [:]
 
   var appAccount: AppAccount
-  let client: Client
+  let client: MastodonClient
   let isCompact: Bool
   let isInSettings: Bool
   let showBadge: Bool

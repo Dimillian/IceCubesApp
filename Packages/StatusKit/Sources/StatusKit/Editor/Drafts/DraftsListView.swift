@@ -52,8 +52,6 @@ extension StatusEditor {
         .background(.clear)
         .navigationTitle("status.editor.drafts.navigation-title")
         .navigationBarTitleDisplayMode(.inline)
-        .presentationBackground(.thinMaterial)
-        .presentationCornerRadius(16)
         .presentationDetents([.medium, .large])
       }
     }

@@ -1,6 +1,6 @@
 import Foundation
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable, Sendable {
@@ -38,7 +38,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
   case link(url: URL, title: String)
   case latest
   case resume
-  
+
   public static func == (lhs: TimelineFilter, rhs: TimelineFilter) -> Bool {
     lhs.id == rhs.id
   }
@@ -62,7 +62,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
     hasher.combine(id)
   }
 
-  public static func availableTimeline(client: Client) -> [TimelineFilter] {
+  public static func availableTimeline(client: MastodonClient) -> [TimelineFilter] {
     if !client.isAuth {
       return [.local, .federated, .trending]
     }

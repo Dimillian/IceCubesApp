@@ -10,7 +10,7 @@ struct PostImageIntent: AppIntent {
   @Parameter(
     title: "Image",
     description: "Image to post on Mastodon",
-    supportedTypeIdentifiers: ["public.image"],
+    supportedContentTypes: [.image, .jpeg, .png, .gif, .heic],
     inputConnectionBehavior: .connectToPreviousIntentResult)
   var images: [IntentFile]?
 

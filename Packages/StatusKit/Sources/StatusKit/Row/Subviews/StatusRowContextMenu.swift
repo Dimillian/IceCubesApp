@@ -1,14 +1,14 @@
 import DesignSystem
 import Env
 import Foundation
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
 struct StatusRowContextMenu: View {
   @Environment(\.openWindow) var openWindow
 
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(SceneDelegate.self) private var sceneDelegate
   @Environment(UserPreferences.self) private var preferences
   @Environment(CurrentAccount.self) private var account

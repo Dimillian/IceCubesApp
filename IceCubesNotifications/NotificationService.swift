@@ -4,7 +4,7 @@ import Env
 import Intents
 import KeychainSwift
 import Models
-import Network
+import NetworkClient
 import Notifications
 import UIKit
 import UserNotifications
@@ -156,7 +156,7 @@ actor NotificationServiceContentProvider {
       if let account = keychainAccounts.first(where: {
         $0.oauthToken?.accessToken == localNotification.accessToken
       }) {
-        let client = Client(server: account.server, oauthToken: account.oauthToken)
+        let client = MastodonClient(server: account.server, oauthToken: account.oauthToken)
         let remoteNotification: Models.Notification = try await client.get(
           endpoint: Notifications.notification(id: String(localNotification.notificationID)))
         return remoteNotification

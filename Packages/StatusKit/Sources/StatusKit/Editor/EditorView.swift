@@ -2,7 +2,7 @@ import AppAccount
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 extension StatusEditor {
@@ -13,7 +13,8 @@ extension StatusEditor {
     @Environment(CurrentAccount.self) private var currentAccount
     @Environment(CurrentInstance.self) private var currentInstance
     @Environment(AppAccountsManager.self) private var appAccounts
-    @Environment(Client.self) private var client
+    @Environment(MastodonClient.self) private var client
+    
     #if targetEnvironment(macCatalyst)
       @Environment(\.dismissWindow) private var dismissWindow
     #else
@@ -23,6 +24,7 @@ extension StatusEditor {
     @Bindable var viewModel: ViewModel
     @Binding var followUpSEVMs: [ViewModel]
     @Binding var editingMediaContainer: MediaContainer?
+    @Binding var presentationDetent: PresentationDetent
 
     @FocusState<UUID?> var isSpoilerTextFocused: UUID?
     @FocusState<EditorFocusState?>.Binding var editorFocusState: EditorFocusState?
@@ -55,7 +57,7 @@ extension StatusEditor {
         }
       }
       #if !os(visionOS)
-        .background(theme.primaryBackgroundColor)
+        .background(presentationDetent == .large ? theme.primaryBackgroundColor : .clear)
       #endif
       .focused($editorFocusState, equals: assignedFocusState)
       .onAppear { setupViewModel() }
@@ -174,51 +176,77 @@ extension StatusEditor {
 
     @ViewBuilder
     private var characterCountAndLangView: some View {
+      HStack(alignment: .center) {
+        if #available(iOS 26.0, *) {
+          LangButton(viewModel: viewModel)
+            .glassEffect(.regular.interactive())
+          pollButton
+            .glassEffect(.regular.interactive())
+          spoilerButton
+            .glassEffect(.regular.interactive())
+          Spacer()
+          characterCount
+            .padding(8)
+            .glassEffect(.regular.interactive())
+        } else {
+          LangButton(viewModel: viewModel)
+          pollButton
+          spoilerButton
+          Spacer()
+          characterCount
+        }
+
+      }
+      .padding(.vertical, 8)
+      .padding(.leading, .layoutPadding)
+      .padding(.trailing, .layoutPadding)
+    }
+    
+    
+    private var pollButton: some View {
+      Button {
+        withAnimation {
+          viewModel.showPoll.toggle()
+          viewModel.resetPollDefaults()
+        }
+      } label: {
+        Image(systemName: viewModel.showPoll ? "chart.bar.fill" : "chart.bar")
+      }
+      .buttonStyle(.bordered)
+      .accessibilityLabel("accessibility.editor.button.poll")
+      .disabled(viewModel.shouldDisablePollButton)
+    }
+    
+    private var spoilerButton: some View {
+      Button {
+        withAnimation {
+          viewModel.spoilerOn.toggle()
+        }
+        isSpoilerTextFocused = viewModel.id
+      } label: {
+        Image(
+          systemName: viewModel.spoilerOn
+            ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
+      }
+      .buttonStyle(.bordered)
+      .accessibilityLabel("accessibility.editor.button.spoiler")
+    }
+    
+    @ViewBuilder
+    private var characterCount: some View {
       let value =
         (currentInstance.instance?.configuration?.statuses.maxCharacters ?? 500)
         + viewModel.statusTextCharacterLength
-      HStack(alignment: .center) {
-        LangButton(viewModel: viewModel)
-          .padding(.leading, .layoutPadding)
-
-        Button {
-          withAnimation {
-            viewModel.showPoll.toggle()
-            viewModel.resetPollDefaults()
-          }
-        } label: {
-          Image(systemName: viewModel.showPoll ? "chart.bar.fill" : "chart.bar")
-        }
-        .buttonStyle(.bordered)
-        .accessibilityLabel("accessibility.editor.button.poll")
-        .disabled(viewModel.shouldDisablePollButton)
-
-        Button {
-          withAnimation {
-            viewModel.spoilerOn.toggle()
-          }
-          isSpoilerTextFocused = viewModel.id
-        } label: {
-          Image(
-            systemName: viewModel.spoilerOn
-              ? "exclamationmark.triangle.fill" : "exclamationmark.triangle")
-        }
-        .buttonStyle(.bordered)
-        .accessibilityLabel("accessibility.editor.button.spoiler")
-
-        Spacer()
-
-        Text("\(value)")
-          .foregroundColor(value < 0 ? .red : .secondary)
-          .font(.callout.monospacedDigit())
-          .accessibilityLabel("accessibility.editor.button.characters-remaining")
-          .accessibilityValue("\(value)")
-          .accessibilityRemoveTraits(.isStaticText)
-          .accessibilityAddTraits(.updatesFrequently)
-          .accessibilityRespondsToUserInteraction(false)
-          .padding(.trailing, .layoutPadding)
-      }
-      .padding(.vertical, 8)
+      Text("\(value)")
+        .contentTransition(.numericText(value: Double(value)))
+        .foregroundColor(value < 0 ? .red : .secondary)
+        .font(.callout.monospacedDigit())
+        .accessibilityLabel("accessibility.editor.button.characters-remaining")
+        .accessibilityValue("\(value)")
+        .accessibilityRemoveTraits(.isStaticText)
+        .accessibilityAddTraits(.updatesFrequently)
+        .accessibilityRespondsToUserInteraction(false)
+        .animation(.smooth, value: value)
     }
 
     private func setupViewModel() {

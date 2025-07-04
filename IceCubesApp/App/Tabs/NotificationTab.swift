@@ -2,7 +2,7 @@ import AppAccount
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import Notifications
 import SwiftUI
 import Timeline
@@ -13,7 +13,7 @@ struct NotificationsTab: View {
   @Environment(\.scenePhase) private var scenePhase
 
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(StreamWatcher.self) private var watcher
   @Environment(AppAccountsManager.self) private var appAccount
   @Environment(CurrentAccount.self) private var currentAccount
@@ -40,12 +40,13 @@ struct NotificationsTab: View {
           }
           ToolbarTab(routerPath: $routerPath)
         }
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .id(client.id)
     }
     .onAppear {
       routerPath.client = client
-      clearNotifications()
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        clearNotifications()
+      }
     }
     .withSafariRouter()
     .environment(routerPath)

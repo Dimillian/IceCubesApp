@@ -1,13 +1,13 @@
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
 public struct StatusPollView: View {
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(CurrentAccount.self) private var currentAccount
 
@@ -106,6 +106,7 @@ public struct StatusPollView: View {
       }
 
       footerView
+        .padding(.top, 4)
 
     }.onAppear {
       viewModel.instance = currentInstance.instance

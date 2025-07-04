@@ -1,7 +1,7 @@
 import Combine
 import Foundation
 import Models
-import Network
+import NetworkClient
 import Observation
 
 @MainActor
@@ -16,7 +16,7 @@ import Observation
   public private(set) var updatingFollowRequestAccountIds = Set<String>()
   public private(set) var isLoadingAccount: Bool = false
 
-  private var client: Client?
+  private var client: MastodonClient?
 
   public static let shared = CurrentAccount()
 
@@ -30,7 +30,7 @@ import Observation
 
   private init() {}
 
-  public func setClient(client: Client) {
+  public func setClient(client: MastodonClient) {
     self.client = client
     guard client.isAuth else { return }
     Task(priority: .userInitiated) {

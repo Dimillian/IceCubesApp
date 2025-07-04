@@ -3,7 +3,7 @@ import Combine
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftData
 import SwiftUI
 import Timeline
@@ -16,24 +16,29 @@ struct TimelineTab: View {
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(UserPreferences.self) private var preferences
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @State private var routerPath = RouterPath()
 
   @State private var didAppear: Bool = false
-  @State private var timeline: TimelineFilter = .home
   @State private var selectedTagGroup: TagGroup?
+
+  @Binding var timeline: TimelineFilter
+  @Binding var pinnedFilters: [TimelineFilter]
+
+  @AppStorage("last_timeline_filter") var lastTimelineFilter: TimelineFilter = .home
 
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
-  @AppStorage("last_timeline_filter") var lastTimelineFilter: TimelineFilter = .home
-  @AppStorage("timeline_pinned_filters") private var pinnedFilters: [TimelineFilter] = []
-
   private let canFilterTimeline: Bool
 
-  init(timeline: TimelineFilter? = nil) {
-    canFilterTimeline = timeline == nil
-    _timeline = .init(initialValue: timeline ?? .home)
+  init(
+    canFilterTimeline: Bool = false, timeline: Binding<TimelineFilter>,
+    pinedFilters: Binding<[TimelineFilter]> = .constant([])
+  ) {
+    self.canFilterTimeline = canFilterTimeline
+    _timeline = timeline
+    _pinnedFilters = pinedFilters
   }
 
   var body: some View {
@@ -49,7 +54,6 @@ struct TimelineTab: View {
       .toolbar {
         toolbarView
       }
-      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
       .id(client.id)
     }
     .onAppear {

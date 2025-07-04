@@ -1,5 +1,5 @@
 import Models
-import Network
+import NetworkClient
 import Observation
 import SwiftUI
 
@@ -10,7 +10,7 @@ import SwiftUI
   var inLists: [Models.List] = []
   var isLoadingInfo: Bool = true
 
-  var client: Client?
+  var client: MastodonClient?
 
   init(account: Account) {
     self.account = account

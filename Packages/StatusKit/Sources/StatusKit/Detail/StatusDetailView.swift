@@ -1,7 +1,7 @@
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
@@ -9,7 +9,7 @@ public struct StatusDetailView: View {
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(StreamWatcher.self) private var watcher
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @Environment(\.isCompact) private var isCompact: Bool
   @Environment(UserPreferences.self) private var userPreferences: UserPreferences

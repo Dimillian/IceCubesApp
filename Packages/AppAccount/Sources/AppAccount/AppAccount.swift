@@ -1,7 +1,7 @@
 import CryptoKit
 import KeychainSwift
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 extension AppAccount {

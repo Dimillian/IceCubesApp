@@ -4,14 +4,14 @@ import Conversations
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
 struct ProfileTab: View {
   @Environment(AppAccountsManager.self) private var appAccount
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount
   @State private var routerPath = RouterPath()
 
@@ -21,7 +21,6 @@ struct ProfileTab: View {
         AccountDetailView(account: account)
           .withAppRouter()
           .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
           .id(account.id)
       } else {
         AccountDetailView(account: .placeholder())

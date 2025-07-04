@@ -1,12 +1,12 @@
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
-struct TimelineQuickAccessPills: View {
-  @Environment(Client.self) private var client
+public struct TimelineQuickAccessPills: View {
+  @Environment(MastodonClient.self) private var client
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
 
@@ -15,7 +15,12 @@ struct TimelineQuickAccessPills: View {
 
   @State private var draggedFilter: TimelineFilter?
 
-  var body: some View {
+  public init(pinnedFilters: Binding<[TimelineFilter]>, timeline: Binding<TimelineFilter>) {
+    _pinnedFilters = pinnedFilters
+    _timeline = timeline
+  }
+
+  public var body: some View {
     ScrollView(.horizontal) {
       HStack {
         ForEach(pinnedFilters) { filter in
@@ -50,11 +55,22 @@ struct TimelineQuickAccessPills: View {
     if !isFilterSupported(filter) {
       EmptyView()
     } else if filter == timeline {
-      makeButton(filter)
-        .buttonStyle(.borderedProminent)
+      if #available(iOS 26.0, *) {
+        makeButton(filter)
+          .buttonStyle(.glassProminent)
+      } else {
+        makeButton(filter)
+          .buttonStyle(.borderedProminent)
+      }
     } else {
-      makeButton(filter)
-        .buttonStyle(.bordered)
+      if #available(iOS 26.0, *) {
+        makeButton(filter)
+          .foregroundStyle(theme.labelColor)
+          .buttonStyle(.glass)
+      } else {
+        makeButton(filter)
+          .buttonStyle(.bordered)
+      }
     }
   }
 

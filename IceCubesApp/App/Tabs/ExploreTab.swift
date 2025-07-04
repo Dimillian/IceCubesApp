@@ -3,7 +3,7 @@ import DesignSystem
 import Env
 import Explore
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
@@ -11,7 +11,7 @@ struct ExploreTab: View {
   @Environment(Theme.self) private var theme
   @Environment(UserPreferences.self) private var preferences
   @Environment(CurrentAccount.self) private var currentAccount
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @State private var routerPath = RouterPath()
 
   var body: some View {
@@ -19,7 +19,6 @@ struct ExploreTab: View {
       ExploreView()
         .withAppRouter()
         .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
-        .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
         .toolbar {
           ToolbarTab(routerPath: $routerPath)
         }

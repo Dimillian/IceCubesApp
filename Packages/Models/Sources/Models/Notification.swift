@@ -10,6 +10,7 @@ public struct Notification: Decodable, Identifiable, Equatable {
   public let createdAt: ServerDate
   public let account: Account
   public let status: Status?
+  public let groupKey: String?
 
   public var supportedType: NotificationType? {
     .init(rawValue: type)
@@ -21,7 +22,8 @@ public struct Notification: Decodable, Identifiable, Equatable {
       type: NotificationType.favourite.rawValue,
       createdAt: ServerDate(),
       account: .placeholder(),
-      status: .placeholder())
+      status: .placeholder(),
+      groupKey: nil)
   }
 }
 

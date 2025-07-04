@@ -5,7 +5,7 @@ import DesignSystem
 import Env
 import KeychainSwift
 import MediaUI
-import Network
+import NetworkClient
 import RevenueCat
 import StatusKit
 import SwiftUI
@@ -47,7 +47,7 @@ struct IceCubesApp: App {
     otherScenes
   }
 
-  func setNewClientsInEnv(client: Client) {
+  func setNewClientsInEnv(client: MastodonClient) {
     currentAccount.setClient(client: client)
     currentInstance.setClient(client: client)
     userPreferences.setClient(client: client)
@@ -141,6 +141,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     super.buildMenu(with: builder)
     builder.remove(menu: .document)
     builder.remove(menu: .toolbar)
-    builder.remove(menu: .sidebar)
   }
 }
