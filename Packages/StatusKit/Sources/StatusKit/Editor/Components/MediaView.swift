@@ -155,13 +155,16 @@ extension StatusEditor {
           placeholderView
         }
         VStack {
-          ProgressView(value: progress)
-            .progressViewStyle(.circular)
+          ProgressView()
+              .progressViewStyle(.circular)
           if progress > 0 {
-            Text("\(Int(progress * 100))%")
-              .font(.caption)
+            ProgressView(value: progress)
+              .progressViewStyle(.linear)
+              .padding()
           }
         }
+        .transition(.identity)
+        .animation(.bouncy, value: progress)
       }
     }
 

@@ -5,7 +5,7 @@ import OSLog
 import Observation
 import SwiftUI
 import os
-  
+
 @Observable
 public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
   public static func == (lhs: MastodonClient, rhs: MastodonClient) -> Bool {
@@ -285,6 +285,35 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
     }
   }
 
+  public func mediaUpload<Entity: Decodable>(
+    endpoint: Endpoint,
+    version: Version,
+    method: String,
+    mimeType: String,
+    filename: String,
+    data: Data,
+    progressHandler: @escaping @Sendable (Double) -> Void
+  ) async throws -> Entity {
+    let request = try makeFormDataRequest(
+      endpoint: endpoint,
+      version: version,
+      method: method,
+      mimeType: mimeType,
+      filename: filename,
+      data: data)
+    
+    let (data, httpResponse) = try await urlSession.upload(for: request, from: request.httpBody!, delegate: UploadProgressDelegate(progressHandler: progressHandler))
+    logResponseOnError(httpResponse: httpResponse, data: data)
+    do {
+      return try decoder.decode(Entity.self, from: data)
+    } catch {
+      if let serverError = try? decoder.decode(ServerError.self, from: data) {
+        throw serverError
+      }
+      throw error
+    }
+  }
+
   public func mediaUpload(
     endpoint: Endpoint,
     version: Version,
@@ -301,6 +330,26 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
       filename: filename,
       data: data)
     let (_, httpResponse) = try await urlSession.data(for: request)
+    return httpResponse as? HTTPURLResponse
+  }
+
+  public func mediaUpload(
+    endpoint: Endpoint,
+    version: Version,
+    method: String,
+    mimeType: String,
+    filename: String,
+    data: Data,
+    progressHandler: @escaping @Sendable (Double) -> Void
+  ) async throws -> HTTPURLResponse? {
+    let request = try makeFormDataRequest(
+      endpoint: endpoint,
+      version: version,
+      method: method,
+      mimeType: mimeType,
+      filename: filename,
+      data: data)
+    let (_, httpResponse) = try await urlSession.upload(for: request, from: request.httpBody!, delegate: UploadProgressDelegate(progressHandler: progressHandler))
     return httpResponse as? HTTPURLResponse
   }
 
@@ -336,5 +385,23 @@ public final class MastodonClient: Equatable, Identifiable, Hashable, Sendable {
         "HTTP Response error: \(httpResponse.statusCode), response: \(httpResponse), data: \(String(data: data, encoding: .utf8) ?? "")"
       logger.error("\(error)")
     }
+  }
+}
+
+private final class UploadProgressDelegate: NSObject, URLSessionTaskDelegate, Sendable {
+  private let progressHandler: @Sendable (Double) -> Void
+  
+  init(progressHandler: @escaping @Sendable (Double) -> Void) {
+    self.progressHandler = progressHandler
+  }
+  
+  func urlSession(_ session: URLSession,
+                  task: URLSessionTask,
+                  didSendBodyData bytesSent: Int64,
+                  totalBytesSent: Int64,
+                  totalBytesExpectedToSend: Int64) {
+    guard totalBytesExpectedToSend > 0 else { return }
+    let progress = Double(totalBytesSent) / Double(totalBytesExpectedToSend)
+    progressHandler(progress)
   }
 }
