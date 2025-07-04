@@ -10,6 +10,7 @@ import SwiftUI
 #if !targetEnvironment(macCatalyst)
   import FoundationModels
 #endif
+import AVFoundation
 
 extension StatusEditor {
   @MainActor
@@ -375,13 +376,10 @@ extension StatusEditor {
         spoilerText = status.spoilerText.asRawText
         visibility = status.visibility
         mediaContainers = status.mediaAttachments.map {
-          MediaContainer(
+          MediaContainer.uploaded(
             id: UUID().uuidString,
-            image: nil,
-            movieTransferable: nil,
-            gifTransferable: nil,
-            mediaAttachment: $0,
-            error: nil
+            attachment: $0,
+            originalImage: nil
           )
         }
       case .quote(let status):
@@ -492,24 +490,17 @@ extension StatusEditor {
       isMediasLoading = true
       let url = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).gif")
       try? data.write(to: url)
-      let container = MediaContainer(
+      let container = MediaContainer.pending(
         id: UUID().uuidString,
-        image: nil,
-        movieTransferable: nil,
-        gifTransferable: .init(url: url),
-        mediaAttachment: nil,
-        error: nil)
+        gif: .init(url: url),
+        preview: nil)
       prepareToPost(for: container)
     }
 
     func processCameraPhoto(image: UIImage) {
-      let container = MediaContainer(
+      let container = MediaContainer.pending(
         id: UUID().uuidString,
-        image: image,
-        movieTransferable: nil,
-        gifTransferable: nil,
-        mediaAttachment: nil,
-        error: nil
+        image: image
       )
       prepareToPost(for: container)
     }
@@ -526,46 +517,32 @@ extension StatusEditor {
               if let text = content as? String {
                 initialText += "\(text) "
               } else if let image = content as? UIImage {
-                let container = MediaContainer(
+                let container = MediaContainer.pending(
                   id: UUID().uuidString,
-                  image: image,
-                  movieTransferable: nil,
-                  gifTransferable: nil,
-                  mediaAttachment: nil,
-                  error: nil
+                  image: image
                 )
                 prepareToPost(for: container)
               } else if let content = content as? ImageFileTranseferable,
                 let compressedData = await compressor.compressImageFrom(url: content.url),
                 let image = UIImage(data: compressedData)
               {
-                let container = MediaContainer(
+                let container = MediaContainer.pending(
                   id: UUID().uuidString,
-                  image: image,
-                  movieTransferable: nil,
-                  gifTransferable: nil,
-                  mediaAttachment: nil,
-                  error: nil
+                  image: image
                 )
                 prepareToPost(for: container)
               } else if let video = content as? MovieFileTranseferable {
-                let container = MediaContainer(
+                let container = MediaContainer.pending(
                   id: UUID().uuidString,
-                  image: nil,
-                  movieTransferable: video,
-                  gifTransferable: nil,
-                  mediaAttachment: nil,
-                  error: nil
+                  video: video,
+                  preview: await Self.extractVideoPreview(from: video.url)
                 )
                 prepareToPost(for: container)
               } else if let gif = content as? GifFileTranseferable {
-                let container = MediaContainer(
+                let container = MediaContainer.pending(
                   id: UUID().uuidString,
-                  image: nil,
-                  movieTransferable: nil,
-                  gifTransferable: gif,
-                  mediaAttachment: nil,
-                  error: nil
+                  gif: gif,
+                  preview: nil
                 )
                 prepareToPost(for: container)
               }
@@ -769,13 +746,13 @@ extension StatusEditor {
       guard let gifFile = try? await pickerItem.loadTransferable(type: GifFileTranseferable.self)
       else { return nil }
 
-      return MediaContainer(
+      // Try to extract a preview image from the GIF
+      let previewImage: UIImage? = nil // GIFs typically show animated preview
+      
+      return MediaContainer.pending(
         id: pickerItem.itemIdentifier ?? UUID().uuidString,
-        image: nil,
-        movieTransferable: nil,
-        gifTransferable: gifFile,
-        mediaAttachment: nil,
-        error: nil
+        gif: gifFile,
+        preview: previewImage
       )
     }
 
@@ -786,13 +763,13 @@ extension StatusEditor {
         let movieFile = try? await pickerItem.loadTransferable(type: MovieFileTranseferable.self)
       else { return nil }
 
-      return MediaContainer(
+      // Extract preview frame from video
+      let previewImage = await extractVideoPreview(from: movieFile.url)
+      
+      return MediaContainer.pending(
         id: pickerItem.itemIdentifier ?? UUID().uuidString,
-        image: nil,
-        movieTransferable: movieFile,
-        gifTransferable: nil,
-        mediaAttachment: nil,
-        error: nil
+        video: movieFile,
+        preview: previewImage
       )
     }
 
@@ -809,13 +786,9 @@ extension StatusEditor {
         let image = UIImage(data: compressedData)
       else { return nil }
 
-      return MediaContainer(
+      return MediaContainer.pending(
         id: pickerItem.itemIdentifier ?? UUID().uuidString,
-        image: image,
-        movieTransferable: nil,
-        gifTransferable: nil,
-        mediaAttachment: nil,
-        error: nil
+        image: image
       )
     }
 
@@ -829,14 +802,11 @@ extension StatusEditor {
           let image = UIImage(data: compressedData)
         {
           containers.append(
-            MediaContainer(
+            MediaContainer.pending(
               id: UUID().uuidString,
-              image: image,
-              movieTransferable: nil,
-              gifTransferable: nil,
-              mediaAttachment: nil,
-              error: nil
-            ))
+              image: image
+            )
+          )
         }
 
         url.stopAccessingSecurityScopedResource()
@@ -844,84 +814,90 @@ extension StatusEditor {
 
       return containers
     }
+    
+    private static func extractVideoPreview(from url: URL) async -> UIImage? {
+      let asset = AVURLAsset(url: url)
+      let generator = AVAssetImageGenerator(asset: asset)
+      generator.appliesPreferredTrackTransform = true
+      
+      return await withCheckedContinuation { continuation in
+        generator.generateCGImageAsynchronously(for: .zero) { cgImage, _, error in
+          if let cgImage = cgImage {
+            continuation.resume(returning: UIImage(cgImage: cgImage))
+          } else {
+            continuation.resume(returning: nil)
+          }
+        }
+      }
+    }
 
     func upload(container: MediaContainer) async {
-      if let index = indexOf(container: container) {
-        let originalContainer = mediaContainers[index]
-        guard originalContainer.mediaAttachment == nil else { return }
-        let newContainer = MediaContainer(
-          id: originalContainer.id,
-          image: originalContainer.image,
-          movieTransferable: originalContainer.movieTransferable,
-          gifTransferable: nil,
-          mediaAttachment: nil,
-          error: nil
-        )
-        mediaContainers[index] = newContainer
-        do {
-          let compressor = Compressor()
-          if let image = originalContainer.image {
-            let imageData = try await compressor.compressImageForUpload(image)
-            let uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg")
-            if let index = indexOf(container: newContainer) {
-              mediaContainers[index] = MediaContainer(
-                id: originalContainer.id,
-                image: mode.isInShareExtension ? originalContainer.image : nil,
-                movieTransferable: nil,
-                gifTransferable: nil,
-                mediaAttachment: uploadedMedia,
-                error: nil
-              )
-            }
-            if let uploadedMedia, uploadedMedia.url == nil {
-              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
-            }
-          } else if let videoURL = originalContainer.movieTransferable?.url,
-            let compressedVideoURL = await compressor.compressVideo(videoURL),
-            let data = try? Data(contentsOf: compressedVideoURL)
-          {
-            let uploadedMedia = try await uploadMedia(
-              data: data, mimeType: compressedVideoURL.mimeType())
-            if let index = indexOf(container: newContainer) {
-              mediaContainers[index] = MediaContainer(
-                id: originalContainer.id,
-                image: mode.isInShareExtension ? originalContainer.image : nil,
-                movieTransferable: originalContainer.movieTransferable,
-                gifTransferable: nil,
-                mediaAttachment: uploadedMedia,
-                error: nil
-              )
-            }
-            if let uploadedMedia, uploadedMedia.url == nil {
-              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
-            }
-          } else if let gifData = originalContainer.gifTransferable?.data {
-            let uploadedMedia = try await uploadMedia(data: gifData, mimeType: "image/gif")
-            if let index = indexOf(container: newContainer) {
-              mediaContainers[index] = MediaContainer(
-                id: originalContainer.id,
-                image: mode.isInShareExtension ? originalContainer.image : nil,
-                movieTransferable: nil,
-                gifTransferable: originalContainer.gifTransferable,
-                mediaAttachment: uploadedMedia,
-                error: nil
-              )
-            }
-            if let uploadedMedia, uploadedMedia.url == nil {
-              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
-            }
+      guard let index = indexOf(container: container) else { return }
+      let originalContainer = mediaContainers[index]
+      
+      // Only upload if in pending state
+      guard case .pending(let content) = originalContainer.state else { return }
+      
+      // Set to uploading state
+      mediaContainers[index] = MediaContainer(
+        id: originalContainer.id,
+        state: .uploading(content: content, progress: 0.0)
+      )
+      
+      do {
+        let compressor = Compressor()
+        let uploadedMedia: MediaAttachment?
+        
+        switch content {
+        case .image(let image):
+          let imageData = try await compressor.compressImageForUpload(image)
+          uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg")
+          
+        case .video(let transferable, _):
+          let videoURL = transferable.url
+          guard let compressedVideoURL = await compressor.compressVideo(videoURL),
+                let data = try? Data(contentsOf: compressedVideoURL)
+          else {
+            throw MediaContainer.MediaError.compressionFailed
           }
-        } catch {
-          if let index = indexOf(container: newContainer) {
-            mediaContainers[index] = MediaContainer(
-              id: originalContainer.id,
-              image: originalContainer.image,
-              movieTransferable: nil,
-              gifTransferable: nil,
-              mediaAttachment: nil,
-              error: error
-            )
+          uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType())
+          
+        case .gif(let transferable, _):
+          guard let gifData = transferable.data else {
+            throw MediaContainer.MediaError.compressionFailed
           }
+          uploadedMedia = try await uploadMedia(data: gifData, mimeType: "image/gif")
+        }
+        
+        if let index = indexOf(container: originalContainer),
+           let uploadedMedia {
+          // Update to uploaded state
+          mediaContainers[index] = MediaContainer.uploaded(
+            id: originalContainer.id,
+            attachment: uploadedMedia,
+            originalImage: mode.isInShareExtension ? content.previewImage : nil
+          )
+          
+          // Schedule refresh if URL is not ready
+          if uploadedMedia.url == nil {
+            scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
+          }
+        }
+      } catch {
+        if let index = indexOf(container: originalContainer) {
+          // Update to failed state
+          let mediaError: MediaContainer.MediaError
+          if let serverError = error as? ServerError {
+            mediaError = .uploadFailed(serverError)
+          } else {
+            mediaError = .compressionFailed
+          }
+          
+          mediaContainers[index] = MediaContainer.failed(
+            id: originalContainer.id,
+            content: content,
+            error: mediaError
+          )
         }
       }
     }
@@ -944,14 +920,13 @@ extension StatusEditor {
                   json: nil))
               if newAttachement.url != nil {
                 let oldContainer = mediaContainers[index]
-                mediaContainers[index] = MediaContainer(
-                  id: mediaAttachement.id,
-                  image: oldContainer.image,
-                  movieTransferable: oldContainer.movieTransferable,
-                  gifTransferable: oldContainer.gifTransferable,
-                  mediaAttachment: newAttachement,
-                  error: nil
-                )
+                if case .uploaded(_, let originalImage) = oldContainer.state {
+                  mediaContainers[index] = MediaContainer.uploaded(
+                    id: oldContainer.id,
+                    attachment: newAttachement,
+                    originalImage: originalImage
+                  )
+                }
               }
             } catch {}
           }
@@ -961,23 +936,22 @@ extension StatusEditor {
     }
 
     func addDescription(container: MediaContainer, description: String) async {
-      guard let client, let attachment = container.mediaAttachment else { return }
-      if let index = indexOf(container: container) {
-        do {
-          let media: MediaAttachment = try await client.put(
-            endpoint: Media.media(
-              id: attachment.id,
-              json: .init(description: description)))
-          mediaContainers[index] = MediaContainer(
-            id: container.id,
-            image: nil,
-            movieTransferable: nil,
-            gifTransferable: nil,
-            mediaAttachment: media,
-            error: nil
-          )
-        } catch {}
-      }
+      guard let client,
+            let index = indexOf(container: container),
+            case .uploaded(let attachment, let originalImage) = container.state
+      else { return }
+      
+      do {
+        let media: MediaAttachment = try await client.put(
+          endpoint: Media.media(
+            id: attachment.id,
+            json: .init(description: description)))
+        mediaContainers[index] = MediaContainer.uploaded(
+          id: container.id,
+          attachment: media,
+          originalImage: originalImage
+        )
+      } catch {}
     }
 
     private var mediaAttributes: [StatusData.MediaAttribute] = []

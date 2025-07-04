@@ -96,14 +96,15 @@ extension StatusEditor {
       RoundedRectangle(cornerRadius: 8)
         .fill(.clear)
         .overlay {
-          if let attachement = container.mediaAttachment {
-            makeRemoteMediaView(mediaAttachement: attachement)
-          } else if container.image != nil {
-            makeLocalImageView(container: container)
-          } else if let error = container.error as? ServerError {
-            makeErrorView(error: error)
-          } else {
-            placeholderView
+          switch container.state {
+          case .pending(let content):
+            makeLocalMediaView(content: content)
+          case .uploading(let content, let progress):
+            makeUploadingView(content: content, progress: progress)
+          case .uploaded(let attachment, _):
+            makeRemoteMediaView(mediaAttachement: attachment)
+          case .failed(let content, let error):
+            makeErrorView(content: content, error: error)
           }
         }
         .contextMenu {
@@ -127,17 +128,39 @@ extension StatusEditor {
         .matchedGeometryEffect(id: index, in: mediaSpace, anchor: .leading)
     }
 
-    private func makeLocalImageView(container: MediaContainer) -> some View {
+    private func makeLocalMediaView(content: MediaContainer.MediaContent) -> some View {
       ZStack(alignment: .center) {
-        Image(uiImage: container.image!)
-          .resizable()
-          .blur(radius: container.mediaAttachment == nil ? 20 : 0)
-          .scaledToFill()
-          .cornerRadius(8)
-        if container.error != nil {
-          Text("status.editor.error.upload")
-        } else if container.mediaAttachment == nil {
-          ProgressView()
+        if let image = content.previewImage {
+          Image(uiImage: image)
+            .resizable()
+            .blur(radius: 20)
+            .scaledToFill()
+            .cornerRadius(8)
+        } else {
+          placeholderView
+        }
+        ProgressView()
+      }
+    }
+    
+    private func makeUploadingView(content: MediaContainer.MediaContent, progress: Double) -> some View {
+      ZStack(alignment: .center) {
+        if let image = content.previewImage {
+          Image(uiImage: image)
+            .resizable()
+            .blur(radius: 10)
+            .scaledToFill()
+            .cornerRadius(8)
+        } else {
+          placeholderView
+        }
+        VStack {
+          ProgressView(value: progress)
+            .progressViewStyle(.circular)
+          if progress > 0 {
+            Text("\(Int(progress * 100))%")
+              .font(.caption)
+          }
         }
       }
     }
@@ -172,23 +195,36 @@ extension StatusEditor {
 
     @ViewBuilder
     private func makeImageMenu(container: MediaContainer) -> some View {
-      if container.mediaAttachment?.url != nil {
-        if currentInstance.isEditAltTextSupported || !viewModel.mode.isEditing {
-          Button {
-            editingMediaContainer = container
-          } label: {
-            Label(
-              container.mediaAttachment?.description?.isEmpty == false
-                ? "status.editor.description.edit" : "status.editor.description.add",
-              systemImage: "pencil.line")
+      switch container.state {
+      case .uploaded(let attachment, _):
+        if attachment.url != nil {
+          if currentInstance.isEditAltTextSupported || !viewModel.mode.isEditing {
+            Button {
+              editingMediaContainer = container
+            } label: {
+              Label(
+                attachment.description?.isEmpty == false
+                  ? "status.editor.description.edit" : "status.editor.description.add",
+                systemImage: "pencil.line")
+            }
           }
         }
-      } else if container.error != nil {
+      case .failed:
         Button {
           isErrorDisplayed = true
         } label: {
           Label("action.view.error", systemImage: "exclamationmark.triangle")
         }
+      case .pending:
+        Button {
+          Task {
+            await viewModel.upload(container: container)
+          }
+        } label: {
+          Label("Retry Upload", systemImage: "arrow.clockwise")
+        }
+      case .uploading:
+        EmptyView()
       }
 
       Button(role: .destructive) {
@@ -198,10 +234,24 @@ extension StatusEditor {
       }
     }
 
-    private func makeErrorView(error _: ServerError) -> some View {
+    private func makeErrorView(content: MediaContainer.MediaContent, error: MediaContainer.MediaError) -> some View {
       ZStack {
-        placeholderView
-        Text("status.editor.error.upload")
+        if let image = content.previewImage {
+          Image(uiImage: image)
+            .resizable()
+            .blur(radius: 5)
+            .scaledToFill()
+            .cornerRadius(8)
+            .opacity(0.5)
+        } else {
+          placeholderView
+        }
+        VStack {
+          Image(systemName: "exclamationmark.triangle.fill")
+            .foregroundStyle(.red)
+          Text("status.editor.error.upload")
+            .font(.caption)
+        }
       }
     }
 
