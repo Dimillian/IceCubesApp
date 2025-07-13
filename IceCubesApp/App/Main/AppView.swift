@@ -39,27 +39,9 @@ struct AppView: View {
 
   var body: some View {
     HStack(spacing: 0) {
-      if #available(iOS 26, *) {
-        tabBarView
-          .tabViewBottomAccessory {
-            if !pinnedFilters.isEmpty {
-              TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
-                .padding(.horizontal, 8)
-                .onChange(of: timeline) { _, _ in
-                  if selectedTab != .timeline {
-                    selectedTab = .timeline
-                  }
-                }
-            }
-          }
-          .tabBarMinimizeBehavior(.never)
-          .tabViewStyle(.sidebarAdaptable)
-      } else {
-        tabBarView
-          .tabViewStyle(.sidebarAdaptable)
-      }
-
-      if horizontalSizeClass == .regular,
+      tabBarView
+        .tabViewStyle(.sidebarAdaptable)
+      if (horizontalSizeClass == .regular && (UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac)),
         appAccountsManager.currentClient.isAuth,
         userPreferences.showiPadSecondaryColumn
       {

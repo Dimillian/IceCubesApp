@@ -53,6 +53,34 @@ public struct TimelineView: View {
   }
 
   public var body: some View {
+    if #available(iOS 26.0, *) {
+      timelineView
+        .scrollEdgeEffectStyle(.soft, for: .top)
+        .safeAreaBar(edge: .top) {
+          if canFilterTimeline, !pinnedFilters.isEmpty {
+            TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
+              .padding(.horizontal, .layoutPadding)
+          }
+      }
+    } else {
+      timelineView
+        .toolbarBackground(toolbarBackgroundVisibility, for: .navigationBar)
+        .safeAreaInset(edge: .top, spacing: 0) {
+          if canFilterTimeline, !pinnedFilters.isEmpty {
+            VStack(spacing: 0) {
+              TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
+                .padding(.vertical, 8)
+                .padding(.horizontal, .layoutPadding)
+                .background(theme.primaryBackgroundColor.opacity(0.30))
+                .background(Material.ultraThin)
+              Divider()
+            }
+          }
+        }
+    }
+  }
+  
+  private var timelineView: some View {
     ZStack(alignment: .top) {
       TimelineListView(viewModel: viewModel,
                        timeline: $timeline,
@@ -67,19 +95,6 @@ public struct TimelineView: View {
         }
       }
     }
-    .safeAreaInset(edge: .top, spacing: 0) {
-      if #unavailable(iOS 26), canFilterTimeline, !pinnedFilters.isEmpty {
-        VStack(spacing: 0) {
-          TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
-            .padding(.vertical, 8)
-            .padding(.horizontal, .layoutPadding)
-            .background(theme.primaryBackgroundColor.opacity(0.30))
-            .background(Material.ultraThin)
-          Divider()
-        }
-      }
-    }
-    .toolbarBackground(toolbarBackgroundVisibility, for: .navigationBar)
     .toolbar {
       TimelineToolbarTitleView(timeline: $timeline, canFilterTimeline: canFilterTimeline)
       TimelineToolbarTagGroupButton(timeline: $timeline)
