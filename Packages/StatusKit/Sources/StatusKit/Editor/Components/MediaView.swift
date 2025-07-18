@@ -155,12 +155,13 @@ extension StatusEditor {
           placeholderView
         }
         VStack {
-          ProgressView()
-              .progressViewStyle(.circular)
-          if progress > 0 {
+          if progress > 0 && progress < 1 {
             ProgressView(value: progress)
               .progressViewStyle(.linear)
-              .padding()
+              .padding(.horizontal)
+          } else  {
+            ProgressView()
+                .progressViewStyle(.circular)
           }
         }
         .transition(.identity)

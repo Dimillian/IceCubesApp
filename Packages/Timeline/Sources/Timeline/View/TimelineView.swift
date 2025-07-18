@@ -31,9 +31,6 @@ public struct TimelineView: View {
   private let canFilterTimeline: Bool
 
   private var toolbarBackgroundVisibility: SwiftUI.Visibility {
-    if #available(iOS 26, *) {
-      return .hidden
-    }
     if canFilterTimeline, !pinnedFilters.isEmpty {
       return .hidden
     }
