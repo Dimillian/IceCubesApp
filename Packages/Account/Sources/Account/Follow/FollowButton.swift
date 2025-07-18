@@ -122,7 +122,7 @@ public struct FollowButton: View {
                 ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
             }
           }
-          .glassEffect()
+          .glassEffect(.regular.interactive())
           if viewModel.relationship.following,
              viewModel.shouldDisplayNotify
           {
@@ -136,7 +136,7 @@ public struct FollowButton: View {
               .accessibilityValue(
                 viewModel.relationship.notifying
                 ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
-              .glassEffect()
+              .glassEffect(.regular.interactive())
               AsyncButton {
                 try await viewModel.toggleReboosts()
               } label: {
@@ -146,7 +146,7 @@ public struct FollowButton: View {
               .accessibilityValue(
                 viewModel.relationship.showingReblogs
                 ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
-              .glassEffect()
+              .glassEffect(.regular.interactive())
             }
             .asyncButtonStyle(.none)
             .disabledWhenLoading()
