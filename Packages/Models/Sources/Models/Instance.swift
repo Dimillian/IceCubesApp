@@ -45,4 +45,5 @@ public struct Instance: Codable, Sendable {
   public let configuration: Configuration?
   public let rules: [Rule]?
   public let urls: URLs?
+  public let uri: String
 }

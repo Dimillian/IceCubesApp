@@ -28,7 +28,7 @@ final class ActionRequestHandler: NSObject, NSExtensionRequestHandling, Sendable
     Task {
       do {
         let url = try await url(from: context)
-        guard await url.isMastodonInstance else {
+        guard await url.isFediverseInstance else {
           throw Error.notMastodonInstance
         }
         await MainActor.run {
@@ -46,7 +46,7 @@ final class ActionRequestHandler: NSObject, NSExtensionRequestHandling, Sendable
 }
 
 extension URL {
-  var isMastodonInstance: Bool {
+  var isFediverseInstance: Bool {
     get async {
       do {
         guard let host = host() else {

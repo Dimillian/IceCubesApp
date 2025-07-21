@@ -161,6 +161,15 @@ import os
     return try (decoder.decode(Entity.self, from: data), linkHandler)
   }
 
+  public func getWithResponse<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws -> (Entity, URLResponse) {
+    let url = try makeURL(endpoint: endpoint, forceVersion: forceVersion)
+    let request = makeURLRequest(url: url, endpoint: endpoint, httpMethod: "GET")
+    let (data, httpResponse) = try await urlSession.data(for: request)
+    logResponseOnError(httpResponse: httpResponse, data: data)
+    logger.log(level: .info, "\(request)")
+    return try (decoder.decode(Entity.self, from: data), httpResponse)
+  }
+
   public func post<Entity: Decodable>(endpoint: Endpoint, forceVersion: Version? = nil) async throws
     -> Entity
   {
