@@ -37,6 +37,7 @@ struct NotificationsTab: View {
             } label: {
               Image(systemName: "bell")
             }
+            .tint(.label)
           }
           ToolbarTab(routerPath: $routerPath)
         }

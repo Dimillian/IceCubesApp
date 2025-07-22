@@ -54,6 +54,7 @@ public struct StatusEditorToolbarItem: ToolbarContent {
           ])
           .offset(y: -2)
       }
+      .tint(.label)
     }
   }
 }
@@ -74,6 +75,7 @@ public struct SecondaryColumnToolbarItem: ToolbarContent {
       } label: {
         Image(systemName: "sidebar.right")
       }
+      .tint(.label)
     }
   }
 }

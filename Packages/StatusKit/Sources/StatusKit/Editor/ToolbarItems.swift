@@ -36,6 +36,7 @@ extension StatusEditor {
         } label: {
           Image(systemName: "pencil.and.list.clipboard")
         }
+        .tint(.label)
         .accessibilityLabel("accessibility.editor.button.drafts")
         .sheet(isPresented: $isDraftsSheetDisplayed) {
           if UIDevice.current.userInterfaceIdiom == .phone {

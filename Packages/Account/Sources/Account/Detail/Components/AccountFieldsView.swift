@@ -13,61 +13,83 @@ struct AccountFieldsView: View {
   
   var body: some View {
     if !fields.isEmpty {
-      VStack(alignment: .leading) {
-        ForEach(fields) { field in
-          HStack {
-            VStack(alignment: .leading, spacing: 2) {
-              EmojiTextApp(.init(stringValue: field.name), emojis: account.emojis)
-                .emojiText.size(Font.scaledHeadlineFont.emojiSize)
-                .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
-                .font(.scaledHeadline)
-              HStack {
-                if field.verifiedAt != nil {
-                  Image(systemName: "checkmark.seal")
-                    .foregroundColor(Color.green.opacity(0.80))
-                    .accessibilityHidden(true)
-                }
-                EmojiTextApp(field.value, emojis: account.emojis)
-                  .emojiText.size(Font.scaledBodyFont.emojiSize)
-                  .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
-                  .foregroundColor(theme.tintColor)
-                  .environment(
-                    \.openURL,
-                    OpenURLAction { url in
-                      routerPath.handle(url: url)
-                    }
-                  )
-                  .accessibilityValue(
-                    field.verifiedAt != nil
-                      ? "accessibility.tabs.profile.fields.verified.label" : "")
-              }
-              .font(.scaledBody)
-              if fields.last != field {
-                Divider()
-                  .padding(.vertical, 4)
-              }
-            }
-            Spacer()
-          }
-          .accessibilityElement(children: .combine)
-          .modifier(
-            ConditionalUserDefinedFieldAccessibilityActionModifier(
-              field: field, routerPath: routerPath))
-        }
+      if #available(iOS 26.0, *) {
+        fieldsContainer
+        .padding(8)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
+        #if os(visionOS)
+          .background(Material.thick)
+          .cornerRadius(4)
+          .overlay(
+            RoundedRectangle(cornerRadius: 4)
+              .stroke(.gray.opacity(0.35), lineWidth: 1)
+          )
+        #else
+          .glassEffect(.regular.interactive(),
+                       in: RoundedRectangle(cornerRadius: 4))
+        #endif
+      } else {
+        fieldsContainer
+        .padding(8)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
+        #if os(visionOS)
+          .background(Material.thick)
+        #else
+          .background(theme.secondaryBackgroundColor)
+        #endif
+        .cornerRadius(4)
+        .overlay(
+          RoundedRectangle(cornerRadius: 4)
+            .stroke(.gray.opacity(0.35), lineWidth: 1)
+        )
       }
-      .padding(8)
-      .accessibilityElement(children: .contain)
-      .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
-      #if os(visionOS)
-        .background(Material.thick)
-      #else
-        .background(theme.secondaryBackgroundColor)
-      #endif
-      .cornerRadius(4)
-      .overlay(
-        RoundedRectangle(cornerRadius: 4)
-          .stroke(.gray.opacity(0.35), lineWidth: 1)
-      )
+    }
+  }
+  
+  private var fieldsContainer: some View {
+    VStack(alignment: .leading) {
+      ForEach(fields) { field in
+        HStack {
+          VStack(alignment: .leading, spacing: 2) {
+            EmojiTextApp(.init(stringValue: field.name), emojis: account.emojis)
+              .emojiText.size(Font.scaledHeadlineFont.emojiSize)
+              .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
+              .font(.scaledHeadline)
+            HStack {
+              if field.verifiedAt != nil {
+                Image(systemName: "checkmark.seal")
+                  .foregroundColor(Color.green.opacity(0.80))
+                  .accessibilityHidden(true)
+              }
+              EmojiTextApp(field.value, emojis: account.emojis)
+                .emojiText.size(Font.scaledBodyFont.emojiSize)
+                .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+                .foregroundColor(theme.tintColor)
+                .environment(
+                  \.openURL,
+                  OpenURLAction { url in
+                    routerPath.handle(url: url)
+                  }
+                )
+                .accessibilityValue(
+                  field.verifiedAt != nil
+                    ? "accessibility.tabs.profile.fields.verified.label" : "")
+            }
+            .font(.scaledBody)
+            if fields.last != field {
+              Divider()
+                .padding(.vertical, 4)
+            }
+          }
+          Spacer()
+        }
+        .accessibilityElement(children: .combine)
+        .modifier(
+          ConditionalUserDefinedFieldAccessibilityActionModifier(
+            field: field, routerPath: routerPath))
+      }
     }
   }
 }
