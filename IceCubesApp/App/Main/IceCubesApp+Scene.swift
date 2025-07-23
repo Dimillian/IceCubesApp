@@ -26,14 +26,19 @@ extension IceCubesApp {
         .environment(appIntentService)
         .environment(\.isSupporter, isSupporter)
         .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
-          MediaUIView(
-            selectedAttachment: selectedMediaAttachment,
-            attachments: quickLook.mediaAttachments
-          )
-          .presentationBackground(.ultraThinMaterial)
-          .presentationCornerRadius(16)
-          .presentationSizing(.page)
-          .withEnvironments()
+          if let namespace = quickLook.namespace {
+            MediaUIView(
+              selectedAttachment: selectedMediaAttachment,
+              attachments: quickLook.mediaAttachments
+            )
+            .navigationTransition(.zoom(sourceID: selectedMediaAttachment.id, in: namespace))
+            .presentationBackground(theme.primaryBackgroundColor)
+            .presentationCornerRadius(16)
+            .presentationSizing(.page)
+            .withEnvironments()
+          } else {
+            EmptyView()
+          }
         }
         .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
           if newValue != nil {

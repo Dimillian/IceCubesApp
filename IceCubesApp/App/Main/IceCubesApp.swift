@@ -33,6 +33,8 @@ struct IceCubesApp: App {
   @State var appRouterPath = RouterPath()
 
   @State var isSupporter: Bool = false
+  
+  @Namespace var namespace
 
   init() {
     #if DEBUG
@@ -48,6 +50,7 @@ struct IceCubesApp: App {
   }
 
   func setNewClientsInEnv(client: MastodonClient) {
+    quickLook.namespace = namespace
     currentAccount.setClient(client: client)
     currentInstance.setClient(client: client)
     userPreferences.setClient(client: client)

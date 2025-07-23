@@ -110,6 +110,7 @@ extension StatusEditor {
         Image(systemName: "paperplane")
           .symbolVariant(isSendingDisabled ? .none : .fill)
           .tint(isSendingDisabled ? .secondary : theme.tintColor)
+          .foregroundStyle(theme.labelColor)
           .bold()
       }
       .buttonBorderShape(.circle)

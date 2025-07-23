@@ -119,54 +119,59 @@ public struct StatusRowMediaPreviewView: View {
 }
 
 private struct MediaPreview: View {
+  @Environment(QuickLook.self) private var quickLook
+  
   let sensitive: Bool
   let imageMaxHeight: CGFloat
   let displayData: DisplayData
 
   var body: some View {
-    Group {
-      switch displayData.type {
-      case .image:
-        LazyResizableImage(url: displayData.previewUrl) { state in
-          if let image = state.image {
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(
-                width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
-                height: imageMaxHeight
-              )
-              .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                  .stroke(.gray.opacity(0.35), lineWidth: 1)
-              )
-          } else if state.isLoading {
-            RoundedRectangle(cornerRadius: 10)
-              .fill(Color.gray)
+    if let namespace = quickLook.namespace {
+      Group {
+        switch displayData.type {
+        case .image:
+          LazyResizableImage(url: displayData.previewUrl) { state in
+            if let image = state.image {
+              image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(
+                  width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
+                  height: imageMaxHeight
+                )
+                .overlay(
+                  RoundedRectangle(cornerRadius: 10)
+                    .stroke(.gray.opacity(0.35), lineWidth: 1)
+                )
+            } else if state.isLoading {
+              RoundedRectangle(cornerRadius: 10)
+                .fill(Color.gray)
+            }
           }
+          .overlay {
+            BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
+          }
+          .overlay {
+            AltTextButton(text: displayData.description, font: .scaledFootnote)
+          }
+        case .av:
+          MediaUIAttachmentVideoView(viewModel: .init(url: displayData.url))
+            .accessibilityAddTraits(.startsMediaSession)
         }
-        .overlay {
-          BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
-        }
-        .overlay {
-          AltTextButton(text: displayData.description, font: .scaledFootnote)
-        }
-      case .av:
-        MediaUIAttachmentVideoView(viewModel: .init(url: displayData.url))
-          .accessibilityAddTraits(.startsMediaSession)
       }
+      .matchedTransitionSource(id: displayData.id, in: namespace)
+      .frame(
+        width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
+        height: imageMaxHeight
+      )
+      .clipped()
+      .cornerRadius(10)
+      // #965: do not create overlapping tappable areas, when multiple images are shown
+      .contentShape(Rectangle())
+      .accessibilityElement(children: .ignore)
+      .accessibilityLabel(Text(displayData.accessibilityText))
+      .accessibilityAddTraits(displayData.type == .image ? [.isImage, .isButton] : .isButton)
     }
-    .frame(
-      width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
-      height: imageMaxHeight
-    )
-    .clipped()
-    .cornerRadius(10)
-    // #965: do not create overlapping tappable areas, when multiple images are shown
-    .contentShape(Rectangle())
-    .accessibilityElement(children: .ignore)
-    .accessibilityLabel(Text(displayData.accessibilityText))
-    .accessibilityAddTraits(displayData.type == .image ? [.isImage, .isButton] : .isButton)
   }
 }
 
@@ -415,6 +420,7 @@ private struct FeaturedImagePreView: View {
   let sensitive: Bool
 
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
+  @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
   @Environment(\.isModal) private var isModal: Bool
 
@@ -427,7 +433,7 @@ private struct FeaturedImagePreView: View {
   }
 
   var body: some View {
-    if let url = attachment.url {
+    if let url = attachment.url, let namespace = quickLook.namespace {
       _Layout(originalWidth: originalWidth, originalHeight: originalHeight, maxSize: maxSize) {
         Group {
           RoundedRectangle(cornerRadius: 10).fill(Color.gray)
@@ -457,6 +463,7 @@ private struct FeaturedImagePreView: View {
               .hoverEffect()
             #endif
         }
+        .matchedTransitionSource(id: attachment.id, in: namespace)
       }
       .overlay {
         BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
