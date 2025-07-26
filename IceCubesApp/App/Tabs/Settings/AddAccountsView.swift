@@ -160,32 +160,40 @@ struct AddAccountView: View {
 
   private var signInSection: some View {
     Section {
-      Button {
-        withAnimation {
-          isSigninIn = true
-        }
-        Task {
-          await signIn()
-        }
-      } label: {
-        HStack {
-          Spacer()
-          if isSigninIn || !sanitizedName.isEmpty && instance == nil {
-            ProgressView()
-              .id(sanitizedName)
-              .tint(theme.labelColor)
-          } else {
-            Text("account.add.sign-in")
-              .font(.scaledHeadline)
-          }
-          Spacer()
+      if #available(iOS 26.0, *) {
+        signinButton
+          .buttonStyle(.glassProminent)
+      } else {
+        signinButton
+          .buttonStyle(.borderedProminent)
+      }
+    }
+  }
+  
+  private var signinButton: some View {
+    Button {
+      withAnimation {
+        isSigninIn = true
+      }
+      Task {
+        await signIn()
+      }
+    } label: {
+      HStack {
+        if isSigninIn || !sanitizedName.isEmpty && instance == nil {
+          ProgressView()
+            .id(sanitizedName)
+            .tint(theme.labelColor)
+        } else {
+          Text("account.add.sign-in")
+            .font(.scaledHeadline)
         }
       }
-      .buttonStyle(PlainButtonStyle())
+      .frame(maxWidth: .infinity)
+      .frame(height: 44)
     }
-    #if !os(visionOS)
-      .listRowBackground(theme.tintColor)
-    #endif
+    .listRowInsets(.init())
+    .listRowBackground(Color.clear)
   }
 
   private var instancesListView: some View {
