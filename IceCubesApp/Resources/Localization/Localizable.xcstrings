@@ -50519,6 +50519,7 @@
       }
     },
     "settings.display.show-tab-label" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {

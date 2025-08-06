@@ -688,7 +688,7 @@ extension StatusEditor {
           backupStatusText = statusText
           do {
             for try await content in newStream {
-              replaceTextWith(text: content)
+              replaceTextWith(text: content.content)
             }
           } catch {
             if let backupStatusText {
