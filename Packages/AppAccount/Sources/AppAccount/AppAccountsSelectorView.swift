@@ -47,7 +47,7 @@ public struct AppAccountsSelectorView: View {
       HapticManager.shared.fireHaptic(.buttonPress)
     } label: {
       labelView
-        .contentShape(Rectangle())
+        .contentShape(.circle)
     }
     .sheet(
       isPresented: $isPresented,
@@ -84,7 +84,12 @@ public struct AppAccountsSelectorView: View {
   private var labelView: some View {
     Group {
       if let account = currentAccount.account, !currentAccount.isLoadingAccount {
-        AvatarView(account.avatar, config: avatarConfig)
+        if #available(iOS 26.0, *) {
+          AvatarView(account.avatar, config: avatarConfig)
+            .glassEffect(.regular.interactive())
+        } else {
+          AvatarView(account.avatar, config: avatarConfig)
+        }
       } else {
         AvatarView(config: avatarConfig)
           .redacted(reason: .placeholder)

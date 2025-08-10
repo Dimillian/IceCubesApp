@@ -196,7 +196,6 @@ struct ConversationMessageView: View {
   
   @ViewBuilder
   private var textView: some View {
-    let isOwnMessage = message.account.id == currentAccount.account?.id
     VStack(alignment: .leading) {
       EmojiTextApp(message.content, emojis: message.emojis)
         .font(.scaledBody)

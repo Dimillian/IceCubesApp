@@ -9,7 +9,6 @@ struct ToolbarTab: ToolbarContent {
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
   @Environment(UserPreferences.self) private var userPreferences
-  @Environment(Theme.self) private var theme
 
   @Binding var routerPath: RouterPath
 
@@ -18,10 +17,19 @@ struct ToolbarTab: ToolbarContent {
       statusEditorToolbarItem(
         routerPath: routerPath,
         visibility: userPreferences.postVisibility)
-      ToolbarItem(placement: .navigationBarLeading) {
-        AppAccountsSelectorView(
-          routerPath: routerPath,
-          avatarConfig: theme.avatarShape == .circle ? .badge : .badgeRounded)
+      if #available(iOS 26.0, *) {
+        ToolbarItem(placement: .navigationBarLeading) {
+          AppAccountsSelectorView(
+            routerPath: routerPath,
+            avatarConfig: .embed)
+        }
+        .sharedBackgroundVisibility(.hidden)
+      } else {
+        ToolbarItem(placement: .navigationBarLeading) {
+          AppAccountsSelectorView(
+            routerPath: routerPath,
+            avatarConfig: .embed)
+        }
       }
     }
     if UIDevice.current.userInterfaceIdiom == .pad && horizontalSizeClass == .regular {
