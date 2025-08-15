@@ -168,10 +168,10 @@ extension View {
         TimelineContentFilterView()
           .withEnvironments()
       case .accountEditInfo:
-        AccountEditView()
+        EditAccountView()
           .withEnvironments()
       case .accountFiltersList:
-        AccountFiltersListView()
+        FiltersListView()
           .withEnvironments()
       }
     }
