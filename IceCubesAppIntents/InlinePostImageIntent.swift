@@ -52,19 +52,19 @@ struct InlinePostImageIntent: AppIntent {
       for (index, file) in images.enumerated() {
         guard let url = file.fileURL else { continue }
         let data: Data
-        let mimeType: String
+        let contentType: String
         if let converted = makeJPEGData(from: url) {
           data = converted.0
-          mimeType = converted.1
+          contentType = converted.1
         } else {
           data = try Data(contentsOf: url)
-          mimeType = mimeType(for: url)
+          contentType = mimeType(for: url)
         }
         let media: MediaAttachment = try await client.mediaUpload(
           endpoint: Media.medias,
           version: .v2,
           method: "POST",
-          mimeType: mimeType,
+          mimeType: contentType,
           filename: "file",
           data: data)
 
