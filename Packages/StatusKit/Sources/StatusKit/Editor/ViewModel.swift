@@ -158,6 +158,9 @@ extension StatusEditor {
       return !modifiedStatusText.isEmpty && !mode.isInShareExtension
     }
 
+    // New: initial alt texts coming from intents when opening the app
+    var initialAltTexts: [String]?
+
     var visibility: Models.Visibility = .pub
 
     var mentionsSuggestions: [Account] = []
@@ -328,7 +331,8 @@ extension StatusEditor {
         itemsProvider = items
         visibility = .pub
         processItemsProvider(items: items)
-      case .imageURL(let urls, let caption, let visibility):
+      case .imageURL(let urls, let caption, let altTexts, let visibility):
+        initialAltTexts = altTexts
         Task {
           for container in await Self.makeImageContainer(from: urls) {
             prepareToPost(for: container)
@@ -723,6 +727,12 @@ extension StatusEditor {
       Task(priority: .high) {
         self.mediaContainers.append(container)
         await upload(container: container)
+        if let altTexts = initialAltTexts, let idx = indexOf(container: container), idx < altTexts.count {
+          let desc = altTexts[idx].trimmingCharacters(in: .whitespacesAndNewlines)
+          if !desc.isEmpty {
+            await addDescription(container: container, description: desc)
+          }
+        }
         self.isMediasLoading = false
       }
     }

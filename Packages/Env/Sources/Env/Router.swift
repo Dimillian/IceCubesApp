@@ -57,7 +57,7 @@ public enum SheetDestination: Identifiable, Hashable {
 
   case newStatusEditor(visibility: Models.Visibility)
   case prefilledStatusEditor(text: String, visibility: Models.Visibility)
-  case imageURL(urls: [URL], caption: String?, visibility: Models.Visibility)
+  case imageURL(urls: [URL], caption: String?, altTexts: [String]?, visibility: Models.Visibility)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)

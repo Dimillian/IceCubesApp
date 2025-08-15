@@ -160,6 +160,7 @@ extension IceCubesApp {
       appRouterPath.presentedSheet = .imageURL(
         urls: urls,
         caption: imageIntent.caption,
+        altTexts: imageIntent.altText.map { [$0] },
         visibility: userPreferences.postVisibility)
     }
   }

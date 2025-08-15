@@ -29,6 +29,11 @@ struct InlinePostImageIntent: AppIntent {
     requestValueDialog: IntentDialog("Caption for your post"))
   var caption: String?
 
+  @Parameter(
+    title: "Image descriptions",
+    requestValueDialog: IntentDialog("Descriptions (ALT) for your images in order"))
+  var altTexts: [String]?
+
   @MainActor
   func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
     guard !images.isEmpty else {
@@ -42,7 +47,7 @@ struct InlinePostImageIntent: AppIntent {
 
     do {
       var mediaIds: [String] = []
-      for file in images {
+      for (index, file) in images.enumerated() {
         guard let url = file.fileURL else { continue }
         let data = try Data(contentsOf: url)
         let mimeType: String = {
@@ -59,6 +64,17 @@ struct InlinePostImageIntent: AppIntent {
           mimeType: mimeType,
           filename: url.lastPathComponent.isEmpty ? "file" : url.lastPathComponent,
           data: data)
+
+        if let altTexts, index < altTexts.count {
+          let desc = altTexts[index].trimmingCharacters(in: .whitespacesAndNewlines)
+          if !desc.isEmpty {
+            let _: MediaAttachment = try await client.put(
+              endpoint: Media.media(
+                id: media.id,
+                json: .init(description: desc)))
+          }
+        }
+
         mediaIds.append(media.id)
       }
 
