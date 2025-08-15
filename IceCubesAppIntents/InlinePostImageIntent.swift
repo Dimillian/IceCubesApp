@@ -5,6 +5,8 @@ import Foundation
 import Models
 import NetworkClient
 import UniformTypeIdentifiers
+import CoreGraphics
+import ImageIO
 
 struct InlinePostImageIntent: AppIntent {
   static let title: LocalizedStringResource = "Send image(s) to Mastodon"
@@ -49,14 +51,9 @@ struct InlinePostImageIntent: AppIntent {
       var mediaIds: [String] = []
       for (index, file) in images.enumerated() {
         guard let url = file.fileURL else { continue }
-        let data = try Data(contentsOf: url)
-        let mimeType: String = {
-          if let ut = UTType(filenameExtension: url.pathExtension), let mt = ut.preferredMIMEType {
-            return mt
-          } else {
-            return "application/octet-stream"
-          }
-        }()
+        let dataAndMime = makeJPEGData(from: url) ?? (try Data(contentsOf: url), mimeType(for: url))
+        let data = dataAndMime.0
+        let mimeType = dataAndMime.1
         let media: MediaAttachment = try await client.mediaUpload(
           endpoint: Media.medias,
           version: .v2,
@@ -88,5 +85,46 @@ struct InlinePostImageIntent: AppIntent {
     } catch {
       return .result(dialog: "An error occured while posting to Mastodon, please try again.")
     }
+  }
+
+  private func mimeType(for url: URL) -> String {
+    if let ut = UTType(filenameExtension: url.pathExtension), let mt = ut.preferredMIMEType {
+      return mt
+    }
+    return "application/octet-stream"
+  }
+
+  private func makeJPEGData(from url: URL) -> (Data, String)? {
+    let sourceOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+    guard let source = CGImageSourceCreateWithURL(url as CFURL, sourceOptions) else {
+      return nil
+    }
+
+    let maxPixelSize: Int = 1536
+    let downsampleOptions = [
+      kCGImageSourceCreateThumbnailFromImageAlways: true,
+      kCGImageSourceCreateThumbnailWithTransform: true,
+      kCGImageSourceThumbnailMaxPixelSize: maxPixelSize,
+    ] as [CFString: Any] as CFDictionary
+
+    guard let cgImage = CGImageSourceCreateThumbnailAtIndex(source, 0, downsampleOptions) else {
+      return nil
+    }
+
+    let data = NSMutableData()
+    guard let imageDestination = CGImageDestinationCreateWithData(
+      data, UTType.jpeg.identifier as CFString, 1, nil)
+    else {
+      return nil
+    }
+
+    let destinationProperties = [
+      kCGImageDestinationLossyCompressionQuality: 0.8
+    ] as CFDictionary
+
+    CGImageDestinationAddImage(imageDestination, cgImage, destinationProperties)
+    CGImageDestinationFinalize(imageDestination)
+
+    return (data as Data, "image/jpeg")
   }
 }
