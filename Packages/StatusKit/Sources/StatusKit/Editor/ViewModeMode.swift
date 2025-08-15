@@ -11,7 +11,7 @@ extension StatusEditor.ViewModel {
     case quoteLink(link: URL)
     case mention(account: Account, visibility: Models.Visibility)
     case shareExtension(items: [NSItemProvider])
-    case imageURL(urls: [URL], caption: String?, visibility: Models.Visibility)
+    case imageURL(urls: [URL], caption: String?, altTexts: [String]?, visibility: Models.Visibility)
 
     var isInShareExtension: Bool {
       switch self {
