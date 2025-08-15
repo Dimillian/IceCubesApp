@@ -21,6 +21,16 @@ struct AppShortcuts: AppShortcutsProvider {
       systemImageName: "square.and.pencil"
     )
     AppShortcut(
+      intent: InlinePostImageIntent(),
+      phrases: [
+        "Send images with \(.applicationName)",
+        "Send an image with \(.applicationName)",
+        "Post photos on Mastodon with \(.applicationName)",
+      ],
+      shortTitle: "Send image(s) (background)",
+      systemImageName: "photo.on.rectangle.angled"
+    )
+    AppShortcut(
       intent: TabIntent(),
       phrases: [
         "Open \(.applicationName)"
