@@ -62,7 +62,7 @@ struct InlinePostImageIntent: AppIntent {
           version: .v2,
           method: "POST",
           mimeType: mimeType,
-          filename: url.lastPathComponent.isEmpty ? "file" : url.lastPathComponent,
+          filename: "file",
           data: data)
 
         if let altTexts, index < altTexts.count {
