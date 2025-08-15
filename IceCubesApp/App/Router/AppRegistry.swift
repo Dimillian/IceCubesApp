@@ -100,8 +100,8 @@ extension View {
       case .prefilledStatusEditor(let text, let visibility):
         StatusEditor.MainView(mode: .new(text: text, visibility: visibility))
           .withEnvironments()
-      case .imageURL(let urls, let visibility):
-        StatusEditor.MainView(mode: .imageURL(urls: urls, visibility: visibility))
+      case .imageURL(let urls, let caption, let visibility):
+        StatusEditor.MainView(mode: .imageURL(urls: urls, caption: caption, visibility: visibility))
           .withEnvironments()
       case .editStatusEditor(let status):
         StatusEditor.MainView(mode: .edit(status: status))
@@ -158,16 +158,14 @@ extension View {
       case .report(let status):
         ReportView(status: status)
           .withEnvironments()
-      case .shareImage(let image, let status):
+      case .shareImage(image: let image, status: let status):
         ActivityView(image: image, status: status)
           .withEnvironments()
       case .editTagGroup(let tagGroup, let onSaved):
         EditTagGroupView(tagGroup: tagGroup, onSaved: onSaved)
           .withEnvironments()
       case .timelineContentFilter:
-        NavigationSheet { TimelineContentFilterView() }
-          .presentationDetents([.medium])
-          .presentationBackground(.thinMaterial)
+        TimelineContentFilterView()
           .withEnvironments()
       case .accountEditInfo:
         EditAccountView()

@@ -328,11 +328,15 @@ extension StatusEditor {
         itemsProvider = items
         visibility = .pub
         processItemsProvider(items: items)
-      case .imageURL(let urls, let visibility):
+      case .imageURL(let urls, let caption, let visibility):
         Task {
           for container in await Self.makeImageContainer(from: urls) {
             prepareToPost(for: container)
           }
+        }
+        if let caption, !caption.isEmpty {
+          statusText = .init(string: caption)
+          selectedRange = .init(location: caption.utf16.count, length: 0)
         }
         self.visibility = visibility
       case .replyTo(let status):

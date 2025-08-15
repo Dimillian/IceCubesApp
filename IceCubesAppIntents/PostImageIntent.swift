@@ -14,6 +14,11 @@ struct PostImageIntent: AppIntent {
     inputConnectionBehavior: .connectToPreviousIntentResult)
   var images: [IntentFile]?
 
+  @Parameter(
+    title: "Caption",
+    requestValueDialog: IntentDialog("Caption for your post"))
+  var caption: String?
+
   func perform() async throws -> some IntentResult {
     AppIntentService.shared.handledIntent = .init(intent: self)
     return .result()
