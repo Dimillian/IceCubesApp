@@ -9,6 +9,10 @@ struct PostIntent: AppIntent {
   @Parameter(title: "Post content", inputConnectionBehavior: .connectToPreviousIntentResult)
   var content: String?
 
+  static var parameterSummary: some ParameterSummary {
+    Summary("Compose \(\.$content)")
+  }
+
   func perform() async throws -> some IntentResult {
     AppIntentService.shared.handledIntent = .init(intent: self)
     return .result()

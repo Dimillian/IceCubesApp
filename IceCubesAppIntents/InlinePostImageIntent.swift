@@ -17,7 +17,7 @@ struct InlinePostImageIntent: AppIntent {
   var account: AppAccountEntity
 
   @Parameter(title: "Post visibility", requestValueDialog: IntentDialog("Visibility of your post"))
-  var visibility: PostVisibility
+  var visibility: PostVisibility = .pub
 
   @Parameter(
     title: "Images",
@@ -35,6 +35,15 @@ struct InlinePostImageIntent: AppIntent {
     title: "Image descriptions",
     requestValueDialog: IntentDialog("Descriptions (ALT) for your images in order"))
   var altTexts: [String]?
+
+  static var parameterSummary: some ParameterSummary {
+    Summary("Send \(\.$images)") {
+      \.$caption
+      \.$altTexts
+      \.$visibility
+      \.$account
+    }
+  }
 
   @MainActor
   func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
@@ -74,12 +83,10 @@ struct InlinePostImageIntent: AppIntent {
         if let altTexts, index < altTexts.count {
           let desc = altTexts[index].trimmingCharacters(in: .whitespacesAndNewlines)
           if !desc.isEmpty {
-            // Best-effort: update media description immediately
             _ = try? await client.put(
               endpoint: Media.media(
                 id: media.id,
                 json: .init(description: desc))) as MediaAttachment
-            // Also include description in the status post as a fallback
             attributes.append(.init(id: media.id, description: desc, thumbnail: nil, focus: nil))
           }
         }

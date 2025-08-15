@@ -44,12 +44,19 @@ struct InlinePostIntent: AppIntent {
   var account: AppAccountEntity
 
   @Parameter(title: "Post visibility", requestValueDialog: IntentDialog("Visibility of your post"))
-  var visibility: PostVisibility
+  var visibility: PostVisibility = .pub
 
   @Parameter(
     title: "Post content",
     requestValueDialog: IntentDialog("Content of the post to be sent to Mastodon"))
   var content: String
+
+  static var parameterSummary: some ParameterSummary {
+    Summary("Send \(\.$content)") {
+      \.$visibility
+      \.$account
+    }
+  }
 
   @MainActor
   func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {

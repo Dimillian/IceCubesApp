@@ -24,6 +24,13 @@ struct PostImageIntent: AppIntent {
     requestValueDialog: IntentDialog("ALT text for the image"))
   var altText: String?
 
+  static var parameterSummary: some ParameterSummary {
+    Summary("Post \(\.$images)") {
+      \.$caption
+      \.$altText
+    }
+  }
+
   func perform() async throws -> some IntentResult {
     AppIntentService.shared.handledIntent = .init(intent: self)
     return .result()

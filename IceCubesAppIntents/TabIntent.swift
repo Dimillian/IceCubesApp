@@ -83,6 +83,10 @@ struct TabIntent: AppIntent {
   @Parameter(title: "Selected tab")
   var tab: TabEnum
 
+  static var parameterSummary: some ParameterSummary {
+    Summary("Open on \(\.$tab)")
+  }
+
   @MainActor
   func perform() async throws -> some IntentResult {
     AppIntentService.shared.handledIntent = .init(intent: self)
