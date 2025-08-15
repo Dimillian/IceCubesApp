@@ -49,8 +49,11 @@ struct InlinePostImageIntent: AppIntent {
 
     do {
       var mediaIds: [String] = []
+      var attributes: [StatusData.MediaAttribute] = []
       for (index, file) in images.enumerated() {
         guard let url = file.fileURL else { continue }
+        _ = url.startAccessingSecurityScopedResource()
+        defer { url.stopAccessingSecurityScopedResource() }
         let data: Data
         let contentType: String
         if let converted = makeJPEGData(from: url) {
@@ -71,10 +74,13 @@ struct InlinePostImageIntent: AppIntent {
         if let altTexts, index < altTexts.count {
           let desc = altTexts[index].trimmingCharacters(in: .whitespacesAndNewlines)
           if !desc.isEmpty {
-            let _: MediaAttachment = try await client.put(
+            // Best-effort: update media description immediately
+            _ = try? await client.put(
               endpoint: Media.media(
                 id: media.id,
-                json: .init(description: desc)))
+                json: .init(description: desc))) as MediaAttachment
+            // Also include description in the status post as a fallback
+            attributes.append(.init(id: media.id, description: desc, thumbnail: nil, focus: nil))
           }
         }
 
@@ -85,11 +91,12 @@ struct InlinePostImageIntent: AppIntent {
       let statusData = StatusData(
         status: statusText,
         visibility: visibility.toAppVisibility,
-        mediaIds: mediaIds)
+        mediaIds: mediaIds,
+        mediaAttributes: attributes.isEmpty ? nil : attributes)
       let _: Status = try await client.post(endpoint: Statuses.postStatus(json: statusData))
       return .result(dialog: "Posted \(mediaIds.count) image(s) on Mastodon")
     } catch {
-      return .result(dialog: "An error occured while posting to Mastodon, please try again.")
+      return .result(dialog: "Error: \(error.localizedDescription)")
     }
   }
 

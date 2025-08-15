@@ -240,6 +240,14 @@ extension StatusEditor {
             multiple: pollVotingFrequency.canVoteMultipleTimes,
             expires_in: pollDuration.rawValue)
         }
+        // Fallback: include any pending containerIdToAltText in mediaAttributes if media got uploaded
+        if !containerIdToAltText.isEmpty {
+          for c in mediaContainers {
+            if let desc = containerIdToAltText[c.id], let id = c.mediaAttachment?.id {
+              mediaAttributes.append(.init(id: id, description: desc, thumbnail: nil, focus: nil))
+            }
+          }
+        }
         let data = StatusData(
           status: statusText.string,
           visibility: visibility,
