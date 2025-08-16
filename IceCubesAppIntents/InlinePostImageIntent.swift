@@ -17,7 +17,7 @@ struct InlinePostImageIntent: AppIntent {
   var account: AppAccountEntity
 
   @Parameter(title: "Post visibility", requestValueDialog: IntentDialog("Visibility of your post"))
-  var visibility: PostVisibility = .pub
+  var visibility: PostVisibility?
 
   @Parameter(
     title: "Images",
@@ -37,7 +37,8 @@ struct InlinePostImageIntent: AppIntent {
   var altTexts: [String]?
 
   static var parameterSummary: some ParameterSummary {
-    Summary("Send \(\.$images)") {
+    Summary("Send image(s)") {
+      \.$images
       \.$caption
       \.$altTexts
       \.$visibility
@@ -94,10 +95,11 @@ struct InlinePostImageIntent: AppIntent {
         mediaIds.append(media.id)
       }
 
+      let chosenVisibility: Models.Visibility = (visibility ?? .pub).toAppVisibility
       let statusText = caption ?? ""
       let statusData = StatusData(
         status: statusText,
-        visibility: visibility.toAppVisibility,
+        visibility: chosenVisibility,
         mediaIds: mediaIds,
         mediaAttributes: attributes.isEmpty ? nil : attributes)
       let _: Status = try await client.post(endpoint: Statuses.postStatus(json: statusData))

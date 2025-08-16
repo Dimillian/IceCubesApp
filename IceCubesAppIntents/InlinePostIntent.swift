@@ -44,7 +44,7 @@ struct InlinePostIntent: AppIntent {
   var account: AppAccountEntity
 
   @Parameter(title: "Post visibility", requestValueDialog: IntentDialog("Visibility of your post"))
-  var visibility: PostVisibility = .pub
+  var visibility: PostVisibility?
 
   @Parameter(
     title: "Post content",
@@ -52,17 +52,15 @@ struct InlinePostIntent: AppIntent {
   var content: String
 
   static var parameterSummary: some ParameterSummary {
-    Summary("Send \(\.$content)") {
-      \.$visibility
-      \.$account
-    }
+    Summary("Send \(\.$content)")
   }
 
   @MainActor
   func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView {
     let client = MastodonClient(
       server: account.account.server, version: .v1, oauthToken: account.account.oauthToken)
-    let status = StatusData(status: content, visibility: visibility.toAppVisibility)
+    let chosenVisibility: Models.Visibility = (visibility ?? .pub).toAppVisibility
+    let status = StatusData(status: content, visibility: chosenVisibility)
     do {
       let status: Status = try await client.post(endpoint: Statuses.postStatus(json: status))
       return .result(dialog: "\(status.content.asRawText) was posted on Mastodon")

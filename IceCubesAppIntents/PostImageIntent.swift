@@ -25,7 +25,8 @@ struct PostImageIntent: AppIntent {
   var altText: String?
 
   static var parameterSummary: some ParameterSummary {
-    Summary("Post \(\.$images)") {
+    Summary("Post image(s)") {
+      \.$images
       \.$caption
       \.$altText
     }
