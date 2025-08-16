@@ -22,7 +22,7 @@ struct ToolbarTab: ToolbarContent {
           AppAccountsSelectorView(
             routerPath: routerPath,
             avatarConfig: .embed)
-            .offset(x: -8)
+            .offset(x: -12)
         }
         .sharedBackgroundVisibility(.hidden)
       } else {
