@@ -24,9 +24,10 @@ public struct ExploreView: View {
   @State private var trendingStatuses: [Status] = []
   @State private var trendingLinks: [Card] = []
   @State private var scrollToTopVisible = false
-  
+
   private var allSectionsEmpty: Bool {
-    trendingLinks.isEmpty && trendingTags.isEmpty && trendingStatuses.isEmpty && suggestedAccounts.isEmpty
+    trendingLinks.isEmpty && trendingTags.isEmpty && trendingStatuses.isEmpty
+      && suggestedAccounts.isEmpty
   }
 
   public init() {}
@@ -122,7 +123,7 @@ public struct ExploreView: View {
       .listStyle(.grouped)
       #if !os(visionOS)
         .scrollContentBackground(.hidden)
-        .background(theme.secondaryBackgroundColor)
+        .background(theme.secondaryBackgroundColor.edgesIgnoringSafeArea(.all))
       #endif
       .navigationTitle("explore.navigation-title")
       .navigationBarTitleDisplayMode(.inline)
@@ -143,7 +144,6 @@ public struct ExploreView: View {
     }
   }
 
-
   private var loadingView: some View {
     ForEach(Status.placeholders()) { status in
       StatusRowExternalView(
@@ -157,8 +157,6 @@ public struct ExploreView: View {
       #endif
     }
   }
-
-
 
   private var scrollToTopView: some View {
     ScrollToView()
@@ -180,7 +178,7 @@ extension ExploreView {
       trendingTags = data.trendingTags
       trendingStatuses = data.trendingStatuses
       trendingLinks = data.trendingLinks
-      
+
       suggestedAccountsRelationShips = try await client.get(
         endpoint: Accounts.relationships(ids: suggestedAccounts.map(\.id)))
       withAnimation {
@@ -190,14 +188,14 @@ extension ExploreView {
       isLoaded = true
     }
   }
-  
+
   private struct TrendingData {
     let suggestedAccounts: [Account]
     let trendingTags: [Tag]
     let trendingStatuses: [Status]
     let trendingLinks: [Card]
   }
-  
+
   private func fetchTrendingsData() async throws -> TrendingData {
     async let suggestedAccounts: [Account] = client.get(endpoint: Accounts.suggestions)
     async let trendingTags: [Tag] = client.get(endpoint: Trends.tags)
@@ -209,7 +207,7 @@ extension ExploreView {
       trendingStatuses: trendingStatuses,
       trendingLinks: trendingLinks)
   }
-  
+
   private func search() async {
     guard !searchQuery.isEmpty else { return }
     isSearching = true
@@ -233,7 +231,7 @@ extension ExploreView {
       isSearching = false
     }
   }
-  
+
   private func fetchNextPage(of type: Search.EntityType) async {
     guard !searchQuery.isEmpty,
       let results = results[searchQuery]
@@ -248,7 +246,7 @@ extension ExploreView {
         case .statuses:
           results.statuses.count
         }
-      
+
       var newPageResults: SearchResults = try await client.get(
         endpoint: Search.search(
           query: searchQuery,
@@ -262,7 +260,7 @@ extension ExploreView {
             endpoint: Accounts.relationships(ids: newPageResults.accounts.map(\.id)))
         newPageResults.relationships = relationships
       }
-      
+
       switch type {
       case .accounts:
         self.results[searchQuery]?.accounts.append(contentsOf: newPageResults.accounts)

@@ -26,13 +26,21 @@ extension StatusEditor {
     @FocusState private var editorFocusState: EditorFocusState?
 
     private var focusedSEVM: ViewModel {
-      if case let .followUp(id) = editorFocusState,
+      if case .followUp(let id) = editorFocusState,
         let sevm = followUpSEVMs.first(where: { $0.id == id })
       {
         return sevm
       }
 
       return mainSEVM
+    }
+
+    @ViewBuilder
+    private var backgroundColor: some View {
+      if presentationDetent == .large {
+        theme.primaryBackgroundColor.edgesIgnoringSafeArea(.all)
+      }
+      Color.clear
     }
 
     public init(mode: ViewModel.Mode) {
@@ -78,7 +86,7 @@ extension StatusEditor {
           .animation(.bouncy(duration: 0.3), value: editorFocusState)
           .animation(.bouncy(duration: 0.3), value: followUpSEVMs)
           #if !os(visionOS)
-            .background(presentationDetent == .large ? theme.primaryBackgroundColor : .clear)
+            .background(backgroundColor)
           #endif
           #if os(visionOS)
             .ornament(attachmentAnchor: .scene(.leading)) {
