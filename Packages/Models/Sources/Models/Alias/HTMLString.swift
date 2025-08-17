@@ -14,12 +14,6 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
   public private(set) var links = [Link]()
 
   public var asAttributedString: AttributedString = .init()
-  
-  // Deprecated: Use asAttributedString instead
-  // Kept for backward compatibility
-  public var asSafeMarkdownAttributedString: AttributedString {
-    asAttributedString
-  }
 
   public init(from decoder: Decoder) {
     var alreadyDecoded = false

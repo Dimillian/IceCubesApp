@@ -227,8 +227,8 @@ struct StatusRowActionsView: View {
     .fixedSize(horizontal: false, vertical: true)
     .sheet(isPresented: $showTextForSelection) {
       let content =
-        viewModel.status.reblog?.content.asSafeMarkdownAttributedString
-        ?? viewModel.status.content.asSafeMarkdownAttributedString
+        viewModel.status.reblog?.content.asAttributedString
+        ?? viewModel.status.content.asAttributedString
       StatusRowSelectableTextView(content: content)
         .tint(theme.tintColor)
     }

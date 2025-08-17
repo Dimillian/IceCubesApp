@@ -164,7 +164,7 @@ struct AccountInfoView: View {
     if let translation = translation, !isLoadingTranslation {
       GroupBox {
         VStack(alignment: .leading, spacing: 4) {
-          Text(translation.content.asSafeMarkdownAttributedString)
+          Text(translation.content.asAttributedString)
             .font(.scaledBody)
           Text(
             getLocalizedStringLabel(

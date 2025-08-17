@@ -57,7 +57,7 @@ struct PostsWidgetView: View {
         label: {
           VStack(alignment: .leading, spacing: 2) {
             makeStatusHeaderView(status)
-            Text(status.content.asSafeMarkdownAttributedString)
+            Text(status.content.asAttributedString)
               .font(.footnote)
               .lineLimit(contentLineLimit)
               .fixedSize(horizontal: false, vertical: true)

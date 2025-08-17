@@ -233,8 +233,8 @@ public struct StatusRowView: View {
     }
     .sheet(isPresented: $showSelectableText) {
       let content =
-        viewModel.status.reblog?.content.asSafeMarkdownAttributedString
-        ?? viewModel.status.content.asSafeMarkdownAttributedString
+        viewModel.status.reblog?.content.asAttributedString
+        ?? viewModel.status.content.asAttributedString
       StatusRowSelectableTextView(content: content)
     }
     .environment(

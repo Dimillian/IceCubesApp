@@ -75,7 +75,7 @@ struct StatusRowTranslateView: View {
     {
       GroupBox {
         VStack(alignment: .leading, spacing: 4) {
-          Text(translation.content.asSafeMarkdownAttributedString)
+          Text(translation.content.asAttributedString)
             .font(.scaledBody)
           Text(
             getLocalizedString(

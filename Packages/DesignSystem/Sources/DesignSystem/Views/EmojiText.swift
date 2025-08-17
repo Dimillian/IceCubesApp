@@ -28,7 +28,7 @@ public struct EmojiTextApp: View {
         .append(text: append)
         .lineLimit(lineLimit)
     } else if emojis.isEmpty {
-      Text(markdown.asSafeMarkdownAttributedString)
+      Text(markdown.asAttributedString)
         .lineLimit(lineLimit)
         .environment(\.layoutDirection, isRTL() ? .rightToLeft : .leftToRight)
     } else {
