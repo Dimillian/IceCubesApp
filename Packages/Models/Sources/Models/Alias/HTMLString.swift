@@ -13,9 +13,14 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
   public var statusesURLs = [URL]()
   public private(set) var links = [Link]()
 
-  public var asSafeMarkdownAttributedString: AttributedString = .init()
-  private var main_regex: NSRegularExpression?
-  private var underscore_regex: NSRegularExpression?
+  public var asAttributedString: AttributedString = .init()
+  
+  // Deprecated: Use asAttributedString instead
+  // Kept for backward compatibility
+  public var asSafeMarkdownAttributedString: AttributedString {
+    asAttributedString
+  }
+
   public init(from decoder: Decoder) {
     var alreadyDecoded = false
     do {
@@ -36,24 +41,10 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     }
 
     if !alreadyDecoded {
-      // https://daringfireball.net/projects/markdown/syntax
-      // Pre-escape \ ` _ * ~ and [ as these are the only
-      // characters the markdown parser uses when it renders
-      // to attributed text. Note that ~ for strikethrough is
-      // not documented in the syntax docs but is used by
-      // AttributedString.
-      main_regex = try? NSRegularExpression(
-        pattern: "([\\*\\`\\~\\[\\\\])", options: .caseInsensitive)
-      // don't escape underscores that are between colons, they are most likely custom emoji
-      underscore_regex = try? NSRegularExpression(
-        pattern: "(?!\\B:[^:]*)(_)(?![^:]*:\\B)", options: .caseInsensitive)
-
-      asMarkdown = ""
       do {
         let document: Document = try SwiftSoup.parse(htmlValue)
-        var listCounters: [Int] = []
-        handleNode(node: document, listCounters: &listCounters)
 
+        // Extract raw text
         document.outputSettings(OutputSettings().prettyPrint(pretty: false))
         try document.select("br").after("\n")
         try document.select("p").after("\n\n")
@@ -68,22 +59,34 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         }
         asRawText = (try? Entities.unescape(text)) ?? text
 
-        if asMarkdown.hasPrefix("\n") {
-          _ = asMarkdown.removeFirst()
-        }
+        // Convert HTML directly to AttributedString
+        asAttributedString = try convertToAttributedString(document: document)
+
+        // Generate simplified markdown for backward compatibility
+        // This is only used for fallback/caching purposes
+        asMarkdown = generateSimpleMarkdown(from: document)
 
       } catch {
         asRawText = htmlValue
+        asAttributedString = AttributedString(htmlValue)
+        asMarkdown = htmlValue
       }
-    }
-
-    do {
-      let options = AttributedString.MarkdownParsingOptions(
-        allowsExtendedAttributes: true,
-        interpretedSyntax: .inlineOnlyPreservingWhitespace)
-      asSafeMarkdownAttributedString = try AttributedString(markdown: asMarkdown, options: options)
-    } catch {
-      asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+    } else {
+      // Already decoded from cache - convert HTML again for consistency
+      do {
+        let document = try SwiftSoup.parse(htmlValue)
+        asAttributedString = try convertToAttributedString(document: document)
+      } catch {
+        // Fallback to markdown parsing if HTML parsing fails
+        do {
+          let options = AttributedString.MarkdownParsingOptions(
+            allowsExtendedAttributes: true,
+            interpretedSyntax: .inlineOnlyPreservingWhitespace)
+          asAttributedString = try AttributedString(markdown: asMarkdown, options: options)
+        } catch {
+          asAttributedString = AttributedString(stringLiteral: htmlValue)
+        }
+      }
     }
   }
 
@@ -98,13 +101,13 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         let options = AttributedString.MarkdownParsingOptions(
           allowsExtendedAttributes: true,
           interpretedSyntax: .inlineOnlyPreservingWhitespace)
-        asSafeMarkdownAttributedString = try AttributedString(
+        asAttributedString = try AttributedString(
           markdown: asMarkdown, options: options)
       } catch {
-        asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+        asAttributedString = AttributedString(stringLiteral: htmlValue)
       }
     } else {
-      asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+      asAttributedString = AttributedString(stringLiteral: htmlValue)
     }
   }
 
@@ -117,172 +120,329 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     try container.encode(links, forKey: .links)
   }
 
-  private mutating func handleNode(
-    node: SwiftSoup.Node,
-    indent: Int? = 0,
-    skipParagraph: Bool = false,
-    listCounters: inout [Int]
+  // New direct HTML to AttributedString conversion
+  private mutating func convertToAttributedString(document: Document) throws -> AttributedString {
+    var result = AttributedString()
+    processNode(document, into: &result)
+    return result
+  }
+
+  private mutating func processNode(
+    _ node: SwiftSoup.Node,
+    into attributedString: inout AttributedString,
+    attributes: AttributeContainer = AttributeContainer()
   ) {
-    do {
-      if let className = try? node.attr("class") {
-        if className == "invisible" {
-          // don't display
-          return
+    // Check for invisible or special classes
+    if let className = try? node.attr("class") {
+      if className == "invisible" {
+        return
+      }
+      if className == "ellipsis" {
+        for child in node.getChildNodes() {
+          processNode(child, into: &attributedString, attributes: attributes)
+        }
+        var ellipsis = AttributedString("…")
+        ellipsis.mergeAttributes(attributes)
+        attributedString += ellipsis
+        return
+      }
+    }
+
+    var currentAttributes = attributes
+
+    switch node.nodeName() {
+    case "#text":
+      var text = node.description
+      text = (try? Entities.unescape(text)) ?? text
+      // Strip newlines - they should be sent as <br>s
+      text = text.replacingOccurrences(of: "\n", with: "")
+        .replacingOccurrences(of: "\u{2028}", with: "")
+
+      var textString = AttributedString(text)
+      textString.mergeAttributes(currentAttributes)
+      attributedString += textString
+
+    case "p":
+      if !attributedString.characters.isEmpty {
+        attributedString += AttributedString("\n\n")
+      }
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+
+    case "br":
+      attributedString += AttributedString("\n")
+
+    case "strong", "b":
+      currentAttributes.font = .body.bold()
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+
+    case "em", "i":
+      currentAttributes.font = .body.italic()
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+
+    case "del", "s", "strike":
+      currentAttributes.strikethroughStyle = .single
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+
+    case "u":
+      currentAttributes.underlineStyle = .single
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+
+    case "code":
+      currentAttributes.font = .system(.body, design: .monospaced)
+      currentAttributes.backgroundColor = Color.gray.opacity(0.15)
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+
+    case "pre":
+      currentAttributes.font = .system(.body, design: .monospaced)
+      currentAttributes.backgroundColor = Color.gray.opacity(0.15)
+      if !attributedString.characters.isEmpty {
+        attributedString += AttributedString("\n")
+      }
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+      attributedString += AttributedString("\n")
+
+    case "blockquote":
+      // Add quote styling with visual indicator
+      currentAttributes.foregroundColor = Color.secondary
+
+      if !attributedString.characters.isEmpty {
+        attributedString += AttributedString("\n")
+      }
+
+      // Add quote indicator
+      var quotePrefix = AttributedString("▐ ")
+      quotePrefix.foregroundColor = Color.accentColor
+      attributedString += quotePrefix
+
+      // Process blockquote content
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+
+      attributedString += AttributedString("\n")
+
+    case "a":
+      if let href = try? node.attr("href"),
+        let url = URL(string: href) ?? URL(string: href, encodePath: true)
+      {
+
+        // Track status URLs
+        if Int(url.lastPathComponent) != nil {
+          statusesURLs.append(url)
+        } else if url.host() == "www.threads.net" || url.host() == "threads.net",
+          url.pathComponents.count == 4,
+          url.pathComponents[2] == "post"
+        {
+          statusesURLs.append(url)
         }
 
-        if className == "ellipsis" {
-          // descend into this one now and
-          // append the ellipsis
-          for nn in node.getChildNodes() {
-            handleNode(node: nn, indent: indent, listCounters: &listCounters)
-          }
-          asMarkdown += "…"
-          return
+        currentAttributes.link = url
+        currentAttributes.foregroundColor = Color.accentColor
+
+        let startIndex = attributedString.endIndex
+        for child in node.getChildNodes() {
+          processNode(child, into: &attributedString, attributes: currentAttributes)
+        }
+        let endIndex = attributedString.endIndex
+
+        let displayString = String(attributedString[startIndex..<endIndex].characters)
+        links.append(Link(url, displayString: displayString))
+      } else {
+        for child in node.getChildNodes() {
+          processNode(child, into: &attributedString, attributes: attributes)
         }
       }
 
-      if node.nodeName() == "p" {
-        if asMarkdown.count > 0 && !skipParagraph {
-          asMarkdown += "\n\n"
-        }
-      } else if node.nodeName() == "br" {
-        if asMarkdown.count > 0 {  // ignore first opening <br>
-          asMarkdown += "\n"
-        }
-        if (indent ?? 0) > 0 {
-          asMarkdown += "\n"
-        }
-      } else if node.nodeName() == "a" {
-        let href = try node.attr("href")
-        if href != "" {
-          if let url = URL(string: href) {
-            if Int(url.lastPathComponent) != nil {
-              statusesURLs.append(url)
-            } else if url.host() == "www.threads.net" || url.host() == "threads.net",
-              url.pathComponents.count == 4,
-              url.pathComponents[2] == "post"
-            {
-              statusesURLs.append(url)
-            }
-          }
-        }
-        asMarkdown += "["
-        let start = asMarkdown.endIndex
-        // descend into this node now so we can wrap the
-        // inner part of the link in the right markup
-        for nn in node.getChildNodes() {
-          handleNode(node: nn, listCounters: &listCounters)
-        }
-        let finish = asMarkdown.endIndex
+    case "h1", "h2", "h3", "h4", "h5", "h6":
+      let level = Int(String(node.nodeName().dropFirst())) ?? 1
+      let sizes: [Font] = [.largeTitle, .title, .title2, .title3, .headline, .subheadline]
+      currentAttributes.font = sizes[min(level - 1, sizes.count - 1)].bold()
 
-        var linkRef = href
+      if !attributedString.characters.isEmpty {
+        attributedString += AttributedString("\n\n")
+      }
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+      attributedString += AttributedString("\n")
 
-        // Try creating a URL from the string. If it fails, try URL encoding
-        //   the string first.
-        var url = URL(string: href)
-        if url == nil {
-          url = URL(string: href, encodePath: true)
-        }
-        if let linkUrl = url {
-          linkRef = linkUrl.absoluteString
-          let displayString = asMarkdown[start..<finish]
-          links.append(Link(linkUrl, displayString: String(displayString)))
-        }
+    case "ul", "ol":
+      if !attributedString.characters.isEmpty {
+        attributedString += AttributedString("\n")
+      }
 
-        asMarkdown += "]("
-        asMarkdown += linkRef
-        asMarkdown += ")"
-
-        return
-      } else if node.nodeName() == "#text" {
-        var txt = node.description
-
-        txt = (try? Entities.unescape(txt)) ?? txt
-
-        if let underscore_regex, let main_regex {
-          //  This is the markdown escaper
-          txt = main_regex.stringByReplacingMatches(
-            in: txt, options: [], range: NSRange(location: 0, length: txt.count),
-            withTemplate: "\\\\$1")
-          txt = underscore_regex.stringByReplacingMatches(
-            in: txt, options: [], range: NSRange(location: 0, length: txt.count),
-            withTemplate: "\\\\$1")
-        }
-        // Strip newlines and line separators - they should be being sent as <br>s
-        asMarkdown += txt.replacingOccurrences(of: "\n", with: "").replacingOccurrences(
-          of: "\u{2028}", with: "")
-      } else if node.nodeName() == "blockquote" {
-        asMarkdown += "\n\n`"
-        for nn in node.getChildNodes() {
-          handleNode(node: nn, indent: indent, listCounters: &listCounters)
-        }
-        asMarkdown += "`"
-        return
-      } else if node.nodeName() == "strong" || node.nodeName() == "b" {
-        asMarkdown += "**"
-        for nn in node.getChildNodes() {
-          handleNode(node: nn, indent: indent, listCounters: &listCounters)
-        }
-        asMarkdown += "**"
-        return
-      } else if node.nodeName() == "em" || node.nodeName() == "i" {
-        asMarkdown += "_"
-        for nn in node.getChildNodes() {
-          handleNode(node: nn, indent: indent, listCounters: &listCounters)
-        }
-        asMarkdown += "_"
-        return
-      } else if node.nodeName() == "ul" || node.nodeName() == "ol" {
-
-        if skipParagraph {
-          asMarkdown += "\n"
+      var listCounter = 1
+      for child in node.getChildNodes() {
+        if child.nodeName() == "li" {
+          processListItem(
+            child,
+            into: &attributedString,
+            ordered: node.nodeName() == "ol",
+            index: listCounter,
+            attributes: currentAttributes
+          )
+          listCounter += 1
         } else {
-          asMarkdown += "\n\n"
+          processNode(child, into: &attributedString, attributes: currentAttributes)
         }
-
-        var listCounters = listCounters
-
-        if node.nodeName() == "ol" {
-          listCounters.append(1)  // Start numbering for a new ordered list
-        }
-
-        for nn in node.getChildNodes() {
-          handleNode(node: nn, indent: (indent ?? 0) + 1, listCounters: &listCounters)
-        }
-
-        if node.nodeName() == "ol" {
-          listCounters.removeLast()
-        }
-
-        return
-      } else if node.nodeName() == "li" {
-        asMarkdown += "   "
-        if let indent, indent > 1 {
-          for _ in 0..<indent {
-            asMarkdown += "   "
-          }
-          asMarkdown += "- "
-        }
-
-        if listCounters.isEmpty {
-          asMarkdown += "• "
-        } else {
-          let currentIndex = listCounters.count - 1
-          asMarkdown += "\(listCounters[currentIndex]). "
-          listCounters[currentIndex] += 1
-        }
-
-        for nn in node.getChildNodes() {
-          handleNode(node: nn, indent: indent, skipParagraph: true, listCounters: &listCounters)
-        }
-        asMarkdown += "\n"
-        return
       }
 
-      for n in node.getChildNodes() {
-        handleNode(node: n, indent: indent, listCounters: &listCounters)
+    case "sup":
+      currentAttributes.baselineOffset = 4
+      currentAttributes.font = .caption
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
       }
-    } catch {}
+
+    case "sub":
+      currentAttributes.baselineOffset = -4
+      currentAttributes.font = .caption
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+
+    case "mark":
+      currentAttributes.backgroundColor = Color.yellow.opacity(0.3)
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+
+    case "abbr":
+      if let title = try? node.attr("title"), !title.isEmpty {
+        currentAttributes.underlineStyle = .single
+        // Note: underlineColor can be set but requires UIKit bridge
+      }
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+
+    case "span":
+      // Process span with possible inline styles
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+
+    default:
+      // Process children for unknown tags
+      for child in node.getChildNodes() {
+        processNode(child, into: &attributedString, attributes: currentAttributes)
+      }
+    }
+  }
+
+  private mutating func processListItem(
+    _ node: SwiftSoup.Node,
+    into attributedString: inout AttributedString,
+    ordered: Bool,
+    index: Int,
+    attributes: AttributeContainer
+  ) {
+    let bullet = ordered ? "\(index). " : "• "
+    var bulletString = AttributedString("   \(bullet)")
+    bulletString.mergeAttributes(attributes)
+    attributedString += bulletString
+
+    for child in node.getChildNodes() {
+      processNode(child, into: &attributedString, attributes: attributes)
+    }
+    attributedString += AttributedString("\n")
+  }
+
+  // Simplified markdown generation for backward compatibility
+  private mutating func generateSimpleMarkdown(from document: Document) -> String {
+    var markdown = ""
+    generateMarkdownFromNode(document, into: &markdown)
+    if markdown.hasPrefix("\n") {
+      markdown.removeFirst()
+    }
+    return markdown
+  }
+
+  private mutating func generateMarkdownFromNode(
+    _ node: SwiftSoup.Node,
+    into markdown: inout String
+  ) {
+    // Simplified version for caching/fallback only
+    switch node.nodeName() {
+    case "#text":
+      var text = node.description
+      text = (try? Entities.unescape(text)) ?? text
+      markdown += text.replacingOccurrences(of: "\n", with: "")
+        .replacingOccurrences(of: "\u{2028}", with: "")
+
+    case "p":
+      if !markdown.isEmpty {
+        markdown += "\n\n"
+      }
+      for child in node.getChildNodes() {
+        generateMarkdownFromNode(child, into: &markdown)
+      }
+
+    case "br":
+      markdown += "\n"
+
+    case "strong", "b":
+      markdown += "**"
+      for child in node.getChildNodes() {
+        generateMarkdownFromNode(child, into: &markdown)
+      }
+      markdown += "**"
+
+    case "em", "i":
+      markdown += "_"
+      for child in node.getChildNodes() {
+        generateMarkdownFromNode(child, into: &markdown)
+      }
+      markdown += "_"
+
+    case "del", "s", "strike":
+      markdown += "~~"
+      for child in node.getChildNodes() {
+        generateMarkdownFromNode(child, into: &markdown)
+      }
+      markdown += "~~"
+
+    case "code":
+      markdown += "`"
+      for child in node.getChildNodes() {
+        generateMarkdownFromNode(child, into: &markdown)
+      }
+      markdown += "`"
+
+    case "blockquote":
+      markdown += "\n> "
+      for child in node.getChildNodes() {
+        generateMarkdownFromNode(child, into: &markdown)
+      }
+      markdown += "\n"
+
+    case "a":
+      let href = (try? node.attr("href")) ?? ""
+      markdown += "["
+      for child in node.getChildNodes() {
+        generateMarkdownFromNode(child, into: &markdown)
+      }
+      markdown += "](\(href))"
+
+    default:
+      for child in node.getChildNodes() {
+        generateMarkdownFromNode(child, into: &markdown)
+      }
+    }
   }
 
   public struct Link: Codable, Hashable, Identifiable {
