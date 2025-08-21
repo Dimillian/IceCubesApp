@@ -1,9 +1,7 @@
 import Foundation
 import NetworkClient
 import SwiftUI
-#if !targetEnvironment(macCatalyst)
 import FoundationModels
-#endif
 
 extension StatusEditor {
   @available(iOS 26.0, *)
@@ -30,7 +28,6 @@ extension StatusEditor {
       }
     }
     
-    #if !targetEnvironment(macCatalyst)
     private static let model = SystemLanguageModel.default
         
     public static var isAvailable: Bool {
@@ -81,7 +78,6 @@ extension StatusEditor {
         Self.session.streamResponse(to: "Rewrite this text to be more \(tone.rawValue). Here is the message to rewrite: \(message)",
                                   options: .init(temperature: 0.8))
     }
-    #endif
   }
   
   @available(iOS 26.0, *)

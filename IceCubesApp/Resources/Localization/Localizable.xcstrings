@@ -20716,6 +20716,9 @@
         }
       }
     },
+    "ALT text for the image" : {
+
+    },
     "An error occured while posting to Mastodon, please try again." : {
       "localizations" : {
         "de" : {
@@ -21027,6 +21030,12 @@
           }
         }
       }
+    },
+    "Caption" : {
+
+    },
+    "Caption for your post" : {
+
     },
     "Compact Layout" : {
       "localizations" : {
@@ -22852,6 +22861,9 @@
           }
         }
       }
+    },
+    "Descriptions (ALT) for your images in order" : {
+
     },
     "design.tag.n-posts-from-n-participants %lld %lld" : {
       "comment" : "MARK: Package: DesignSystem",
@@ -27227,6 +27239,9 @@
           }
         }
       }
+    },
+    "Error: %@" : {
+
     },
     "Explore & Trending" : {
       "localizations" : {
@@ -32008,6 +32023,12 @@
         }
       }
     },
+    "Image description" : {
+
+    },
+    "Image descriptions" : {
+
+    },
     "Image to post on Mastodon" : {
       "localizations" : {
         "de" : {
@@ -32065,6 +32086,12 @@
           }
         }
       }
+    },
+    "Image(s) to post on Mastodon" : {
+
+    },
+    "Images" : {
+
     },
     "Instance" : {
       "extractionState" : "manual",
@@ -36534,6 +36561,9 @@
           }
         }
       }
+    },
+    "No images provided to post." : {
+
     },
     "Notifications" : {
       "localizations" : {
@@ -42365,6 +42395,9 @@
         }
       }
     },
+    "Posted %lld image(s) on Mastodon" : {
+
+    },
     "Privacy Policy" : {
       "localizations" : {
         "es" : {
@@ -43436,6 +43469,15 @@
           }
         }
       }
+    },
+    "Send an image or multiple images to Mastodon with Ice Cubes without opening the app" : {
+
+    },
+    "Send image(s) (background)" : {
+
+    },
+    "Send image(s) to Mastodon" : {
+
     },
     "Send post to Mastodon" : {
       "localizations" : {
