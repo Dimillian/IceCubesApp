@@ -18704,6 +18704,126 @@
         }
       }
     },
+    "action.cancel" : {
+      "comment" : "MARK: Common strings",
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасаваць"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel·la"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abbrechen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utzi"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuler"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annulla"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キャンセル"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avbryt"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuleer"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anuluj"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İptal Et"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відміна"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
     "action.delete" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -20360,52 +20480,6 @@
         }
       }
     },
-    "AI" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IA"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IA"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "IA"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "생성형 AI"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "人工智慧"
-          }
-        },
-        "zh-Hans" : {
-           "stringUnit" : {
-            "state" : "translated",
-            "value" : "AI"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AI"
-          }
-        }
-      }
-    },
     "alert.button.ok" : {
       "localizations" : {
         "be" : {
@@ -20641,6 +20715,9 @@
           }
         }
       }
+    },
+    "ALT text for the image" : {
+
     },
     "An error occured while posting to Mastodon, please try again." : {
       "localizations" : {
@@ -20954,6 +21031,12 @@
         }
       }
     },
+    "Caption" : {
+
+    },
+    "Caption for your post" : {
+
+    },
     "Compact Layout" : {
       "localizations" : {
         "es" : {
@@ -20980,10 +21063,10 @@
             "value" : "여백 넓게 표시"
           }
         },
-        "zh-Hant" : {
+        "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "精簡排版"
+            "value" : "Sıkışık Düzen"
           }
         },
         "zh-Hans" : {
@@ -20992,10 +21075,10 @@
             "value" : "紧凑布局"
           }
         },
-        "tr" : {
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sıkışık Düzen"
+            "value" : "精簡排版"
           }
         }
       }
@@ -22779,6 +22862,9 @@
         }
       }
     },
+    "Descriptions (ALT) for your images in order" : {
+
+    },
     "design.tag.n-posts-from-n-participants %lld %lld" : {
       "comment" : "MARK: Package: DesignSystem",
       "extractionState" : "manual",
@@ -23935,98 +24021,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "嘟文預覽"
-          }
-        }
-      }
-    },
-    "Disable to hide AI assisted tool options such as copywritting and alt-image description generated using AI. Uses OpenAI API. See our Privacy Policy for more information." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desactiva para ocultar la herramienta de asistencia de IA como la redacción y la generación de texto alternativo para imágenes con IA. Utiliza la API de OpenAI. Consulta nuestra Política de Privacidad para más información."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Désactiver pour cacher les options d'outils d'aideavec l'IA telles que le copywriting et la description d’images générées par l'IA. Utilise l'API OpenAI. Consulter notre Politique de confidentialité pour plus d'informations."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Disabilita per nascondere le opzioni di strumenti basati sull’IA come i suggerimenti di scrittura e la generazione di testo alternativo. Utilizza l’API di OpenAI. Consulta la nostra Politica sulla privacy per maggiori informazioni"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AI 도우미 표시 옵션을 끄면 글 간결하게 바꾸기, 미디어 설명 생성과 같은 생성형 AI를 활용한 기능이 표시되지 않습니다. AI 도우미는 OpenAI API를 사용합니다. 자세한 내용은 개인정보 처리방침을 확인해주세요."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resim altı açıklama ve telif hakkı yazımını AI yardımcı araçları ile desteklemeyi devre dışı bırakır. OpenAI API’ı kullanır. Daha fazlasını öğrenmek için Gizlilik Politikamıza göz atın."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "禁用以隐藏AI辅助工具选项，例如使用AI生成文案和图片描述文本。内容使用 OpenAI API 生成。如需了解更多信息，请参阅我们的隐私政策。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "停用將隱藏如寫作和圖片描述等生成人工智慧工具。本功能利用 OpenAI API，詳情請見隱私政策。"
-          }
-        }
-      }
-    },
-    "Enabling post streaming will automatically add new posts at the top of your home timeline. Disable if you get performance issues." : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activar la actualización automática de publicaciones añadirá publicaciones nuevas a tu cronología principal. Desactívalo si tienes problemas de rendimiento."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activer le streaming des messages ajoutera automatiquement de nouveaux messages en haut de votre timeline. Désactiver si vous avez des problèmes de performance."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abilitando lo streaming, i nuovi post verranno aggiunti automaticamente in cima alla home. Disabilita se riscontri problemi di prestazioni."
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "글 스트리밍 옵션을 켜면 홈에서 새 글이 올라올 때마다 자동으로 표시합니다. 성능 문제가 발생한다면 이 옵션을 끄세요."
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yayın akışını etkinleştirmek, gönderileri otomatik olarak akışın tepesine ekler. Performans sorunları yaşıyorsanız kapatın."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "启用流式传输会自动将新嘟文添加到主页时间线的顶部。如果出现性能问题，请禁用此功能。"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "嘟文串流將自動把新嘟文加入您時間軸頂端。如果遭遇效能問題請停用。"
           }
         }
       }
@@ -27245,6 +27239,9 @@
           }
         }
       }
+    },
+    "Error: %@" : {
+
     },
     "Explore & Trending" : {
       "localizations" : {
@@ -32026,6 +32023,12 @@
         }
       }
     },
+    "Image description" : {
+
+    },
+    "Image descriptions" : {
+
+    },
     "Image to post on Mastodon" : {
       "localizations" : {
         "de" : {
@@ -32083,6 +32086,12 @@
           }
         }
       }
+    },
+    "Image(s) to post on Mastodon" : {
+
+    },
+    "Images" : {
+
     },
     "Instance" : {
       "extractionState" : "manual",
@@ -36552,6 +36561,9 @@
           }
         }
       }
+    },
+    "No images provided to post." : {
+
     },
     "Notifications" : {
       "localizations" : {
@@ -42383,51 +42395,8 @@
         }
       }
     },
-    "Posts streaming" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualización automática de mensajes"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Flux de publications"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Post in streaming"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "글 스트리밍"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yayın Akışı"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "启用嘟文流式传输"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "嘟文串流"
-          }
-        }
-      }
+    "Posted %lld image(s) on Mastodon" : {
+
     },
     "Privacy Policy" : {
       "localizations" : {
@@ -42821,10 +42790,10 @@
             "value" : "캐시 데이터로 저장된 모든 미디어를 삭제합니다."
           }
         },
-        "zh-Hant" : {
+        "tr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "刪除快取記憶裡所有影像和視訊"
+            "value" : "Önbellekteki tüm resim ve videoları kaldırın"
           }
         },
         "zh-Hans" : {
@@ -42833,10 +42802,10 @@
             "value" : "移除全部图片和视频缓存"
           }
         },
-        "tr" : {
+        "zh-Hant" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Önbellekteki tüm resim ve videoları kaldırın"
+            "value" : "刪除快取記憶裡所有影像和視訊"
           }
         }
       }
@@ -43500,6 +43469,15 @@
           }
         }
       }
+    },
+    "Send an image or multiple images to Mastodon with Ice Cubes without opening the app" : {
+
+    },
+    "Send image(s) (background)" : {
+
+    },
+    "Send image(s) to Mastodon" : {
+
     },
     "Send post to Mastodon" : {
       "localizations" : {
@@ -50583,6 +50561,7 @@
       }
     },
     "settings.display.show-tab-label" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -54119,242 +54098,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "自動播放視訊"
-          }
-        }
-      }
-    },
-    "settings.other.fast-refresh" : {
-      "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Schnelles Aktualisieren"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fast refresh"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fast refresh"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualización rápida"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Freskatze azkarra"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Rafraîchissement rapide"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aggiornamento rapido"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "高速リフレッシュ"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "타임라인 당길 때 완전히 새로고침"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Snel vernieuwen"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Szybkie odświeżanie"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hızlı yenileme"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Швидке оновлення"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "快速刷新"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "盡速更新"
-          }
-        }
-      }
-    },
-    "settings.other.hide-openai" : {
-      "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Уключыць 🤖 памочніка"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activa l'ajudant 🤖"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiviere 🤖-Helfer"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable 🤖 Helper"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enable 🤖 Helper"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activar ayudante 🤖"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gaitu 🤖 laguntzailea"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Activer l'aide 🤖"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abilita assistente 🤖"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AI支援機能の有効化"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "AI 도우미 표시 🤖"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aktiver 🤖-hjelper"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gebruik 🤖-hulp"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Włącz 🤖 pomocnik"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Habilitar 🤖 ajudante"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yardımcıyı 🤖 Aktive Et"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Увімкнути 🤖 помічника"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "启用写作助手 🤖"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "啟用 🤖 寫作助手"
           }
         }
       }
@@ -63329,52 +63072,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "DeepL API 密鑰"
-          }
-        }
-      }
-    },
-    "Show Content Gradient" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostrar contenido con gradiente"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Afficher le dégradé de contenu"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mostra gradiente del contenuto"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "부스트된 글에 그라디언트 표시"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "İçerik Gradyanını Göster"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "启用渐变嘟文背景"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "顯示內容漸層效果"
           }
         }
       }
@@ -77726,52 +77423,6 @@
         }
       }
     },
-    "Streaming" : {
-      "localizations" : {
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Actualización automática"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Flux"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Streaming"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "스트리밍"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yayında"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "流式传输"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "串流"
-          }
-        }
-      }
-    },
     "Tab" : {
       "localizations" : {
         "de" : {
@@ -78659,124 +78310,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "個人檔案"
-          }
-        }
-      }
-    },
-    "tab.profile-account-%@" : {
-      "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profil (%@)"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profile (%@)"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Perfil (%@)"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profila (%@)"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profil (%@)"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profilo (%@)"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "프로필 (%@)"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profiel (%@)"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Profil (%@)"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Profile (%@)"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "个人主页 (%@)"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "個人檔案（%@）"
           }
         }
       }
@@ -84653,416 +84186,7 @@
           }
         }
       }
-    },
-        "Use Ice Cubes to post a status to Mastodon" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ice Cubes benutzen, um einen Status auf Mastodon zu veröffentlichen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usar Ice Cubes para hacer una publicación en Mastodon"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erabili Ice Cubes Mastodonen egoera bat argitaratzeko"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utilisez Ice Cubes pour publier un statut sur Mastodon"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usa Ice Cubes per postare uno status su Mastodon"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gebruik Ice Cubes om een bericht op Mastodon te plaatsen"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mastodonda durum göndermek için Ice Cubes kullanın"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用 Ice Cubes 向 Mastodon 发布嘟文"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "用 Ice Cubes 在 Mastodon 上發表狀態"
-          }
-        }
-      }
-    },
-    "Use Ice Cubes to post a status with an image to Mastodon" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ice Cubes benutzen, um einen Status mit einem Bild auf Mastodon zu veröffentlichen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usar Ice Cubes para hacer una publicación con una imagen en Mastodon"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Erabili Ice Cubes irudi bat duen Mastodonerako bidalketa bat argitaratzeko"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utiliser Ice Cubes pour publier un statut avec une image sur Mastodon"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usa Ice Cubes per postare uno status con un'immagine su Mastodon"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Gebruik Ice Cubes om een bericht met een afbeelding op Mastodon te plaatsen"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mastodon'a resim içeren bir durum göndermek için Ice Cubes kullanın"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "使用 Ice Cubes 向 Mastodon 发布带有图片的嘟文"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "用 Ice Cubes 在 Mastodon 上發表含影像的狀態"
-          }
-        }
-      }
-    },
-    "Post images" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bilder veröffentlichen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Publicar imágenes"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Argitaratu irudiak"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Publier des images"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Posta immagini"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plaats een afbeelding"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resimleri gönder"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "发布图片"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "可見度"
-          }
-        }
-      }
-    },
-    "Post status to Mastodon" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Status auf Mastodon veröffentlichen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hacer una publicación en Mastodon"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Argitaratu egoera Mastodonen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Publier un status sur Mastodon"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Posta uno status su Mastodon"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plaats een statusbericht op Mastodon"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Durumu Mastodon'a gönder"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "向 Mastodon 发布嘟文"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "有誰能看到您的嘟文"
-          }
-        }
-      }
-    },
-    "Post a status" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Einen Status veröffentlichen"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hacer una publicación"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Argitaratu egoera bat"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Publier un statut"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Posta uno status"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Plaats een bericht"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Bir durum gönder"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "发布嘟文"
-          }
-        }
-      }
-    },
-        "action.cancel" : {
-      "comment" : "MARK: Common strings",
-      "extractionState" : "stale",
-      "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Скасаваць"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel·la"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abbrechen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancel"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Utzi"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Annuler"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Annulla"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "キャンセル"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "취소"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avbryt"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Annuleer"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Anuluj"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Cancelar"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "İptal Et"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Відміна"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "取消"
-          }
-        }
-      }
-    },
+    }
   },
   "version" : "1.0"
 }

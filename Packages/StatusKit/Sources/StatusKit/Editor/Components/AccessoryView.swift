@@ -35,13 +35,20 @@ extension StatusEditor {
         .cornerRadius(8)
         .padding(.trailing, 78)
       #else
-        Divider()
-        HStack {
+        if #available(iOS 26, *) {
           contentView
+            .padding(.vertical, 16)
+            .glassEffect(.regular.tint(theme.primaryBackgroundColor.opacity(0.2)))
+            .padding(.horizontal, 16)
+        } else {
+          Divider()
+          HStack {
+            contentView
+          }
+          .frame(height: 20)
+          .padding(.vertical, 12)
+          .background(.ultraThickMaterial)
         }
-        .frame(height: 20)
-        .padding(.vertical, 12)
-        .background(.ultraThickMaterial)
       #endif
     }
 
@@ -95,8 +102,10 @@ extension StatusEditor {
           ProgressView()
         } else {
           Image(systemName: "photo.on.rectangle.angled")
+            .foregroundStyle(theme.tintColor)
         }
       }
+      .buttonStyle(.plain)
       .photosPicker(
         isPresented: $isPhotosPickerPresented,
         selection: $viewModel.mediaPickers,
@@ -159,8 +168,8 @@ extension StatusEditor {
         }
       }
 
-      if preferences.isOpenAIEnabled {
-        AIMenu.disabled(!viewModel.canPost)
+      if #available(iOS 26, *), Assistant.isAvailable  {
+        AssistantMenu.disabled(!viewModel.canPost)
       }
 
       Spacer()
@@ -196,18 +205,36 @@ extension StatusEditor {
       return false
     }
 
-    private var AIMenu: some View {
+    @available(iOS 26, *)
+    private var AssistantMenu: some View {
       Menu {
         ForEach(AIPrompt.allCases, id: \.self) { prompt in
-          Button {
-            Task {
-              isLoadingAIRequest = true
-              await focusedSEVM.runOpenAI(
-                prompt: prompt.toRequestPrompt(text: focusedSEVM.statusText.string))
-              isLoadingAIRequest = false
+          if case AIPrompt.rewriteWithTone = prompt {
+            Menu {
+              ForEach(Assistant.Tone.allCases, id: \.self) { tone in
+                Button {
+                  isLoadingAIRequest = true
+                  Task {
+                    await focusedSEVM.runAssistant(prompt: prompt)
+                    isLoadingAIRequest = false
+                  }
+                } label: {
+                  tone.label
+                }
+              }
+            } label: {
+              prompt.label
             }
-          } label: {
-            prompt.label
+          } else {
+            Button {
+              isLoadingAIRequest = true
+              Task {
+                await focusedSEVM.runAssistant(prompt: prompt)
+                isLoadingAIRequest = false
+              }
+            } label: {
+              prompt.label
+            }
           }
         }
         if let backup = focusedSEVM.backupStatusText {
@@ -224,8 +251,10 @@ extension StatusEditor {
         } else {
           Image(systemName: "faxmachine")
             .accessibilityLabel("accessibility.editor.button.ai-prompt")
+            .foregroundStyle(focusedSEVM.canPost ? theme.tintColor : .secondary)
         }
       }
+      .buttonStyle(.plain)
     }
   }
 }

@@ -1,7 +1,7 @@
 import Combine
 import Foundation
 import Models
-import Network
+import NetworkClient
 import Observation
 import SwiftUI
 
@@ -29,6 +29,7 @@ public enum RouterDestination: Hashable {
   case notificationForAccount(accountId: String)
   case blockedAccounts
   case mutedAccounts
+  case conversations
 }
 
 public enum WindowDestinationEditor: Hashable, Codable {
@@ -56,7 +57,7 @@ public enum SheetDestination: Identifiable, Hashable {
 
   case newStatusEditor(visibility: Models.Visibility)
   case prefilledStatusEditor(text: String, visibility: Models.Visibility)
-  case imageURL(urls: [URL], visibility: Models.Visibility)
+  case imageURL(urls: [URL], caption: String?, altTexts: [String]?, visibility: Models.Visibility)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
@@ -131,7 +132,7 @@ public enum SettingsStartingPoint {
 
 @MainActor
 @Observable public class RouterPath {
-  public var client: Client?
+  public var client: MastodonClient?
   public var urlHandler: ((URL) -> OpenURLAction.Result)?
 
   public var path: [RouterDestination] = []
@@ -195,9 +196,7 @@ public enum SettingsStartingPoint {
     {
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
-    }
-    else if url.lastPathComponent.first == "@"
-      || (url.host() == AppInfo.premiumInstance && url.pathComponents.contains("users")),
+    } else if url.lastPathComponent.first == "@",
       let host = url.host,
       !host.hasPrefix("www")
     {

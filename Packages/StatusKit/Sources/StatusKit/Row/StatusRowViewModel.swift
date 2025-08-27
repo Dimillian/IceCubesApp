@@ -3,7 +3,7 @@ import DesignSystem
 import Env
 import Models
 import NaturalLanguage
-import Network
+import NetworkClient
 import Observation
 import SwiftUI
 
@@ -16,7 +16,7 @@ import SwiftUI
   let textDisabled: Bool
   let finalStatus: AnyStatus
 
-  let client: Client
+  let client: MastodonClient
   let routerPath: RouterPath
 
   let userFollowedTag: HTMLString.Link?
@@ -112,41 +112,11 @@ import SwiftUI
   }
 
   @ViewBuilder
-  func makeBackgroundColor(isHomeTimeline: Bool) -> some View {
-    if isHomeTimeline, theme.showContentGradient {
-      homeBackgroundColor
-    } else {
-      backgroundColor
-    }
-  }
-
-  @ViewBuilder
-  var homeBackgroundColor: some View {
-    if status.visibility == .direct {
-      theme.tintColor.opacity(0.15)
-    } else if userMentionned {
-      theme.secondaryBackgroundColor
-    } else {
-      if status.account.isPremiumAccount {
-        makeDecorativeGradient(startColor: .yellow, endColor: theme.primaryBackgroundColor)
-      } else if userFollowedTag != nil {
-        makeDecorativeGradient(startColor: .teal, endColor: theme.primaryBackgroundColor)
-      } else if status.reblog != nil {
-        makeDecorativeGradient(startColor: theme.tintColor, endColor: theme.primaryBackgroundColor)
-      } else {
-        theme.primaryBackgroundColor
-      }
-    }
-  }
-
-  @ViewBuilder
   var backgroundColor: some View {
     if status.visibility == .direct {
       theme.tintColor.opacity(0.15)
     } else if userMentionned {
       theme.secondaryBackgroundColor
-    } else if status.account.isPremiumAccount {
-      Color.yellow.opacity(0.4)
     } else {
       theme.primaryBackgroundColor
     }
@@ -167,7 +137,7 @@ import SwiftUI
 
   public init(
     status: Status,
-    client: Client,
+    client: MastodonClient,
     routerPath: RouterPath,
     isRemote: Bool = false,
     showActions: Bool = true,

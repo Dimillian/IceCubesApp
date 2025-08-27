@@ -1,20 +1,20 @@
 import Foundation
 import Models
-import Network
+import NetworkClient
 
 protocol TimelineStatusFetching: Sendable {
   func fetchFirstPage(
-    client: Client?,
+    client: MastodonClient?,
     timeline: TimelineFilter
   ) async throws -> [Status]
   func fetchNewPages(
-    client: Client?,
+    client: MastodonClient?,
     timeline: TimelineFilter,
     minId: String,
     maxPages: Int
   ) async throws -> [Status]
   func fetchNextPage(
-    client: Client?,
+    client: MastodonClient?,
     timeline: TimelineFilter,
     lastId: String,
     offset: Int
@@ -26,7 +26,7 @@ enum StatusFetcherError: Error {
 }
 
 struct TimelineStatusFetcher: TimelineStatusFetching {
-  func fetchFirstPage(client: Client?, timeline: TimelineFilter) async throws -> [Status] {
+  func fetchFirstPage(client: MastodonClient?, timeline: TimelineFilter) async throws -> [Status] {
     guard let client = client else { throw StatusFetcherError.noClientAvailable }
     return try await client.get(
       endpoint: timeline.endpoint(
@@ -34,17 +34,22 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
         maxId: nil,
         minId: nil,
         offset: 0,
-        limit: 40))
+        limit: 50))
   }
 
-  func fetchNewPages(client: Client?, timeline: TimelineFilter, minId: String, maxPages: Int)
+  func fetchNewPages(client: MastodonClient?, timeline: TimelineFilter, minId: String, maxPages: Int)
     async throws -> [Status]
   {
     guard let client = client else { throw StatusFetcherError.noClientAvailable }
     var allStatuses: [Status] = []
     var latestMinId = minId
+    let targetCount = 50
+
     for _ in 1...maxPages {
       if Task.isCancelled { break }
+
+      // If we already have enough statuses, stop fetching
+      if allStatuses.count >= targetCount { break }
 
       let newStatuses: [Status] = try await client.get(
         endpoint: timeline.endpoint(
@@ -52,7 +57,7 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
           maxId: nil,
           minId: latestMinId,
           offset: nil,
-          limit: 40
+          limit: min(40, targetCount - allStatuses.count)
         ))
 
       if newStatuses.isEmpty { break }
@@ -63,7 +68,7 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
     return allStatuses
   }
 
-  func fetchNextPage(client: Client?, timeline: TimelineFilter, lastId: String, offset: Int)
+  func fetchNextPage(client: MastodonClient?, timeline: TimelineFilter, lastId: String, offset: Int)
     async throws -> [Status]
   {
     guard let client = client else { throw StatusFetcherError.noClientAvailable }

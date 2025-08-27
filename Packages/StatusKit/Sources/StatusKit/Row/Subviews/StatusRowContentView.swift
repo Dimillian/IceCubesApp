@@ -24,7 +24,15 @@ struct StatusRowContentView: View {
         StatusRowTranslateView(viewModel: viewModel)
       }
       if let poll = viewModel.finalStatus.poll {
-        StatusPollView(poll: poll, status: viewModel.finalStatus)
+        if #available(iOS 26.0, *) {
+          StatusPollView(poll: poll, status: viewModel.finalStatus)
+            .padding()
+            .glassEffect(.regular.tint(theme.tintColor.opacity(0.1)),
+                         in: RoundedRectangle(cornerRadius: 8))
+        } else {
+          StatusPollView(poll: poll, status: viewModel.finalStatus)
+            .padding(.vertical)
+        }
       }
 
       if !reasons.contains(.placeholder),

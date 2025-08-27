@@ -1,7 +1,7 @@
 import Combine
 import Env
 import Models
-import Network
+import NetworkClient
 import Observation
 import SwiftUI
 
@@ -20,7 +20,7 @@ import SwiftUI
   }
 
   public var availableAccounts: [AppAccount]
-  public var currentClient: Client
+  public var currentClient: MastodonClient
 
   public var pushAccounts: [PushAccount] {
     availableAccounts.filter { $0.oauthToken != nil }

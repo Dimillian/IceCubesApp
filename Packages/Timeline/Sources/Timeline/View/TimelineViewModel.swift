@@ -1,6 +1,6 @@
 import Env
 import Models
-import Network
+import NetworkClient
 import Observation
 import StatusKit
 import SwiftUI
@@ -78,7 +78,7 @@ import SwiftUI
   @ObservationIgnored
   var canFilterTimeline: Bool = true
 
-  var client: Client? {
+  var client: MastodonClient? {
     didSet {
       if oldValue != client {
         Task {
@@ -94,7 +94,6 @@ import SwiftUI
     client?.server ?? "Error"
   }
 
-  var isTimelineVisible: Bool = false
   let pendingStatusesObserver: TimelineUnreadStatusesObserver = .init()
   var marker: Marker.Content?
 
@@ -153,11 +152,11 @@ extension TimelineViewModel {
 
 // MARK: - StatusesFetcher
 
-extension TimelineViewModel: StatusesFetcher {
+extension TimelineViewModel: GapLoadingFetcher {
   func pullToRefresh() async {
     timelineTask?.cancel()
 
-    if !timeline.supportNewestPagination || UserPreferences.shared.fastRefreshEnabled {
+    if !timeline.supportNewestPagination {
       await reset()
     }
     await fetchNewestStatuses(pullToRefresh: true)
@@ -166,25 +165,19 @@ extension TimelineViewModel: StatusesFetcher {
   func refreshTimeline() {
     timelineTask?.cancel()
     timelineTask = Task {
-      if UserPreferences.shared.fastRefreshEnabled {
-        await reset()
-      }
       await fetchNewestStatuses(pullToRefresh: false)
     }
   }
 
   func refreshTimelineContentFilter() async {
     timelineTask?.cancel()
-    let statuses = await datasource.getFiltered()
-    withAnimation {
-      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-    }
+    await updateStatusesState()
   }
 
   func fetchStatuses(from: Marker.Content) async throws {
     guard let client else { return }
     statusesState = .loading
-    var statuses: [Status] = try await client.get(
+    let statuses: [Status] = try await client.get(
       endpoint: timeline.endpoint(
         sinceId: nil,
         maxId: from.lastReadId,
@@ -192,17 +185,8 @@ extension TimelineViewModel: StatusesFetcher {
         offset: 0,
         limit: 40))
 
-    StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
-
-    await datasource.set(statuses)
-    await cache()
-    statuses = await datasource.getFiltered()
+    await updateDatasourceAndState(statuses: statuses, client: client, replaceExisting: true)
     marker = nil
-
-    withAnimation {
-      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-    }
-
     await fetchNewestStatuses(pullToRefresh: false)
   }
 
@@ -219,17 +203,18 @@ extension TimelineViewModel: StatusesFetcher {
       }
     } catch {
       if await datasource.isEmpty {
-        statusesState = .error(error: error)
+        statusesState = .error(error: .noData)
       }
       canStreamEvents = true
     }
   }
 
   // Hydrate statuses in the Timeline when statuses are empty.
-  private func fetchFirstPage(client: Client) async throws {
+  private func fetchFirstPage(client: MastodonClient) async throws {
     pendingStatusesObserver.pendingStatuses = []
 
-    if await datasource.isEmpty {
+    let datasourceIsEmpty = await datasource.isEmpty
+    if datasourceIsEmpty {
       statusesState = .loading
     }
 
@@ -237,53 +222,48 @@ extension TimelineViewModel: StatusesFetcher {
     // Else we fetch top most page from the API.
     if timeline.supportNewestPagination,
       let cachedStatuses = await getCachedStatuses(),
-      !cachedStatuses.isEmpty,
-      !UserPreferences.shared.fastRefreshEnabled
+      !cachedStatuses.isEmpty
     {
       await datasource.set(cachedStatuses)
-      let statuses = await datasource.getFiltered()
+      let items = await datasource.getFilteredItems()
       if let latestSeenId = await cache.getLatestSeenStatus(for: client, filter: timeline.id)?.first
       {
         // Restore cache and scroll to latest seen status.
         scrollToId = latestSeenId
-        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+        statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
       } else {
         // Restore cache and scroll to top.
         withAnimation {
-          statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+          statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
         }
       }
-      // And then we fetch statuses again toget newest statuses from there.
+      // And then we fetch statuses again to get newest statuses from there.
       await fetchNewestStatuses(pullToRefresh: false)
     } else {
-      var statuses: [Status] = try await statusFetcher.fetchFirstPage(
+      let statuses: [Status] = try await statusFetcher.fetchFirstPage(
         client: client,
         timeline: timeline)
 
-      StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
+      await updateDatasourceAndState(statuses: statuses, client: client, replaceExisting: true)
 
-      await datasource.set(statuses)
-      await cache()
-      statuses = await datasource.getFiltered()
-
-      withAnimation {
-        statusesState = .display(
-          statuses: statuses, nextPageState: statuses.count < 20 ? .none : .hasNextPage)
+      // If we got 40 or more statuses, there might be older ones - create a gap
+      if statuses.count >= 40, let oldestStatus = statuses.last, !datasourceIsEmpty {
+        await createGapForOlderStatuses(maxId: oldestStatus.id, at: statuses.count)
       }
     }
   }
 
   // Fetch pages from the top most status of the timeline.
-  private func fetchNewPagesFrom(latestStatus: String, client: Client) async throws {
+  private func fetchNewPagesFrom(latestStatus: String, client: MastodonClient) async throws {
     canStreamEvents = false
     let initialTimeline = timeline
 
-    let newStatuses = try await fetchAndDedupNewStatuses(
-      latestStatus: latestStatus,
-      client: client)
+    // First, fetch the absolute newest statuses (no ID parameters)
+    let newestStatuses: [Status] = try await statusFetcher.fetchFirstPage(
+      client: client,
+      timeline: timeline)
 
-    guard !newStatuses.isEmpty,
-      isTimelineVisible,
+    guard !newestStatuses.isEmpty,
       !Task.isCancelled,
       initialTimeline == timeline
     else {
@@ -291,53 +271,63 @@ extension TimelineViewModel: StatusesFetcher {
       return
     }
 
-    await updateTimelineWithNewStatuses(newStatuses)
-
-    if !Task.isCancelled, let latest = await datasource.get().first {
-      pendingStatusesObserver.isLoadingNewStatuses = true
-      try await fetchNewPagesFrom(latestStatus: latest.id, client: client)
+    let currentIds = await datasource.get().map(\.id)
+    let actuallyNewStatuses = newestStatuses.filter { status in
+      !currentIds.contains(where: { $0 == status.id }) && status.id > latestStatus
     }
-  }
 
-  private func fetchAndDedupNewStatuses(latestStatus: String, client: Client) async throws
-    -> [Status]
-  {
-    var newStatuses = try await statusFetcher.fetchNewPages(
-      client: client,
-      timeline: timeline,
-      minId: latestStatus,
-      maxPages: 5)
-    let ids = await datasource.get().map(\.id)
-    newStatuses = newStatuses.filter { status in
-      !ids.contains(where: { $0 == status.id })
-    }
-    StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
-    return newStatuses
-  }
-
-  private func updateTimelineWithNewStatuses(_ newStatuses: [Status]) async {
-    defer {
+    guard !actuallyNewStatuses.isEmpty else {
       canStreamEvents = true
+      return
     }
+
+    StatusDataControllerProvider.shared.updateDataControllers(
+      for: actuallyNewStatuses, client: client)
+
+    // Pass the original count to determine if we need a gap
+    await updateTimelineWithNewStatuses(
+      actuallyNewStatuses,
+      latestStatus: latestStatus,
+      fetchedCount: newestStatuses.count
+    )
+    canStreamEvents = true
+  }
+
+  private func updateTimelineWithNewStatuses(
+    _ newStatuses: [Status], latestStatus: String, fetchedCount: Int
+  ) async {
     let topStatus = await datasource.getFiltered().first
+
+    // Insert new statuses at the top
     await datasource.insert(contentOf: newStatuses, at: 0)
+
+    // Only create a gap if:
+    // 1. We fetched a full page (suggesting there might be more)
+    // 2. AND we have a significant number of actually new statuses
+    if fetchedCount >= 40 && newStatuses.count >= 40, let oldestNewStatus = newStatuses.last {
+      // Create a gap to load statuses between the oldest new status and our previous top
+      let gap = TimelineGap(sinceId: latestStatus, maxId: oldestNewStatus.id, direction: .downward)
+      // Insert the gap after all the new statuses
+      await datasource.insertGap(gap, at: newStatuses.count)
+    }
+
     if let lastVisible = visibleStatuses.last {
       await datasource.remove(after: lastVisible, safeOffset: 15)
     }
     await cache()
     pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map(\.id), at: 0)
 
-    let statuses = await datasource.getFiltered()
+    let items = await datasource.getFilteredItems()
 
     if let topStatus = topStatus,
       visibleStatuses.contains(where: { $0.id == topStatus.id }),
       scrollToTopVisible
     {
       scrollToId = topStatus.id
-      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+      statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
     } else {
       withAnimation {
-        statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
+        statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
       }
     }
   }
@@ -358,8 +348,8 @@ extension TimelineViewModel: StatusesFetcher {
     await datasource.append(contentOf: newStatuses)
     StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
 
-    statusesState = await .display(
-      statuses: datasource.getFiltered(),
+    statusesState = await .displayWithGaps(
+      items: datasource.getFilteredItems(),
       nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
   }
 
@@ -376,6 +366,95 @@ extension TimelineViewModel: StatusesFetcher {
 
   func statusDidDisappear(status: Status) {
     visibleStatuses.removeAll(where: { $0.id == status.id })
+  }
+
+  func loadGap(gap: TimelineGap) async {
+    guard let client else { return }
+
+    // Update gap loading state
+    await datasource.updateGapLoadingState(id: gap.id, isLoading: true)
+
+    // Update UI to show loading state without causing jumps
+    await updateStatusesState()
+
+    do {
+      // Fetch statuses within the gap
+      let statuses: [Status] = try await client.get(
+        endpoint: timeline.endpoint(
+          sinceId: gap.sinceId.isEmpty ? nil : gap.sinceId,
+          maxId: gap.maxId,
+          minId: nil,
+          offset: 0,
+          limit: 50))
+
+      StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
+
+      // Get the original gap index before replacing
+      let items = await datasource.getItems()
+      let gapIndex = items.firstIndex(where: { item in
+        if case .gap(let g) = item {
+          return g.id == gap.id
+        }
+        return false
+      })
+
+      // Replace the gap with the fetched statuses
+      await datasource.replaceGap(id: gap.id, with: statuses)
+
+      // If we fetched 40 or more statuses, there might be more older statuses
+      // Lower threshold because some instances might not return exactly 50
+      if statuses.count >= 40, let oldestLoadedStatus = statuses.last,
+        let originalGapIndex = gapIndex
+      {
+        // Create a new gap from the original gap's sinceId to the oldest status we just loaded
+        await createGapForOlderStatuses(
+          sinceId: gap.sinceId.isEmpty ? nil : gap.sinceId,
+          maxId: oldestLoadedStatus.id,
+          at: originalGapIndex + statuses.count
+        )
+      }
+
+      // Update the display
+      await updateStatusesStateWithAnimation()
+    } catch {
+      // If loading fails, reset the gap loading state
+      await datasource.updateGapLoadingState(id: gap.id, isLoading: false)
+      await refreshTimelineContentFilter()
+    }
+  }
+
+  // MARK: - Helper Methods
+
+  private func updateDatasourceAndState(statuses: [Status], client: MastodonClient, replaceExisting: Bool)
+    async
+  {
+    StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
+
+    if replaceExisting {
+      await datasource.set(statuses)
+    } else {
+      await datasource.append(contentOf: statuses)
+    }
+
+    await cache()
+    await updateStatusesStateWithAnimation()
+  }
+
+  private func updateStatusesState() async {
+    let items = await datasource.getFilteredItems()
+    statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
+  }
+
+  private func updateStatusesStateWithAnimation() async {
+    let items = await datasource.getFilteredItems()
+    withAnimation {
+      statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
+    }
+  }
+
+  private func createGapForOlderStatuses(sinceId: String? = nil, maxId: String, at index: Int) async {
+    let gap = TimelineGap(sinceId: sinceId, maxId: maxId, direction: .downward)
+    await datasource.insertGap(gap, at: index)
   }
 }
 
@@ -411,11 +490,9 @@ extension TimelineViewModel {
 
 extension TimelineViewModel {
   func handleEvent(event: any StreamEvent) async {
-    guard let client = client, canStreamEvents, isTimelineVisible else { return }
+    guard let client = client, canStreamEvents else { return }
 
     switch event {
-    case let updateEvent as StreamEventUpdate:
-      await handleUpdateEvent(updateEvent, client: client)
     case let deleteEvent as StreamEventDelete:
       await handleDeleteEvent(deleteEvent)
     case let statusUpdateEvent as StreamEventStatusUpdate:
@@ -425,39 +502,37 @@ extension TimelineViewModel {
     }
   }
 
-  private func handleUpdateEvent(_ event: StreamEventUpdate, client: Client) async {
+  // Post streaming insertion is disabled for now.
+  /*
+  private func handleUpdateEvent(_ event: StreamEventUpdate, client: MastodonClient) async {
     guard timeline == .home,
       UserPreferences.shared.isPostsStreamingEnabled,
-      await !datasource.contains(statusId: event.status.id)
+      await !datasource.contains(statusId: event.status.id),
+      let topStatus = await datasource.get().first,
+      topStatus.createdAt.asDate < event.status.createdAt.asDate
     else { return }
-
+  
     pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
     await datasource.insert(event.status, at: 0)
     await cache()
     StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
-    await updateStatusesState()
+    await updateStatusesStateWithAnimation()
   }
+   */
 
   private func handleDeleteEvent(_ event: StreamEventDelete) async {
     if await datasource.remove(event.status) != nil {
       await cache()
-      await updateStatusesState()
+      await updateStatusesStateWithAnimation()
     }
   }
 
-  private func handleStatusUpdateEvent(_ event: StreamEventStatusUpdate, client: Client) async {
+  private func handleStatusUpdateEvent(_ event: StreamEventStatusUpdate, client: MastodonClient) async {
     guard let originalIndex = await datasource.indexOf(statusId: event.status.id) else { return }
 
     StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
     await datasource.replace(event.status, at: originalIndex)
     await cache()
-    await updateStatusesState()
-  }
-
-  private func updateStatusesState() async {
-    let statuses = await datasource.getFiltered()
-    withAnimation {
-      statusesState = .display(statuses: statuses, nextPageState: .hasNextPage)
-    }
+    await updateStatusesStateWithAnimation()
   }
 }

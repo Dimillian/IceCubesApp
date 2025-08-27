@@ -24,50 +24,35 @@ extension StatusEditor {
     #else
       @Environment(\.dismiss) private var dismiss
     #endif
+    
+    var isSendingDisabled: Bool {
+      !mainSEVM.canPost || mainSEVM.isPosting
+    }
 
     var body: some ToolbarContent {
-      if !mainSEVM.mode.isInShareExtension {
-        ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            isDraftsSheetDisplayed = true
-          } label: {
-            Image(systemName: "pencil.and.list.clipboard")
-          }
-          .accessibilityLabel("accessibility.editor.button.drafts")
-          .sheet(isPresented: $isDraftsSheetDisplayed) {
-            if UIDevice.current.userInterfaceIdiom == .phone {
-              draftsListView
-            } else {
-              draftsListView
-            }
-          }
-        }
-      }
-
-      ToolbarItem(placement: .navigationBarTrailing) {
+      ToolbarItemGroup(placement: .topBarTrailing) {
         Button {
-          Task {
-            mainSEVM.evaluateLanguages()
-            if preferences.autoDetectPostLanguage,
-              mainSEVM.languageConfirmationDialogLanguages != nil
-            {
-              isLanguageConfirmPresented = true
-            } else {
-              await postAllStatus()
-            }
-          }
+          isDraftsSheetDisplayed = true
         } label: {
-          Image(systemName: "paperplane.fill")
-            .bold()
+          Image(systemName: "pencil.and.list.clipboard")
         }
-        .buttonStyle(.borderedProminent)
-        .disabled(!mainSEVM.canPost || mainSEVM.isPosting)
-        .keyboardShortcut(.return, modifiers: .command)
-        .confirmationDialog(
-          "", isPresented: $isLanguageConfirmPresented,
-          actions: {
-            languageConfirmationDialog
-          })
+        .tint(.label)
+        .accessibilityLabel("accessibility.editor.button.drafts")
+        .sheet(isPresented: $isDraftsSheetDisplayed) {
+          if UIDevice.current.userInterfaceIdiom == .phone {
+            draftsListView
+          } else {
+            draftsListView
+          }
+        }
+
+        if #available(iOS 26, *) {
+          sendButton
+            .buttonStyle(.glassProminent)
+        } else {
+          sendButton
+            .buttonStyle(.borderedProminent)
+        }
       }
 
       ToolbarItem(placement: .navigationBarLeading) {
@@ -83,6 +68,7 @@ extension StatusEditor {
         } label: {
           Image(systemName: "xmark")
         }
+        .tint(.red)
         .keyboardShortcut(.cancelAction)
         .confirmationDialog(
           "",
@@ -106,6 +92,35 @@ extension StatusEditor {
         )
       }
     }
+    
+    private var sendButton: some View {
+      Button {
+        Task {
+          guard !isSendingDisabled else { return }
+          mainSEVM.evaluateLanguages()
+          if preferences.autoDetectPostLanguage,
+            mainSEVM.languageConfirmationDialogLanguages != nil
+          {
+            isLanguageConfirmPresented = true
+          } else {
+            await postAllStatus()
+          }
+        }
+      } label: {
+        Image(systemName: "paperplane")
+          .symbolVariant(isSendingDisabled ? .none : .fill)
+          .tint(isSendingDisabled ? .secondary : theme.tintColor)
+          .foregroundStyle(theme.labelColor)
+          .bold()
+      }
+      .buttonBorderShape(.circle)
+      .keyboardShortcut(.return, modifiers: .command)
+      .confirmationDialog(
+        "", isPresented: $isLanguageConfirmPresented,
+        actions: {
+          languageConfirmationDialog
+        })
+    }
 
     @discardableResult
     private func postStatus(with model: ViewModel, isMainPost: Bool) async -> Status? {
@@ -119,7 +134,7 @@ extension StatusEditor {
             if let scene = UIApplication.shared.connectedScenes.first(where: {
               $0.activationState == .foregroundActive
             }) as? UIWindowScene {
-              SKStoreReviewController.requestReview(in: scene)
+              AppStore.requestReview(in: scene)
             }
             preferences.requestedReview = true
           }

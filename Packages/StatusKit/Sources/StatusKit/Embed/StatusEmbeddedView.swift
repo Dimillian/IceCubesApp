@@ -2,7 +2,7 @@ import DesignSystem
 import EmojiText
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
@@ -10,10 +10,10 @@ public struct StatusEmbeddedView: View {
   @Environment(Theme.self) private var theme
 
   public let status: Status
-  public let client: Client
+  public let client: MastodonClient
   public let routerPath: RouterPath
 
-  public init(status: Status, client: Client, routerPath: RouterPath) {
+  public init(status: Status, client: MastodonClient, routerPath: RouterPath) {
     self.status = status
     self.client = client
     self.routerPath = routerPath

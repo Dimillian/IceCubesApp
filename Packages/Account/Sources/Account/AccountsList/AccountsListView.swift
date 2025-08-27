@@ -1,13 +1,13 @@
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
 public struct AccountsListView: View {
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount
   @State private var viewModel: AccountsListViewModel
   @State private var didAppear: Bool = false

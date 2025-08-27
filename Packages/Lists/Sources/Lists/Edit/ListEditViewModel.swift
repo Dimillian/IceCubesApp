@@ -1,7 +1,7 @@
 import Combine
 import Env
 import Models
-import Network
+import NetworkClient
 import Observation
 import SwiftUI
 
@@ -9,7 +9,7 @@ import SwiftUI
 @Observable public class ListEditViewModel {
   var list: Models.List
 
-  var client: Client?
+  var client: MastodonClient?
 
   var isLoadingAccounts: Bool = true
   var accounts: [Account] = []

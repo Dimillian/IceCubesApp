@@ -4,7 +4,7 @@ import Combine
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import NukeUI
 import SafariServices
 import SwiftUI
@@ -25,7 +25,7 @@ struct AddAccountView: View {
   @State private var instanceName: String = ""
   @State private var instance: Instance?
   @State private var isSigninIn = false
-  @State private var signInClient: Client?
+  @State private var signInClient: MastodonClient?
   @State private var instances: [InstanceSocial] = []
   @State private var instanceFetchError: LocalizedStringKey?
   @State private var instanceSocialClient = InstanceSocialClient()
@@ -123,7 +123,7 @@ struct AddAccountView: View {
 
           do {
             // bare bones preflight for domain validity
-            let instanceDetailClient = Client(server: sanitizedName)
+            let instanceDetailClient = MastodonClient(server: sanitizedName)
             if instanceDetailClient.server.contains("."),
               instanceDetailClient.server.last != "."
             {
@@ -160,32 +160,40 @@ struct AddAccountView: View {
 
   private var signInSection: some View {
     Section {
-      Button {
-        withAnimation {
-          isSigninIn = true
-        }
-        Task {
-          await signIn()
-        }
-      } label: {
-        HStack {
-          Spacer()
-          if isSigninIn || !sanitizedName.isEmpty && instance == nil {
-            ProgressView()
-              .id(sanitizedName)
-              .tint(theme.labelColor)
-          } else {
-            Text("account.add.sign-in")
-              .font(.scaledHeadline)
-          }
-          Spacer()
+      if #available(iOS 26.0, *) {
+        signinButton
+          .buttonStyle(.glassProminent)
+      } else {
+        signinButton
+          .buttonStyle(.borderedProminent)
+      }
+    }
+  }
+  
+  private var signinButton: some View {
+    Button {
+      withAnimation {
+        isSigninIn = true
+      }
+      Task {
+        await signIn()
+      }
+    } label: {
+      HStack {
+        if isSigninIn || !sanitizedName.isEmpty && instance == nil {
+          ProgressView()
+            .id(sanitizedName)
+            .tint(theme.labelColor)
+        } else {
+          Text("account.add.sign-in")
+            .font(.scaledHeadline)
         }
       }
-      .buttonStyle(PlainButtonStyle())
+      .frame(maxWidth: .infinity)
+      .frame(height: 44)
     }
-    #if !os(visionOS)
-      .listRowBackground(theme.tintColor)
-    #endif
+    .listRowInsets(.init())
+    .listRowBackground(Color.clear)
   }
 
   private var instancesListView: some View {
@@ -294,7 +302,7 @@ struct AddAccountView: View {
     }
     do {
       let oauthToken = try await client.continueOauthFlow(url: url)
-      let client = Client(server: client.server, oauthToken: oauthToken)
+      let client = MastodonClient(server: client.server, oauthToken: oauthToken)
       let account: Account = try await client.get(endpoint: Accounts.verifyCredentials)
       Telemetry.signal("account.added")
       appAccountsManager.add(

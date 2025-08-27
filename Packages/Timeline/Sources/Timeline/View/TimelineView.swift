@@ -2,7 +2,7 @@ import Charts
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import StatusKit
 import SwiftData
 import SwiftUI
@@ -10,12 +10,11 @@ import SwiftUI
 @MainActor
 public struct TimelineView: View {
   @Environment(\.scenePhase) private var scenePhase
-  @Environment(\.selectedTabScrollToTop) private var selectedTabScrollToTop
 
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var account
   @Environment(StreamWatcher.self) private var watcher
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(RouterPath.self) private var routerPath
 
   @State private var viewModel = TimelineViewModel()
@@ -29,9 +28,14 @@ public struct TimelineView: View {
   @Binding var pinnedFilters: [TimelineFilter]
   @Binding var selectedTagGroup: TagGroup?
 
-  @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
-
   private let canFilterTimeline: Bool
+
+  private var toolbarBackgroundVisibility: SwiftUI.Visibility {
+    if canFilterTimeline, !pinnedFilters.isEmpty {
+      return .hidden
+    }
+    return .visible
+  }
 
   public init(
     timeline: Binding<TimelineFilter>,
@@ -46,33 +50,59 @@ public struct TimelineView: View {
   }
 
   public var body: some View {
-    ZStack(alignment: .top) {
-      listView
-      statusesObserver
+    if #available(iOS 26.0, *) {
+      timelineView
+        .scrollEdgeEffectStyle(.soft, for: .top)
+        .safeAreaBar(edge: .top) {
+          if canFilterTimeline, !pinnedFilters.isEmpty {
+            TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
+              .padding(.horizontal, .layoutPadding)
+          }
+        }
+    } else {
+      timelineView
+        .toolbarBackground(toolbarBackgroundVisibility, for: .navigationBar)
+        .safeAreaInset(edge: .top, spacing: 0) {
+          if canFilterTimeline, !pinnedFilters.isEmpty {
+            VStack(spacing: 0) {
+              TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
+                .padding(.vertical, 8)
+                .padding(.horizontal, .layoutPadding)
+                .background(theme.primaryBackgroundColor.opacity(0.30))
+                .background(Material.ultraThin)
+              Divider()
+            }
+          }
+        }
     }
-    .safeAreaInset(edge: .top, spacing: 0) {
-      if canFilterTimeline, !pinnedFilters.isEmpty {
-        VStack(spacing: 0) {
-          TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
-            .padding(.vertical, 8)
-            .padding(.horizontal, .layoutPadding)
-            .background(theme.primaryBackgroundColor.opacity(0.30))
-            .background(Material.ultraThin)
-          Divider()
+  }
+
+  private var timelineView: some View {
+    ZStack(alignment: .top) {
+      TimelineListView(
+        viewModel: viewModel,
+        timeline: $timeline,
+        pinnedFilters: $pinnedFilters,
+        selectedTagGroup: $selectedTagGroup,
+        scrollToIdAnimated: $scrollToIdAnimated)
+      if viewModel.timeline.supportNewestPagination {
+        TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver) { statusId in
+          if let statusId {
+            scrollToIdAnimated = statusId
+          }
         }
       }
     }
-    .if(canFilterTimeline && !pinnedFilters.isEmpty) { view in
-      view.toolbarBackground(.hidden, for: .navigationBar)
-    }
     .toolbar {
-      toolbarTitleView
-      toolbarTagGroupButton
+      TimelineToolbarTitleView(timeline: $timeline, canFilterTimeline: canFilterTimeline)
+      if #available(iOS 26.0, *) {
+        ToolbarSpacer(placement: .topBarTrailing)
+      }
+      TimelineToolbarTagGroupButton(timeline: $timeline)
     }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
       viewModel.canFilterTimeline = canFilterTimeline
-      viewModel.isTimelineVisible = true
 
       if viewModel.client == nil {
         viewModel.client = client
@@ -81,7 +111,6 @@ public struct TimelineView: View {
       viewModel.timeline = timeline
     }
     .onDisappear {
-      viewModel.isTimelineVisible = false
       viewModel.saveMarker()
     }
     .refreshable {
@@ -101,7 +130,7 @@ public struct TimelineView: View {
     .onChange(of: account.lists) { _, lists in
       guard client.isAuth else { return }
       switch timeline {
-      case let .list(list):
+      case .list(let list):
         if let accountList = lists.first(where: { $0.id == list.id }),
           list.id == accountList.id,
           accountList.title != list.title
@@ -115,13 +144,13 @@ public struct TimelineView: View {
     .onChange(of: timeline) { oldValue, newValue in
       guard oldValue != newValue else { return }
       switch newValue {
-      case let .remoteLocal(server, _):
-        viewModel.client = Client(server: server)
+      case .remoteLocal(let server, _):
+        viewModel.client = MastodonClient(server: server)
       default:
         switch oldValue {
-        case let .remoteLocal(server, _):
+        case .remoteLocal(let server, _):
           if newValue == .latest {
-            viewModel.client = Client(server: server)
+            viewModel.client = MastodonClient(server: server)
           } else {
             viewModel.client = client
           }
@@ -162,153 +191,5 @@ public struct TimelineView: View {
         break
       }
     }
-  }
-
-  private var listView: some View {
-    ScrollViewReader { proxy in
-      List {
-        scrollToTopView
-        TimelineTagGroupheaderView(group: $selectedTagGroup, timeline: $timeline)
-        TimelineTagHeaderView(tag: $viewModel.tag)
-        switch viewModel.timeline {
-        case .remoteLocal:
-          StatusesListView(
-            fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
-        default:
-          StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
-            .environment(\.isHomeTimeline, timeline == .home)
-        }
-      }
-      .id(client.id)
-      .environment(\.defaultMinListRowHeight, 1)
-      .listStyle(.plain)
-      #if !os(visionOS)
-        .scrollContentBackground(.hidden)
-        .background(theme.primaryBackgroundColor)
-      #endif
-      .onChange(of: viewModel.scrollToId) { _, newValue in
-        if let newValue {
-          proxy.scrollTo(newValue, anchor: .top)
-          viewModel.scrollToId = nil
-        }
-      }
-      .onChange(of: scrollToIdAnimated) { _, newValue in
-        if let newValue {
-          withAnimation {
-            proxy.scrollTo(newValue, anchor: .top)
-            scrollToIdAnimated = nil
-          }
-        }
-      }
-      .onChange(of: selectedTabScrollToTop) { _, newValue in
-        if newValue == 0, routerPath.path.isEmpty {
-          withAnimation {
-            proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
-          }
-        }
-      }
-    }
-  }
-
-  @ViewBuilder
-  private var statusesObserver: some View {
-    if viewModel.timeline.supportNewestPagination {
-      TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver) { statusId in
-        if let statusId {
-          scrollToIdAnimated = statusId
-        }
-      }
-    }
-  }
-
-  @ToolbarContentBuilder
-  private var toolbarTitleView: some ToolbarContent {
-    ToolbarItem(placement: .principal) {
-      VStack(alignment: .center) {
-        switch timeline {
-        case let .remoteLocal(_, filter):
-          Text(filter.localizedTitle())
-            .font(.headline)
-          Text(timeline.localizedTitle())
-            .font(.caption)
-            .foregroundStyle(.secondary)
-        case let .link(url, _):
-          Text(timeline.localizedTitle())
-            .font(.headline)
-          Text(url.host() ?? url.absoluteString)
-            .font(.caption)
-            .foregroundStyle(.secondary)
-        default:
-          Text(timeline.localizedTitle())
-            .font(.headline)
-          Text(client.server)
-            .font(.caption)
-            .foregroundStyle(.secondary)
-        }
-      }
-      .accessibilityRepresentation {
-        switch timeline {
-        case let .remoteLocal(_, filter):
-          if canFilterTimeline {
-            Menu(filter.localizedTitle()) {}
-          } else {
-            Text(filter.localizedTitle())
-          }
-        default:
-          if canFilterTimeline {
-            Menu(timeline.localizedTitle()) {}
-          } else {
-            Text(timeline.localizedTitle())
-          }
-        }
-      }
-      .accessibilityAddTraits(.isHeader)
-      .accessibilityRemoveTraits(.isButton)
-      .accessibilityRespondsToUserInteraction(canFilterTimeline)
-    }
-  }
-
-  @ToolbarContentBuilder
-  private var toolbarTagGroupButton: some ToolbarContent {
-    ToolbarItem(placement: .topBarTrailing) {
-      switch timeline {
-      case let .hashtag(tag, _):
-        if !tagGroups.isEmpty {
-          Menu {
-            Section("tag-groups.edit.section.title") {
-              ForEach(tagGroups) { group in
-                Button {
-                  if group.tags.contains(tag) {
-                    group.tags.removeAll(where: { $0 == tag })
-                  } else {
-                    group.tags.append(tag)
-                  }
-                } label: {
-                  Label(
-                    group.title,
-                    systemImage: group.tags.contains(tag)
-                      ? "checkmark.rectangle.fill" : "checkmark.rectangle")
-                }
-              }
-            }
-          } label: {
-            Image(systemName: "ellipsis")
-          }
-        }
-      default:
-        EmptyView()
-      }
-    }
-  }
-
-  private var scrollToTopView: some View {
-    ScrollToView()
-      .frame(height: pinnedFilters.isEmpty ? .layoutPadding : 0)
-      .onAppear {
-        viewModel.scrollToTopVisible = true
-      }
-      .onDisappear {
-        viewModel.scrollToTopVisible = false
-      }
   }
 }

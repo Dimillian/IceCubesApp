@@ -1,5 +1,5 @@
 import Models
-import Network
+import NetworkClient
 import Testing
 import XCTest
 
@@ -13,7 +13,6 @@ struct Tests {
     let client = Client(server: "localhost")
     subject.client = client
     subject.timeline = .home
-    subject.isTimelineVisible = true
     subject.timelineTask?.cancel()
     return subject
   }

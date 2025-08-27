@@ -89,55 +89,83 @@ extension StatusEditor {
       .scrollTargetLayout()
     }
 
+    @ViewBuilder
     private func makeMediaItem(at index: Int) -> some View {
       let container = viewModel.mediaContainers[index]
 
-      return Menu {
-        makeImageMenu(container: container)
-      } label: {
-        RoundedRectangle(cornerRadius: 8).fill(.clear)
-          .overlay {
-            if let attachement = container.mediaAttachment {
-              makeRemoteMediaView(mediaAttachement: attachement)
-            } else if container.image != nil {
-              makeLocalImageView(container: container)
-            } else if let error = container.error as? ServerError {
-              makeErrorView(error: error)
-            } else {
-              placeholderView
-            }
+      RoundedRectangle(cornerRadius: 8)
+        .fill(.clear)
+        .overlay {
+          switch container.state {
+          case .pending(let content):
+            makeLocalMediaView(content: content)
+          case .uploading(let content, let progress):
+            makeUploadingView(content: content, progress: progress)
+          case .uploaded(let attachment, _):
+            makeRemoteMediaView(mediaAttachement: attachment)
+          case .failed(let content, let error):
+            makeErrorView(content: content, error: error)
           }
-      }
-      .alert("alert.error", isPresented: $isErrorDisplayed) {
-        Button("Ok", action: {})
-      } message: {
-        Text(container.error?.localizedDescription ?? "")
-      }
-      .overlay(alignment: .bottomTrailing) {
-        makeAltMarker(container: container)
-      }
-      .overlay(alignment: .topTrailing) {
-        makeDiscardMarker(container: container)
-      }
-      .clipShape(RoundedRectangle(cornerRadius: 8))
-      .frame(minWidth: count == 1 ? nil : containerWidth, maxWidth: 600)
-      .id(container.id)
-      .matchedGeometryEffect(id: container.id, in: mediaSpace, anchor: .leading)
-      .matchedGeometryEffect(id: index, in: mediaSpace, anchor: .leading)
+        }
+        .contextMenu {
+          makeImageMenu(container: container)
+        }
+        .alert("alert.error", isPresented: $isErrorDisplayed) {
+          Button("Ok", action: {})
+        } message: {
+          Text(container.error?.localizedDescription ?? "")
+        }
+        .overlay(alignment: .bottomTrailing) {
+          makeAltMarker(container: container)
+        }
+        .overlay(alignment: .topTrailing) {
+          makeDiscardMarker(container: container)
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .frame(minWidth: count == 1 ? nil : containerWidth, maxWidth: 600)
+        .id(container.id)
+        .matchedGeometryEffect(id: container.id, in: mediaSpace, anchor: .leading)
+        .matchedGeometryEffect(id: index, in: mediaSpace, anchor: .leading)
     }
 
-    private func makeLocalImageView(container: MediaContainer) -> some View {
+    private func makeLocalMediaView(content: MediaContainer.MediaContent) -> some View {
       ZStack(alignment: .center) {
-        Image(uiImage: container.image!)
-          .resizable()
-          .blur(radius: container.mediaAttachment == nil ? 20 : 0)
-          .scaledToFill()
-          .cornerRadius(8)
-        if container.error != nil {
-          Text("status.editor.error.upload")
-        } else if container.mediaAttachment == nil {
-          ProgressView()
+        if let image = content.previewImage {
+          Image(uiImage: image)
+            .resizable()
+            .blur(radius: 20)
+            .scaledToFill()
+            .cornerRadius(8)
+        } else {
+          placeholderView
         }
+        ProgressView()
+      }
+    }
+    
+    private func makeUploadingView(content: MediaContainer.MediaContent, progress: Double) -> some View {
+      ZStack(alignment: .center) {
+        if let image = content.previewImage {
+          Image(uiImage: image)
+            .resizable()
+            .blur(radius: 10)
+            .scaledToFill()
+            .cornerRadius(8)
+        } else {
+          placeholderView
+        }
+        VStack {
+          if progress > 0 && progress < 1 {
+            ProgressView(value: progress)
+              .progressViewStyle(.linear)
+              .padding(.horizontal)
+          } else  {
+            ProgressView()
+                .progressViewStyle(.circular)
+          }
+        }
+        .transition(.identity)
+        .animation(.bouncy, value: progress)
       }
     }
 
@@ -171,23 +199,36 @@ extension StatusEditor {
 
     @ViewBuilder
     private func makeImageMenu(container: MediaContainer) -> some View {
-      if container.mediaAttachment?.url != nil {
-        if currentInstance.isEditAltTextSupported || !viewModel.mode.isEditing {
-          Button {
-            editingMediaContainer = container
-          } label: {
-            Label(
-              container.mediaAttachment?.description?.isEmpty == false
-                ? "status.editor.description.edit" : "status.editor.description.add",
-              systemImage: "pencil.line")
+      switch container.state {
+      case .uploaded(let attachment, _):
+        if attachment.url != nil {
+          if currentInstance.isEditAltTextSupported || !viewModel.mode.isEditing {
+            Button {
+              editingMediaContainer = container
+            } label: {
+              Label(
+                attachment.description?.isEmpty == false
+                  ? "status.editor.description.edit" : "status.editor.description.add",
+                systemImage: "pencil.line")
+            }
           }
         }
-      } else if container.error != nil {
+      case .failed:
         Button {
           isErrorDisplayed = true
         } label: {
           Label("action.view.error", systemImage: "exclamationmark.triangle")
         }
+      case .pending:
+        Button {
+          Task {
+            await viewModel.upload(container: container)
+          }
+        } label: {
+          Label("Retry Upload", systemImage: "arrow.clockwise")
+        }
+      case .uploading:
+        EmptyView()
       }
 
       Button(role: .destructive) {
@@ -197,37 +238,77 @@ extension StatusEditor {
       }
     }
 
-    private func makeErrorView(error _: ServerError) -> some View {
+    private func makeErrorView(content: MediaContainer.MediaContent, error: MediaContainer.MediaError) -> some View {
       ZStack {
-        placeholderView
-        Text("status.editor.error.upload")
+        if let image = content.previewImage {
+          Image(uiImage: image)
+            .resizable()
+            .blur(radius: 5)
+            .scaledToFill()
+            .cornerRadius(8)
+            .opacity(0.5)
+        } else {
+          placeholderView
+        }
+        VStack {
+          Image(systemName: "exclamationmark.triangle.fill")
+            .foregroundStyle(.red)
+          Text("status.editor.error.upload")
+            .font(.caption)
+        }
       }
     }
 
+    @ViewBuilder
     private func makeAltMarker(container: MediaContainer) -> some View {
-      Button {
-        editingMediaContainer = container
-      } label: {
-        Text("status.image.alt-text.abbreviation")
-          .font(.caption2)
+      if #available(iOS 26.0, *) {
+        Button {
+          editingMediaContainer = container
+        } label: {
+          Text("status.image.alt-text.abbreviation")
+            .font(.caption2)
+            .padding(4)
+        }
+        .buttonStyle(.glass)
+        .padding()
+      } else {
+        Button {
+          editingMediaContainer = container
+        } label: {
+          Text("status.image.alt-text.abbreviation")
+            .font(.caption2)
+        }
+        .padding(8)
+        .background(.thinMaterial)
+        .cornerRadius(8)
+        .padding(4)
       }
-      .padding(8)
-      .background(.thinMaterial)
-      .cornerRadius(8)
-      .padding(4)
     }
 
+    @ViewBuilder
     private func makeDiscardMarker(container: MediaContainer) -> some View {
-      Button(role: .destructive) {
-        deleteAction(container: container)
-      } label: {
-        Image(systemName: "xmark")
-          .font(.caption2)
-          .foregroundStyle(.tint)
-          .padding(8)
-          .background(Circle().fill(.thinMaterial))
+      if #available(iOS 26.0, *) {
+        Button(role: .destructive) {
+          deleteAction(container: container)
+        } label: {
+          Image(systemName: "xmark")
+            .font(.caption2)
+            .padding(4)
+        }
+        .buttonStyle(.glass)
+        .padding()
+      } else {
+        Button(role: .destructive) {
+          deleteAction(container: container)
+        } label: {
+          Image(systemName: "xmark")
+            .font(.caption2)
+            .foregroundStyle(.tint)
+            .padding(8)
+            .background(Circle().fill(.thinMaterial))
+        }
+        .padding(4)
       }
-      .padding(4)
     }
 
     private func deleteAction(container: MediaContainer) {

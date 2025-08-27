@@ -3,7 +3,7 @@ import AppIntents
 import Env
 import Foundation
 import Models
-import Network
+import NetworkClient
 
 public struct AppAccountEntity: Identifiable, AppEntity {
   public var id: String { account.id }

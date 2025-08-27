@@ -1,22 +1,28 @@
 import DesignSystem
-import Network
+import Models
+import NetworkClient
 import SwiftUI
 
 @MainActor
 public struct EditRelationshipNoteView: View {
   @Environment(\.dismiss) private var dismiss
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
 
-  @State var accountDetailViewModel: AccountDetailViewModel
-  @State private var viewModel = EditRelationshipNoteViewModel()
+  let accountId: String
+  let relationship: Relationship?
+  let onSave: () -> Void
+  
+  @State private var note: String = ""
+  @State private var isSaving: Bool = false
+  @State private var saveError: Bool = false
 
   public var body: some View {
     NavigationStack {
       Form {
         Section("account.relation.note.label") {
           TextField(
-            "account.relation.note.edit.placeholder", text: $viewModel.note, axis: .vertical
+            "account.relation.note.edit.placeholder", text: $note, axis: .vertical
           )
           .frame(minHeight: 150, maxHeight: 150, alignment: .top)
         }
@@ -35,15 +41,13 @@ public struct EditRelationshipNoteView: View {
       }
       .alert(
         "account.relation.note.edit.error.save.title",
-        isPresented: $viewModel.saveError,
+        isPresented: $saveError,
         actions: {
           Button("alert.button.ok", action: {})
         }, message: { Text("account.relation.note.edit.error.save.message") }
       )
       .task {
-        viewModel.client = client
-        viewModel.relatedAccountId = accountDetailViewModel.accountId
-        viewModel.note = accountDetailViewModel.relationship?.note ?? ""
+        note = relationship?.note ?? ""
       }
     }
   }
@@ -59,17 +63,32 @@ public struct EditRelationshipNoteView: View {
     ToolbarItem(placement: .navigationBarTrailing) {
       Button {
         Task {
-          await viewModel.save()
-          await accountDetailViewModel.fetchAccount()
+          await save()
+          onSave()
           dismiss()
         }
       } label: {
-        if viewModel.isSaving {
+        if isSaving {
           ProgressView()
         } else {
           Text("action.save").bold()
         }
       }
+    }
+  }
+}
+
+extension EditRelationshipNoteView {
+  private func save() async {
+    isSaving = true
+    do {
+      _ = try await client.post(
+        endpoint: Accounts.relationshipNote(
+          id: accountId, json: RelationshipNoteData(note: note)))
+      isSaving = false
+    } catch {
+      isSaving = false
+      saveError = true
     }
   }
 }

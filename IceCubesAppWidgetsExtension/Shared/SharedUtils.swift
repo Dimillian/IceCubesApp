@@ -1,7 +1,7 @@
 import AppAccount
 import Foundation
 import Models
-import Network
+import NetworkClient
 import StatusKit
 import Timeline
 import UIKit
@@ -12,7 +12,7 @@ func loadStatuses(
   account: AppAccountEntity,
   widgetFamily: WidgetFamily
 ) async -> [Status] {
-  let client = Client(server: account.account.server, oauthToken: account.account.oauthToken)
+  let client = MastodonClient(server: account.account.server, oauthToken: account.account.oauthToken)
   do {
     var statuses: [Status] = try await client.get(
       endpoint: timeline.endpoint(

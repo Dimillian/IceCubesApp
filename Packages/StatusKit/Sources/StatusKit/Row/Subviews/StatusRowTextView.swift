@@ -19,7 +19,7 @@ struct StatusRowTextView: View {
           statusDataController.content,
           emojis: viewModel.finalStatus.emojis,
           language: viewModel.finalStatus.language,
-          lineLimit: viewModel.lineLimit
+          lineLimit: viewModel.textDisabled ? 3 : viewModel.lineLimit
         )
         .fixedSize(horizontal: false, vertical: true)
         .font(isFocused ? .scaledBodyFocused : .scaledBody)

@@ -1,6 +1,6 @@
 import DesignSystem
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 import Timeline
 import WidgetKit
@@ -31,7 +31,7 @@ struct AccountWidgetProvider: AppIntentTimelineProvider {
     guard let account = configuration.account else {
       return .placeholder()
     }
-    let client = Client(
+    let client = MastodonClient(
       server: account.account.server,
       oauthToken: account.account.oauthToken)
     do {

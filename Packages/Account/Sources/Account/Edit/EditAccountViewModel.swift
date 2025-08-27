@@ -1,5 +1,5 @@
 import Models
-import Network
+import NetworkClient
 import Observation
 import PhotosUI
 import StatusKit
@@ -18,7 +18,7 @@ import SwiftUI
     }
   }
 
-  public var client: Client?
+  public var client: MastodonClient?
 
   var displayName: String = ""
   var note: String = ""

@@ -12,7 +12,7 @@ import SwiftUI
 /// A LazyImage (Nuke) with a geometry reader under the hood in order to use a Resize Processor to optimize performances on lists.
 /// This views also allows smooth resizing of the images by debouncing the update of the ImageProcessor.
 public struct LazyResizableImage<Content: View>: View {
-  public init(url: URL?, @ViewBuilder content: @escaping (LazyImageState, GeometryProxy) -> Content)
+  public init(url: URL?, @ViewBuilder content: @escaping (LazyImageState) -> Content)
   {
     imageURL = url
     self.content = content
@@ -23,21 +23,27 @@ public struct LazyResizableImage<Content: View>: View {
   @State private var debouncedTask: Task<Void, Never>?
 
   @ViewBuilder
-  private var content: (LazyImageState, _ proxy: GeometryProxy) -> Content
+  private var content: (LazyImageState) -> Content
 
   public var body: some View {
     GeometryReader { proxy in
       LazyImage(url: imageURL) { state in
-        content(state, proxy)
+        content(state)
       }
       .processors([resizeProcessor == nil ? .resize(size: proxy.size) : resizeProcessor!])
       .onChange(of: proxy.size, initial: true) { oldValue, newValue in
         guard oldValue != newValue else { return }
-        debouncedTask?.cancel()
-        debouncedTask = Task {
-          do { try await Task.sleep(for: .milliseconds(200)) } catch { return }
-          resizeProcessor = .resize(size: newValue)
-        }
+        updateResizing(with: newValue)
+      }
+    }
+  }
+
+  private func updateResizing(with newSize: CGSize) {
+    debouncedTask?.cancel()
+    debouncedTask = Task {
+      do { try await Task.sleep(for: .milliseconds(200)) } catch { return }
+      await MainActor.run {
+        resizeProcessor = .resize(size: newSize)
       }
     }
   }

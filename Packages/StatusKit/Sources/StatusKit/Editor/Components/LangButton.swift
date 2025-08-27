@@ -60,7 +60,12 @@ extension StatusEditor {
         .searchable(text: $languageSearch, placement: .navigationBarDrawer)
         .toolbar {
           ToolbarItem(placement: .navigationBarLeading) {
-            Button("action.cancel", action: { isLanguageSheetDisplayed = false })
+            Button(role: .destructive) {
+              isLanguageSheetDisplayed = false
+            } label: {
+              Label("action.cancel", systemImage: "xmark")
+            }
+            .tint(.red)
           }
         }
         .navigationTitle("status.editor.language-select.navigation-title")

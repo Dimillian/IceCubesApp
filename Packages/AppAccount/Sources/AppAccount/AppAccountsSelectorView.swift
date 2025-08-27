@@ -47,17 +47,24 @@ public struct AppAccountsSelectorView: View {
       HapticManager.shared.fireHaptic(.buttonPress)
     } label: {
       labelView
-        .contentShape(Rectangle())
+        .contentShape(.circle)
     }
     .sheet(
       isPresented: $isPresented,
       content: {
-        accountsView.presentationDetents([.height(preferredHeight), .large])
-          .presentationBackground(.ultraThinMaterial)
-          .presentationCornerRadius(16)
-          .onAppear {
-            refreshAccounts()
-          }
+        if #available(iOS 26, *) {
+          accountsView.presentationDetents([.height(preferredHeight), .large])
+            .onAppear {
+              refreshAccounts()
+            }
+        } else {
+          accountsView.presentationDetents([.height(preferredHeight), .large])
+            .presentationBackground(.ultraThinMaterial)
+            .presentationCornerRadius(16)
+            .onAppear {
+              refreshAccounts()
+            }
+        }
       }
     )
     .onChange(of: currentAccount.account?.id) {
@@ -77,7 +84,12 @@ public struct AppAccountsSelectorView: View {
   private var labelView: some View {
     Group {
       if let account = currentAccount.account, !currentAccount.isLoadingAccount {
-        AvatarView(account.avatar, config: avatarConfig)
+        if #available(iOS 26.0, *) {
+          AvatarView(account.avatar, config: avatarConfig)
+            .glassEffect(.regular.interactive())
+        } else {
+          AvatarView(account.avatar, config: avatarConfig)
+        }
       } else {
         AvatarView(config: avatarConfig)
           .redacted(reason: .placeholder)
@@ -106,7 +118,7 @@ public struct AppAccountsSelectorView: View {
             #endif
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
+          .listRowBackground(theme.secondaryBackgroundColor.opacity(0.8))
         #endif
 
         if accountCreationEnabled {
@@ -118,7 +130,7 @@ public struct AppAccountsSelectorView: View {
           #if os(visionOS)
             .foregroundStyle(theme.labelColor)
           #else
-            .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
+            .listRowBackground(theme.secondaryBackgroundColor.opacity(0.8))
           #endif
         }
       }
