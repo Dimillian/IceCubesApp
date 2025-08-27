@@ -1,5 +1,5 @@
 {
-  "originHash" : "f4a38cf3b71adee5c987dcb603362633b86bbbd38c6dc4c897085f53a0ea9d44",
+  "originHash" : "928514fbf2a44300a6ba99e7b8b50e65f99eba3bf6503dd2be12a5fa76389623",
   "pins" : [
     {
       "identity" : "bodega",
@@ -25,7 +25,7 @@
       "location" : "https://github.com/Dimillian/EmojiText",
       "state" : {
         "branch" : "fix-ios26",
-        "revision" : "0305cf9c0ecfe661bbab2b834167e261b89b3d7a"
+        "revision" : "3b11459a19c9406176a08b0f0599b98f88113296"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios-spm",
       "state" : {
-        "revision" : "2f43b88b893880848983af9b885185e20850a1df",
-        "version" : "5.28.0"
+        "revision" : "334e4c6d711286744f1b9138934774f034c0a515",
+        "version" : "5.35.1"
       }
     },
     {
