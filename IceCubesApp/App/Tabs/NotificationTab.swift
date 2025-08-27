@@ -39,6 +39,9 @@ struct NotificationsTab: View {
             }
             .tint(.label)
           }
+          if #available(iOS 26.0, *) {
+            ToolbarSpacer(placement: .topBarTrailing)
+          }
           ToolbarTab(routerPath: $routerPath)
         }
         .id(client.id)

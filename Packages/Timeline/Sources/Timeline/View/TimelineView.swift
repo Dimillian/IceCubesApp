@@ -58,7 +58,7 @@ public struct TimelineView: View {
             TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
               .padding(.horizontal, .layoutPadding)
           }
-      }
+        }
     } else {
       timelineView
         .toolbarBackground(toolbarBackgroundVisibility, for: .navigationBar)
@@ -76,14 +76,15 @@ public struct TimelineView: View {
         }
     }
   }
-  
+
   private var timelineView: some View {
     ZStack(alignment: .top) {
-      TimelineListView(viewModel: viewModel,
-                       timeline: $timeline,
-                       pinnedFilters: $pinnedFilters,
-                       selectedTagGroup: $selectedTagGroup,
-                       scrollToIdAnimated: $scrollToIdAnimated)
+      TimelineListView(
+        viewModel: viewModel,
+        timeline: $timeline,
+        pinnedFilters: $pinnedFilters,
+        selectedTagGroup: $selectedTagGroup,
+        scrollToIdAnimated: $scrollToIdAnimated)
       if viewModel.timeline.supportNewestPagination {
         TimelineUnreadStatusesView(observer: viewModel.pendingStatusesObserver) { statusId in
           if let statusId {
@@ -94,6 +95,9 @@ public struct TimelineView: View {
     }
     .toolbar {
       TimelineToolbarTitleView(timeline: $timeline, canFilterTimeline: canFilterTimeline)
+      if #available(iOS 26.0, *) {
+        ToolbarSpacer(placement: .topBarTrailing)
+      }
       TimelineToolbarTagGroupButton(timeline: $timeline)
     }
     .navigationBarTitleDisplayMode(.inline)
@@ -126,7 +130,7 @@ public struct TimelineView: View {
     .onChange(of: account.lists) { _, lists in
       guard client.isAuth else { return }
       switch timeline {
-      case let .list(list):
+      case .list(let list):
         if let accountList = lists.first(where: { $0.id == list.id }),
           list.id == accountList.id,
           accountList.title != list.title
@@ -140,11 +144,11 @@ public struct TimelineView: View {
     .onChange(of: timeline) { oldValue, newValue in
       guard oldValue != newValue else { return }
       switch newValue {
-      case let .remoteLocal(server, _):
+      case .remoteLocal(let server, _):
         viewModel.client = MastodonClient(server: server)
       default:
         switch oldValue {
-        case let .remoteLocal(server, _):
+        case .remoteLocal(let server, _):
           if newValue == .latest {
             viewModel.client = MastodonClient(server: server)
           } else {

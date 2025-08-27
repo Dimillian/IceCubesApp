@@ -1,16 +1,18 @@
-import SwiftUI
+import DesignSystem
 import Models
 import SwiftData
+import SwiftUI
 
 struct TimelineToolbarTagGroupButton: ToolbarContent {
+  @Environment(Theme.self) private var theme
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
-  
+
   @Binding var timeline: TimelineFilter
-  
+
   var body: some ToolbarContent {
     ToolbarItem(placement: .topBarTrailing) {
       switch timeline {
-      case let .hashtag(tag, _):
+      case .hashtag(let tag, _):
         if !tagGroups.isEmpty {
           Menu {
             Section("tag-groups.edit.section.title") {
@@ -31,6 +33,7 @@ struct TimelineToolbarTagGroupButton: ToolbarContent {
             }
           } label: {
             Image(systemName: "ellipsis")
+              .foregroundStyle(theme.labelColor)
           }
         }
       default:

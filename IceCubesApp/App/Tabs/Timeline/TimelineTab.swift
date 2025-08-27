@@ -87,7 +87,7 @@ struct TimelineTab: View {
         lastTimelineFilter = newValue
       }
       switch newValue {
-      case let .tagGroup(title, _, _):
+      case .tagGroup(let title, _, _):
         if let group = tagGroups.first(where: { $0.title == title }) {
           selectedTagGroup = group
         }
@@ -153,16 +153,23 @@ struct TimelineTab: View {
       }
     }
     switch timeline {
-    case let .list(list):
-      ToolbarItem {
+    case .list(let list):
+      if #available(iOS 26.0, *) {
+        ToolbarSpacer(placement: .topBarTrailing)
+      }
+      ToolbarItem(placement: .topBarTrailing) {
         Button {
           routerPath.presentedSheet = .listEdit(list: list)
         } label: {
           Image(systemName: "list.bullet")
+            .foregroundStyle(theme.labelColor)
         }
       }
-    case let .remoteLocal(server, _):
-      ToolbarItem {
+    case .remoteLocal(let server, _):
+      if #available(iOS 26.0, *) {
+        ToolbarSpacer(placement: .topBarTrailing)
+      }
+      ToolbarItem(placement: .topBarTrailing) {
         Menu {
           ForEach(RemoteTimelineFilter.allCases, id: \.self) { filter in
             Button {
@@ -173,6 +180,7 @@ struct TimelineTab: View {
           }
         } label: {
           Image(systemName: "line.3.horizontal.decrease.circle")
+            .foregroundStyle(theme.labelColor)
         }
       }
     default:

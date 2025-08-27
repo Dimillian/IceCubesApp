@@ -33,7 +33,6 @@ struct NotificationRowContentView: View {
               showActions: false,
               textDisabled: true)
           )
-          .lineLimit(4)
           .environment(\.isMediaCompact, true)
         }
         Spacer()
