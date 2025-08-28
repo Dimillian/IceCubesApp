@@ -20717,7 +20717,14 @@
       }
     },
     "ALT text for the image" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texto ALT para la imagen"
+          }
+        }
+      }
     },
     "An error occured while posting to Mastodon, please try again." : {
       "localizations" : {
@@ -21032,10 +21039,24 @@
       }
     },
     "Caption" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leyenda"
+          }
+        }
+      }
     },
     "Caption for your post" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leyenda para tu publicación"
+          }
+        }
+      }
     },
     "Compact Layout" : {
       "localizations" : {
@@ -22863,7 +22884,14 @@
       }
     },
     "Descriptions (ALT) for your images in order" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripciones (ALT) para tus imágenes en orden"
+          }
+        }
+      }
     },
     "design.tag.n-posts-from-n-participants %lld %lld" : {
       "comment" : "MARK: Package: DesignSystem",
@@ -27241,7 +27269,14 @@
       }
     },
     "Error: %@" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error %@"
+          }
+        }
+      }
     },
     "Explore & Trending" : {
       "localizations" : {
@@ -32024,10 +32059,24 @@
       }
     },
     "Image description" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripción de imagen"
+          }
+        }
+      }
     },
     "Image descriptions" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripciones de imagen"
+          }
+        }
+      }
     },
     "Image to post on Mastodon" : {
       "localizations" : {
@@ -32088,10 +32137,24 @@
       }
     },
     "Image(s) to post on Mastodon" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen(es) para publicar en Mastodon"
+          }
+        }
+      }
     },
     "Images" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imágenes"
+          }
+        }
+      }
     },
     "Instance" : {
       "extractionState" : "manual",
@@ -36563,7 +36626,14 @@
       }
     },
     "No images provided to post." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imágenes para la publicación no incluídas"
+          }
+        }
+      }
     },
     "Notifications" : {
       "localizations" : {
@@ -42396,7 +42466,14 @@
       }
     },
     "Posted %lld image(s) on Mastodon" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Se han publicado %lld imagen(es) en Mastodon"
+          }
+        }
+      }
     },
     "Privacy Policy" : {
       "localizations" : {
@@ -43471,13 +43548,34 @@
       }
     },
     "Send an image or multiple images to Mastodon with Ice Cubes without opening the app" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envía una imagen o múltiples imágenes a Mastodon con Ice Cubes sin abrir la aplicación"
+          }
+        }
+      }
     },
     "Send image(s) (background)" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar imagen(es) (segundo plano)"
+          }
+        }
+      }
     },
     "Send image(s) to Mastodon" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar imagen(es) a Mastodon"
+          }
+        }
+      }
     },
     "Send post to Mastodon" : {
       "localizations" : {
