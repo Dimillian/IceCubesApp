@@ -242,7 +242,7 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
     case .mentions:
       "at"
     case .explore:
-      "magnifyingglass"
+      "magnifyingglass.circle"
     case .messages:
       "tray"
     case .settings:
