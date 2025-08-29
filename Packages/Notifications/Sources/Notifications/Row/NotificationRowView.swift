@@ -67,6 +67,7 @@ struct NotificationRowView: View {
           client: client,
           routerPath: routerPath
         )
+      .environment(\.isNotificationsTab, true)
         if notification.type == .follow_request,
           followRequests.map(\.id).contains(notification.accounts[0].id)
         {

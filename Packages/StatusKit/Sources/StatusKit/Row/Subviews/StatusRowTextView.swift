@@ -7,6 +7,8 @@ import SwiftUI
 struct StatusRowTextView: View {
   @Environment(Theme.self) private var theme
   @Environment(\.isStatusFocused) private var isFocused
+  @Environment(UserPreferences.self) private var userPreferences
+  @Environment(\.isNotificationsTab) private var isNotificationsTab
 
   @Environment(StatusDataController.self) private var statusDataController
 
@@ -19,7 +21,9 @@ struct StatusRowTextView: View {
           statusDataController.content,
           emojis: viewModel.finalStatus.emojis,
           language: viewModel.finalStatus.language,
-          lineLimit: viewModel.textDisabled ? 3 : viewModel.lineLimit
+          lineLimit: isNotificationsTab
+            ? (userPreferences.notificationsTruncateStatusContent ? 2 : nil)
+            : (viewModel.textDisabled ? 3 : viewModel.lineLimit)
         )
         .fixedSize(horizontal: false, vertical: true)
         .font(isFocused ? .scaledBodyFocused : .scaledBody)
