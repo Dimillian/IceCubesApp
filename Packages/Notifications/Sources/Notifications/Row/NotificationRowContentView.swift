@@ -23,6 +23,7 @@ struct NotificationRowContentView: View {
               routerPath: routerPath,
               showActions: true)
           )
+          .environment(\.isNotificationsTab, false)
           .environment(\.isMediaCompact, false)
         } else {
           StatusRowExternalView(
