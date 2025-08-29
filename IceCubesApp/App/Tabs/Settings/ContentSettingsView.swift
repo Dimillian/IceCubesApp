@@ -148,6 +148,15 @@ struct ContentSettingsView: View {
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
       #endif
+
+      Section("Notifications") {
+        Toggle(isOn: $userPreferences.notificationsTruncateStatusContent) {
+          Text("Truncate status content")
+        }
+      }
+      #if !os(visionOS)
+        .listRowBackground(theme.primaryBackgroundColor)
+      #endif
     }
     .navigationTitle("settings.content.navigation-title")
     #if !os(visionOS)

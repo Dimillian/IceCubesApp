@@ -69,6 +69,10 @@ import SwiftUI
 
     @AppStorage("sidebar_expanded") public var isSidebarExpanded: Bool = false
 
+    // Notifications
+    @AppStorage("notifications-truncate-status-content")
+    public var notificationsTruncateStatusContent: Bool = true
+
     init() {
       prepareTranslationType()
     }
@@ -348,6 +352,13 @@ import SwiftUI
     }
   }
 
+  // Notifications
+  public var notificationsTruncateStatusContent: Bool {
+    didSet {
+      storage.notificationsTruncateStatusContent = notificationsTruncateStatusContent
+    }
+  }
+
   public func getRealMaxIndent() -> UInt {
     showReplyIndentation ? maxReplyIndentation : 0
   }
@@ -523,6 +534,7 @@ import SwiftUI
     showAccountPopover = storage.showAccountPopover
     muteVideo = storage.muteVideo
     isSidebarExpanded = storage.isSidebarExpanded
+    notificationsTruncateStatusContent = storage.notificationsTruncateStatusContent
   }
 }
 
