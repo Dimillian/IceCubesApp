@@ -57,6 +57,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         handleNode(node: document, listCounters: &listCounters)
 
         document.outputSettings(OutputSettings().prettyPrint(pretty: false))
+        try document.select("p.quote-inline").remove()
         try document.select("br").after("\n")
         try document.select("p").after("\n\n")
         let html = try document.html()
@@ -203,6 +204,9 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       }
 
       if node.nodeName() == "p" {
+        if let className = try? node.attr("class"), className == "quote-inline" {
+          return
+        }
         if asMarkdown.count > 0 && !skipParagraph {
           asMarkdown += "\n\n"
         }
