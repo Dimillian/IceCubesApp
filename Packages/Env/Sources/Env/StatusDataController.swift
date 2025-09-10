@@ -62,6 +62,7 @@ public final class StatusDataControllerProvider {
   public var favoritesCount: Int
   public var reblogsCount: Int
   public var repliesCount: Int
+  public var quotesCount: Int
 
   init(status: AnyStatus, client: MastodonClient) {
     self.status = status
@@ -74,6 +75,7 @@ public final class StatusDataControllerProvider {
     reblogsCount = status.reblogsCount
     repliesCount = status.repliesCount
     favoritesCount = status.favouritesCount
+    quotesCount = status.quotesCount ?? 0
     content = status.content
   }
 
@@ -85,6 +87,7 @@ public final class StatusDataControllerProvider {
     reblogsCount = status.reblogsCount
     repliesCount = status.repliesCount
     favoritesCount = status.favouritesCount
+    quotesCount = status.quotesCount ?? 0
     content = status.content
   }
 

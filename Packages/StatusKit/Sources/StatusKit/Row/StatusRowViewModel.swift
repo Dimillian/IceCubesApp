@@ -49,6 +49,7 @@ import SwiftUI
   private(set) var actionsAccountsFetched: Bool = false
   var favoriters: [Account] = []
   var rebloggers: [Account] = []
+  var quoters: [Account] = []
 
   var isLoadingRemoteContent: Bool = false
   var localStatusId: String?
@@ -328,9 +329,16 @@ import SwiftUI
         endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
       let rebloggers: [Account] = try await client.get(
         endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
+      var quoters: [Account] = []
+      if finalStatus.quotesCount ?? 0 > 0 {
+        let statuses: [Status] =  try await client.get(
+          endpoint: Statuses.quotesBy(id: status.id, maxId: nil))
+        quoters = statuses.map{ $0.account }
+      }
       withAnimation(.smooth) {
         self.favoriters = favoriters
         self.rebloggers = rebloggers
+        self.quoters = quoters
       }
     } catch {}
   }

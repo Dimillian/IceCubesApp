@@ -12,6 +12,7 @@ public enum Statuses: Endpoint {
   case unreblog(id: String)
   case rebloggedBy(id: String, maxId: String?)
   case favoritedBy(id: String, maxId: String?)
+  case quotesBy(id: String, maxId: String?)
   case pin(id: String)
   case unpin(id: String)
   case bookmark(id: String)
@@ -42,6 +43,8 @@ public enum Statuses: Endpoint {
       "statuses/\(id)/reblogged_by"
     case .favoritedBy(let id, _):
       "statuses/\(id)/favourited_by"
+    case .quotesBy(let id, _):
+      "statuses/\(id)/quotes"
     case .pin(let id):
       "statuses/\(id)/pin"
     case .unpin(let id):
@@ -64,6 +67,8 @@ public enum Statuses: Endpoint {
     case .rebloggedBy(_, let maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case .favoritedBy(_, let maxId):
+      return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
+    case .quotesBy(_, let maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case .translate(_, let lang):
       if let lang {

@@ -17,6 +17,7 @@ public protocol AnyStatus {
   var mentions: [Mention] { get }
   var repliesCount: Int { get }
   var reblogsCount: Int { get }
+  var quotesCount: Int? { get }
   var favouritesCount: Int { get }
   var card: Card? { get }
   var favourited: Bool? { get }
@@ -58,6 +59,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   public let mentions: [Mention]
   public let repliesCount: Int
   public let reblogsCount: Int
+  public let quotesCount: Int?
   public let favouritesCount: Int
   public let card: Card?
   public let favourited: Bool?
@@ -93,7 +95,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
     reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?,
     application: Application?, inReplyToId: String?, inReplyToAccountId: String?,
     visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?,
-    sensitive: Bool, language: String?, tags: [Tag] = [], quote: Quote?
+    sensitive: Bool, language: String?, tags: [Tag] = [], quote: Quote?, quotesCount: Int?
   ) {
     self.id = id
     self.content = content
@@ -124,6 +126,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
     self.language = language
     self.tags = tags
     self.quote = quote
+    self.quotesCount = quotesCount
   }
 
   public static func placeholder(forSettings: Bool = false, language: String? = nil) -> Status {
@@ -160,7 +163,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
       sensitive: false,
       language: language,
       tags: [],
-      quote: nil)
+      quote: nil,
+      quotesCount: nil)
   }
 
   public static func placeholders() -> [Status] {
@@ -201,7 +205,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
         sensitive: reblog.sensitive,
         language: reblog.language,
         tags: reblog.tags,
-        quote: reblog.quote)
+        quote: reblog.quote,
+        quotesCount: reblog.quotesCount)
     }
     return nil
   }
@@ -225,6 +230,7 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
   public let mentions: [Mention]
   public let repliesCount: Int
   public let reblogsCount: Int
+  public let quotesCount: Int?
   public let favouritesCount: Int
   public let card: Card?
   public let favourited: Bool?
@@ -256,7 +262,7 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
     bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application? = nil,
     inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?,
     spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?,
-    tags: [Tag] = [], quote: Quote?
+    tags: [Tag] = [], quote: Quote?, quotesCount: Int?
   ) {
     self.id = id
     self.content = content
@@ -286,6 +292,7 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
     self.language = language
     self.tags = tags
     self.quote = quote
+    self.quotesCount = quotesCount
   }
 }
 

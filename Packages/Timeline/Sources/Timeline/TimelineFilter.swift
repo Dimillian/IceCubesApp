@@ -36,6 +36,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
   case list(list: Models.List)
   case remoteLocal(server: String, filter: RemoteTimelineFilter)
   case link(url: URL, title: String)
+  case quotes(statusId: String)
   case latest
   case resume
 
@@ -53,6 +54,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
       return title + tags.joined()
     case let .link(url, _):
       return url.absoluteString
+    case let .quotes(statusId):
+      return "quotes" + statusId
     default:
       return title
     }
@@ -94,6 +97,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
       "Trending"
     case .home:
       "Home"
+    case .quotes:
+      "Quotes"
     case let .link(_, title):
       title
     case let .hashtag(tag, _):
@@ -131,6 +136,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
       LocalizedStringKey(list.title)
     case let .remoteLocal(server, _):
       LocalizedStringKey(server)
+    case .quotes:
+      "Quotes"
     }
   }
 
@@ -158,6 +165,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
       "number"
     case .link:
       "link"
+    case .quotes:
+      "quote.bubble"
     }
   }
 
@@ -184,6 +193,8 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
       case .trending:
         return Trends.statuses(offset: offset)
       }
+    case let .quotes(statusId):
+      return Statuses.quotesBy(id: statusId, maxId: maxId)
     case .latest: return Timelines.home(sinceId: nil, maxId: nil, minId: nil, limit: limit)
     case .resume: return Timelines.home(sinceId: nil, maxId: nil, minId: nil, limit: limit)
     case .home: return Timelines.home(sinceId: sinceId, maxId: maxId, minId: minId, limit: limit)
@@ -230,6 +241,7 @@ extension TimelineFilter: Codable {
     case latest
     case resume
     case link
+    case quotes
   }
 
   public init(from decoder: Decoder) throws {
@@ -268,6 +280,12 @@ extension TimelineFilter: Codable {
         forKey: .list
       )
       self = .list(list: list)
+    case .quotes:
+      let id = try container.decode(
+        String.self,
+        forKey: .quotes
+      )
+      self = .quotes(statusId: id)
     case .remoteLocal:
       var nestedContainer = try container.nestedUnkeyedContainer(forKey: .remoteLocal)
       let server = try nestedContainer.decode(String.self)
@@ -315,6 +333,8 @@ extension TimelineFilter: Codable {
       try? nestedContainer.encode(symbolName)
     case let .list(list):
       try container.encode(list, forKey: .list)
+    case let .quotes(id):
+      try container.encode(id, forKey: .quotes)
     case let .remoteLocal(server, filter):
       var nestedContainer = container.nestedUnkeyedContainer(forKey: .remoteLocal)
       try nestedContainer.encode(server)
