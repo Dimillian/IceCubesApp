@@ -47,6 +47,10 @@ import Observation
     version >= 4.3
   }
 
+  public var isQuoteSupported: Bool {
+    version >= 4.5 || instance?.apiVersions?.mastodon ?? 0 >= 7
+  }
+
   private init() {}
 
   public func setClient(client: MastodonClient) {
@@ -55,6 +59,6 @@ import Observation
 
   public func fetchCurrentInstance() async {
     guard let client else { return }
-    instance = try? await client.get(endpoint: Instances.instance)
+    instance = try? await client.get(endpoint: Instances.instance, forceVersion: .v2)
   }
 }

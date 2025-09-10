@@ -24,35 +24,35 @@ public enum Statuses: Endpoint {
     switch self {
     case .postStatus:
       "statuses"
-    case let .status(id):
+    case .status(let id):
       "statuses/\(id)"
-    case let .editStatus(id, _):
+    case .editStatus(let id, _):
       "statuses/\(id)"
-    case let .context(id):
+    case .context(let id):
       "statuses/\(id)/context"
-    case let .favorite(id):
+    case .favorite(let id):
       "statuses/\(id)/favourite"
-    case let .unfavorite(id):
+    case .unfavorite(let id):
       "statuses/\(id)/unfavourite"
-    case let .reblog(id):
+    case .reblog(let id):
       "statuses/\(id)/reblog"
-    case let .unreblog(id):
+    case .unreblog(let id):
       "statuses/\(id)/unreblog"
-    case let .rebloggedBy(id, _):
+    case .rebloggedBy(let id, _):
       "statuses/\(id)/reblogged_by"
-    case let .favoritedBy(id, _):
+    case .favoritedBy(let id, _):
       "statuses/\(id)/favourited_by"
-    case let .pin(id):
+    case .pin(let id):
       "statuses/\(id)/pin"
-    case let .unpin(id):
+    case .unpin(let id):
       "statuses/\(id)/unpin"
-    case let .bookmark(id):
+    case .bookmark(let id):
       "statuses/\(id)/bookmark"
-    case let .unbookmark(id):
+    case .unbookmark(let id):
       "statuses/\(id)/unbookmark"
-    case let .history(id):
+    case .history(let id):
       "statuses/\(id)/history"
-    case let .translate(id, _):
+    case .translate(let id, _):
       "statuses/\(id)/translate"
     case .report:
       "reports"
@@ -61,16 +61,16 @@ public enum Statuses: Endpoint {
 
   public func queryItems() -> [URLQueryItem]? {
     switch self {
-    case let .rebloggedBy(_, maxId):
+    case .rebloggedBy(_, let maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
-    case let .favoritedBy(_, maxId):
+    case .favoritedBy(_, let maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
-    case let .translate(_, lang):
+    case .translate(_, let lang):
       if let lang {
         return [.init(name: "lang", value: lang)]
       }
       return nil
-    case let .report(accountId, statusId, comment):
+    case .report(let accountId, let statusId, let comment):
       return [
         .init(name: "account_id", value: accountId),
         .init(name: "status_ids[]", value: statusId),
@@ -83,9 +83,9 @@ public enum Statuses: Endpoint {
 
   public var jsonValue: Encodable? {
     switch self {
-    case let .postStatus(json):
+    case .postStatus(let json):
       json
-    case let .editStatus(_, json):
+    case .editStatus(_, let json):
       json
     default:
       nil
@@ -102,6 +102,7 @@ public struct StatusData: Encodable, Sendable {
   public let poll: PollData?
   public let language: String?
   public let mediaAttributes: [MediaAttribute]?
+  public let quotedStatusId: String?
 
   public struct PollData: Encodable, Sendable {
     public let options: [String]
@@ -137,7 +138,8 @@ public struct StatusData: Encodable, Sendable {
     mediaIds: [String]? = nil,
     poll: PollData? = nil,
     language: String? = nil,
-    mediaAttributes: [MediaAttribute]? = nil
+    mediaAttributes: [MediaAttribute]? = nil,
+    quotedStatusId: String? = nil
   ) {
     self.status = status
     self.visibility = visibility
@@ -147,5 +149,6 @@ public struct StatusData: Encodable, Sendable {
     self.poll = poll
     self.language = language
     self.mediaAttributes = mediaAttributes
+    self.quotedStatusId = quotedStatusId
   }
 }
