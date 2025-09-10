@@ -183,6 +183,10 @@ import SwiftUI
     {
       isEmbedLoading = false
       embeddedStatus = embed
+    } else if let quotedStatus = finalStatus.quote?.quotedStatus,
+      finalStatus.quote?.state == .accepted
+    {
+      embeddedStatus = quotedStatus
     }
 
     collapseLongPosts = UserPreferences.shared.collapseLongPosts
@@ -227,6 +231,7 @@ import SwiftUI
   }
 
   private func embededStatusURL() -> URL? {
+    guard finalStatus.quote == nil else { return nil }
     let content = finalStatus.content
     if !content.statusesURLs.isEmpty,
       let url = content.statusesURLs.first,
