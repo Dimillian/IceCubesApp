@@ -14,7 +14,7 @@ extension StatusEditor {
     @Environment(CurrentInstance.self) private var currentInstance
     @Environment(AppAccountsManager.self) private var appAccounts
     @Environment(MastodonClient.self) private var client
-    
+
     #if targetEnvironment(macCatalyst)
       @Environment(\.dismissWindow) private var dismissWindow
     #else
@@ -102,7 +102,7 @@ extension StatusEditor {
 
           Spacer()
 
-          if case let .followUp(id) = assignedFocusState {
+          if case .followUp(let id) = assignedFocusState {
             Button {
               followUpSEVMs.removeAll { $0.id == id }
             } label: {
@@ -201,8 +201,7 @@ extension StatusEditor {
       .padding(.leading, .layoutPadding)
       .padding(.trailing, .layoutPadding)
     }
-    
-    
+
     private var pollButton: some View {
       Button {
         withAnimation {
@@ -216,7 +215,7 @@ extension StatusEditor {
       .accessibilityLabel("accessibility.editor.button.poll")
       .disabled(viewModel.shouldDisablePollButton)
     }
-    
+
     private var spoilerButton: some View {
       Button {
         withAnimation {
@@ -231,7 +230,7 @@ extension StatusEditor {
       .buttonStyle(.bordered)
       .accessibilityLabel("accessibility.editor.button.spoiler")
     }
-    
+
     @ViewBuilder
     private var characterCount: some View {
       let value =
@@ -254,6 +253,7 @@ extension StatusEditor {
       viewModel.currentAccount = currentAccount.account
       viewModel.theme = theme
       viewModel.preferences = preferences
+      viewModel.currentInstance = currentInstance
       viewModel.prepareStatusText()
       if !client.isAuth {
         #if targetEnvironment(macCatalyst)

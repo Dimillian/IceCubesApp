@@ -1,3 +1,4 @@
+import AVFoundation
 import Combine
 import DesignSystem
 import Env
@@ -10,7 +11,6 @@ import SwiftUI
 #if !targetEnvironment(macCatalyst)
   import FoundationModels
 #endif
-import AVFoundation
 
 extension StatusEditor {
   @MainActor
@@ -30,6 +30,7 @@ extension StatusEditor {
 
     var theme: Theme?
     var preferences: UserPreferences?
+    var currentInstance: CurrentInstance?
     var languageConfirmationDialogLanguages: (detected: String, selected: String)?
 
     var textView: UITextView? {
@@ -256,7 +257,8 @@ extension StatusEditor {
           mediaIds: mediaContainers.compactMap { $0.mediaAttachment?.id },
           poll: pollData,
           language: selectedLanguage,
-          mediaAttributes: mediaAttributes)
+          mediaAttributes: mediaAttributes,
+          quotedStatusId: embeddedStatus?.id)
         switch mode {
         case .new, .replyTo, .quote, .mention, .shareExtension, .quoteLink, .imageURL:
           postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
@@ -408,7 +410,9 @@ extension StatusEditor {
         }
       case .quote(let status):
         embeddedStatus = status
-        if let url = embeddedStatusURL {
+        if currentInstance?.isQuoteSupported == true {
+          // Do nothing
+        } else if let url = embeddedStatusURL {
           statusText = .init(
             string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
           selectedRange = .init(location: 0, length: 0)
@@ -599,6 +603,7 @@ extension StatusEditor {
 
     private func checkEmbed() {
       if let url = embeddedStatusURL,
+        currentInstance?.isQuoteSupported == false,
         !statusText.string.contains(url.absoluteString)
       {
         embeddedStatus = nil
@@ -775,8 +780,8 @@ extension StatusEditor {
       else { return nil }
 
       // Try to extract a preview image from the GIF
-      let previewImage: UIImage? = nil // GIFs typically show animated preview
-      
+      let previewImage: UIImage? = nil  // GIFs typically show animated preview
+
       return MediaContainer.pending(
         id: pickerItem.itemIdentifier ?? UUID().uuidString,
         gif: gifFile,
@@ -793,7 +798,7 @@ extension StatusEditor {
 
       // Extract preview frame from video
       let previewImage = await extractVideoPreview(from: movieFile.url)
-      
+
       return MediaContainer.pending(
         id: pickerItem.itemIdentifier ?? UUID().uuidString,
         video: movieFile,
@@ -842,12 +847,12 @@ extension StatusEditor {
 
       return containers
     }
-    
+
     private static func extractVideoPreview(from url: URL) async -> UIImage? {
       let asset = AVURLAsset(url: url)
       let generator = AVAssetImageGenerator(asset: asset)
       generator.appliesPreferredTrackTransform = true
-      
+
       return await withCheckedContinuation { continuation in
         generator.generateCGImageAsynchronously(for: .zero) { cgImage, _, error in
           if let cgImage = cgImage {
@@ -862,24 +867,25 @@ extension StatusEditor {
     func upload(container: MediaContainer) async {
       guard let index = indexOf(container: container) else { return }
       let originalContainer = mediaContainers[index]
-      
+
       // Only upload if in pending state
       guard case .pending(let content) = originalContainer.state else { return }
-      
+
       // Set to uploading state
       mediaContainers[index] = MediaContainer(
         id: originalContainer.id,
         state: .uploading(content: content, progress: 0.0)
       )
-      
+
       do {
         let compressor = Compressor()
         let uploadedMedia: MediaAttachment?
-        
+
         switch content {
         case .image(let image):
           let imageData = try await compressor.compressImageForUpload(image)
-          uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg") { [weak self] progress in
+          uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg") {
+            [weak self] progress in
             guard let self else { return }
             Task { @MainActor in
               if let index = self.indexOf(container: originalContainer) {
@@ -890,15 +896,16 @@ extension StatusEditor {
               }
             }
           }
-          
+
         case .video(let transferable, _):
           let videoURL = transferable.url
           guard let compressedVideoURL = await compressor.compressVideo(videoURL),
-                let data = try? Data(contentsOf: compressedVideoURL)
+            let data = try? Data(contentsOf: compressedVideoURL)
           else {
             throw MediaContainer.MediaError.compressionFailed
           }
-          uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType()) { [weak self] progress in
+          uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType())
+          { [weak self] progress in
             guard let self else { return }
             Task { @MainActor in
               if let index = self.indexOf(container: originalContainer) {
@@ -909,12 +916,13 @@ extension StatusEditor {
               }
             }
           }
-          
+
         case .gif(let transferable, _):
           guard let gifData = transferable.data else {
             throw MediaContainer.MediaError.compressionFailed
           }
-          uploadedMedia = try await uploadMedia(data: gifData, mimeType: "image/gif") { [weak self] progress in
+          uploadedMedia = try await uploadMedia(data: gifData, mimeType: "image/gif") {
+            [weak self] progress in
             guard let self else { return }
             Task { @MainActor in
               if let index = self.indexOf(container: originalContainer) {
@@ -926,16 +934,17 @@ extension StatusEditor {
             }
           }
         }
-        
+
         if let index = indexOf(container: originalContainer),
-           let uploadedMedia {
+          let uploadedMedia
+        {
           // Update to uploaded state
           mediaContainers[index] = MediaContainer.uploaded(
             id: originalContainer.id,
             attachment: uploadedMedia,
             originalImage: mode.isInShareExtension ? content.previewImage : nil
           )
-          
+
           // Schedule refresh if URL is not ready
           if uploadedMedia.url == nil {
             scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
@@ -950,7 +959,7 @@ extension StatusEditor {
           } else {
             mediaError = .compressionFailed
           }
-          
+
           mediaContainers[index] = MediaContainer.failed(
             id: originalContainer.id,
             content: content,
@@ -995,7 +1004,7 @@ extension StatusEditor {
 
     func addDescription(container: MediaContainer, description: String) async {
       guard let client,
-            let index = indexOf(container: container)
+        let index = indexOf(container: container)
       else { return }
 
       let state = mediaContainers[index].state
@@ -1024,7 +1033,9 @@ extension StatusEditor {
       }
     }
 
-    private func uploadMedia(data: Data, mimeType: String, progressHandler: @escaping @Sendable (Double) -> Void) async throws -> MediaAttachment? {
+    private func uploadMedia(
+      data: Data, mimeType: String, progressHandler: @escaping @Sendable (Double) -> Void
+    ) async throws -> MediaAttachment? {
       guard let client else { return nil }
       return try await client.mediaUpload(
         endpoint: Media.medias,
