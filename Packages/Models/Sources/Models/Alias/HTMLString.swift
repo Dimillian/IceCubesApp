@@ -3,7 +3,7 @@ import SwiftSoup
 import SwiftUI
 
 private enum CodingKeys: CodingKey {
-  case htmlValue, asMarkdown, asRawText, statusesURLs, links
+  case htmlValue, asMarkdown, asRawText, statusesURLs, links, hadTrailingTags
 }
 
 public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
@@ -12,6 +12,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
   public var asRawText: String = ""
   public var statusesURLs = [URL]()
   public private(set) var links = [Link]()
+  public private(set) var hadTrailingTags = false
 
   public var asSafeMarkdownAttributedString: AttributedString = .init()
   private var main_regex: NSRegularExpression?
@@ -30,6 +31,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         asRawText = try container.decode(String.self, forKey: .asRawText)
         statusesURLs = try container.decode([URL].self, forKey: .statusesURLs)
         links = try container.decode([Link].self, forKey: .links)
+        hadTrailingTags = (try? container.decode(Bool.self, forKey: .hadTrailingTags)) ?? false
       } catch {
         htmlValue = ""
       }
@@ -72,18 +74,33 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
           _ = asMarkdown.removeFirst()
         }
 
+        // Remove trailing hashtags
+        removeTrailingTags()
+
+        // Regenerate attributed string after extracting tags
+        do {
+          let options = AttributedString.MarkdownParsingOptions(
+            allowsExtendedAttributes: true,
+            interpretedSyntax: .inlineOnlyPreservingWhitespace)
+          asSafeMarkdownAttributedString = try AttributedString(
+            markdown: asMarkdown, options: options)
+        } catch {
+          asSafeMarkdownAttributedString = AttributedString(stringLiteral: asMarkdown)
+        }
+
       } catch {
         asRawText = htmlValue
       }
-    }
-
-    do {
-      let options = AttributedString.MarkdownParsingOptions(
-        allowsExtendedAttributes: true,
-        interpretedSyntax: .inlineOnlyPreservingWhitespace)
-      asSafeMarkdownAttributedString = try AttributedString(markdown: asMarkdown, options: options)
-    } catch {
-      asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+    } else {
+      do {
+        let options = AttributedString.MarkdownParsingOptions(
+          allowsExtendedAttributes: true,
+          interpretedSyntax: .inlineOnlyPreservingWhitespace)
+        asSafeMarkdownAttributedString = try AttributedString(
+          markdown: asMarkdown, options: options)
+      } catch {
+        asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+      }
     }
   }
 
@@ -115,6 +132,110 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     try container.encode(asRawText, forKey: .asRawText)
     try container.encode(statusesURLs, forKey: .statusesURLs)
     try container.encode(links, forKey: .links)
+    try container.encode(hadTrailingTags, forKey: .hadTrailingTags)
+  }
+
+  private mutating func removeTrailingTags() {
+    // Check if the last paragraph consists only of hashtag links
+    // Pattern matches hashtag links in the markdown format: [#tag](url)
+    // Note: hashtag names can contain letters, numbers, and underscores
+    let hashtagLinkPattern = #"\[#[\w]+\]\([^)]+\)"#
+    guard let regex = try? NSRegularExpression(pattern: hashtagLinkPattern, options: []) else {
+      return
+    }
+
+    // Split markdown by double newlines to get paragraphs
+    let paragraphs = asMarkdown.split(separator: "\n\n", omittingEmptySubsequences: false).map {
+      String($0)
+    }
+    guard !paragraphs.isEmpty else { return }
+
+    // Check the last non-empty paragraph
+    guard
+      let lastParagraphIndex = paragraphs.lastIndex(where: {
+        !$0.trimmingCharacters(in: .whitespaces).isEmpty
+      })
+    else { return }
+    let lastParagraph = paragraphs[lastParagraphIndex].trimmingCharacters(
+      in: .whitespacesAndNewlines)
+
+    // Check if the entire paragraph consists only of hashtag links
+    let range = NSRange(location: 0, length: lastParagraph.count)
+    let matches = regex.matches(in: lastParagraph, options: [], range: range)
+
+    // Reconstruct the paragraph from matches to see if it equals the original (minus whitespace)
+    var reconstructed = ""
+    var lastEnd = 0
+
+    for match in matches {
+      let matchRange = match.range
+
+      // Check if there's non-whitespace content between matches
+      if lastEnd < matchRange.location {
+        let between = lastParagraph[
+          lastParagraph.index(
+            lastParagraph.startIndex, offsetBy: lastEnd)..<lastParagraph.index(
+              lastParagraph.startIndex, offsetBy: matchRange.location)]
+        if !between.trimmingCharacters(in: .whitespaces).isEmpty {
+          // There's content between hashtags, so don't remove
+          return
+        }
+      }
+
+      if let range = Range(matchRange, in: lastParagraph) {
+        reconstructed += lastParagraph[range]
+      }
+      lastEnd = matchRange.location + matchRange.length
+    }
+
+    // Check if there's content after the last match
+    if lastEnd < lastParagraph.count {
+      let after = lastParagraph[lastParagraph.index(lastParagraph.startIndex, offsetBy: lastEnd)...]
+      if !after.trimmingCharacters(in: .whitespaces).isEmpty {
+        // There's content after hashtags, so don't remove
+        return
+      }
+    }
+
+    // If we have matches and they constitute the entire paragraph, remove it
+    if !matches.isEmpty && !reconstructed.isEmpty {
+      hadTrailingTags = true
+
+      // Remove the last paragraph from markdown
+      var updatedParagraphs = Array(paragraphs)
+      updatedParagraphs.remove(at: lastParagraphIndex)
+
+      // Remove any trailing empty paragraphs
+      while !updatedParagraphs.isEmpty
+        && updatedParagraphs.last?.trimmingCharacters(in: .whitespaces).isEmpty == true
+      {
+        updatedParagraphs.removeLast()
+      }
+
+      asMarkdown = updatedParagraphs.joined(separator: "\n\n")
+
+      // Also update asRawText to remove the hashtags
+      // Split by double newlines
+      let rawParagraphs = asRawText.split(separator: "\n\n", omittingEmptySubsequences: false).map {
+        String($0)
+      }
+      if let lastRawIndex = rawParagraphs.lastIndex(where: {
+        !$0.trimmingCharacters(in: .whitespaces).isEmpty
+      }) {
+        let lastRawParagraph = rawParagraphs[lastRawIndex]
+        // Check if it contains hashtags
+        if lastRawParagraph.contains("#") {
+          var updatedRawParagraphs = Array(rawParagraphs)
+          updatedRawParagraphs.remove(at: lastRawIndex)
+          while !updatedRawParagraphs.isEmpty
+            && updatedRawParagraphs.last?.trimmingCharacters(in: .whitespaces).isEmpty == true
+          {
+            updatedRawParagraphs.removeLast()
+          }
+          asRawText = updatedRawParagraphs.joined(separator: "\n\n")
+        }
+      }
+    }
   }
 
   private mutating func handleNode(

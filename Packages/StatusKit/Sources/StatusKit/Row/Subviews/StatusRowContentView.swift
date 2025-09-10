@@ -81,6 +81,13 @@ struct StatusRowContentView: View {
       {
         StatusRowCardView(card: card)
       }
+      
+      // Display trailing tags if they were removed from content
+      if viewModel.finalStatus.content.hadTrailingTags,
+         !viewModel.finalStatus.tags.isEmpty {
+        StatusRowTagsView(tags: viewModel.finalStatus.tags)
+          .padding(.top, 8)
+      }
     }
   }
 }
