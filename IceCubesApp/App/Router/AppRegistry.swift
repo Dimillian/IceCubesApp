@@ -52,6 +52,12 @@ extension View {
           pinnedFilters: .constant([]),
           selectedTagGroup: .constant(nil),
           canFilterTimeline: false)
+      case .quotes(let id):
+        TimelineView(
+          timeline: .constant(.quotes(statusId: id)),
+          pinnedFilters: .constant([]),
+          selectedTagGroup: .constant(nil),
+          canFilterTimeline: false)
       case .following(let id):
         AccountsListView(mode: .following(accountId: id))
       case .followers(let id):

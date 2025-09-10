@@ -20,6 +20,7 @@ public enum RouterDestination: Hashable {
   case following(id: String)
   case favoritedBy(id: String)
   case rebloggedBy(id: String)
+  case quotes(id: String)
   case accountsList(accounts: [Account])
   case trendingTimeline
   case linkTimeline(url: URL, title: String)

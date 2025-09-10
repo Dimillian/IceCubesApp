@@ -20790,6 +20790,9 @@
         }
       }
     },
+    "API Versions" : {
+
+    },
     "app-account.button.add" : {
       "comment" : "MARK: Package: AppAccount",
       "extractionState" : "manual",
@@ -32223,6 +32226,7 @@
     },
     "instance.info.domains" : {
       "comment" : "MARK: Instances",
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -32695,6 +32699,7 @@
       }
     },
     "instance.info.posts" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -33049,6 +33054,7 @@
       }
     },
     "instance.info.users" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -36560,6 +36566,9 @@
           }
         }
       }
+    },
+    "Monthly Active Users" : {
+
     },
     "New post" : {
       "localizations" : {
@@ -76698,6 +76707,29 @@
         }
       }
     },
+    "status.summary.n-quotes %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld quote"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld quotes"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "status.summary.n-replies %lld" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -84051,6 +84083,9 @@
           }
         }
       }
+    },
+    "Truncate status content" : {
+
     },
     "Use Ice Cubes to compose a post for Mastodon" : {
       "localizations" : {

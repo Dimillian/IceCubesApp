@@ -91,6 +91,24 @@ struct StatusRowDetailView: View {
         .buttonStyle(.borderless)
         .transition(.move(edge: .leading))
       }
+      
+      if viewModel.actionsAccountsFetched, statusDataController.quotesCount > 0 {
+        Divider()
+        Button {
+          viewModel.routerPath.navigate(to: .quotes(id: viewModel.status.id))
+        } label: {
+          HStack {
+            Text("status.summary.n-quotes \(statusDataController.quotesCount)")
+              .font(.scaledCallout)
+            Spacer()
+            makeAccountsScrollView(accounts: viewModel.quoters)
+            Image(systemName: "chevron.right")
+          }
+          .frame(height: 20)
+        }
+        .buttonStyle(.borderless)
+        .transition(.move(edge: .leading))
+      }
     }
     .task {
       await viewModel.fetchActionsAccounts()
