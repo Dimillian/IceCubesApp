@@ -123,7 +123,7 @@ struct AddAccountView: View {
 
           do {
             // bare bones preflight for domain validity
-            let instanceDetailClient = MastodonClient(server: sanitizedName)
+            let instanceDetailClient = MastodonClient(server: sanitizedName, version: .v2)
             if instanceDetailClient.server.contains("."),
               instanceDetailClient.server.last != "."
             {
@@ -169,7 +169,7 @@ struct AddAccountView: View {
       }
     }
   }
-  
+
   private var signinButton: some View {
     Button {
       withAnimation {

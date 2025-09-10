@@ -72,7 +72,7 @@ struct AddRemoteTimelineView: View {
         instanceNamePublisher.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
       ) { newValue in
         Task {
-          let client = MastodonClient(server: newValue)
+          let client = MastodonClient(server: newValue, version: .v2)
           instance = try? await client.get(endpoint: Instances.instance)
         }
       }

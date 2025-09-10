@@ -33,13 +33,18 @@ public struct InstanceInfoSection: View {
       } else if instance.description != nil {
         Text(instance.description!)
       }
-      LabeledContent("instance.info.email", value: instance.email)
+      LabeledContent("instance.info.email", value: instance.contact.email)
       LabeledContent("instance.info.version") {
         Text(instance.version).monospaced()
       }
-      LabeledContent("instance.info.users", value: format(instance.stats.userCount))
-      LabeledContent("instance.info.posts", value: format(instance.stats.statusCount))
-      LabeledContent("instance.info.domains", value: format(instance.stats.domainCount))
+      if let apiVersions = instance.apiVersions {
+        LabeledContent("API Versions") {
+          Text(apiVersions.mastodon.map { String($0) } ?? "Unknown").monospaced()
+        }
+      }
+      if let activeMonth = instance.usage?.users?.activeMonth {
+        LabeledContent("Monthly Active Users", value: format(activeMonth))
+      }
     }
     #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
