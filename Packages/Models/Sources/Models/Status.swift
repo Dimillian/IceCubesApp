@@ -34,6 +34,7 @@ public protocol AnyStatus {
   var filtered: [Filtered]? { get }
   var sensitive: Bool { get }
   var language: String? { get }
+  var tags: [Tag] { get }
   var isHidden: Bool { get }
 }
 
@@ -73,6 +74,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
+  public let tags: [Tag]
 
   public var isHidden: Bool {
     filtered?.first?.filter.filterAction == .hide
@@ -89,7 +91,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
     reblogged: Bool?, pinned: Bool?, bookmarked: Bool?, emojis: [Emoji], url: String?,
     application: Application?, inReplyToId: String?, inReplyToAccountId: String?,
     visibility: Visibility, poll: Poll?, spoilerText: HTMLString, filtered: [Filtered]?,
-    sensitive: Bool, language: String?
+    sensitive: Bool, language: String?, tags: [Tag] = []
   ) {
     self.id = id
     self.content = content
@@ -118,6 +120,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
     self.filtered = filtered
     self.sensitive = sensitive
     self.language = language
+    self.tags = tags
   }
 
   public static func placeholder(forSettings: Bool = false, language: String? = nil) -> Status {
@@ -152,7 +155,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
       spoilerText: .init(stringValue: ""),
       filtered: [],
       sensitive: false,
-      language: language)
+      language: language,
+      tags: [])
   }
 
   public static func placeholders() -> [Status] {
@@ -191,7 +195,8 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
         spoilerText: reblog.spoilerText,
         filtered: reblog.filtered,
         sensitive: reblog.sensitive,
-        language: reblog.language)
+        language: reblog.language,
+        tags: reblog.tags)
     }
     return nil
   }
@@ -232,6 +237,7 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
   public let filtered: [Filtered]?
   public let sensitive: Bool
   public let language: String?
+  public let tags: [Tag]
 
   public var isHidden: Bool {
     filtered?.first?.filter.filterAction == .hide
@@ -243,7 +249,7 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
     favouritesCount: Int, card: Card?, favourited: Bool?, reblogged: Bool?, pinned: Bool?,
     bookmarked: Bool?, emojis: [Emoji], url: String?, application: Application? = nil,
     inReplyToId: String?, inReplyToAccountId: String?, visibility: Visibility, poll: Poll?,
-    spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?
+    spoilerText: HTMLString, filtered: [Filtered]?, sensitive: Bool, language: String?, tags: [Tag] = []
   ) {
     self.id = id
     self.content = content
@@ -271,6 +277,7 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
     self.filtered = filtered
     self.sensitive = sensitive
     self.language = language
+    self.tags = tags
   }
 }
 
