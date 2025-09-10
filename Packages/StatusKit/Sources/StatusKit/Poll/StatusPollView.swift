@@ -154,7 +154,7 @@ public struct StatusPollView: View {
   private func makeBarView(for option: Poll.Option, buttonImage: some View) -> some View {
     Button {
       if !viewModel.poll.expired,
-        let index = viewModel.poll.options.firstIndex(where: { $0.id == option.id })
+        let index = viewModel.poll.options.firstIndex(where: { $0.title == option.title })
       {
         withAnimation {
           viewModel.handleSelection(index)
