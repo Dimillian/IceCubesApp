@@ -48,7 +48,7 @@ import Observation
   }
 
   public var isQuoteSupported: Bool {
-    version >= 4.5 || instance?.apiVersions?.mastodon ?? 0 >= 7
+    instance?.apiVersions?.mastodon ?? 0 >= 7
   }
 
   private init() {}
