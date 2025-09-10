@@ -330,7 +330,7 @@ import SwiftUI
       let rebloggers: [Account] = try await client.get(
         endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
       var quoters: [Account] = []
-      if finalStatus.quotesCount ?? 0 > 0 {
+      if finalStatus.quotesCount ?? 0 > 0, CurrentAccount.shared.account?.id == status.account.id {
         let statuses: [Status] =  try await client.get(
           endpoint: Statuses.quotesBy(id: status.id, maxId: nil))
         quoters = statuses.map{ $0.account }
