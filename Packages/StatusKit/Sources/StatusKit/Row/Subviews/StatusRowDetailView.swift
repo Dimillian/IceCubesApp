@@ -8,6 +8,7 @@ struct StatusRowDetailView: View {
   @Environment(\.openURL) private var openURL
 
   @Environment(StatusDataController.self) private var statusDataController
+  @Environment(CurrentAccount.self) private var currentAccount
 
   var viewModel: StatusRowViewModel
 
@@ -74,7 +75,8 @@ struct StatusRowDetailView: View {
         .transition(.move(edge: .leading))
       }
 
-      if viewModel.actionsAccountsFetched, statusDataController.reblogsCount > 0 {
+      if viewModel.actionsAccountsFetched,
+          statusDataController.reblogsCount > 0 {
         Divider()
         Button {
           viewModel.routerPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
@@ -92,7 +94,9 @@ struct StatusRowDetailView: View {
         .transition(.move(edge: .leading))
       }
       
-      if viewModel.actionsAccountsFetched, statusDataController.quotesCount > 0 {
+      if viewModel.actionsAccountsFetched,
+          statusDataController.quotesCount > 0,
+          viewModel.status.account.id == currentAccount.account?.id {
         Divider()
         Button {
           viewModel.routerPath.navigate(to: .quotes(id: viewModel.status.id))
