@@ -136,11 +136,9 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
   }
 
   private mutating func removeTrailingTags() {
-    // Check if the last paragraph consists only of hashtag links
-    // Pattern matches hashtag links in the markdown format: [#tag](url)
-    // Note: hashtag names can contain letters, numbers, and underscores
-    let hashtagLinkPattern = #"\[#[\w]+\]\([^)]+\)"#
-    guard let regex = try? NSRegularExpression(pattern: hashtagLinkPattern, options: []) else {
+    // Pattern to match one or more hashtag links with optional whitespace between them
+    let onlyHashtagsPattern = #"^(\s*\[#[\w]+\]\([^)]+\)\s*)+$"#
+    guard let regex = try? NSRegularExpression(pattern: onlyHashtagsPattern, options: []) else {
       return
     }
 
@@ -148,92 +146,34 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     let paragraphs = asMarkdown.split(separator: "\n\n", omittingEmptySubsequences: false).map {
       String($0)
     }
-    guard !paragraphs.isEmpty else { return }
 
-    // Check the last non-empty paragraph
+    // Find last non-empty paragraph
     guard
-      let lastParagraphIndex = paragraphs.lastIndex(where: {
+      let lastIndex = paragraphs.lastIndex(where: {
         !$0.trimmingCharacters(in: .whitespaces).isEmpty
       })
-    else { return }
-    let lastParagraph = paragraphs[lastParagraphIndex].trimmingCharacters(
-      in: .whitespacesAndNewlines)
+    else {
+      return
+    }
 
-    // Check if the entire paragraph consists only of hashtag links
+    let lastParagraph = paragraphs[lastIndex].trimmingCharacters(in: .whitespacesAndNewlines)
     let range = NSRange(location: 0, length: lastParagraph.count)
-    let matches = regex.matches(in: lastParagraph, options: [], range: range)
 
-    // Reconstruct the paragraph from matches to see if it equals the original (minus whitespace)
-    var reconstructed = ""
-    var lastEnd = 0
-
-    for match in matches {
-      let matchRange = match.range
-
-      // Check if there's non-whitespace content between matches
-      if lastEnd < matchRange.location {
-        let between = lastParagraph[
-          lastParagraph.index(
-            lastParagraph.startIndex, offsetBy: lastEnd)..<lastParagraph.index(
-              lastParagraph.startIndex, offsetBy: matchRange.location)]
-        if !between.trimmingCharacters(in: .whitespaces).isEmpty {
-          // There's content between hashtags, so don't remove
-          return
-        }
-      }
-
-      if let range = Range(matchRange, in: lastParagraph) {
-        reconstructed += lastParagraph[range]
-      }
-      lastEnd = matchRange.location + matchRange.length
-    }
-
-    // Check if there's content after the last match
-    if lastEnd < lastParagraph.count {
-      let after = lastParagraph[lastParagraph.index(lastParagraph.startIndex, offsetBy: lastEnd)...]
-      if !after.trimmingCharacters(in: .whitespaces).isEmpty {
-        // There's content after hashtags, so don't remove
-        return
-      }
-    }
-
-    // If we have matches and they constitute the entire paragraph, remove it
-    if !matches.isEmpty && !reconstructed.isEmpty {
+    // Check if the entire paragraph is only hashtag links
+    if regex.firstMatch(in: lastParagraph, options: [], range: range) != nil {
       hadTrailingTags = true
 
-      // Remove the last paragraph from markdown
-      var updatedParagraphs = Array(paragraphs)
-      updatedParagraphs.remove(at: lastParagraphIndex)
-
-      // Remove any trailing empty paragraphs
-      while !updatedParagraphs.isEmpty
-        && updatedParagraphs.last?.trimmingCharacters(in: .whitespaces).isEmpty == true
-      {
-        updatedParagraphs.removeLast()
-      }
-
+      // Remove the paragraph from both markdown and raw text
+      let updatedParagraphs = Array(paragraphs.prefix(lastIndex))
       asMarkdown = updatedParagraphs.joined(separator: "\n\n")
 
-      // Also update asRawText to remove the hashtags
-      // Split by double newlines
-      let rawParagraphs = asRawText.split(separator: "\n\n", omittingEmptySubsequences: false).map {
-        String($0)
-      }
-      if let lastRawIndex = rawParagraphs.lastIndex(where: {
-        !$0.trimmingCharacters(in: .whitespaces).isEmpty
+      // Update raw text similarly
+      let rawParagraphs = asRawText.split(separator: "\n\n", omittingEmptySubsequences: false)
+      if let rawLastIndex = rawParagraphs.lastIndex(where: {
+        !$0.trimmingCharacters(in: .whitespaces).isEmpty && $0.contains("#")
       }) {
-        let lastRawParagraph = rawParagraphs[lastRawIndex]
-        // Check if it contains hashtags
-        if lastRawParagraph.contains("#") {
-          var updatedRawParagraphs = Array(rawParagraphs)
-          updatedRawParagraphs.remove(at: lastRawIndex)
-          while !updatedRawParagraphs.isEmpty
-            && updatedRawParagraphs.last?.trimmingCharacters(in: .whitespaces).isEmpty == true
-          {
-            updatedRawParagraphs.removeLast()
-          }
-          asRawText = updatedRawParagraphs.joined(separator: "\n\n")
-        }
+        let updatedRawParagraphs = Array(rawParagraphs.prefix(rawLastIndex))
+        asRawText = updatedRawParagraphs.joined(separator: "\n\n")
       }
     }
   }
