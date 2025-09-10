@@ -9,9 +9,9 @@ IceCubesApp is a multiplatform Mastodon client built entirely in SwiftUI. It's a
 ## Build Commands
 
 ### Building for iOS Simulator
-To build IceCubesApp for iPhone 16 Pro simulator:
+To build IceCubesApp for iPhone Air simulator:
 ```bash
-mcp__XcodeBuildMCP__build_sim_name_proj projectPath: "/Users/thomas/Documents/Dev/Open Source/IceCubesApp/IceCubesApp.xcodeproj" scheme: "IceCubesApp" simulatorName: "iPhone 16 Pro"
+mcp__XcodeBuildMCP__build_sim_name_proj projectPath: "/Users/thomas/Documents/Dev/Open Source/IceCubesApp/IceCubesApp.xcodeproj" scheme: "IceCubesApp" simulatorName: "iPhone Air"
 ```
 
 
@@ -172,7 +172,7 @@ Example workflow:
 mcp__XcodeBuildMCP__build_mac_proj projectPath: "/path/to/IceCubesApp.xcodeproj" scheme: "IceCubesApp"
 
 # Or for iOS simulator
-mcp__XcodeBuildMCP__build_ios_sim_name_proj projectPath: "/path/to/IceCubesApp.xcodeproj" scheme: "IceCubesApp" simulatorName: "iPhone 16"
+mcp__XcodeBuildMCP__build_ios_sim_name_proj projectPath: "/path/to/IceCubesApp.xcodeproj" scheme: "IceCubesApp" simulatorName: "iPhone Air"
 ```
 
 ### Implementation Examples
