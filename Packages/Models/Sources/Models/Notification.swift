@@ -2,7 +2,8 @@ import Foundation
 
 public struct Notification: Decodable, Identifiable, Equatable {
   public enum NotificationType: String, CaseIterable {
-    case follow, follow_request, mention, reblog, status, favourite, poll, update
+    case follow, follow_request, mention, reblog, status, favourite, poll, update, quote,
+      quoted_update
   }
 
   public let id: String

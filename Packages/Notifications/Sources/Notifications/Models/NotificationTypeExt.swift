@@ -21,6 +21,10 @@ extension Models.Notification.NotificationType {
       "notifications.label.poll"
     case .update:
       "notifications.label.update"
+    case .quote:
+      "quoted a status"
+    case .quoted_update:
+      "updated a quoted status"
     }
   }
 
@@ -42,6 +46,10 @@ extension Models.Notification.NotificationType {
       "notifications.label.poll.push"
     case .update:
       "notifications.label.update.push"
+    case .quote:
+      "🔊 quoted"
+    case .quoted_update:
+      "🔊 updated a quoted status"
     }
   }
 
@@ -64,6 +72,10 @@ extension Models.Notification.NotificationType {
       return Image(systemName: "chart.bar.fill")
     case .update:
       return Image(systemName: "pencil.line")
+    case .quote:
+      return Image(systemName: "quote.bubble.fill")
+    case .quoted_update:
+      return Image(systemName: "exclamationmark.bubble.fill")
     }
   }
 
@@ -75,7 +87,7 @@ extension Models.Notification.NotificationType {
     switch self {
     case .status, .mention, .update, .poll:
       return Theme.shared.tintColor.opacity(0.80)
-    case .reblog:
+    case .reblog, .quote, .quoted_update:
       return Color.teal.opacity(0.80)
     case .follow, .follow_request:
       return Color.cyan.opacity(0.80)
@@ -102,6 +114,10 @@ extension Models.Notification.NotificationType {
       "notifications.menu-title.poll"
     case .update:
       "notifications.menu-title.update"
+    case .quote:
+      "Quote"
+    case .quoted_update:
+      "Quote updated"
     }
   }
 }
