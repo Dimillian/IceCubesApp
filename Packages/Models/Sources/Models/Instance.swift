@@ -1,6 +1,15 @@
 import Foundation
 
-public struct Instance: Codable, Sendable {
+public struct Instance: Codable, Sendable, Hashable {
+  public static func == (lhs: Instance, rhs: Instance) -> Bool {
+    lhs.title == rhs.title && lhs.domain == rhs.domain
+  }
+
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(title)
+    hasher.combine(domain)
+  }
+
   public struct Usage: Codable, Sendable {
     public struct Users: Codable, Sendable {
       public let activeMonth: Int?
@@ -39,6 +48,7 @@ public struct Instance: Codable, Sendable {
   }
 
   public struct Contact: Codable, Sendable {
+    public let account: Account?
     public let email: String
   }
 
@@ -51,6 +61,7 @@ public struct Instance: Codable, Sendable {
   }
 
   public let title: String
+  public let domain: String
   public let description: String?
   public let shortDescription: String?
   public let version: String
