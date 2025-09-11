@@ -1,3 +1,4 @@
+import Account
 import DesignSystem
 import Models
 import NukeUI
@@ -33,7 +34,6 @@ public struct InstanceInfoSection: View {
       } else if instance.description != nil {
         Text(instance.description!)
       }
-      LabeledContent("instance.info.email", value: instance.contact.email)
       LabeledContent("instance.info.version") {
         Text(instance.version).monospaced()
       }
@@ -46,14 +46,28 @@ public struct InstanceInfoSection: View {
         LabeledContent("Monthly Active Users", value: format(activeMonth))
       }
     }
+
+    Section("Instance Administrator") {
+      LabeledContent("instance.info.email", value: instance.contact.email)
+      if let account = instance.contact.account {
+        AccountsListRow(viewModel: .init(account: account))
+      }
+    }
     #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
     #endif
 
     if let rules = instance.rules {
       Section("instance.info.section.rules") {
-        ForEach(rules) { rule in
-          Text(rule.text.trimmingCharacters(in: .whitespacesAndNewlines))
+        ForEach(Array(rules.enumerated()), id: \.offset) { index, rule in
+          HStack(alignment: .top) {
+            Text("\(index + 1). ")
+              .font(.headline)
+              .fontWeight(.bold)
+              .fontDesign(.monospaced)
+              .foregroundStyle(theme.tintColor)
+            Text(rule.text.trimmingCharacters(in: .whitespacesAndNewlines))
+          }
         }
       }
       #if !os(visionOS)

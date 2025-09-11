@@ -90,6 +90,8 @@ extension View {
         AccountsListView(mode: .muted)
       case .conversations:
         ConversationsListView()
+      case .instanceInfo(let instance):
+        InstanceInfoView(instance: instance)
       }
     }
   }
@@ -107,8 +109,10 @@ extension View {
         StatusEditor.MainView(mode: .new(text: text, visibility: visibility))
           .withEnvironments()
       case .imageURL(let urls, let caption, let altTexts, let visibility):
-        StatusEditor.MainView(mode: .imageURL(urls: urls, caption: caption, altTexts: altTexts, visibility: visibility))
-          .withEnvironments()
+        StatusEditor.MainView(
+          mode: .imageURL(urls: urls, caption: caption, altTexts: altTexts, visibility: visibility)
+        )
+        .withEnvironments()
       case .editStatusEditor(let status):
         StatusEditor.MainView(mode: .edit(status: status))
           .withEnvironments()
@@ -164,7 +168,7 @@ extension View {
       case .report(let status):
         ReportView(status: status)
           .withEnvironments()
-      case .shareImage(image: let image, status: let status):
+      case .shareImage(let image, let status):
         ActivityView(image: image, status: status)
           .withEnvironments()
       case .editTagGroup(let tagGroup, let onSaved):

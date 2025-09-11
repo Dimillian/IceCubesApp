@@ -156,7 +156,7 @@ struct SettingsTabs: View {
   private var generalSection: some View {
     Section("settings.section.general") {
       if let instanceData = currentInstance.instance {
-        NavigationLink(destination: InstanceInfoView(instance: instanceData)) {
+        NavigationLink(value: RouterDestination.instanceInfo(instance: instanceData)) {
           Label("settings.general.instance", systemImage: "server.rack")
         }
       }
@@ -240,7 +240,7 @@ struct SettingsTabs: View {
       .listRowBackground(theme.primaryBackgroundColor)
     #endif
   }
-  
+
   private var appSection: some View {
     Section {
       #if !targetEnvironment(macCatalyst) && !os(visionOS)
