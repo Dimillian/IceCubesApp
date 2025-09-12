@@ -6,6 +6,7 @@ import SwiftUI
 
 @MainActor
 struct StatusRowHeaderView: View {
+  @Environment(\.isInCaptureMode) private var isInCaptureMode
   @Environment(\.isStatusFocused) private var isFocused
   @Environment(\.redactionReasons) private var redactionReasons
 
@@ -100,13 +101,22 @@ struct StatusRowHeaderView: View {
     return nil
   }
 
+  @ViewBuilder
   private var dateView: some View {
-    Text(
-      "\(Image(systemName: viewModel.finalStatus.visibility.iconName)) ⸱ \(viewModel.finalStatus.createdAt.relativeFormatted)"
-    )
-    .fixedSize(horizontal: false, vertical: true)
-    .font(.scaledFootnote)
-    .foregroundStyle(.secondary)
-    .lineLimit(1)
+    if isInCaptureMode {
+      Text(viewModel.finalStatus.createdAt.relativeFormatted)
+        .fixedSize(horizontal: false, vertical: true)
+        .font(.scaledFootnote)
+        .foregroundStyle(.secondary)
+        .lineLimit(1)
+    } else {
+      Text(
+        "\(Image(systemName: viewModel.finalStatus.visibility.iconName)) ⸱ \(viewModel.finalStatus.createdAt.relativeFormatted)"
+      )
+      .fixedSize(horizontal: false, vertical: true)
+      .font(.scaledFootnote)
+      .foregroundStyle(.secondary)
+      .lineLimit(1)
+    }
   }
 }
