@@ -133,7 +133,7 @@ struct ContentSettingsView: View {
 
       Section("timeline.content-filter.title") {
         Toggle(isOn: $contentFilter.showBoosts) {
-          Label("timeline.filter.show-boosts", image: "Rocket")
+          Label("timeline.filter.show-boosts", systemImage: "arrow.2.squarepath")
         }
         Toggle(isOn: $contentFilter.showReplies) {
           Label("timeline.filter.show-replies", systemImage: "bubble.left.and.bubble.right")

@@ -30,10 +30,7 @@ struct StatusRowContextMenu: View {
       return Label("status.action.boost-to-followers", systemImage: "lock.rotation")
     }
 
-    if statusDataController.isReblogged {
-      return Label("status.action.unboost", image: "Rocket.Fill")
-    }
-    return Label("status.action.boost", image: "Rocket")
+    return Label("status.action.boost", systemImage: "arrow.2.squarepath")
   }
 
   var body: some View {
@@ -47,18 +44,6 @@ struct StatusRowContextMenu: View {
           #endif
         } label: {
           Label("status.action.reply", systemImage: "arrowshape.turn.up.left")
-        }
-        Button {
-          Task {
-            HapticManager.shared.fireHaptic(.notification(.success))
-            SoundEffectManager.shared.playSound(.favorite)
-            await statusDataController.toggleFavorite(remoteStatus: nil)
-          }
-        } label: {
-          Label(
-            statusDataController.isFavorited
-              ? "status.action.unfavorite" : "status.action.favorite",
-            systemImage: statusDataController.isFavorited ? "star.fill" : "star")
         }
         Button {
           Task {
@@ -78,19 +63,15 @@ struct StatusRowContextMenu: View {
         Button {
           Task {
             HapticManager.shared.fireHaptic(.notification(.success))
-            SoundEffectManager.shared.playSound(.boost)
-            #if targetEnvironment(macCatalyst) || os(visionOS)
-              openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
-            #else
-              viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
-            #endif
+            SoundEffectManager.shared.playSound(.favorite)
+            await statusDataController.toggleFavorite(remoteStatus: nil)
           }
         } label: {
-          Label("Quote", systemImage: "quote.bubble")
+          Label(
+            statusDataController.isFavorited
+              ? "status.action.unfavorite" : "status.action.favorite",
+            systemImage: statusDataController.isFavorited ? "star.fill" : "star")
         }
-        .disabled(
-          viewModel.status.visibility != .pub
-        )
 
         Button {
           Task {

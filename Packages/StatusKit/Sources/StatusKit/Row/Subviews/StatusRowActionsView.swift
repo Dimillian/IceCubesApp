@@ -55,12 +55,12 @@ struct StatusRowActionsView: View {
       case .boost:
         if privateBoost {
           if dataController.isReblogged {
-            return Image("Rocket.Fill")
+            return Image(systemName: "arrow.2.squarepath")
           } else {
             return Image(systemName: "lock.rotation")
           }
         }
-        return Image(dataController.isReblogged ? "Rocket.Fill" : "Rocket")
+        return Image(systemName: "arrow.2.squarepath")
       case .favorite:
         return Image(systemName: dataController.isFavorited ? "star.fill" : "star")
       case .bookmark:
@@ -272,8 +272,6 @@ struct StatusRowActionsView: View {
         if action == .boost {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
-            .imageScale(.medium)
-            .fontWeight(.black)
             #if targetEnvironment(macCatalyst)
               .font(.scaledBody)
             #else
