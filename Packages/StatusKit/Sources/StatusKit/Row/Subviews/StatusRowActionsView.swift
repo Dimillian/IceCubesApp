@@ -46,7 +46,7 @@ struct StatusRowActionsView: View {
 
   @MainActor
   enum Action {
-    case respond, boost, favorite, bookmark, share, menu
+    case respond, boost, quote, favorite, bookmark, share, menu
 
     func image(dataController: StatusDataController, privateBoost: Bool = false) -> Image {
       switch self {
@@ -67,6 +67,8 @@ struct StatusRowActionsView: View {
         return Image(systemName: dataController.isBookmarked ? "bookmark.fill" : "bookmark")
       case .share:
         return Image(systemName: "square.and.arrow.up")
+      case .quote:
+        return Image(systemName: "quote.bubble")
       case .menu:
         return Image(systemName: "ellipsis")
       }
@@ -97,6 +99,8 @@ struct StatusRowActionsView: View {
         return "status.action.share"
       case .menu:
         return "status.context.menu"
+      case .quote:
+        return "Quote"
       }
     }
 
@@ -111,14 +115,14 @@ struct StatusRowActionsView: View {
         return dataController.favoritesCount
       case .boost:
         return dataController.reblogsCount
-      case .share, .bookmark, .menu:
+      case .share, .bookmark, .menu, .quote:
         return nil
       }
     }
 
     func tintColor(theme: Theme) -> Color? {
       switch self {
-      case .respond, .share, .menu:
+      case .respond, .share, .menu, .quote:
         nil
       case .favorite:
         .yellow
@@ -131,7 +135,7 @@ struct StatusRowActionsView: View {
 
     func isOn(dataController: StatusDataController) -> Bool {
       switch self {
-      case .respond, .share, .menu: false
+      case .respond, .share, .menu, .quote: false
       case .favorite: dataController.isFavorited
       case .bookmark: dataController.isBookmarked
       case .boost: dataController.isReblogged
@@ -270,14 +274,29 @@ struct StatusRowActionsView: View {
     } label: {
       HStack(spacing: 2) {
         if action == .boost {
-          action
-            .image(dataController: statusDataController, privateBoost: privateBoost())
-            #if targetEnvironment(macCatalyst)
-              .font(.scaledBody)
-            #else
-              .font(.body)
-              .dynamicTypeSize(.large)
-            #endif
+          Menu {
+            Button {
+              handleAction(action: .boost)
+            } label: {
+              Label("status.action.boost", systemImage: "arrow.2.squarepath")
+                .tint(theme.labelColor)
+            }
+            Button {
+              handleAction(action: .quote)
+            } label: {
+              Label("Quote", systemImage: "quote.bubble")
+                .tint(theme.labelColor)
+            }
+          } label: {
+            action
+              .image(dataController: statusDataController, privateBoost: privateBoost())
+              #if targetEnvironment(macCatalyst)
+                .font(.scaledBody)
+              #else
+                .font(.body)
+                .dynamicTypeSize(.large)
+              #endif
+          }
         } else {
           action
             .image(dataController: statusDataController, privateBoost: privateBoost())
@@ -364,6 +383,13 @@ struct StatusRowActionsView: View {
       case .boost:
         SoundEffectManager.shared.playSound(.boost)
         await statusDataController.toggleReblog(remoteStatus: viewModel.localStatusId)
+      case .quote:
+        SoundEffectManager.shared.playSound(.boost)
+        #if targetEnvironment(macCatalyst) || os(visionOS)
+          openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
+        #else
+          viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+        #endif
       default:
         break
       }
