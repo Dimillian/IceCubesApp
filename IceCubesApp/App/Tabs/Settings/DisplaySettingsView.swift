@@ -226,6 +226,11 @@ struct DisplaySettingsView: View {
           Text(action.description).tag(action)
         }
       }
+      Picker("Boost Button Behavior", selection: $userPreferences.boostButtonBehavior) {
+        ForEach(PreferredBoostButtonBehavior.allCases, id: \.rawValue) { behavior in
+          Text(behavior.title).tag(behavior)
+        }
+      }
       Picker("settings.display.status.media-style", selection: $theme.statusDisplayStyle) {
         ForEach(Theme.StatusDisplayStyle.allCases, id: \.rawValue) { buttonStyle in
           Text(buttonStyle.description).tag(buttonStyle)
