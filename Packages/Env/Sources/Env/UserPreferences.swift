@@ -62,6 +62,9 @@ import SwiftUI
     @AppStorage("share-button-behavior") public var shareButtonBehavior:
       PreferredShareButtonBehavior = .linkOnly
 
+    @AppStorage("boost-button-behavior") public var boostButtonBehavior:
+      PreferredBoostButtonBehavior = .both
+
     @AppStorage("max_reply_indentation") public var maxReplyIndentation: UInt = 7
     @AppStorage("show_reply_indentation") public var showReplyIndentation: Bool = true
 
@@ -328,6 +331,12 @@ import SwiftUI
     }
   }
 
+  public var boostButtonBehavior: PreferredBoostButtonBehavior {
+    didSet {
+      storage.boostButtonBehavior = boostButtonBehavior
+    }
+  }
+
   public var maxReplyIndentation: UInt {
     didSet {
       storage.maxReplyIndentation = maxReplyIndentation
@@ -527,6 +536,7 @@ import SwiftUI
     requestedReview = storage.requestedReview
     collapseLongPosts = storage.collapseLongPosts
     shareButtonBehavior = storage.shareButtonBehavior
+    boostButtonBehavior = storage.boostButtonBehavior
     pendingShownAtBottom = storage.pendingShownAtBottom
     pendingShownLeft = storage.pendingShownLeft
     maxReplyIndentation = storage.maxReplyIndentation

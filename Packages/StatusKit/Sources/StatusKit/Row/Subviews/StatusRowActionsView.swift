@@ -22,6 +22,12 @@ struct StatusRowActionsView: View {
 
   @Binding var isBlockConfirmationPresented: Bool
 
+  private struct ActionButtonConfiguration {
+    let display: Action
+    let trigger: Action
+    let showsMenu: Bool
+  }
+
   var viewModel: StatusRowViewModel
 
   var isNarrow: Bool {
@@ -268,12 +274,14 @@ struct StatusRowActionsView: View {
     }
   }
 
+  @ViewBuilder
   private func actionButton(action: Action) -> some View {
+    let configuration = configuration(for: action)
     Button {
-      handleAction(action: action)
+      handleAction(action: configuration.trigger)
     } label: {
       HStack(spacing: 2) {
-        if action == .boost {
+        if configuration.showsMenu {
           Menu {
             Button {
               handleAction(action: .boost)
@@ -288,7 +296,7 @@ struct StatusRowActionsView: View {
                 .tint(theme.labelColor)
             }
           } label: {
-            action
+            configuration.display
               .image(dataController: statusDataController, privateBoost: privateBoost())
               #if targetEnvironment(macCatalyst)
                 .font(.scaledBody)
@@ -298,7 +306,7 @@ struct StatusRowActionsView: View {
               #endif
           }
         } else {
-          action
+          configuration.display
             .image(dataController: statusDataController, privateBoost: privateBoost())
             #if targetEnvironment(macCatalyst)
               .font(.scaledBody)
@@ -338,21 +346,39 @@ struct StatusRowActionsView: View {
     #else
       .buttonStyle(
         .statusAction(
-          isOn: action.isOn(dataController: statusDataController),
-          tintColor: action.tintColor(theme: theme)
+          isOn: configuration.display.isOn(dataController: statusDataController),
+          tintColor: configuration.display.tintColor(theme: theme)
         )
       )
       .offset(x: -8)
     #endif
     .disabled(
-      action == .boost
+      configuration.trigger == .boost
         && (viewModel.status.visibility == .direct
           || viewModel.status.visibility == .priv
             && viewModel.status.account.id != currentAccount.account?.id)
     )
     .accessibilityElement(children: .combine)
     .accessibilityLabel(
-      action.accessibilityLabel(dataController: statusDataController, privateBoost: privateBoost()))
+      configuration.display.accessibilityLabel(
+        dataController: statusDataController,
+        privateBoost: privateBoost()))
+
+  }
+
+  private func configuration(for action: Action) -> ActionButtonConfiguration {
+    guard action == .boost else {
+      return .init(display: action, trigger: action, showsMenu: false)
+    }
+
+    switch userPreferences.boostButtonBehavior {
+    case .both:
+      return .init(display: .boost, trigger: .boost, showsMenu: true)
+    case .boostOnly:
+      return .init(display: .boost, trigger: .boost, showsMenu: false)
+    case .quoteOnly:
+      return .init(display: .quote, trigger: .quote, showsMenu: false)
+    }
   }
 
   private func handleAction(action: Action) {
