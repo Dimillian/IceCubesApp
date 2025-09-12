@@ -250,7 +250,7 @@ struct TimelineTab: View {
 
   @ViewBuilder
   private var listsFiltersButons: some View {
-    Menu("timeline.filter.lists") {
+    Menu {
       Button {
         routerPath.presentedSheet = .listCreate
       } label: {
@@ -263,13 +263,15 @@ struct TimelineTab: View {
           Label(list.title, systemImage: "list.bullet")
         }
       }
+    } label: {
+      Label("timeline.filter.lists", systemImage: "list.bullet")
     }
   }
 
   @ViewBuilder
   private var tagsFiltersButtons: some View {
     if !currentAccount.tags.isEmpty {
-      Menu("timeline.filter.tags") {
+      Menu {
         ForEach(currentAccount.sortedTags) { tag in
           Button {
             timeline = .hashtag(tag: tag.name, accountId: nil)
@@ -277,12 +279,14 @@ struct TimelineTab: View {
             Label("#\(tag.name)", systemImage: "number")
           }
         }
+      } label: {
+        Label("timeline.filter.tags", systemImage: "tag")
       }
     }
   }
 
   private var localTimelinesFiltersButtons: some View {
-    Menu("timeline.filter.local") {
+    Menu {
       ForEach(localTimelines) { remoteLocal in
         Button {
           timeline = .remoteLocal(server: remoteLocal.instance, filter: .local)
@@ -297,11 +301,13 @@ struct TimelineTab: View {
       } label: {
         Label("timeline.filter.add-local", systemImage: "badge.plus.radiowaves.right")
       }
+    } label: {
+      Label("timeline.filter.local", systemImage: "dot.radiowaves.right")
     }
   }
 
   private var tagGroupsFiltersButtons: some View {
-    Menu("timeline.filter.tag-groups") {
+    Menu {
       ForEach(tagGroups) { group in
         Button {
           timeline = .tagGroup(title: group.title, tags: group.tags, symbolName: group.symbolName)
@@ -318,6 +324,8 @@ struct TimelineTab: View {
       } label: {
         Label("timeline.filter.add-tag-groups", systemImage: "plus")
       }
+    } label: {
+      Label("timeline.filter.tag-groups", systemImage: "number")
     }
   }
 
