@@ -72,6 +72,7 @@ public struct NotificationsListView: View {
           Button {
             selectedType = nil
             Task {
+              viewState = .loading
               await fetchNotifications()
             }
           } label: {
@@ -83,6 +84,7 @@ public struct NotificationsListView: View {
             Button {
               selectedType = type
               Task {
+                viewState = .loading
                 await fetchNotifications()
               }
             } label: {
