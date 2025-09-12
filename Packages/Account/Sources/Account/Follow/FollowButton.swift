@@ -45,7 +45,8 @@ import SwiftUI
 
   func unfollow() async throws {
     do {
-      let newRelationship: Relationship = try await client.post(endpoint: Accounts.unfollow(id: accountId))
+      let newRelationship: Relationship = try await client.post(
+        endpoint: Accounts.unfollow(id: accountId))
       withAnimation(.bouncy) {
         relationship = newRelationship
       }
@@ -114,17 +115,18 @@ public struct FollowButton: View {
               Text("account.follow.requested")
             } else {
               Text(
-                viewModel.relationship.following ? "account.follow.following" : "account.follow.follow"
+                viewModel.relationship.following
+                  ? "account.follow.following" : "account.follow.follow"
               )
               .accessibilityLabel("account.follow.following")
               .accessibilityValue(
                 viewModel.relationship.following
-                ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+                  ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
             }
           }
           .glassEffect(.regular.interactive())
           if viewModel.relationship.following,
-             viewModel.shouldDisplayNotify
+            viewModel.shouldDisplayNotify
           {
             HStack {
               AsyncButton {
@@ -135,7 +137,8 @@ public struct FollowButton: View {
               .accessibilityLabel("accessibility.tabs.profile.user-notifications.label")
               .accessibilityValue(
                 viewModel.relationship.notifying
-                ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+                  ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off"
+              )
               .glassEffect(.regular.interactive())
               AsyncButton {
                 try await viewModel.toggleReboosts()
@@ -145,7 +148,8 @@ public struct FollowButton: View {
               .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
               .accessibilityValue(
                 viewModel.relationship.showingReblogs
-                ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+                  ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off"
+              )
               .glassEffect(.regular.interactive())
             }
             .asyncButtonStyle(.none)
@@ -167,16 +171,17 @@ public struct FollowButton: View {
             Text("account.follow.requested")
           } else {
             Text(
-              viewModel.relationship.following ? "account.follow.following" : "account.follow.follow"
+              viewModel.relationship.following
+                ? "account.follow.following" : "account.follow.follow"
             )
             .accessibilityLabel("account.follow.following")
             .accessibilityValue(
               viewModel.relationship.following
-              ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+                ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
           }
         }
         if viewModel.relationship.following,
-           viewModel.shouldDisplayNotify
+          viewModel.shouldDisplayNotify
         {
           HStack {
             AsyncButton {
@@ -187,7 +192,7 @@ public struct FollowButton: View {
             .accessibilityLabel("accessibility.tabs.profile.user-notifications.label")
             .accessibilityValue(
               viewModel.relationship.notifying
-              ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+                ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
             AsyncButton {
               try await viewModel.toggleReboosts()
             } label: {
@@ -196,7 +201,7 @@ public struct FollowButton: View {
             .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
             .accessibilityValue(
               viewModel.relationship.showingReblogs
-              ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
+                ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
           }
           .asyncButtonStyle(.none)
           .disabledWhenLoading()
