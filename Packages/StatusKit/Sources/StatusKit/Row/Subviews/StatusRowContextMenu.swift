@@ -74,6 +74,24 @@ struct StatusRowContextMenu: View {
             || viewModel.status.visibility == .priv
               && viewModel.status.account.id != account.account?.id
         )
+
+        Button {
+          Task {
+            HapticManager.shared.fireHaptic(.notification(.success))
+            SoundEffectManager.shared.playSound(.boost)
+            #if targetEnvironment(macCatalyst) || os(visionOS)
+              openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
+            #else
+              viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+            #endif
+          }
+        } label: {
+          Label("Quote", systemImage: "quote.bubble")
+        }
+        .disabled(
+          viewModel.status.visibility != .pub
+        )
+
         Button {
           Task {
             SoundEffectManager.shared.playSound(.bookmark)
@@ -102,7 +120,7 @@ struct StatusRowContextMenu: View {
 
     Divider()
 
-    Menu("status.action.share-title") {
+    Menu {
       if let url = viewModel.url {
         ShareLink(
           item: url,
@@ -125,6 +143,8 @@ struct StatusRowContextMenu: View {
           Label("status.action.share-image", systemImage: "photo")
         }
       }
+    } label: {
+      Label("status.action.share-title", systemImage: "square.and.arrow.up")
     }
 
     if let url = viewModel.url {
