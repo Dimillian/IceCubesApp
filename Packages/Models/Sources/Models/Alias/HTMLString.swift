@@ -76,7 +76,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         }
 
         // Remove trailing hashtags
-        removeTrailingTags()
+        removeTrailingTags(doc: document)
 
         // Regenerate attributed string after extracting tags
         do {
@@ -136,46 +136,62 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     try container.encode(hadTrailingTags, forKey: .hadTrailingTags)
   }
 
-  private mutating func removeTrailingTags() {
-    // Pattern to match one or more hashtag links with optional whitespace between them
-    let onlyHashtagsPattern = #"^(\s*\[#[\w]+\]\([^)]+\)\s*)+$"#
-    guard let regex = try? NSRegularExpression(pattern: onlyHashtagsPattern, options: []) else {
-      return
-    }
+  private mutating func removeTrailingTags(doc: Document) {
+    // Fast bail-outs
+    if !asMarkdown.contains("#") { return }
 
-    // Split markdown by double newlines to get paragraphs
-    let paragraphs = asMarkdown.split(separator: "\n\n", omittingEmptySubsequences: false).map {
-      String($0)
-    }
-
-    // Find last non-empty paragraph
+    // Split markdown by double newlines to get paragraphs (same as building logic)
+    let paragraphs = asMarkdown.split(separator: "\n\n", omittingEmptySubsequences: false).map(
+      String.init)
     guard
       let lastIndex = paragraphs.lastIndex(where: {
-        !$0.trimmingCharacters(in: .whitespaces).isEmpty
+        !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
       })
     else {
       return
     }
 
-    let lastParagraph = paragraphs[lastIndex].trimmingCharacters(in: .whitespacesAndNewlines)
-    let range = NSRange(location: 0, length: lastParagraph.count)
-
-    // Check if the entire paragraph is only hashtag links
-    if regex.firstMatch(in: lastParagraph, options: [], range: range) != nil {
-      hadTrailingTags = true
-
-      // Remove the paragraph from both markdown and raw text
-      let updatedParagraphs = Array(paragraphs.prefix(lastIndex))
-      asMarkdown = updatedParagraphs.joined(separator: "\n\n")
-
-      // Update raw text similarly
-      let rawParagraphs = asRawText.split(separator: "\n\n", omittingEmptySubsequences: false)
-      if let rawLastIndex = rawParagraphs.lastIndex(where: {
-        !$0.trimmingCharacters(in: .whitespaces).isEmpty && $0.contains("#")
-      }) {
-        let updatedRawParagraphs = Array(rawParagraphs.prefix(rawLastIndex))
-        asRawText = updatedRawParagraphs.joined(separator: "\n\n")
+    // Inspect original HTML last paragraph to ensure it is hashtags-only
+    // and not a quote-inline. This avoids regex backtracking on large inputs.
+    let isLastParagraphTagsOnly: Bool = {
+      do {
+        let paras = try doc.select("p:not(.quote-inline)")
+        guard let lastP = paras.array().last else { return false }
+        var hasAtLeastOneHashtag = false
+        for child in lastP.getChildNodes() {
+          let name = child.nodeName()
+          if name == "#text" {
+            // Allow whitespace-only text
+            let txt = child.description.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !txt.isEmpty { return false }
+          } else if name == "a" {
+            // Accept only anchors that look like hashtag links
+            let cls = (try? child.attr("class")) ?? ""
+            if !cls.contains("hashtag") { return false }
+            hasAtLeastOneHashtag = true
+          } else {
+            // Any other element means mixed content
+            return false
+          }
+        }
+        return hasAtLeastOneHashtag
+      } catch {
+        return false
       }
+    }()
+
+    guard isLastParagraphTagsOnly else { return }
+
+    // Remove the last non-empty paragraph from both markdown and raw text
+    hadTrailingTags = true
+    let updatedMarkdownParagraphs = Array(paragraphs.prefix(lastIndex))
+    asMarkdown = updatedMarkdownParagraphs.joined(separator: "\n\n")
+
+    let rawParagraphs = asRawText.split(separator: "\n\n", omittingEmptySubsequences: false).map(
+      String.init)
+    if lastIndex < rawParagraphs.count {
+      let updatedRawParagraphs = Array(rawParagraphs.prefix(lastIndex))
+      asRawText = updatedRawParagraphs.joined(separator: "\n\n")
     }
   }
 
