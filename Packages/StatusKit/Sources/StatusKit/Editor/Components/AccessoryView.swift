@@ -38,7 +38,8 @@ extension StatusEditor {
         if #available(iOS 26, *) {
           contentView
             .padding(.vertical, 16)
-            .glassEffect(.regular.tint(theme.primaryBackgroundColor.opacity(0.2)))
+            .glassEffect(.regular)
+            .background(theme.primaryBackgroundColor.opacity(0.2))
             .padding(.horizontal, 16)
         } else {
           Divider()
@@ -84,6 +85,8 @@ extension StatusEditor {
           isPhotosPickerPresented = true
         } label: {
           Label("status.editor.photo-library", systemImage: "photo")
+          .frame(width: 25, height: 25)
+          .contentShape(Rectangle())
         }
         #if !targetEnvironment(macCatalyst)
           Button {
@@ -102,6 +105,8 @@ extension StatusEditor {
           ProgressView()
         } else {
           Image(systemName: "photo.on.rectangle.angled")
+            .frame(width: 25, height: 25)
+            .contentShape(Rectangle())
             .foregroundStyle(theme.tintColor)
         }
       }
@@ -148,6 +153,8 @@ extension StatusEditor {
         followUpSEVMs.append(ViewModel(mode: .new(text: nil, visibility: focusedSEVM.visibility)))
       } label: {
         Image(systemName: "arrowshape.turn.up.left.circle.fill")
+        .frame(width: 25, height: 25)
+        .contentShape(Rectangle())
       }
       .disabled(!canAddNewSEVM)
 
@@ -160,6 +167,8 @@ extension StatusEditor {
           let customEmojiSheetIconName =
             colorScheme == .light ? "face.smiling" : "face.smiling.inverse"
           Image(systemName: customEmojiSheetIconName)
+            .frame(width: 25, height: 25)
+            .contentShape(Rectangle())
         }
         .accessibilityLabel("accessibility.editor.button.custom-emojis")
         .sheet(isPresented: $isCustomEmojisSheetDisplay) {
@@ -178,12 +187,16 @@ extension StatusEditor {
         viewModel.insertStatusText(text: "@")
       } label: {
         Image(systemName: "at")
+          .frame(width: 25, height: 25)
+          .contentShape(Rectangle())
       }
 
       Button {
         viewModel.insertStatusText(text: "#")
       } label: {
         Image(systemName: "number")
+          .frame(width: 25, height: 25)
+          .contentShape(Rectangle())
       }
     }
 
@@ -252,6 +265,8 @@ extension StatusEditor {
           Image(systemName: "faxmachine")
             .accessibilityLabel("accessibility.editor.button.ai-prompt")
             .foregroundStyle(focusedSEVM.canPost ? theme.tintColor : .secondary)
+            .frame(width: 25, height: 25)
+            .contentShape(Rectangle())
         }
       }
       .buttonStyle(.plain)
