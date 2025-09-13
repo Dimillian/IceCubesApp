@@ -131,13 +131,14 @@ import SwiftUI
 extension TimelineViewModel {
   private func cache() async {
     if let client, isCacheEnabled {
-      await cache.set(statuses: datasource.get(), client: client.id, filter: timeline.id)
+      let items = await datasource.getItems()
+      await cache.set(items: items, client: client.id, filter: timeline.id)
     }
   }
 
-  private func getCachedStatuses() async -> [Status]? {
+  private func getCachedItems() async -> [TimelineItem]? {
     if let client, isCacheEnabled {
-      return await cache.getStatuses(for: client.id, filter: timeline.id)
+      return await cache.getItems(for: client.id, filter: timeline.id)
     }
     return nil
   }
@@ -221,10 +222,10 @@ extension TimelineViewModel: GapLoadingFetcher {
     // If we get statuses from the cache for the home timeline, we displays those.
     // Else we fetch top most page from the API.
     if timeline.supportNewestPagination,
-      let cachedStatuses = await getCachedStatuses(),
-      !cachedStatuses.isEmpty
+      let cachedItems = await getCachedItems(),
+      !cachedItems.isEmpty
     {
-      await datasource.set(cachedStatuses)
+      await datasource.setItems(cachedItems)
       let items = await datasource.getFilteredItems()
       if let latestSeenId = await cache.getLatestSeenStatus(for: client, filter: timeline.id)?.first
       {
@@ -306,7 +307,7 @@ extension TimelineViewModel: GapLoadingFetcher {
     // 2. AND we have a significant number of actually new statuses
     if fetchedCount >= 40 && newStatuses.count >= 40, let oldestNewStatus = newStatuses.last {
       // Create a gap to load statuses between the oldest new status and our previous top
-      let gap = TimelineGap(sinceId: latestStatus, maxId: oldestNewStatus.id, direction: .downward)
+      let gap = TimelineGap(sinceId: latestStatus, maxId: oldestNewStatus.id)
       // Insert the gap after all the new statuses
       await datasource.insertGap(gap, at: newStatuses.count)
     }
@@ -453,7 +454,7 @@ extension TimelineViewModel: GapLoadingFetcher {
   }
 
   private func createGapForOlderStatuses(sinceId: String? = nil, maxId: String, at index: Int) async {
-    let gap = TimelineGap(sinceId: sinceId, maxId: maxId, direction: .downward)
+    let gap = TimelineGap(sinceId: sinceId, maxId: maxId)
     await datasource.insertGap(gap, at: index)
   }
 }

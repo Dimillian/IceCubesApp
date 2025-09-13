@@ -92,6 +92,10 @@ actor TimelineDatasource {
     self.items = statuses.map { .status($0) }
   }
 
+  func setItems(_ items: [TimelineItem]) {
+    self.items = items
+  }
+
   func append(_ status: Status) {
     items.append(.status(status))
   }
