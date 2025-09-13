@@ -4,6 +4,19 @@ import NetworkClient
 import SwiftUI
 
 public actor TimelineCache {
+  private struct CachedTimelineItem: Codable {
+    enum Kind: String, Codable { case status, gap }
+
+    var kind: Kind
+    var status: Status?
+    var gap: CachedGap?
+  }
+
+  private struct CachedGap: Codable {
+    var sinceId: String
+    var maxId: String
+  }
+
   private func storageFor(_ client: String, _ filter: String) -> SQLiteStorageEngine {
     if filter == "Home" {
       SQLiteStorageEngine.default(appendingPath: "\(client)")
@@ -46,27 +59,22 @@ public actor TimelineCache {
     } catch {}
   }
 
-  func set(statuses: [Status], client: String, filter: String) async {
-    guard !statuses.isEmpty else { return }
-    let statuses = statuses.prefix(upTo: min(600, statuses.count - 1)).map { $0 }
+  func set(items: [TimelineItem], client: String, filter: String) async {
+    guard items.contains(where: { $0.status != nil }) else { return }
     do {
       let engine = storageFor(client, filter)
       try await engine.removeAllData()
-      let itemKeys = statuses.map { CacheKey($0[keyPath: \.id]) }
-      let dataAndKeys = try zip(itemKeys, statuses)
-        .map { try (key: $0, data: encoder.encode($1)) }
-      try await engine.write(dataAndKeys)
+      let payload = try encoder.encode(prepareItemsForCaching(items))
+      try await engine.write([(CacheKey("items"), payload)])
     } catch {}
   }
 
-  func getStatuses(for client: String, filter: String) async -> [Status]? {
+  func getItems(for client: String, filter: String) async -> [TimelineItem]? {
     let engine = storageFor(client, filter)
     do {
-      return
-        try await engine
-        .readAllData()
-        .map { try decoder.decode(Status.self, from: $0) }
-        .sorted(by: { $0.createdAt.asDate > $1.createdAt.asDate })
+      let storedData = await engine.readAllData()
+      guard let data = storedData.first else { return nil }
+      return try restoreItems(from: data)
     } catch {
       return nil
     }
@@ -88,5 +96,65 @@ public actor TimelineCache {
     } else {
       UserDefaults.standard.array(forKey: "timeline-last-seen-\(client.id)-\(filter)") as? [String]
     }
+  }
+}
+
+// MARK: - Encoding helpers
+
+private extension TimelineCache {
+  var maxCachedStatuses: Int { 600 }
+
+  private func prepareItemsForCaching(_ items: [TimelineItem]) -> [CachedTimelineItem] {
+    limitedItems(items, limit: maxCachedStatuses).map { item in
+      switch item {
+      case .status(let status):
+        return CachedTimelineItem(kind: .status, status: status, gap: nil)
+      case .gap(let gap):
+        let cachedGap = CachedGap(
+          sinceId: gap.sinceId,
+          maxId: gap.maxId)
+        return CachedTimelineItem(kind: .gap, status: nil, gap: cachedGap)
+      }
+    }
+  }
+
+  private func restoreItems(from data: Data) throws -> [TimelineItem] {
+    let cachedItems = try decoder.decode([CachedTimelineItem].self, from: data)
+    return cachedItems.compactMap { item in
+      switch item.kind {
+      case .status:
+        if let status = item.status {
+          return .status(status)
+        }
+        return nil
+      case .gap:
+        guard let gap = item.gap else { return nil }
+        return .gap(
+          TimelineGap(
+            sinceId: gap.sinceId.isEmpty ? nil : gap.sinceId,
+            maxId: gap.maxId))
+      }
+    }
+  }
+
+  private func limitedItems(_ items: [TimelineItem], limit: Int) -> [TimelineItem] {
+    var collected: [TimelineItem] = []
+    var statusCount = 0
+
+    for item in items {
+      if statusCount >= limit { break }
+
+      switch item {
+      case .status:
+        collected.append(item)
+        statusCount += 1
+      case .gap:
+        if statusCount > 0 {
+          collected.append(item)
+        }
+      }
+    }
+
+    return collected
   }
 }

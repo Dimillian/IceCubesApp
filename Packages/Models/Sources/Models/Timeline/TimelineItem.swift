@@ -24,21 +24,15 @@ public enum TimelineItem: Identifiable, Equatable, Sendable {
 }
 
 public struct TimelineGap: Identifiable, Equatable, Sendable {
-  public enum Direction: Sendable {
-    case downward, upward
-  }
-  
   public let id: String
   public let sinceId: String
   public let maxId: String
   public var isLoading: Bool = false
-  public let direction: Direction
 
-  public init(sinceId: String?, maxId: String, direction: Direction) {
+  public init(sinceId: String?, maxId: String) {
     let sinceIdStr = sinceId ?? "start"
-    self.id = "gap-\(sinceIdStr)-\(maxId)-\(direction)"
+    self.id = "gap-\(sinceIdStr)-\(maxId)"
     self.sinceId = sinceId ?? ""
     self.maxId = maxId
-    self.direction = direction
   }
 }
