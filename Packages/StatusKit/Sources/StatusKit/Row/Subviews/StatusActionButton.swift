@@ -15,19 +15,7 @@ struct StatusActionButton: View {
   let handleAction: (StatusRowActionsView.Action) -> Void
 
   var body: some View {
-    Button {
-      handleAction(configuration.trigger)
-    } label: {
-      HStack(spacing: 2) {
-        actionContent
-        if let count = countValue {
-          countView(count)
-        }
-      }
-      .padding(.vertical, 6)
-      .padding(.horizontal, 8)
-      .contentShape(Rectangle())
-    }
+    actionView
     #if os(visionOS)
       .buttonStyle(.borderless)
       .foregroundColor(Color(UIColor.secondaryLabel))
@@ -47,10 +35,10 @@ struct StatusActionButton: View {
         dataController: statusDataController,
         privateBoost: privateBoost))
   }
-
+  
   @ViewBuilder
-  private var actionContent: some View {
-    if configuration.showsMenu {
+  private var actionView: some View {
+    if configuration.showsMenu && configuration.trigger == .boost {
       Menu {
         Button {
           handleAction(.boost)
@@ -65,10 +53,30 @@ struct StatusActionButton: View {
             .tint(theme.labelColor)
         }
       } label: {
-        actionImage(for: configuration.display)
+        HStack(spacing: 2) {
+          actionImage(for: configuration.display)
+          if let count = countValue {
+            countView(count)
+          }
+        }
+        .padding(.vertical, 6)
+        .padding(.horizontal, 8)
+        .contentShape(Rectangle())
       }
     } else {
-      actionImage(for: configuration.display)
+      Button {
+        handleAction(configuration.trigger)
+      } label: {
+        HStack(spacing: 2) {
+          actionImage(for: configuration.display)
+          if let count = countValue {
+            countView(count)
+          }
+        }
+        .padding(.vertical, 6)
+        .padding(.horizontal, 8)
+        .contentShape(Rectangle())
+      }
     }
   }
 
