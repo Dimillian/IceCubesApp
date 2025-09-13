@@ -39,9 +39,17 @@ struct AppView: View {
 
   var body: some View {
     HStack(spacing: 0) {
-      tabBarView
-        .tabViewStyle(.sidebarAdaptable)
-      if (horizontalSizeClass == .regular && (UIDevice.current.userInterfaceIdiom == .pad || UIDevice.current.userInterfaceIdiom == .mac)),
+      if #available(iOS 26.0, *) {
+        tabBarView
+          .tabViewStyle(.sidebarAdaptable)
+          .tabBarMinimizeBehavior(.onScrollDown)
+      } else {
+        tabBarView
+          .tabViewStyle(.sidebarAdaptable)
+      }
+      if horizontalSizeClass == .regular
+        && (UIDevice.current.userInterfaceIdiom == .pad
+          || UIDevice.current.userInterfaceIdiom == .mac),
         appAccountsManager.currentClient.isAuth,
         userPreferences.showiPadSecondaryColumn
       {
