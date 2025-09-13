@@ -16,10 +16,28 @@ public enum Markers: Endpoint {
         URLQueryItem(name: "timeline[]", value: "home"),
         URLQueryItem(name: "timeline[]", value: "notifications"),
       ]
-    case let .markNotifications(lastReadId):
-      [URLQueryItem(name: "notifications[last_read_id]", value: lastReadId)]
-    case let .markHome(lastReadId):
-      [URLQueryItem(name: "home[last_read_id]", value: lastReadId)]
+    case .markNotifications, .markHome:
+      nil
     }
   }
+
+  public var jsonValue: Encodable? {
+    switch self {
+    case .markers:
+      nil
+    case .markNotifications(let lastReadId):
+      MarkerPayload(notifications: MarkerPayload.Marker(lastReadId: lastReadId), home: nil)
+    case .markHome(let lastReadId):
+      MarkerPayload(notifications: nil, home: MarkerPayload.Marker(lastReadId: lastReadId))
+    }
+  }
+}
+
+private struct MarkerPayload: Encodable {
+  struct Marker: Encodable {
+    let lastReadId: String
+  }
+
+  let notifications: Marker?
+  let home: Marker?
 }
