@@ -110,7 +110,7 @@ struct StatusRowActionsView: View {
       }
     }
 
-    func count(dataController: StatusDataController, isFocused: Bool, theme: Theme) -> Int? {
+    func count(dataController: StatusDataController, userPreferences: UserPreferences, isFocused: Bool, theme: Theme) -> Int? {
       if theme.statusActionsDisplay == .discret, !isFocused {
         return nil
       }
@@ -120,6 +120,9 @@ struct StatusRowActionsView: View {
       case .favorite:
         return dataController.favoritesCount
       case .boost:
+        if userPreferences.boostButtonBehavior == .quoteOnly {
+          return dataController.quotesCount
+        }
         return dataController.reblogsCount
       case .share, .bookmark, .menu, .quote:
         return nil
@@ -313,6 +316,7 @@ struct StatusRowActionsView: View {
     StatusActionButton(
       configuration: configuration,
       statusDataController: statusDataController,
+      userPreferences: userPreferences,
       theme: theme,
       isFocused: isFocused,
       isNarrow: isNarrow,
