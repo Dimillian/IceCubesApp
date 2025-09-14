@@ -23,8 +23,7 @@ struct StatusRowSelectableTextView: View {
         .navigationTitle("status.action.select-text")
         .navigationBarTitleDisplayMode(.inline)
     }
-    .presentationBackground(.ultraThinMaterial)
-    .presentationCornerRadius(16)
+    .presentationDetents([.medium, .large])
   }
 }
 
