@@ -21,6 +21,8 @@ extension StatusEditor {
       @Environment(\.dismiss) private var dismiss
     #endif
 
+    @Namespace private var transition
+    
     @Bindable var viewModel: ViewModel
     @Binding var followUpSEVMs: [ViewModel]
     @Binding var editingMediaContainer: MediaContainer?
@@ -80,6 +82,7 @@ extension StatusEditor {
         HStack {
           if viewModel.mode.isInShareExtension {
             AppAccountsSelectorView(
+              transition: transition,
               routerPath: RouterPath(),
               accountCreationEnabled: false,
               avatarConfig: .status)
