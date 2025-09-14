@@ -11,6 +11,8 @@ struct ToolbarTab: ToolbarContent {
   @Environment(UserPreferences.self) private var userPreferences
 
   @Binding var routerPath: RouterPath
+  
+  @Namespace private var transition
 
   var body: some ToolbarContent {
     if !isSecondaryColumn {
@@ -20,14 +22,17 @@ struct ToolbarTab: ToolbarContent {
       if #available(iOS 26.0, *) {
         ToolbarItem(placement: .navigationBarLeading) {
           AppAccountsSelectorView(
+            transition: transition,
             routerPath: routerPath,
             avatarConfig: .embed)
             .offset(x: -12)
         }
+        .matchedTransitionSource(id: CurrentAccount.shared.account?.id ?? "", in: transition)
         .sharedBackgroundVisibility(.hidden)
       } else {
         ToolbarItem(placement: .navigationBarLeading) {
           AppAccountsSelectorView(
+            transition: transition,
             routerPath: routerPath,
             avatarConfig: .embed)
         }

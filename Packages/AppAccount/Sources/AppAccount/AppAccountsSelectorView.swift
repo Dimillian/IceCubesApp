@@ -13,9 +13,11 @@ public struct AppAccountsSelectorView: View {
 
   @State private var accountsViewModel: [AppAccountViewModel] = []
   @State private var isPresented: Bool = false
-
+  
   private let accountCreationEnabled: Bool
   private let avatarConfig: AvatarView.FrameConfig
+  
+  private let transition: Namespace.ID
 
   private var showNotificationBadge: Bool {
     accountsViewModel
@@ -26,16 +28,18 @@ public struct AppAccountsSelectorView: View {
   }
 
   private var preferredHeight: CGFloat {
-    var baseHeight: CGFloat = 310
+    var baseHeight: CGFloat = 360
     baseHeight += CGFloat(60 * accountsViewModel.count)
     return baseHeight
   }
 
   public init(
+    transition: Namespace.ID,
     routerPath: RouterPath,
     accountCreationEnabled: Bool = true,
     avatarConfig: AvatarView.FrameConfig? = nil
   ) {
+    self.transition = transition
     self.routerPath = routerPath
     self.accountCreationEnabled = accountCreationEnabled
     self.avatarConfig = avatarConfig ?? .badge
@@ -53,7 +57,9 @@ public struct AppAccountsSelectorView: View {
       isPresented: $isPresented,
       content: {
         if #available(iOS 26, *) {
-          accountsView.presentationDetents([.height(preferredHeight), .large])
+          accountsView
+            .presentationDetents([.height(preferredHeight), .large])
+            .navigationTransition(.zoom(sourceID: CurrentAccount.shared.account?.id ?? "", in: transition))
             .onAppear {
               refreshAccounts()
             }
@@ -113,12 +119,10 @@ public struct AppAccountsSelectorView: View {
             AppAccountView(viewModel: viewModel, isParentPresented: $isPresented)
           }
           addAccountButton
-            #if os(visionOS)
-              .foregroundStyle(theme.labelColor)
-            #endif
+            .foregroundStyle(theme.labelColor)
         }
         #if !os(visionOS)
-          .listRowBackground(theme.secondaryBackgroundColor.opacity(0.8))
+          .listRowBackground(theme.secondaryBackgroundColor)
         #endif
 
         if accountCreationEnabled {
@@ -130,21 +134,30 @@ public struct AppAccountsSelectorView: View {
           #if os(visionOS)
             .foregroundStyle(theme.labelColor)
           #else
-            .listRowBackground(theme.secondaryBackgroundColor.opacity(0.8))
+            .foregroundStyle(theme.labelColor)
+            .listRowBackground(theme.secondaryBackgroundColor)
           #endif
         }
       }
       .listStyle(.insetGrouped)
       .scrollContentBackground(.hidden)
-      .background(.clear)
       .navigationTitle("settings.section.accounts")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            isPresented.toggle()
-          } label: {
-            Text("action.done").bold()
+          if #available(iOS 26.0, *) {
+            Button {
+              isPresented.toggle()
+            } label: {
+              Text("action.done").bold()
+            }
+            .buttonStyle(.glass)
+          } else {
+            Button {
+              isPresented.toggle()
+            } label: {
+              Text("action.done").bold()
+            }
           }
         }
       }
