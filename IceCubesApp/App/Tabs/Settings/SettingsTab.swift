@@ -231,6 +231,10 @@ struct SettingsTabs: View {
       Toggle(isOn: $preferences.soundEffectEnabled) {
         Label("settings.other.sound-effect", systemImage: "hifispeaker")
       }
+      Toggle(isOn: $preferences.streamHomeTimeline) {
+        Label("Stream home timeline", systemImage: "antenna.radiowaves.left.and.right")
+          .symbolVariant(preferences.streamHomeTimeline ? .none : .slash)
+      }
     } header: {
       Text("settings.section.other")
     } footer: {

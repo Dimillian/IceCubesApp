@@ -71,6 +71,8 @@ import SwiftUI
     @AppStorage("show_account_popover") public var showAccountPopover: Bool = true
 
     @AppStorage("sidebar_expanded") public var isSidebarExpanded: Bool = false
+    
+    @AppStorage("stream_home_timeline") public var streamHomeTimeline: Bool = false
 
     // Notifications
     @AppStorage("notifications-truncate-status-content")
@@ -360,6 +362,12 @@ import SwiftUI
       storage.isSidebarExpanded = isSidebarExpanded
     }
   }
+  
+  public var streamHomeTimeline: Bool {
+    didSet {
+      storage.streamHomeTimeline = streamHomeTimeline
+    }
+  }
 
   // Notifications
   public var notificationsTruncateStatusContent: Bool {
@@ -545,6 +553,7 @@ import SwiftUI
     muteVideo = storage.muteVideo
     isSidebarExpanded = storage.isSidebarExpanded
     notificationsTruncateStatusContent = storage.notificationsTruncateStatusContent
+    streamHomeTimeline = storage.streamHomeTimeline
   }
 }
 

@@ -494,6 +494,8 @@ extension TimelineViewModel {
     guard let client = client, canStreamEvents else { return }
 
     switch event {
+    case let updateEvent as StreamEventUpdate:
+      await handleUpdateEvent(updateEvent, client: client)
     case let deleteEvent as StreamEventDelete:
       await handleDeleteEvent(deleteEvent)
     case let statusUpdateEvent as StreamEventStatusUpdate:
@@ -503,11 +505,9 @@ extension TimelineViewModel {
     }
   }
 
-  // Post streaming insertion is disabled for now.
-  /*
   private func handleUpdateEvent(_ event: StreamEventUpdate, client: MastodonClient) async {
     guard timeline == .home,
-      UserPreferences.shared.isPostsStreamingEnabled,
+      UserPreferences.shared.streamHomeTimeline,
       await !datasource.contains(statusId: event.status.id),
       let topStatus = await datasource.get().first,
       topStatus.createdAt.asDate < event.status.createdAt.asDate
@@ -519,7 +519,6 @@ extension TimelineViewModel {
     StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
     await updateStatusesStateWithAnimation()
   }
-   */
 
   private func handleDeleteEvent(_ event: StreamEventDelete) async {
     if await datasource.remove(event.status) != nil {
