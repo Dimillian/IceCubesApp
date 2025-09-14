@@ -65,7 +65,6 @@ public struct TimelineQuickAccessPills: View {
     } else {
       if #available(iOS 26.0, *) {
         makeButton(filter)
-          .foregroundStyle(theme.labelColor)
           .buttonStyle(.glass)
       } else {
         makeButton(filter)
