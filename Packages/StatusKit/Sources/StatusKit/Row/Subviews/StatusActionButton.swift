@@ -6,7 +6,6 @@ import SwiftUI
 struct StatusActionButton: View {
   let configuration: StatusRowActionsView.ActionButtonConfiguration
   let statusDataController: StatusDataController
-  let userPreferences: UserPreferences
   let theme: Theme
   let isFocused: Bool
   let isNarrow: Bool
@@ -97,7 +96,6 @@ struct StatusActionButton: View {
     guard !isNarrow, !isRemoteStatus else { return nil }
     return configuration.display.count(
       dataController: statusDataController,
-      userPreferences: userPreferences,
       isFocused: isFocused,
       theme: theme)
   }
