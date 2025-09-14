@@ -164,7 +164,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
       language: language,
       tags: [],
       quote: nil,
-      quotesCount: nil)
+      quotesCount: 2)
   }
 
   public static func placeholders() -> [Status] {
