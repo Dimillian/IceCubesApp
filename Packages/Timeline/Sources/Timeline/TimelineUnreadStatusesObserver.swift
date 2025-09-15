@@ -44,10 +44,9 @@ struct TimelineUnreadStatusesView: View {
         #if os(visionOS)
           .buttonStyle(.bordered)
           .tint(Material.ultraThick)
-        #else
-          .buttonStyle(.glass)
         #endif
         .padding(8)
+        .foregroundStyle(.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: preferences.pendingLocation)
     } else {
       buttonBody
@@ -77,24 +76,34 @@ struct TimelineUnreadStatusesView: View {
       Button {
         onButtonTap(observer.pendingStatuses.last)
       } label: {
-        HStack(spacing: 8) {
-          if observer.isLoadingNewStatuses {
-            ProgressView()
-          }
-          if observer.pendingStatusesCount > 0 {
-            Text("\(observer.pendingStatusesCount)")
-              .contentTransition(.numericText(value: Double(observer.pendingStatusesCount)))
-              // Accessibility: this results in a frame with a size of at least 44x44 at regular font size
-              .frame(minWidth: 16, minHeight: 16)
-              .font(.footnote.monospacedDigit())
-              .fontWeight(.bold)
-          }
+        if #available(iOS 26, *) {
+          label
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .glassEffect(.regular.tint(theme.tintColor.opacity(0.4)).interactive(), in: .capsule)
+        } else {
+          label
         }
       }
       .accessibilityLabel(
         "accessibility.tabs.timeline.unread-posts.label-\(observer.pendingStatusesCount)"
       )
       .accessibilityHint("accessibility.tabs.timeline.unread-posts.hint")
+    }
+  }
+  
+  var label: some View {
+    HStack(spacing: 8) {
+      if observer.isLoadingNewStatuses {
+        ProgressView()
+      }
+      if observer.pendingStatusesCount > 0 {
+        Text("\(observer.pendingStatusesCount)")
+          .contentTransition(.numericText(value: Double(observer.pendingStatusesCount)))
+          .frame(minWidth: 16, minHeight: 16)
+          .font(.footnote.monospacedDigit())
+          .fontWeight(.bold)
+      }
     }
   }
 }
