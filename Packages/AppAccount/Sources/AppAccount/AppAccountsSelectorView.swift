@@ -13,10 +13,10 @@ public struct AppAccountsSelectorView: View {
 
   @State private var accountsViewModel: [AppAccountViewModel] = []
   @State private var isPresented: Bool = false
-  
+
   private let accountCreationEnabled: Bool
   private let avatarConfig: AvatarView.FrameConfig
-  
+
   private let transition: Namespace.ID
 
   private var showNotificationBadge: Bool {
@@ -53,13 +53,32 @@ public struct AppAccountsSelectorView: View {
       labelView
         .contentShape(.circle)
     }
+    .contextMenu {
+      ForEach(accountsViewModel.sorted { $0.acct < $1.acct }, id: \.appAccount.id) {
+        viewModel in
+        Button {
+          appAccounts.currentAccount = viewModel.appAccount
+        } label: {
+          if appAccounts.currentAccount.id == viewModel.appAccount.id {
+            Label(viewModel.appAccount.server, systemImage: "checkmark.circle.fill")
+              .foregroundStyle(.primary)
+            Text(viewModel.acct)
+          } else {
+            Text(viewModel.appAccount.server)
+            Text(viewModel.acct)
+          }
+        }
+      }
+    }
     .sheet(
       isPresented: $isPresented,
       content: {
         if #available(iOS 26, *) {
           accountsView
             .presentationDetents([.height(preferredHeight), .large])
-            .navigationTransition(.zoom(sourceID: CurrentAccount.shared.account?.id ?? "", in: transition))
+            .navigationTransition(
+              .zoom(sourceID: CurrentAccount.shared.account?.id ?? "", in: transition)
+            )
             .onAppear {
               refreshAccounts()
             }
@@ -90,12 +109,7 @@ public struct AppAccountsSelectorView: View {
   private var labelView: some View {
     Group {
       if let account = currentAccount.account, !currentAccount.isLoadingAccount {
-        if #available(iOS 26.0, *) {
-          AvatarView(account.avatar, config: avatarConfig)
-            .glassEffect(.regular.interactive())
-        } else {
-          AvatarView(account.avatar, config: avatarConfig)
-        }
+        AvatarView(account.avatar, config: avatarConfig)
       } else {
         AvatarView(config: avatarConfig)
           .redacted(reason: .placeholder)
