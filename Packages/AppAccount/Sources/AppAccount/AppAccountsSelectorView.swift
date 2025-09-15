@@ -68,6 +68,7 @@ public struct AppAccountsSelectorView: View {
             Text(viewModel.acct)
           }
         }
+        .tint(.primary)
       }
     }
     .sheet(
