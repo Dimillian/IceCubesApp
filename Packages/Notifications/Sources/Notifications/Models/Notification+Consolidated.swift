@@ -24,6 +24,7 @@ extension [Models.Notification] {
 
             return ConsolidatedNotification(
               notifications: notifications,
+              mostRecentNotificationId: notifications.first?.id ?? "",
               type: supportedType,
               createdAt: notification.createdAt,
               accounts: notifications.map(\.account),
