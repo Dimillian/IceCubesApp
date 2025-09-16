@@ -241,12 +241,9 @@ public final class NotificationsListDataSource {
     selectedType: Models.Notification.NotificationType?
   ) async throws {
     guard let firstGroup = consolidatedNotifications.first else { return }
-
-    let sinceId = firstGroup.notifications.first?.id ?? firstGroup.groupKey
-
     let results = try await fetchGroupedNotifications(
       client: client,
-      sinceId: sinceId,
+      sinceId: firstGroup.mostRecentNotificationId,
       maxId: nil,
       selectedType: selectedType
     )

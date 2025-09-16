@@ -79,6 +79,7 @@ public struct ConversationsListView: View {
         .allowsHitTesting(false)
       }
       .listSectionSeparator(.hidden, edges: .top)
+      .listRowBackground(theme.primaryBackgroundColor)
 
     case .display(let conversations, let hasNextPage):
       if conversations.isEmpty {
@@ -98,6 +99,7 @@ public struct ConversationsListView: View {
           )
         }
         .listSectionSeparator(.hidden, edges: .top)
+        .listRowBackground(theme.primaryBackgroundColor)
 
         if hasNextPage {
           HStack {
@@ -105,6 +107,7 @@ public struct ConversationsListView: View {
             ProgressView()
             Spacer()
           }
+          .listRowBackground(theme.primaryBackgroundColor)
           .onAppear {
             Task {
               await fetchNextPage()
@@ -121,6 +124,7 @@ public struct ConversationsListView: View {
       ) {
         await fetchConversations()
       }
+      .listRowBackground(theme.primaryBackgroundColor)
     }
   }
 }
