@@ -207,15 +207,9 @@ public struct AccountDetailView: View {
         })
     ) {
       ForEach(tabManager.availableTabs, id: \.id) { tab in
-        if tab.id == "boosts" {
-          Image("Rocket")
-            .tag(tab.id as String?)
-            .accessibilityLabel(tab.accessibilityLabel)
-        } else {
-          Image(systemName: tab.iconName)
-            .tag(tab.id as String?)
-            .accessibilityLabel(tab.accessibilityLabel)
-        }
+        Image(systemName: tab.iconName)
+          .tag(tab.id as String?)
+          .accessibilityLabel(tab.accessibilityLabel)
       }
     }
   }
@@ -317,7 +311,9 @@ extension AccountDetailView {
     }
   }
 
-  private func fetchAccountData(accountId: String, client: MastodonClient) async throws -> AccountData {
+  private func fetchAccountData(accountId: String, client: MastodonClient) async throws
+    -> AccountData
+  {
     async let account: Account = client.get(endpoint: Accounts.accounts(id: accountId))
     async let featuredTags: [FeaturedTag] = client.get(
       endpoint: Accounts.featuredTags(id: accountId))

@@ -6,12 +6,13 @@ import SwiftUI
 
 struct BoostsTab: AccountTabProtocol {
   let id = "boosts"
-  let iconName = ""
+  let iconName = "arrow.2.squarepath"
   let accessibilityLabel: LocalizedStringKey = "accessibility.tabs.profile.picker.boosts"
   let isAvailableForCurrentUser = true
   let isAvailableForOtherUsers = true
 
-  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool) -> any StatusesFetcher
+  func createFetcher(accountId: String, client: MastodonClient, isCurrentUser: Bool)
+    -> any StatusesFetcher
   {
     BoostsTabFetcher(accountId: accountId, client: client, isCurrentUser: isCurrentUser)
   }
