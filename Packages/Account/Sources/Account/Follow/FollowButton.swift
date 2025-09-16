@@ -118,6 +118,7 @@ public struct FollowButton: View {
                 viewModel.relationship.following
                   ? "account.follow.following" : "account.follow.follow"
               )
+              .padding(.horizontal, 2)
               .accessibilityLabel("account.follow.following")
               .accessibilityValue(
                 viewModel.relationship.following
@@ -143,7 +144,8 @@ public struct FollowButton: View {
               AsyncButton {
                 try await viewModel.toggleReboosts()
               } label: {
-                Image(viewModel.relationship.showingReblogs ? "Rocket.Fill" : "Rocket")
+                Image(systemName: "arrow.2.squarepath")
+                  .opacity(viewModel.relationship.showingReblogs ? 1 : 0.5)
               }
               .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
               .accessibilityValue(
@@ -174,6 +176,7 @@ public struct FollowButton: View {
               viewModel.relationship.following
                 ? "account.follow.following" : "account.follow.follow"
             )
+            .padding(.horizontal, 2)
             .accessibilityLabel("account.follow.following")
             .accessibilityValue(
               viewModel.relationship.following
@@ -196,7 +199,8 @@ public struct FollowButton: View {
             AsyncButton {
               try await viewModel.toggleReboosts()
             } label: {
-              Image(viewModel.relationship.showingReblogs ? "Rocket.Fill" : "Rocket")
+              Image(systemName: "arrow.2.squarepath")
+                .opacity(viewModel.relationship.showingReblogs ? 1 : 0.5)
             }
             .accessibilityLabel("accessibility.tabs.profile.user-reblogs.label")
             .accessibilityValue(

@@ -144,7 +144,7 @@ public struct AccountDetailContextMenu: View {
                   } catch {}
                 }
               } label: {
-                Label("account.action.reboosts-show", image: "Rocket")
+                Label("account.action.reboosts-show", systemImage: "arrow.2.squarepath")
               }
             }
           }
