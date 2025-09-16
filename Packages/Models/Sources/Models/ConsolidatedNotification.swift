@@ -13,14 +13,16 @@ public struct ConsolidatedNotification: Identifiable {
   public let createdAt: ServerDate
   public let accounts: [Account]
   public let status: Status?
+  public let mostRecentNotificationId: String
 
-  public var id: String? { notifications.first?.id ?? groupKey }
+  public var id: String { groupKey ?? mostRecentNotificationId }
   
   // For V2 API compatibility
   public var groupKey: String?
 
   public init(
     notifications: [Notification],
+    mostRecentNotificationId: String,
     type: Notification.NotificationType,
     createdAt: ServerDate,
     accounts: [Account],
@@ -33,11 +35,13 @@ public struct ConsolidatedNotification: Identifiable {
     self.accounts = accounts
     self.status = status ?? nil
     self.groupKey = groupKey
+    self.mostRecentNotificationId = mostRecentNotificationId
   }
 
   public static func placeholder() -> ConsolidatedNotification {
     .init(
       notifications: [Notification.placeholder()],
+      mostRecentNotificationId: UUID().uuidString,
       type: .favourite,
       createdAt: ServerDate(),
       accounts: [.placeholder()],
