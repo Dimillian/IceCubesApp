@@ -24,13 +24,13 @@ extension StatusEditor {
     #else
       @Environment(\.dismiss) private var dismiss
     #endif
-    
+
     var isSendingDisabled: Bool {
       !mainSEVM.canPost || mainSEVM.isPosting
     }
 
     var body: some ToolbarContent {
-      ToolbarItemGroup(placement: .topBarTrailing) {
+      ToolbarItem(placement: .navigationBarTrailing) {
         Button {
           isDraftsSheetDisplayed = true
         } label: {
@@ -45,13 +45,20 @@ extension StatusEditor {
             draftsListView
           }
         }
+      }
 
-        if #available(iOS 26, *) {
+      if #available(iOS 26, *) {
+        ToolbarSpacer(placement: .topBarTrailing)
+        ToolbarItem(placement: .navigationBarTrailing) {
           sendButton
             .buttonStyle(.glassProminent)
-        } else {
+            .tint(theme.tintColor)
+        }
+      } else {
+        ToolbarItem(placement: .navigationBarTrailing) {
           sendButton
             .buttonStyle(.borderedProminent)
+            .tint(theme.tintColor)
         }
       }
 
@@ -92,7 +99,7 @@ extension StatusEditor {
         )
       }
     }
-    
+
     private var sendButton: some View {
       Button {
         Task {
@@ -109,8 +116,7 @@ extension StatusEditor {
       } label: {
         Image(systemName: "paperplane")
           .symbolVariant(isSendingDisabled ? .none : .fill)
-          .tint(isSendingDisabled ? .secondary : theme.tintColor)
-          .foregroundStyle(theme.labelColor)
+          .foregroundStyle(.white)
           .bold()
       }
       .buttonBorderShape(.circle)
