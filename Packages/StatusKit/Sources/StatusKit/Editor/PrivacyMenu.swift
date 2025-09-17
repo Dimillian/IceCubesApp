@@ -13,36 +13,34 @@ extension StatusEditor {
             visibility = vis
           } label: {
             Label(vis.title, systemImage: vis.iconName)
+            Text(vis.subtitle)
           }
         }
       } label: {
         if #available(iOS 26.0, *) {
-          HStack {
-            Label(visibility.title, systemImage: visibility.iconName)
-              .accessibilityLabel("accessibility.editor.privacy.label")
-              .accessibilityValue(visibility.title)
-              .accessibilityHint("accessibility.editor.privacy.hint")
-            Image(systemName: "chevron.down")
-          }
-          .font(.scaledFootnote)
-          .padding(8)
-          .glassEffect()
+          makeMenuLabel(visibility: visibility)
+            .padding(8)
+            .glassEffect()
         } else {
-          HStack {
-            Label(visibility.title, systemImage: visibility.iconName)
-              .accessibilityLabel("accessibility.editor.privacy.label")
-              .accessibilityValue(visibility.title)
-              .accessibilityHint("accessibility.editor.privacy.hint")
-            Image(systemName: "chevron.down")
-          }
-          .font(.scaledFootnote)
-          .padding(4)
-          .overlay(
-            RoundedRectangle(cornerRadius: 8)
-              .stroke(tint, lineWidth: 1)
-          )
+          makeMenuLabel(visibility: visibility)
+            .padding(4)
+            .overlay(
+              RoundedRectangle(cornerRadius: 8)
+                .stroke(tint, lineWidth: 1)
+            )
         }
       }
+    }
+
+    private func makeMenuLabel(visibility: Models.Visibility) -> some View {
+      HStack {
+        Label(visibility.title, systemImage: visibility.iconName)
+          .accessibilityLabel("accessibility.editor.privacy.label")
+          .accessibilityValue(visibility.title)
+          .accessibilityHint("accessibility.editor.privacy.hint")
+        Image(systemName: "chevron.down")
+      }
+      .font(.scaledFootnote)
     }
   }
 }
