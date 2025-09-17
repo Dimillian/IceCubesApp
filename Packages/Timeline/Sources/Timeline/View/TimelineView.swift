@@ -52,7 +52,6 @@ public struct TimelineView: View {
   public var body: some View {
     if #available(iOS 26.0, *) {
       timelineView
-        .scrollEdgeEffectStyle(.soft, for: .top)
         .safeAreaBar(edge: .top) {
           if canFilterTimeline, !pinnedFilters.isEmpty {
             TimelineQuickAccessPills(pinnedFilters: $pinnedFilters, timeline: $timeline)
