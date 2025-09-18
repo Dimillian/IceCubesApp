@@ -33,6 +33,10 @@ struct StatusRowContextMenu: View {
     return Label("status.action.boost", systemImage: "arrow.2.squarepath")
   }
 
+  var isQuoteDisabled: Bool {
+    viewModel.status.quoteApproval?.currentUser == .denied || viewModel.status.visibility != .pub
+  }
+
   var body: some View {
     if !viewModel.isRemote {
       ControlGroup {
@@ -87,16 +91,17 @@ struct StatusRowContextMenu: View {
         }
       }
       .controlGroupStyle(.compactMenu)
-      Button {
-        #if targetEnvironment(macCatalyst) || os(visionOS)
-          openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
-        #else
-          viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
-        #endif
-      } label: {
-        Label("status.action.quote", systemImage: "quote.bubble")
+      if !isQuoteDisabled {
+        Button {
+          #if targetEnvironment(macCatalyst) || os(visionOS)
+            openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
+          #else
+            viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+          #endif
+        } label: {
+          Label("status.action.quote", systemImage: "quote.bubble")
+        }
       }
-      .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
     }
 
     Divider()

@@ -17,7 +17,7 @@ struct StatusActionButton: View {
   let handleAction: (StatusRowActionsView.Action) -> Void
 
   var isQuoteDisabled: Bool {
-    status.quoteApproval?.currentUser == .denied
+    status.quoteApproval?.currentUser == .denied || status.visibility != .pub
   }
 
   var body: some View {
