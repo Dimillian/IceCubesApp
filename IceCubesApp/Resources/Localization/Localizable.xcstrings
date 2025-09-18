@@ -351,6 +351,12 @@
             "value" : "%@"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -460,7 +466,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "%@ já está selecionado"
           }
         },
         "tr" : {
@@ -578,7 +584,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@ já existe"
           }
         },
         "tr" : {
@@ -696,7 +702,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@ é um nome de SFSymbol inválido"
           }
         },
         "tr" : {
@@ -767,6 +773,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@ is geplaatst op Mastodon"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ foi postado no Mastodon"
           }
         },
         "tr" : {
@@ -902,7 +914,14 @@
       }
     },
     "%lld. " : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld."
+          }
+        }
+      }
     },
     "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)" : {
       "localizations" : {
@@ -2296,7 +2315,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Altera o público da postagem."
+            "value" : "Alterar o público da postagem."
           }
         },
         "tr" : {
@@ -2534,7 +2553,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Off"
+            "value" : "Desativado"
           }
         },
         "tr" : {
@@ -2654,7 +2673,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "On"
+            "value" : "Ativado"
           }
         },
         "tr" : {
@@ -6700,7 +6719,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rola para a lista."
+            "value" : "Desliza até a lista."
           }
         },
         "tr" : {
@@ -8127,7 +8146,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visita %@"
+            "value" : "Visitar %@"
           }
         },
         "tr" : {
@@ -8603,7 +8622,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Rola a linha do tempo."
+            "value" : "Desliza a linha do tempo."
           }
         },
         "tr" : {
@@ -9029,6 +9048,12 @@
             "value" : "Account"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conta"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9378,7 +9403,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Block %@"
+            "value" : "Bloquear %@"
           }
         },
         "tr" : {
@@ -9497,7 +9522,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do you want to block this user?"
+            "value" : "Deseja bloquear este usuário?"
           }
         },
         "tr" : {
@@ -10326,7 +10351,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mutar"
+            "value" : "Silenciar"
           }
         },
         "tr" : {
@@ -10683,7 +10708,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Settings"
+            "value" : "Configurações de privacidade"
           }
         },
         "tr" : {
@@ -11514,7 +11539,7 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Adicionar conta"
           }
         },
@@ -11751,8 +11776,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Blocked accounts"
+            "state" : "translated",
+            "value" : "Contas bloqueadas"
           }
         },
         "tr" : {
@@ -12285,14 +12310,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld postagens"
+                  "state" : "translated",
+                  "value" : "%lld publicação"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld postagens"
+                  "value" : "%lld publicações"
                 }
               }
             }
@@ -12638,8 +12663,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld campos"
+                  "state" : "translated",
+                  "value" : "%lld campo"
                 }
               },
               "other" : {
@@ -13528,8 +13553,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "Editar avatar"
           }
         },
         "tr" : {
@@ -13601,6 +13626,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verwijder profielfoto"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remover avatar"
           }
         },
         "tr" : {
@@ -13832,7 +13863,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erro salvando seu perfil, por favor, tente novamente."
+            "value" : "Erro ao salvar seu perfil, por favor, tente novamente."
           }
         },
         "tr" : {
@@ -13951,7 +13982,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erro salvando seu perfil"
+            "value" : "Erro ao salvar seu perfil"
           }
         },
         "tr" : {
@@ -14069,8 +14100,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "Editar cabeçalho"
           }
         },
         "tr" : {
@@ -14142,6 +14173,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verwijder omslagfoto"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remover cabeçalho"
           }
         },
         "tr" : {
@@ -14492,7 +14529,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Valor"
+            "value" : "Conteúdo"
           }
         },
         "tr" : {
@@ -14730,7 +14767,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "Aviso: Essas configurações são sobrescritas pelas configurações globais de conteúdo"
           }
         },
         "tr" : {
@@ -15682,7 +15719,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pedidos pendentes"
+            "value" : "Solicitações pendentes"
           }
         },
         "tr" : {
@@ -16039,7 +16076,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Pedido"
+            "value" : "Solicitado"
           }
         },
         "tr" : {
@@ -16798,13 +16835,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ follower"
+                      "value" : "%2$@ seguidor"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ followers"
+                      "value" : "%2$@ seguidores"
                     }
                   }
                 }
@@ -17606,8 +17643,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "Movido para %@"
           }
         },
         "tr" : {
@@ -17725,8 +17762,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Muted accounts"
+            "state" : "translated",
+            "value" : "Contas silenciadas"
           }
         },
         "tr" : {
@@ -19509,7 +19546,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Icon (SFSymbol name)"
+            "value" : "Ícone do grupo de tags (SFSymbol name)"
           }
         },
         "tr" : {
@@ -19627,7 +19664,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add tags to the group"
+            "value" : "Adicionar tags ao grupo"
           }
         },
         "tr" : {
@@ -19863,7 +19900,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "Tag duplicada"
           }
         },
         "tr" : {
@@ -19981,7 +20018,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "Número de tags é menor do que 2"
           }
         },
         "tr" : {
@@ -20099,7 +20136,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "Símbolo não encontrado"
           }
         },
         "tr" : {
@@ -20218,7 +20255,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Group Title"
+            "value" : "Título do grupo de tags"
           }
         },
         "tr" : {
@@ -20336,7 +20373,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "Título vazio"
           }
         },
         "tr" : {
@@ -20454,7 +20491,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "Nenhum símbolo selecionado"
           }
         },
         "tr" : {
@@ -20720,7 +20757,14 @@
       }
     },
     "ALT text for the image" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texto alternativo para a imagem"
+          }
+        }
+      }
     },
     "An error occured while posting to Mastodon, please try again." : {
       "localizations" : {
@@ -20766,6 +20810,12 @@
             "value" : "Er is een fout opgetreden tijdens het plaatsen van het bericht op Mastodon, probeer het nogmaals."
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Um erro ocorreu ao postar no Mastodon, por favor, tente novamente."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20787,7 +20837,14 @@
       }
     },
     "API Versions" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versões da API"
+          }
+        }
+      }
     },
     "app-account.button.add" : {
       "comment" : "MARK: Package: AppAccount",
@@ -20953,6 +21010,12 @@
             "value" : "AppAccount"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppAccount"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21017,6 +21080,12 @@
             "value" : "Bladwijzers"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoritos"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21038,13 +21107,34 @@
       }
     },
     "Boost Button Behavior" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comportamento do botão Boost"
+          }
+        }
+      }
     },
     "Caption" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legenda"
+          }
+        }
+      }
     },
     "Caption for your post" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Legendar sua postagem"
+          }
+        }
+      }
     },
     "Compact Layout" : {
       "localizations" : {
@@ -21070,6 +21160,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "여백 넓게 표시"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leiaute compacto"
           }
         },
         "tr" : {
@@ -21130,6 +21226,12 @@
             "value" : "글 작성 화면 열기"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Criar uma postagem"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21188,6 +21290,12 @@
             "value" : "글 작성 화면 열기"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Criar uma postagem para Mastodon"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21244,6 +21352,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "게시할 글 내용"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O conteúdo da postagem foi enviada ao Mastodon"
           }
         },
         "tr" : {
@@ -21595,7 +21709,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "View detail"
+            "value" : "Visualizar detalhes"
           }
         },
         "tr" : {
@@ -21952,7 +22066,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tente novamente"
+            "value" : "Tentar novamente"
           }
         },
         "tr" : {
@@ -22851,6 +22965,12 @@
             "value" : "DeepL kan niet worden bereikt. Klopt de API-sleutel? "
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A conexão com DeepL não foi possível. A chave de API está correta?"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22872,7 +22992,14 @@
       }
     },
     "Descriptions (ALT) for your images in order" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrições (alternativas) para suas imagens na ordem"
+          }
+        }
+      }
     },
     "design.tag.n-posts-from-n-participants %lld %lld" : {
       "comment" : "MARK: Package: DesignSystem",
@@ -23568,7 +23695,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg participantes"
+                      "value" : "%arg participante"
                     }
                   },
                   "other" : {
@@ -23588,7 +23715,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg postagens de "
+                      "value" : "%arg postagem de"
                     }
                   },
                   "other" : {
@@ -24125,7 +24252,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Principal"
+            "value" : "Início"
           }
         },
         "tr" : {
@@ -27250,7 +27377,14 @@
       }
     },
     "Error: %@" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erro: %@"
+          }
+        }
+      }
     },
     "Explore & Trending" : {
       "localizations" : {
@@ -27294,6 +27428,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ondekken en nieuws"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Explorar & Tendências"
           }
         },
         "tr" : {
@@ -27764,7 +27904,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "People"
+            "value" : "Pessoas"
           }
         },
         "tr" : {
@@ -27883,7 +28023,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posts"
+            "value" : "Postagens"
           }
         },
         "tr" : {
@@ -28953,8 +29093,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Links em Tendência"
+            "state" : "translated",
+            "value" : "Notícias"
           }
         },
         "tr" : {
@@ -29384,6 +29524,12 @@
             "value" : "Favorieten"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favoritos"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29428,6 +29574,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "기능 추가 요청"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solicitação de funcionalidade"
           }
         },
         "tr" : {
@@ -29492,6 +29644,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gefedereerde tijdlijn"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeline federada"
           }
         },
         "tr" : {
@@ -30913,7 +31071,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duration"
+            "value" : "Duração"
           }
         },
         "tr" : {
@@ -31032,7 +31190,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Palavras chaves do Filtro"
+            "value" : "Palavras-chave do filtro"
           }
         },
         "tr" : {
@@ -31151,7 +31309,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Adicionar uma palavra chave"
+            "value" : "Adicionar uma palavra-chave"
           }
         },
         "tr" : {
@@ -31508,7 +31666,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Expiração: %@"
+            "value" : "Expira em: %@"
           }
         },
         "tr" : {
@@ -31820,6 +31978,12 @@
             "value" : "Gevolgde tags"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tags seguidas"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31882,6 +32046,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alleen volgers"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Somente seguidores"
           }
         },
         "tr" : {
@@ -31948,6 +32118,12 @@
             "value" : "Start"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeline Principal"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32012,6 +32188,12 @@
             "value" : "Afbeelding"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagem"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32033,10 +32215,24 @@
       }
     },
     "Image description" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrição da imagem"
+          }
+        }
+      }
     },
     "Image descriptions" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrições da imagem"
+          }
+        }
+      }
     },
     "Image to post on Mastodon" : {
       "localizations" : {
@@ -32076,6 +32272,12 @@
             "value" : "첨부할 이미지"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagem para postar no Mastodon"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32097,10 +32299,24 @@
       }
     },
     "Image(s) to post on Mastodon" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagens para postar no Mastodon"
+          }
+        }
+      }
     },
     "Images" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagens"
+          }
+        }
+      }
     },
     "Instance" : {
       "extractionState" : "manual",
@@ -32147,6 +32363,12 @@
             "value" : "Instance"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instância"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32168,7 +32390,14 @@
       }
     },
     "Instance Administrator" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Administrador da Instância"
+          }
+        }
+      }
     },
     "instance.info.domains" : {
       "comment" : "MARK: Instances",
@@ -33747,6 +33976,12 @@
             "value" : "DeepL API 키를 삭제하지 않으면, 마스토돈 서버의 번역 서비스를 사용할 수 없을 때 DeepL을 사용합니다."
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No entanto, ainda pode servir como opção de contingência para o serviço de tradução da sua instância."
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33804,6 +34039,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sleutel"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chave"
           }
         },
         "tr" : {
@@ -33916,7 +34157,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "Ocultar essas postagens da página principal"
           }
         },
         "tr" : {
@@ -34035,7 +34276,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show replies to"
+            "value" : "Mostrar respostas para"
           }
         },
         "tr" : {
@@ -34154,7 +34395,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
+            "value" : "Título"
           }
         },
         "tr" : {
@@ -34273,7 +34514,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any followed user"
+            "value" : "Qualquer usuário seguido"
           }
         },
         "tr" : {
@@ -34392,7 +34633,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Members of the list"
+            "value" : "Membros da lista"
           }
         },
         "tr" : {
@@ -34511,7 +34752,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one"
+            "value" : "Ninguém"
           }
         },
         "tr" : {
@@ -34582,6 +34823,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lijsten"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listas"
           }
         },
         "tr" : {
@@ -35052,7 +35299,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "List settings"
+            "value" : "Configurações da lista"
           }
         },
         "tr" : {
@@ -35290,7 +35537,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search users"
+            "value" : "Procurar usuários"
           }
         },
         "tr" : {
@@ -35601,6 +35848,12 @@
             "value" : "Lokale tijdlijn"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Linha do tempo local"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35663,6 +35916,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vermeldingen"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menções"
           }
         },
         "tr" : {
@@ -36365,7 +36624,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Window"
+            "value" : "Nova Janela"
           }
         },
         "tr" : {
@@ -36514,7 +36773,14 @@
       }
     },
     "Monthly Active Users" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuários Ativos Mensais"
+          }
+        }
+      }
     },
     "New post" : {
       "localizations" : {
@@ -36560,6 +36826,12 @@
             "value" : "Nieuw bericht"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nova postagem"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36581,7 +36853,14 @@
       }
     },
     "No images provided to post." : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sem imagens fornecidas para postagem."
+          }
+        }
+      }
     },
     "Notifications" : {
       "localizations" : {
@@ -36625,6 +36904,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Meldingen"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notificações"
           }
         },
         "tr" : {
@@ -37077,8 +37362,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "Contas novas"
           }
         },
         "tr" : {
@@ -37196,8 +37481,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "Pessoas que não te seguem"
           }
         },
         "tr" : {
@@ -37315,8 +37600,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "Pessoas que você não segue"
           }
         },
         "tr" : {
@@ -37434,8 +37719,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : ""
+            "state" : "translated",
+            "value" : "Mensagens privadas não solicitadas"
           }
         },
         "tr" : {
@@ -37553,8 +37838,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "Notificações filtradas"
           }
         },
         "tr" : {
@@ -37672,8 +37957,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "Filtrar notificações"
           }
         },
         "tr" : {
@@ -37791,8 +38076,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "Filtrar notificações de…"
           }
         },
         "tr" : {
@@ -41772,6 +42057,12 @@
             "value" : "Open Ice Cubes"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir Ice Cubes"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41836,6 +42127,12 @@
             "value" : "Open op een tab"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir em uma aba"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -41898,6 +42195,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open de app op een specifieke tab"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir o aplicativo em uma aba específica"
           }
         },
         "tr" : {
@@ -42009,7 +42312,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Carregando, carregando, carregando ..."
+            "value" : "Carregando, carregando, carregando …"
           }
         },
         "tr" : {
@@ -42200,6 +42503,12 @@
             "value" : "Plaats een bericht met een afbeelding"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fazer uma publicação com uma imagem"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42262,6 +42571,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plaats een afbeelding op Mastodon"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicar uma imagem no Mastodon"
           }
         },
         "tr" : {
@@ -42393,6 +42708,12 @@
             "value" : "Zichtbaarheid"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibilidade da postagem"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42414,7 +42735,14 @@
       }
     },
     "Posted %lld image(s) on Mastodon" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicou %lld imagens no Mastodon"
+          }
+        }
+      }
     },
     "Privacy Policy" : {
       "localizations" : {
@@ -42440,6 +42768,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "개인정보 처리방침"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de Privacidade"
           }
         },
         "tr" : {
@@ -42506,6 +42840,12 @@
             "value" : "Privé"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privado"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42568,6 +42908,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privéberichten"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mensagens privadas"
           }
         },
         "tr" : {
@@ -42634,6 +42980,12 @@
             "value" : "Profiel"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42696,6 +43048,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Openbaar"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Público"
           }
         },
         "tr" : {
@@ -42762,6 +43120,12 @@
             "value" : "Minder openbaar"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Público silencioso"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42806,6 +43170,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "캐시 데이터로 저장된 모든 미디어를 삭제합니다."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remover todas as imagens e vídeos em cache"
           }
         },
         "tr" : {
@@ -43346,6 +43716,12 @@
             "value" : "Geselecteerde tab"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aba selecionada"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43410,6 +43786,12 @@
             "value" : "Verstuur bericht"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar uma postagem"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43468,6 +43850,12 @@
             "value" : "Ice Cubes로 마스토돈에 글을 작성합니다."
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar publicação de texto no Mastodon pelo Ice Cubes"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43489,13 +43877,34 @@
       }
     },
     "Send an image or multiple images to Mastodon with Ice Cubes without opening the app" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar uma imagem ou várias imagens para o Mastodon com o Ice Cubes sem abrir o app"
+          }
+        }
+      }
     },
     "Send image(s) (background)" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar imagens (em segundo plano)"
+          }
+        }
+      }
     },
     "Send image(s) to Mastodon" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar imagens para o Mastodon"
+          }
+        }
+      }
     },
     "Send post to Mastodon" : {
       "localizations" : {
@@ -43533,6 +43942,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "글 게시하기"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar publicações para o Mastodon"
           }
         },
         "tr" : {
@@ -43597,6 +44012,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instellingen"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configurações"
           }
         },
         "tr" : {
@@ -45481,7 +45902,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reply Visibility"
+            "value" : "Visibilidade da resposta"
           }
         },
         "tr" : {
@@ -46307,7 +46728,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostrar textos ALT"
+            "value" : "Mostrar textos alternativos"
           }
         },
         "tr" : {
@@ -46779,7 +47200,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Require Alt Text to Post"
+            "value" : "Exigir texto alternativo para publicar"
           }
         },
         "tr" : {
@@ -46897,7 +47318,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sharing"
+            "value" : "Compartilhar"
           }
         },
         "tr" : {
@@ -47016,7 +47437,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Link and Text"
+            "value" : "Link e Texto"
           }
         },
         "tr" : {
@@ -47135,7 +47556,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Link Only"
+            "value" : "Somente link"
           }
         },
         "tr" : {
@@ -47253,7 +47674,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share Button Behavior"
+            "value" : "Comportamento do botão compartilhar"
           }
         },
         "tr" : {
@@ -47726,7 +48147,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apply custom colors"
+            "value" : "Aplicar cores personalizadas"
           }
         },
         "tr" : {
@@ -48673,8 +49094,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "Recuo máximo de respostas: %@"
           }
         },
         "tr" : {
@@ -49029,7 +49450,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show Pending Button on the Left"
+            "value" : "Mostrar botão Pendente na esquerda"
           }
         },
         "tr" : {
@@ -50194,7 +50615,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cores customizadas só podem ser definidas se o Padrão do Sistema estiver desabilitado"
+            "value" : "Cores personalizadas só podem ser definidas se o Padrão do Sistema estiver desabilitado"
           }
         },
         "tr" : {
@@ -50311,8 +50732,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "Mostrar conta ao passar o mouse"
           }
         },
         "tr" : {
@@ -50548,8 +50969,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "Mostrar recuo das respostas"
           }
         },
         "tr" : {
@@ -50903,8 +51324,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "Ação secundária de status"
           }
         },
         "tr" : {
@@ -52909,8 +53330,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "Tags usadas recentemente"
           }
         },
         "tr" : {
@@ -53146,8 +53567,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "Customizações da barra lateral"
           }
         },
         "tr" : {
@@ -53383,7 +53804,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "Customizações das Abas"
           }
         },
         "tr" : {
@@ -54208,8 +54629,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "Silenciar vídeos"
           }
         },
         "tr" : {
@@ -56804,8 +57225,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Fast refresh disables timeline position saving and caching. It'll always fetch a fresh timeline."
+            "state" : "translated",
+            "value" : "A atualização rápida desativa o salvamento da posição na linha do tempo e o cache. A linha do tempo será sempre carregada novamente."
           }
         },
         "tr" : {
@@ -57395,7 +57816,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "👽 Gorgeta de outro mundo"
+            "value" : "👽 Gorjeta de outro mundo"
           }
         },
         "tr" : {
@@ -59165,7 +59586,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🤯 Gorgeta generosa"
+            "value" : "🤯 Gorjeta generosa"
           }
         },
         "tr" : {
@@ -60228,7 +60649,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bookmark"
+            "value" : "Favoritos"
           }
         },
         "tr" : {
@@ -61649,7 +62070,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "Quinta Aba"
           }
         },
         "tr" : {
@@ -61767,7 +62188,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "Primeira Aba"
           }
         },
         "tr" : {
@@ -61885,7 +62306,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "Quarta Aba"
           }
         },
         "tr" : {
@@ -62003,7 +62424,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "Segunda Aba"
           }
         },
         "tr" : {
@@ -62121,7 +62542,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "Terceira Aba"
           }
         },
         "tr" : {
@@ -62593,7 +63014,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto detect language"
+            "value" : "Detectar idioma automaticamente"
           }
         },
         "tr" : {
@@ -62711,7 +63132,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "O Ice Cubes tentará detectar automaticamente o idioma da publicação que você está prestes a enviar e sugerirá a atualização do idioma da publicação, se necessário."
           }
         },
         "tr" : {
@@ -65325,8 +65746,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "Selecionar texto"
           }
         },
         "tr" : {
@@ -68064,7 +68485,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Take Photo"
+            "value" : "Tirar foto"
           }
         },
         "tr" : {
@@ -68659,7 +69080,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erro ao fazer upload"
+            "value" : "Erro ao enviar"
           }
         },
         "tr" : {
@@ -68777,8 +69198,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "Escreva aqui a continuação do seu conteúdo."
           }
         },
         "tr" : {
@@ -69491,8 +69912,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 Gerar descrição"
           }
         },
         "tr" : {
@@ -70443,7 +70864,7 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Texto de Spoiler"
           }
         },
@@ -71039,7 +71460,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your settings require alt text on all media before posting"
+            "value" : "Suas configurações exigem textos alternativos em todas as imagens antes de postar"
           }
         },
         "tr" : {
@@ -71158,7 +71579,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while posting"
+            "value" : "Erro ao postar"
           }
         },
         "tr" : {
@@ -72942,8 +73363,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "Esconder Resultados"
           }
         },
         "tr" : {
@@ -73238,8 +73659,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld votos"
+                  "state" : "translated",
+                  "value" : "%lld voto"
                 }
               },
               "other" : {
@@ -74018,7 +74439,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg votantes"
+                      "value" : "%arg votante"
                     }
                   },
                   "other" : {
@@ -74038,7 +74459,7 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg votos de "
+                      "value" : "%arg voto de "
                     }
                   },
                   "other" : {
@@ -74573,8 +74994,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "Mostrar Resultados"
           }
         },
         "tr" : {
@@ -74811,8 +75232,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "Continue uma conversa"
           }
         },
         "tr" : {
@@ -76178,8 +76599,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld boosts"
+                  "state" : "translated",
+                  "value" : "%lld boost"
                 }
               },
               "other" : {
@@ -76531,8 +76952,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld favoritos"
+                  "state" : "translated",
+                  "value" : "%lld favorito"
                 }
               },
               "other" : {
@@ -76634,6 +77055,24 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld quotes"
+                }
+              }
+            }
+          }
+        },
+        "pt-BR" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld menção"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld menções"
                 }
               }
             }
@@ -76901,8 +77340,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld respostas"
+                  "state" : "translated",
+                  "value" : "%lld resposta"
                 }
               },
               "other" : {
@@ -77465,7 +77904,14 @@
       }
     },
     "Stream home timeline" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transmitir a timeline principal"
+          }
+        }
+      }
     },
     "Tab" : {
       "localizations" : {
@@ -77509,6 +77955,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tab"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aba"
           }
         },
         "tr" : {
@@ -78802,7 +79254,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "Adicionar ou remover tag de grupos de tags"
           }
         },
         "tr" : {
@@ -79097,8 +79549,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld menções"
+                  "state" : "translated",
+                  "value" : "%lld menção"
                 }
               },
               "other" : {
@@ -79210,6 +79662,12 @@
             "value" : "사용 정보 수집"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetria"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -79254,6 +79712,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "TelemetryDeck을 통해 사용 정보 수집됨"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetria por TelemetryDeck"
           }
         },
         "tr" : {
@@ -79321,6 +79785,12 @@
             "value" : "De DeepL API-sleutel is nog steeds opgeslagen!"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A chave de API DeepL ainda está armazenada!"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -79384,6 +79854,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "De Vertaalservice van deze server is onbereikbaar!"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Não foi possível acessar o serviço de tradução da sua instância!"
           }
         },
         "tr" : {
@@ -80428,8 +80904,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Filtro de Conteúdo"
           }
         },
         "tr" : {
@@ -80785,7 +81261,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add tag group"
+            "value" : "Adicionar grupo de tags"
           }
         },
         "tr" : {
@@ -80903,7 +81379,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit tag group"
+            "value" : "Editar grupo de tags"
           }
         },
         "tr" : {
@@ -81257,8 +81733,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Mostrar Boosts"
           }
         },
         "tr" : {
@@ -81376,8 +81852,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Mostrar Menções"
           }
         },
         "tr" : {
@@ -81495,8 +81971,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Mostrar Respostas"
           }
         },
         "tr" : {
@@ -81614,8 +82090,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Mostrar Conversas"
           }
         },
         "tr" : {
@@ -81733,7 +82209,7 @@
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tag Groups"
+            "value" : "Grupo de Tags"
           }
         },
         "tr" : {
@@ -82088,8 +82564,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ir para o mais recente"
+            "state" : "translated",
+            "value" : "Atualizar"
           }
         },
         "tr" : {
@@ -82916,7 +83392,7 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "%#@arg1@ postagens recentes de %#@arg2@ participantes"
           },
           "substitutions" : {
@@ -82927,14 +83403,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg publicação recente"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg publicações recentes"
                     }
                   }
                 }
@@ -82947,14 +83423,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participante"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participantes"
                     }
                   }
                 }
@@ -83245,8 +83721,8 @@
         },
         "pt-BR" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "Continuar"
           }
         },
         "tr" : {
@@ -83432,6 +83908,12 @@
             "value" : "TimelineFilter"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TimelineFilter"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83495,6 +83977,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vertaalservice"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serviço de Tradução"
           }
         },
         "tr" : {
@@ -83561,6 +84049,12 @@
             "value" : "Trending Links"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Links em alta"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83617,6 +84111,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "뜨고 있는"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeline em alta"
           }
         },
         "tr" : {
@@ -83911,14 +84411,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : ""
+                  "state" : "translated",
+                  "value" : "%lld publicação"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : ""
+                  "state" : "translated",
+                  "value" : "%lld publicações"
                 }
               }
             }
@@ -83999,7 +84499,14 @@
       }
     },
     "Truncate status content" : {
-
+      "localizations" : {
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cortar conteúdo do status"
+          }
+        }
+      }
     },
     "Use Ice Cubes to compose a post for Mastodon" : {
       "localizations" : {
@@ -84037,6 +84544,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "글 작성 화면을 엽니다."
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usar Ice Cubes para criar uma postagem para o Mastodon"
           }
         },
         "tr" : {
@@ -84162,6 +84675,12 @@
             "value" : "Zichtbaarheid"
           }
         },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibilidade"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -84218,6 +84737,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zichtbaarheid van je bericht"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibilidade da sua postagem"
           }
         },
         "tr" : {
