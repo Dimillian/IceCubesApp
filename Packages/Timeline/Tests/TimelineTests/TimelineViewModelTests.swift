@@ -98,7 +98,8 @@ struct Tests {
       sensitive: status.sensitive,
       language: status.language,
       quote: nil,
-      quotesCount: nil)
+      quotesCount: nil,
+      quoteApproval: nil)
     await subject.handleEvent(event: StreamEventStatusUpdate(status: status))
     let statuses = await subject.datasource.get()
     count = await subject.datasource.count()
