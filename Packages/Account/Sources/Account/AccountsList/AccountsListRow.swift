@@ -1,4 +1,5 @@
 import Combine
+import AppAccount
 import DesignSystem
 import EmojiText
 import Env
@@ -27,6 +28,8 @@ public struct AccountsListRow: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(MastodonClient.self) private var client
   @Environment(QuickLook.self) private var quickLook
+  @Environment(StreamWatcher.self) private var watcher
+  @Environment(AppAccountsManager.self) private var appAccountsManager
 
   @State var viewModel: AccountsListRowViewModel
 
@@ -157,6 +160,8 @@ public struct AccountsListRow: View {
       .environment(client)
       .environment(quickLook)
       .environment(routerPath)
+      .environment(watcher)
+      .environment(appAccountsManager)
     }
   }
 }
