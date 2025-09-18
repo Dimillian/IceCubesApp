@@ -20,6 +20,12 @@ import SwiftUI
     }
     didSet {
       timelineTask?.cancel()
+
+      // Stop streaming when leaving streamable timeline
+      if isStreamingTimeline && !canStreamTimeline(timeline) {
+        isStreamingTimeline = false
+      }
+
       timelineTask = Task {
         await handleLatestOrResume(oldValue)
 
@@ -39,7 +45,7 @@ import SwiftUI
 
         await fetchNewestStatuses(pullToRefresh: false)
         switch timeline {
-        case let .hashtag(tag, _):
+        case .hashtag(let tag, _):
           await fetchTag(id: tag)
         default:
           break
@@ -77,6 +83,14 @@ import SwiftUI
 
   @ObservationIgnored
   var canFilterTimeline: Bool = true
+
+  var isStreamingTimeline: Bool = false {
+    didSet {
+      if isStreamingTimeline != oldValue {
+        updateStreamWatcher()
+      }
+    }
+  }
 
   var client: MastodonClient? {
     didSet {
@@ -426,7 +440,9 @@ extension TimelineViewModel: GapLoadingFetcher {
 
   // MARK: - Helper Methods
 
-  private func updateDatasourceAndState(statuses: [Status], client: MastodonClient, replaceExisting: Bool)
+  private func updateDatasourceAndState(
+    statuses: [Status], client: MastodonClient, replaceExisting: Bool
+  )
     async
   {
     StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
@@ -453,7 +469,8 @@ extension TimelineViewModel: GapLoadingFetcher {
     }
   }
 
-  private func createGapForOlderStatuses(sinceId: String? = nil, maxId: String, at index: Int) async {
+  private func createGapForOlderStatuses(sinceId: String? = nil, maxId: String, at index: Int) async
+  {
     let gap = TimelineGap(sinceId: sinceId, maxId: maxId)
     await datasource.insertGap(gap, at: index)
   }
@@ -487,6 +504,46 @@ extension TimelineViewModel {
   }
 }
 
+// MARK: - Stream management
+
+extension TimelineViewModel {
+  func canStreamTimeline(_ timeline: TimelineFilter) -> Bool {
+    switch timeline {
+    case .federated, .local:
+      return true
+    default:
+      return false
+    }
+  }
+
+  private func updateStreamWatcher() {
+    guard let client, client.isAuth else { return }
+
+    let watcher = StreamWatcher.shared
+    var streams: [StreamWatcher.Stream] = []
+
+    streams.append(.user)
+    streams.append(.direct)
+
+    // Add timeline-specific streams
+    if isStreamingTimeline {
+      switch timeline {
+      case .federated:
+        streams.append(.federated)
+      case .local:
+        streams.append(.local)
+      default:
+        break
+      }
+    }
+
+    watcher.stopWatching()
+    if !streams.isEmpty {
+      watcher.watch(streams: streams)
+    }
+  }
+}
+
 // MARK: - Event handling
 
 extension TimelineViewModel {
@@ -506,13 +563,22 @@ extension TimelineViewModel {
   }
 
   private func handleUpdateEvent(_ event: StreamEventUpdate, client: MastodonClient) async {
-    guard timeline == .home,
-      UserPreferences.shared.streamHomeTimeline,
+    let shouldStream =
+      switch timeline {
+      case .home:
+        UserPreferences.shared.streamHomeTimeline
+      case .federated, .local:
+        isStreamingTimeline
+      default:
+        false
+      }
+
+    guard shouldStream,
       await !datasource.contains(statusId: event.status.id),
       let topStatus = await datasource.get().first,
       topStatus.createdAt.asDate < event.status.createdAt.asDate
     else { return }
-  
+
     pendingStatusesObserver.pendingStatuses.insert(event.status.id, at: 0)
     await datasource.insert(event.status, at: 0)
     await cache()
@@ -527,7 +593,9 @@ extension TimelineViewModel {
     }
   }
 
-  private func handleStatusUpdateEvent(_ event: StreamEventStatusUpdate, client: MastodonClient) async {
+  private func handleStatusUpdateEvent(_ event: StreamEventStatusUpdate, client: MastodonClient)
+    async
+  {
     guard let originalIndex = await datasource.indexOf(statusId: event.status.id) else { return }
 
     StatusDataControllerProvider.shared.updateDataControllers(for: [event.status], client: client)
