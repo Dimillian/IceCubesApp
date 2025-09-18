@@ -30,7 +30,9 @@ public final class StatusDataControllerProvider {
     let client: MastodonClient
   }
 
-  public func dataController(for status: any AnyStatus, client: MastodonClient) -> StatusDataController {
+  public func dataController(for status: any AnyStatus, client: MastodonClient)
+    -> StatusDataController
+  {
     let key = CacheKey(statusId: status.id, client: client)
     if let controller = cache[key] as? StatusDataController {
       return controller

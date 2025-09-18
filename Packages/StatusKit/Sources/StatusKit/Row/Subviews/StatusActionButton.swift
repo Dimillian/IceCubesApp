@@ -1,11 +1,13 @@
 import DesignSystem
 import Env
+import Models
 import SwiftUI
 
 @MainActor
 struct StatusActionButton: View {
   let configuration: StatusRowActionsView.ActionButtonConfiguration
   let statusDataController: StatusDataController
+  let status: Status
   let theme: Theme
   let isFocused: Bool
   let isNarrow: Bool
@@ -14,28 +16,32 @@ struct StatusActionButton: View {
   let isDisabled: Bool
   let handleAction: (StatusRowActionsView.Action) -> Void
 
+  var isQuoteDisabled: Bool {
+    status.quoteApproval?.currentUser == .denied
+  }
+
   var body: some View {
     actionView
-    #if os(visionOS)
-      .buttonStyle(.borderless)
-      .foregroundColor(Color(UIColor.secondaryLabel))
-    #else
-      .buttonStyle(
-        .statusAction(
-          isOn: configuration.display.isOn(dataController: statusDataController),
-          tintColor: configuration.display.tintColor(theme: theme)
+      #if os(visionOS)
+        .buttonStyle(.borderless)
+        .foregroundColor(Color(UIColor.secondaryLabel))
+      #else
+        .buttonStyle(
+          .statusAction(
+            isOn: configuration.display.isOn(dataController: statusDataController),
+            tintColor: configuration.display.tintColor(theme: theme)
+          )
         )
-      )
-      .offset(x: -8)
-    #endif
-    .disabled(isDisabled)
-    .accessibilityElement(children: .combine)
-    .accessibilityLabel(
-      configuration.display.accessibilityLabel(
-        dataController: statusDataController,
-        privateBoost: privateBoost))
+        .offset(x: -8)
+      #endif
+      .disabled(isDisabled)
+      .accessibilityElement(children: .combine)
+      .accessibilityLabel(
+        configuration.display.accessibilityLabel(
+          dataController: statusDataController,
+          privateBoost: privateBoost))
   }
-  
+
   @ViewBuilder
   private var actionView: some View {
     if configuration.showsMenu && configuration.trigger == .boost {
@@ -49,9 +55,13 @@ struct StatusActionButton: View {
         Button {
           handleAction(.quote)
         } label: {
-          Label("Quote", systemImage: "quote.bubble")
+          Label("Quote", systemImage: isQuoteDisabled ? "pencil.slash" : "quote.bubble")
             .tint(theme.labelColor)
+          if isQuoteDisabled {
+            Text("You are not allowed to quote this post")
+          }
         }
+        .disabled(isQuoteDisabled)
       } label: {
         HStack(spacing: 2) {
           actionImage(for: configuration.display)
