@@ -21,20 +21,14 @@ extension StatusEditor {
 
     var body: some View {
       ScrollView(.horizontal, showsIndicators: showsScrollIndicators) {
-        switch count {
-        case 1: mediaLayout
-        case 2: mediaLayout
-        case 3: mediaLayout
-        case 4: mediaLayout
-        default: mediaLayout
-        }
+        mediaLayout
       }
       .scrollPosition(id: $scrollID, anchor: .trailing)
       .scrollClipDisabled()
       .padding(.horizontal, .layoutPadding)
-      .frame(height: count > 0 ? containerHeight : 0)
-      .animation(.spring(duration: 0.3), value: count)
-      .onChange(of: count) { oldValue, newValue in
+      .frame(height: viewModel.mediaContainers.count > 0 ? containerHeight : 0)
+      .animation(.spring(duration: 0.3), value: viewModel.mediaContainers.count)
+      .onChange(of: viewModel.mediaPickers.count) { oldValue, newValue in
         if oldValue < newValue {
           Task {
             try? await Task.sleep(for: .seconds(0.5))
@@ -46,7 +40,6 @@ extension StatusEditor {
       }
     }
 
-    private var count: Int { viewModel.mediaContainers.count }
     private var containers: [MediaContainer] { viewModel.mediaContainers }
     private let containerHeight: CGFloat = 300
     private var containerWidth: CGFloat { containerHeight / 1.5 }
@@ -64,35 +57,22 @@ extension StatusEditor {
       _editingMediaContainer = editingMediaContainer
     }
 
-    private func pixel(at index: Int) -> some View {
-      Rectangle().frame(width: 0, height: 0)
-        .matchedGeometryEffect(id: index, in: mediaSpace, anchor: .leading)
-    }
-
     private var mediaLayout: some View {
-      HStack(alignment: .center, spacing: count > 1 ? 8 : 0) {
-        if count > 0 {
-          if count == 1 {
-            makeMediaItem(at: 0)
-              .containerRelativeFrame(.horizontal, alignment: .leading)
-          } else {
-            makeMediaItem(at: 0)
-          }
-        } else {
-          pixel(at: 0)
+      HStack(alignment: .center, spacing: 8) {
+        ForEach(Array(viewModel.mediaContainers.enumerated()), id: \.offset) { index, container in
+          makeMediaItem(container)
+            .containerRelativeFrame(.horizontal,
+                                    count: viewModel.mediaContainers.count == 1 ? 1 : 2,
+                                    span: 1,
+                                    spacing: 0,
+                                    alignment: .leading)
         }
-        if count > 1 { makeMediaItem(at: 1) } else { pixel(at: 1) }
-        if count > 2 { makeMediaItem(at: 2) } else { pixel(at: 2) }
-        if count > 3 { makeMediaItem(at: 3) } else { pixel(at: 3) }
       }
       .padding(.bottom, scrollBottomPadding)
       .scrollTargetLayout()
     }
 
-    @ViewBuilder
-    private func makeMediaItem(at index: Int) -> some View {
-      let container = viewModel.mediaContainers[index]
-
+    private func makeMediaItem(_ container: MediaContainer) -> some View {
       RoundedRectangle(cornerRadius: 8)
         .fill(.clear)
         .overlay {
@@ -107,6 +87,7 @@ extension StatusEditor {
             makeErrorView(content: content, error: error)
           }
         }
+        .contentShape(Rectangle())
         .contextMenu {
           makeImageMenu(container: container)
         }
@@ -122,10 +103,7 @@ extension StatusEditor {
           makeDiscardMarker(container: container)
         }
         .clipShape(RoundedRectangle(cornerRadius: 8))
-        .frame(minWidth: count == 1 ? nil : containerWidth, maxWidth: 600)
         .id(container.id)
-        .matchedGeometryEffect(id: container.id, in: mediaSpace, anchor: .leading)
-        .matchedGeometryEffect(id: index, in: mediaSpace, anchor: .leading)
     }
 
     private func makeLocalMediaView(content: MediaContainer.MediaContent) -> some View {
@@ -185,6 +163,8 @@ extension StatusEditor {
                 image
                   .resizable()
                   .scaledToFill()
+                  .clipped()
+                  .allowsHitTesting(false)
               } else {
                 placeholderView
               }
