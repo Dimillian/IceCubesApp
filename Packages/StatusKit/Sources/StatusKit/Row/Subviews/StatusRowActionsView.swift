@@ -315,6 +315,7 @@ struct StatusRowActionsView: View {
     StatusActionButton(
       configuration: configuration,
       statusDataController: statusDataController,
+      status: viewModel.status,
       theme: theme,
       isFocused: isFocused,
       isNarrow: isNarrow,
