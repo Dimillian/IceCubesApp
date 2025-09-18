@@ -321,10 +321,9 @@ struct StatusRowActionsView: View {
       isNarrow: isNarrow,
       isRemoteStatus: viewModel.isRemote,
       privateBoost: privateBoost(),
-      isDisabled: configuration.trigger == .boost
-        && (viewModel.status.visibility == .direct
-          || viewModel.status.visibility == .priv
-            && viewModel.status.account.id != currentAccount.account?.id),
+      isDisabled: (configuration.trigger == .boost
+        || configuration.trigger == .quote)
+        && viewModel.status.visibility != .pub,
       handleAction: handleAction(action:)
     )
   }
