@@ -119,10 +119,8 @@ struct StatusRowActionsView: View {
         return dataController.repliesCount
       case .favorite:
         return dataController.favoritesCount
-      case .boost:
-        return dataController.reblogsCount
-      case .quote:
-        return dataController.quotesCount
+      case .boost, .quote:
+        return dataController.reblogsCount + dataController.quotesCount
       case .share, .bookmark, .menu:
         return nil
       }

@@ -76,7 +76,8 @@ struct StatusRowDetailView: View {
       }
 
       if viewModel.actionsAccountsFetched,
-          statusDataController.reblogsCount > 0 {
+        statusDataController.reblogsCount > 0
+      {
         Divider()
         Button {
           viewModel.routerPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
@@ -93,20 +94,24 @@ struct StatusRowDetailView: View {
         .buttonStyle(.borderless)
         .transition(.move(edge: .leading))
       }
-      
+
       if viewModel.actionsAccountsFetched,
-          statusDataController.quotesCount > 0,
-          viewModel.status.account.id == currentAccount.account?.id {
+        statusDataController.quotesCount > 0
+      {
         Divider()
         Button {
-          viewModel.routerPath.navigate(to: .quotes(id: viewModel.status.id))
+          if viewModel.status.account.id == currentAccount.account?.id {
+            viewModel.routerPath.navigate(to: .quotes(id: viewModel.status.id))
+          }
         } label: {
           HStack {
             Text("status.summary.n-quotes \(statusDataController.quotesCount)")
               .font(.scaledCallout)
-            Spacer()
-            makeAccountsScrollView(accounts: viewModel.quoters)
-            Image(systemName: "chevron.right")
+            if viewModel.status.account.id == currentAccount.account?.id {
+              Spacer()
+              makeAccountsScrollView(accounts: viewModel.quoters)
+              Image(systemName: "chevron.right")
+            }
           }
           .frame(height: 20)
         }
