@@ -97,6 +97,18 @@ public struct TimelineView: View {
       if #available(iOS 26.0, *) {
         ToolbarSpacer(placement: .topBarTrailing)
       }
+      if viewModel.canStreamTimeline(timeline) {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            viewModel.isStreamingTimeline.toggle()
+          } label: {
+            Image(
+              systemName: viewModel.isStreamingTimeline
+                ? "antenna.radiowaves.left.and.right" : "antenna.radiowaves.left.and.right.slash")
+          }
+          .tint(theme.labelColor)
+        }
+      }
       TimelineToolbarTagGroupButton(timeline: $timeline)
     }
     .navigationBarTitleDisplayMode(.inline)
