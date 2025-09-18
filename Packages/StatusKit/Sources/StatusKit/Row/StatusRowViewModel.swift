@@ -188,6 +188,11 @@ import SwiftUI
       finalStatus.quote?.state == .accepted
     {
       embeddedStatus = quotedStatus
+    } else if let id = finalStatus.quote?.quotedStatusId,
+      let embed = StatusEmbedCache.shared.get(id: id)
+    {
+      isEmbedLoading = false
+      embeddedStatus = embed
     }
 
     collapseLongPosts = UserPreferences.shared.collapseLongPosts
@@ -245,6 +250,11 @@ import SwiftUI
   }
 
   func loadEmbeddedStatus() async {
+    let loaded = await loadStatusById()
+    if loaded {
+      return
+    }
+
     guard embeddedStatus == nil,
       let url = embededStatusURL()
     else {
@@ -290,6 +300,27 @@ import SwiftUI
     }
   }
 
+  private func loadStatusById() async -> Bool {
+    if embeddedStatus == nil,
+      let id = finalStatus.quote?.quotedStatusId,
+      finalStatus.quote?.quotedStatus == nil
+    {
+      isEmbedLoading = true
+      if let embed = StatusEmbedCache.shared.get(id: id) {
+        embeddedStatus = embed
+        isEmbedLoading = false
+        return true
+      } else if let embed: Status = try? await client.get(endpoint: Statuses.status(id: id)) {
+        StatusEmbedCache.shared.set(id: id, status: embed)
+        embeddedStatus = embed
+        isEmbedLoading = false
+        return true
+      }
+      return false
+    }
+    return false
+  }
+
   func pin() async {
     guard client.isAuth else { return }
     isPinned = true
@@ -331,9 +362,9 @@ import SwiftUI
         endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
       var quoters: [Account] = []
       if finalStatus.quotesCount ?? 0 > 0, CurrentAccount.shared.account?.id == status.account.id {
-        let statuses: [Status] =  try await client.get(
+        let statuses: [Status] = try await client.get(
           endpoint: Statuses.quotesBy(id: status.id, maxId: nil))
-        quoters = statuses.map{ $0.account }
+        quoters = statuses.map { $0.account }
       }
       withAnimation(.smooth) {
         self.favoriters = favoriters
