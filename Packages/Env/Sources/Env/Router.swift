@@ -193,6 +193,10 @@ public enum SettingsStartingPoint {
   }
 
   public func handle(url: URL) -> OpenURLAction.Result {
+    guard let client, client.hasConnection(with: url) else {
+      return urlHandler?(url) ?? .systemAction
+    }
+
     if url.pathComponents.contains(where: { $0 == "tags" || $0 == "tag" }),
       let tag = url.pathComponents.last
     {
@@ -207,9 +211,7 @@ public enum SettingsStartingPoint {
         await navigateToAccountFrom(acct: acct, url: url)
       }
       return .handled
-    } else if let client,
-      client.isAuth,
-      client.hasConnection(with: url),
+    } else if client.isAuth,
       let id = Int(url.lastPathComponent)
     {
       if url.absoluteString.contains(client.server) {
