@@ -38,12 +38,6 @@ private struct SafariRouter: ViewModifier {
       .onOpenURL { url in
         // Open external URL (from icecubesapp://)
         guard !isSecondaryColumn else { return }
-        if url.absoluteString == "icecubesapp://subclub" {
-          #if !os(visionOS)
-            safariManager.dismiss()
-          #endif
-          return
-        }
         let urlString = url.absoluteString.replacingOccurrences(
           of: AppInfo.scheme, with: "https://")
         guard let url = URL(string: urlString), url.host != nil else { return }
