@@ -7,4 +7,5 @@ public struct Quote: Codable, Sendable {
 
   public let state: State
   public let quotedStatus: Status?
+  public let quotedStatusId: String?
 }
