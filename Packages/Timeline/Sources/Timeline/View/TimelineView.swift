@@ -7,6 +7,28 @@ import StatusKit
 import SwiftData
 import SwiftUI
 
+public struct TopicView: View {
+    @State private var isPresented: Bool = true
+    let topic: String
+    
+    public var body: some View {
+        Text(topic)
+            .foregroundStyle(isPresented ? Color.white : Color.secondary)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background {
+                Capsule()
+                    .stroke(isPresented ? Color.clear : Color.accentColor, lineWidth: 1)
+                    .fill(isPresented ? Color.accentColor : Color.clear)
+            }
+            .onTapGesture {
+                withAnimation(.snappy) {
+                    isPresented.toggle()
+                }
+            }
+    }
+}
+
 @MainActor
 public struct TimelineView: View {
   @Environment(\.scenePhase) private var scenePhase

@@ -7,8 +7,8 @@ let package = Package(
   name: "Env",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v18),
-    .visionOS(.v1),
+    .iOS(.v26),
+    .visionOS(.v26),
   ],
   products: [
     .library(

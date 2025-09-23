@@ -4,6 +4,7 @@ import NetworkClient
 import Observation
 import StatusKit
 import SwiftUI
+import FoundationModels
 
 @MainActor
 @Observable class TimelineViewModel {
@@ -50,9 +51,49 @@ import SwiftUI
         default:
           break
         }
+         await summarize(items: datasource.getItems())
       }
     }
   }
+    private(set) var summary: TimelineSummary.PartiallyGenerated?
+//    private(set) var summary: TimelineSummary?
+    typealias MarkdownText = String
+    
+    private func joinContent(items: [TimelineItem]) -> MarkdownText {
+        let joinedContent = items.reduce(into: "") { partialResult, thisTimelineItem in
+            guard let thisMarkdown = thisTimelineItem.status?.content.asMarkdown else {
+                return
+            }
+            partialResult = [partialResult, thisMarkdown].joined(separator: "\n")
+        }
+        return joinedContent
+    }
+    
+    private func summarize(items: [TimelineItem]) async {
+        do {
+            let session = LanguageModelSession()
+            let content = joinContent(items: items)
+            
+            let prompt = """
+            Summarize these social media posts into a brief description:
+            \(content)
+            """
+            let summarizationStream = session
+                .streamResponse(to: prompt, generating: TimelineSummary.self)
+            do {
+                for try await chunk in summarizationStream {
+                    summary = chunk.content
+                }
+            } catch {
+                fatalError(String(describing: error))
+            }
+//            do {
+//                summary = try await session.respond(to: prompt, generating: TimelineSummary.self)
+//            } catch {
+//                summary = TimelineSummary(summary: "Apple Intelligence is having trouble generating a summary for this content.\n\n\(String(describing: error))", topics: [])
+//            }
+        }
+    }
 
   private(set) var timelineTask: Task<Void, Never>?
 

@@ -45,7 +45,7 @@ extension StatusEditor {
     private var containerWidth: CGFloat { containerHeight / 1.5 }
 
     #if targetEnvironment(macCatalyst)
-      private var showsScrollIndicators: Bool { count > 1 }
+      private var showsScrollIndicators: Bool { true }
       private var scrollBottomPadding: CGFloat?
     #else
       private var showsScrollIndicators: Bool = false
