@@ -138,20 +138,28 @@ public struct HandledNotification: Equatable {
   }
 
   public func updateSubscriptions(forceCreate: Bool) async {
+    // This type is isolated to the main actor, so the previous task-group based
+    // implementation still executed sequentially while adding extra task
+    // bookkeeping. Iterating directly keeps the same execution semantics while
+    // making the control-flow around subscription refreshes easier to follow.
     for subscription in subscriptions {
-      await withTaskGroup(
-        of: Void.self,
-        body: { group in
-          group.addTask {
-            await subscription.fetchSubscription()
-            if await subscription.subscription != nil, !forceCreate {
-              await subscription.deleteSubscription()
-              await subscription.updateSubscription()
-            } else if forceCreate {
-              await subscription.updateSubscription()
-            }
-          }
-        })
+      await subscription.fetchSubscription()
+
+      if forceCreate {
+        await subscription.updateSubscription()
+        continue
+      }
+
+      guard let currentSubscription = subscription.subscription else {
+        await subscription.updateSubscription()
+        continue
+      }
+
+      guard let expectedEndpoint = subscription.currentListenerEndpoint() else { continue }
+
+      if currentSubscription.endpoint.absoluteString != expectedEndpoint {
+        await subscription.updateSubscription()
+      }
     }
   }
 }
@@ -230,16 +238,9 @@ extension Data {
   }
 
   public func updateSubscription() async {
-    guard let pushToken else { return }
+    guard let listenerURL = makeListenerURL() else { return }
     let client = MastodonClient(server: account.server, oauthToken: account.token)
     do {
-      var listenerURL = PushNotificationsService.Constants.endpoint
-      listenerURL += "/push/"
-      listenerURL += pushToken.hexString
-      listenerURL += "/\(account.accountName ?? account.server)"
-      #if DEBUG
-        listenerURL += "?sandbox=true"
-      #endif
       subscription =
         try await client.post(
           endpoint: Push.createSub(
@@ -284,5 +285,21 @@ extension Data {
       isEnabled = false
     }
     refreshSubscriptionsUI()
+  }
+
+  func currentListenerEndpoint() -> String? {
+    makeListenerURL()
+  }
+
+  private func makeListenerURL() -> String? {
+    guard let pushToken else { return nil }
+    var listenerURL = PushNotificationsService.Constants.endpoint
+    listenerURL += "/push/"
+    listenerURL += pushToken.hexString
+    listenerURL += "/\(account.accountName ?? account.server)"
+    #if DEBUG
+      listenerURL += "?sandbox=true"
+    #endif
+    return listenerURL
   }
 }
