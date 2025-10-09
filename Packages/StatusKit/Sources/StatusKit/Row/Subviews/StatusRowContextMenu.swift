@@ -38,6 +38,18 @@ struct StatusRowContextMenu: View {
       || viewModel.finalStatus.visibility != .pub
   }
 
+  var isBoostDisabled: Bool {
+    switch viewModel.finalStatus.visibility {
+    case .pub:
+      return false
+    case .priv:
+      guard let currentAccountId = account.account?.id else { return true }
+      return viewModel.finalStatus.account.id != currentAccountId
+    case .unlisted, .direct:
+      return true
+    }
+  }
+
   var body: some View {
     if !viewModel.isRemote {
       ControlGroup {
@@ -59,11 +71,7 @@ struct StatusRowContextMenu: View {
         } label: {
           boostLabel
         }
-        .disabled(
-          viewModel.status.visibility == .direct
-            || viewModel.status.visibility == .priv
-              && viewModel.status.account.id != account.account?.id
-        )
+        .disabled(isBoostDisabled)
 
         Button {
           Task {
