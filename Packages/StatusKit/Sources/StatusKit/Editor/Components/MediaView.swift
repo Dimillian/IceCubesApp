@@ -45,12 +45,12 @@ extension StatusEditor {
     private var containerWidth: CGFloat { containerHeight / 1.5 }
 
     #if targetEnvironment(macCatalyst)
-      private var showsScrollIndicators: Bool { count > 1 }
       private var scrollBottomPadding: CGFloat?
     #else
-      private var showsScrollIndicators: Bool = false
       private var scrollBottomPadding: CGFloat? = 0
     #endif
+    
+    private var showsScrollIndicators: Bool = false
 
     init(viewModel: ViewModel, editingMediaContainer: Binding<StatusEditor.MediaContainer?>) {
       self.viewModel = viewModel
