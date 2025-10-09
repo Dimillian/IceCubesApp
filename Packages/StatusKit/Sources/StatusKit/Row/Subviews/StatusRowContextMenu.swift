@@ -34,7 +34,8 @@ struct StatusRowContextMenu: View {
   }
 
   var isQuoteDisabled: Bool {
-    viewModel.status.quoteApproval?.currentUser == .denied || viewModel.status.visibility != .pub
+    viewModel.finalStatus.quoteApproval?.currentUser == .denied
+      || viewModel.finalStatus.visibility != .pub
   }
 
   var body: some View {

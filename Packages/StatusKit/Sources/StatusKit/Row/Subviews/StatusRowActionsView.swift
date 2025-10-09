@@ -310,18 +310,25 @@ struct StatusRowActionsView: View {
   @ViewBuilder
   private func actionButton(action: Action) -> some View {
     let configuration = configuration(for: action)
+    let finalStatus = viewModel.finalStatus
+    let isQuoteUnavailable =
+      finalStatus.visibility != .pub
+        || finalStatus.quoteApproval?.currentUser == .denied
+    let shouldDisableAction =
+      (configuration.trigger == .boost && viewModel.status.visibility != .pub)
+        || (configuration.trigger == .quote && isQuoteUnavailable)
+
     StatusActionButton(
       configuration: configuration,
       statusDataController: statusDataController,
       status: viewModel.status,
+      quoteStatus: finalStatus,
       theme: theme,
       isFocused: isFocused,
       isNarrow: isNarrow,
       isRemoteStatus: viewModel.isRemote,
       privateBoost: privateBoost(),
-      isDisabled: (configuration.trigger == .boost
-        || configuration.trigger == .quote)
-        && viewModel.status.visibility != .pub,
+      isDisabled: shouldDisableAction,
       handleAction: handleAction(action:)
     )
   }
