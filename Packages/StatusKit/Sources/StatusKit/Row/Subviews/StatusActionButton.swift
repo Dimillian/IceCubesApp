@@ -8,6 +8,7 @@ struct StatusActionButton: View {
   let configuration: StatusRowActionsView.ActionButtonConfiguration
   let statusDataController: StatusDataController
   let status: Status
+  let quoteStatus: any AnyStatus
   let theme: Theme
   let isFocused: Bool
   let isNarrow: Bool
@@ -17,7 +18,7 @@ struct StatusActionButton: View {
   let handleAction: (StatusRowActionsView.Action) -> Void
 
   var isQuoteDisabled: Bool {
-    status.quoteApproval?.currentUser == .denied || status.visibility != .pub
+    quoteStatus.quoteApproval?.currentUser == .denied || quoteStatus.visibility != .pub
   }
 
   var body: some View {
