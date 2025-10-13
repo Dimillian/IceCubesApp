@@ -36,6 +36,7 @@ struct StatusActionButton: View {
         .offset(x: -8)
       #endif
       .disabled(isDisabled)
+      .opacity(isDisabled ? 0.35 : 1)
       .accessibilityElement(children: .combine)
       .accessibilityLabel(
         configuration.display.accessibilityLabel(
@@ -63,6 +64,7 @@ struct StatusActionButton: View {
           }
         }
         .disabled(isQuoteDisabled)
+        .opacity(isQuoteDisabled ? 0.35 : 1)
       } label: {
         HStack(spacing: 2) {
           actionImage(for: configuration.display)
