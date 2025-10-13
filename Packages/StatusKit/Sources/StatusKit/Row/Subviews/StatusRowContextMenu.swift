@@ -72,6 +72,7 @@ struct StatusRowContextMenu: View {
           boostLabel
         }
         .disabled(isBoostDisabled)
+        .opacity(isBoostDisabled ? 0.35 : 1)
 
         Button {
           Task {
