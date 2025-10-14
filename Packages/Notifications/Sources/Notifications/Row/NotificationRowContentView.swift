@@ -33,7 +33,7 @@ struct NotificationRowContentView: View {
                 client: client,
                 routerPath: routerPath,
                 showActions: false,
-                textDisabled: true)
+                textDisabled: notification.type != .quote)
             )
             .environment(\.isMediaCompact, true)
           }
@@ -47,6 +47,7 @@ struct NotificationRowContentView: View {
               client: client,
               routerPath: routerPath
             )
+            .padding(.bottom, 8)
           }
         }
         Spacer()
