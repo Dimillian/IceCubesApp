@@ -70,11 +70,7 @@ public struct NotificationsListView: View {
       if lockedType == nil && lockedAccountId == nil {
         ToolbarTitleMenu {
           Button {
-            selectedType = nil
-            Task {
-              viewState = .loading
-              await fetchNotifications()
-            }
+            applyFilter(type: nil)
           } label: {
             Label("notifications.navigation-title", systemImage: "bell.fill")
               .tint(theme.labelColor)
@@ -82,11 +78,7 @@ public struct NotificationsListView: View {
           Divider()
           ForEach(Notification.NotificationType.allCases, id: \.self) { type in
             Button {
-              selectedType = type
-              Task {
-                viewState = .loading
-                await fetchNotifications()
-              }
+              applyFilter(type: type)
             } label: {
               Label {
                 Text(type.menuTitle())
@@ -277,6 +269,16 @@ public struct NotificationsListView: View {
 }
 
 extension NotificationsListView {
+  private func applyFilter(type: Models.Notification.NotificationType?) {
+    selectedType = type
+    dataSource.reset()
+    viewState = .loading
+
+    Task {
+      await fetchNotifications()
+    }
+  }
+
   private func fetchNotifications() async {
     do {
       let result = try await dataSource.fetchNotifications(
