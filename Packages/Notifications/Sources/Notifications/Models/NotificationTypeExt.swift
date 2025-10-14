@@ -22,7 +22,7 @@ extension Models.Notification.NotificationType {
     case .update:
       "notifications.label.update"
     case .quote:
-      "quoted a status"
+      "quoted your post"
     case .quoted_update:
       "updated a quoted status"
     }

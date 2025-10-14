@@ -14,27 +14,40 @@ struct NotificationRowContentView: View {
 
   var body: some View {
     if let status = notification.status {
-      HStack {
-        if notification.type == .mention {
-          StatusRowExternalView(
-            viewModel: .init(
-              status: status,
+      HStack(alignment: .top) {
+        VStack(alignment: .leading, spacing: 8) {
+          if notification.type == .mention {
+            StatusRowExternalView(
+              viewModel: .init(
+                status: status,
+                client: client,
+                routerPath: routerPath,
+                showActions: true)
+            )
+            .environment(\.isNotificationsTab, false)
+            .environment(\.isMediaCompact, false)
+          } else {
+            StatusRowExternalView(
+              viewModel: .init(
+                status: status,
+                client: client,
+                routerPath: routerPath,
+                showActions: false,
+                textDisabled: true)
+            )
+            .environment(\.isMediaCompact, true)
+          }
+
+          if notification.type == .quote,
+            status.quote?.state == .accepted,
+            let quotedStatus = status.quote?.quotedStatus
+          {
+            StatusEmbeddedView(
+              status: quotedStatus,
               client: client,
-              routerPath: routerPath,
-              showActions: true)
-          )
-          .environment(\.isNotificationsTab, false)
-          .environment(\.isMediaCompact, false)
-        } else {
-          StatusRowExternalView(
-            viewModel: .init(
-              status: status,
-              client: client,
-              routerPath: routerPath,
-              showActions: false,
-              textDisabled: true)
-          )
-          .environment(\.isMediaCompact, true)
+              routerPath: routerPath
+            )
+          }
         }
         Spacer()
       }
