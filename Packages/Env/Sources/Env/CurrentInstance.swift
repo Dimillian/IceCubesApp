@@ -52,7 +52,7 @@ import Observation
   }
 
   public var canViewStatusQuotes: Bool {
-    instance?.apiVersions?.mastodon ?? 0 >= 8
+    instance?.apiVersions?.mastodon ?? 0 >= 7
   }
 
   private init() {}
