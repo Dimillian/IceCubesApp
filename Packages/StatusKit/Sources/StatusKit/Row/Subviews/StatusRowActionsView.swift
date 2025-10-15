@@ -312,11 +312,12 @@ struct StatusRowActionsView: View {
     let configuration = configuration(for: action)
     let finalStatus = viewModel.finalStatus
     let isQuoteUnavailable =
-      finalStatus.visibility != .pub
-        || finalStatus.quoteApproval?.currentUser == .denied
+      (finalStatus.visibility == .priv || finalStatus.visibility == .direct)
+      || finalStatus.quoteApproval?.currentUser == .denied
     let shouldDisableAction =
-      (configuration.trigger == .boost && finalStatus.visibility != .pub)
-        || (configuration.trigger == .quote && isQuoteUnavailable)
+      (configuration.trigger == .boost
+        && (finalStatus.visibility == .priv || finalStatus.visibility == .direct))
+      || (configuration.trigger == .quote && isQuoteUnavailable)
 
     StatusActionButton(
       configuration: configuration,
