@@ -262,7 +262,12 @@ extension TimelineViewModel: GapLoadingFetcher {
       await updateDatasourceAndState(statuses: statuses, client: client, replaceExisting: true)
 
       // If we got 40 or more statuses, there might be older ones - create a gap
-      if statuses.count >= 40, let oldestStatus = statuses.last, !datasourceIsEmpty {
+      // (unless fullTimelineFetch is enabled, in which case gaps are not used)
+      if !UserPreferences.shared.fullTimelineFetch,
+        statuses.count >= 40,
+        let oldestStatus = statuses.last,
+        !datasourceIsEmpty
+      {
         await createGapForOlderStatuses(maxId: oldestStatus.id, at: statuses.count)
       }
     }
@@ -299,13 +304,121 @@ extension TimelineViewModel: GapLoadingFetcher {
     StatusDataControllerProvider.shared.updateDataControllers(
       for: actuallyNewStatuses, client: client)
 
-    // Pass the original count to determine if we need a gap
-    await updateTimelineWithNewStatuses(
-      actuallyNewStatuses,
-      latestStatus: latestStatus,
-      fetchedCount: newestStatuses.count
-    )
+    // Check if full timeline fetch is enabled
+    if UserPreferences.shared.fullTimelineFetch {
+      await fetchFullTimelineFrom(
+        actuallyNewStatuses: actuallyNewStatuses,
+        latestStatus: latestStatus,
+        client: client,
+        initialTimeline: initialTimeline
+      )
+    } else {
+      // Pass the original count to determine if we need a gap
+      await updateTimelineWithNewStatuses(
+        actuallyNewStatuses,
+        latestStatus: latestStatus,
+        fetchedCount: newestStatuses.count
+      )
+    }
     canStreamEvents = true
+  }
+
+  // Fetch full timeline between newest status and latest visible status (up to 800 posts)
+  private func fetchFullTimelineFrom(
+    actuallyNewStatuses: [Status],
+    latestStatus: String,
+    client: MastodonClient,
+    initialTimeline: TimelineFilter
+  ) async {
+    var allNewStatuses = actuallyNewStatuses
+    let maxStatusesToFetch = 800
+    var oldestFetchedId = actuallyNewStatuses.last?.id
+
+    // Keep fetching pages until we reach the latestStatus or hit the limit
+    while allNewStatuses.count < maxStatusesToFetch,
+      let currentOldestId = oldestFetchedId,
+      currentOldestId > latestStatus,
+      !Task.isCancelled,
+      initialTimeline == timeline
+    {
+      do {
+        // Fetch next page using maxId
+        let nextPageStatuses: [Status] = try await client.get(
+          endpoint: timeline.endpoint(
+            sinceId: nil,
+            maxId: currentOldestId,
+            minId: nil,
+            offset: 0,
+            limit: 40))
+
+        // If we got no results, we've reached the end
+        guard !nextPageStatuses.isEmpty else {
+          break
+        }
+
+        // Filter out duplicates and statuses older than our target
+        let newStatuses = nextPageStatuses.filter { status in
+          !allNewStatuses.contains(where: { $0.id == status.id }) &&
+            status.id > latestStatus &&
+            status.id < currentOldestId
+        }
+
+        // If no new statuses, we're done
+        guard !newStatuses.isEmpty else {
+          break
+        }
+
+        StatusDataControllerProvider.shared.updateDataControllers(
+          for: newStatuses, client: client)
+
+        allNewStatuses.append(contentsOf: newStatuses)
+        oldestFetchedId = newStatuses.last?.id
+
+        // If we've reached or passed the latestStatus, we're done
+        if let oldestId = oldestFetchedId, oldestId <= latestStatus {
+          break
+        }
+
+        // If the page returned fewer than 40 statuses, we might be at the end
+        if nextPageStatuses.count < 40 {
+          break
+        }
+      } catch {
+        // On error, stop fetching and use what we have
+        break
+      }
+    }
+
+    // Insert all fetched statuses at once without gaps
+    await insertNewStatusesWithoutGap(allNewStatuses)
+  }
+
+  // Insert new statuses without creating a gap
+  private func insertNewStatusesWithoutGap(_ newStatuses: [Status]) async {
+    let topStatus = await datasource.getFiltered().first
+
+    // Insert all new statuses at the top
+    await datasource.insert(contentOf: newStatuses, at: 0)
+
+    if let lastVisible = visibleStatuses.last {
+      await datasource.remove(after: lastVisible, safeOffset: 15)
+    }
+    await cache()
+    pendingStatusesObserver.pendingStatuses.insert(contentsOf: newStatuses.map(\.id), at: 0)
+
+    let items = await datasource.getFilteredItems()
+
+    if let topStatus = topStatus,
+      visibleStatuses.contains(where: { $0.id == topStatus.id }),
+      scrollToTopVisible
+    {
+      scrollToId = topStatus.id
+      statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
+    } else {
+      withAnimation {
+        statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
+      }
+    }
   }
 
   private func updateTimelineWithNewStatuses(

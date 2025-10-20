@@ -74,6 +74,8 @@ import SwiftUI
     
     @AppStorage("stream_home_timeline") public var streamHomeTimeline: Bool = false
 
+    @AppStorage("full_timeline_fetch") public var fullTimelineFetch: Bool = false
+
     // Notifications
     @AppStorage("notifications-truncate-status-content")
     public var notificationsTruncateStatusContent: Bool = true
@@ -369,6 +371,12 @@ import SwiftUI
     }
   }
 
+  public var fullTimelineFetch: Bool {
+    didSet {
+      storage.fullTimelineFetch = fullTimelineFetch
+    }
+  }
+
   // Notifications
   public var notificationsTruncateStatusContent: Bool {
     didSet {
@@ -554,6 +562,7 @@ import SwiftUI
     isSidebarExpanded = storage.isSidebarExpanded
     notificationsTruncateStatusContent = storage.notificationsTruncateStatusContent
     streamHomeTimeline = storage.streamHomeTimeline
+    fullTimelineFetch = storage.fullTimelineFetch
   }
 }
 

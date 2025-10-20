@@ -235,6 +235,9 @@ struct SettingsTabs: View {
         Label("Stream home timeline", systemImage: "antenna.radiowaves.left.and.right")
           .symbolVariant(preferences.streamHomeTimeline ? .none : .slash)
       }
+      Toggle(isOn: $preferences.fullTimelineFetch) {
+        Label("Full timeline fetch", systemImage: "arrow.down.to.line")
+      }
     } header: {
       Text("settings.section.other")
     } footer: {
