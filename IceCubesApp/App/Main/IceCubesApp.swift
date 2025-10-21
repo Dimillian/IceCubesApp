@@ -38,9 +38,10 @@ struct IceCubesApp: App {
 
   init() {
     #if DEBUG
-      // Enable "GraphReuseLogging" for debugging purpose
-      // subsystem: "com.apple.SwiftUI" category: "GraphReuse"
-      UserDefaults.standard.register(defaults: ["com.apple.SwiftUI.GraphReuseLogging": true])
+      UserDefaults.standard.register(defaults: [
+        "com.apple.SwiftUI.GraphReuseLogging": true, // Enable "GraphReuseLogging" by default. The log can be found via - subsystem: "com.apple.SwiftUI" category: "GraphReuse"
+        "LogForEachSlowPath": true, // Enable "LogForEachSlowPath" by default. The log can be found via - subsystem: "com.apple.SwiftUI" category: "Invalid Configuration"
+      ])
     #endif
   }
 
