@@ -241,8 +241,6 @@ struct SettingsTabs: View {
       }
     } header: {
       Text("settings.section.other")
-    } footer: {
-      Text("settings.section.other.footer")
     }
     #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
