@@ -66,6 +66,15 @@ import SwiftUI
   @ObservationIgnored
   private let cache = TimelineCache()
 
+  private enum Constants {
+    static let fullTimelineFetchLimit = 800
+    static let fullTimelineFetchMaxPages = fullTimelineFetchLimit / 40
+  }
+
+  private var isFullTimelineFetchEnabled: Bool {
+    UserPreferences.shared.fullTimelineFetch
+  }
+
   private var isCacheEnabled: Bool {
     canFilterTimeline && timeline.supportNewestPagination && client?.isAuth == true
   }
@@ -296,20 +305,58 @@ extension TimelineViewModel: GapLoadingFetcher {
       return
     }
 
+    var statusesToInsert = actuallyNewStatuses
+
+    if isFullTimelineFetchEnabled, statusesToInsert.count < Constants.fullTimelineFetchLimit {
+      let additionalStatuses: [Status] = try await statusFetcher.fetchNewPages(
+        client: client,
+        timeline: timeline,
+        minId: latestStatus,
+        maxPages: Constants.fullTimelineFetchMaxPages)
+
+      if !additionalStatuses.isEmpty {
+        var knownIds = Set(currentIds)
+        knownIds.formUnion(statusesToInsert.map(\.id))
+
+        let filteredAdditional = additionalStatuses.filter { status in
+          guard status.id > latestStatus else { return false }
+          if knownIds.contains(status.id) {
+            return false
+          }
+          knownIds.insert(status.id)
+          return true
+        }
+
+        if !filteredAdditional.isEmpty {
+          let remainingCapacity = max(0, Constants.fullTimelineFetchLimit - statusesToInsert.count)
+          if remainingCapacity > 0 {
+            statusesToInsert.append(contentsOf: filteredAdditional.prefix(remainingCapacity))
+          }
+        }
+      }
+    }
+
+    statusesToInsert.sort { $0.id > $1.id }
+
+    if statusesToInsert.count > Constants.fullTimelineFetchLimit {
+      statusesToInsert = Array(statusesToInsert.prefix(Constants.fullTimelineFetchLimit))
+    }
+
     StatusDataControllerProvider.shared.updateDataControllers(
-      for: actuallyNewStatuses, client: client)
+      for: statusesToInsert, client: client)
 
     // Pass the original count to determine if we need a gap
     await updateTimelineWithNewStatuses(
-      actuallyNewStatuses,
+      statusesToInsert,
       latestStatus: latestStatus,
-      fetchedCount: newestStatuses.count
+      fetchedCount: newestStatuses.count,
+      shouldCreateGap: !isFullTimelineFetchEnabled
     )
     canStreamEvents = true
   }
 
   private func updateTimelineWithNewStatuses(
-    _ newStatuses: [Status], latestStatus: String, fetchedCount: Int
+    _ newStatuses: [Status], latestStatus: String, fetchedCount: Int, shouldCreateGap: Bool
   ) async {
     let topStatus = await datasource.getFiltered().first
 
@@ -319,7 +366,11 @@ extension TimelineViewModel: GapLoadingFetcher {
     // Only create a gap if:
     // 1. We fetched a full page (suggesting there might be more)
     // 2. AND we have a significant number of actually new statuses
-    if fetchedCount >= 40 && newStatuses.count >= 40, let oldestNewStatus = newStatuses.last {
+    if shouldCreateGap,
+      fetchedCount >= 40,
+      newStatuses.count >= 40,
+      let oldestNewStatus = newStatuses.last
+    {
       // Create a gap to load statuses between the oldest new status and our previous top
       let gap = TimelineGap(sinceId: latestStatus, maxId: oldestNewStatus.id)
       // Insert the gap after all the new statuses
@@ -471,6 +522,7 @@ extension TimelineViewModel: GapLoadingFetcher {
 
   private func createGapForOlderStatuses(sinceId: String? = nil, maxId: String, at index: Int) async
   {
+    guard !isFullTimelineFetchEnabled else { return }
     let gap = TimelineGap(sinceId: sinceId, maxId: maxId)
     await datasource.insertGap(gap, at: index)
   }
