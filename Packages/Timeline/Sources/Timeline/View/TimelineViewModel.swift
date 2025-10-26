@@ -72,7 +72,14 @@ import SwiftUI
   }
 
   private var isFullTimelineFetchEnabled: Bool {
-    UserPreferences.shared.fullTimelineFetch
+    guard UserPreferences.shared.fullTimelineFetch else { return false }
+
+    switch timeline {
+    case .local, .federated:
+      return false
+    default:
+      return true
+    }
   }
 
   private var isCacheEnabled: Bool {
