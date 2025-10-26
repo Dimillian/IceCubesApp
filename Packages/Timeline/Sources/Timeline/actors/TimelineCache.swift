@@ -102,7 +102,7 @@ public actor TimelineCache {
 // MARK: - Encoding helpers
 
 private extension TimelineCache {
-  var maxCachedStatuses: Int { 600 }
+  var maxCachedStatuses: Int { 800 }
 
   private func prepareItemsForCaching(_ items: [TimelineItem]) -> [CachedTimelineItem] {
     limitedItems(items, limit: maxCachedStatuses).map { item in
@@ -138,20 +138,21 @@ private extension TimelineCache {
   }
 
   private func limitedItems(_ items: [TimelineItem], limit: Int) -> [TimelineItem] {
+    guard limit > 0 else { return [] }
+
     var collected: [TimelineItem] = []
     var statusCount = 0
 
     for item in items {
-      if statusCount >= limit { break }
-
       switch item {
       case .status:
+        guard statusCount < limit else { continue }
         collected.append(item)
         statusCount += 1
       case .gap:
-        if statusCount > 0 {
-          collected.append(item)
-        }
+        guard statusCount > 0 else { continue }
+        collected.append(item)
+        if statusCount >= limit { return collected }
       }
     }
 
