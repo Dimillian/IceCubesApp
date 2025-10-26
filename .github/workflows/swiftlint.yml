@@ -1,0 +1,20 @@
+name: SwiftLint
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  swiftlint:
+    name: Run SwiftLint
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run SwiftLint
+        uses: realm/SwiftLint@v3
+        with:
+          args: --strict
