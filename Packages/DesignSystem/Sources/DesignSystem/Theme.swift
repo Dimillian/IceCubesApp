@@ -15,6 +15,7 @@ public final class Theme {
       case statusActionSecondary
       case contentGradient
       case compactLayoutPadding
+      case avatarAnimated
     }
 
     @AppStorage("is_previously_set") public var isThemePreviouslySet: Bool = false
@@ -42,7 +43,7 @@ public final class Theme {
     @AppStorage(ThemeKey.compactLayoutPadding.rawValue) public var compactLayoutPadding: Bool = true
     @AppStorage("font_size_scale") public var fontSizeScale: Double = 1
     @AppStorage("chosen_font") public var chosenFontData: Data?
-
+    @AppStorage(ThemeKey.avatarAnimated.rawValue) public var avatarAnimated: Bool = true
     init() {}
   }
 
@@ -301,6 +302,12 @@ public final class Theme {
       themeStorage.compactLayoutPadding = compactLayoutPadding
     }
   }
+    
+  public var avatarAnimated: Bool {
+    didSet {
+      themeStorage.avatarAnimated = avatarAnimated
+    }
+  }
 
   public var selectedSet: ColorSetName = .iceCubeDark
 
@@ -342,6 +349,7 @@ public final class Theme {
     chosenFontData = themeStorage.chosenFontData
     statusActionSecondary = themeStorage.statusActionSecondary
     compactLayoutPadding = themeStorage.compactLayoutPadding
+    avatarAnimated = themeStorage.avatarAnimated
     selectedSet = storedSet
 
     computeContrastingTintColor()

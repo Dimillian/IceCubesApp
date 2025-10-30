@@ -2,6 +2,7 @@ import Models
 import Nuke
 import NukeUI
 import SwiftUI
+import Env
 
 @MainActor
 public struct AvatarView: View {
@@ -117,6 +118,7 @@ struct AvatarImage: View {
 
   public let avatar: URL
   public let config: AvatarView.FrameConfig
+  @Environment(Theme.self) private var theme
 
   var body: some View {
     if reasons == .placeholder {
@@ -125,19 +127,32 @@ struct AvatarImage: View {
       LazyImage(
         request: ImageRequest(url: avatar, processors: [.resize(size: config.size)])
       ) { state in
-        if let image = state.image {
-          image
-            .resizable()
-            .scaledToFit()
-            .clipShape(RoundedRectangle(cornerRadius: config.cornerRadius))
-            .overlay(
-              RoundedRectangle(cornerRadius: config.cornerRadius)
-                .stroke(.primary.opacity(0.25), lineWidth: 1)
-            )
-        } else {
-          RoundedRectangle(cornerRadius: config.cornerRadius)
-            .stroke(.primary.opacity(0.25), lineWidth: 1)
-        }
+          if let container = state.imageContainer {
+              if theme.avatarAnimated && container.type == .gif, let data = container.data {
+                  GifView(data:data)
+                  .frame(width: config.width, height: config.height)
+                  .clipShape(RoundedRectangle(cornerRadius: config.cornerRadius))
+                  .overlay(
+                    RoundedRectangle(cornerRadius: config.cornerRadius)
+                        .stroke(.primary.opacity(0.25), lineWidth: 1)
+                  )
+              } else {
+                  if let image = state.image {
+                      image
+                          .resizable()
+                          .scaledToFit()
+                          .frame(width: config.width, height: config.height)
+                          .clipShape(RoundedRectangle(cornerRadius: config.cornerRadius))
+                          .overlay(
+                            RoundedRectangle(cornerRadius: config.cornerRadius)
+                                .stroke(.primary.opacity(0.25), lineWidth: 1)
+                          )
+                  } else {
+                      RoundedRectangle(cornerRadius: config.cornerRadius)
+                          .stroke(.primary.opacity(0.25), lineWidth: 1)
+                  }
+              }
+          }
       }
     }
   }
