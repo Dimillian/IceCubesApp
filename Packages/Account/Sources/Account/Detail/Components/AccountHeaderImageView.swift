@@ -3,6 +3,7 @@ import Env
 import Models
 import NukeUI
 import SwiftUI
+import DesignSystem
 
 struct AccountHeaderImageView: View {
   enum Constants {
@@ -40,17 +41,27 @@ struct AccountHeaderImageView: View {
           .accessibilityHidden(true)
       } else {
         LazyImage(url: account.header) { state in
-          if let image = state.image {
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
-              .frame(height: Constants.headerHeight)
-              .clipped()
-          } else {
-            theme.secondaryBackgroundColor
-              .frame(height: Constants.headerHeight)
-          }
+            if let container = state.imageContainer {
+                if theme.avatarAnimated && container.type == .gif, let data = container.data {
+                    GifView(data:data)
+                        .aspectRatio(contentMode: .fill)
+                        .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
+                        .frame(height: Constants.headerHeight)
+                        .clipped()
+                } else {
+                    if let image = state.image {
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .overlay(account.haveHeader ? .black.opacity(0.50) : .clear)
+                            .frame(height: Constants.headerHeight)
+                            .clipped()
+                    } else {
+                        theme.secondaryBackgroundColor
+                            .frame(height: Constants.headerHeight)
+                    }
+                }
+            }
         }
         .frame(height: Constants.headerHeight)
       }
