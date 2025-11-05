@@ -1,7 +1,7 @@
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import NukeUI
 import SwiftUI
 
@@ -14,11 +14,15 @@ public struct ConversationDetailView: View {
   @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
 
-  @State private var viewModel: ConversationDetailViewModel
+  @State private var dataSource: ConversationDetailDataSource
+  @State private var viewState: ConversationDetailState = .loading
+  @State private var newMessageText: String = ""
+  @State private var isSendingMessage: Bool = false
+  @State private var previousClientId: String?
 
   @FocusState private var isMessageFieldFocused: Bool
 
@@ -26,24 +30,15 @@ public struct ConversationDetailView: View {
   @State private var didAppear: Bool = false
 
   public init(conversation: Conversation) {
-    _viewModel = .init(initialValue: .init(conversation: conversation))
+    _dataSource = .init(initialValue: .init(conversation: conversation))
+    _viewState = .init(initialValue: .loading)
   }
 
   public var body: some View {
     ScrollViewReader { proxy in
       ScrollView {
         LazyVStack {
-          if viewModel.isLoadingMessages {
-            loadingView
-          }
-          ForEach(viewModel.messages) { message in
-            ConversationMessageView(
-              message: message,
-              conversation: viewModel.conversation
-            )
-            .padding(.vertical, 4)
-            .id(message.id)
-          }
+          conversationMessagesView
           bottomAnchorView
         }
         .padding(.horizontal, .layoutPadding)
@@ -52,16 +47,25 @@ public struct ConversationDetailView: View {
         .scrollDismissesKeyboard(.interactively)
       #endif
       .safeAreaInset(edge: .bottom) {
-        inputTextView
+        if case .display(_, let conversation) = viewState {
+          ConversationInputView(
+            newMessageText: $newMessageText,
+            conversation: conversation,
+            isSendingMessage: isSendingMessage,
+            onSendMessage: {
+              await postMessage()
+            },
+            isMessageFieldFocused: $isMessageFieldFocused
+          )
+        }
       }
       .onAppear {
         scrollProxy = proxy
-        viewModel.client = client
         isMessageFieldFocused = true
         if !didAppear {
           didAppear = true
           Task {
-            await viewModel.fetchMessages()
+            await fetchMessages()
             DispatchQueue.main.async {
               withAnimation {
                 proxy.scrollTo(Constants.bottomAnchor, anchor: .bottom)
@@ -78,93 +82,132 @@ public struct ConversationDetailView: View {
     #endif
     .toolbar {
       ToolbarItem(placement: .principal) {
-        if viewModel.conversation.accounts.count == 1,
-          let account = viewModel.conversation.accounts.first
-        {
-          EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
-            .font(.scaledHeadline)
-            .foregroundColor(theme.labelColor)
-            .emojiText.size(Font.scaledHeadlineFont.emojiSize)
-            .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
-        } else {
-          Text("Direct message with \(viewModel.conversation.accounts.count) people")
-            .font(.scaledHeadline)
+        if case .display(_, let conversation) = viewState {
+          if conversation.accounts.count == 1,
+            let account = conversation.accounts.first
+          {
+            EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
+              .font(.scaledHeadline)
+              .foregroundColor(theme.labelColor)
+              .emojiText.size(Font.scaledHeadlineFont.emojiSize)
+              .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
+          } else {
+            Text("Direct message with \(conversation.accounts.count) people")
+              .font(.scaledHeadline)
+          }
         }
       }
     }
     .onChange(of: watcher.latestEvent?.id) {
       if let latestEvent = watcher.latestEvent {
-        viewModel.handleEvent(event: latestEvent)
-        DispatchQueue.main.async {
-          withAnimation {
-            scrollProxy?.scrollTo(Constants.bottomAnchor, anchor: .bottom)
-          }
+        Task {
+          await handleStreamEvent(latestEvent)
         }
+      }
+    }
+    .onChange(of: client) { _, _ in
+      _ = routerPath.path.removeLast()
+    }
+  }
+
+  @ViewBuilder
+  private var conversationMessagesView: some View {
+    switch viewState {
+    case .loading:
+      loadingView
+
+    case .display(let messages, let conversation):
+      ForEach(messages) { message in
+        ConversationMessageView(
+          message: message,
+          conversation: conversation
+        )
+        .padding(.vertical, 4)
+        .id(message.id)
+      }
+
+    case .error:
+      ErrorView(
+        title: "conversations.error.title",
+        message: "conversations.error.message",
+        buttonTitle: "conversations.error.button"
+      ) {
+        await fetchMessages()
       }
     }
   }
 
   private var loadingView: some View {
     ForEach(Status.placeholders()) { message in
-      ConversationMessageView(message: message, conversation: viewModel.conversation)
-        .redacted(reason: .placeholder)
-        .allowsHitTesting(false)
-        .padding(.vertical, 4)
+      ConversationMessageView(
+        message: message,
+        conversation: Conversation.placeholder()
+      )
+      .redacted(reason: .placeholder)
+      .allowsHitTesting(false)
+      .padding(.vertical, 4)
     }
   }
 
   private var bottomAnchorView: some View {
     Rectangle()
       .fill(Color.clear)
-      .frame(height: 40)
+      .frame(height: 10)
       .id(Constants.bottomAnchor)
       .accessibilityHidden(true)
   }
 
-  private var inputTextView: some View {
-    VStack {
-      HStack(alignment: .bottom, spacing: 8) {
-        if viewModel.conversation.lastStatus != nil {
-          Button {
-            routerPath.presentedSheet = .replyToStatusEditor(
-              status: viewModel.conversation.lastStatus!)
-          } label: {
-            Image(systemName: "plus")
-          }
-          .padding(.bottom, 7)
-        }
+  // MARK: - Helper Methods
 
-        TextField(
-          "conversations.new.message.placeholder", text: $viewModel.newMessageText, axis: .vertical
-        )
-        .focused($isMessageFieldFocused)
-        .keyboardType(.default)
-        .backgroundStyle(.thickMaterial)
-        .padding(6)
-        .overlay(
-          RoundedRectangle(cornerRadius: 14)
-            .stroke(.gray, lineWidth: 1)
-        )
-        .font(.scaledBody)
-        if !viewModel.newMessageText.isEmpty {
-          Button {
-            Task {
-              guard !viewModel.isSendingMessage else { return }
-              await viewModel.postMessage()
-            }
-          } label: {
-            if viewModel.isSendingMessage {
-              ProgressView()
-            } else {
-              Image(systemName: "paperplane")
-            }
-          }
-          .keyboardShortcut(.return, modifiers: .command)
-          .padding(.bottom, 6)
+  private func fetchMessages() async {
+    do {
+      let result = try await dataSource.fetchMessages(client: client)
+      viewState = .display(messages: result.messages, conversation: result.conversation)
+    } catch {
+      viewState = .error(error: error)
+    }
+  }
+
+  private func postMessage() async {
+    guard !isSendingMessage, !newMessageText.isEmpty else { return }
+
+    isSendingMessage = true
+
+    do {
+      let result = try await dataSource.postMessage(
+        client: client,
+        messageText: newMessageText
+      )
+
+      withAnimation {
+        viewState = .display(messages: result.messages, conversation: result.conversation)
+        newMessageText = ""
+        isSendingMessage = false
+      }
+
+      // Scroll to bottom after sending
+      DispatchQueue.main.async {
+        withAnimation {
+          scrollProxy?.scrollTo(Constants.bottomAnchor, anchor: .bottom)
         }
       }
-      .padding(8)
+    } catch {
+      isSendingMessage = false
     }
-    .background(.thinMaterial)
+  }
+
+  private func handleStreamEvent(_ event: any StreamEvent) async {
+    if let result = dataSource.handleStreamEvent(event: event) {
+      withAnimation {
+        viewState = .display(messages: result.messages, conversation: result.conversation)
+      }
+
+      // Scroll to bottom for new messages
+      DispatchQueue.main.async {
+        withAnimation {
+          scrollProxy?.scrollTo(Constants.bottomAnchor, anchor: .bottom)
+        }
+      }
+    }
   }
 }

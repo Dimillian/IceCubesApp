@@ -7,7 +7,7 @@
 
 import MobileCoreServices
 import Models
-import Network
+import NetworkClient
 import UIKit
 import UniformTypeIdentifiers
 
@@ -52,7 +52,8 @@ extension URL {
         guard let host = host() else {
           throw ActionRequestHandler.Error.noHost
         }
-        let _: Instance = try await Client(server: host).get(endpoint: Instances.instance)
+        let _: Instance = try await MastodonClient(server: host, version: .v2).get(
+          endpoint: Instances.instance)
         return true
       } catch {
         return false

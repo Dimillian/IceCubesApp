@@ -18,7 +18,7 @@ public struct StatusRowMediaPreviewView: View {
 
   @State private var isQuickLookLoading: Bool = false
 
-  init(attachments: [MediaAttachment], sensitive: Bool) {
+  public init(attachments: [MediaAttachment], sensitive: Bool) {
     self.attachments = attachments
     self.sensitive = sensitive
   }
@@ -119,54 +119,59 @@ public struct StatusRowMediaPreviewView: View {
 }
 
 private struct MediaPreview: View {
+  @Environment(QuickLook.self) private var quickLook
+  
   let sensitive: Bool
   let imageMaxHeight: CGFloat
   let displayData: DisplayData
 
   var body: some View {
-    Group {
-      switch displayData.type {
-      case .image:
-        LazyResizableImage(url: displayData.previewUrl) { state, _ in
-          if let image = state.image {
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(
-                width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
-                height: imageMaxHeight
-              )
-              .overlay(
-                RoundedRectangle(cornerRadius: 10)
-                  .stroke(.gray.opacity(0.35), lineWidth: 1)
-              )
-          } else if state.isLoading {
-            RoundedRectangle(cornerRadius: 10)
-              .fill(Color.gray)
+    if let namespace = quickLook.namespace {
+      Group {
+        switch displayData.type {
+        case .image:
+          LazyResizableImage(url: displayData.previewUrl) { state in
+            if let image = state.image {
+              image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(
+                  width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
+                  height: imageMaxHeight
+                )
+                .overlay(
+                  RoundedRectangle(cornerRadius: 10)
+                    .stroke(.gray.opacity(0.35), lineWidth: 1)
+                )
+            } else if state.isLoading {
+              RoundedRectangle(cornerRadius: 10)
+                .fill(Color.gray)
+            }
           }
+          .overlay {
+            BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
+          }
+          .overlay {
+            AltTextButton(text: displayData.description, font: .scaledFootnote)
+          }
+        case .av:
+          MediaUIAttachmentVideoView(viewModel: .init(url: displayData.url))
+            .accessibilityAddTraits(.startsMediaSession)
         }
-        .overlay {
-          BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
-        }
-        .overlay {
-          AltTextButton(text: displayData.description, font: .scaledFootnote)
-        }
-      case .av:
-        MediaUIAttachmentVideoView(viewModel: .init(url: displayData.url))
-          .accessibilityAddTraits(.startsMediaSession)
       }
+      .matchedTransitionSource(id: displayData.id, in: namespace)
+      .frame(
+        width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
+        height: imageMaxHeight
+      )
+      .clipped()
+      .cornerRadius(10)
+      // #965: do not create overlapping tappable areas, when multiple images are shown
+      .contentShape(Rectangle())
+      .accessibilityElement(children: .ignore)
+      .accessibilityLabel(Text(displayData.accessibilityText))
+      .accessibilityAddTraits(displayData.type == .image ? [.isImage, .isButton] : .isButton)
     }
-    .frame(
-      width: displayData.isLandscape ? imageMaxHeight * 1.2 : imageMaxHeight / 1.5,
-      height: imageMaxHeight
-    )
-    .clipped()
-    .cornerRadius(10)
-    // #965: do not create overlapping tappable areas, when multiple images are shown
-    .contentShape(Rectangle())
-    .accessibilityElement(children: .ignore)
-    .accessibilityLabel(Text(displayData.accessibilityText))
-    .accessibilityAddTraits(displayData.type == .image ? [.isImage, .isButton] : .isButton)
   }
 }
 
@@ -415,6 +420,7 @@ private struct FeaturedImagePreView: View {
   let sensitive: Bool
 
   @Environment(\.isSecondaryColumn) private var isSecondaryColumn: Bool
+  @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
   @Environment(\.isModal) private var isModal: Bool
 
@@ -427,14 +433,14 @@ private struct FeaturedImagePreView: View {
   }
 
   var body: some View {
-    if let url = attachment.url {
+    if let url = attachment.url, let namespace = quickLook.namespace {
       _Layout(originalWidth: originalWidth, originalHeight: originalHeight, maxSize: maxSize) {
         Group {
           RoundedRectangle(cornerRadius: 10).fill(Color.gray)
             .overlay {
               switch attachment.supportedType {
               case .image:
-                LazyResizableImage(url: attachment.url) { state, _ in
+                LazyResizableImage(url: attachment.url) { state in
                   if let image = state.image {
                     image
                       .resizable()
@@ -457,6 +463,7 @@ private struct FeaturedImagePreView: View {
               .hoverEffect()
             #endif
         }
+        .matchedTransitionSource(id: attachment.id, in: namespace)
       }
       .overlay {
         BlurOverLay(sensitive: sensitive, font: .scaledFootnote)
@@ -510,7 +517,7 @@ private struct FeaturedImagePreView: View {
         (.some(.infinity), nil):
         size = CGSize(width: originalWidth, height: originalWidth)
 
-      case let (nil, .some(height)), let (.some(.infinity), .some(height)):
+      case (nil, .some(let height)), (.some(.infinity), .some(let height)):
         let minHeight = min(height, originalWidth)
         if originalHeight == 0 {
           size = CGSize.zero
@@ -518,14 +525,14 @@ private struct FeaturedImagePreView: View {
           size = CGSize(width: originalWidth * minHeight / originalHeight, height: minHeight)
         }
 
-      case let (.some(width), .some(.infinity)), let (.some(width), nil):
+      case (.some(let width), .some(.infinity)), (.some(let width), nil):
         if originalWidth == 0 {
           size = CGSize(width: width, height: width)
         } else {
           size = CGSize(width: width, height: width / originalWidth * originalHeight)
         }
 
-      case let (.some(width), .some(height)):
+      case (.some(let width), .some(let height)):
         // intrinsic size of image fits just fine
         if originalWidth <= width, originalHeight <= height {
           size = CGSize(width: originalWidth, height: originalHeight)

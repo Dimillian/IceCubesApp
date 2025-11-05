@@ -1,5 +1,5 @@
 import Models
-import Network
+import NetworkClient
 import Testing
 import XCTest
 
@@ -10,10 +10,9 @@ import XCTest
 struct Tests {
   func makeSubject() -> TimelineViewModel {
     let subject = TimelineViewModel()
-    let client = Client(server: "localhost")
+    let client = MastodonClient(server: "localhost")
     subject.client = client
     subject.timeline = .home
-    subject.isTimelineVisible = true
     subject.timelineTask?.cancel()
     return subject
   }
@@ -97,7 +96,10 @@ struct Tests {
       spoilerText: status.spoilerText,
       filtered: status.filtered,
       sensitive: status.sensitive,
-      language: status.language)
+      language: status.language,
+      quote: nil,
+      quotesCount: nil,
+      quoteApproval: nil)
     await subject.handleEvent(event: StreamEventStatusUpdate(status: status))
     let statuses = await subject.datasource.get()
     count = await subject.datasource.count()

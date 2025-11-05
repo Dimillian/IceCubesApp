@@ -5,7 +5,7 @@ import DesignSystem
 import Env
 import KeychainSwift
 import MediaUI
-import Network
+import NetworkClient
 import RevenueCat
 import StatusKit
 import SwiftUI
@@ -33,12 +33,15 @@ struct IceCubesApp: App {
   @State var appRouterPath = RouterPath()
 
   @State var isSupporter: Bool = false
+  
+  @Namespace var namespace
 
   init() {
     #if DEBUG
-      // Enable "GraphReuseLogging" for debugging purpose
-      // subsystem: "com.apple.SwiftUI" category: "GraphReuse"
-      UserDefaults.standard.register(defaults: ["com.apple.SwiftUI.GraphReuseLogging": true])
+      UserDefaults.standard.register(defaults: [
+        "com.apple.SwiftUI.GraphReuseLogging": true, // Enable "GraphReuseLogging" by default. The log can be found via - subsystem: "com.apple.SwiftUI" category: "GraphReuse"
+        "LogForEachSlowPath": true, // Enable "LogForEachSlowPath" by default. The log can be found via - subsystem: "com.apple.SwiftUI" category: "Invalid Configuration"
+      ])
     #endif
   }
 
@@ -47,7 +50,8 @@ struct IceCubesApp: App {
     otherScenes
   }
 
-  func setNewClientsInEnv(client: Client) {
+  func setNewClientsInEnv(client: MastodonClient) {
+    quickLook.namespace = namespace
     currentAccount.setClient(client: client)
     currentInstance.setClient(client: client)
     userPreferences.setClient(client: client)
@@ -141,6 +145,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     super.buildMenu(with: builder)
     builder.remove(menu: .document)
     builder.remove(menu: .toolbar)
-    builder.remove(menu: .sidebar)
   }
 }

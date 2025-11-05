@@ -1,6 +1,6 @@
 import Foundation
 import Models
-import Network
+import NetworkClient
 import Observation
 import SwiftUI
 
@@ -27,10 +27,12 @@ public final class StatusDataControllerProvider {
 
   private struct CacheKey: Hashable {
     let statusId: String
-    let client: Client
+    let client: MastodonClient
   }
 
-  public func dataController(for status: any AnyStatus, client: Client) -> StatusDataController {
+  public func dataController(for status: any AnyStatus, client: MastodonClient)
+    -> StatusDataController
+  {
     let key = CacheKey(statusId: status.id, client: client)
     if let controller = cache[key] as? StatusDataController {
       return controller
@@ -40,7 +42,7 @@ public final class StatusDataControllerProvider {
     return controller
   }
 
-  public func updateDataControllers(for statuses: [Status], client: Client) {
+  public func updateDataControllers(for statuses: [Status], client: MastodonClient) {
     for status in statuses {
       let realStatus: AnyStatus = status.reblog ?? status
       let controller = dataController(for: realStatus, client: client)
@@ -52,7 +54,7 @@ public final class StatusDataControllerProvider {
 @MainActor
 @Observable public final class StatusDataController: StatusDataControlling {
   private let status: AnyStatus
-  private let client: Client
+  private let client: MastodonClient
 
   public var isReblogged: Bool
   public var isBookmarked: Bool
@@ -62,8 +64,9 @@ public final class StatusDataControllerProvider {
   public var favoritesCount: Int
   public var reblogsCount: Int
   public var repliesCount: Int
+  public var quotesCount: Int
 
-  init(status: AnyStatus, client: Client) {
+  init(status: AnyStatus, client: MastodonClient) {
     self.status = status
     self.client = client
 
@@ -74,6 +77,7 @@ public final class StatusDataControllerProvider {
     reblogsCount = status.reblogsCount
     repliesCount = status.repliesCount
     favoritesCount = status.favouritesCount
+    quotesCount = status.quotesCount ?? 0
     content = status.content
   }
 
@@ -85,6 +89,7 @@ public final class StatusDataControllerProvider {
     reblogsCount = status.reblogsCount
     repliesCount = status.repliesCount
     favoritesCount = status.favouritesCount
+    quotesCount = status.quotesCount ?? 0
     content = status.content
   }
 

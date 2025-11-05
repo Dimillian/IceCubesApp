@@ -31,4 +31,17 @@ extension Models.Visibility {
       "status.visibility.direct"
     }
   }
+
+  public var subtitle: LocalizedStringKey {
+    switch self {
+    case .pub:
+      "Anyone can see this post"
+    case .unlisted:
+      "Hidden from algorithmic surfaces"
+    case .priv:
+      "Only visible to your followers"
+    case .direct:
+      "Only visible to people mentioned"
+    }
+  }
 }

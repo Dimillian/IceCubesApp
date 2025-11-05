@@ -3,7 +3,7 @@ import EmojiText
 import Env
 import Foundation
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
@@ -20,7 +20,7 @@ public struct StatusRowView: View {
   @Environment(RouterPath.self) private var routerPath: RouterPath
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
 
   @State private var showSelectableText: Bool = false
   @State private var isShareAsImageSheetPresented: Bool = false
@@ -66,7 +66,6 @@ public struct StatusRowView: View {
         } else {
           if !isCompact && context != .detail {
             Group {
-              StatusRowPremiumView(viewModel: viewModel)
               StatusRowTagView(viewModel: viewModel)
               StatusRowReblogView(viewModel: viewModel)
               StatusRowReplyView(viewModel: viewModel)
@@ -135,6 +134,7 @@ public struct StatusRowView: View {
     .if(viewModel.url != nil) { $0.draggable(viewModel.url!) }
     .contextMenu {
       contextMenu
+        .tint(.primary)
         .onAppear {
           Task {
             await viewModel.loadAuthorRelationship()
@@ -160,7 +160,7 @@ public struct StatusRowView: View {
       )
       .listRowHoverEffectDisabled()
     #else
-      .listRowBackground(viewModel.makeBackgroundColor(isHomeTimeline: isHomeTimeline))
+      .listRowBackground(viewModel.backgroundColor)
     #endif
     .listRowInsets(
       .init(

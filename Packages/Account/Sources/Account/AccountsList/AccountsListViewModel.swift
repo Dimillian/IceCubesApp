@@ -1,5 +1,5 @@
 import Models
-import Network
+import NetworkClient
 import OSLog
 import Observation
 import SwiftUI
@@ -34,7 +34,7 @@ public enum AccountsListMode {
 
 @MainActor
 @Observable class AccountsListViewModel {
-  var client: Client?
+  var client: MastodonClient?
 
   let mode: AccountsListMode
 

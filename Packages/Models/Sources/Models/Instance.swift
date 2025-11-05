@@ -1,10 +1,20 @@
 import Foundation
 
-public struct Instance: Codable, Sendable {
-  public struct Stats: Codable, Sendable {
-    public let userCount: Int
-    public let statusCount: Int
-    public let domainCount: Int
+public struct Instance: Codable, Sendable, Hashable {
+  public static func == (lhs: Instance, rhs: Instance) -> Bool {
+    lhs.title == rhs.title && lhs.domain == rhs.domain
+  }
+
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(title)
+    hasher.combine(domain)
+  }
+
+  public struct Usage: Codable, Sendable {
+    public struct Users: Codable, Sendable {
+      public let activeMonth: Int?
+    }
+    public let users: Users?
   }
 
   public struct Configuration: Codable, Sendable {
@@ -33,16 +43,35 @@ public struct Instance: Codable, Sendable {
     public let streamingApi: URL?
   }
 
+  public struct APIVersions: Codable, Sendable {
+    public let mastodon: Int?
+  }
+
+  public struct Contact: Codable, Sendable {
+    public let account: Account?
+    public let email: String
+  }
+
+  public struct Registrations: Codable, Sendable {
+    public let enabled: Bool
+  }
+
+  public struct Thumbnail: Codable, Sendable {
+    public let url: URL?
+  }
+
   public let title: String
+  public let domain: String
   public let description: String?
   public let shortDescription: String?
-  public let email: String
   public let version: String
-  public let stats: Stats
+  public let apiVersions: APIVersions?
+  public let usage: Usage?
   public let languages: [String]?
-  public let registrations: Bool
-  public let thumbnail: URL?
+  public let registrations: Registrations
+  public let thumbnail: Thumbnail
   public let configuration: Configuration?
   public let rules: [Rule]?
   public let urls: URLs?
+  public let contact: Contact
 }

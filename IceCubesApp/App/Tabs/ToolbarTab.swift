@@ -9,41 +9,32 @@ struct ToolbarTab: ToolbarContent {
   @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
   @Environment(UserPreferences.self) private var userPreferences
-  @Environment(Theme.self) private var theme
 
   @Binding var routerPath: RouterPath
+  
+  @Namespace private var transition
 
   var body: some ToolbarContent {
     if !isSecondaryColumn {
-      if horizontalSizeClass == .regular {
-        ToolbarItem(placement: .topBarLeading) {
-          if UIDevice.current.userInterfaceIdiom == .pad
-            || UIDevice.current.userInterfaceIdiom == .mac
-          {
-            Button {
-              withAnimation {
-                userPreferences.isSidebarExpanded.toggle()
-              }
-            } label: {
-              if userPreferences.isSidebarExpanded {
-                Image(systemName: "sidebar.squares.left")
-              } else {
-                Image(systemName: "sidebar.left")
-              }
-            }
-          }
-        }
-      }
       statusEditorToolbarItem(
         routerPath: routerPath,
         visibility: userPreferences.postVisibility)
-      if UIDevice.current.userInterfaceIdiom != .pad
-        || (UIDevice.current.userInterfaceIdiom == .pad && horizontalSizeClass == .compact)
-      {
+      if #available(iOS 26.0, *) {
         ToolbarItem(placement: .navigationBarLeading) {
           AppAccountsSelectorView(
+            transition: transition,
             routerPath: routerPath,
-            avatarConfig: theme.avatarShape == .circle ? .badge : .badgeRounded)
+            avatarConfig: .embed)
+            .offset(x: -12)
+        }
+        .matchedTransitionSource(id: CurrentAccount.shared.account?.id ?? "", in: transition)
+        .sharedBackgroundVisibility(.hidden)
+      } else {
+        ToolbarItem(placement: .navigationBarLeading) {
+          AppAccountsSelectorView(
+            transition: transition,
+            routerPath: routerPath,
+            avatarConfig: .embed)
         }
       }
     }

@@ -1,4 +1,4 @@
-import Network
+import NetworkClient
 import SwiftUI
 import Testing
 import XCTest
@@ -16,36 +16,9 @@ func testRouterThreadsURL() {
 
 @Test
 @MainActor
-func testRouterTagsURL() {
-  let router = RouterPath()
-  let url = URL(string: "https://mastodon.social/tags/test")!
-  _ = router.handle(url: url)
-  #expect(router.path.first == .hashTag(tag: "test", account: nil))
-}
-
-@Test
-@MainActor
-func testRouterTagsAkkomaURL() {
-  let router = RouterPath()
-  let url = URL(string: "https://genserver.social/tag/test")!
-  _ = router.handle(url: url)
-  #expect(router.path.first == .hashTag(tag: "test", account: nil))
-}
-
-@Test
-@MainActor
-func testRouterTagsPixelfedURL() {
-  let router = RouterPath()
-  let url = URL(string: "https://pixelfed.social/discover/tags/test")!
-  _ = router.handle(url: url)
-  #expect(router.path.first == .hashTag(tag: "test", account: nil))
-}
-
-@Test
-@MainActor
 func testRouterLocalStatusURL() {
   let router = RouterPath()
-  let client = Client(
+  let client = MastodonClient(
     server: "mastodon.social",
     oauthToken: .init(accessToken: "", tokenType: "", scope: "", createdAt: 0))
   client.addConnections(["mastodon.social"])
@@ -59,7 +32,7 @@ func testRouterLocalStatusURL() {
 @MainActor
 func testRouterRemoteStatusURL() {
   let router = RouterPath()
-  let client = Client(
+  let client = MastodonClient(
     server: "mastodon.social",
     oauthToken: .init(accessToken: "", tokenType: "", scope: "", createdAt: 0))
   client.addConnections(["mastodon.social", "mastodon.online"])

@@ -1,5 +1,5 @@
 {
-  "originHash" : "9d42c0a5696b2ea2df5db9f4f0bcf2ed56558636f36278a222b188cc2df705a7",
+  "originHash" : "928514fbf2a44300a6ba99e7b8b50e65f99eba3bf6503dd2be12a5fa76389623",
   "pins" : [
     {
       "identity" : "bodega",
@@ -22,10 +22,10 @@
     {
       "identity" : "emojitext",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/divadretlaw/EmojiText",
+      "location" : "https://github.com/Dimillian/EmojiText",
       "state" : {
-        "revision" : "3b0417959e23307d38fd0f72ba0110daa2122e3f",
-        "version" : "4.2.0"
+        "branch" : "fix-ios26",
+        "revision" : "3b11459a19c9406176a08b0f0599b98f88113296"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios-spm",
       "state" : {
-        "revision" : "adde1aa9c5fdb8cb9178ae1eed0981adcff07dd3",
-        "version" : "5.21.0"
+        "revision" : "334e4c6d711286744f1b9138934774f034c0a515",
+        "version" : "5.35.1"
       }
     },
     {
@@ -94,7 +94,7 @@
     {
       "identity" : "swift-markdown",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-markdown",
+      "location" : "https://github.com/swiftlang/swift-markdown",
       "state" : {
         "revision" : "ea79e83c8744d2b50b0dc2d5bbd1e857e1253bf9",
         "version" : "0.6.0"

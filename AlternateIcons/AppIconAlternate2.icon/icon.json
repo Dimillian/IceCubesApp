@@ -1,0 +1,217 @@
+{
+  "fill" : {
+    "linear-gradient" : [
+      "display-p3:0.49338,0.09624,0.75589,1.00000",
+      "display-p3:0.10553,0.00332,0.25763,1.00000"
+    ]
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "image-name" : "Path 2.svg",
+          "name" : "Path 2",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              78,
+              -211
+            ]
+          }
+        },
+        {
+          "glass" : false,
+          "image-name" : "Path copy.svg",
+          "name" : "Path copy",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              0,
+              -23
+            ]
+          }
+        },
+        {
+          "blend-mode-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : "normal"
+            }
+          ],
+          "fill-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : "none"
+            }
+          ],
+          "image-name" : "Rounded Rectangle copy 2.svg",
+          "name" : "Rounded Rectangle copy 2",
+          "opacity-specializations" : [
+            {
+              "value" : 0.9
+            },
+            {
+              "appearance" : "dark",
+              "value" : 0.8
+            }
+          ],
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              39,
+              -186.1796875
+            ]
+          }
+        },
+        {
+          "fill-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : "none"
+            }
+          ],
+          "image-name" : "Rounded Rectangle.svg",
+          "name" : "Rounded Rectangle",
+          "opacity-specializations" : [
+            {
+              "value" : 0.9
+            },
+            {
+              "appearance" : "dark",
+              "value" : 0.8
+            }
+          ],
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              -111,
+              -35
+            ]
+          }
+        },
+        {
+          "fill-specializations" : [
+            {
+              "appearance" : "dark",
+              "value" : "none"
+            }
+          ],
+          "image-name" : "Rounded Rectangle copy.svg",
+          "name" : "Rounded Rectangle copy",
+          "opacity-specializations" : [
+            {
+              "value" : 0.9
+            },
+            {
+              "appearance" : "dark",
+              "value" : 0.8
+            }
+          ],
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              96.51953125,
+              48
+            ]
+          }
+        },
+        {
+          "image-name" : "Oval 1.svg",
+          "name" : "Oval 1",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              -47.87109375,
+              -342.03125
+            ]
+          }
+        },
+        {
+          "image-name" : "Oval copy.svg",
+          "name" : "Oval copy",
+          "opacity" : 1,
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              278.50390625,
+              -375.5703125
+            ]
+          }
+        },
+        {
+          "image-name" : "Path.svg",
+          "name" : "Path"
+        },
+        {
+          "image-name" : "Path 1.svg",
+          "name" : "Path 1",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              10,
+              -277
+            ]
+          }
+        },
+        {
+          "glass" : false,
+          "hidden" : false,
+          "image-name" : "Shape.svg",
+          "name" : "Shape",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              1.216796875,
+              -248
+            ]
+          }
+        },
+        {
+          "hidden" : false,
+          "image-name" : "Oval.svg",
+          "name" : "Oval",
+          "position" : {
+            "scale" : 1,
+            "translation-in-points" : [
+              -0.62109375,
+              -247.6171875
+            ]
+          }
+        },
+        {
+          "glass" : false,
+          "image-name" : "Path copy 2.svg",
+          "name" : "Path copy 2",
+          "position" : {
+            "scale" : 1.1,
+            "translation-in-points" : [
+              2,
+              10
+            ]
+          }
+        }
+      ],
+      "position" : {
+        "scale" : 1,
+        "translation-in-points" : [
+          0,
+          97.5
+        ]
+      },
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.5
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}

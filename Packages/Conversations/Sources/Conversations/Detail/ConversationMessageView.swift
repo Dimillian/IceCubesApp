@@ -1,8 +1,9 @@
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import NukeUI
+import StatusKit
 import SwiftUI
 
 @MainActor
@@ -11,7 +12,7 @@ struct ConversationMessageView: View {
   @Environment(QuickLook.self) private var quickLook
   @Environment(RouterPath.self) private var routerPath
   @Environment(CurrentAccount.self) private var currentAccount
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(Theme.self) private var theme
 
   let message: Status
@@ -32,34 +33,42 @@ struct ConversationMessageView: View {
               routerPath.navigate(to: .accountDetailWithAccount(account: message.account))
             }
         }
-        VStack(alignment: .leading) {
-          EmojiTextApp(message.content, emojis: message.emojis)
-            .font(.scaledBody)
-            .foregroundColor(theme.labelColor)
-            .emojiText.size(Font.scaledBodyFont.emojiSize)
-            .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
-            .padding(6)
-            .environment(
-              \.openURL,
-              OpenURLAction { url in
-                routerPath.handleStatus(status: message, url: url)
-              })
-        }
-        #if os(visionOS)
-          .background(isOwnMessage ? Material.ultraThick : Material.regular)
-        #else
-          .background(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor)
-        #endif
-        .cornerRadius(8)
-        .padding(.leading, isOwnMessage ? 24 : 0)
-        .padding(.trailing, isOwnMessage ? 0 : 24)
-        .overlay {
-          if isLiked, message.account.id != currentAccount.account?.id {
-            likeView
+        if #available(iOS 26.0, *) {
+          textView
+          #if os(visionOS)
+            .background(isOwnMessage ? Material.ultraThick : Material.regular)
+          #else
+            .glassEffect(.regular.tint(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor),
+                          in: RoundedRectangle(cornerRadius: 8))
+          #endif
+          .padding(.leading, isOwnMessage ? 24 : 0)
+          .padding(.trailing, isOwnMessage ? 0 : 24)
+          .overlay {
+            if isLiked, message.account.id != currentAccount.account?.id {
+              likeView
+            }
           }
-        }
-        .contextMenu {
-          contextMenu
+          .contextMenu {
+            contextMenu
+          }
+        } else {
+          textView
+          #if os(visionOS)
+            .background(isOwnMessage ? Material.ultraThick : Material.regular)
+          #else
+            .background(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor)
+          #endif
+          .cornerRadius(8)
+          .padding(.leading, isOwnMessage ? 24 : 0)
+          .padding(.trailing, isOwnMessage ? 0 : 24)
+          .overlay {
+            if isLiked, message.account.id != currentAccount.account?.id {
+              likeView
+            }
+          }
+          .contextMenu {
+            contextMenu
+          }
         }
 
         if !isOwnMessage {
@@ -67,10 +76,11 @@ struct ConversationMessageView: View {
         }
       }
 
-      ForEach(message.mediaAttachments) { media in
-        makeMediaView(media)
+      if !message.mediaAttachments.isEmpty {
+        StatusRowMediaPreviewView(attachments: message.mediaAttachments, sensitive: false)
           .padding(.leading, isOwnMessage ? 24 : 0)
           .padding(.trailing, isOwnMessage ? 0 : 24)
+          .padding(.vertical, 12)
       }
 
       if message.id == String(conversation.lastStatus?.id ?? "") {
@@ -172,58 +182,6 @@ struct ConversationMessageView: View {
     }
   }
 
-  private func makeImageRequest(for url: URL, size: CGSize) -> ImageRequest {
-    ImageRequest(url: url, processors: [.resize(size: size)])
-  }
-
-  private func mediaWidth(proxy: GeometryProxy) -> CGFloat {
-    var width = proxy.frame(in: .local).width
-    if UIDevice.current.userInterfaceIdiom == .pad {
-      width = width * 0.60
-    }
-    return width
-  }
-
-  private func makeMediaView(_ attachement: MediaAttachment) -> some View {
-    GeometryReader { proxy in
-      let width = mediaWidth(proxy: proxy)
-      if let url = attachement.url {
-        LazyImage(
-          request: makeImageRequest(
-            for: url,
-            size: .init(width: width, height: 200))
-        ) { state in
-          if let image = state.image {
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(height: 200)
-              .frame(maxWidth: width)
-              .clipped()
-              .cornerRadius(8)
-              .padding(8)
-          } else if state.isLoading {
-            RoundedRectangle(cornerRadius: 8)
-              .fill(Color.gray)
-              .frame(height: 200)
-          }
-        }
-      }
-    }
-    .frame(height: 200)
-    .contentShape(Rectangle())
-    .onTapGesture {
-      #if targetEnvironment(macCatalyst) || os(visionOS)
-        openWindow(
-          value: WindowDestinationMedia.mediaViewer(
-            attachments: [attachement],
-            selectedAttachment: attachement))
-      #else
-        quickLook.prepareFor(selectedMediaAttachment: attachement, mediaAttachments: [attachement])
-      #endif
-    }
-  }
-
   private var likeView: some View {
     HStack {
       Spacer()
@@ -233,6 +191,23 @@ struct ConversationMessageView: View {
           .offset(x: -16, y: -7)
         Spacer()
       }
+    }
+  }
+  
+  @ViewBuilder
+  private var textView: some View {
+    VStack(alignment: .leading) {
+      EmojiTextApp(message.content, emojis: message.emojis)
+        .font(.scaledBody)
+        .foregroundColor(theme.labelColor)
+        .emojiText.size(Font.scaledBodyFont.emojiSize)
+        .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
+        .padding(6)
+        .environment(
+          \.openURL,
+          OpenURLAction { url in
+            routerPath.handleStatus(status: message, url: url)
+          })
     }
   }
 }

@@ -1,20 +1,20 @@
 import Foundation
 import Models
-import Network
+import NetworkClient
 
 protocol TimelineStatusFetching: Sendable {
   func fetchFirstPage(
-    client: Client?,
+    client: MastodonClient?,
     timeline: TimelineFilter
   ) async throws -> [Status]
   func fetchNewPages(
-    client: Client?,
+    client: MastodonClient?,
     timeline: TimelineFilter,
     minId: String,
     maxPages: Int
   ) async throws -> [Status]
   func fetchNextPage(
-    client: Client?,
+    client: MastodonClient?,
     timeline: TimelineFilter,
     lastId: String,
     offset: Int
@@ -26,7 +26,7 @@ enum StatusFetcherError: Error {
 }
 
 struct TimelineStatusFetcher: TimelineStatusFetching {
-  func fetchFirstPage(client: Client?, timeline: TimelineFilter) async throws -> [Status] {
+  func fetchFirstPage(client: MastodonClient?, timeline: TimelineFilter) async throws -> [Status] {
     guard let client = client else { throw StatusFetcherError.noClientAvailable }
     return try await client.get(
       endpoint: timeline.endpoint(
@@ -34,18 +34,20 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
         maxId: nil,
         minId: nil,
         offset: 0,
-        limit: 40))
+        limit: 50))
   }
 
-  func fetchNewPages(client: Client?, timeline: TimelineFilter, minId: String, maxPages: Int)
+  func fetchNewPages(client: MastodonClient?, timeline: TimelineFilter, minId: String, maxPages: Int)
     async throws -> [Status]
   {
     guard let client = client else { throw StatusFetcherError.noClientAvailable }
+    guard maxPages > 0 else { return [] }
+
+    var pagesLoaded = 0
     var allStatuses: [Status] = []
     var latestMinId = minId
-    for _ in 1...maxPages {
-      if Task.isCancelled { break }
 
+    while !Task.isCancelled, pagesLoaded < maxPages {
       let newStatuses: [Status] = try await client.get(
         endpoint: timeline.endpoint(
           sinceId: nil,
@@ -57,13 +59,14 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
 
       if newStatuses.isEmpty { break }
 
+      pagesLoaded += 1
       allStatuses.insert(contentsOf: newStatuses, at: 0)
       latestMinId = newStatuses.first?.id ?? latestMinId
     }
     return allStatuses
   }
 
-  func fetchNextPage(client: Client?, timeline: TimelineFilter, lastId: String, offset: Int)
+  func fetchNextPage(client: MastodonClient?, timeline: TimelineFilter, lastId: String, offset: Int)
     async throws -> [Status]
   {
     guard let client = client else { throw StatusFetcherError.noClientAvailable }

@@ -5,54 +5,72 @@ import DesignSystem
 import Env
 import KeychainSwift
 import MediaUI
-import Network
+import Models
+import NetworkClient
 import RevenueCat
 import StatusKit
+import SwiftData
 import SwiftUI
 import Timeline
 
 @MainActor
 struct AppView: View {
+  @Environment(\.modelContext) private var context
+  @Environment(\.openWindow) var openWindow
+  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(Theme.self) private var theme
   @Environment(StreamWatcher.self) private var watcher
-
-  @Environment(\.openWindow) var openWindow
-  @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+  @Environment(CurrentAccount.self) private var currentAccount
 
   @Binding var selectedTab: AppTab
   @Binding var appRouterPath: RouterPath
 
   @State var iosTabs = iOSTabs.shared
-  @State var sidebarTabs = SidebarTabs.shared
   @State var selectedTabScrollToTop: Int = -1
+  @State var timeline: TimelineFilter = .home
+
+  @AppStorage("timeline_pinned_filters") private var pinnedFilters: [TimelineFilter] = []
+
+  @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
+  @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
   var body: some View {
-    switch UIDevice.current.userInterfaceIdiom {
-    case .vision:
+    HStack(spacing: 0) {
       tabBarView
-    case .pad, .mac:
-      #if !os(visionOS)
-        sidebarView
-      #else
-        tabBarView
-      #endif
-    default:
-      tabBarView
+          .tabViewStyle(.sidebarAdaptable)
+      if horizontalSizeClass == .regular
+        && (UIDevice.current.userInterfaceIdiom == .pad
+          || UIDevice.current.userInterfaceIdiom == .mac),
+        appAccountsManager.currentClient.isAuth,
+        userPreferences.showiPadSecondaryColumn
+      {
+        Divider().edgesIgnoringSafeArea(.all)
+        notificationsSecondaryColumn
+      }
     }
   }
 
-  var availableTabs: [AppTab] {
+  var availableSections: [SidebarSections] {
     guard appAccountsManager.currentClient.isAuth else {
-      return AppTab.loggedOutTab()
+      return [SidebarSections.loggedOutTabs]
     }
     if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
-      return iosTabs.tabs
+      return [SidebarSections.iosTabs]
     } else if UIDevice.current.userInterfaceIdiom == .vision {
-      return AppTab.visionOSTab()
+      return [SidebarSections.visionOSTabs]
     }
-    return sidebarTabs.tabs.map { $0.tab }
+    var sections = SidebarSections.macOrIpadOSSections
+    if !localTimelines.isEmpty {
+      sections.append(.localTimeline)
+    }
+    if !tagGroups.isEmpty {
+      sections.append(.tagGroup)
+    }
+    sections.append(.app)
+    return sections
   }
 
   @ViewBuilder
@@ -66,19 +84,49 @@ struct AppView: View {
           updateTab(with: newTab)
         })
     ) {
-      ForEach(availableTabs) { tab in
-        tab.makeContentView(selectedTab: $selectedTab)
-          .tabItem {
-            if userPreferences.showiPhoneTabLabel {
-              tab.label
-                .environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
-            } else {
-              Image(systemName: tab.iconName)
+      ForEach(availableSections) { section in
+        TabSection(section.title) {
+          if section == .localTimeline {
+            ForEach(localTimelines) { timeline in
+              let tab = AppTab.anyTimelineFilter(
+                filter: .remoteLocal(server: timeline.instance, filter: .local))
+              Tab(value: tab) {
+                tab.makeContentView(
+                  homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+              } label: {
+                tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+              }
+              .tabPlacement(tab.tabPlacement)
+            }
+          } else if section == .tagGroup {
+            ForEach(tagGroups) { tagGroup in
+              let tab = AppTab.anyTimelineFilter(
+                filter: TimelineFilter.tagGroup(
+                  title: tagGroup.title,
+                  tags: tagGroup.tags,
+                  symbolName: tagGroup.symbolName))
+              Tab(value: tab) {
+                tab.makeContentView(
+                  homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+              } label: {
+                tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+              }
+              .tabPlacement(tab.tabPlacement)
+            }
+          } else {
+            ForEach(section.tabs) { tab in
+              Tab(value: tab, role: tab == .explore ? .search : .none) {
+                tab.makeContentView(
+                  homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+              } label: {
+                tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+              }
+              .tabPlacement(tab.tabPlacement)
+              .badge(badgeFor(tab: tab))
             }
           }
-          .tag(tab)
-          .badge(badgeFor(tab: tab))
-          .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .tabBar)
+        }
+        .tabPlacement(.sidebarOnly)
       }
     }
     .id(appAccountsManager.currentClient.id)
@@ -102,7 +150,7 @@ struct AppView: View {
     SoundEffectManager.shared.playSound(.tabSelection)
 
     if selectedTab == newTab {
-      selectedTabScrollToTop = newTab.rawValue
+      selectedTabScrollToTop = newTab.id
       DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
         selectedTabScrollToTop = -1
       }
@@ -120,66 +168,6 @@ struct AppView: View {
       return watcher.unreadNotificationsCount + (userPreferences.notificationsCount[token] ?? 0)
     }
     return 0
-  }
-
-  #if !os(visionOS)
-    var sidebarView: some View {
-      SideBarView(
-        selectedTab: .init(
-          get: {
-            selectedTab
-          },
-          set: { newTab in
-            updateTab(with: newTab)
-          }), tabs: availableTabs
-      ) {
-        HStack(spacing: 0) {
-          if #available(iOS 18.0, *) {
-            baseTabView
-              #if targetEnvironment(macCatalyst)
-                .tabViewStyle(.sidebarAdaptable)
-                .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
-                  tabview.sidebar.isHidden = true
-                }
-              #else
-                .tabViewStyle(.tabBarOnly)
-              #endif
-          } else {
-            baseTabView
-          }
-          if horizontalSizeClass == .regular,
-            appAccountsManager.currentClient.isAuth,
-            userPreferences.showiPadSecondaryColumn
-          {
-            Divider().edgesIgnoringSafeArea(.all)
-            notificationsSecondaryColumn
-          }
-        }
-      }
-      .environment(appRouterPath)
-      .environment(\.selectedTabScrollToTop, selectedTabScrollToTop)
-    }
-  #endif
-
-  private var baseTabView: some View {
-    TabView(selection: $selectedTab) {
-      ForEach(availableTabs) { tab in
-        tab
-          .makeContentView(selectedTab: $selectedTab)
-          .toolbar(horizontalSizeClass == .regular ? .hidden : .visible, for: .tabBar)
-          .tabItem {
-            tab.label
-          }
-          .tag(tab)
-      }
-    }
-    #if !os(visionOS)
-      .introspect(.tabView, on: .iOS(.v17, .v18)) { (tabview: UITabBarController) in
-        tabview.tabBar.isHidden = horizontalSizeClass == .regular
-        tabview.customizableViewControllers = []
-        tabview.moreNavigationController.isNavigationBarHidden = true
-      }
-    #endif
   }
 
   var notificationsSecondaryColumn: some View {

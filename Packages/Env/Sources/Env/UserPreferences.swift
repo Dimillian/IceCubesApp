@@ -1,7 +1,7 @@
 import Combine
 import Foundation
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
@@ -11,7 +11,6 @@ import SwiftUI
     @AppStorage("show_translate_button_inline") public var showTranslateButton: Bool = true
     @AppStorage("show_pending_at_bottom") public var pendingShownAtBottom: Bool = false
     @AppStorage("show_pending_left") public var pendingShownLeft: Bool = false
-    @AppStorage("is_open_ai_enabled") public var isOpenAIEnabled: Bool = true
 
     @AppStorage("recently_used_languages") public var recentlyUsedLanguages: [String] = []
     @AppStorage("social_keyboard_composer") public var isSocialKeyboardEnabled: Bool = false
@@ -40,7 +39,6 @@ import SwiftUI
     @AppStorage("haptic_button_press") public var hapticButtonPressEnabled = true
     @AppStorage("sound_effect_enabled") public var soundEffectEnabled = true
 
-    @AppStorage("show_tab_label_iphone") public var showiPhoneTabLabel = true
     @AppStorage("show_alt_text_for_media") public var showAltTextForMedia = true
 
     @AppStorage("show_second_column_ipad") public var showiPadSecondaryColumn = true
@@ -64,7 +62,8 @@ import SwiftUI
     @AppStorage("share-button-behavior") public var shareButtonBehavior:
       PreferredShareButtonBehavior = .linkOnly
 
-    @AppStorage("fast_refresh") public var fastRefreshEnabled: Bool = false
+    @AppStorage("boost-button-behavior") public var boostButtonBehavior:
+      PreferredBoostButtonBehavior = .both
 
     @AppStorage("max_reply_indentation") public var maxReplyIndentation: UInt = 7
     @AppStorage("show_reply_indentation") public var showReplyIndentation: Bool = true
@@ -72,8 +71,13 @@ import SwiftUI
     @AppStorage("show_account_popover") public var showAccountPopover: Bool = true
 
     @AppStorage("sidebar_expanded") public var isSidebarExpanded: Bool = false
+    
+    @AppStorage("stream_home_timeline") public var streamHomeTimeline: Bool = false
+    @AppStorage("full_timeline_fetch") public var fullTimelineFetch: Bool = false
 
-    @AppStorage("stream_new_posts") public var isPostsStreamingEnabled: Bool = false
+    // Notifications
+    @AppStorage("notifications-truncate-status-content")
+    public var notificationsTruncateStatusContent: Bool = true
 
     init() {
       prepareTranslationType()
@@ -105,7 +109,7 @@ import SwiftUI
   public static let shared = UserPreferences()
   private let storage = Storage()
 
-  private var client: Client?
+  private var client: MastodonClient?
 
   public var preferredBrowser: PreferredBrowser {
     didSet {
@@ -147,12 +151,6 @@ import SwiftUI
       } else {
         return .topTrailing
       }
-    }
-  }
-
-  public var isOpenAIEnabled: Bool {
-    didSet {
-      storage.isOpenAIEnabled = isOpenAIEnabled
     }
   }
 
@@ -270,12 +268,6 @@ import SwiftUI
     }
   }
 
-  public var showiPhoneTabLabel: Bool {
-    didSet {
-      storage.showiPhoneTabLabel = showiPhoneTabLabel
-    }
-  }
-
   public var showAltTextForMedia: Bool {
     didSet {
       storage.showAltTextForMedia = showAltTextForMedia
@@ -342,9 +334,9 @@ import SwiftUI
     }
   }
 
-  public var fastRefreshEnabled: Bool {
+  public var boostButtonBehavior: PreferredBoostButtonBehavior {
     didSet {
-      storage.fastRefreshEnabled = fastRefreshEnabled
+      storage.boostButtonBehavior = boostButtonBehavior
     }
   }
 
@@ -371,10 +363,23 @@ import SwiftUI
       storage.isSidebarExpanded = isSidebarExpanded
     }
   }
-
-  public var isPostsStreamingEnabled: Bool {
+  
+  public var streamHomeTimeline: Bool {
     didSet {
-      storage.isPostsStreamingEnabled = isPostsStreamingEnabled
+      storage.streamHomeTimeline = streamHomeTimeline
+    }
+  }
+
+  public var fullTimelineFetch: Bool {
+    didSet {
+      storage.fullTimelineFetch = fullTimelineFetch
+    }
+  }
+
+  // Notifications
+  public var notificationsTruncateStatusContent: Bool {
+    didSet {
+      storage.notificationsTruncateStatusContent = notificationsTruncateStatusContent
     }
   }
 
@@ -480,7 +485,7 @@ import SwiftUI
 
   public var serverPreferences: ServerPreferences?
 
-  public func setClient(client: Client) {
+  public func setClient(client: MastodonClient) {
     self.client = client
     Task {
       await refreshServerPreferences()
@@ -517,7 +522,6 @@ import SwiftUI
   private init() {
     preferredBrowser = storage.preferredBrowser
     showTranslateButton = storage.showTranslateButton
-    isOpenAIEnabled = storage.isOpenAIEnabled
     recentlyUsedLanguages = storage.recentlyUsedLanguages
     isSocialKeyboardEnabled = storage.isSocialKeyboardEnabled
     useInstanceContentSettings = storage.useInstanceContentSettings
@@ -536,7 +540,6 @@ import SwiftUI
     hapticTimelineEnabled = storage.hapticTimelineEnabled
     hapticButtonPressEnabled = storage.hapticButtonPressEnabled
     soundEffectEnabled = storage.soundEffectEnabled
-    showiPhoneTabLabel = storage.showiPhoneTabLabel
     showAltTextForMedia = storage.showAltTextForMedia
     showiPadSecondaryColumn = storage.showiPadSecondaryColumn
     swipeActionsStatusTrailingRight = storage.swipeActionsStatusTrailingRight
@@ -548,15 +551,17 @@ import SwiftUI
     requestedReview = storage.requestedReview
     collapseLongPosts = storage.collapseLongPosts
     shareButtonBehavior = storage.shareButtonBehavior
+    boostButtonBehavior = storage.boostButtonBehavior
     pendingShownAtBottom = storage.pendingShownAtBottom
     pendingShownLeft = storage.pendingShownLeft
-    fastRefreshEnabled = storage.fastRefreshEnabled
     maxReplyIndentation = storage.maxReplyIndentation
     showReplyIndentation = storage.showReplyIndentation
     showAccountPopover = storage.showAccountPopover
     muteVideo = storage.muteVideo
     isSidebarExpanded = storage.isSidebarExpanded
-    isPostsStreamingEnabled = storage.isPostsStreamingEnabled
+    notificationsTruncateStatusContent = storage.notificationsTruncateStatusContent
+    streamHomeTimeline = storage.streamHomeTimeline
+    fullTimelineFetch = storage.fullTimelineFetch
   }
 }
 

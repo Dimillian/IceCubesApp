@@ -2,14 +2,14 @@ import Account
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
 struct AboutView: View {
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
 
   @State private var dimillianAccount: AccountsListRowViewModel?
   @State private var iceCubesAccount: AccountsListRowViewModel?
@@ -34,15 +34,15 @@ struct AboutView: View {
               .resizable()
               .frame(width: 50, height: 50)
               .cornerRadius(4)
-            Image(uiImage: .init(named: "AppIconAlternate46-image") ?? .init())
+            Image(uiImage: .init(named: "AppIconAlternate1-image") ?? .init())
               .resizable()
               .frame(width: 50, height: 50)
               .cornerRadius(4)
-            Image(uiImage: .init(named: "AppIconAlternate17-image") ?? .init())
+            Image(uiImage: .init(named: "AppIconAlternate2-image") ?? .init())
               .resizable()
               .frame(width: 50, height: 50)
               .cornerRadius(4)
-            Image(uiImage: .init(named: "AppIconAlternate23-image") ?? .init())
+            Image(uiImage: .init(named: "AppIconAlternate3-image") ?? .init())
               .resizable()
               .frame(width: 50, height: 50)
               .cornerRadius(4)
@@ -176,7 +176,7 @@ struct AboutView: View {
     }
   }
 
-  private func fetchAccountViewModel(_ client: Client, account: String) async throws
+  private func fetchAccountViewModel(_ client: MastodonClient, account: String) async throws
     -> AccountsListRowViewModel
   {
     let dimillianAccount: Account = try await client.get(endpoint: Accounts.lookup(name: account))

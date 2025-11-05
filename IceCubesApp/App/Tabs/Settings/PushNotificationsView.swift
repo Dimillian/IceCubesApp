@@ -2,7 +2,7 @@ import AppAccount
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import NukeUI
 import SwiftUI
 import UserNotifications
@@ -89,7 +89,7 @@ struct PushNotificationsView: View {
                 updateSubscription()
               })
           ) {
-            Label("settings.push.boosts", image: "Rocket")
+            Label("settings.push.boosts", systemImage: "arrow.2.squarepath")
           }
           Toggle(
             isOn: .init(

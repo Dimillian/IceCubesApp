@@ -1,7 +1,7 @@
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
@@ -10,7 +10,7 @@ struct StatusRowActionsView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(StatusDataController.self) private var statusDataController
   @Environment(UserPreferences.self) private var userPreferences
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(SceneDelegate.self) private var sceneDelegate
 
   @Environment(\.openWindow) private var openWindow
@@ -21,6 +21,12 @@ struct StatusRowActionsView: View {
   @State private var isShareAsImageSheetPresented: Bool = false
 
   @Binding var isBlockConfirmationPresented: Bool
+
+  struct ActionButtonConfiguration {
+    let display: Action
+    let trigger: Action
+    let showsMenu: Bool
+  }
 
   var viewModel: StatusRowViewModel
 
@@ -46,7 +52,7 @@ struct StatusRowActionsView: View {
 
   @MainActor
   enum Action {
-    case respond, boost, favorite, bookmark, share, menu
+    case respond, boost, quote, favorite, bookmark, share, menu
 
     func image(dataController: StatusDataController, privateBoost: Bool = false) -> Image {
       switch self {
@@ -55,18 +61,20 @@ struct StatusRowActionsView: View {
       case .boost:
         if privateBoost {
           if dataController.isReblogged {
-            return Image("Rocket.Fill")
+            return Image(systemName: "arrow.2.squarepath")
           } else {
             return Image(systemName: "lock.rotation")
           }
         }
-        return Image(dataController.isReblogged ? "Rocket.Fill" : "Rocket")
+        return Image(systemName: "arrow.2.squarepath")
       case .favorite:
         return Image(systemName: dataController.isFavorited ? "star.fill" : "star")
       case .bookmark:
         return Image(systemName: dataController.isBookmarked ? "bookmark.fill" : "bookmark")
       case .share:
         return Image(systemName: "square.and.arrow.up")
+      case .quote:
+        return Image(systemName: "quote.bubble")
       case .menu:
         return Image(systemName: "ellipsis")
       }
@@ -97,6 +105,8 @@ struct StatusRowActionsView: View {
         return "status.action.share"
       case .menu:
         return "status.context.menu"
+      case .quote:
+        return "Quote"
       }
     }
 
@@ -109,8 +119,8 @@ struct StatusRowActionsView: View {
         return dataController.repliesCount
       case .favorite:
         return dataController.favoritesCount
-      case .boost:
-        return dataController.reblogsCount
+      case .boost, .quote:
+        return dataController.reblogsCount + dataController.quotesCount
       case .share, .bookmark, .menu:
         return nil
       }
@@ -118,7 +128,7 @@ struct StatusRowActionsView: View {
 
     func tintColor(theme: Theme) -> Color? {
       switch self {
-      case .respond, .share, .menu:
+      case .respond, .share, .menu, .quote:
         nil
       case .favorite:
         .yellow
@@ -131,7 +141,7 @@ struct StatusRowActionsView: View {
 
     func isOn(dataController: StatusDataController) -> Bool {
       switch self {
-      case .respond, .share, .menu: false
+      case .respond, .share, .menu, .quote: false
       case .favorite: dataController.isFavorited
       case .bookmark: dataController.isBookmarked
       case .boost: dataController.isReblogged
@@ -141,201 +151,202 @@ struct StatusRowActionsView: View {
 
   var body: some View {
     VStack(spacing: 12) {
-      HStack {
-        ForEach(actions, id: \.self) { action in
-          if action == .share {
-            if let urlString = viewModel.finalStatus.url,
-              let url = URL(string: urlString)
-            {
-              switch userPreferences.shareButtonBehavior {
-              case .linkOnly:
-                ShareLink(item: url) {
-                  action.image(dataController: statusDataController)
-                    .foregroundColor(Color(UIColor.secondaryLabel))
-                    .padding(.vertical, 6)
-                    .padding(.horizontal, 8)
-                    .contentShape(Rectangle())
-                    #if targetEnvironment(macCatalyst)
-                      .font(.scaledBody)
-                    #else
-                      .font(.body)
-                      .dynamicTypeSize(.large)
-                    #endif
-                }
-                .buttonStyle(.borderless)
-                #if !os(visionOS)
-                  .offset(x: -8)
-                #endif
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel("status.action.share-link")
-              case .linkAndText:
-                ShareLink(
-                  item: url,
-                  subject: Text(viewModel.finalStatus.account.safeDisplayName),
-                  message: Text(viewModel.finalStatus.content.asRawText)
-                ) {
-                  action.image(dataController: statusDataController)
-                    .foregroundColor(Color(UIColor.secondaryLabel))
-                    .padding(.vertical, 6)
-                    .padding(.horizontal, 8)
-                    .contentShape(Rectangle())
-                    #if targetEnvironment(macCatalyst)
-                      .font(.scaledBody)
-                    #else
-                      .font(.body)
-                      .dynamicTypeSize(.large)
-                    #endif
-                }
-                .buttonStyle(.borderless)
-                #if !os(visionOS)
-                  .offset(x: -8)
-                #endif
-                .accessibilityElement(children: .combine)
-                .accessibilityLabel("status.action.share-link")
-              }
-            }
-            Spacer()
-          } else if action == .menu {
-            Menu {
-              StatusRowContextMenu(
-                viewModel: viewModel,
-                showTextForSelection: $showTextForSelection,
-                isBlockConfirmationPresented: $isBlockConfirmationPresented,
-                isShareAsImageSheetPresented: $isShareAsImageSheetPresented
-              )
-              .onAppear {
-                Task {
-                  await viewModel.loadAuthorRelationship()
-                }
-              }
-            } label: {
-              Label("", systemImage: "ellipsis")
-                .padding(.vertical, 6)
-            }
-            .menuStyle(.button)
-            .buttonStyle(.borderless)
-            .foregroundStyle(.secondary)
-            .contentShape(Rectangle())
-            .accessibilityLabel("status.action.context-menu")
-          } else {
-            actionButton(action: action)
-            Spacer()
-          }
-        }
-      }
+      actionsRow
     }
     .fixedSize(horizontal: false, vertical: true)
-    .sheet(isPresented: $showTextForSelection) {
-      let content =
-        viewModel.status.reblog?.content.asSafeMarkdownAttributedString
-        ?? viewModel.status.content.asSafeMarkdownAttributedString
-      StatusRowSelectableTextView(content: content)
-        .tint(theme.tintColor)
-    }
-    .sheet(isPresented: $isShareAsImageSheetPresented) {
-      let view =
-        HStack {
-          StatusRowView(viewModel: viewModel, context: .timeline)
-            .padding(8)
-        }
-        .environment(\.isInCaptureMode, true)
-        .environment(RouterPath())
-        .environment(QuickLook.shared)
-        .environment(theme)
-        .environment(client)
-        .environment(sceneDelegate)
-        .environment(UserPreferences.shared)
-        .environment(CurrentAccount.shared)
-        .environment(CurrentInstance.shared)
-        .environment(statusDataController)
-        .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
-        .foregroundColor(theme.labelColor)
-        .background(theme.primaryBackgroundColor)
-        .frame(width: sceneDelegate.windowWidth - 12)
-        .tint(theme.tintColor)
-      let renderer = ImageRenderer(content: AnyView(view))
-      renderer.isOpaque = true
-      renderer.scale = 3.0
-      return StatusRowShareAsImageView(
-        viewModel: viewModel,
-        renderer: renderer
-      )
-      .tint(theme.tintColor)
+    .sheet(isPresented: $showTextForSelection, content: makeSelectableTextSheet)
+    .sheet(isPresented: $isShareAsImageSheetPresented, content: makeShareAsImageSheet)
+  }
+
+  private var actionsRow: some View {
+    HStack {
+      ForEach(actions, id: \.self) { action in
+        actionView(for: action)
+      }
     }
   }
 
-  private func actionButton(action: Action) -> some View {
-    Button {
-      handleAction(action: action)
-    } label: {
-      HStack(spacing: 2) {
-        if action == .boost {
-          action
-            .image(dataController: statusDataController, privateBoost: privateBoost())
-            .imageScale(.medium)
-            .fontWeight(.black)
-            #if targetEnvironment(macCatalyst)
-              .font(.scaledBody)
-            #else
-              .font(.body)
-              .dynamicTypeSize(.large)
-            #endif
-        } else {
-          action
-            .image(dataController: statusDataController, privateBoost: privateBoost())
-            #if targetEnvironment(macCatalyst)
-              .font(.scaledBody)
-            #else
-              .font(.body)
-              .dynamicTypeSize(.large)
-            #endif
-        }
-        if !isNarrow,
-          let count = action.count(
-            dataController: statusDataController,
-            isFocused: isFocused,
-            theme: theme), !viewModel.isRemote
-        {
-          Text(count, format: .number.notation(.compactName))
-            .lineLimit(1)
-            .minimumScaleFactor(0.6)
-            .contentTransition(.numericText(value: Double(count)))
-            .foregroundColor(Color(UIColor.secondaryLabel))
-            #if targetEnvironment(macCatalyst)
-              .font(.scaledFootnote)
-            #else
-              .font(.footnote)
-              .dynamicTypeSize(.medium)
-            #endif
-            .monospacedDigit()
-            .opacity(count > 0 ? 1 : 0)
+  @ViewBuilder
+  private func actionView(for action: Action) -> some View {
+    switch action {
+    case .share:
+      shareActionView(for: action)
+    case .menu:
+      menuActionView()
+    default:
+      actionButton(action: action)
+    }
+  }
+
+  @ViewBuilder
+  private func shareActionView(for action: Action) -> some View {
+    if let urlString = viewModel.finalStatus.url,
+      let url = URL(string: urlString)
+    {
+      HStack {
+        shareLink(for: url, action: action)
+        Spacer()
+      }
+    } else {
+      EmptyView()
+    }
+  }
+
+  @ViewBuilder
+  private func menuActionView() -> some View {
+    Menu {
+      StatusRowContextMenu(
+        viewModel: viewModel,
+        showTextForSelection: $showTextForSelection,
+        isBlockConfirmationPresented: $isBlockConfirmationPresented,
+        isShareAsImageSheetPresented: $isShareAsImageSheetPresented
+      )
+      .onAppear {
+        Task {
+          await viewModel.loadAuthorRelationship()
         }
       }
+    } label: {
+      Label("", systemImage: "ellipsis")
+        .padding(.vertical, 6)
+    }
+    .menuStyle(.button)
+    .buttonStyle(.borderless)
+    .foregroundStyle(.secondary)
+    .tint(.primary)
+    .contentShape(Rectangle())
+    .accessibilityLabel("status.action.context-menu")
+  }
+
+  @ViewBuilder
+  private func shareLink(for url: URL, action: Action) -> some View {
+    switch userPreferences.shareButtonBehavior {
+    case .linkOnly:
+      shareLinkView(
+        ShareLink(item: url) {
+          shareButtonLabel(for: action)
+        }
+      )
+    case .linkAndText:
+      shareLinkView(
+        ShareLink(
+          item: url,
+          subject: Text(viewModel.finalStatus.account.safeDisplayName),
+          message: Text(viewModel.finalStatus.content.asRawText)
+        ) {
+          shareButtonLabel(for: action)
+        }
+      )
+    }
+  }
+
+  @ViewBuilder
+  private func shareLinkView<V: View>(_ view: V) -> some View {
+    view
+      .buttonStyle(.borderless)
+      #if !os(visionOS)
+        .offset(x: -8)
+      #endif
+      .accessibilityElement(children: .combine)
+      .accessibilityLabel("status.action.share-link")
+  }
+
+  private func shareButtonLabel(for action: Action) -> some View {
+    action
+      .image(dataController: statusDataController)
+      .foregroundColor(Color(UIColor.secondaryLabel))
       .padding(.vertical, 6)
       .padding(.horizontal, 8)
       .contentShape(Rectangle())
-    }
-    #if os(visionOS)
-      .buttonStyle(.borderless)
-      .foregroundColor(Color(UIColor.secondaryLabel))
-    #else
-      .buttonStyle(
-        .statusAction(
-          isOn: action.isOn(dataController: statusDataController),
-          tintColor: action.tintColor(theme: theme)
-        )
-      )
-      .offset(x: -8)
-    #endif
-    .disabled(
-      action == .boost
-        && (viewModel.status.visibility == .direct
-          || viewModel.status.visibility == .priv
-            && viewModel.status.account.id != currentAccount.account?.id)
+      #if targetEnvironment(macCatalyst)
+        .font(.scaledBody)
+      #else
+        .font(.body)
+        .dynamicTypeSize(.large)
+      #endif
+  }
+
+  private func makeSelectableTextSheet() -> some View {
+    let content =
+      viewModel.status.reblog?.content.asSafeMarkdownAttributedString
+      ?? viewModel.status.content.asSafeMarkdownAttributedString
+    return StatusRowSelectableTextView(content: content)
+      .tint(theme.tintColor)
+  }
+
+  private func makeShareAsImageSheet() -> some View {
+    let renderer = ImageRenderer(content: AnyView(shareCaptureView))
+    renderer.isOpaque = true
+    renderer.scale = 3.0
+    return StatusRowShareAsImageView(
+      viewModel: viewModel,
+      renderer: renderer
     )
-    .accessibilityElement(children: .combine)
-    .accessibilityLabel(
-      action.accessibilityLabel(dataController: statusDataController, privateBoost: privateBoost()))
+    .tint(theme.tintColor)
+  }
+
+  private var shareCaptureView: some View {
+    HStack {
+      StatusRowView(viewModel: viewModel, context: .timeline)
+        .padding(8)
+    }
+    .environment(\.isInCaptureMode, true)
+    .environment(RouterPath())
+    .environment(QuickLook.shared)
+    .environment(theme)
+    .environment(client)
+    .environment(sceneDelegate)
+    .environment(UserPreferences.shared)
+    .environment(CurrentAccount.shared)
+    .environment(CurrentInstance.shared)
+    .environment(statusDataController)
+    .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
+    .foregroundColor(theme.labelColor)
+    .background(theme.primaryBackgroundColor)
+    .frame(width: sceneDelegate.windowWidth - 12)
+    .tint(theme.tintColor)
+  }
+
+  @ViewBuilder
+  private func actionButton(action: Action) -> some View {
+    let configuration = configuration(for: action)
+    let finalStatus = viewModel.finalStatus
+    let isQuoteUnavailable =
+      (finalStatus.visibility == .priv || finalStatus.visibility == .direct)
+      || finalStatus.quoteApproval?.currentUser == .denied
+    let shouldDisableAction =
+      (configuration.trigger == .boost
+        && (finalStatus.visibility == .priv || finalStatus.visibility == .direct))
+      || (configuration.trigger == .quote && isQuoteUnavailable)
+
+    StatusActionButton(
+      configuration: configuration,
+      statusDataController: statusDataController,
+      status: viewModel.status,
+      quoteStatus: finalStatus,
+      theme: theme,
+      isFocused: isFocused,
+      isNarrow: isNarrow,
+      isRemoteStatus: viewModel.isRemote,
+      privateBoost: privateBoost(),
+      isDisabled: shouldDisableAction,
+      handleAction: handleAction(action:)
+    )
+  }
+
+  private func configuration(for action: Action) -> ActionButtonConfiguration {
+    guard action == .boost else {
+      return .init(display: action, trigger: action, showsMenu: false)
+    }
+
+    switch userPreferences.boostButtonBehavior {
+    case .both:
+      return .init(display: .boost, trigger: .boost, showsMenu: true)
+    case .boostOnly:
+      return .init(display: .boost, trigger: .boost, showsMenu: false)
+    case .quoteOnly:
+      return .init(display: .quote, trigger: .quote, showsMenu: false)
+    }
   }
 
   private func handleAction(action: Action) {
@@ -366,6 +377,13 @@ struct StatusRowActionsView: View {
       case .boost:
         SoundEffectManager.shared.playSound(.boost)
         await statusDataController.toggleReblog(remoteStatus: viewModel.localStatusId)
+      case .quote:
+        SoundEffectManager.shared.playSound(.boost)
+        #if targetEnvironment(macCatalyst) || os(visionOS)
+          openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
+        #else
+          viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+        #endif
       default:
         break
       }

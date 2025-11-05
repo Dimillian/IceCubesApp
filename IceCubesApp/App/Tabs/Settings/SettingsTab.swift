@@ -4,7 +4,7 @@ import DesignSystem
 import Env
 import Foundation
 import Models
-import Network
+import NetworkClient
 import Nuke
 import SwiftData
 import SwiftUI
@@ -17,7 +17,7 @@ struct SettingsTabs: View {
 
   @Environment(PushNotificationsService.self) private var pushNotifications
   @Environment(UserPreferences.self) private var preferences
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(Theme.self) private var theme
@@ -39,8 +39,6 @@ struct SettingsTabs: View {
         accountsSection
         generalSection
         otherSections
-        postStreamingSection
-        AISection
         cacheSection
       }
       .scrollContentBackground(.hidden)
@@ -49,7 +47,6 @@ struct SettingsTabs: View {
       #endif
       .navigationTitle(Text("settings.title"))
       .navigationBarTitleDisplayMode(.inline)
-      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
       .toolbar {
         if isModal {
           ToolbarItem {
@@ -147,7 +144,7 @@ struct SettingsTabs: View {
     if let token = account.oauthToken,
       let sub = pushNotifications.subscriptions.first(where: { $0.account.token == token })
     {
-      let client = Client(server: account.server, oauthToken: token)
+      let client = MastodonClient(server: account.server, oauthToken: token)
       await timelineCache.clearCache(for: client.id)
       await sub.deleteSubscription()
       appAccountsManager.delete(account: account)
@@ -159,7 +156,7 @@ struct SettingsTabs: View {
   private var generalSection: some View {
     Section("settings.section.general") {
       if let instanceData = currentInstance.instance {
-        NavigationLink(destination: InstanceInfoView(instance: instanceData)) {
+        NavigationLink(value: RouterDestination.instanceInfo(instance: instanceData)) {
           Label("settings.general.instance", systemImage: "server.rack")
         }
       }
@@ -189,12 +186,6 @@ struct SettingsTabs: View {
       if UIDevice.current.userInterfaceIdiom == .phone || horizontalSizeClass == .compact {
         NavigationLink(destination: TabbarEntriesSettingsView()) {
           Label("settings.general.tabbarEntries", systemImage: "platter.filled.bottom.iphone")
-        }
-      } else if UIDevice.current.userInterfaceIdiom == .pad
-        || UIDevice.current.userInterfaceIdiom == .mac
-      {
-        NavigationLink(destination: SidebarEntriesSettingsView()) {
-          Label("settings.general.sidebarEntries", systemImage: "sidebar.squares.leading")
         }
       }
       NavigationLink(destination: TranslationSettingsView()) {
@@ -240,51 +231,16 @@ struct SettingsTabs: View {
       Toggle(isOn: $preferences.soundEffectEnabled) {
         Label("settings.other.sound-effect", systemImage: "hifispeaker")
       }
-      Toggle(isOn: $preferences.fastRefreshEnabled) {
-        Label("settings.other.fast-refresh", systemImage: "arrow.clockwise")
+      Toggle(isOn: $preferences.streamHomeTimeline) {
+        Label("Stream home timeline", systemImage: "antenna.radiowaves.left.and.right")
+          .symbolVariant(preferences.streamHomeTimeline ? .none : .slash)
+      }
+      Toggle(isOn: $preferences.fullTimelineFetch) {
+        Label("Full timeline fetch", systemImage: "arrow.triangle.2.circlepath")
+          .symbolVariant(preferences.fullTimelineFetch ? .none : .slash)
       }
     } header: {
       Text("settings.section.other")
-    } footer: {
-      Text("settings.section.other.footer")
-    }
-    #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-    #endif
-  }
-
-  @ViewBuilder
-  private var postStreamingSection: some View {
-    @Bindable var preferences = preferences
-    Section {
-      Toggle(isOn: $preferences.isPostsStreamingEnabled) {
-        Label("Posts streaming", systemImage: "clock.badge")
-      }
-    } header: {
-      Text("Streaming")
-    } footer: {
-      Text(
-        "Enabling post streaming will automatically add new posts at the top of your home timeline. Disable if you get performance issues."
-      )
-    }
-    #if !os(visionOS)
-      .listRowBackground(theme.primaryBackgroundColor)
-    #endif
-  }
-
-  @ViewBuilder
-  private var AISection: some View {
-    @Bindable var preferences = preferences
-    Section {
-      Toggle(isOn: $preferences.isOpenAIEnabled) {
-        Label("settings.other.hide-openai", systemImage: "faxmachine")
-      }
-    } header: {
-      Text("AI")
-    } footer: {
-      Text(
-        "Disable to hide AI assisted tool options such as copywritting and alt-image description generated using AI. Uses OpenAI API. See our Privacy Policy for more information."
-      )
     }
     #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)

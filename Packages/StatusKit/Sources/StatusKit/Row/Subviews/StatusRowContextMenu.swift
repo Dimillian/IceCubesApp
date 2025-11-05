@@ -1,14 +1,14 @@
 import DesignSystem
 import Env
 import Foundation
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
 struct StatusRowContextMenu: View {
   @Environment(\.openWindow) var openWindow
 
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(SceneDelegate.self) private var sceneDelegate
   @Environment(UserPreferences.self) private var preferences
   @Environment(CurrentAccount.self) private var account
@@ -30,10 +30,24 @@ struct StatusRowContextMenu: View {
       return Label("status.action.boost-to-followers", systemImage: "lock.rotation")
     }
 
-    if statusDataController.isReblogged {
-      return Label("status.action.unboost", image: "Rocket.Fill")
+    return Label("status.action.boost", systemImage: "arrow.2.squarepath")
+  }
+
+  var isQuoteDisabled: Bool {
+    viewModel.finalStatus.quoteApproval?.currentUser == .denied
+      || viewModel.finalStatus.visibility != .pub
+  }
+
+  var isBoostDisabled: Bool {
+    switch viewModel.finalStatus.visibility {
+    case .pub:
+      return false
+    case .priv:
+      guard let currentAccountId = account.account?.id else { return true }
+      return viewModel.finalStatus.account.id != currentAccountId
+    case .unlisted, .direct:
+      return true
     }
-    return Label("status.action.boost", image: "Rocket")
   }
 
   var body: some View {
@@ -51,6 +65,18 @@ struct StatusRowContextMenu: View {
         Button {
           Task {
             HapticManager.shared.fireHaptic(.notification(.success))
+            SoundEffectManager.shared.playSound(.boost)
+            await statusDataController.toggleReblog(remoteStatus: nil)
+          }
+        } label: {
+          boostLabel
+        }
+        .disabled(isBoostDisabled)
+        .opacity(isBoostDisabled ? 0.35 : 1)
+
+        Button {
+          Task {
+            HapticManager.shared.fireHaptic(.notification(.success))
             SoundEffectManager.shared.playSound(.favorite)
             await statusDataController.toggleFavorite(remoteStatus: nil)
           }
@@ -60,20 +86,7 @@ struct StatusRowContextMenu: View {
               ? "status.action.unfavorite" : "status.action.favorite",
             systemImage: statusDataController.isFavorited ? "star.fill" : "star")
         }
-        Button {
-          Task {
-            HapticManager.shared.fireHaptic(.notification(.success))
-            SoundEffectManager.shared.playSound(.boost)
-            await statusDataController.toggleReblog(remoteStatus: nil)
-          }
-        } label: {
-          boostLabel
-        }
-        .disabled(
-          viewModel.status.visibility == .direct
-            || viewModel.status.visibility == .priv
-              && viewModel.status.account.id != account.account?.id
-        )
+
         Button {
           Task {
             SoundEffectManager.shared.playSound(.bookmark)
@@ -88,21 +101,22 @@ struct StatusRowContextMenu: View {
         }
       }
       .controlGroupStyle(.compactMenu)
-      Button {
-        #if targetEnvironment(macCatalyst) || os(visionOS)
-          openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
-        #else
-          viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
-        #endif
-      } label: {
-        Label("status.action.quote", systemImage: "quote.bubble")
+      if !isQuoteDisabled {
+        Button {
+          #if targetEnvironment(macCatalyst) || os(visionOS)
+            openWindow(value: WindowDestinationEditor.quoteStatusEditor(status: viewModel.status))
+          #else
+            viewModel.routerPath.presentedSheet = .quoteStatusEditor(status: viewModel.status)
+          #endif
+        } label: {
+          Label("status.action.quote", systemImage: "quote.bubble")
+        }
       }
-      .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
     }
 
     Divider()
 
-    Menu("status.action.share-title") {
+    Menu {
       if let url = viewModel.url {
         ShareLink(
           item: url,
@@ -125,6 +139,8 @@ struct StatusRowContextMenu: View {
           Label("status.action.share-image", systemImage: "photo")
         }
       }
+    } label: {
+      Label("status.action.share-title", systemImage: "square.and.arrow.up")
     }
 
     if let url = viewModel.url {

@@ -52,13 +52,6 @@ struct TabbarEntriesSettingsView: View {
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
       #endif
-
-      Section {
-        Toggle("settings.display.show-tab-label", isOn: $userPreferences.showiPhoneTabLabel)
-      }
-      #if !os(visionOS)
-        .listRowBackground(theme.primaryBackgroundColor)
-      #endif
     }
     .navigationTitle("settings.general.tabbarEntries")
     #if !os(visionOS)

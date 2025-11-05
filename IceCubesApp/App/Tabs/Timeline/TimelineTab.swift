@@ -3,7 +3,7 @@ import Combine
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftData
 import SwiftUI
 import Timeline
@@ -16,24 +16,29 @@ struct TimelineTab: View {
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(UserPreferences.self) private var preferences
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @State private var routerPath = RouterPath()
 
   @State private var didAppear: Bool = false
-  @State private var timeline: TimelineFilter = .home
   @State private var selectedTagGroup: TagGroup?
+
+  @Binding var timeline: TimelineFilter
+  @Binding var pinnedFilters: [TimelineFilter]
+
+  @AppStorage("last_timeline_filter") var lastTimelineFilter: TimelineFilter = .home
 
   @Query(sort: \LocalTimeline.creationDate, order: .reverse) var localTimelines: [LocalTimeline]
   @Query(sort: \TagGroup.creationDate, order: .reverse) var tagGroups: [TagGroup]
 
-  @AppStorage("last_timeline_filter") var lastTimelineFilter: TimelineFilter = .home
-  @AppStorage("timeline_pinned_filters") private var pinnedFilters: [TimelineFilter] = []
-
   private let canFilterTimeline: Bool
 
-  init(timeline: TimelineFilter? = nil) {
-    canFilterTimeline = timeline == nil
-    _timeline = .init(initialValue: timeline ?? .home)
+  init(
+    canFilterTimeline: Bool = false, timeline: Binding<TimelineFilter>,
+    pinedFilters: Binding<[TimelineFilter]> = .constant([])
+  ) {
+    self.canFilterTimeline = canFilterTimeline
+    _timeline = timeline
+    _pinnedFilters = pinedFilters
   }
 
   var body: some View {
@@ -49,7 +54,6 @@ struct TimelineTab: View {
       .toolbar {
         toolbarView
       }
-      .toolbarBackground(theme.primaryBackgroundColor.opacity(0.30), for: .navigationBar)
       .id(client.id)
     }
     .onAppear {
@@ -83,7 +87,7 @@ struct TimelineTab: View {
         lastTimelineFilter = newValue
       }
       switch newValue {
-      case let .tagGroup(title, _, _):
+      case .tagGroup(let title, _, _):
         if let group = tagGroups.first(where: { $0.title == title }) {
           selectedTagGroup = group
         }
@@ -149,16 +153,23 @@ struct TimelineTab: View {
       }
     }
     switch timeline {
-    case let .list(list):
-      ToolbarItem {
+    case .list(let list):
+      if #available(iOS 26.0, *) {
+        ToolbarSpacer(placement: .topBarTrailing)
+      }
+      ToolbarItem(placement: .topBarTrailing) {
         Button {
           routerPath.presentedSheet = .listEdit(list: list)
         } label: {
           Image(systemName: "list.bullet")
+            .foregroundStyle(theme.labelColor)
         }
       }
-    case let .remoteLocal(server, _):
-      ToolbarItem {
+    case .remoteLocal(let server, _):
+      if #available(iOS 26.0, *) {
+        ToolbarSpacer(placement: .topBarTrailing)
+      }
+      ToolbarItem(placement: .topBarTrailing) {
         Menu {
           ForEach(RemoteTimelineFilter.allCases, id: \.self) { filter in
             Button {
@@ -169,6 +180,7 @@ struct TimelineTab: View {
           }
         } label: {
           Image(systemName: "line.3.horizontal.decrease.circle")
+            .foregroundStyle(theme.labelColor)
         }
       }
     default:
@@ -238,7 +250,7 @@ struct TimelineTab: View {
 
   @ViewBuilder
   private var listsFiltersButons: some View {
-    Menu("timeline.filter.lists") {
+    Menu {
       Button {
         routerPath.presentedSheet = .listCreate
       } label: {
@@ -251,13 +263,15 @@ struct TimelineTab: View {
           Label(list.title, systemImage: "list.bullet")
         }
       }
+    } label: {
+      Label("timeline.filter.lists", systemImage: "list.bullet")
     }
   }
 
   @ViewBuilder
   private var tagsFiltersButtons: some View {
     if !currentAccount.tags.isEmpty {
-      Menu("timeline.filter.tags") {
+      Menu {
         ForEach(currentAccount.sortedTags) { tag in
           Button {
             timeline = .hashtag(tag: tag.name, accountId: nil)
@@ -265,12 +279,14 @@ struct TimelineTab: View {
             Label("#\(tag.name)", systemImage: "number")
           }
         }
+      } label: {
+        Label("timeline.filter.tags", systemImage: "tag")
       }
     }
   }
 
   private var localTimelinesFiltersButtons: some View {
-    Menu("timeline.filter.local") {
+    Menu {
       ForEach(localTimelines) { remoteLocal in
         Button {
           timeline = .remoteLocal(server: remoteLocal.instance, filter: .local)
@@ -285,11 +301,13 @@ struct TimelineTab: View {
       } label: {
         Label("timeline.filter.add-local", systemImage: "badge.plus.radiowaves.right")
       }
+    } label: {
+      Label("timeline.filter.local", systemImage: "dot.radiowaves.right")
     }
   }
 
   private var tagGroupsFiltersButtons: some View {
-    Menu("timeline.filter.tag-groups") {
+    Menu {
       ForEach(tagGroups) { group in
         Button {
           timeline = .tagGroup(title: group.title, tags: group.tags, symbolName: group.symbolName)
@@ -306,6 +324,8 @@ struct TimelineTab: View {
       } label: {
         Label("timeline.filter.add-tag-groups", systemImage: "plus")
       }
+    } label: {
+      Label("timeline.filter.tag-groups", systemImage: "number")
     }
   }
 

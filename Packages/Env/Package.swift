@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -7,7 +7,7 @@ let package = Package(
   name: "Env",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v17),
+    .iOS(.v18),
     .visionOS(.v1),
   ],
   products: [
@@ -18,7 +18,7 @@ let package = Package(
   ],
   dependencies: [
     .package(name: "Models", path: "../Models"),
-    .package(name: "Network", path: "../Network"),
+    .package(name: "NetworkClient", path: "../NetworkClient"),
     .package(url: "https://github.com/evgenyneu/keychain-swift", branch: "master"),
     .package(url: "https://github.com/TelemetryDeck/SwiftSDK", from: "2.3.0"),
   ],
@@ -27,7 +27,7 @@ let package = Package(
       name: "Env",
       dependencies: [
         .product(name: "Models", package: "Models"),
-        .product(name: "Network", package: "Network"),
+        .product(name: "NetworkClient", package: "NetworkClient"),
         .product(name: "KeychainSwift", package: "keychain-swift"),
         .product(name: "TelemetryDeck", package: "SwiftSDK"),
       ],

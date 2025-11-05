@@ -1,13 +1,13 @@
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
 public struct ListAddAccountView: View {
   @Environment(\.dismiss) private var dismiss
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
   @State private var viewModel: ListAddAccountViewModel

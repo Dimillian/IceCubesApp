@@ -24,7 +24,15 @@ struct StatusRowContentView: View {
         StatusRowTranslateView(viewModel: viewModel)
       }
       if let poll = viewModel.finalStatus.poll {
-        StatusPollView(poll: poll, status: viewModel.finalStatus)
+        if #available(iOS 26.0, *) {
+          StatusPollView(poll: poll, status: viewModel.finalStatus)
+            .padding()
+            .glassEffect(.regular.tint(theme.tintColor.opacity(0.1)),
+                         in: RoundedRectangle(cornerRadius: 8))
+        } else {
+          StatusPollView(poll: poll, status: viewModel.finalStatus)
+            .padding(.vertical)
+        }
       }
 
       if !reasons.contains(.placeholder),
@@ -72,6 +80,13 @@ struct StatusRowContentView: View {
         viewModel.finalStatus.mediaAttachments.isEmpty
       {
         StatusRowCardView(card: card)
+      }
+      
+      // Display trailing tags if they were removed from content
+      if viewModel.finalStatus.content.hadTrailingTags,
+         !viewModel.finalStatus.tags.isEmpty {
+        StatusRowTagsView(tags: viewModel.finalStatus.tags)
+          .padding(.top, 8)
       }
     }
   }

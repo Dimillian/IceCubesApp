@@ -3,7 +3,7 @@ import SwiftSoup
 import SwiftUI
 
 private enum CodingKeys: CodingKey {
-  case htmlValue, asMarkdown, asRawText, statusesURLs, links
+  case htmlValue, asMarkdown, asRawText, statusesURLs, links, hadTrailingTags
 }
 
 public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
@@ -12,6 +12,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
   public var asRawText: String = ""
   public var statusesURLs = [URL]()
   public private(set) var links = [Link]()
+  public private(set) var hadTrailingTags = false
 
   public var asSafeMarkdownAttributedString: AttributedString = .init()
   private var main_regex: NSRegularExpression?
@@ -30,6 +31,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         asRawText = try container.decode(String.self, forKey: .asRawText)
         statusesURLs = try container.decode([URL].self, forKey: .statusesURLs)
         links = try container.decode([Link].self, forKey: .links)
+        hadTrailingTags = (try? container.decode(Bool.self, forKey: .hadTrailingTags)) ?? false
       } catch {
         htmlValue = ""
       }
@@ -55,6 +57,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         handleNode(node: document, listCounters: &listCounters)
 
         document.outputSettings(OutputSettings().prettyPrint(pretty: false))
+        try document.select("p.quote-inline").remove()
         try document.select("br").after("\n")
         try document.select("p").after("\n\n")
         let html = try document.html()
@@ -72,18 +75,33 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
           _ = asMarkdown.removeFirst()
         }
 
+        // Remove trailing hashtags
+        removeTrailingTags(doc: document)
+
+        // Regenerate attributed string after extracting tags
+        do {
+          let options = AttributedString.MarkdownParsingOptions(
+            allowsExtendedAttributes: true,
+            interpretedSyntax: .inlineOnlyPreservingWhitespace)
+          asSafeMarkdownAttributedString = try AttributedString(
+            markdown: asMarkdown, options: options)
+        } catch {
+          asSafeMarkdownAttributedString = AttributedString(stringLiteral: asMarkdown)
+        }
+
       } catch {
         asRawText = htmlValue
       }
-    }
-
-    do {
-      let options = AttributedString.MarkdownParsingOptions(
-        allowsExtendedAttributes: true,
-        interpretedSyntax: .inlineOnlyPreservingWhitespace)
-      asSafeMarkdownAttributedString = try AttributedString(markdown: asMarkdown, options: options)
-    } catch {
-      asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+    } else {
+      do {
+        let options = AttributedString.MarkdownParsingOptions(
+          allowsExtendedAttributes: true,
+          interpretedSyntax: .inlineOnlyPreservingWhitespace)
+        asSafeMarkdownAttributedString = try AttributedString(
+          markdown: asMarkdown, options: options)
+      } catch {
+        asSafeMarkdownAttributedString = AttributedString(stringLiteral: htmlValue)
+      }
     }
   }
 
@@ -115,6 +133,66 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     try container.encode(asRawText, forKey: .asRawText)
     try container.encode(statusesURLs, forKey: .statusesURLs)
     try container.encode(links, forKey: .links)
+    try container.encode(hadTrailingTags, forKey: .hadTrailingTags)
+  }
+
+  private mutating func removeTrailingTags(doc: Document) {
+    // Fast bail-outs
+    if !asMarkdown.contains("#") { return }
+
+    // Split markdown by double newlines to get paragraphs (same as building logic)
+    let paragraphs = asMarkdown.split(separator: "\n\n", omittingEmptySubsequences: false).map(
+      String.init)
+    guard
+      let lastIndex = paragraphs.lastIndex(where: {
+        !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+      })
+    else {
+      return
+    }
+
+    // Inspect original HTML last paragraph to ensure it is hashtags-only
+    // and not a quote-inline. This avoids regex backtracking on large inputs.
+    let isLastParagraphTagsOnly: Bool = {
+      do {
+        let paras = try doc.select("p:not(.quote-inline)")
+        guard let lastP = paras.array().last else { return false }
+        var hasAtLeastOneHashtag = false
+        for child in lastP.getChildNodes() {
+          let name = child.nodeName()
+          if name == "#text" {
+            // Allow whitespace-only text
+            let txt = child.description.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !txt.isEmpty { return false }
+          } else if name == "a" {
+            // Accept only anchors that look like hashtag links
+            let cls = (try? child.attr("class")) ?? ""
+            if !cls.contains("hashtag") { return false }
+            hasAtLeastOneHashtag = true
+          } else {
+            // Any other element means mixed content
+            return false
+          }
+        }
+        return hasAtLeastOneHashtag
+      } catch {
+        return false
+      }
+    }()
+
+    guard isLastParagraphTagsOnly else { return }
+
+    // Remove the last non-empty paragraph from both markdown and raw text
+    hadTrailingTags = true
+    let updatedMarkdownParagraphs = Array(paragraphs.prefix(lastIndex))
+    asMarkdown = updatedMarkdownParagraphs.joined(separator: "\n\n")
+
+    let rawParagraphs = asRawText.split(separator: "\n\n", omittingEmptySubsequences: false).map(
+      String.init)
+    if lastIndex < rawParagraphs.count {
+      let updatedRawParagraphs = Array(rawParagraphs.prefix(lastIndex))
+      asRawText = updatedRawParagraphs.joined(separator: "\n\n")
+    }
   }
 
   private mutating func handleNode(
@@ -142,6 +220,9 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       }
 
       if node.nodeName() == "p" {
+        if let className = try? node.attr("class"), className == "quote-inline" {
+          return
+        }
         if asMarkdown.count > 0 && !skipParagraph {
           asMarkdown += "\n\n"
         }

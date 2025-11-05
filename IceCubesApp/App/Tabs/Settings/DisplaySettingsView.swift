@@ -2,7 +2,7 @@ import Combine
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import Observation
 import StatusKit
 import SwiftUI
@@ -31,7 +31,7 @@ struct DisplaySettingsView: View {
 
   private let previewStatusViewModel = StatusRowViewModel(
     status: Status.placeholder(forSettings: true, language: "la"),
-    client: Client(server: ""),
+    client: MastodonClient(server: ""),
     routerPath: RouterPath())  // translate from latin button
 
   var body: some View {
@@ -226,6 +226,11 @@ struct DisplaySettingsView: View {
           Text(action.description).tag(action)
         }
       }
+      Picker("Boost Button Behavior", selection: $userPreferences.boostButtonBehavior) {
+        ForEach(PreferredBoostButtonBehavior.allCases, id: \.rawValue) { behavior in
+          Text(behavior.title).tag(behavior)
+        }
+      }
       Picker("settings.display.status.media-style", selection: $theme.statusDisplayStyle) {
         ForEach(Theme.StatusDisplayStyle.allCases, id: \.rawValue) { buttonStyle in
           Text(buttonStyle.description).tag(buttonStyle)
@@ -255,7 +260,6 @@ struct DisplaySettingsView: View {
         }
       }
       Toggle("settings.display.show-account-popover", isOn: $userPreferences.showAccountPopover)
-      Toggle("Show Content Gradient", isOn: $theme.showContentGradient)
       Toggle("Compact Layout", isOn: $theme.compactLayoutPadding)
     }
     #if !os(visionOS)

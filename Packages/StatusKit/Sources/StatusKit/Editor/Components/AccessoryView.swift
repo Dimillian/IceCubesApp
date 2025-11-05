@@ -35,13 +35,21 @@ extension StatusEditor {
         .cornerRadius(8)
         .padding(.trailing, 78)
       #else
-        Divider()
-        HStack {
+        if #available(iOS 26, *) {
           contentView
+            .padding(.vertical, 16)
+            .glassEffect(.regular)
+            .background(theme.primaryBackgroundColor.opacity(0.2))
+            .padding(.horizontal, 16)
+        } else {
+          Divider()
+          HStack {
+            contentView
+          }
+          .frame(height: 20)
+          .padding(.vertical, 12)
+          .background(.ultraThickMaterial)
         }
-        .frame(height: 20)
-        .padding(.vertical, 12)
-        .background(.ultraThickMaterial)
       #endif
     }
 
@@ -77,6 +85,8 @@ extension StatusEditor {
           isPhotosPickerPresented = true
         } label: {
           Label("status.editor.photo-library", systemImage: "photo")
+          .frame(width: 25, height: 25)
+          .contentShape(Rectangle())
         }
         #if !targetEnvironment(macCatalyst)
           Button {
@@ -95,8 +105,12 @@ extension StatusEditor {
           ProgressView()
         } else {
           Image(systemName: "photo.on.rectangle.angled")
+            .frame(width: 25, height: 25)
+            .contentShape(Rectangle())
+            .foregroundStyle(theme.tintColor)
         }
       }
+      .buttonStyle(.plain)
       .photosPicker(
         isPresented: $isPhotosPickerPresented,
         selection: $viewModel.mediaPickers,
@@ -139,6 +153,8 @@ extension StatusEditor {
         followUpSEVMs.append(ViewModel(mode: .new(text: nil, visibility: focusedSEVM.visibility)))
       } label: {
         Image(systemName: "arrowshape.turn.up.left.circle.fill")
+        .frame(width: 25, height: 25)
+        .contentShape(Rectangle())
       }
       .disabled(!canAddNewSEVM)
 
@@ -151,6 +167,8 @@ extension StatusEditor {
           let customEmojiSheetIconName =
             colorScheme == .light ? "face.smiling" : "face.smiling.inverse"
           Image(systemName: customEmojiSheetIconName)
+            .frame(width: 25, height: 25)
+            .contentShape(Rectangle())
         }
         .accessibilityLabel("accessibility.editor.button.custom-emojis")
         .sheet(isPresented: $isCustomEmojisSheetDisplay) {
@@ -159,8 +177,8 @@ extension StatusEditor {
         }
       }
 
-      if preferences.isOpenAIEnabled {
-        AIMenu.disabled(!viewModel.canPost)
+      if #available(iOS 26, *), Assistant.isAvailable  {
+        AssistantMenu.disabled(!viewModel.canPost)
       }
 
       Spacer()
@@ -169,12 +187,16 @@ extension StatusEditor {
         viewModel.insertStatusText(text: "@")
       } label: {
         Image(systemName: "at")
+          .frame(width: 25, height: 25)
+          .contentShape(Rectangle())
       }
 
       Button {
         viewModel.insertStatusText(text: "#")
       } label: {
         Image(systemName: "number")
+          .frame(width: 25, height: 25)
+          .contentShape(Rectangle())
       }
     }
 
@@ -196,18 +218,36 @@ extension StatusEditor {
       return false
     }
 
-    private var AIMenu: some View {
+    @available(iOS 26, *)
+    private var AssistantMenu: some View {
       Menu {
         ForEach(AIPrompt.allCases, id: \.self) { prompt in
-          Button {
-            Task {
-              isLoadingAIRequest = true
-              await focusedSEVM.runOpenAI(
-                prompt: prompt.toRequestPrompt(text: focusedSEVM.statusText.string))
-              isLoadingAIRequest = false
+          if case AIPrompt.rewriteWithTone = prompt {
+            Menu {
+              ForEach(Assistant.Tone.allCases, id: \.self) { tone in
+                Button {
+                  isLoadingAIRequest = true
+                  Task {
+                    await focusedSEVM.runAssistant(prompt: prompt)
+                    isLoadingAIRequest = false
+                  }
+                } label: {
+                  tone.label
+                }
+              }
+            } label: {
+              prompt.label
             }
-          } label: {
-            prompt.label
+          } else {
+            Button {
+              isLoadingAIRequest = true
+              Task {
+                await focusedSEVM.runAssistant(prompt: prompt)
+                isLoadingAIRequest = false
+              }
+            } label: {
+              prompt.label
+            }
           }
         }
         if let backup = focusedSEVM.backupStatusText {
@@ -224,8 +264,12 @@ extension StatusEditor {
         } else {
           Image(systemName: "faxmachine")
             .accessibilityLabel("accessibility.editor.button.ai-prompt")
+            .foregroundStyle(focusedSEVM.canPost ? theme.tintColor : .secondary)
+            .frame(width: 25, height: 25)
+            .contentShape(Rectangle())
         }
       }
+      .buttonStyle(.plain)
     }
   }
 }

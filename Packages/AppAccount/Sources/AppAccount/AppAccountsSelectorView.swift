@@ -17,6 +17,8 @@ public struct AppAccountsSelectorView: View {
   private let accountCreationEnabled: Bool
   private let avatarConfig: AvatarView.FrameConfig
 
+  private let transition: Namespace.ID
+
   private var showNotificationBadge: Bool {
     accountsViewModel
       .filter { $0.account?.id != currentAccount.account?.id }
@@ -26,16 +28,18 @@ public struct AppAccountsSelectorView: View {
   }
 
   private var preferredHeight: CGFloat {
-    var baseHeight: CGFloat = 310
+    var baseHeight: CGFloat = 360
     baseHeight += CGFloat(60 * accountsViewModel.count)
     return baseHeight
   }
 
   public init(
+    transition: Namespace.ID,
     routerPath: RouterPath,
     accountCreationEnabled: Bool = true,
     avatarConfig: AvatarView.FrameConfig? = nil
   ) {
+    self.transition = transition
     self.routerPath = routerPath
     self.accountCreationEnabled = accountCreationEnabled
     self.avatarConfig = avatarConfig ?? .badge
@@ -47,17 +51,46 @@ public struct AppAccountsSelectorView: View {
       HapticManager.shared.fireHaptic(.buttonPress)
     } label: {
       labelView
-        .contentShape(Rectangle())
+        .contentShape(.circle)
+    }
+    .contextMenu {
+      ForEach(accountsViewModel.sorted { $0.acct < $1.acct }, id: \.appAccount.id) {
+        viewModel in
+        Button {
+          appAccounts.currentAccount = viewModel.appAccount
+        } label: {
+          if appAccounts.currentAccount.id == viewModel.appAccount.id {
+            Label(viewModel.appAccount.server, systemImage: "checkmark.circle.fill")
+              .foregroundStyle(.primary)
+            Text(viewModel.acct)
+          } else {
+            Text(viewModel.appAccount.server)
+            Text(viewModel.acct)
+          }
+        }
+        .tint(.primary)
+      }
     }
     .sheet(
       isPresented: $isPresented,
       content: {
-        accountsView.presentationDetents([.height(preferredHeight), .large])
-          .presentationBackground(.ultraThinMaterial)
-          .presentationCornerRadius(16)
-          .onAppear {
-            refreshAccounts()
-          }
+        if #available(iOS 26, *) {
+          accountsView
+            .presentationDetents([.height(preferredHeight), .large])
+            .navigationTransition(
+              .zoom(sourceID: CurrentAccount.shared.account?.id ?? "", in: transition)
+            )
+            .onAppear {
+              refreshAccounts()
+            }
+        } else {
+          accountsView.presentationDetents([.height(preferredHeight), .large])
+            .presentationBackground(.ultraThinMaterial)
+            .presentationCornerRadius(16)
+            .onAppear {
+              refreshAccounts()
+            }
+        }
       }
     )
     .onChange(of: currentAccount.account?.id) {
@@ -101,12 +134,10 @@ public struct AppAccountsSelectorView: View {
             AppAccountView(viewModel: viewModel, isParentPresented: $isPresented)
           }
           addAccountButton
-            #if os(visionOS)
-              .foregroundStyle(theme.labelColor)
-            #endif
+            .foregroundStyle(theme.labelColor)
         }
         #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
+          .listRowBackground(theme.secondaryBackgroundColor)
         #endif
 
         if accountCreationEnabled {
@@ -118,21 +149,30 @@ public struct AppAccountsSelectorView: View {
           #if os(visionOS)
             .foregroundStyle(theme.labelColor)
           #else
-            .listRowBackground(theme.primaryBackgroundColor.opacity(0.4))
+            .foregroundStyle(theme.labelColor)
+            .listRowBackground(theme.secondaryBackgroundColor)
           #endif
         }
       }
       .listStyle(.insetGrouped)
       .scrollContentBackground(.hidden)
-      .background(.clear)
       .navigationTitle("settings.section.accounts")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
         ToolbarItem(placement: .navigationBarTrailing) {
-          Button {
-            isPresented.toggle()
-          } label: {
-            Text("action.done").bold()
+          if #available(iOS 26.0, *) {
+            Button {
+              isPresented.toggle()
+            } label: {
+              Text("action.done").bold()
+            }
+            .buttonStyle(.glass)
+          } else {
+            Button {
+              isPresented.toggle()
+            } label: {
+              Text("action.done").bold()
+            }
           }
         }
       }

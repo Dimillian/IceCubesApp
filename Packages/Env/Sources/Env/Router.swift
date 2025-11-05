@@ -1,7 +1,7 @@
 import Combine
 import Foundation
 import Models
-import Network
+import NetworkClient
 import Observation
 import SwiftUI
 
@@ -20,6 +20,7 @@ public enum RouterDestination: Hashable {
   case following(id: String)
   case favoritedBy(id: String)
   case rebloggedBy(id: String)
+  case quotes(id: String)
   case accountsList(accounts: [Account])
   case trendingTimeline
   case linkTimeline(url: URL, title: String)
@@ -29,6 +30,8 @@ public enum RouterDestination: Hashable {
   case notificationForAccount(accountId: String)
   case blockedAccounts
   case mutedAccounts
+  case conversations
+  case instanceInfo(instance: Instance)
 }
 
 public enum WindowDestinationEditor: Hashable, Codable {
@@ -56,7 +59,7 @@ public enum SheetDestination: Identifiable, Hashable {
 
   case newStatusEditor(visibility: Models.Visibility)
   case prefilledStatusEditor(text: String, visibility: Models.Visibility)
-  case imageURL(urls: [URL], visibility: Models.Visibility)
+  case imageURL(urls: [URL], caption: String?, altTexts: [String]?, visibility: Models.Visibility)
   case editStatusEditor(status: Status)
   case replyToStatusEditor(status: Status)
   case quoteStatusEditor(status: Status)
@@ -131,7 +134,7 @@ public enum SettingsStartingPoint {
 
 @MainActor
 @Observable public class RouterPath {
-  public var client: Client?
+  public var client: MastodonClient?
   public var urlHandler: ((URL) -> OpenURLAction.Result)?
 
   public var path: [RouterDestination] = []
@@ -190,14 +193,16 @@ public enum SettingsStartingPoint {
   }
 
   public func handle(url: URL) -> OpenURLAction.Result {
+    guard let client, client.hasConnection(with: url) else {
+      return urlHandler?(url) ?? .systemAction
+    }
+
     if url.pathComponents.contains(where: { $0 == "tags" || $0 == "tag" }),
       let tag = url.pathComponents.last
     {
       navigate(to: .hashTag(tag: tag, account: nil))
       return .handled
-    }
-    else if url.lastPathComponent.first == "@"
-      || (url.host() == AppInfo.premiumInstance && url.pathComponents.contains("users")),
+    } else if url.lastPathComponent.first == "@",
       let host = url.host,
       !host.hasPrefix("www")
     {
@@ -206,9 +211,7 @@ public enum SettingsStartingPoint {
         await navigateToAccountFrom(acct: acct, url: url)
       }
       return .handled
-    } else if let client,
-      client.isAuth,
-      client.hasConnection(with: url),
+    } else if client.isAuth,
       let id = Int(url.lastPathComponent)
     {
       if url.absoluteString.contains(client.server) {

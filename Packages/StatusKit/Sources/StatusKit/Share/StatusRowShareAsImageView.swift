@@ -1,6 +1,6 @@
 import DesignSystem
 import Env
-import Network
+import NetworkClient
 import SwiftUI
 
 struct StatusRowShareAsImageView: View {

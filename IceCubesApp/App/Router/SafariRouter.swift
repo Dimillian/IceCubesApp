@@ -38,12 +38,6 @@ private struct SafariRouter: ViewModifier {
       .onOpenURL { url in
         // Open external URL (from icecubesapp://)
         guard !isSecondaryColumn else { return }
-        if url.absoluteString == "icecubesapp://subclub" {
-          #if !os(visionOS)
-            safariManager.dismiss()
-          #endif
-          return
-        }
         let urlString = url.absoluteString.replacingOccurrences(
           of: AppInfo.scheme, with: "https://")
         guard let url = URL(string: urlString), url.host != nil else { return }
@@ -60,20 +54,6 @@ private struct SafariRouter: ViewModifier {
               UIApplication.shared.open(url)
               return .handled
             }
-          } else if url.query()?.contains("callback=") == false,
-            url.host() == AppInfo.premiumInstance,
-            let accountName = appAccount.currentAccount.accountName
-          {
-            let newURL = url.appending(queryItems: [
-              .init(name: "callback", value: "icecubesapp://subclub"),
-              .init(name: "id", value: "@\(accountName)"),
-            ])
-
-            #if !os(visionOS)
-              return safariManager.open(newURL)
-            #else
-              return .systemAction
-            #endif
           }
           #if !targetEnvironment(macCatalyst)
             guard preferences.preferredBrowser == .inAppSafari else { return .systemAction }

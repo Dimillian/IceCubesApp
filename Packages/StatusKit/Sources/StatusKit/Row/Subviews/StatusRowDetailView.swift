@@ -8,6 +8,8 @@ struct StatusRowDetailView: View {
   @Environment(\.openURL) private var openURL
 
   @Environment(StatusDataController.self) private var statusDataController
+  @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(CurrentInstance.self) private var currentInstance
 
   var viewModel: StatusRowViewModel
 
@@ -74,7 +76,9 @@ struct StatusRowDetailView: View {
         .transition(.move(edge: .leading))
       }
 
-      if viewModel.actionsAccountsFetched, statusDataController.reblogsCount > 0 {
+      if viewModel.actionsAccountsFetched,
+        statusDataController.reblogsCount > 0
+      {
         Divider()
         Button {
           viewModel.routerPath.navigate(to: .rebloggedBy(id: viewModel.status.id))
@@ -85,6 +89,29 @@ struct StatusRowDetailView: View {
             Spacer()
             makeAccountsScrollView(accounts: viewModel.rebloggers)
             Image(systemName: "chevron.right")
+          }
+          .frame(height: 20)
+        }
+        .buttonStyle(.borderless)
+        .transition(.move(edge: .leading))
+      }
+
+      if viewModel.actionsAccountsFetched,
+        statusDataController.quotesCount > 0
+      {
+        Divider()
+        Button {
+          guard canAccessQuotes else { return }
+          viewModel.routerPath.navigate(to: .quotes(id: viewModel.status.id))
+        } label: {
+          HStack {
+            Text("status.summary.n-quotes \(statusDataController.quotesCount)")
+              .font(.scaledCallout)
+            if canAccessQuotes {
+              Spacer()
+              makeAccountsScrollView(accounts: viewModel.quoters)
+              Image(systemName: "chevron.right")
+            }
           }
           .frame(height: 20)
         }
@@ -108,5 +135,9 @@ struct StatusRowDetailView: View {
       }
       .padding(.leading, .layoutPadding)
     }
+  }
+
+  private var canAccessQuotes: Bool {
+    currentInstance.canViewStatusQuotes || viewModel.status.account.id == currentAccount.account?.id
   }
 }

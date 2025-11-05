@@ -1,13 +1,13 @@
 import DesignSystem
 import Env
 import Models
-import Network
+import NetworkClient
 import SwiftUI
 
 @MainActor
 public struct StatusPollView: View {
   @Environment(Theme.self) private var theme
-  @Environment(Client.self) private var client
+  @Environment(MastodonClient.self) private var client
   @Environment(CurrentInstance.self) private var currentInstance
   @Environment(CurrentAccount.self) private var currentAccount
 
@@ -106,6 +106,7 @@ public struct StatusPollView: View {
       }
 
       footerView
+        .padding(.top, 4)
 
     }.onAppear {
       viewModel.instance = currentInstance.instance
@@ -153,7 +154,7 @@ public struct StatusPollView: View {
   private func makeBarView(for option: Poll.Option, buttonImage: some View) -> some View {
     Button {
       if !viewModel.poll.expired,
-        let index = viewModel.poll.options.firstIndex(where: { $0.id == option.id })
+        let index = viewModel.poll.options.firstIndex(where: { $0.title == option.title })
       {
         withAnimation {
           viewModel.handleSelection(index)

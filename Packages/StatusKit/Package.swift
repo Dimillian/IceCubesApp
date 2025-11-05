@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 6.2
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -7,7 +7,7 @@ let package = Package(
   name: "StatusKit",
   defaultLocalization: "en",
   platforms: [
-    .iOS(.v17),
+    .iOS(.v18),
     .visionOS(.v1),
   ],
   products: [
@@ -20,7 +20,7 @@ let package = Package(
     .package(name: "AppAccount", path: "../AppAccount"),
     .package(name: "Models", path: "../Models"),
     .package(name: "MediaUI", path: "../MediaUI"),
-    .package(name: "Network", path: "../Network"),
+    .package(name: "NetworkClient", path: "../NetworkClient"),
     .package(name: "Env", path: "../Env"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
     .package(url: "https://github.com/nicklockwood/LRUCache", from: "1.0.4"),
@@ -32,7 +32,7 @@ let package = Package(
         .product(name: "AppAccount", package: "AppAccount"),
         .product(name: "Models", package: "Models"),
         .product(name: "MediaUI", package: "MediaUI"),
-        .product(name: "Network", package: "Network"),
+        .product(name: "NetworkClient", package: "NetworkClient"),
         .product(name: "Env", package: "Env"),
         .product(name: "DesignSystem", package: "DesignSystem"),
         .product(name: "LRUCache", package: "LRUCache"),

@@ -1,11 +1,16 @@
+import AVFoundation
 import Combine
 import DesignSystem
 import Env
 import Models
 import NaturalLanguage
-import Network
+import NetworkClient
 import PhotosUI
 import SwiftUI
+
+#if !targetEnvironment(macCatalyst)
+  import FoundationModels
+#endif
 
 extension StatusEditor {
   @MainActor
@@ -14,7 +19,7 @@ extension StatusEditor {
 
     var mode: Mode
 
-    var client: Client?
+    var client: MastodonClient?
     var currentAccount: Account? {
       didSet {
         if itemsProvider != nil {
@@ -25,6 +30,7 @@ extension StatusEditor {
 
     var theme: Theme?
     var preferences: UserPreferences?
+    var currentInstance: CurrentInstance?
     var languageConfirmationDialogLanguages: (detected: String, selected: String)?
 
     var textView: UITextView? {
@@ -153,6 +159,9 @@ extension StatusEditor {
       return !modifiedStatusText.isEmpty && !mode.isInShareExtension
     }
 
+    // Map of container.id -> initial alt text (from intents)
+    var containerIdToAltText: [String: String] = [:]
+
     var visibility: Models.Visibility = .pub
 
     var mentionsSuggestions: [Account] = []
@@ -172,11 +181,17 @@ extension StatusEditor {
 
     init(mode: Mode) {
       self.mode = mode
+
+      #if !targetEnvironment(macCatalyst)
+        if #available(iOS 26.0, *), Assistant.isAvailable {
+          Assistant.prewarm()
+        }
+      #endif
     }
 
     func setInitialLanguageSelection(preference: String?) {
       switch mode {
-      case let .edit(status), let .quote(status):
+      case .edit(let status), .quote(let status):
         selectedLanguage = status.language
       default:
         break
@@ -226,6 +241,14 @@ extension StatusEditor {
             multiple: pollVotingFrequency.canVoteMultipleTimes,
             expires_in: pollDuration.rawValue)
         }
+        // Fallback: include any pending containerIdToAltText in mediaAttributes if media got uploaded
+        if !containerIdToAltText.isEmpty {
+          for c in mediaContainers {
+            if let desc = containerIdToAltText[c.id], let id = c.mediaAttachment?.id {
+              mediaAttributes.append(.init(id: id, description: desc, thumbnail: nil, focus: nil))
+            }
+          }
+        }
         let data = StatusData(
           status: statusText.string,
           visibility: visibility,
@@ -234,14 +257,15 @@ extension StatusEditor {
           mediaIds: mediaContainers.compactMap { $0.mediaAttachment?.id },
           poll: pollData,
           language: selectedLanguage,
-          mediaAttributes: mediaAttributes)
+          mediaAttributes: mediaAttributes,
+          quotedStatusId: embeddedStatus?.id)
         switch mode {
         case .new, .replyTo, .quote, .mention, .shareExtension, .quoteLink, .imageURL:
           postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
           if let postStatus {
             StreamWatcher.shared.emmitPostEvent(for: postStatus)
           }
-        case let .edit(status):
+        case .edit(let status):
           postStatus = try await client.put(
             endpoint: Statuses.editStatus(id: status.id, json: data))
           if let postStatus {
@@ -295,6 +319,9 @@ extension StatusEditor {
       string.mutableString.insert(text, at: inRange.location)
       statusText = string
       selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
+      if let textView {
+        textView.delegate?.textViewDidChange?(textView)
+      }
     }
 
     func replaceTextWith(text: String) {
@@ -304,24 +331,37 @@ extension StatusEditor {
 
     func prepareStatusText() {
       switch mode {
-      case let .new(text, visibility):
+      case .new(let text, let visibility):
         if let text {
           statusText = .init(string: text)
           selectedRange = .init(location: text.utf16.count, length: 0)
         }
         self.visibility = visibility
-      case let .shareExtension(items):
+      case .shareExtension(let items):
         itemsProvider = items
         visibility = .pub
         processItemsProvider(items: items)
-      case let .imageURL(urls, visibility):
+      case .imageURL(let urls, let caption, let altTexts, let visibility):
         Task {
-          for container in await Self.makeImageContainer(from: urls) {
+          let containers = await Self.makeImageContainer(from: urls)
+          if let altTexts {
+            for (i, c) in containers.enumerated() where i < altTexts.count {
+              let desc = altTexts[i].trimmingCharacters(in: .whitespacesAndNewlines)
+              if !desc.isEmpty {
+                containerIdToAltText[c.id] = desc
+              }
+            }
+          }
+          for container in containers {
             prepareToPost(for: container)
           }
         }
+        if let caption, !caption.isEmpty {
+          statusText = .init(string: caption)
+          selectedRange = .init(location: caption.utf16.count, length: 0)
+        }
         self.visibility = visibility
-      case let .replyTo(status):
+      case .replyTo(let status):
         var mentionString = ""
         if (status.reblog?.account.acct ?? status.account.acct) != currentAccount?.acct {
           mentionString = "@\(status.reblog?.account.acct ?? status.account.acct)"
@@ -346,11 +386,11 @@ extension StatusEditor {
           spoilerOn = true
           spoilerText = status.spoilerText.asRawText
         }
-      case let .mention(account, visibility):
+      case .mention(let account, let visibility):
         statusText = .init(string: "@\(account.acct) ")
         self.visibility = visibility
         selectedRange = .init(location: statusText.string.utf16.count, length: 0)
-      case let .edit(status):
+      case .edit(let status):
         var rawText = status.content.asRawText.escape()
         for mention in status.mentions {
           rawText = rawText.replacingOccurrences(
@@ -362,23 +402,22 @@ extension StatusEditor {
         spoilerText = status.spoilerText.asRawText
         visibility = status.visibility
         mediaContainers = status.mediaAttachments.map {
-          MediaContainer(
+          MediaContainer.uploaded(
             id: UUID().uuidString,
-            image: nil,
-            movieTransferable: nil,
-            gifTransferable: nil,
-            mediaAttachment: $0,
-            error: nil
+            attachment: $0,
+            originalImage: nil
           )
         }
-      case let .quote(status):
+      case .quote(let status):
         embeddedStatus = status
-        if let url = embeddedStatusURL {
+        if currentInstance?.isQuoteSupported == true {
+          // Do nothing
+        } else if let url = embeddedStatusURL {
           statusText = .init(
             string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
           selectedRange = .init(location: 0, length: 0)
         }
-      case let .quoteLink(link):
+      case .quoteLink(let link):
         statusText = .init(string: "\n\n\(link)")
         selectedRange = .init(location: 0, length: 0)
       }
@@ -479,24 +518,17 @@ extension StatusEditor {
       isMediasLoading = true
       let url = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).gif")
       try? data.write(to: url)
-      let container = MediaContainer(
+      let container = MediaContainer.pending(
         id: UUID().uuidString,
-        image: nil,
-        movieTransferable: nil,
-        gifTransferable: .init(url: url),
-        mediaAttachment: nil,
-        error: nil)
+        gif: .init(url: url),
+        preview: nil)
       prepareToPost(for: container)
     }
 
     func processCameraPhoto(image: UIImage) {
-      let container = MediaContainer(
+      let container = MediaContainer.pending(
         id: UUID().uuidString,
-        image: image,
-        movieTransferable: nil,
-        gifTransferable: nil,
-        mediaAttachment: nil,
-        error: nil
+        image: image
       )
       prepareToPost(for: container)
     }
@@ -513,46 +545,32 @@ extension StatusEditor {
               if let text = content as? String {
                 initialText += "\(text) "
               } else if let image = content as? UIImage {
-                let container = MediaContainer(
+                let container = MediaContainer.pending(
                   id: UUID().uuidString,
-                  image: image,
-                  movieTransferable: nil,
-                  gifTransferable: nil,
-                  mediaAttachment: nil,
-                  error: nil
+                  image: image
                 )
                 prepareToPost(for: container)
               } else if let content = content as? ImageFileTranseferable,
                 let compressedData = await compressor.compressImageFrom(url: content.url),
                 let image = UIImage(data: compressedData)
               {
-                let container = MediaContainer(
+                let container = MediaContainer.pending(
                   id: UUID().uuidString,
-                  image: image,
-                  movieTransferable: nil,
-                  gifTransferable: nil,
-                  mediaAttachment: nil,
-                  error: nil
+                  image: image
                 )
                 prepareToPost(for: container)
               } else if let video = content as? MovieFileTranseferable {
-                let container = MediaContainer(
+                let container = MediaContainer.pending(
                   id: UUID().uuidString,
-                  image: nil,
-                  movieTransferable: video,
-                  gifTransferable: nil,
-                  mediaAttachment: nil,
-                  error: nil
+                  video: video,
+                  preview: await Self.extractVideoPreview(from: video.url)
                 )
                 prepareToPost(for: container)
               } else if let gif = content as? GifFileTranseferable {
-                let container = MediaContainer(
+                let container = MediaContainer.pending(
                   id: UUID().uuidString,
-                  image: nil,
-                  movieTransferable: nil,
-                  gifTransferable: gif,
-                  mediaAttachment: nil,
-                  error: nil
+                  gif: gif,
+                  preview: nil
                 )
                 prepareToPost(for: container)
               }
@@ -585,6 +603,7 @@ extension StatusEditor {
 
     private func checkEmbed() {
       if let url = embeddedStatusURL,
+        currentInstance?.isQuoteSupported == false,
         !statusText.string.contains(url.absoluteString)
       {
         embeddedStatus = nil
@@ -668,19 +687,45 @@ extension StatusEditor {
 
     func selectHashtagSuggestion(tag: String) {
       if let range = currentSuggestionRange {
+        var tag = tag
+        if tag.hasPrefix("#") {
+          tag.removeFirst()
+        }
         replaceTextWith(text: "#\(tag) ", inRange: range)
       }
     }
 
-    // MARK: - OpenAI Prompt
+    // MARK: - Assistant Prompt
 
-    func runOpenAI(prompt: OpenAIClient.Prompt) async {
-      do {
-        let client = OpenAIClient()
-        let response = try await client.request(prompt)
-        backupStatusText = statusText
-        replaceTextWith(text: response.trimmedText)
-      } catch {}
+    @available(iOS 26.0, *)
+    func runAssistant(prompt: AIPrompt) async {
+      #if !targetEnvironment(macCatalyst)
+        let assistant = Assistant()
+        var newStream: LanguageModelSession.ResponseStream<String>?
+        switch prompt {
+        case .correct:
+          newStream = await assistant.correct(message: statusText.string)
+        case .emphasize:
+          newStream = await assistant.emphasize(message: statusText.string)
+        case .fit:
+          newStream = await assistant.shorten(message: statusText.string)
+        case .rewriteWithTone(let tone):
+          newStream = await assistant.adjustTone(message: statusText.string, to: tone)
+        }
+
+        if let newStream {
+          backupStatusText = statusText
+          do {
+            for try await content in newStream {
+              replaceTextWith(text: content.content)
+            }
+          } catch {
+            if let backupStatusText {
+              replaceTextWith(text: backupStatusText.string)
+            }
+          }
+        }
+      #endif
     }
 
     // MARK: - Media related function
@@ -703,6 +748,10 @@ extension StatusEditor {
       Task(priority: .high) {
         self.mediaContainers.append(container)
         await upload(container: container)
+        if let desc = containerIdToAltText[container.id], !desc.isEmpty {
+          await addDescription(container: container, description: desc)
+          containerIdToAltText.removeValue(forKey: container.id)
+        }
         self.isMediasLoading = false
       }
     }
@@ -730,13 +779,13 @@ extension StatusEditor {
       guard let gifFile = try? await pickerItem.loadTransferable(type: GifFileTranseferable.self)
       else { return nil }
 
-      return MediaContainer(
+      // Try to extract a preview image from the GIF
+      let previewImage: UIImage? = nil  // GIFs typically show animated preview
+
+      return MediaContainer.pending(
         id: pickerItem.itemIdentifier ?? UUID().uuidString,
-        image: nil,
-        movieTransferable: nil,
-        gifTransferable: gifFile,
-        mediaAttachment: nil,
-        error: nil
+        gif: gifFile,
+        preview: previewImage
       )
     }
 
@@ -747,13 +796,13 @@ extension StatusEditor {
         let movieFile = try? await pickerItem.loadTransferable(type: MovieFileTranseferable.self)
       else { return nil }
 
-      return MediaContainer(
+      // Extract preview frame from video
+      let previewImage = await extractVideoPreview(from: movieFile.url)
+
+      return MediaContainer.pending(
         id: pickerItem.itemIdentifier ?? UUID().uuidString,
-        image: nil,
-        movieTransferable: movieFile,
-        gifTransferable: nil,
-        mediaAttachment: nil,
-        error: nil
+        video: movieFile,
+        preview: previewImage
       )
     }
 
@@ -770,13 +819,9 @@ extension StatusEditor {
         let image = UIImage(data: compressedData)
       else { return nil }
 
-      return MediaContainer(
+      return MediaContainer.pending(
         id: pickerItem.itemIdentifier ?? UUID().uuidString,
-        image: image,
-        movieTransferable: nil,
-        gifTransferable: nil,
-        mediaAttachment: nil,
-        error: nil
+        image: image
       )
     }
 
@@ -790,14 +835,11 @@ extension StatusEditor {
           let image = UIImage(data: compressedData)
         {
           containers.append(
-            MediaContainer(
+            MediaContainer.pending(
               id: UUID().uuidString,
-              image: image,
-              movieTransferable: nil,
-              gifTransferable: nil,
-              mediaAttachment: nil,
-              error: nil
-            ))
+              image: image
+            )
+          )
         }
 
         url.stopAccessingSecurityScopedResource()
@@ -806,83 +848,123 @@ extension StatusEditor {
       return containers
     }
 
+    private static func extractVideoPreview(from url: URL) async -> UIImage? {
+      let asset = AVURLAsset(url: url)
+      let generator = AVAssetImageGenerator(asset: asset)
+      generator.appliesPreferredTrackTransform = true
+
+      return await withCheckedContinuation { continuation in
+        generator.generateCGImageAsynchronously(for: .zero) { cgImage, _, error in
+          if let cgImage = cgImage {
+            continuation.resume(returning: UIImage(cgImage: cgImage))
+          } else {
+            continuation.resume(returning: nil)
+          }
+        }
+      }
+    }
+
     func upload(container: MediaContainer) async {
-      if let index = indexOf(container: container) {
-        let originalContainer = mediaContainers[index]
-        guard originalContainer.mediaAttachment == nil else { return }
-        let newContainer = MediaContainer(
-          id: originalContainer.id,
-          image: originalContainer.image,
-          movieTransferable: originalContainer.movieTransferable,
-          gifTransferable: nil,
-          mediaAttachment: nil,
-          error: nil
-        )
-        mediaContainers[index] = newContainer
-        do {
-          let compressor = Compressor()
-          if let image = originalContainer.image {
-            let imageData = try await compressor.compressImageForUpload(image)
-            let uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg")
-            if let index = indexOf(container: newContainer) {
-              mediaContainers[index] = MediaContainer(
-                id: originalContainer.id,
-                image: mode.isInShareExtension ? originalContainer.image : nil,
-                movieTransferable: nil,
-                gifTransferable: nil,
-                mediaAttachment: uploadedMedia,
-                error: nil
-              )
+      guard let index = indexOf(container: container) else { return }
+      let originalContainer = mediaContainers[index]
+
+      // Only upload if in pending state
+      guard case .pending(let content) = originalContainer.state else { return }
+
+      // Set to uploading state
+      mediaContainers[index] = MediaContainer(
+        id: originalContainer.id,
+        state: .uploading(content: content, progress: 0.0)
+      )
+
+      do {
+        let compressor = Compressor()
+        let uploadedMedia: MediaAttachment?
+
+        switch content {
+        case .image(let image):
+          let imageData = try await compressor.compressImageForUpload(image)
+          uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg") {
+            [weak self] progress in
+            guard let self else { return }
+            Task { @MainActor in
+              if let index = self.indexOf(container: originalContainer) {
+                self.mediaContainers[index] = MediaContainer(
+                  id: originalContainer.id,
+                  state: .uploading(content: content, progress: progress)
+                )
+              }
             }
-            if let uploadedMedia, uploadedMedia.url == nil {
-              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
-            }
-          } else if let videoURL = originalContainer.movieTransferable?.url,
-            let compressedVideoURL = await compressor.compressVideo(videoURL),
+          }
+
+        case .video(let transferable, _):
+          let videoURL = transferable.url
+          guard let compressedVideoURL = await compressor.compressVideo(videoURL),
             let data = try? Data(contentsOf: compressedVideoURL)
-          {
-            let uploadedMedia = try await uploadMedia(
-              data: data, mimeType: compressedVideoURL.mimeType())
-            if let index = indexOf(container: newContainer) {
-              mediaContainers[index] = MediaContainer(
-                id: originalContainer.id,
-                image: mode.isInShareExtension ? originalContainer.image : nil,
-                movieTransferable: originalContainer.movieTransferable,
-                gifTransferable: nil,
-                mediaAttachment: uploadedMedia,
-                error: nil
-              )
-            }
-            if let uploadedMedia, uploadedMedia.url == nil {
-              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
-            }
-          } else if let gifData = originalContainer.gifTransferable?.data {
-            let uploadedMedia = try await uploadMedia(data: gifData, mimeType: "image/gif")
-            if let index = indexOf(container: newContainer) {
-              mediaContainers[index] = MediaContainer(
-                id: originalContainer.id,
-                image: mode.isInShareExtension ? originalContainer.image : nil,
-                movieTransferable: nil,
-                gifTransferable: originalContainer.gifTransferable,
-                mediaAttachment: uploadedMedia,
-                error: nil
-              )
-            }
-            if let uploadedMedia, uploadedMedia.url == nil {
-              scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
+          else {
+            throw MediaContainer.MediaError.compressionFailed
+          }
+          uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType())
+          { [weak self] progress in
+            guard let self else { return }
+            Task { @MainActor in
+              if let index = self.indexOf(container: originalContainer) {
+                self.mediaContainers[index] = MediaContainer(
+                  id: originalContainer.id,
+                  state: .uploading(content: content, progress: progress)
+                )
+              }
             }
           }
-        } catch {
-          if let index = indexOf(container: newContainer) {
-            mediaContainers[index] = MediaContainer(
-              id: originalContainer.id,
-              image: originalContainer.image,
-              movieTransferable: nil,
-              gifTransferable: nil,
-              mediaAttachment: nil,
-              error: error
-            )
+
+        case .gif(let transferable, _):
+          guard let gifData = transferable.data else {
+            throw MediaContainer.MediaError.compressionFailed
           }
+          uploadedMedia = try await uploadMedia(data: gifData, mimeType: "image/gif") {
+            [weak self] progress in
+            guard let self else { return }
+            Task { @MainActor in
+              if let index = self.indexOf(container: originalContainer) {
+                self.mediaContainers[index] = MediaContainer(
+                  id: originalContainer.id,
+                  state: .uploading(content: content, progress: progress)
+                )
+              }
+            }
+          }
+        }
+
+        if let index = indexOf(container: originalContainer),
+          let uploadedMedia
+        {
+          // Update to uploaded state
+          mediaContainers[index] = MediaContainer.uploaded(
+            id: originalContainer.id,
+            attachment: uploadedMedia,
+            originalImage: mode.isInShareExtension ? content.previewImage : nil
+          )
+
+          // Schedule refresh if URL is not ready
+          if uploadedMedia.url == nil {
+            scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
+          }
+        }
+      } catch {
+        if let index = indexOf(container: originalContainer) {
+          // Update to failed state
+          let mediaError: MediaContainer.MediaError
+          if let serverError = error as? ServerError {
+            mediaError = .uploadFailed(serverError)
+          } else {
+            mediaError = .compressionFailed
+          }
+
+          mediaContainers[index] = MediaContainer.failed(
+            id: originalContainer.id,
+            content: content,
+            error: mediaError
+          )
         }
       }
     }
@@ -905,14 +987,13 @@ extension StatusEditor {
                   json: nil))
               if newAttachement.url != nil {
                 let oldContainer = mediaContainers[index]
-                mediaContainers[index] = MediaContainer(
-                  id: mediaAttachement.id,
-                  image: oldContainer.image,
-                  movieTransferable: oldContainer.movieTransferable,
-                  gifTransferable: oldContainer.gifTransferable,
-                  mediaAttachment: newAttachement,
-                  error: nil
-                )
+                if case .uploaded(_, let originalImage) = oldContainer.state {
+                  mediaContainers[index] = MediaContainer.uploaded(
+                    id: oldContainer.id,
+                    attachment: newAttachement,
+                    originalImage: originalImage
+                  )
+                }
               }
             } catch {}
           }
@@ -922,23 +1003,24 @@ extension StatusEditor {
     }
 
     func addDescription(container: MediaContainer, description: String) async {
-      guard let client, let attachment = container.mediaAttachment else { return }
-      if let index = indexOf(container: container) {
-        do {
-          let media: MediaAttachment = try await client.put(
-            endpoint: Media.media(
-              id: attachment.id,
-              json: .init(description: description)))
-          mediaContainers[index] = MediaContainer(
-            id: container.id,
-            image: nil,
-            movieTransferable: nil,
-            gifTransferable: nil,
-            mediaAttachment: media,
-            error: nil
-          )
-        } catch {}
-      }
+      guard let client,
+        let index = indexOf(container: container)
+      else { return }
+
+      let state = mediaContainers[index].state
+      guard case .uploaded(let attachment, let originalImage) = state else { return }
+
+      do {
+        let media: MediaAttachment = try await client.put(
+          endpoint: Media.media(
+            id: attachment.id,
+            json: .init(description: description)))
+        mediaContainers[index] = MediaContainer.uploaded(
+          id: mediaContainers[index].id,
+          attachment: media,
+          originalImage: originalImage
+        )
+      } catch {}
     }
 
     private var mediaAttributes: [StatusData.MediaAttribute] = []
@@ -951,7 +1033,9 @@ extension StatusEditor {
       }
     }
 
-    private func uploadMedia(data: Data, mimeType: String) async throws -> MediaAttachment? {
+    private func uploadMedia(
+      data: Data, mimeType: String, progressHandler: @escaping @Sendable (Double) -> Void
+    ) async throws -> MediaAttachment? {
       guard let client else { return nil }
       return try await client.mediaUpload(
         endpoint: Media.medias,
@@ -959,7 +1043,8 @@ extension StatusEditor {
         method: "POST",
         mimeType: mimeType,
         filename: "file",
-        data: data)
+        data: data,
+        progressHandler: progressHandler)
     }
 
     // MARK: - Custom emojis
@@ -1029,5 +1114,3 @@ extension StatusEditor.ViewModel: UITextPasteDelegate {
     }
   }
 }
-
-extension PhotosPickerItem: @unchecked @retroactive Sendable {}

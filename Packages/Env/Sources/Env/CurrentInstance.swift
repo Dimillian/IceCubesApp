@@ -1,14 +1,14 @@
 import Combine
 import Foundation
 import Models
-import Network
+import NetworkClient
 import Observation
 
 @MainActor
 @Observable public class CurrentInstance {
   public private(set) var instance: Instance?
 
-  private var client: Client?
+  private var client: MastodonClient?
 
   public static let shared = CurrentInstance()
 
@@ -43,14 +43,26 @@ import Observation
     version >= 4.3
   }
 
+  public var isGroupedNotificationsSupported: Bool {
+    version >= 4.3
+  }
+
+  public var isQuoteSupported: Bool {
+    instance?.apiVersions?.mastodon ?? 0 >= 7
+  }
+
+  public var canViewStatusQuotes: Bool {
+    instance?.apiVersions?.mastodon ?? 0 >= 7
+  }
+
   private init() {}
 
-  public func setClient(client: Client) {
+  public func setClient(client: MastodonClient) {
     self.client = client
   }
 
   public func fetchCurrentInstance() async {
     guard let client else { return }
-    instance = try? await client.get(endpoint: Instances.instance)
+    instance = try? await client.get(endpoint: Instances.instance, forceVersion: .v2)
   }
 }

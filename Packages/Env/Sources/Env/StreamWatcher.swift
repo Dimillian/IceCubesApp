@@ -1,13 +1,13 @@
 import Combine
 import Foundation
 import Models
-import Network
+import NetworkClient
 import OSLog
 import Observation
 
 @MainActor
 @Observable public class StreamWatcher {
-  private var client: Client?
+  private var client: MastodonClient?
   private var task: URLSessionWebSocketTask?
   private var watchedStreams: [Stream] = []
   private var instanceStreamingURL: URL?
@@ -36,7 +36,7 @@ import Observation
     decoder.keyDecodingStrategy = .convertFromSnakeCase
   }
 
-  public func setClient(client: Client, instanceStreamingURL: URL?) {
+  public func setClient(client: MastodonClient, instanceStreamingURL: URL?) {
     if self.client != nil {
       stopWatching()
     }

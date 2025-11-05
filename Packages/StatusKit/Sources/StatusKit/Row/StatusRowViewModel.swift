@@ -3,7 +3,7 @@ import DesignSystem
 import Env
 import Models
 import NaturalLanguage
-import Network
+import NetworkClient
 import Observation
 import SwiftUI
 
@@ -16,7 +16,7 @@ import SwiftUI
   let textDisabled: Bool
   let finalStatus: AnyStatus
 
-  let client: Client
+  let client: MastodonClient
   let routerPath: RouterPath
 
   let userFollowedTag: HTMLString.Link?
@@ -49,6 +49,7 @@ import SwiftUI
   private(set) var actionsAccountsFetched: Bool = false
   var favoriters: [Account] = []
   var rebloggers: [Account] = []
+  var quoters: [Account] = []
 
   var isLoadingRemoteContent: Bool = false
   var localStatusId: String?
@@ -112,41 +113,11 @@ import SwiftUI
   }
 
   @ViewBuilder
-  func makeBackgroundColor(isHomeTimeline: Bool) -> some View {
-    if isHomeTimeline, theme.showContentGradient {
-      homeBackgroundColor
-    } else {
-      backgroundColor
-    }
-  }
-
-  @ViewBuilder
-  var homeBackgroundColor: some View {
-    if status.visibility == .direct {
-      theme.tintColor.opacity(0.15)
-    } else if userMentionned {
-      theme.secondaryBackgroundColor
-    } else {
-      if status.account.isPremiumAccount {
-        makeDecorativeGradient(startColor: .yellow, endColor: theme.primaryBackgroundColor)
-      } else if userFollowedTag != nil {
-        makeDecorativeGradient(startColor: .teal, endColor: theme.primaryBackgroundColor)
-      } else if status.reblog != nil {
-        makeDecorativeGradient(startColor: theme.tintColor, endColor: theme.primaryBackgroundColor)
-      } else {
-        theme.primaryBackgroundColor
-      }
-    }
-  }
-
-  @ViewBuilder
   var backgroundColor: some View {
     if status.visibility == .direct {
       theme.tintColor.opacity(0.15)
     } else if userMentionned {
       theme.secondaryBackgroundColor
-    } else if status.account.isPremiumAccount {
-      Color.yellow.opacity(0.4)
     } else {
       theme.primaryBackgroundColor
     }
@@ -167,7 +138,7 @@ import SwiftUI
 
   public init(
     status: Status,
-    client: Client,
+    client: MastodonClient,
     routerPath: RouterPath,
     isRemote: Bool = false,
     showActions: Bool = true,
@@ -210,6 +181,15 @@ import SwiftUI
 
     if let url = embededStatusURL(),
       let embed = StatusEmbedCache.shared.get(url: url)
+    {
+      isEmbedLoading = false
+      embeddedStatus = embed
+    } else if let quotedStatus = finalStatus.quote?.quotedStatus,
+      finalStatus.quote?.state == .accepted
+    {
+      embeddedStatus = quotedStatus
+    } else if let id = finalStatus.quote?.quotedStatusId,
+      let embed = StatusEmbedCache.shared.get(id: id)
     {
       isEmbedLoading = false
       embeddedStatus = embed
@@ -257,6 +237,7 @@ import SwiftUI
   }
 
   private func embededStatusURL() -> URL? {
+    guard finalStatus.quote == nil else { return nil }
     let content = finalStatus.content
     if !content.statusesURLs.isEmpty,
       let url = content.statusesURLs.first,
@@ -269,6 +250,11 @@ import SwiftUI
   }
 
   func loadEmbeddedStatus() async {
+    let loaded = await loadStatusById()
+    if loaded {
+      return
+    }
+
     guard embeddedStatus == nil,
       let url = embededStatusURL()
     else {
@@ -314,6 +300,27 @@ import SwiftUI
     }
   }
 
+  private func loadStatusById() async -> Bool {
+    if embeddedStatus == nil,
+      let id = finalStatus.quote?.quotedStatusId,
+      finalStatus.quote?.quotedStatus == nil
+    {
+      isEmbedLoading = true
+      if let embed = StatusEmbedCache.shared.get(id: id) {
+        embeddedStatus = embed
+        isEmbedLoading = false
+        return true
+      } else if let embed: Status = try? await client.get(endpoint: Statuses.status(id: id)) {
+        StatusEmbedCache.shared.set(id: id, status: embed)
+        embeddedStatus = embed
+        isEmbedLoading = false
+        return true
+      }
+      return false
+    }
+    return false
+  }
+
   func pin() async {
     guard client.isAuth else { return }
     isPinned = true
@@ -353,9 +360,16 @@ import SwiftUI
         endpoint: Statuses.favoritedBy(id: status.id, maxId: nil))
       let rebloggers: [Account] = try await client.get(
         endpoint: Statuses.rebloggedBy(id: status.id, maxId: nil))
+      var quoters: [Account] = []
+      if finalStatus.quotesCount ?? 0 > 0, CurrentAccount.shared.account?.id == status.account.id {
+        let statuses: [Status] = try await client.get(
+          endpoint: Statuses.quotesBy(id: status.id, maxId: nil))
+        quoters = statuses.map { $0.account }
+      }
       withAnimation(.smooth) {
         self.favoriters = favoriters
         self.rebloggers = rebloggers
+        self.quoters = quoters
       }
     } catch {}
   }
