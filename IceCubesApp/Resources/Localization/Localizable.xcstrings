@@ -902,7 +902,14 @@
       }
     },
     "%lld. " : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld."
+          }
+        }
+      }
     },
     "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)" : {
       "localizations" : {
@@ -20720,7 +20727,14 @@
       }
     },
     "ALT text for the image" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Testo alternativo per l’immagine"
+          }
+        }
+      }
     },
     "An error occured while posting to Mastodon, please try again." : {
       "localizations" : {
@@ -20787,7 +20801,14 @@
       }
     },
     "API Versions" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versioni API"
+          }
+        }
+      }
     },
     "app-account.button.add" : {
       "comment" : "MARK: Package: AppAccount",
@@ -21038,13 +21059,34 @@
       }
     },
     "Boost Button Behavior" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comportamento tasto Reblog"
+          }
+        }
+      }
     },
     "Caption" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrizione"
+          }
+        }
+      }
     },
     "Caption for your post" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrizione del post"
+          }
+        }
+      }
     },
     "Compact Layout" : {
       "localizations" : {
@@ -22872,7 +22914,14 @@
       }
     },
     "Descriptions (ALT) for your images in order" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrizioni (ALT) per l’immagine in ordine"
+          }
+        }
+      }
     },
     "design.tag.n-posts-from-n-participants %lld %lld" : {
       "comment" : "MARK: Package: DesignSystem",
@@ -27250,7 +27299,14 @@
       }
     },
     "Error: %@" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Errore: %@"
+          }
+        }
+      }
     },
     "Explore & Trending" : {
       "localizations" : {
@@ -32033,10 +32089,24 @@
       }
     },
     "Image description" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrizione immagine"
+          }
+        }
+      }
     },
     "Image descriptions" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descrizioni immagine"
+          }
+        }
+      }
     },
     "Image to post on Mastodon" : {
       "localizations" : {
@@ -32097,10 +32167,24 @@
       }
     },
     "Image(s) to post on Mastodon" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Immagine(i) da pubblicare su Mastodon"
+          }
+        }
+      }
     },
     "Images" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Immagini"
+          }
+        }
+      }
     },
     "Instance" : {
       "extractionState" : "manual",
@@ -32168,7 +32252,14 @@
       }
     },
     "Instance Administrator" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amministratore istanza"
+          }
+        }
+      }
     },
     "instance.info.domains" : {
       "comment" : "MARK: Instances",
@@ -33880,7 +33971,7 @@
         "it" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Nascondi questi post dalla home"
+            "value" : "Nascondi questi post dalla Home"
           }
         },
         "ja" : {
@@ -36514,7 +36605,14 @@
       }
     },
     "Monthly Active Users" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utenti attivi mensili"
+          }
+        }
+      }
     },
     "New post" : {
       "localizations" : {
@@ -36581,7 +36679,14 @@
       }
     },
     "No images provided to post." : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Non è stata fornita un’immagine da pubblicare."
+          }
+        }
+      }
     },
     "Notifications" : {
       "localizations" : {
@@ -42414,7 +42519,14 @@
       }
     },
     "Posted %lld image(s) on Mastodon" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld immagine(i) pubblicate su Mastodon"
+          }
+        }
+      }
     },
     "Privacy Policy" : {
       "localizations" : {
@@ -43489,13 +43601,34 @@
       }
     },
     "Send an image or multiple images to Mastodon with Ice Cubes without opening the app" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invia una o più immagini a Mastodon con Ice Cubes senza aprire l’app"
+          }
+        }
+      }
     },
     "Send image(s) (background)" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invia immagine(i) (background)"
+          }
+        }
+      }
     },
     "Send image(s) to Mastodon" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invia immagine(i) a Mastodon"
+          }
+        }
+      }
     },
     "Send post to Mastodon" : {
       "localizations" : {
@@ -76638,6 +76771,24 @@
               }
             }
           }
+        },
+        "it" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld citazione"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld citazioni"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -77465,7 +77616,14 @@
       }
     },
     "Stream home timeline" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streaming della Home"
+          }
+        }
+      }
     },
     "Tab" : {
       "localizations" : {
@@ -83999,7 +84157,14 @@
       }
     },
     "Truncate status content" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tronca contenuto post"
+          }
+        }
+      }
     },
     "Use Ice Cubes to compose a post for Mastodon" : {
       "localizations" : {
