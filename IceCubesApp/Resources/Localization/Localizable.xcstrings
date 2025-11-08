@@ -21058,12 +21058,34 @@
         }
       }
     },
+    "Boost & Quote" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "메뉴 표시"
+          }
+        }
+      }
+    },
     "Boost Button Behavior" : {
       "localizations" : {
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "부스트 버튼 동작"
+          }
+        }
+      }
+    },
+    "Boost Only" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "부스트"
           }
         }
       }
@@ -31960,6 +31982,17 @@
         }
       }
     },
+    "Full timeline fetch" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "불러올 글이 많을 때 ‘더 보기’ 버튼을 표시하는 대신 모두 불러옴"
+          }
+        }
+      }
+    },
     "Home Timeline" : {
       "localizations" : {
         "de" : {
@@ -35585,6 +35618,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "輸入列表名稱"
+          }
+        }
+      }
+    },
+    "Load more" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "더 보기"
           }
         }
       }
@@ -42831,6 +42875,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "悄悄公開"
+          }
+        }
+      }
+    },
+    "Quote Only" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인용"
           }
         }
       }
