@@ -902,7 +902,14 @@
       }
     },
     "%lld. " : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld."
+          }
+        }
+      }
     },
     "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)" : {
       "localizations" : {
@@ -20720,7 +20727,14 @@
       }
     },
     "ALT text for the image" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "첨부될 이미지에 관한 설명"
+          }
+        }
+      }
     },
     "An error occured while posting to Mastodon, please try again." : {
       "localizations" : {
@@ -20787,7 +20801,14 @@
       }
     },
     "API Versions" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "API 버전"
+          }
+        }
+      }
     },
     "app-account.button.add" : {
       "comment" : "MARK: Package: AppAccount",
@@ -21038,13 +21059,34 @@
       }
     },
     "Boost Button Behavior" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "부스트 버튼 동작"
+          }
+        }
+      }
     },
     "Caption" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "본문"
+          }
+        }
+      }
     },
     "Caption for your post" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글 본문"
+          }
+        }
+      }
     },
     "Compact Layout" : {
       "localizations" : {
@@ -21243,7 +21285,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "게시할 글 내용"
+            "value" : "게시할 글 본문"
           }
         },
         "tr" : {
@@ -22872,7 +22914,14 @@
       }
     },
     "Descriptions (ALT) for your images in order" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게시될 이미지에 관한 설명 (순서대로)"
+          }
+        }
+      }
     },
     "design.tag.n-posts-from-n-participants %lld %lld" : {
       "comment" : "MARK: Package: DesignSystem",
@@ -26124,7 +26173,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "모두 표시"
+            "value" : "아이콘과 숫자 표시"
           }
         },
         "nb" : {
@@ -26243,7 +26292,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "표시하지 않음"
+            "value" : "표시 안 함"
           }
         },
         "nb" : {
@@ -26362,7 +26411,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "버튼만 표시"
+            "value" : "아이콘만 표시"
           }
         },
         "nb" : {
@@ -27250,7 +27299,14 @@
       }
     },
     "Error: %@" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오류: %@"
+          }
+        }
+      }
     },
     "Explore & Trending" : {
       "localizations" : {
@@ -32033,10 +32089,24 @@
       }
     },
     "Image description" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지 설명"
+          }
+        }
+      }
     },
     "Image descriptions" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지 설명"
+          }
+        }
+      }
     },
     "Image to post on Mastodon" : {
       "localizations" : {
@@ -32097,10 +32167,24 @@
       }
     },
     "Image(s) to post on Mastodon" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "게시할 이미지"
+          }
+        }
+      }
     },
     "Images" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지"
+          }
+        }
+      }
     },
     "Instance" : {
       "extractionState" : "manual",
@@ -32168,7 +32252,14 @@
       }
     },
     "Instance Administrator" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "서버 관리자"
+          }
+        }
+      }
     },
     "instance.info.domains" : {
       "comment" : "MARK: Instances",
@@ -36514,7 +36605,14 @@
       }
     },
     "Monthly Active Users" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "월간 활성 사용자 수"
+          }
+        }
+      }
     },
     "New post" : {
       "localizations" : {
@@ -36581,7 +36679,14 @@
       }
     },
     "No images provided to post." : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "제공된 이미지가 없습니다."
+          }
+        }
+      }
     },
     "Notifications" : {
       "localizations" : {
@@ -41763,7 +41868,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "앱 열기"
+            "value" : "탭 열기"
           }
         },
         "nl" : {
@@ -42191,7 +42296,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이미지와 글 게시"
+            "value" : "글 작성 화면 열고 이미지 첨부하기"
           }
         },
         "nl" : {
@@ -42319,7 +42424,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "내용"
+            "value" : "본문"
           }
         },
         "nl" : {
@@ -42414,7 +42519,14 @@
       }
     },
     "Posted %lld image(s) on Mastodon" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld개 이미지 게시됨"
+          }
+        }
+      }
     },
     "Privacy Policy" : {
       "localizations" : {
@@ -43401,7 +43513,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "글 게시"
+            "value" : "글 게시하기"
           }
         },
         "nl" : {
@@ -43465,7 +43577,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes로 마스토돈에 글을 작성합니다."
+            "value" : "글을 게시합니다."
           }
         },
         "tr" : {
@@ -43489,13 +43601,34 @@
       }
     },
     "Send an image or multiple images to Mastodon with Ice Cubes without opening the app" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글과 이미지를 게시합니다."
+          }
+        }
+      }
     },
     "Send image(s) (background)" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글과 이미지 게시하기"
+          }
+        }
+      }
     },
     "Send image(s) to Mastodon" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "글과 이미지 게시하기"
+          }
+        }
+      }
     },
     "Send post to Mastodon" : {
       "localizations" : {
@@ -45339,7 +45472,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "접힌 글은 일정 줄까지만 내용이 표시됩니다. 함께 표시되는 버튼을 누르면 전체 내용을 볼 수 있습니다."
+            "value" : "접힌 글은 일정 줄까지만 본문이 표시됩니다. 함께 표시되는 버튼을 누르면 본문 전체를 볼 수 있습니다."
           }
         },
         "nb" : {
@@ -68754,7 +68887,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "앞 글에 이어지는 내용을 작성하세요."
+            "value" : "앞 글에 이어질 내용을 작성하세요."
           }
         },
         "nb" : {
@@ -75264,7 +75397,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "전체 내용 보기"
+            "value" : "본문 전체 보기"
           }
         },
         "nb" : {
@@ -76638,6 +76771,18 @@
               }
             }
           }
+        },
+        "ko" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "인용 %lld회"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -77465,7 +77610,14 @@
       }
     },
     "Stream home timeline" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "홈에서 글 자동 새로고침"
+          }
+        }
+      }
     },
     "Tab" : {
       "localizations" : {
@@ -83999,7 +84151,14 @@
       }
     },
     "Truncate status content" : {
-
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "긴 글 본문을 일부만 표시"
+          }
+        }
+      }
     },
     "Use Ice Cubes to compose a post for Mastodon" : {
       "localizations" : {
