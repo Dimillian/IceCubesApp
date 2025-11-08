@@ -20731,7 +20731,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "첨부될 이미지에 관한 설명"
+            "value" : "첨부될 이미지에 대한 설명"
           }
         }
       }
@@ -22940,7 +22940,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "게시될 이미지에 관한 설명 (순서대로)"
+            "value" : "게시될 이미지에 대한 설명 (순서대로)"
           }
         }
       }
@@ -28056,7 +28056,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "검색어에 대한 결과가 없습니다. 다른 검색어로 시도해주세요."
+            "value" : "검색 결과가 없습니다. 다른 검색어로 시도해주세요."
           }
         },
         "nb" : {
@@ -44404,7 +44404,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 앱에 관해"
+            "value" : "앱 정보"
           }
         },
         "nb" : {
@@ -45114,7 +45114,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "이 앱 지원하기"
+            "value" : "Ice Cubes 지원하기"
           }
         },
         "nb" : {
@@ -78807,7 +78807,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "뜨고 있는"
+            "value" : "뜨고 있는 글"
           }
         },
         "nb" : {
@@ -83489,7 +83489,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "뜨고 있는"
+            "value" : "뜨고 있는 글"
           }
         },
         "nb" : {
@@ -83764,7 +83764,7 @@
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "뜨고 있는"
+            "value" : "뜨고 있는 글"
           }
         },
         "tr" : {
