@@ -2,7 +2,9 @@ import DesignSystem
 import Env
 import Models
 import NetworkClient
+import Nuke
 import SwiftUI
+import VisionKit
 
 extension StatusEditor {
   @MainActor
@@ -22,6 +24,7 @@ extension StatusEditor {
 
     @State private var didAppear: Bool = false
     @State private var isGeneratingDescription: Bool = false
+    @State private var isGeneratingText: Bool = false
 
     @State private var showTranslateView: Bool = false
     @State private var isTranslating: Bool = false
@@ -38,6 +41,7 @@ extension StatusEditor {
             .focused($isFieldFocused)
             if imageDescription.isEmpty {
               generateButton
+              copyTextButton
             }
             #if canImport(_Translation_SwiftUI)
               if #available(iOS 17.4, *), !imageDescription.isEmpty {
@@ -134,6 +138,25 @@ extension StatusEditor {
     }
 
     @ViewBuilder
+    private var copyTextButton: some View {
+      if let url = container.mediaAttachment?.url {
+        Button {
+          Task {
+            if let description = await generateText(url: url) {
+              imageDescription = description
+            }
+          }
+        } label: {
+          if isGeneratingText {
+            ProgressView()
+          } else {
+            Text("status.editor.media.copy-text")
+          }
+        }
+      }
+    }
+      
+    @ViewBuilder
     private var translateButton: some View {
       Button {
         showTranslateView = true
@@ -155,6 +178,26 @@ extension StatusEditor {
       let response = try? await client.request(.imageDescription(image: url))
       isGeneratingDescription = false
       return response?.trimmedText
+    }
+      
+    private func generateText(url: URL) async -> String? {
+      isGeneratingText = true
+      defer {
+        isGeneratingText = false
+      }
+      
+      let analyzer = ImageAnalyzer()
+      do {
+        let image = try await ImagePipeline.shared.image(for: url)
+        let configuration = ImageAnalyzer.Configuration([.text])
+        
+        let analysis = try await analyzer.analyze(image, configuration: configuration)
+        return analysis.transcript
+      } catch {
+        print("Error: \(error)")
+      }
+      
+      return nil
     }
   }
 }
