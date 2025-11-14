@@ -31904,6 +31904,9 @@
         }
       }
     },
+    "Full timeline fetch" : {
+
+    },
     "Home Timeline" : {
       "localizations" : {
         "de" : {
@@ -56717,6 +56720,7 @@
       }
     },
     "settings.section.other.footer" : {
+      "extractionState" : "stale",
       "localizations" : {
         "be" : {
           "stringUnit" : {
@@ -69279,6 +69283,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "最近用過"
+          }
+        }
+      }
+    },
+    "status.editor.media.copy-text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🤖 Copy text from image"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🤖 Copy text from image"
           }
         }
       }
