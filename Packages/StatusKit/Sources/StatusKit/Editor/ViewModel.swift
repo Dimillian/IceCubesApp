@@ -249,8 +249,14 @@ extension StatusEditor {
             }
           }
         }
+
+        var statusString = statusText.string
+        if UserPreferences.shared.cleanURLsBeforePosting {
+          statusString = cleanURLS(in: statusString)
+        }
+        
         let data = StatusData(
-          status: statusText.string,
+          status: statusString,
           visibility: visibility,
           inReplyToId: mode.replyToStatus?.id,
           spoilerText: spoilerOn ? spoilerText : nil,
@@ -504,7 +510,74 @@ extension StatusEditor {
         }
       } catch {}
     }
+    
+    func cleanURLS(in statusText: String) -> String {
+      let urlPattern = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)"
+      var statusText = statusText
+      
+      do {
+        let urlRegex = try NSRegularExpression(pattern: urlPattern, options: [])
+        let range = NSMakeRange(0, statusText.utf16.count)
+        let urls = urlRegex.matches(
+          in: statusText,
+          options: [],
+          range: range
+        ).map {
+          let strRange = Range($0.range, in: statusText)!
+          let urlString = String(statusText[strRange])
+          let url = URL(string: urlString)!
+          
+          return (removeTrackers(from: url), strRange)
+        }
+        
+        if urls.isEmpty {
+          return statusText
+        }
 
+        // replace the subranges backwards so the range indicies don't
+        // need recalculated
+        for (url, range) in urls.reversed() {
+          statusText.replaceSubrange(range, with: url.absoluteString)
+        }
+        
+        return statusText
+      } catch {
+        
+      }
+      
+      return statusText
+    }
+
+    // A collection of tracking parameters to be cleaned from the urls
+    static let knownTrackers = Set(["utm_source", "utm_medium", "utm_campaign", "utm_term",
+                                    "utm_content", "dclid", "fbclid", "gclid", "msclkid",
+                                    "si", "_openstat", "yclid", "wickedid", "twclid",
+                                    "_hsenc", "__hssc", "__hstc", "__hsfp", "hsctatracking",
+                                    "wbraid", "gbraid", "ysclid", "mc_eid", "oly_anon_id",
+                                    "oly_enc_id", "__s", "vero_id", "mkt_tok"])
+
+    func removeTrackers(from url: URL) -> URL {
+      guard var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
+          return url
+      }
+      
+      if let queryItems = components.queryItems {
+          
+          if queryItems.isEmpty {
+              return url
+          }
+          
+          var cleanQueryItems: [URLQueryItem] = []
+          for item in queryItems {
+              if !(item.name.hasPrefix("utm_") || item.name.hasPrefix("si")) {
+                  cleanQueryItems.append(item)
+              }
+          }
+          components.queryItems = cleanQueryItems.count == 0 ? nil : cleanQueryItems
+      }
+      
+      return components.url ?? url
+    }
     // MARK: - Shar sheet / Item provider
 
     func processURLs(urls: [URL]) {

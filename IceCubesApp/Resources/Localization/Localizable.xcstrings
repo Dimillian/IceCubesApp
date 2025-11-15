@@ -45156,6 +45156,22 @@
         }
       }
     },
+    "settings.content.clean-urls" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clean Tracking IDs from Links Before Posting"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clean Tracking IDs from Links Before Posting"
+          }
+        }
+      }
+    },
     "settings.content.collapse-long-posts" : {
       "localizations" : {
         "be" : {
