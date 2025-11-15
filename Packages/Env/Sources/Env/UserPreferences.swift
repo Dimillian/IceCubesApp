@@ -74,7 +74,7 @@ import SwiftUI
     
     @AppStorage("stream_home_timeline") public var streamHomeTimeline: Bool = false
     @AppStorage("full_timeline_fetch") public var fullTimelineFetch: Bool = false
-
+    @AppStorage("clean_urls_before_posting") public var cleanURLsBeforePosting: Bool = false
     // Notifications
     @AppStorage("notifications-truncate-status-content")
     public var notificationsTruncateStatusContent: Bool = true
@@ -376,6 +376,12 @@ import SwiftUI
     }
   }
 
+  public var cleanURLsBeforePosting: Bool {
+    didSet {
+      storage.cleanURLsBeforePosting = cleanURLsBeforePosting
+    }
+  }
+  
   // Notifications
   public var notificationsTruncateStatusContent: Bool {
     didSet {
@@ -562,6 +568,7 @@ import SwiftUI
     notificationsTruncateStatusContent = storage.notificationsTruncateStatusContent
     streamHomeTimeline = storage.streamHomeTimeline
     fullTimelineFetch = storage.fullTimelineFetch
+    cleanURLsBeforePosting = storage.cleanURLsBeforePosting
   }
 }
 
