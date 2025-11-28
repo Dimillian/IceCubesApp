@@ -902,7 +902,14 @@
       }
     },
     "%lld. " : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
     },
     "• [EmojiText](https://github.com/divadretlaw/EmojiText)\n\n• [HTML2Markdown](https://gitlab.com/mflint/HTML2Markdown)\n\n• [KeychainSwift](https://github.com/evgenyneu/keychain-swift)\n\n• [LRUCache](https://github.com/nicklockwood/LRUCache)\n\n• [Bodega](https://github.com/mergesort/Bodega)\n\n• [Nuke](https://github.com/kean/Nuke)\n\n• [SwiftSoup](https://github.com/scinfu/SwiftSoup.git)\n\n• [Atkinson Hyperlegible](https://github.com/googlefonts/atkinson-hyperlegible)\n\n• [OpenDyslexic](http://opendyslexic.org)\n\n• [SwiftUI-Introspect](https://github.com/siteline/SwiftUI-Introspect)\n\n• [RevenueCat](https://github.com/RevenueCat/purchases-ios)\n\n• [SFSafeSymbols](https://github.com/SFSafeSymbols/SFSafeSymbols)" : {
       "localizations" : {
@@ -20794,7 +20801,14 @@
       }
     },
     "API Versions" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versiones de la API"
+          }
+        }
+      }
     },
     "app-account.button.add" : {
       "comment" : "MARK: Package: AppAccount",
@@ -21045,7 +21059,14 @@
       }
     },
     "Boost Button Behavior" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comportamiento del botón Boost"
+          }
+        }
+      }
     },
     "Caption" : {
       "localizations" : {
@@ -32082,7 +32103,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Descripciones de imagen"
+            "value" : "Descripciones de imágenes"
           }
         }
       }
@@ -32231,7 +32252,14 @@
       }
     },
     "Instance Administrator" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Administrador de Instancia"
+          }
+        }
+      }
     },
     "instance.info.domains" : {
       "comment" : "MARK: Instances",
@@ -36577,7 +36605,14 @@
       }
     },
     "Monthly Active Users" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuarios Activos Mensuales"
+          }
+        }
+      }
     },
     "New post" : {
       "localizations" : {
@@ -36648,7 +36683,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Imágenes para la publicación no incluídas"
+            "value" : "Ninguna imagen proporcionada para publicar."
           }
         }
       }
@@ -42488,7 +42523,7 @@
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Se han publicado %lld imagen(es) en Mastodon"
+            "value" : "%lld imagen(es) publicadas en Mastodon"
           }
         }
       }
@@ -76736,6 +76771,24 @@
               }
             }
           }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld cita"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld citas"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -77563,7 +77616,14 @@
       }
     },
     "Stream home timeline" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar cronología principal en tiempo real"
+          }
+        }
+      }
     },
     "Tab" : {
       "localizations" : {
@@ -84097,7 +84157,14 @@
       }
     },
     "Truncate status content" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Truncar contenido del estado"
+          }
+        }
+      }
     },
     "Use Ice Cubes to compose a post for Mastodon" : {
       "localizations" : {
