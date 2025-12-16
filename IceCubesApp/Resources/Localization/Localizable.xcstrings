@@ -13561,6 +13561,12 @@
     "account.edit.avatar.delete" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatar löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14102,6 +14108,12 @@
     "account.edit.header.delete" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopfbild löschen"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20720,7 +20732,14 @@
       }
     },
     "ALT text for the image" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alt-Text für das Bild"
+          }
+        }
+      }
     },
     "An error occured while posting to Mastodon, please try again." : {
       "localizations" : {
@@ -20787,7 +20806,14 @@
       }
     },
     "API Versions" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "API-Versionen"
+          }
+        }
+      }
     },
     "app-account.button.add" : {
       "comment" : "MARK: Package: AppAccount",
@@ -21038,16 +21064,43 @@
       }
     },
     "Boost Button Behavior" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verhalten der Boostschaltfläche"
+          }
+        }
+      }
     },
     "Caption" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beschriftung"
+          }
+        }
+      }
     },
     "Caption for your post" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beschriftung für den Beitrag"
+          }
+        }
+      }
     },
     "Compact Layout" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kompakte Ansicht"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22872,7 +22925,14 @@
       }
     },
     "Descriptions (ALT) for your images in order" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beschreibungen (Alttext) für die Bilder in dieser Reihenfolge"
+          }
+        }
+      }
     },
     "design.tag.n-posts-from-n-participants %lld %lld" : {
       "comment" : "MARK: Package: DesignSystem",
@@ -27250,7 +27310,14 @@
       }
     },
     "Error: %@" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fehler: %@"
+          }
+        }
+      }
     },
     "Explore & Trending" : {
       "localizations" : {
@@ -29406,6 +29473,12 @@
     },
     "Feature Requests" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Funktionswünsche"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32033,10 +32106,24 @@
       }
     },
     "Image description" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bildbeschreibung"
+          }
+        }
+      }
     },
     "Image descriptions" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bildbeschreibungen"
+          }
+        }
+      }
     },
     "Image to post on Mastodon" : {
       "localizations" : {
@@ -32097,10 +32184,24 @@
       }
     },
     "Image(s) to post on Mastodon" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bild(er), das/die auf Mastodon veröffentlicht werden soll(en)"
+          }
+        }
+      }
     },
     "Images" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bilder"
+          }
+        }
+      }
     },
     "Instance" : {
       "extractionState" : "manual",
@@ -32168,7 +32269,14 @@
       }
     },
     "Instance Administrator" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instanzadministrator"
+          }
+        }
+      }
     },
     "instance.info.domains" : {
       "comment" : "MARK: Instances",
@@ -33770,6 +33878,12 @@
     "Key" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schlüssel"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36514,7 +36628,14 @@
       }
     },
     "Monthly Active Users" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Monatlich aktive Nutzer"
+          }
+        }
+      }
     },
     "New post" : {
       "localizations" : {
@@ -36581,7 +36702,14 @@
       }
     },
     "No images provided to post." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keine Bilder wurden zur Veröffentlichung angegeben."
+          }
+        }
+      }
     },
     "Notifications" : {
       "localizations" : {
@@ -42414,10 +42542,23 @@
       }
     },
     "Posted %lld image(s) on Mastodon" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hat %lld Bilder auf Mastodon veröffentlicht"
+          }
+        }
+      }
     },
     "Privacy Policy" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datenschutzhinweise"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42784,6 +42925,12 @@
     },
     "Remove all cached images and videos" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alle zwischengespeicherten Bilder und Videos entfernen"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43489,13 +43636,34 @@
       }
     },
     "Send an image or multiple images to Mastodon with Ice Cubes without opening the app" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ein oder mehrere Bilder mit Ice Cubes an Mastodon senden, ohne die App zu öffnen"
+          }
+        }
+      }
     },
     "Send image(s) (background)" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bild(er) senden (Hintergrund)"
+          }
+        }
+      }
     },
     "Send image(s) to Mastodon" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bild(er) an Mastodon senden"
+          }
+        }
+      }
     },
     "Send post to Mastodon" : {
       "localizations" : {
@@ -76621,6 +76789,24 @@
     "status.summary.n-quotes %lld" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Zitat"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld Zitate"
+                }
+              }
+            }
+          }
+        },
         "en" : {
           "variations" : {
             "plural" : {
@@ -77465,7 +77651,14 @@
       }
     },
     "Stream home timeline" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Timeline streamen"
+          }
+        }
+      }
     },
     "Tab" : {
       "localizations" : {
@@ -79186,6 +79379,12 @@
     },
     "Telemetry" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetrie"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -79232,6 +79431,12 @@
     },
     "Telemetry by TelemetryDeck" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetrie von TelemetryDeck"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83455,6 +83660,12 @@
     "Translation Service" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Übersetzungsdienst"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83999,7 +84210,14 @@
       }
     },
     "Truncate status content" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statusinhalt abschneiden"
+          }
+        }
+      }
     },
     "Use Ice Cubes to compose a post for Mastodon" : {
       "localizations" : {
