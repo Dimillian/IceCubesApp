@@ -34,7 +34,20 @@ struct StatusRowContextMenu: View {
   }
 
   var isQuoteDisabled: Bool {
-    viewModel.status.quoteApproval?.currentUser == .denied || viewModel.status.visibility != .pub
+    viewModel.finalStatus.quoteApproval?.currentUser == .denied
+      || viewModel.finalStatus.visibility != .pub
+  }
+
+  var isBoostDisabled: Bool {
+    switch viewModel.finalStatus.visibility {
+    case .pub:
+      return false
+    case .priv:
+      guard let currentAccountId = account.account?.id else { return true }
+      return viewModel.finalStatus.account.id != currentAccountId
+    case .unlisted, .direct:
+      return true
+    }
   }
 
   var body: some View {
@@ -58,11 +71,8 @@ struct StatusRowContextMenu: View {
         } label: {
           boostLabel
         }
-        .disabled(
-          viewModel.status.visibility == .direct
-            || viewModel.status.visibility == .priv
-              && viewModel.status.account.id != account.account?.id
-        )
+        .disabled(isBoostDisabled)
+        .opacity(isBoostDisabled ? 0.35 : 1)
 
         Button {
           Task {

@@ -9,6 +9,7 @@ struct StatusRowDetailView: View {
 
   @Environment(StatusDataController.self) private var statusDataController
   @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(CurrentInstance.self) private var currentInstance
 
   var viewModel: StatusRowViewModel
 
@@ -100,14 +101,13 @@ struct StatusRowDetailView: View {
       {
         Divider()
         Button {
-          if viewModel.status.account.id == currentAccount.account?.id {
-            viewModel.routerPath.navigate(to: .quotes(id: viewModel.status.id))
-          }
+          guard canAccessQuotes else { return }
+          viewModel.routerPath.navigate(to: .quotes(id: viewModel.status.id))
         } label: {
           HStack {
             Text("status.summary.n-quotes \(statusDataController.quotesCount)")
               .font(.scaledCallout)
-            if viewModel.status.account.id == currentAccount.account?.id {
+            if canAccessQuotes {
               Spacer()
               makeAccountsScrollView(accounts: viewModel.quoters)
               Image(systemName: "chevron.right")
@@ -135,5 +135,9 @@ struct StatusRowDetailView: View {
       }
       .padding(.leading, .layoutPadding)
     }
+  }
+
+  private var canAccessQuotes: Bool {
+    currentInstance.canViewStatusQuotes || viewModel.status.account.id == currentAccount.account?.id
   }
 }

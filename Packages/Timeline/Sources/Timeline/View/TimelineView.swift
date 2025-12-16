@@ -116,7 +116,12 @@ public struct TimelineView: View {
       viewModel.canFilterTimeline = canFilterTimeline
 
       if viewModel.client == nil {
-        viewModel.client = client
+        switch timeline {
+        case .remoteLocal(let server, _):
+          viewModel.client = MastodonClient(server: server)
+        default:
+          viewModel.client = client
+        }
       }
 
       viewModel.timeline = timeline

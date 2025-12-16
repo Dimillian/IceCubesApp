@@ -74,10 +74,13 @@ struct StatusRowSwipeView: View {
       makeSwipeButtonForRouterPath(
         action: action, destination: .replyToStatusEditor(status: viewModel.status))
     case .quote:
+      let finalStatus = viewModel.finalStatus
       makeSwipeButtonForRouterPath(
         action: action, destination: .quoteStatusEditor(status: viewModel.status)
       )
-      .disabled(viewModel.status.visibility == .direct || viewModel.status.visibility == .priv)
+      .disabled(
+        finalStatus.visibility != .pub
+          || finalStatus.quoteApproval?.currentUser == .denied)
     case .favorite:
       makeSwipeButtonForTask(action: action) {
         await statusDataController.toggleFavorite(remoteStatus: nil)

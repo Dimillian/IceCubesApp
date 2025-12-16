@@ -51,6 +51,10 @@ import Observation
     instance?.apiVersions?.mastodon ?? 0 >= 7
   }
 
+  public var canViewStatusQuotes: Bool {
+    instance?.apiVersions?.mastodon ?? 0 >= 7
+  }
+
   private init() {}
 
   public func setClient(client: MastodonClient) {

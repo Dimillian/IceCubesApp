@@ -41,27 +41,25 @@ struct TimelineStatusFetcher: TimelineStatusFetching {
     async throws -> [Status]
   {
     guard let client = client else { throw StatusFetcherError.noClientAvailable }
+    guard maxPages > 0 else { return [] }
+
+    var pagesLoaded = 0
     var allStatuses: [Status] = []
     var latestMinId = minId
-    let targetCount = 50
 
-    for _ in 1...maxPages {
-      if Task.isCancelled { break }
-
-      // If we already have enough statuses, stop fetching
-      if allStatuses.count >= targetCount { break }
-
+    while !Task.isCancelled, pagesLoaded < maxPages {
       let newStatuses: [Status] = try await client.get(
         endpoint: timeline.endpoint(
           sinceId: nil,
           maxId: nil,
           minId: latestMinId,
           offset: nil,
-          limit: min(40, targetCount - allStatuses.count)
+          limit: 40
         ))
 
       if newStatuses.isEmpty { break }
 
+      pagesLoaded += 1
       allStatuses.insert(contentsOf: newStatuses, at: 0)
       latestMinId = newStatuses.first?.id ?? latestMinId
     }
