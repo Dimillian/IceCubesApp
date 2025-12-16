@@ -54135,6 +54135,17 @@
         }
       }
     },
+    "settings.other.animate-emojis" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animate Emojis"
+          }
+        }
+      }
+    },
     "settings.other.autoplay-video" : {
       "localizations" : {
         "be" : {
@@ -84400,5 +84411,5 @@
       }
     }
   },
-  "version" : "1.0"
+  "version" : "1.1"
 }

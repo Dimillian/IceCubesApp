@@ -28,6 +28,9 @@ struct ContentSettingsView: View {
         Toggle(isOn: $userPreferences.showAltTextForMedia) {
           Text("settings.content.media.show.alt")
         }
+        Toggle(isOn: $userPreferences.animateEmojis) {
+            Text("settings.other.animate-emojis")
+        }
       }
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
