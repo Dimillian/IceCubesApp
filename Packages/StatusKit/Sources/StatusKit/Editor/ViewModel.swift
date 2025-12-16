@@ -311,6 +311,9 @@ extension StatusEditor {
       statusText = string
       selectedRange = NSRange(location: selectedRange.location + text.utf16.count, length: 0)
       processText()
+      if let textView {
+        textView.delegate?.textViewDidChange?(textView)
+      }
     }
 
     func replaceTextWith(text: String, inRange: NSRange) {
