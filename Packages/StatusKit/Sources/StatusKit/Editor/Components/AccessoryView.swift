@@ -158,23 +158,25 @@ extension StatusEditor {
       }
       .disabled(!canAddNewSEVM)
 
-      if !viewModel.customEmojiContainer.isEmpty {
-        Button {
-          isCustomEmojisSheetDisplay = true
-        } label: {
-          // This is a workaround for an apparent bug in the `face.smiling` SF Symbol.
-          // See https://github.com/Dimillian/IceCubesApp/issues/1193
-          let customEmojiSheetIconName =
-            colorScheme == .light ? "face.smiling" : "face.smiling.inverse"
-          Image(systemName: customEmojiSheetIconName)
-            .frame(width: 25, height: 25)
-            .contentShape(Rectangle())
-        }
-        .accessibilityLabel("accessibility.editor.button.custom-emojis")
-        .sheet(isPresented: $isCustomEmojisSheetDisplay) {
-          CustomEmojisView(viewModel: focusedSEVM)
-            .environment(theme)
-        }
+      Button {
+        isCustomEmojisSheetDisplay = true
+      } label: {
+        // This is a workaround for an apparent bug in the `face.smiling` SF Symbol.
+        // See https://github.com/Dimillian/IceCubesApp/issues/1193
+        let customEmojiSheetIconName =
+          colorScheme == .light ? "face.smiling" : "face.smiling.inverse"
+        Image(systemName: customEmojiSheetIconName)
+          .frame(width: 25, height: 25)
+          .contentShape(Rectangle())
+      }
+      .accessibilityLabel("accessibility.editor.button.custom-emojis")
+      .disabled(viewModel.customEmojiContainer.isEmpty)
+      .sheet(isPresented: $isCustomEmojisSheetDisplay) {
+        CustomEmojisView(viewModel: focusedSEVM)
+          .environment(theme)
+          .presentationDragIndicator(.hidden)
+          .presentationDetents([.medium])
+          .interactiveDismissDisabled()
       }
 
       if #available(iOS 26, *), Assistant.isAvailable  {
