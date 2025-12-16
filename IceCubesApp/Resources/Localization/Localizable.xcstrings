@@ -908,6 +908,12 @@
             "state" : "translated",
             "value" : "%lld."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
         }
       }
     },
@@ -20733,6 +20739,12 @@
             "state" : "translated",
             "value" : "첨부될 이미지에 대한 설명"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texto ALT para la imagen"
+          }
         }
       }
     },
@@ -20806,6 +20818,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "API 버전"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versiones de la API"
           }
         }
       }
@@ -21087,6 +21105,12 @@
             "state" : "translated",
             "value" : "부스트"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comportamiento del Botón de Boost"
+          }
         }
       }
     },
@@ -21097,6 +21121,12 @@
             "state" : "translated",
             "value" : "본문"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leyenda"
+          }
         }
       }
     },
@@ -21106,6 +21136,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "글 본문"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leyenda para tu publicación"
           }
         }
       }
@@ -22941,6 +22977,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "게시될 이미지에 대한 설명 (순서대로)"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripciones (ALT) para tus imágenes en orden"
           }
         }
       }
@@ -27326,6 +27368,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "오류: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error: %@"
           }
         }
       }
@@ -32128,6 +32176,12 @@
             "state" : "translated",
             "value" : "이미지 설명"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripción de la imagen"
+          }
         }
       }
     },
@@ -32137,6 +32191,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "이미지 설명"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripciones de las imágenes"
           }
         }
       }
@@ -32206,6 +32266,12 @@
             "state" : "translated",
             "value" : "게시할 이미지"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imagen(es) para publicar en Mastodon"
+          }
         }
       }
     },
@@ -32215,6 +32281,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "이미지"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imágenes"
           }
         }
       }
@@ -32290,6 +32362,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "서버 관리자"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Administrador de la Instancia"
           }
         }
       }
@@ -36596,6 +36674,12 @@
             "state" : "translated",
             "value" : "월간 활성 사용자 수"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuarios Activos Mensuales"
+          }
         }
       }
     },
@@ -36669,6 +36753,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "제공된 이미지가 없습니다."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ninguna imagen proporcionada para publicar."
           }
         }
       }
@@ -42510,6 +42600,12 @@
             "state" : "translated",
             "value" : "%lld개 이미지 게시됨"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld imagen(es) publicada(s) en Mastodon"
+          }
         }
       }
     },
@@ -43603,6 +43699,12 @@
             "state" : "translated",
             "value" : "글과 이미지를 게시합니다."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envía una imagen o múltiples imágenes a Mastodon con Ice Cubes sin abrir la aplicación"
+          }
         }
       }
     },
@@ -43613,6 +43715,12 @@
             "state" : "translated",
             "value" : "글과 이미지 게시하기"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar imagen(es) (segundo plano)"
+          }
         }
       }
     },
@@ -43622,6 +43730,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "글과 이미지 게시하기"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enviar imagen(es) a Mastodon"
           }
         }
       }
@@ -76775,6 +76889,24 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "인용 %lld회"
+          }
+          }
+          }
+          }
+        },
+        "es" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld cita"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld citas"
                 }
               }
             }
@@ -77611,6 +77743,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "홈에서 글 자동 새로고침"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizar cronología principal en tiempo real"
           }
         }
       }
@@ -84152,6 +84290,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "긴 글 본문을 일부만 표시"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Truncar contenido del estado"
           }
         }
       }
