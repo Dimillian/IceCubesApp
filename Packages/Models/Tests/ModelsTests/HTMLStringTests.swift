@@ -99,6 +99,17 @@ func testHTMLStringInit_markdownEscaping() throws {
 }
 
 @Test
+func testHTMLStringInit_lineStartListMarkers() throws {
+  let decoder = JSONDecoder()
+
+  let listLikeContent = "\"<p>2025 year review:<br />- 11 accepted and merged pull requests</p>\""
+  let htmlString = try decoder.decode(HTMLString.self, from: Data(listLikeContent.utf8))
+  #expect("2025 year review:\n- 11 accepted and merged pull requests" == htmlString.asRawText)
+  #expect(
+    "2025 year review:\n\\- 11 accepted and merged pull requests" == htmlString.asMarkdown)
+}
+
+@Test
 func testHTMLStringInit_quoteInlineRemoval() throws {
   let decoder = JSONDecoder()
   
