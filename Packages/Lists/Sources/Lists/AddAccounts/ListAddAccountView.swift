@@ -10,6 +10,7 @@ public struct ListAddAccountView: View {
   @Environment(MastodonClient.self) private var client
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(RouterPath.self) private var routerPath
   @State private var viewModel: ListAddAccountViewModel
 
   public init(account: Account) {
@@ -48,7 +49,14 @@ public struct ListAddAccountView: View {
       .navigationTitle("lists.add-remove-\(viewModel.account.safeDisplayName)")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
-        ToolbarItem {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button {
+            routerPath.presentedSheet = .listCreate
+          } label: {
+            Label("account.list.create", systemImage: "plus")
+          }
+        }
+        ToolbarItem(placement: .navigationBarTrailing) {
           Button("action.done") {
             dismiss()
           }
