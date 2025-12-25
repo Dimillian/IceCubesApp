@@ -279,6 +279,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
         var txt = node.description
 
         txt = (try? Entities.unescape(txt)) ?? txt
+        let isLineStart = asMarkdown.isEmpty || asMarkdown.hasSuffix("\n")
 
         if let underscore_regex, let main_regex {
           //  This is the markdown escaper
@@ -288,6 +289,11 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
           txt = underscore_regex.stringByReplacingMatches(
             in: txt, options: [], range: NSRange(location: 0, length: txt.count),
             withTemplate: "\\\\$1")
+        }
+        if isLineStart,
+          txt.hasPrefix("- ") || txt.hasPrefix("* ") || txt.hasPrefix("+ ")
+        {
+          txt = "\\" + txt
         }
         // Strip newlines and line separators - they should be being sent as <br>s
         asMarkdown += txt.replacingOccurrences(of: "\n", with: "").replacingOccurrences(
