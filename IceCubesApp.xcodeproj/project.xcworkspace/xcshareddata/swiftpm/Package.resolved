@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/nicklockwood/LRUCache",
       "state" : {
-        "revision" : "542f0449556327415409ededc9c43a4bd0a397dc",
-        "version" : "1.0.7"
+        "revision" : "0d91406ecd4d6c1c56275866f00508d9aeacc92a",
+        "version" : "1.2.0"
       }
     },
     {
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios-spm",
       "state" : {
-        "revision" : "334e4c6d711286744f1b9138934774f034c0a515",
-        "version" : "5.35.1"
+        "revision" : "21e33549780659771085e252093305d12c3b067d",
+        "version" : "5.52.0"
       }
     },
     {
@@ -78,8 +78,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/stephencelis/SQLite.swift.git",
       "state" : {
-        "revision" : "a95fc6df17d108bd99210db5e8a9bac90fe984b8",
-        "version" : "0.15.3"
+        "revision" : "392dd6058624d9f6c5b4c769d165ddd8c7293394",
+        "version" : "0.15.4"
+      }
+    },
+    {
+      "identity" : "swift-atomics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-atomics.git",
+      "state" : {
+        "revision" : "b601256eab081c0f92f059e12818ac1d4f178ff7",
+        "version" : "1.3.0"
       }
     },
     {
@@ -87,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swiftlang/swift-cmark.git",
       "state" : {
-        "revision" : "b022b08312decdc46585e0b3440d97f6f22ef703",
-        "version" : "0.6.0"
+        "revision" : "5d9bdaa4228b381639fff09403e39a04926e2dbe",
+        "version" : "0.7.1"
       }
     },
     {
@@ -96,8 +105,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/swiftlang/swift-markdown",
       "state" : {
-        "revision" : "ea79e83c8744d2b50b0dc2d5bbd1e857e1253bf9",
-        "version" : "0.6.0"
+        "revision" : "7d9a5ce307528578dfa777d505496bd5f544ad94",
+        "version" : "0.7.3"
+      }
+    },
+    {
+      "identity" : "swift-toolchain-sqlite",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-toolchain-sqlite",
+      "state" : {
+        "revision" : "b626d3002773b1a1304166643e7f118f724b2132",
+        "version" : "1.0.4"
       }
     },
     {
@@ -105,8 +123,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/TelemetryDeck/SwiftSDK",
       "state" : {
-        "revision" : "501270cd33082c3fa430b724e849855482ed051c",
-        "version" : "2.9.3"
+        "revision" : "8f332c1c256ba26cc46f74c9e5af94f7b1c37a9c",
+        "version" : "2.11.0"
       }
     },
     {
@@ -114,8 +132,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/scinfu/SwiftSoup.git",
       "state" : {
-        "revision" : "bba848db50462894e7fc0891d018dfecad4ef11e",
-        "version" : "2.8.7"
+        "revision" : "d86f244ed497d48012782e2f59c985a55e77b3f5",
+        "version" : "2.11.3"
       }
     },
     {
