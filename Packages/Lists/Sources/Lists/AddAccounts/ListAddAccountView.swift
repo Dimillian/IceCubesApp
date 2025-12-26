@@ -10,8 +10,8 @@ public struct ListAddAccountView: View {
   @Environment(MastodonClient.self) private var client
   @Environment(Theme.self) private var theme
   @Environment(CurrentAccount.self) private var currentAccount
-  @Environment(RouterPath.self) private var routerPath
   @State private var viewModel: ListAddAccountViewModel
+  @State private var isPresentingCreateList = false
 
   public init(account: Account) {
     _viewModel = .init(initialValue: .init(account: account))
@@ -20,6 +20,15 @@ public struct ListAddAccountView: View {
   public var body: some View {
     NavigationStack {
       List {
+        Section {
+          Button {
+            isPresentingCreateList = true
+          } label: {
+            Label("account.list.create", systemImage: "plus")
+          }
+        }
+        .listRowBackground(theme.primaryBackgroundColor)
+
         ForEach(currentAccount.sortedLists) { list in
           HStack {
             Toggle(
@@ -49,19 +58,15 @@ public struct ListAddAccountView: View {
       .navigationTitle("lists.add-remove-\(viewModel.account.safeDisplayName)")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
-        ToolbarItem(placement: .navigationBarLeading) {
-          Button {
-            routerPath.presentedSheet = .listCreate
-          } label: {
-            Label("account.list.create", systemImage: "plus")
-          }
-        }
         ToolbarItem(placement: .navigationBarTrailing) {
           Button("action.done") {
             dismiss()
           }
         }
       }
+    }
+    .sheet(isPresented: $isPresentingCreateList) {
+      ListCreateView()
     }
     .task {
       viewModel.client = client
