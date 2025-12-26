@@ -69,6 +69,8 @@ import SwiftUI
   private enum Constants {
     static let fullTimelineFetchLimit = 800
     static let fullTimelineFetchMaxPages = fullTimelineFetchLimit / 40
+    static let filteredTimelineAutoFetchLimit = 40
+    static let filteredTimelineAutoFetchMaxPages = 3
   }
 
   private var isFullTimelineFetchEnabled: Bool {
@@ -99,6 +101,9 @@ import SwiftUI
 
   @ObservationIgnored
   var canFilterTimeline: Bool = true
+
+  @ObservationIgnored
+  private var isAutoLoadingFilteredTimeline = false
 
   var isStreamingTimeline: Bool = false {
     didSet {
@@ -203,6 +208,7 @@ extension TimelineViewModel: GapLoadingFetcher {
   func refreshTimelineContentFilter() async {
     timelineTask?.cancel()
     await updateStatusesState()
+    await maybeLoadMoreForFilteredTimeline()
   }
 
   func fetchStatuses(from: Marker.Content) async throws {
@@ -403,6 +409,7 @@ extension TimelineViewModel: GapLoadingFetcher {
         statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
       }
     }
+    await maybeLoadMoreForFilteredTimeline()
   }
 
   enum NextPageError: Error {
@@ -513,6 +520,7 @@ extension TimelineViewModel: GapLoadingFetcher {
 
     await cache()
     await updateStatusesStateWithAnimation()
+    await maybeLoadMoreForFilteredTimeline()
   }
 
   private func updateStatusesState() async {
@@ -525,6 +533,49 @@ extension TimelineViewModel: GapLoadingFetcher {
     withAnimation {
       statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
     }
+  }
+
+  private func maybeLoadMoreForFilteredTimeline() async {
+    guard !isAutoLoadingFilteredTimeline else { return }
+    guard let client else { return }
+    guard await datasource.getFilteredItems().isEmpty else { return }
+    guard !(await datasource.getItems()).isEmpty else { return }
+
+    isAutoLoadingFilteredTimeline = true
+    defer { isAutoLoadingFilteredTimeline = false }
+
+    var pagesLoaded = 0
+    while pagesLoaded < Constants.filteredTimelineAutoFetchMaxPages, !Task.isCancelled {
+      let statuses = await datasource.get()
+      guard let lastId = statuses.last?.id else { break }
+
+      let newStatuses: [Status]
+      do {
+        newStatuses = try await statusFetcher.fetchNextPage(
+          client: client,
+          timeline: timeline,
+          lastId: lastId,
+          offset: statuses.count)
+      } catch {
+        break
+      }
+
+      guard !newStatuses.isEmpty else { break }
+
+      await datasource.append(contentOf: newStatuses)
+      StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
+
+      pagesLoaded += 1
+      if newStatuses.count < Constants.filteredTimelineAutoFetchLimit {
+        break
+      }
+
+      if !(await datasource.getFilteredItems()).isEmpty {
+        break
+      }
+    }
+
+    await updateStatusesStateWithAnimation()
   }
 
   private func createGapForOlderStatuses(sinceId: String? = nil, maxId: String, at index: Int) async
