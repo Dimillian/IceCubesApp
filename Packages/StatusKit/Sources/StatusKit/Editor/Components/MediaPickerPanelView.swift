@@ -1,0 +1,300 @@
+#if !os(visionOS)
+  import DesignSystem
+  import Env
+  import Foundation
+  import Photos
+  import PhotosUI
+  import SwiftUI
+  import UIKit
+
+  extension StatusEditor {
+    @MainActor
+    struct MediaPickerPanelView: View {
+      @Environment(Theme.self) private var theme
+      @Environment(CurrentInstance.self) private var currentInstance
+
+      @Bindable var viewModel: ViewModel
+
+      @State private var isPhotosPickerPresented: Bool = false
+      @State private var isFileImporterPresented: Bool = false
+      @State private var isCameraPickerPresented: Bool = false
+
+      var body: some View {
+        Group {
+          if #available(iOS 26, *) {
+            panelContent
+              .buttonStyle(.glass)
+              .font(.scaledFootnote)
+              .glassEffect(.regular, in: .rect(cornerRadius: 16))
+              .background(
+                theme.primaryBackgroundColor.opacity(0.2), in: .rect(cornerRadius: 16)
+              )
+              .padding(.horizontal, 16)
+          } else {
+            panelContent
+              .buttonStyle(.bordered)
+              .background(.ultraThickMaterial)
+          }
+        }
+        .photosPicker(
+          isPresented: $isPhotosPickerPresented,
+          selection: $viewModel.mediaPickers,
+          maxSelectionCount: currentInstance.instance?.configuration?.statuses.maxMediaAttachments
+            ?? 4,
+          matching: .any(of: [.images, .videos]),
+          photoLibrary: .shared()
+        )
+        .fileImporter(
+          isPresented: $isFileImporterPresented,
+          allowedContentTypes: [.image, .video, .movie],
+          allowsMultipleSelection: true
+        ) { result in
+          if let urls = try? result.get() {
+            viewModel.processURLs(urls: urls)
+          }
+        }
+        .fullScreenCover(
+          isPresented: $isCameraPickerPresented,
+          content: {
+            CameraPickerView(
+              selectedImage: .init(
+                get: {
+                  nil
+                },
+                set: { image in
+                  if let image {
+                    viewModel.processCameraPhoto(image: image)
+                  }
+                })
+            )
+            .background(.black)
+          }
+        )
+      }
+
+      private var panelContent: some View {
+        VStack(spacing: 12) {
+          RecentPhotosStripView { asset in
+            await addAsset(asset)
+          }
+
+          HStack(spacing: 24) {
+            Button {
+              isPhotosPickerPresented = true
+            } label: {
+              Label("Library", systemImage: "photo")
+            }
+
+            #if !targetEnvironment(macCatalyst)
+              Button {
+                isCameraPickerPresented = true
+              } label: {
+                Label("Camera", systemImage: "camera")
+              }
+            #endif
+
+            Button {
+              isFileImporterPresented = true
+            } label: {
+              Label("Files", systemImage: "folder")
+            }
+            .accessibilityLabel("status.editor.browse-file")
+          }
+          .disabled(viewModel.showPoll)
+        }
+        .padding(.vertical, 16)
+      }
+
+      private func addAsset(_ asset: PHAsset) async {
+        guard asset.mediaType == .image else { return }
+
+        let limit = currentInstance.instance?.configuration?.statuses.maxMediaAttachments ?? 4
+        guard viewModel.mediaContainers.count < limit else { return }
+
+        let options = PHImageRequestOptions()
+        options.isNetworkAccessAllowed = true
+        options.deliveryMode = .highQualityFormat
+        options.resizeMode = .none
+
+        let dataResult = await withCheckedContinuation { continuation in
+          PHImageManager.default().requestImageDataAndOrientation(
+            for: asset,
+            options: options
+          ) { data, _, _, _ in
+            continuation.resume(returning: data)
+          }
+        }
+
+        if let dataResult, let image = UIImage(data: dataResult) {
+          viewModel.processCameraPhoto(image: image)
+          return
+        }
+
+        let fallbackOptions = PHImageRequestOptions()
+        fallbackOptions.isNetworkAccessAllowed = true
+        fallbackOptions.deliveryMode = .highQualityFormat
+        fallbackOptions.resizeMode = .none
+
+        let fallbackImage = await withCheckedContinuation { continuation in
+          PHImageManager.default().requestImage(
+            for: asset,
+            targetSize: PHImageManagerMaximumSize,
+            contentMode: .aspectFit,
+            options: fallbackOptions
+          ) { image, _ in
+            continuation.resume(returning: image)
+          }
+        }
+
+        if let fallbackImage {
+          viewModel.processCameraPhoto(image: fallbackImage)
+        }
+      }
+    }
+  }
+
+  @MainActor
+  private struct RecentPhotosStripView: View {
+    private let thumbnailSize: CGFloat = 150
+    private let fetchLimit: Int = 20
+
+    let onSelect: (PHAsset) async -> Void
+
+    @State private var assets: [PHAsset] = []
+    @State private var authorizationStatus: PHAuthorizationStatus =
+      PHPhotoLibrary.authorizationStatus(for: .readWrite)
+
+    var body: some View {
+      ScrollView(.horizontal) {
+        LazyHStack(spacing: 12) {
+          if assets.isEmpty {
+            ForEach(0..<6, id: \.self) { _ in
+              RoundedRectangle(cornerRadius: 16)
+                .fill(.secondary.opacity(0.2))
+                .frame(width: thumbnailSize, height: thumbnailSize)
+                .overlay {
+                  Image(systemName: "photo")
+                    .foregroundStyle(.secondary)
+                }
+            }
+          } else {
+            ForEach(assets, id: \.localIdentifier) { asset in
+              PhotoAssetThumbnailView(
+                asset: asset,
+                size: thumbnailSize,
+                onSelect: onSelect
+              )
+            }
+          }
+        }
+        .padding(.vertical, 4)
+        .padding(.horizontal, 12)
+      }
+      .scrollIndicators(.hidden)
+      .frame(height: thumbnailSize + 12)
+      .task { await loadAssetsIfNeeded() }
+    }
+
+    private func loadAssetsIfNeeded() async {
+      guard authorizationStatus == .notDetermined else {
+        if authorizationStatus == .authorized || authorizationStatus == .limited {
+          loadAssets()
+        }
+        return
+      }
+
+      var status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+      if status == .notDetermined {
+        status = await PHPhotoLibrary.requestAuthorization(for: .readWrite)
+      }
+
+      authorizationStatus = status
+      if status == .authorized || status == .limited {
+        loadAssets()
+      }
+    }
+
+    private func loadAssets() {
+      let options = PHFetchOptions()
+      options.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+      options.fetchLimit = fetchLimit
+
+      let fetchResult = PHAsset.fetchAssets(with: .image, options: options)
+      var results: [PHAsset] = []
+      results.reserveCapacity(fetchResult.count)
+      fetchResult.enumerateObjects { asset, _, _ in
+        results.append(asset)
+      }
+
+      assets = results
+    }
+  }
+
+  @MainActor
+  private struct PhotoAssetThumbnailView: View {
+    let asset: PHAsset
+    let size: CGFloat
+    let onSelect: (PHAsset) async -> Void
+
+    @State private var image: UIImage?
+
+    var body: some View {
+      Group {
+        if let image {
+          Image(uiImage: image)
+            .resizable()
+            .scaledToFill()
+        } else {
+          RoundedRectangle(cornerRadius: 16)
+            .fill(.secondary.opacity(0.2))
+            .overlay {
+              Image(systemName: "photo")
+                .foregroundStyle(.secondary)
+            }
+        }
+      }
+      .frame(width: size, height: size)
+      .clipShape(RoundedRectangle(cornerRadius: 16))
+      .task {
+        await loadThumbnailIfNeeded()
+      }
+      .onTapGesture {
+        Task {
+          await onSelect(asset)
+        }
+      }
+    }
+
+    private func loadThumbnailIfNeeded() async {
+      guard image == nil else { return }
+
+      let options = PHImageRequestOptions()
+      options.deliveryMode = .fastFormat
+      options.resizeMode = .fast
+      options.isNetworkAccessAllowed = true
+
+      let scale = UIScreen.main.scale
+      let targetSize = CGSize(width: size * scale, height: size * scale)
+      options.deliveryMode = .opportunistic
+      options.isSynchronous = false
+
+      let result = await withCheckedContinuation { continuation in
+        var didResume = false
+        PHImageManager.default().requestImage(
+          for: asset,
+          targetSize: targetSize,
+          contentMode: .aspectFill,
+          options: options
+        ) { image, _ in
+          guard !didResume else { return }
+          didResume = true
+          continuation.resume(returning: image)
+        }
+      }
+
+      if let result {
+        image = result
+      }
+    }
+  }
+#endif

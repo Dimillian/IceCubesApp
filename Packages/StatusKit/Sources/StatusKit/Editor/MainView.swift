@@ -22,6 +22,8 @@ extension StatusEditor {
     @State private var followUpSEVMs: [ViewModel] = []
     @State private var editingMediaContainer: MediaContainer?
     @State private var scrollID: UUID?
+    @State private var isMediaPanelPresented: Bool = false
+    @State private var lastEditorFocusState: EditorFocusState?
 
     @FocusState private var editorFocusState: EditorFocusState?
 
@@ -92,7 +94,8 @@ extension StatusEditor {
             .ornament(attachmentAnchor: .scene(.leading)) {
               AccessoryView(
                 focusedSEVM: focusedSEVM,
-                followUpSEVMs: $followUpSEVMs)
+                followUpSEVMs: $followUpSEVMs,
+                isMediaPanelPresented: $isMediaPanelPresented)
             }
           #else
             .safeAreaInset(edge: .bottom) {
@@ -104,16 +107,29 @@ extension StatusEditor {
 
                       AccessoryView(
                         focusedSEVM: focusedSEVM,
-                        followUpSEVMs: $followUpSEVMs)
+                        followUpSEVMs: $followUpSEVMs,
+                        isMediaPanelPresented: $isMediaPanelPresented
+                      )
+                      .padding(.bottom, isMediaPanelPresented ? 0 : 8)
+
+                      if isMediaPanelPresented {
+                        MediaPickerPanelView(viewModel: focusedSEVM)
+                      }
                     }
                   }
-                  .padding(.bottom, 8)
                 } else {
-                  AccessoryView(
-                    focusedSEVM: focusedSEVM,
-                    followUpSEVMs: $followUpSEVMs)
+                  VStack(spacing: 10) {
+                    AutoCompleteView(viewModel: focusedSEVM)
 
-                  AutoCompleteView(viewModel: focusedSEVM)
+                    AccessoryView(
+                      focusedSEVM: focusedSEVM,
+                      followUpSEVMs: $followUpSEVMs,
+                      isMediaPanelPresented: $isMediaPanelPresented)
+
+                    if isMediaPanelPresented {
+                      MediaPickerPanelView(viewModel: focusedSEVM)
+                    }
+                  }
                 }
               }
             }
@@ -155,6 +171,22 @@ extension StatusEditor {
             mainSEVM.currentAccount = currentAccount.account
             for p in followUpSEVMs {
               p.currentAccount = mainSEVM.currentAccount
+            }
+          }
+          .onChange(of: editorFocusState) { _, newValue in
+            if let newValue {
+              lastEditorFocusState = newValue
+              if isMediaPanelPresented {
+                isMediaPanelPresented = false
+              }
+            }
+          }
+          .onChange(of: isMediaPanelPresented) { _, newValue in
+            if newValue {
+              lastEditorFocusState = editorFocusState
+              editorFocusState = nil
+            } else if editorFocusState == nil {
+              editorFocusState = lastEditorFocusState ?? .main
             }
           }
           .onChange(of: mainSEVM.visibility) {

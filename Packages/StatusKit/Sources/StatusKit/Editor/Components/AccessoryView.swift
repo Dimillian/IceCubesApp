@@ -1,27 +1,25 @@
 import DesignSystem
 import Env
-import Models
-import NukeUI
 import PhotosUI
 import SwiftUI
 
 extension StatusEditor {
   @MainActor
   struct AccessoryView: View {
-    @Environment(UserPreferences.self) private var preferences
     @Environment(Theme.self) private var theme
-    @Environment(CurrentInstance.self) private var currentInstance
     @Environment(\.colorScheme) private var colorScheme
 
     let focusedSEVM: ViewModel
     @Binding var followUpSEVMs: [ViewModel]
+    @Binding var isMediaPanelPresented: Bool
 
     @State private var isCustomEmojisSheetDisplay: Bool = false
     @State private var isLoadingAIRequest: Bool = false
-    @State private var isPhotosPickerPresented: Bool = false
-    @State private var isFileImporterPresented: Bool = false
-    @State private var isCameraPickerPresented: Bool = false
-
+    #if os(visionOS)
+      @State private var isPhotosPickerPresented: Bool = false
+      @State private var isFileImporterPresented: Bool = false
+      @State private var isCameraPickerPresented: Bool = false
+    #endif
     var body: some View {
       @Bindable var viewModel = focusedSEVM
       #if os(visionOS)
@@ -42,7 +40,6 @@ extension StatusEditor {
             .background(theme.primaryBackgroundColor.opacity(0.2))
             .padding(.horizontal, 16)
         } else {
-          Divider()
           HStack {
             contentView
           }
@@ -80,81 +77,103 @@ extension StatusEditor {
     @ViewBuilder
     private var actionsView: some View {
       @Bindable var viewModel = focusedSEVM
-      Menu {
-        Button {
-          isPhotosPickerPresented = true
-        } label: {
-          Label("status.editor.photo-library", systemImage: "photo")
-          .frame(width: 25, height: 25)
-          .contentShape(Rectangle())
-        }
-        #if !targetEnvironment(macCatalyst)
+      #if os(visionOS)
+        Menu {
+          Button {
+            isPhotosPickerPresented = true
+          } label: {
+            Label("status.editor.photo-library", systemImage: "photo")
+              .frame(width: 25, height: 25)
+              .contentShape(Rectangle())
+          }
           Button {
             isCameraPickerPresented = true
           } label: {
             Label("status.editor.camera-picker", systemImage: "camera")
           }
-        #endif
-        Button {
-          isFileImporterPresented = true
+          Button {
+            isFileImporterPresented = true
+          } label: {
+            Label("status.editor.browse-file", systemImage: "folder")
+          }
         } label: {
-          Label("status.editor.browse-file", systemImage: "folder")
+          if viewModel.isMediasLoading {
+            ProgressView()
+          } else {
+            Image(systemName: "photo.on.rectangle.angled")
+              .frame(width: 25, height: 25)
+              .contentShape(Rectangle())
+              .foregroundStyle(theme.tintColor)
+          }
         }
-      } label: {
-        if viewModel.isMediasLoading {
-          ProgressView()
-        } else {
-          Image(systemName: "photo.on.rectangle.angled")
-            .frame(width: 25, height: 25)
-            .contentShape(Rectangle())
-            .foregroundStyle(theme.tintColor)
+        .buttonStyle(.plain)
+        .photosPicker(
+          isPresented: $isPhotosPickerPresented,
+          selection: $viewModel.mediaPickers,
+          maxSelectionCount: currentInstance.instance?.configuration?.statuses.maxMediaAttachments
+            ?? 4,
+          matching: .any(of: [.images, .videos]),
+          photoLibrary: .shared()
+        )
+        .fileImporter(
+          isPresented: $isFileImporterPresented,
+          allowedContentTypes: [.image, .video, .movie],
+          allowsMultipleSelection: true
+        ) { result in
+          if let urls = try? result.get() {
+            viewModel.processURLs(urls: urls)
+          }
         }
-      }
-      .buttonStyle(.plain)
-      .photosPicker(
-        isPresented: $isPhotosPickerPresented,
-        selection: $viewModel.mediaPickers,
-        maxSelectionCount: currentInstance.instance?.configuration?.statuses.maxMediaAttachments
-          ?? 4,
-        matching: .any(of: [.images, .videos]),
-        photoLibrary: .shared()
-      )
-      .fileImporter(
-        isPresented: $isFileImporterPresented,
-        allowedContentTypes: [.image, .video, .movie],
-        allowsMultipleSelection: true
-      ) { result in
-        if let urls = try? result.get() {
-          viewModel.processURLs(urls: urls)
+        .fullScreenCover(
+          isPresented: $isCameraPickerPresented,
+          content: {
+            CameraPickerView(
+              selectedImage: .init(
+                get: {
+                  nil
+                },
+                set: { image in
+                  if let image {
+                    viewModel.processCameraPhoto(image: image)
+                  }
+                })
+            )
+            .background(.black)
+          }
+        )
+        .accessibilityLabel("accessibility.editor.button.attach-photo")
+        .disabled(viewModel.showPoll)
+      #else
+        Button {
+          if isMediaPanelPresented {
+            isMediaPanelPresented = false
+          } else {
+            withAnimation(.smooth) {
+              isMediaPanelPresented = true
+            }
+          }
+        } label: {
+          if viewModel.isMediasLoading {
+            ProgressView()
+          } else {
+            Image(systemName: isMediaPanelPresented ? "xmark" : "photo.on.rectangle.angled")
+              .frame(width: 25, height: 25)
+              .contentShape(Rectangle())
+              .foregroundStyle(theme.tintColor)
+          }
         }
-      }
-      .fullScreenCover(
-        isPresented: $isCameraPickerPresented,
-        content: {
-          CameraPickerView(
-            selectedImage: .init(
-              get: {
-                nil
-              },
-              set: { image in
-                if let image {
-                  viewModel.processCameraPhoto(image: image)
-                }
-              })
-          )
-          .background(.black)
-        }
-      )
-      .accessibilityLabel("accessibility.editor.button.attach-photo")
-      .disabled(viewModel.showPoll)
+        .buttonStyle(.plain)
+        .accessibilityLabel("accessibility.editor.button.attach-photo")
+        .disabled(viewModel.showPoll)
+      #endif
 
       Button {
         // all SEVM have the same visibility value
         followUpSEVMs.append(ViewModel(mode: .new(text: nil, visibility: focusedSEVM.visibility)))
       } label: {
         Image(systemName: "arrowshape.turn.up.left.circle.fill")
-        .frame(width: 25, height: 25)
-        .contentShape(Rectangle())
+          .frame(width: 25, height: 25)
+          .contentShape(Rectangle())
       }
       .disabled(!canAddNewSEVM)
 
@@ -177,7 +196,7 @@ extension StatusEditor {
         }
       }
 
-      if #available(iOS 26, *), Assistant.isAvailable  {
+      if #available(iOS 26, *), Assistant.isAvailable {
         AssistantMenu.disabled(!viewModel.canPost)
       }
 
