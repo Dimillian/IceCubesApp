@@ -17,18 +17,17 @@ mcp__XcodeBuildMCP__build_sim_name_proj projectPath: "/Users/thomas/Documents/De
 
 ### Running Tests
 - **All tests**: Run through Xcode's Test navigator
-- **Specific package tests**:
+- **Specific package tests (XcodeBuildMCP on simulator)**:
   ```bash
-  xcodebuild -scheme AccountTests test
-  xcodebuild -scheme ModelsTests test
-  xcodebuild -scheme NetworkTests test
-  xcodebuild -scheme TimelineTests test
-  xcodebuild -scheme EnvTests test
-  ```
-- **Swift Package Manager** (for individual packages):
-  ```bash
-  cd Packages/[PackageName]
-  swift test
+  # Set defaults once per session
+  mcp__XcodeBuildMCP__session-set-defaults projectPath: "/Users/thomas/Documents/Dev/Open Source/IceCubesApp/IceCubesApp.xcodeproj" simulatorName: "iPhone Air"
+
+  # Then run any package test scheme
+  mcp__XcodeBuildMCP__test_sim scheme: "AccountTests"
+  mcp__XcodeBuildMCP__test_sim scheme: "ModelsTests"
+  mcp__XcodeBuildMCP__test_sim scheme: "NetworkTests"
+  mcp__XcodeBuildMCP__test_sim scheme: "TimelineTests"
+  mcp__XcodeBuildMCP__test_sim scheme: "EnvTests"
   ```
 
 ### Code Formatting

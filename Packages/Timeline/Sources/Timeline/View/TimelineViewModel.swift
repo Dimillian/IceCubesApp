@@ -69,6 +69,9 @@ import SwiftUI
   private enum Constants {
     static let fullTimelineFetchLimit = 800
     static let fullTimelineFetchMaxPages = fullTimelineFetchLimit / 40
+    static let initialPageLimit = 50
+    static let nextPageLimit = 40
+    static let emptyFilterAutoPageLimit = 3
   }
 
   private var isFullTimelineFetchEnabled: Bool {
@@ -276,10 +279,20 @@ extension TimelineViewModel: GapLoadingFetcher {
         timeline: timeline)
 
       await updateDatasourceAndState(statuses: statuses, client: client, replaceExisting: true)
+      let lastCount = await autoFetchNextPagesIfFilteredEmpty(
+        lastFetchedCount: statuses.count,
+        pageLimit: Constants.initialPageLimit)
+      if lastCount != statuses.count {
+        await cache()
+        await updateStatusesStateWithAnimation()
+      }
 
       // If we got 40 or more statuses, there might be older ones - create a gap
-      if statuses.count >= 40, let oldestStatus = statuses.last, !datasourceIsEmpty {
-        await createGapForOlderStatuses(maxId: oldestStatus.id, at: statuses.count)
+      if lastCount >= Constants.nextPageLimit, !datasourceIsEmpty {
+        let allStatuses = await datasource.get()
+        if let oldestStatus = allStatuses.last {
+          await createGapForOlderStatuses(maxId: oldestStatus.id, at: allStatuses.count)
+        }
       }
     }
   }
@@ -421,9 +434,13 @@ extension TimelineViewModel: GapLoadingFetcher {
     await datasource.append(contentOf: newStatuses)
     StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
 
+    let lastCount = await autoFetchNextPagesIfFilteredEmpty(
+      lastFetchedCount: newStatuses.count,
+      pageLimit: Constants.nextPageLimit)
+    await cache()
     statusesState = await .displayWithGaps(
       items: datasource.getFilteredItems(),
-      nextPageState: newStatuses.count < 20 ? .none : .hasNextPage)
+      nextPageState: lastCount < Constants.nextPageLimit ? .none : .hasNextPage)
   }
 
   func statusDidAppear(status: Status) {
@@ -525,6 +542,43 @@ extension TimelineViewModel: GapLoadingFetcher {
     withAnimation {
       statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
     }
+  }
+
+  private func autoFetchNextPagesIfFilteredEmpty(
+    lastFetchedCount: Int,
+    pageLimit: Int
+  ) async -> Int {
+    guard lastFetchedCount >= pageLimit else { return lastFetchedCount }
+    guard await datasource.getFilteredItems().isEmpty else { return lastFetchedCount }
+    guard let client else { return lastFetchedCount }
+
+    var pagesLoaded = 0
+    var lastCount = lastFetchedCount
+
+    while pagesLoaded < Constants.emptyFilterAutoPageLimit,
+      lastCount >= Constants.nextPageLimit,
+      await datasource.getFilteredItems().isEmpty
+    {
+      let statuses = await datasource.get()
+      guard let lastId = statuses.last?.id else { break }
+      let newStatuses: [Status]
+      do {
+        newStatuses = try await statusFetcher.fetchNextPage(
+          client: client,
+          timeline: timeline,
+          lastId: lastId,
+          offset: statuses.count)
+      } catch {
+        break
+      }
+      guard !newStatuses.isEmpty else { break }
+      await datasource.append(contentOf: newStatuses)
+      StatusDataControllerProvider.shared.updateDataControllers(for: newStatuses, client: client)
+      lastCount = newStatuses.count
+      pagesLoaded += 1
+    }
+
+    return lastCount
   }
 
   private func createGapForOlderStatuses(sinceId: String? = nil, maxId: String, at index: Int) async

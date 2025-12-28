@@ -106,4 +106,31 @@ struct Tests {
     #expect(count == 1)
     #expect(statuses.first?.content.asRawText == "test")
   }
+
+  @Test
+  func autoFetchesWhenFilteredStatusesAreEmpty() async throws {
+    let contentFilter = TimelineContentFilter.shared
+    contentFilter.showBoosts = true
+    contentFilter.showReplies = true
+    contentFilter.showThreads = true
+    contentFilter.showQuotePosts = true
+
+    let hiddenFirstPage = (0..<50).map { makeStatus(id: "hidden-first-\($0)", hidden: true) }
+    let hiddenSecondPage = (0..<40).map { makeStatus(id: "hidden-next-\($0)", hidden: true) }
+    let visibleThirdPage = [makeStatus(id: "visible-0", hidden: false)]
+
+    let fetcher = MockTimelineStatusFetcher(
+      firstPage: hiddenFirstPage,
+      nextPages: [hiddenSecondPage, visibleThirdPage])
+
+    let subject = TimelineViewModel(statusFetcher: fetcher)
+    subject.client = MastodonClient(server: "localhost")
+    await subject.reset()
+
+    await subject.fetchNewestStatuses(pullToRefresh: false)
+
+    let filteredItems = await subject.datasource.getFilteredItems()
+    #expect(!filteredItems.isEmpty)
+    #expect(await fetcher.nextPageCallCount() >= 2)
+  }
 }
