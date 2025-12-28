@@ -37464,13 +37464,13 @@
               "one": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "e %lld altro"
+                  "value": " e %lld altro"
                 }
               },
               "other": {
                 "stringUnit": {
                   "state": "translated",
-                  "value": "e %lld altri"
+                  "value": " e %lld altri"
                 }
               }
             }
