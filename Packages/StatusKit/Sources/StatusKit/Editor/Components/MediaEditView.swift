@@ -44,6 +44,18 @@ extension StatusEditor {
                 translateButton
               }
             #endif
+          } footer: {
+            HStack(spacing: 4) {
+              Text("Use OpenAI API -")
+              Link(
+                "Review Privacy Policy",
+                destination: URL(
+                  string: "https://github.com/Dimillian/IceCubesApp/blob/main/PRIVACY.MD"
+                )!
+              )
+            }
+            .font(.footnote)
+            .foregroundStyle(.secondary)
           }
           .listRowBackground(theme.primaryBackgroundColor)
           Section {
@@ -117,17 +129,19 @@ extension StatusEditor {
     @ViewBuilder
     private var generateButton: some View {
       if let url = container.mediaAttachment?.url {
-        Button {
-          Task {
-            if let description = await generateDescription(url: url) {
-              imageDescription = description
+        VStack(alignment: .leading, spacing: 4) {
+          Button {
+            Task {
+              if let description = await generateDescription(url: url) {
+                imageDescription = description
+              }
             }
-          }
-        } label: {
-          if isGeneratingDescription {
-            ProgressView()
-          } else {
-            Text("status.editor.media.generate-description")
+          } label: {
+            if isGeneratingDescription {
+              ProgressView()
+            } else {
+              Text("status.editor.media.generate-description")
+            }
           }
         }
       }
