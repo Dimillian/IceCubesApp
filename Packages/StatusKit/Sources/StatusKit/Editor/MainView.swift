@@ -118,7 +118,7 @@ extension StatusEditor {
                     }
                   }
                 } else {
-                  VStack(spacing: 10) {
+                  VStack(spacing: 0) {
                     AutoCompleteView(viewModel: focusedSEVM)
 
                     AccessoryView(

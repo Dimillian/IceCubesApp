@@ -32,22 +32,21 @@
               )
               .clipShape(panelContainerShape)
               .padding(.horizontal, 16)
+              .background {
+                GeometryReader { proxy in
+                  Color.clear
+                    .onAppear {
+                      updateBottomCornerRadius(proxy.safeAreaInsets.bottom)
+                    }
+                    .onChange(of: proxy.safeAreaInsets.bottom) { _, newValue in
+                      updateBottomCornerRadius(newValue)
+                    }
+                }
+              }
           } else {
             panelContent
               .buttonStyle(.bordered)
               .background(.ultraThickMaterial)
-              .clipShape(panelContainerShape)
-          }
-        }
-        .background {
-          GeometryReader { proxy in
-            Color.clear
-              .onAppear {
-                updateBottomCornerRadius(proxy.safeAreaInsets.bottom)
-              }
-              .onChange(of: proxy.safeAreaInsets.bottom) { _, newValue in
-                updateBottomCornerRadius(newValue)
-              }
           }
         }
         .photosPicker(
