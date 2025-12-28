@@ -18,6 +18,7 @@
       @State private var isPhotosPickerPresented: Bool = false
       @State private var isFileImporterPresented: Bool = false
       @State private var isCameraPickerPresented: Bool = false
+      @State private var bottomCornerRadius: CGFloat = 16
 
       var body: some View {
         Group {
@@ -25,15 +26,28 @@
             panelContent
               .buttonStyle(.glass)
               .font(.scaledFootnote)
-              .glassEffect(.regular, in: .rect(cornerRadius: 16))
+              .glassEffect(.regular, in: panelContainerShape)
               .background(
-                theme.primaryBackgroundColor.opacity(0.2), in: .rect(cornerRadius: 16)
+                theme.primaryBackgroundColor.opacity(0.2), in: panelContainerShape
               )
+              .clipShape(panelContainerShape)
               .padding(.horizontal, 16)
           } else {
             panelContent
               .buttonStyle(.bordered)
               .background(.ultraThickMaterial)
+              .clipShape(panelContainerShape)
+          }
+        }
+        .background {
+          GeometryReader { proxy in
+            Color.clear
+              .onAppear {
+                updateBottomCornerRadius(proxy.safeAreaInsets.bottom)
+              }
+              .onChange(of: proxy.safeAreaInsets.bottom) { _, newValue in
+                updateBottomCornerRadius(newValue)
+              }
           }
         }
         .photosPicker(
@@ -103,6 +117,30 @@
           .disabled(viewModel.showPoll)
         }
         .padding(.vertical, 16)
+      }
+
+      private var panelContainerShape: UnevenRoundedRectangle {
+        UnevenRoundedRectangle(
+          topLeadingRadius: 16,
+          bottomLeadingRadius: bottomCornerRadius,
+          bottomTrailingRadius: bottomCornerRadius,
+          topTrailingRadius: 16
+        )
+      }
+
+      private func updateBottomCornerRadius(_ bottomInset: CGFloat) {
+        let resolvedInset = max(bottomInset, resolvedBottomInset())
+        let radius: CGFloat = resolvedInset > 0 ? 44 : 16
+        if bottomCornerRadius != radius {
+          bottomCornerRadius = radius
+        }
+      }
+
+      private func resolvedBottomInset() -> CGFloat {
+        let scenes = UIApplication.shared.connectedScenes
+        let windowScene = scenes.first { $0.activationState == .foregroundActive } as? UIWindowScene
+        let window = windowScene?.windows.first { $0.isKeyWindow }
+        return window?.safeAreaInsets.bottom ?? 0
       }
 
       private func addAsset(_ asset: PHAsset) async {
@@ -269,7 +307,7 @@
       guard image == nil else { return }
 
       let options = PHImageRequestOptions()
-      options.deliveryMode = .fastFormat
+      options.deliveryMode = .highQualityFormat
       options.resizeMode = .fast
       options.isNetworkAccessAllowed = true
 

@@ -145,13 +145,7 @@ extension StatusEditor {
         .disabled(viewModel.showPoll)
       #else
         Button {
-          if isMediaPanelPresented {
-            isMediaPanelPresented = false
-          } else {
-            withAnimation(.smooth) {
-              isMediaPanelPresented = true
-            }
-          }
+          isMediaPanelPresented.toggle()
         } label: {
           if viewModel.isMediasLoading {
             ProgressView()
