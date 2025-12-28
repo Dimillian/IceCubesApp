@@ -148,6 +148,9 @@
         let limit = currentInstance.instance?.configuration?.statuses.maxMediaAttachments ?? 4
         guard viewModel.mediaContainers.count < limit else { return }
 
+        viewModel.isMediasLoading = true
+        defer { viewModel.isMediasLoading = false }
+
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
         options.deliveryMode = .highQualityFormat
@@ -162,29 +165,16 @@
           }
         }
 
-        if let dataResult, let image = UIImage(data: dataResult) {
-          viewModel.processCameraPhoto(image: image)
-          return
-        }
-
-        let fallbackOptions = PHImageRequestOptions()
-        fallbackOptions.isNetworkAccessAllowed = true
-        fallbackOptions.deliveryMode = .highQualityFormat
-        fallbackOptions.resizeMode = .none
-
-        let fallbackImage = await withCheckedContinuation { continuation in
-          PHImageManager.default().requestImage(
-            for: asset,
-            targetSize: PHImageManagerMaximumSize,
-            contentMode: .aspectFit,
-            options: fallbackOptions
-          ) { image, _ in
-            continuation.resume(returning: image)
+        if let dataResult {
+          let tempURL = URL.temporaryDirectory.appending(path: "\(UUID().uuidString).image")
+          try? dataResult.write(to: tempURL)
+          let compressor = Compressor()
+          if let compressedData = await compressor.compressImageFrom(url: tempURL),
+            let image = UIImage(data: compressedData)
+          {
+            viewModel.processCameraPhoto(image: image)
+            return
           }
-        }
-
-        if let fallbackImage {
-          viewModel.processCameraPhoto(image: fallbackImage)
         }
       }
     }
@@ -306,14 +296,13 @@
       guard image == nil else { return }
 
       let options = PHImageRequestOptions()
-      options.deliveryMode = .highQualityFormat
-      options.resizeMode = .fast
+      options.resizeMode = .exact
       options.isNetworkAccessAllowed = true
+      options.deliveryMode = .highQualityFormat
+      options.isSynchronous = false
 
       let scale = UIScreen.main.scale
       let targetSize = CGSize(width: size * scale, height: size * scale)
-      options.deliveryMode = .opportunistic
-      options.isSynchronous = false
 
       let result = await withCheckedContinuation { continuation in
         var didResume = false
