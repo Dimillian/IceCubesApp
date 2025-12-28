@@ -48544,6 +48544,17 @@
         }
       }
     },
+    "settings.display.avatarAnimated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animated Avatars and Headers"
+          }
+        }
+       }
+    },
     "settings.display.colors.apply": {
       "extractionState": "manual",
       "localizations": {
