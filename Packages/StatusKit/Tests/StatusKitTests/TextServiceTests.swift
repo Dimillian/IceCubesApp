@@ -3,6 +3,7 @@ import Models
 @testable import StatusKit
 import XCTest
 
+@MainActor
 final class TextServiceTests: XCTestCase {
   func testProcessTextSuggestsHashtagAtCursor() {
     let service = StatusEditor.TextService()

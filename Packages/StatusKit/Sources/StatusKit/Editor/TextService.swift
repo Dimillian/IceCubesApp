@@ -5,6 +5,7 @@ import SwiftUI
 import UIKit
 
 extension StatusEditor {
+  @MainActor
   struct TextService {
     typealias Mode = StatusEditor.ViewModel.Mode
 

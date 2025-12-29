@@ -58,7 +58,7 @@ extension StatusEditor {
     }
 
     var textState = TextState()
-    @ObservationIgnored private let textService = TextService()
+    private let textService = TextService()
 
     private var spoilerTextCount: Int {
       spoilerOn ? spoilerText.utf16.count : 0
