@@ -1,6 +1,7 @@
 import Foundation
 import Models
 @testable import StatusKit
+import UniformTypeIdentifiers
 import XCTest
 
 @MainActor
@@ -58,6 +59,40 @@ final class TextServiceTests: XCTestCase {
     XCTAssertEqual(result.urlLengthAdjustments, -8)
   }
 
+  func testProcessTextResetsSuggestionWhenCursorIsInsideHashtag() {
+    let service = StatusEditor.TextService()
+    let text = NSMutableAttributedString(string: "Testing #icecubes")
+    let selection = NSRange(location: "Testing #ice".utf16.count, length: 0)
+
+    let result = service.processText(
+      text,
+      theme: nil,
+      selectedRange: selection,
+      hasMarkedText: false,
+      previousUrlLengthAdjustments: 0
+    )
+
+    XCTAssertTrue(result.didProcess)
+    XCTAssertEqual(result.action, .reset)
+  }
+
+  func testProcessTextSuggestsHashtagWithEmojiPrefix() {
+    let service = StatusEditor.TextService()
+    let text = NSMutableAttributedString(string: "Hello 😄 #icecubes")
+    let selection = NSRange(location: text.string.utf16.count, length: 0)
+
+    let result = service.processText(
+      text,
+      theme: nil,
+      selectedRange: selection,
+      hasMarkedText: false,
+      previousUrlLengthAdjustments: 0
+    )
+
+    XCTAssertTrue(result.didProcess)
+    XCTAssertEqual(result.action, .suggest(query: "#icecubes"))
+  }
+
   func testInitialTextChangesForReplyMentionsAuthorAndMentions() {
     let service = StatusEditor.TextService()
     let author = makeAccount(acct: "alice", username: "alice")
@@ -78,6 +113,78 @@ final class TextServiceTests: XCTestCase {
     XCTAssertEqual(changes.statusText?.string, "@alice @bob ")
     XCTAssertEqual(changes.mentionString, "@alice @bob")
     XCTAssertEqual(changes.selectedRange?.location, "@alice @bob ".utf16.count)
+  }
+
+  func testInitialTextChangesForEditNormalizesMentionAcct() {
+    let service = StatusEditor.TextService()
+    let author = makeAccount(acct: "alice", username: "alice")
+    let mention = Mention(
+      id: "mention-1",
+      username: "bob",
+      url: URL(string: "https://example.com/@bob")!,
+      acct: "bob@server"
+    )
+    let status = makeStatus(
+      account: author,
+      mentions: [mention],
+      content: HTMLString(stringValue: "Hello @bob")
+    )
+
+    let changes = service.initialTextChanges(
+      for: .edit(status: status),
+      currentAccount: nil,
+      currentInstance: nil
+    )
+
+    XCTAssertEqual(changes.statusText?.string, "Hello @bob@server")
+  }
+
+  func testInitialTextChangesForLegacyQuoteIncludesAuthorAndURL() {
+    let service = StatusEditor.TextService()
+    let author = makeAccount(acct: "alice", username: "alice")
+    let status = makeStatus(
+      account: author,
+      mentions: [],
+      url: URL(string: "https://example.com/@alice/1")
+    )
+
+    let changes = service.initialTextChanges(
+      for: .quote(status: status),
+      currentAccount: nil,
+      currentInstance: nil
+    )
+
+    XCTAssertEqual(
+      changes.statusText?.string,
+      "\n\nFrom: @alice\nhttps://example.com/@alice/1"
+    )
+  }
+
+  func testShareExtensionTextItemsInsertLeadingText() async {
+    let item = NSItemProvider(
+      item: "Hello" as NSString,
+      typeIdentifier: UTType.plainText.identifier
+    )
+    let viewModel = await MainActor.run {
+      StatusEditor.ViewModel(mode: .shareExtension(items: [item]))
+    }
+
+    await MainActor.run {
+      viewModel.prepareStatusText()
+    }
+
+    let expectation = XCTestExpectation(description: "Wait for share text")
+    Task {
+      for _ in 0..<20 {
+        let text = await MainActor.run { viewModel.statusText.string }
+        if text == "\n\nHello " {
+          expectation.fulfill()
+          return
+        }
+        try? await Task.sleep(nanoseconds: 50_000_000)
+      }
+    }
+    await fulfillment(of: [expectation], timeout: 3.0)
   }
 }
 
@@ -105,10 +212,15 @@ private func makeAccount(acct: String, username: String) -> Account {
   )
 }
 
-private func makeStatus(account: Account, mentions: [Mention]) -> Status {
+private func makeStatus(
+  account: Account,
+  mentions: [Mention],
+  content: HTMLString = HTMLString(stringValue: "Hello"),
+  url: URL? = nil
+) -> Status {
   Status(
     id: UUID().uuidString,
-    content: HTMLString(stringValue: "Hello"),
+    content: content,
     account: account,
     createdAt: ServerDate(),
     editedAt: nil,
@@ -124,7 +236,7 @@ private func makeStatus(account: Account, mentions: [Mention]) -> Status {
     pinned: nil,
     bookmarked: nil,
     emojis: [],
-    url: nil,
+    url: url?.absoluteString,
     application: nil,
     inReplyToId: nil,
     inReplyToAccountId: nil,
