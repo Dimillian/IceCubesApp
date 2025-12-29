@@ -28,6 +28,9 @@ struct ContentSettingsView: View {
         Toggle(isOn: $userPreferences.showAltTextForMedia) {
           Text("settings.content.media.show.alt")
         }
+        Toggle(isOn: $userPreferences.hidePostsWithMedia) {
+          Text("settings.content.media.hide-posts-with-media")
+        }
       }
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
