@@ -59,6 +59,20 @@ extension StatusEditor {
 
     var textState = TextState()
     private let textService = TextService()
+    private let autocompleteService = AutocompleteService()
+    private let mediaIngestionService = MediaIngestionService()
+    private let mediaUploadService = MediaUploadService()
+    private var suggestedTask: Task<Void, Never>?
+    private var mediaUploadPolicy: MediaUploadService.UploadPolicy {
+      MediaUploadService.UploadPolicy(
+        maxConcurrentUploads: 2,
+        retryCount: 2,
+        retryBackoffBase: .seconds(1),
+        retryBackoffMultiplier: 2,
+        maxBytes: nil,
+        requiresAltText: false
+      )
+    }
 
     private var spoilerTextCount: Int {
       spoilerOn ? spoilerText.utf16.count : 0
@@ -176,22 +190,6 @@ extension StatusEditor {
     var hasExplicitlySelectedLanguage: Bool = false
     private var embeddedStatusURL: URL? {
       URL(string: embeddedStatus?.reblog?.url ?? embeddedStatus?.url ?? "")
-    }
-
-    private var suggestedTask: Task<Void, Never>?
-    private let autocompleteService = AutocompleteService()
-    private let mediaIngestionService = MediaIngestionService()
-    private let mediaUploadService = MediaUploadService()
-
-    private var mediaUploadPolicy: MediaUploadService.UploadPolicy {
-      MediaUploadService.UploadPolicy(
-        maxConcurrentUploads: 2,
-        retryCount: 2,
-        retryBackoffBase: .seconds(1),
-        retryBackoffMultiplier: 2,
-        maxBytes: nil,
-        requiresAltText: false
-      )
     }
 
     init(mode: Mode) {
