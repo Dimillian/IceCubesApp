@@ -181,6 +181,7 @@ extension StatusEditor {
     private var suggestedTask: Task<Void, Never>?
     private let autocompleteService = AutocompleteService()
     private let mediaIngestionService = MediaIngestionService()
+    private let mediaUploadService = MediaUploadService()
 
     init(mode: Mode) {
       self.mode = mode
@@ -750,76 +751,34 @@ extension StatusEditor {
       )
 
       do {
-        let compressor = Compressor()
-        let uploadedMedia: MediaAttachment?
-
-        switch content {
-        case .image(let image):
-          let imageData = try await compressor.compressImageForUpload(image)
-          uploadedMedia = try await uploadMedia(data: imageData, mimeType: "image/jpeg") {
-            [weak self] progress in
-            guard let self else { return }
-            Task { @MainActor in
-              if let index = self.indexOf(container: originalContainer) {
-                self.mediaContainers[index] = MediaContainer(
-                  id: originalContainer.id,
-                  state: .uploading(content: content, progress: progress)
-                )
-              }
-            }
-          }
-
-        case .video(let transferable, _):
-          let videoURL = transferable.url
-          guard let compressedVideoURL = await compressor.compressVideo(videoURL),
-            let data = try? Data(contentsOf: compressedVideoURL)
-          else {
-            throw MediaContainer.MediaError.compressionFailed
-          }
-          uploadedMedia = try await uploadMedia(data: data, mimeType: compressedVideoURL.mimeType())
-          { [weak self] progress in
-            guard let self else { return }
-            Task { @MainActor in
-              if let index = self.indexOf(container: originalContainer) {
-                self.mediaContainers[index] = MediaContainer(
-                  id: originalContainer.id,
-                  state: .uploading(content: content, progress: progress)
-                )
-              }
-            }
-          }
-
-        case .gif(let transferable, _):
-          guard let gifData = transferable.data else {
-            throw MediaContainer.MediaError.compressionFailed
-          }
-          uploadedMedia = try await uploadMedia(data: gifData, mimeType: "image/gif") {
-            [weak self] progress in
-            guard let self else { return }
-            Task { @MainActor in
-              if let index = self.indexOf(container: originalContainer) {
-                self.mediaContainers[index] = MediaContainer(
-                  id: originalContainer.id,
-                  state: .uploading(content: content, progress: progress)
-                )
-              }
+        guard let client else { return }
+        let result = try await mediaUploadService.upload(
+          content: content,
+          client: client,
+          modeIsShareExtension: mode.isInShareExtension
+        ) { [weak self] progress in
+          guard let self else { return }
+          Task { @MainActor in
+            if let index = self.indexOf(container: originalContainer) {
+              self.mediaContainers[index] = MediaContainer(
+                id: originalContainer.id,
+                state: .uploading(content: content, progress: progress)
+              )
             }
           }
         }
 
         if let index = indexOf(container: originalContainer),
-          let uploadedMedia
+          let result
         {
-          // Update to uploaded state
           mediaContainers[index] = MediaContainer.uploaded(
             id: originalContainer.id,
-            attachment: uploadedMedia,
-            originalImage: mode.isInShareExtension ? content.previewImage : nil
+            attachment: result.attachment,
+            originalImage: result.originalImage
           )
 
-          // Schedule refresh if URL is not ready
-          if uploadedMedia.url == nil {
-            scheduleAsyncMediaRefresh(mediaAttachement: uploadedMedia)
+          if result.needsRefresh {
+            scheduleAsyncMediaRefresh(mediaAttachement: result.attachment)
           }
         }
       } catch {
@@ -905,19 +864,7 @@ extension StatusEditor {
       }
     }
 
-    private func uploadMedia(
-      data: Data, mimeType: String, progressHandler: @escaping @Sendable (Double) -> Void
-    ) async throws -> MediaAttachment? {
-      guard let client else { return nil }
-      return try await client.mediaUpload(
-        endpoint: Media.medias,
-        version: .v2,
-        method: "POST",
-        mimeType: mimeType,
-        filename: "file",
-        data: data,
-        progressHandler: progressHandler)
-    }
+    // Media upload handled by MediaUploadService.
 
     // MARK: - Custom emojis
 
