@@ -11,8 +11,7 @@ public struct EmojiTextApp: View {
   private let language: String?
   private let append: (@Sendable () -> Text)?
   private let lineLimit: Int?
-  @Environment(UserPreferences.self) private var preferences
-  
+
   public init(
     _ markdown: HTMLString, emojis: [Emoji], language: String? = nil, lineLimit: Int? = nil,
     append: (@Sendable () -> Text)? = nil
@@ -27,7 +26,7 @@ public struct EmojiTextApp: View {
   public var body: some View {
     if let append {
       EmojiText(markdown: markdown.asMarkdown, emojis: emojis)
-        .animated(preferences.animateEmojis)
+        .animated(UserPreferences.shared.animateEmojis)
         .append(text: append)
         .lineLimit(lineLimit)
     } else if emojis.isEmpty {
@@ -36,7 +35,7 @@ public struct EmojiTextApp: View {
         .environment(\.layoutDirection, isRTL() ? .rightToLeft : .leftToRight)
     } else {
       EmojiText(markdown: markdown.asMarkdown, emojis: emojis)
-        .animated(preferences.animateEmojis)
+        .animated(UserPreferences.shared.animateEmojis)
         .lineLimit(lineLimit)
         .environment(\.layoutDirection, isRTL() ? .rightToLeft : .leftToRight)
     }
