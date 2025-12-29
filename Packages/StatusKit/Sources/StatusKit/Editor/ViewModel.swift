@@ -183,6 +183,17 @@ extension StatusEditor {
     private let mediaIngestionService = MediaIngestionService()
     private let mediaUploadService = MediaUploadService()
 
+    private var mediaUploadPolicy: MediaUploadService.UploadPolicy {
+      MediaUploadService.UploadPolicy(
+        maxConcurrentUploads: 2,
+        retryCount: 2,
+        retryBackoffBase: .seconds(1),
+        retryBackoffMultiplier: 2,
+        maxBytes: nil,
+        requiresAltText: false
+      )
+    }
+
     init(mode: Mode) {
       self.mode = mode
 
@@ -392,9 +403,7 @@ extension StatusEditor {
               }
             }
           }
-          for container in containers {
-            prepareToPost(for: container)
-          }
+          prepareToPost(for: containers)
         }
       case .edit(let status):
         mediaContainers = status.mediaAttachments.map {
@@ -469,9 +478,7 @@ extension StatusEditor {
         if result.hadError {
           isMediasLoading = false
         }
-        for container in result.containers {
-          prepareToPost(for: container)
-        }
+        prepareToPost(for: result.containers)
         if !result.initialText.isEmpty {
           updateStatusText(
             .init(string: "\n\n\(result.initialText)"),
@@ -620,11 +627,16 @@ extension StatusEditor {
     func prepareToPost(for container: MediaContainer) {
       Task(priority: .high) {
         self.mediaContainers.append(container)
-        await upload(container: container)
-        if let desc = containerIdToAltText[container.id], !desc.isEmpty {
-          await addDescription(container: container, description: desc)
-          containerIdToAltText.removeValue(forKey: container.id)
-        }
+        await upload(containers: [container])
+        self.isMediasLoading = false
+      }
+    }
+
+    func prepareToPost(for containers: [MediaContainer]) {
+      Task(priority: .high) {
+        guard !containers.isEmpty else { return }
+        self.mediaContainers.append(contentsOf: containers)
+        await upload(containers: containers)
         self.isMediasLoading = false
       }
     }
@@ -744,59 +756,122 @@ extension StatusEditor {
       // Only upload if in pending state
       guard case .pending(let content) = originalContainer.state else { return }
 
-      // Set to uploading state
-      mediaContainers[index] = MediaContainer(
+      guard let client else { return }
+      let input = MediaUploadService.UploadInput(
         id: originalContainer.id,
-        state: .uploading(content: content, progress: 0.0)
+        content: content,
+        altText: containerIdToAltText[originalContainer.id]
       )
-
-      do {
-        guard let client else { return }
-        let result = try await mediaUploadService.upload(
-          content: content,
-          client: client,
-          modeIsShareExtension: mode.isInShareExtension
-        ) { [weak self] progress in
-          guard let self else { return }
-          Task { @MainActor in
-            if let index = self.indexOf(container: originalContainer) {
-              self.mediaContainers[index] = MediaContainer(
-                id: originalContainer.id,
-                state: .uploading(content: content, progress: progress)
-              )
-            }
+      let result = await mediaUploadService.upload(
+        input: input,
+        client: client,
+        modeIsShareExtension: mode.isInShareExtension,
+        policy: mediaUploadPolicy
+      ) { [weak self] progress in
+        guard let self else { return }
+        Task { @MainActor in
+          if let index = self.indexOf(container: originalContainer) {
+            self.mediaContainers[index] = MediaContainer(
+              id: originalContainer.id,
+              state: .uploading(content: content, progress: progress)
+            )
           }
         }
+      }
 
-        if let index = indexOf(container: originalContainer),
-          let result
-        {
-          mediaContainers[index] = MediaContainer.uploaded(
-            id: originalContainer.id,
-            attachment: result.attachment,
-            originalImage: result.originalImage
-          )
+      await handleUploadResult(result, for: originalContainer, content: content)
+    }
 
+    private func upload(containers: [MediaContainer]) async {
+      guard let client else { return }
+      let inputs = containers.compactMap { container -> MediaUploadService.UploadInput? in
+        guard case .pending(let content) = container.state else { return nil }
+        return MediaUploadService.UploadInput(
+          id: container.id,
+          content: content,
+          altText: containerIdToAltText[container.id]
+        )
+      }
+
+      await mediaUploadService.uploadBatch(
+        inputs: inputs,
+        client: client,
+        modeIsShareExtension: mode.isInShareExtension,
+        policy: mediaUploadPolicy
+      ) { [weak self] event in
+        guard let self else { return }
+        switch event {
+        case .started(let id, let content):
+          if let index = self.mediaContainers.firstIndex(where: { $0.id == id }) {
+            self.mediaContainers[index] = MediaContainer(
+              id: id,
+              state: .uploading(content: content, progress: 0.0)
+            )
+          }
+        case .progress(let id, let content, let progress):
+          if let index = self.mediaContainers.firstIndex(where: { $0.id == id }) {
+            self.mediaContainers[index] = MediaContainer(
+              id: id,
+              state: .uploading(content: content, progress: progress)
+            )
+          }
+        case .success(let id, let result):
+          if let index = self.mediaContainers.firstIndex(where: { $0.id == id }) {
+            self.mediaContainers[index] = MediaContainer.uploaded(
+              id: id,
+              attachment: result.attachment,
+              originalImage: result.originalImage
+            )
+          }
           if result.needsRefresh {
             scheduleAsyncMediaRefresh(mediaAttachement: result.attachment)
           }
-        }
-      } catch {
-        if let index = indexOf(container: originalContainer) {
-          // Update to failed state
-          let mediaError: MediaContainer.MediaError
-          if let serverError = error as? ServerError {
-            mediaError = .uploadFailed(serverError)
-          } else {
-            mediaError = .compressionFailed
+          if let desc = containerIdToAltText[id], !desc.isEmpty {
+            Task { @MainActor in
+              if let container = self.mediaContainers.first(where: { $0.id == id }) {
+                await self.addDescription(container: container, description: desc)
+                self.containerIdToAltText.removeValue(forKey: id)
+              }
+            }
           }
-
-          mediaContainers[index] = MediaContainer.failed(
-            id: originalContainer.id,
-            content: content,
-            error: mediaError
-          )
+        case .failure(let id, let content, let error):
+          if let index = self.mediaContainers.firstIndex(where: { $0.id == id }) {
+            self.mediaContainers[index] = MediaContainer.failed(
+              id: id,
+              content: content,
+              error: error
+            )
+          }
         }
+      }
+    }
+
+    private func handleUploadResult(
+      _ result: Result<MediaUploadService.UploadResult, MediaContainer.MediaError>,
+      for container: MediaContainer,
+      content: MediaContainer.MediaContent
+    ) async {
+      guard let index = indexOf(container: container) else { return }
+      switch result {
+      case .success(let result):
+        mediaContainers[index] = MediaContainer.uploaded(
+          id: container.id,
+          attachment: result.attachment,
+          originalImage: result.originalImage
+        )
+        if result.needsRefresh {
+          scheduleAsyncMediaRefresh(mediaAttachement: result.attachment)
+        }
+        if let desc = containerIdToAltText[container.id], !desc.isEmpty {
+          await addDescription(container: mediaContainers[index], description: desc)
+          containerIdToAltText.removeValue(forKey: container.id)
+        }
+      case .failure(let error):
+        mediaContainers[index] = MediaContainer.failed(
+          id: container.id,
+          content: content,
+          error: error
+        )
       }
     }
 

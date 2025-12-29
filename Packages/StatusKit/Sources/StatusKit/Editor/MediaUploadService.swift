@@ -4,10 +4,8 @@ import NetworkClient
 import UIKit
 
 extension StatusEditor {
-  @MainActor
   struct MediaUploadService {
-    @MainActor
-    protocol Client {
+    protocol Client: Sendable {
       func uploadMedia(
         data: Data,
         mimeType: String,
@@ -21,20 +19,130 @@ extension StatusEditor {
       var needsRefresh: Bool
     }
 
+    struct UploadPolicy: Sendable {
+      var maxConcurrentUploads: Int = 2
+      var retryCount: Int = 2
+      var retryBackoffBase: Duration = .seconds(1)
+      var retryBackoffMultiplier: Double = 2
+      var maxBytes: Int? = nil
+      var requiresAltText: Bool = false
+    }
+
+    struct UploadInput: Sendable {
+      var id: String
+      var content: MediaContainer.MediaContent
+      var altText: String?
+    }
+
+    enum UploadEvent: Sendable {
+      case started(id: String, content: MediaContainer.MediaContent)
+      case progress(id: String, content: MediaContainer.MediaContent, progress: Double)
+      case success(id: String, result: UploadResult)
+      case failure(id: String, content: MediaContainer.MediaContent, error: MediaContainer.MediaError)
+    }
+
     func upload(
-      content: MediaContainer.MediaContent,
+      input: UploadInput,
       client: Client,
       modeIsShareExtension: Bool,
+      policy: UploadPolicy,
       progressHandler: @escaping @Sendable (Double) -> Void
-    ) async throws -> UploadResult? {
+    ) async -> Result<UploadResult, MediaContainer.MediaError> {
+      if let validationError = validate(input: input, policy: policy) {
+        return .failure(validationError)
+      }
+
+      do {
+        let (data, mimeType) = try await prepareUploadData(from: input.content)
+        if let maxBytes = policy.maxBytes, data.count > maxBytes {
+          return .failure(.sizeLimitExceeded)
+        }
+
+        return await uploadWithRetry(
+          data: data,
+          mimeType: mimeType,
+          input: input,
+          client: client,
+          modeIsShareExtension: modeIsShareExtension,
+          policy: policy,
+          progressHandler: progressHandler
+        )
+      } catch let error as MediaContainer.MediaError {
+        return .failure(error)
+      } catch let error as ServerError {
+        return .failure(.uploadFailed(error))
+      } catch {
+        return .failure(.compressionFailed)
+      }
+    }
+
+    func uploadBatch(
+      inputs: [UploadInput],
+      client: Client,
+      modeIsShareExtension: Bool,
+      policy: UploadPolicy,
+      eventHandler: @MainActor @escaping (UploadEvent) -> Void
+    ) async {
+      let limit = max(1, policy.maxConcurrentUploads)
+      var iterator = inputs.makeIterator()
+
+      await withTaskGroup(of: Void.self) { group in
+        func addNext() {
+          guard let input = iterator.next() else { return }
+          group.addTask {
+            await eventHandler(.started(id: input.id, content: input.content))
+            let result = await self.upload(
+              input: input,
+              client: client,
+              modeIsShareExtension: modeIsShareExtension,
+              policy: policy
+            ) { progress in
+              Task { @MainActor in
+                eventHandler(.progress(id: input.id, content: input.content, progress: progress))
+              }
+            }
+
+            switch result {
+            case .success(let result):
+              await eventHandler(.success(id: input.id, result: result))
+            case .failure(let error):
+              await eventHandler(.failure(id: input.id, content: input.content, error: error))
+            }
+          }
+        }
+
+        for _ in 0..<limit {
+          addNext()
+        }
+
+        while await group.next() != nil {
+          addNext()
+        }
+      }
+    }
+
+    private func validate(
+      input: UploadInput,
+      policy: UploadPolicy
+    ) -> MediaContainer.MediaError? {
+      if policy.requiresAltText {
+        let trimmed = input.altText?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        if trimmed.isEmpty {
+          return .missingAltText
+        }
+      }
+      return nil
+    }
+
+    private func prepareUploadData(
+      from content: MediaContainer.MediaContent
+    ) async throws -> (Data, String) {
       let compressor = Compressor()
-      let data: Data
-      let mimeType: String
 
       switch content {
       case .image(let image):
-        data = try await compressor.compressImageForUpload(image)
-        mimeType = "image/jpeg"
+        let data = try await compressor.compressImageForUpload(image)
+        return (data, "image/jpeg")
       case .video(let transferable, _):
         let videoURL = transferable.url
         guard let compressedVideoURL = await compressor.compressVideo(videoURL),
@@ -42,34 +150,83 @@ extension StatusEditor {
         else {
           throw MediaContainer.MediaError.compressionFailed
         }
-        data = videoData
-        mimeType = compressedVideoURL.mimeType()
+        return (videoData, compressedVideoURL.mimeType())
       case .gif(let transferable, _):
         guard let gifData = transferable.data else {
           throw MediaContainer.MediaError.compressionFailed
         }
-        data = gifData
-        mimeType = "image/gif"
+        return (gifData, "image/gif")
       }
+    }
 
-      guard let attachment = try await client.uploadMedia(
-        data: data,
-        mimeType: mimeType,
-        progressHandler: progressHandler
-      ) else {
-        return nil
+    private func uploadWithRetry(
+      data: Data,
+      mimeType: String,
+      input: UploadInput,
+      client: Client,
+      modeIsShareExtension: Bool,
+      policy: UploadPolicy,
+      progressHandler: @escaping @Sendable (Double) -> Void
+    ) async -> Result<UploadResult, MediaContainer.MediaError> {
+      var attempt = 0
+      let components = policy.retryBackoffBase.components
+      var delaySeconds = Double(components.seconds)
+        + Double(components.attoseconds) / 1_000_000_000_000_000_000
+
+      while true {
+        do {
+          try Task.checkCancellation()
+          guard let attachment = try await client.uploadMedia(
+            data: data,
+            mimeType: mimeType,
+            progressHandler: progressHandler
+          ) else {
+            return .failure(.invalidFormat)
+          }
+
+          return .success(
+            UploadResult(
+              attachment: attachment,
+              originalImage: modeIsShareExtension ? input.content.previewImage : nil,
+              needsRefresh: attachment.url == nil
+            )
+          )
+        } catch let error as MediaContainer.MediaError {
+          return .failure(error)
+        } catch let error as ServerError {
+          if shouldRetry(error: error, attempt: attempt, policy: policy) {
+            attempt += 1
+            try? await Task.sleep(for: .seconds(delaySeconds))
+            delaySeconds *= policy.retryBackoffMultiplier
+            continue
+          }
+          return .failure(.uploadFailed(error))
+        } catch is CancellationError {
+          return .failure(.cancelled)
+        } catch {
+          if attempt < policy.retryCount {
+            attempt += 1
+            try? await Task.sleep(for: .seconds(delaySeconds))
+            delaySeconds *= policy.retryBackoffMultiplier
+            continue
+          }
+          return .failure(.compressionFailed)
+        }
       }
+    }
 
-      return UploadResult(
-        attachment: attachment,
-        originalImage: modeIsShareExtension ? content.previewImage : nil,
-        needsRefresh: attachment.url == nil
-      )
+    private func shouldRetry(
+      error: ServerError,
+      attempt: Int,
+      policy: UploadPolicy
+    ) -> Bool {
+      guard attempt < policy.retryCount else { return false }
+      guard let httpCode = error.httpCode else { return true }
+      return httpCode >= 500
     }
   }
 }
 
-@MainActor
 extension MastodonClient: StatusEditor.MediaUploadService.Client {
   public func uploadMedia(
     data: Data,

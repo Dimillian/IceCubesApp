@@ -38,6 +38,8 @@ extension StatusEditor {
       case uploadFailed(ServerError)
       case invalidFormat
       case sizeLimitExceeded
+      case missingAltText
+      case cancelled
       
       var errorDescription: String? {
         switch self {
@@ -49,6 +51,10 @@ extension StatusEditor {
           return "Invalid media format"
         case .sizeLimitExceeded:
           return "Media size exceeds limit"
+        case .missingAltText:
+          return "Media description is required"
+        case .cancelled:
+          return "Upload cancelled"
         }
       }
     }
