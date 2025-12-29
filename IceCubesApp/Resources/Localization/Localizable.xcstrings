@@ -54921,6 +54921,17 @@
         }
       }
     },
+    "settings.other.animate-emojis" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enable Animated Emojis"
+          }
+        }
+      }
+    },
     "settings.other.autoplay-video": {
       "localizations": {
         "be": {
