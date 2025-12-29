@@ -86,7 +86,7 @@
       }
 
       private var panelContent: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 8) {
           RecentPhotosStripView { asset in
             await addAsset(asset)
           }
@@ -115,7 +115,8 @@
           }
           .disabled(viewModel.showPoll)
         }
-        .padding(.vertical, 16)
+        .padding(.top, 8)
+        .padding(.bottom, 16)
       }
 
       private var panelContainerShape: UnevenRoundedRectangle {
@@ -200,8 +201,7 @@
                 .fill(.secondary.opacity(0.2))
                 .frame(width: thumbnailSize, height: thumbnailSize)
                 .overlay {
-                  Image(systemName: "photo")
-                    .foregroundStyle(.secondary)
+                  ProgressView()
                 }
             }
           } else {
