@@ -40,6 +40,16 @@ let package = Package(
       swiftSettings: [
         .swiftLanguageMode(.v6)
       ]
+    ),
+    .testTarget(
+      name: "StatusKitTests",
+      dependencies: [
+        "StatusKit",
+        .product(name: "Models", package: "Models"),
+      ],
+      swiftSettings: [
+        .swiftLanguageMode(.v6)
+      ]
     )
   ]
 )
