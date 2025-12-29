@@ -62,6 +62,7 @@ extension StatusEditor {
     private let autocompleteService = AutocompleteService()
     private let mediaIngestionService = MediaIngestionService()
     private let mediaUploadService = MediaUploadService()
+    private let mediaDescriptionService = MediaDescriptionService()
     private var suggestedTask: Task<Void, Never>?
     private var mediaUploadPolicy: MediaUploadService.UploadPolicy {
       MediaUploadService.UploadPolicy(
@@ -179,7 +180,7 @@ extension StatusEditor {
     }
 
     // Map of container.id -> initial alt text (from intents)
-    var containerIdToAltText: [String: String] = [:]
+    private var pendingMediaDescriptions = MediaDescriptionService.PendingStore()
 
     var visibility: Models.Visibility = .pub
 
@@ -254,13 +255,12 @@ extension StatusEditor {
             multiple: pollVotingFrequency.canVoteMultipleTimes,
             expires_in: pollDuration.rawValue)
         }
-        // Fallback: include any pending containerIdToAltText in mediaAttributes if media got uploaded
-        if !containerIdToAltText.isEmpty {
-          for c in mediaContainers {
-            if let desc = containerIdToAltText[c.id], let id = c.mediaAttachment?.id {
-              mediaAttributes.append(.init(id: id, description: desc, thumbnail: nil, focus: nil))
-            }
-          }
+        // Fallback: include any pending alt text in mediaAttributes if media got uploaded
+        if !pendingMediaDescriptions.altTextByContainerId.isEmpty {
+          mediaDescriptionService.applyPendingAltText(
+            mediaContainers: mediaContainers,
+            store: &pendingMediaDescriptions
+          )
         }
         let data = StatusData(
           status: textState.statusText.string,
@@ -270,7 +270,7 @@ extension StatusEditor {
           mediaIds: mediaContainers.compactMap { $0.mediaAttachment?.id },
           poll: pollData,
           language: selectedLanguage,
-          mediaAttributes: mediaAttributes,
+          mediaAttributes: pendingMediaDescriptions.mediaAttributes,
           quotedStatusId: embeddedStatus?.id)
         switch mode {
         case .new, .replyTo, .quote, .mention, .shareExtension, .quoteLink, .imageURL:
@@ -397,7 +397,7 @@ extension StatusEditor {
             for (i, c) in containers.enumerated() where i < altTexts.count {
               let desc = altTexts[i].trimmingCharacters(in: .whitespacesAndNewlines)
               if !desc.isEmpty {
-                containerIdToAltText[c.id] = desc
+                pendingMediaDescriptions.altTextByContainerId[c.id] = desc
               }
             }
           }
@@ -758,7 +758,7 @@ extension StatusEditor {
       let input = MediaUploadService.UploadInput(
         id: originalContainer.id,
         content: content,
-        altText: containerIdToAltText[originalContainer.id]
+        altText: pendingMediaDescriptions.altTextByContainerId[originalContainer.id]
       )
       let result = await mediaUploadService.upload(
         input: input,
@@ -787,7 +787,7 @@ extension StatusEditor {
         return MediaUploadService.UploadInput(
           id: container.id,
           content: content,
-          altText: containerIdToAltText[container.id]
+          altText: pendingMediaDescriptions.altTextByContainerId[container.id]
         )
       }
 
@@ -840,12 +840,27 @@ extension StatusEditor {
               }
             }
           }
-          if let desc = containerIdToAltText[id], !desc.isEmpty {
+          if let desc = pendingMediaDescriptions.altTextByContainerId[id], !desc.isEmpty {
             Task { @MainActor in
-              if let container = self.mediaContainers.first(where: { $0.id == id }) {
-                await self.addDescription(container: container, description: desc)
-                self.containerIdToAltText.removeValue(forKey: id)
+              guard let client = self.client,
+                let container = self.mediaContainers.first(where: { $0.id == id })
+              else { return }
+              if let updated = await self.mediaDescriptionService.addDescription(
+                container: container,
+                description: desc,
+                client: client
+              ) {
+                if let index = self.indexOf(container: container) {
+                  if case .uploaded(_, let originalImage) = self.mediaContainers[index].state {
+                    self.mediaContainers[index] = MediaContainer.uploaded(
+                      id: self.mediaContainers[index].id,
+                      attachment: updated,
+                      originalImage: originalImage
+                    )
+                  }
+                }
               }
+              self.pendingMediaDescriptions.altTextByContainerId.removeValue(forKey: id)
             }
           }
         case .failure(let id, let content, let error):
@@ -892,9 +907,23 @@ extension StatusEditor {
             }
           }
         }
-        if let desc = containerIdToAltText[container.id], !desc.isEmpty {
-          await addDescription(container: mediaContainers[index], description: desc)
-          containerIdToAltText.removeValue(forKey: container.id)
+        if let desc = pendingMediaDescriptions.altTextByContainerId[container.id], !desc.isEmpty,
+          let client
+        {
+          if let updated = await mediaDescriptionService.addDescription(
+            container: mediaContainers[index],
+            description: desc,
+            client: client
+          ) {
+            if case .uploaded(_, let originalImage) = mediaContainers[index].state {
+              mediaContainers[index] = MediaContainer.uploaded(
+                id: mediaContainers[index].id,
+                attachment: updated,
+                originalImage: originalImage
+              )
+            }
+          }
+          pendingMediaDescriptions.altTextByContainerId.removeValue(forKey: container.id)
         }
       case .failure(let error):
         mediaContainers[index] = MediaContainer.failed(
@@ -909,30 +938,29 @@ extension StatusEditor {
       guard let client,
         let index = indexOf(container: container)
       else { return }
-
-      let state = mediaContainers[index].state
-      guard case .uploaded(let attachment, let originalImage) = state else { return }
-
-      do {
-        let media: MediaAttachment = try await client.put(
-          endpoint: Media.media(
-            id: attachment.id,
-            json: .init(description: description)))
-        mediaContainers[index] = MediaContainer.uploaded(
-          id: mediaContainers[index].id,
-          attachment: media,
-          originalImage: originalImage
-        )
-      } catch {}
+      if let updated = await mediaDescriptionService.addDescription(
+        container: mediaContainers[index],
+        description: description,
+        client: client
+      ) {
+        if case .uploaded(_, let originalImage) = mediaContainers[index].state {
+          mediaContainers[index] = MediaContainer.uploaded(
+            id: mediaContainers[index].id,
+            attachment: updated,
+            originalImage: originalImage
+          )
+        }
+      }
     }
 
-    private var mediaAttributes: [StatusData.MediaAttribute] = []
     func editDescription(container: MediaContainer, description: String) async {
       guard let attachment = container.mediaAttachment else { return }
       if indexOf(container: container) != nil {
-        mediaAttributes.append(
-          StatusData.MediaAttribute(
-            id: attachment.id, description: description, thumbnail: nil, focus: nil))
+        mediaDescriptionService.buildMediaAttribute(
+          attachment: attachment,
+          description: description,
+          store: &pendingMediaDescriptions
+        )
       }
     }
 

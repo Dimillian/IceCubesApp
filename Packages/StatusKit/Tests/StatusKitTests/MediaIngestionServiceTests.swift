@@ -24,16 +24,7 @@ final class MediaIngestionServiceTests: XCTestCase {
   }
 
   func testIngestImageItemBuildsContainer() async {
-    let format = UIGraphicsImageRendererFormat()
-    format.opaque = false
-    format.scale = 1
-    let image = UIGraphicsImageRenderer(
-      size: .init(width: 64, height: 64),
-      format: format
-    ).image { context in
-      UIColor.red.setFill()
-      context.fill(CGRect(x: 0, y: 0, width: 64, height: 64))
-    }
+    let image = makeOpaqueTestImage()
     let item = NSItemProvider(object: image)
     let service = StatusEditor.MediaIngestionService()
 

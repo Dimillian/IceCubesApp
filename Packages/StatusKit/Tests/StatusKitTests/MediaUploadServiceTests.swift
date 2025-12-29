@@ -42,16 +42,7 @@ final class MediaUploadServiceTests: XCTestCase {
   }
 
   func testUploadImageUsesJpegMimeType() async throws {
-    let format = UIGraphicsImageRendererFormat()
-    format.opaque = false
-    format.scale = 1
-    let image = UIGraphicsImageRenderer(
-      size: .init(width: 64, height: 64),
-      format: format
-    ).image { context in
-      UIColor.red.setFill()
-      context.fill(CGRect(x: 0, y: 0, width: 64, height: 64))
-    }
+    let image = makeOpaqueTestImage()
     let content = StatusEditor.MediaContainer.MediaContent.image(image)
     let client = FakeUploadClient()
     client.attachment = makeAttachment(
