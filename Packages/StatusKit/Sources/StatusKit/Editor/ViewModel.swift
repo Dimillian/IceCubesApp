@@ -179,6 +179,7 @@ extension StatusEditor {
     }
 
     private var suggestedTask: Task<Void, Never>?
+    private let autocompleteService = AutocompleteService()
 
     init(mode: Mode) {
       self.mode = mode
@@ -538,51 +539,28 @@ extension StatusEditor {
 
     private func loadAutoCompleteResults(query: String) {
       guard let client else { return }
-      var query = query
       suggestedTask?.cancel()
       suggestedTask = Task {
         do {
-          var results: SearchResults?
-          switch query.first {
-          case "#":
-            if query.utf8.count == 1 {
-              withAnimation {
-                showRecentsTagsInline = true
-              }
-              return
-            }
-            showRecentsTagsInline = false
-            query.removeFirst()
-            results = try await client.get(
-              endpoint: Search.search(
-                query: query,
-                type: .hashtags,
-                offset: 0,
-                following: nil),
-              forceVersion: .v2)
-            guard !Task.isCancelled else {
-              return
-            }
+          let result = try await autocompleteService.fetchSuggestions(for: query, client: client)
+          guard !Task.isCancelled else {
+            return
+          }
+          switch result {
+          case .showRecentsTagsInline:
             withAnimation {
-              tagsSuggestions = results?.hashtags.sorted(by: { $0.totalUses > $1.totalUses }) ?? []
+              showRecentsTagsInline = true
             }
-          case "@":
-            guard query.utf8.count > 1 else { return }
-            query.removeFirst()
-            let accounts: [Account] = try await client.get(
-              endpoint: Search.accountsSearch(
-                query: query,
-                type: nil,
-                offset: 0,
-                following: nil),
-              forceVersion: .v1)
-            guard !Task.isCancelled else {
-              return
+          case .tags(let tags):
+            withAnimation {
+              showRecentsTagsInline = false
+              tagsSuggestions = tags
             }
+          case .mentions(let accounts):
             withAnimation {
               mentionsSuggestions = accounts
             }
-          default:
+          case .none:
             break
           }
         } catch {}
