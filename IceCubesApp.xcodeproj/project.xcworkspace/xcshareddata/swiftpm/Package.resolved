@@ -1,5 +1,5 @@
 {
-  "originHash" : "928514fbf2a44300a6ba99e7b8b50e65f99eba3bf6503dd2be12a5fa76389623",
+  "originHash" : "81aa589e83382ceceed0c7f9bca45e182522383381abd56ad6f5672b42c3623b",
   "pins" : [
     {
       "identity" : "bodega",
@@ -26,6 +26,15 @@
       "state" : {
         "branch" : "fix-ios26",
         "revision" : "3b11459a19c9406176a08b0f0599b98f88113296"
+      }
+    },
+    {
+      "identity" : "gifu",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kaishin/Gifu.git",
+      "state" : {
+        "revision" : "f19726eaf0dfa4dbce4d3f80293c9d38c2acba53",
+        "version" : "4.0.1"
       }
     },
     {

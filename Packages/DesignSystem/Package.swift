@@ -21,6 +21,7 @@ let package = Package(
     .package(name: "Env", path: "../Env"),
     .package(url: "https://github.com/kean/Nuke", exact: "12.8.0"),
     .package(url: "https://github.com/Dimillian/EmojiText", branch: "fix-ios26"),
+    .package(url: "https://github.com/kaishin/Gifu.git", from: "4.0.1"),
   ],
   targets: [
     .target(
@@ -31,6 +32,7 @@ let package = Package(
         .product(name: "NukeUI", package: "Nuke"),
         .product(name: "Nuke", package: "Nuke"),
         .product(name: "EmojiText", package: "EmojiText"),
+        .product(name: "Gifu", package: "Gifu"),
       ],
       swiftSettings: [
         .swiftLanguageMode(.v6)

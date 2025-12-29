@@ -19,9 +19,16 @@ struct AccountPopoverView: View {
       LazyImage(
         request: ImageRequest(url: account.header)
       ) { state in
-        if let image = state.image {
-          image.resizable().scaledToFill()
-        }
+          if let container = state.imageContainer {
+              if container.type == .gif, let data = container.data {
+                  GifView(data:data)
+                      .scaledToFill()
+              } else {
+                  if let image = state.image {
+                      image.resizable().scaledToFill()
+                  }
+              }
+          }
       }
       .frame(width: 500, height: 150)
       .clipped()
