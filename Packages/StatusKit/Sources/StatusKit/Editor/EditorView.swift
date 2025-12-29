@@ -121,7 +121,7 @@ extension StatusEditor {
 
     private var textInput: some View {
       TextView(
-        $viewModel.statusText,
+        viewModel.statusTextBinding,
         getTextView: { textView in viewModel.textView = textView }
       )
       .placeholder(

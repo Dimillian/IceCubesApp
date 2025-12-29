@@ -1,5 +1,4 @@
 import AVFoundation
-import Combine
 import DesignSystem
 import Env
 import Models
@@ -58,30 +57,36 @@ extension StatusEditor {
       return textView.markedTextRange
     }
 
-    var statusText = NSMutableAttributedString(string: "") {
-      didSet {
-        let range = selectedRange
-        processText()
-        checkEmbed()
-        textView?.attributedText = statusText
-        selectedRange = range
-      }
-    }
-
-    private var urlLengthAdjustments: Int = 0
-    private let maxLengthOfUrl = 23
+    var textState = TextState()
+    @ObservationIgnored private let textService = TextService()
 
     private var spoilerTextCount: Int {
       spoilerOn ? spoilerText.utf16.count : 0
     }
 
     var statusTextCharacterLength: Int {
-      urlLengthAdjustments - statusText.string.utf16.count - spoilerTextCount
+      textState.urlLengthAdjustments - textState.statusText.string.utf16.count - spoilerTextCount
     }
 
     private var itemsProvider: [NSItemProvider]?
 
-    var backupStatusText: NSAttributedString?
+    var statusText: NSMutableAttributedString {
+      textState.statusText
+    }
+
+    var backupStatusText: NSAttributedString? {
+      get { textState.backupStatusText }
+      set { textState.backupStatusText = newValue }
+    }
+
+    var statusTextBinding: Binding<NSMutableAttributedString> {
+      Binding(
+        get: { self.textState.statusText },
+        set: { newValue in
+          self.updateStatusText(newValue)
+        }
+      )
+    }
 
     var showPoll: Bool = false
     var pollVotingFrequency = PollVotingFrequency.oneVote
@@ -129,7 +134,7 @@ extension StatusEditor {
     var showPostingErrorAlert: Bool = false
 
     var canPost: Bool {
-      statusText.length > 0 || !mediaContainers.isEmpty
+      textState.statusText.length > 0 || !mediaContainers.isEmpty
     }
 
     var shouldDisablePollButton: Bool {
@@ -150,9 +155,9 @@ extension StatusEditor {
     }
 
     var shouldDisplayDismissWarning: Bool {
-      var modifiedStatusText = statusText.string.trimmingCharacters(in: .whitespaces)
+      var modifiedStatusText = textState.statusText.string.trimmingCharacters(in: .whitespaces)
 
-      if let mentionString, modifiedStatusText.hasPrefix(mentionString) {
+      if let mentionString = textState.mentionString, modifiedStatusText.hasPrefix(mentionString) {
         modifiedStatusText = String(modifiedStatusText.dropFirst(mentionString.count))
       }
 
@@ -169,13 +174,9 @@ extension StatusEditor {
     var showRecentsTagsInline: Bool = false
     var selectedLanguage: String?
     var hasExplicitlySelectedLanguage: Bool = false
-    private var currentSuggestionRange: NSRange?
-
     private var embeddedStatusURL: URL? {
       URL(string: embeddedStatus?.reblog?.url ?? embeddedStatus?.url ?? "")
     }
-
-    private var mentionString: String?
 
     private var suggestedTask: Task<Void, Never>?
 
@@ -201,7 +202,7 @@ extension StatusEditor {
     }
 
     func evaluateLanguages() {
-      if let detectedLang = detectLanguage(text: statusText.string),
+      if let detectedLang = detectLanguage(text: textState.statusText.string),
         let selectedLanguage,
         selectedLanguage != "",
         selectedLanguage != detectedLang
@@ -250,7 +251,7 @@ extension StatusEditor {
           }
         }
         let data = StatusData(
-          status: statusText.string,
+          status: textState.statusText.string,
           visibility: visibility,
           inReplyToId: mode.replyToStatus?.id,
           spoilerText: spoilerOn ? spoilerText : nil,
@@ -306,42 +307,78 @@ extension StatusEditor {
     // MARK: - Status Text manipulations
 
     func insertStatusText(text: String) {
-      let string = statusText
-      string.mutableString.insert(text, at: selectedRange.location)
-      statusText = string
-      selectedRange = NSRange(location: selectedRange.location + text.utf16.count, length: 0)
-      processText()
+      let update = textService.insertText(
+        text,
+        into: textState.statusText,
+        selection: selectedRange
+      )
+      updateStatusText(update.text, selection: update.selection)
     }
 
     func replaceTextWith(text: String, inRange: NSRange) {
-      let string = statusText
-      string.mutableString.deleteCharacters(in: inRange)
-      string.mutableString.insert(text, at: inRange.location)
-      statusText = string
-      selectedRange = NSRange(location: inRange.location + text.utf16.count, length: 0)
+      let update = textService.replaceText(
+        with: text,
+        in: textState.statusText,
+        range: inRange
+      )
+      updateStatusText(update.text, selection: update.selection)
       if let textView {
         textView.delegate?.textViewDidChange?(textView)
       }
     }
 
     func replaceTextWith(text: String) {
-      statusText = .init(string: text)
-      selectedRange = .init(location: text.utf16.count, length: 0)
+      let update = textService.replaceText(with: text)
+      updateStatusText(update.text, selection: update.selection)
+    }
+
+    private func updateStatusText(_ text: NSMutableAttributedString, selection: NSRange? = nil) {
+      let resolvedSelection = selection ?? selectedRange
+      textState.statusText = text
+      processText(selection: resolvedSelection)
+      checkEmbed()
+      textView?.attributedText = textState.statusText
+      selectedRange = resolvedSelection
+    }
+
+    private func applyTextChanges(_ changes: TextService.InitialTextChanges) {
+      if let visibility = changes.visibility {
+        self.visibility = visibility
+      }
+      if let replyToStatus = changes.replyToStatus {
+        self.replyToStatus = replyToStatus
+      }
+      if let embeddedStatus = changes.embeddedStatus {
+        self.embeddedStatus = embeddedStatus
+      }
+      if let spoilerOn = changes.spoilerOn {
+        self.spoilerOn = spoilerOn
+      }
+      if let spoilerText = changes.spoilerText {
+        self.spoilerText = spoilerText
+      }
+      textState.mentionString = changes.mentionString
+
+      if let statusText = changes.statusText {
+        updateStatusText(statusText, selection: changes.selectedRange)
+      } else if let selection = changes.selectedRange {
+        selectedRange = selection
+      }
     }
 
     func prepareStatusText() {
+      let textChanges = textService.initialTextChanges(
+        for: mode,
+        currentAccount: currentAccount,
+        currentInstance: currentInstance
+      )
+      applyTextChanges(textChanges)
+
       switch mode {
-      case .new(let text, let visibility):
-        if let text {
-          statusText = .init(string: text)
-          selectedRange = .init(location: text.utf16.count, length: 0)
-        }
-        self.visibility = visibility
       case .shareExtension(let items):
         itemsProvider = items
-        visibility = .pub
         processItemsProvider(items: items)
-      case .imageURL(let urls, let caption, let altTexts, let visibility):
+      case .imageURL(let urls, _, let altTexts, _):
         Task {
           let containers = await Self.makeImageContainer(from: urls)
           if let altTexts {
@@ -356,51 +393,7 @@ extension StatusEditor {
             prepareToPost(for: container)
           }
         }
-        if let caption, !caption.isEmpty {
-          statusText = .init(string: caption)
-          selectedRange = .init(location: caption.utf16.count, length: 0)
-        }
-        self.visibility = visibility
-      case .replyTo(let status):
-        var mentionString = ""
-        if (status.reblog?.account.acct ?? status.account.acct) != currentAccount?.acct {
-          mentionString = "@\(status.reblog?.account.acct ?? status.account.acct)"
-        }
-        for mention in status.mentions where mention.acct != currentAccount?.acct {
-          if !mentionString.isEmpty {
-            mentionString += " "
-          }
-          mentionString += "@\(mention.acct)"
-        }
-        if !mentionString.isEmpty {
-          mentionString += " "
-        }
-        replyToStatus = status
-        visibility = UserPreferences.shared.getReplyVisibility(of: status)
-        statusText = .init(string: mentionString)
-        selectedRange = .init(location: mentionString.utf16.count, length: 0)
-        if !mentionString.isEmpty {
-          self.mentionString = mentionString.trimmingCharacters(in: .whitespaces)
-        }
-        if !status.spoilerText.asRawText.isEmpty {
-          spoilerOn = true
-          spoilerText = status.spoilerText.asRawText
-        }
-      case .mention(let account, let visibility):
-        statusText = .init(string: "@\(account.acct) ")
-        self.visibility = visibility
-        selectedRange = .init(location: statusText.string.utf16.count, length: 0)
       case .edit(let status):
-        var rawText = status.content.asRawText.escape()
-        for mention in status.mentions {
-          rawText = rawText.replacingOccurrences(
-            of: "@\(mention.username)", with: "@\(mention.acct)")
-        }
-        statusText = .init(string: rawText)
-        selectedRange = .init(location: statusText.string.utf16.count, length: 0)
-        spoilerOn = !status.spoilerText.asRawText.isEmpty
-        spoilerText = status.spoilerText.asRawText
-        visibility = status.visibility
         mediaContainers = status.mediaAttachments.map {
           MediaContainer.uploaded(
             id: UUID().uuidString,
@@ -408,101 +401,32 @@ extension StatusEditor {
             originalImage: nil
           )
         }
-      case .quote(let status):
-        embeddedStatus = status
-        if currentInstance?.isQuoteSupported == true {
-          // Do nothing
-        } else if let url = embeddedStatusURL {
-          statusText = .init(
-            string: "\n\nFrom: @\(status.reblog?.account.acct ?? status.account.acct)\n\(url)")
-          selectedRange = .init(location: 0, length: 0)
-        }
-      case .quoteLink(let link):
-        statusText = .init(string: "\n\n\(link)")
-        selectedRange = .init(location: 0, length: 0)
+      default:
+        break
       }
     }
 
-    private func processText() {
-      guard markedTextRange == nil else { return }
-      statusText.addAttributes(
-        [
-          .foregroundColor: UIColor(Theme.shared.labelColor),
-          .font: Font.scaledBodyUIFont,
-          .backgroundColor: UIColor.clear,
-          .underlineColor: UIColor.clear,
-        ],
-        range: NSMakeRange(0, statusText.string.utf16.count))
-      let hashtagPattern = "(#+[\\w0-9(_)]{0,})"
-      let mentionPattern = "(@+[a-zA-Z0-9(_).-]{1,})"
-      let urlPattern = "(?i)https?://(?:www\\.)?\\S+(?:/|\\b)"
+    private func processText(selection: NSRange) {
+      let result = textService.processText(
+        textState.statusText,
+        theme: theme,
+        selectedRange: selection,
+        hasMarkedText: markedTextRange != nil,
+        previousUrlLengthAdjustments: textState.urlLengthAdjustments
+      )
+      guard result.didProcess else { return }
 
-      do {
-        let hashtagRegex = try NSRegularExpression(pattern: hashtagPattern, options: [])
-        let mentionRegex = try NSRegularExpression(pattern: mentionPattern, options: [])
-        let urlRegex = try NSRegularExpression(pattern: urlPattern, options: [])
+      textState.urlLengthAdjustments = result.urlLengthAdjustments
+      textState.currentSuggestionRange = result.suggestionRange
 
-        let range = NSMakeRange(0, statusText.string.utf16.count)
-        var ranges = hashtagRegex.matches(
-          in: statusText.string,
-          options: [],
-          range: range
-        ).map(\.range)
-        ranges.append(
-          contentsOf: mentionRegex.matches(
-            in: statusText.string,
-            options: [],
-            range: range
-          ).map(\.range))
-
-        let urlRanges = urlRegex.matches(
-          in: statusText.string,
-          options: [],
-          range: range
-        ).map(\.range)
-
-        var foundSuggestionRange = false
-        for nsRange in ranges {
-          statusText.addAttributes(
-            [.foregroundColor: UIColor(theme?.tintColor ?? .brand)],
-            range: nsRange)
-          if selectedRange.location == (nsRange.location + nsRange.length),
-            let range = Range(nsRange, in: statusText.string)
-          {
-            foundSuggestionRange = true
-            currentSuggestionRange = nsRange
-            loadAutoCompleteResults(query: String(statusText.string[range]))
-          }
-        }
-
-        if !foundSuggestionRange || ranges.isEmpty {
-          resetAutoCompletion()
-        }
-
-        var totalUrlLength = 0
-        var numUrls = 0
-
-        for range in urlRanges {
-          numUrls += 1
-          totalUrlLength += range.length
-
-          statusText.addAttributes(
-            [
-              .foregroundColor: UIColor(theme?.tintColor ?? .brand),
-              .underlineStyle: NSUnderlineStyle.single.rawValue,
-              .underlineColor: UIColor(theme?.tintColor ?? .brand),
-            ],
-            range: NSRange(location: range.location, length: range.length))
-        }
-
-        urlLengthAdjustments = totalUrlLength - (maxLengthOfUrl * numUrls)
-
-        statusText.enumerateAttributes(in: range) { attributes, range, _ in
-          if attributes[.link] != nil {
-            statusText.removeAttribute(.link, range: range)
-          }
-        }
-      } catch {}
+      switch result.action {
+      case .suggest(let query):
+        loadAutoCompleteResults(query: query)
+      case .reset:
+        resetAutoCompletion()
+      case .none:
+        break
+      }
     }
 
     // MARK: - Shar sheet / Item provider
@@ -579,9 +503,8 @@ extension StatusEditor {
             }
           }
         }
-        if !initialText.isEmpty {
-          statusText = .init(string: "\n\n\(initialText)")
-          selectedRange = .init(location: 0, length: 0)
+      if !initialText.isEmpty {
+          updateStatusText(.init(string: "\n\n\(initialText)"), selection: .init(location: 0, length: 0))
         }
       }
     }
@@ -604,7 +527,7 @@ extension StatusEditor {
     private func checkEmbed() {
       if let url = embeddedStatusURL,
         currentInstance?.isQuoteSupported == false,
-        !statusText.string.contains(url.absoluteString)
+        !textState.statusText.string.contains(url.absoluteString)
       {
         embeddedStatus = nil
         mode = .new(text: nil, visibility: visibility)
@@ -667,26 +590,27 @@ extension StatusEditor {
     }
 
     private func resetAutoCompletion() {
-      if !tagsSuggestions.isEmpty || !mentionsSuggestions.isEmpty || currentSuggestionRange != nil
+      if !tagsSuggestions.isEmpty || !mentionsSuggestions.isEmpty
+        || textState.currentSuggestionRange != nil
         || showRecentsTagsInline
       {
         withAnimation {
           tagsSuggestions = []
           mentionsSuggestions = []
-          currentSuggestionRange = nil
+          textState.currentSuggestionRange = nil
           showRecentsTagsInline = false
         }
       }
     }
 
     func selectMentionSuggestion(account: Account) {
-      if let range = currentSuggestionRange {
+      if let range = textState.currentSuggestionRange {
         replaceTextWith(text: "@\(account.acct) ", inRange: range)
       }
     }
 
     func selectHashtagSuggestion(tag: String) {
-      if let range = currentSuggestionRange {
+      if let range = textState.currentSuggestionRange {
         var tag = tag
         if tag.hasPrefix("#") {
           tag.removeFirst()
@@ -704,23 +628,23 @@ extension StatusEditor {
         var newStream: LanguageModelSession.ResponseStream<String>?
         switch prompt {
         case .correct:
-          newStream = await assistant.correct(message: statusText.string)
+          newStream = await assistant.correct(message: textState.statusText.string)
         case .emphasize:
-          newStream = await assistant.emphasize(message: statusText.string)
+          newStream = await assistant.emphasize(message: textState.statusText.string)
         case .fit:
-          newStream = await assistant.shorten(message: statusText.string)
+          newStream = await assistant.shorten(message: textState.statusText.string)
         case .rewriteWithTone(let tone):
-          newStream = await assistant.adjustTone(message: statusText.string, to: tone)
+          newStream = await assistant.adjustTone(message: textState.statusText.string, to: tone)
         }
 
         if let newStream {
-          backupStatusText = statusText
+          textState.backupStatusText = textState.statusText
           do {
             for try await content in newStream {
               replaceTextWith(text: content.content)
             }
           } catch {
-            if let backupStatusText {
+            if let backupStatusText = textState.backupStatusText {
               replaceTextWith(text: backupStatusText.string)
             }
           }
