@@ -180,6 +180,7 @@ extension StatusEditor {
 
     private var suggestedTask: Task<Void, Never>?
     private let autocompleteService = AutocompleteService()
+    private let mediaIngestionService = MediaIngestionService()
 
     init(mode: Mode) {
       self.mode = mode
@@ -460,52 +461,21 @@ extension StatusEditor {
 
     private func processItemsProvider(items: [NSItemProvider]) {
       Task {
-        var initialText: String = ""
-        for item in items {
-          if let identifier = item.registeredTypeIdentifiers.first {
-            let handledItemType = UTTypeSupported(value: identifier)
-            do {
-              let compressor = Compressor()
-              let content = try await handledItemType.loadItemContent(item: item)
-              if let text = content as? String {
-                initialText += "\(text) "
-              } else if let image = content as? UIImage {
-                let container = MediaContainer.pending(
-                  id: UUID().uuidString,
-                  image: image
-                )
-                prepareToPost(for: container)
-              } else if let content = content as? ImageFileTranseferable,
-                let compressedData = await compressor.compressImageFrom(url: content.url),
-                let image = UIImage(data: compressedData)
-              {
-                let container = MediaContainer.pending(
-                  id: UUID().uuidString,
-                  image: image
-                )
-                prepareToPost(for: container)
-              } else if let video = content as? MovieFileTranseferable {
-                let container = MediaContainer.pending(
-                  id: UUID().uuidString,
-                  video: video,
-                  preview: await Self.extractVideoPreview(from: video.url)
-                )
-                prepareToPost(for: container)
-              } else if let gif = content as? GifFileTranseferable {
-                let container = MediaContainer.pending(
-                  id: UUID().uuidString,
-                  gif: gif,
-                  preview: nil
-                )
-                prepareToPost(for: container)
-              }
-            } catch {
-              isMediasLoading = false
-            }
-          }
+        let result = await mediaIngestionService.ingest(
+          items: items,
+          makeVideoPreview: Self.extractVideoPreview(from:)
+        )
+        if result.hadError {
+          isMediasLoading = false
         }
-      if !initialText.isEmpty {
-          updateStatusText(.init(string: "\n\n\(initialText)"), selection: .init(location: 0, length: 0))
+        for container in result.containers {
+          prepareToPost(for: container)
+        }
+        if !result.initialText.isEmpty {
+          updateStatusText(
+            .init(string: "\n\n\(result.initialText)"),
+            selection: .init(location: 0, length: 0)
+          )
         }
       }
     }
