@@ -824,7 +824,23 @@ extension StatusEditor {
             )
           }
           if result.needsRefresh {
-            scheduleAsyncMediaRefresh(mediaAttachement: result.attachment)
+            mediaUploadService.scheduleAsyncMediaRefresh(
+              attachment: result.attachment,
+              client: client
+            ) { [weak self] refreshed in
+              guard let self else { return }
+              if let index = self.mediaContainers.firstIndex(where: {
+                $0.mediaAttachment?.id == refreshed.id
+              }) {
+                if case .uploaded(_, let originalImage) = self.mediaContainers[index].state {
+                  self.mediaContainers[index] = MediaContainer.uploaded(
+                    id: self.mediaContainers[index].id,
+                    attachment: refreshed,
+                    originalImage: originalImage
+                  )
+                }
+              }
+            }
           }
           if let desc = containerIdToAltText[id], !desc.isEmpty {
             Task { @MainActor in
@@ -859,8 +875,24 @@ extension StatusEditor {
           attachment: result.attachment,
           originalImage: result.originalImage
         )
-        if result.needsRefresh {
-          scheduleAsyncMediaRefresh(mediaAttachement: result.attachment)
+        if result.needsRefresh, let client {
+          mediaUploadService.scheduleAsyncMediaRefresh(
+            attachment: result.attachment,
+            client: client
+          ) { [weak self] refreshed in
+            guard let self else { return }
+            if let index = self.mediaContainers.firstIndex(where: {
+              $0.mediaAttachment?.id == refreshed.id
+            }) {
+              if case .uploaded(_, let originalImage) = self.mediaContainers[index].state {
+                self.mediaContainers[index] = MediaContainer.uploaded(
+                  id: self.mediaContainers[index].id,
+                  attachment: refreshed,
+                  originalImage: originalImage
+                )
+              }
+            }
+          }
         }
         if let desc = containerIdToAltText[container.id], !desc.isEmpty {
           await addDescription(container: mediaContainers[index], description: desc)
@@ -872,39 +904,6 @@ extension StatusEditor {
           content: content,
           error: error
         )
-      }
-    }
-
-    private func scheduleAsyncMediaRefresh(mediaAttachement: MediaAttachment) {
-      Task {
-        repeat {
-          if let client,
-            let index = mediaContainers.firstIndex(where: {
-              $0.mediaAttachment?.id == mediaAttachement.id
-            })
-          {
-            guard mediaContainers[index].mediaAttachment?.url == nil else {
-              return
-            }
-            do {
-              let newAttachement: MediaAttachment = try await client.get(
-                endpoint: Media.media(
-                  id: mediaAttachement.id,
-                  json: nil))
-              if newAttachement.url != nil {
-                let oldContainer = mediaContainers[index]
-                if case .uploaded(_, let originalImage) = oldContainer.state {
-                  mediaContainers[index] = MediaContainer.uploaded(
-                    id: oldContainer.id,
-                    attachment: newAttachement,
-                    originalImage: originalImage
-                  )
-                }
-              }
-            } catch {}
-          }
-          try? await Task.sleep(for: .seconds(5))
-        } while !Task.isCancelled
       }
     }
 

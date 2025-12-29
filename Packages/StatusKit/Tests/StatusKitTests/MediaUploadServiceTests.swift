@@ -204,6 +204,13 @@ private final class FakeUploadClient: StatusEditor.MediaUploadService.Client {
     }
     return attachment
   }
+
+  func fetchMedia(id _: String) async throws -> MediaAttachment {
+    if let attachment {
+      return attachment
+    }
+    return makeAttachment(id: UUID().uuidString, urlString: nil)
+  }
 }
 
 private func makeAttachment(id: String, urlString: String?) -> MediaAttachment {

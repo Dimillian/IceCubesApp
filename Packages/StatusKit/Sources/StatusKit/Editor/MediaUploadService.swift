@@ -11,6 +11,8 @@ extension StatusEditor {
         mimeType: String,
         progressHandler: @escaping @Sendable (Double) -> Void
       ) async throws -> MediaAttachment?
+
+      func fetchMedia(id: String) async throws -> MediaAttachment
     }
 
     struct UploadResult {
@@ -117,6 +119,31 @@ extension StatusEditor {
 
         while await group.next() != nil {
           addNext()
+        }
+      }
+    }
+
+    func scheduleAsyncMediaRefresh(
+      attachment: MediaAttachment,
+      client: Client,
+      interval: Duration = .seconds(5),
+      onUpdate: @MainActor @escaping (MediaAttachment) -> Void
+    ) {
+      Task {
+        var currentAttachment = attachment
+        while !Task.isCancelled {
+          if currentAttachment.url != nil {
+            return
+          }
+          do {
+            let refreshed: MediaAttachment = try await client.fetchMedia(id: attachment.id)
+            if refreshed.url != nil {
+              await onUpdate(refreshed)
+              return
+            }
+            currentAttachment = refreshed
+          } catch {}
+          try? await Task.sleep(for: interval)
         }
       }
     }
@@ -242,5 +269,9 @@ extension MastodonClient: StatusEditor.MediaUploadService.Client {
       data: data,
       progressHandler: progressHandler
     )
+  }
+
+  public func fetchMedia(id: String) async throws -> MediaAttachment {
+    try await get(endpoint: Media.media(id: id, json: nil))
   }
 }
