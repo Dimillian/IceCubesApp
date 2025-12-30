@@ -66,12 +66,14 @@ extension StatusEditor {
     func initialTextChanges(
       for mode: StatusEditor.ViewModel.Mode,
       currentAccount: Account?,
-      currentInstance: CurrentInstance?
+      currentInstance: CurrentInstance?,
+      preferences: UserPreferences?
     ) -> TextService.InitialTextChanges {
       textService.initialTextChanges(
         for: mode,
         currentAccount: currentAccount,
-        currentInstance: currentInstance
+        currentInstance: currentInstance,
+        preferences: preferences
       )
     }
 

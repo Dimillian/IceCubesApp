@@ -43,7 +43,8 @@ extension StatusEditor {
     func initialTextChanges(
       for mode: Mode,
       currentAccount: Account?,
-      currentInstance: CurrentInstance?
+      currentInstance: CurrentInstance?,
+      preferences: UserPreferences?
     ) -> InitialTextChanges {
       switch mode {
       case .new(let text, let visibility):
@@ -114,7 +115,8 @@ extension StatusEditor {
           mentionString: trimmedMention,
           spoilerOn: !status.spoilerText.asRawText.isEmpty,
           spoilerText: status.spoilerText.asRawText,
-          visibility: UserPreferences.shared.getReplyVisibility(of: status),
+          visibility: preferences?.getReplyVisibility(of: status)
+            ?? UserPreferences.shared.getReplyVisibility(of: status),
           replyToStatus: status,
           embeddedStatus: nil
         )
@@ -236,7 +238,7 @@ extension StatusEditor {
         )
       }
 
-      applyBaseAttributes(to: text)
+      applyBaseAttributes(to: text, theme: theme)
 
       let textValue = text.string
       let allRange = NSRange(location: 0, length: textValue.utf16.count)
@@ -269,11 +271,11 @@ extension StatusEditor {
       )
     }
 
-    private func applyBaseAttributes(to text: NSMutableAttributedString) {
+    private func applyBaseAttributes(to text: NSMutableAttributedString, theme: Theme?) {
       let range = NSRange(location: 0, length: text.string.utf16.count)
       text.addAttributes(
         [
-          .foregroundColor: UIColor(Theme.shared.labelColor),
+          .foregroundColor: UIColor(theme?.labelColor ?? Theme.shared.labelColor),
           .font: Font.scaledBodyUIFont,
           .backgroundColor: UIColor.clear,
           .underlineColor: UIColor.clear,

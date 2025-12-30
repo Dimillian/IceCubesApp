@@ -18,7 +18,12 @@ extension StatusEditor {
 
     var mode: Mode
 
-    var client: MastodonClient?
+    typealias EditorClient = AutocompleteService.Client
+      & MediaUploadService.Client
+      & MediaDescriptionService.Client
+      & PostingService.Client
+      & CustomEmojiService.Client
+    var client: (any EditorClient)?
     var currentAccount: Account? {
       didSet {
         if itemsProvider != nil {
@@ -268,7 +273,7 @@ extension StatusEditor {
           pendingMediaAttributes: pendingMediaDescriptions.mediaAttributes,
           embeddedStatusId: embeddedStatus?.id,
           allMediaHasDescription: allMediaHasDescription,
-          requiresAltText: UserPreferences.shared.appRequireAltText
+          requiresAltText: preferences?.appRequireAltText ?? UserPreferences.shared.appRequireAltText
         )
 
         let postStatus = try await postingService.submit(
@@ -326,7 +331,8 @@ extension StatusEditor {
       let textChanges = textEditingService.initialTextChanges(
         for: mode,
         currentAccount: currentAccount,
-        currentInstance: currentInstance
+        currentInstance: currentInstance,
+        preferences: preferences
       )
       textEditingService.applyTextChanges(textChanges, in: self)
 
