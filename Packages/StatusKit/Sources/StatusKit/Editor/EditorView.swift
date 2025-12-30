@@ -22,7 +22,7 @@ extension StatusEditor {
     #endif
 
     @Namespace private var transition
-    
+
     @Bindable var viewModel: ViewModel
     @Binding var followUpSEVMs: [ViewModel]
     @Binding var editingMediaContainer: MediaContainer?
@@ -30,8 +30,11 @@ extension StatusEditor {
 
     @FocusState<UUID?> var isSpoilerTextFocused: UUID?
     @FocusState<EditorFocusState?>.Binding var editorFocusState: EditorFocusState?
+
     let assignedFocusState: EditorFocusState
     let isMain: Bool
+
+    @State private var hasInitialized = false
 
     var body: some View {
       HStack(spacing: 0) {
@@ -62,7 +65,11 @@ extension StatusEditor {
         .background(presentationDetent == .large ? theme.primaryBackgroundColor : .clear)
       #endif
       .focused($editorFocusState, equals: assignedFocusState)
-      .onAppear { setupViewModel() }
+      .onAppear {
+        guard !hasInitialized else { return }
+        hasInitialized = true
+        setupViewModel()
+      }
     }
 
     @ViewBuilder
