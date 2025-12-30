@@ -63,6 +63,7 @@ extension StatusEditor {
     private let mediaIngestionService = MediaIngestionService()
     private let mediaUploadService = MediaUploadService()
     private let mediaDescriptionService = MediaDescriptionService()
+    private let postingService = PostingService()
     private var suggestedTask: Task<Void, Never>?
     private var mediaUploadPolicy: MediaUploadService.UploadPolicy {
       MediaUploadService.UploadPolicy(
@@ -229,10 +230,6 @@ extension StatusEditor {
     func postStatus() async -> Status? {
       guard let client else { return nil }
       do {
-        if !allMediaHasDescription && UserPreferences.shared.appRequireAltText {
-          throw PostError.missingAltText
-        }
-
         if postingTimer == nil {
           Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
             Task { @MainActor in
@@ -246,15 +243,8 @@ extension StatusEditor {
             }
           }
         }
+
         isPosting = true
-        let postStatus: Status?
-        var pollData: StatusData.PollData?
-        if let pollOptions = getPollOptionsForAPI() {
-          pollData = .init(
-            options: pollOptions,
-            multiple: pollVotingFrequency.canVoteMultipleTimes,
-            expires_in: pollDuration.rawValue)
-        }
         // Fallback: include any pending alt text in mediaAttributes if media got uploaded
         if !pendingMediaDescriptions.altTextByContainerId.isEmpty {
           mediaDescriptionService.applyPendingAltText(
@@ -262,29 +252,28 @@ extension StatusEditor {
             store: &pendingMediaDescriptions
           )
         }
-        let data = StatusData(
-          status: textState.statusText.string,
+
+        let input = PostingService.Input(
+          mode: mode,
+          statusText: textState.statusText.string,
           visibility: visibility,
-          inReplyToId: mode.replyToStatus?.id,
-          spoilerText: spoilerOn ? spoilerText : nil,
-          mediaIds: mediaContainers.compactMap { $0.mediaAttachment?.id },
-          poll: pollData,
-          language: selectedLanguage,
-          mediaAttributes: pendingMediaDescriptions.mediaAttributes,
-          quotedStatusId: embeddedStatus?.id)
-        switch mode {
-        case .new, .replyTo, .quote, .mention, .shareExtension, .quoteLink, .imageURL:
-          postStatus = try await client.post(endpoint: Statuses.postStatus(json: data))
-          if let postStatus {
-            StreamWatcher.shared.emmitPostEvent(for: postStatus)
-          }
-        case .edit(let status):
-          postStatus = try await client.put(
-            endpoint: Statuses.editStatus(id: status.id, json: data))
-          if let postStatus {
-            StreamWatcher.shared.emmitEditEvent(for: postStatus)
-          }
-        }
+          spoilerOn: spoilerOn,
+          spoilerText: spoilerText,
+          mediaAttachments: mediaContainers.compactMap { $0.mediaAttachment },
+          pollOptions: getPollOptionsForAPI(),
+          pollVotingFrequency: pollVotingFrequency,
+          pollDuration: pollDuration,
+          selectedLanguage: selectedLanguage,
+          pendingMediaAttributes: pendingMediaDescriptions.mediaAttributes,
+          embeddedStatusId: embeddedStatus?.id,
+          allMediaHasDescription: allMediaHasDescription,
+          requiresAltText: UserPreferences.shared.appRequireAltText
+        )
+
+        let postStatus = try await postingService.submit(
+          input: input,
+          client: client
+        )
 
         postingTimer?.invalidate()
         postingTimer = nil
@@ -302,6 +291,8 @@ extension StatusEditor {
 
         return postStatus
       } catch {
+        postingTimer?.invalidate()
+        postingTimer = nil
         if let error = error as? Models.ServerError {
           postingError = error.error
           showPostingErrorAlert = true
