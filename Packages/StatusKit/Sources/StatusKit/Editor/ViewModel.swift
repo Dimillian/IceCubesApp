@@ -58,7 +58,7 @@ extension StatusEditor {
     }
 
     var textState = TextState()
-    private let textService = TextService()
+    private let textEditingService = TextEditingService()
     private let autocompleteService = AutocompleteService()
     private let mediaIngestionService = MediaIngestionService()
     private let mediaUploadService = MediaUploadService()
@@ -100,7 +100,7 @@ extension StatusEditor {
       Binding(
         get: { self.textState.statusText },
         set: { newValue in
-          self.updateStatusText(newValue)
+          self.textEditingService.updateStatusText(newValue, in: self)
         }
       )
     }
@@ -191,7 +191,7 @@ extension StatusEditor {
     var showRecentsTagsInline: Bool = false
     var selectedLanguage: String?
     var hasExplicitlySelectedLanguage: Bool = false
-    private var embeddedStatusURL: URL? {
+    var embeddedStatusURL: URL? {
       URL(string: embeddedStatus?.reblog?.url ?? embeddedStatus?.url ?? "")
     }
 
@@ -311,72 +311,24 @@ extension StatusEditor {
     // MARK: - Status Text manipulations
 
     func insertStatusText(text: String) {
-      let update = textService.insertText(
-        text,
-        into: textState.statusText,
-        selection: selectedRange
-      )
-      updateStatusText(update.text, selection: update.selection)
+      textEditingService.insertStatusText(text, in: self)
     }
 
     func replaceTextWith(text: String, inRange: NSRange) {
-      let update = textService.replaceText(
-        with: text,
-        in: textState.statusText,
-        range: inRange
-      )
-      updateStatusText(update.text, selection: update.selection)
-      if let textView {
-        textView.delegate?.textViewDidChange?(textView)
-      }
+      textEditingService.replaceText(text, in: inRange, in: self)
     }
 
     func replaceTextWith(text: String) {
-      let update = textService.replaceText(with: text)
-      updateStatusText(update.text, selection: update.selection)
-    }
-
-    private func updateStatusText(_ text: NSMutableAttributedString, selection: NSRange? = nil) {
-      let resolvedSelection = selection ?? selectedRange
-      textState.statusText = text
-      processText(selection: resolvedSelection)
-      checkEmbed()
-      textView?.attributedText = textState.statusText
-      selectedRange = resolvedSelection
-    }
-
-    private func applyTextChanges(_ changes: TextService.InitialTextChanges) {
-      if let visibility = changes.visibility {
-        self.visibility = visibility
-      }
-      if let replyToStatus = changes.replyToStatus {
-        self.replyToStatus = replyToStatus
-      }
-      if let embeddedStatus = changes.embeddedStatus {
-        self.embeddedStatus = embeddedStatus
-      }
-      if let spoilerOn = changes.spoilerOn {
-        self.spoilerOn = spoilerOn
-      }
-      if let spoilerText = changes.spoilerText {
-        self.spoilerText = spoilerText
-      }
-      textState.mentionString = changes.mentionString
-
-      if let statusText = changes.statusText {
-        updateStatusText(statusText, selection: changes.selectedRange)
-      } else if let selection = changes.selectedRange {
-        selectedRange = selection
-      }
+      textEditingService.replaceText(text, in: self)
     }
 
     func prepareStatusText() {
-      let textChanges = textService.initialTextChanges(
+      let textChanges = textEditingService.initialTextChanges(
         for: mode,
         currentAccount: currentAccount,
         currentInstance: currentInstance
       )
-      applyTextChanges(textChanges)
+      textEditingService.applyTextChanges(textChanges, in: self)
 
       switch mode {
       case .shareExtension(let items):
@@ -408,28 +360,7 @@ extension StatusEditor {
       }
     }
 
-    private func processText(selection: NSRange) {
-      let result = textService.processText(
-        textState.statusText,
-        theme: theme,
-        selectedRange: selection,
-        hasMarkedText: markedTextRange != nil,
-        previousUrlLengthAdjustments: textState.urlLengthAdjustments
-      )
-      guard result.didProcess else { return }
-
-      textState.urlLengthAdjustments = result.urlLengthAdjustments
-      textState.currentSuggestionRange = result.suggestionRange
-
-      switch result.action {
-      case .suggest(let query):
-        loadAutoCompleteResults(query: query)
-      case .reset:
-        resetAutoCompletion()
-      case .none:
-        break
-      }
-    }
+    // Text processing handled by TextEditingService.
 
     // MARK: - Shar sheet / Item provider
 
@@ -470,9 +401,10 @@ extension StatusEditor {
         }
         prepareToPost(for: result.containers)
         if !result.initialText.isEmpty {
-          updateStatusText(
+          textEditingService.updateStatusText(
             .init(string: "\n\n\(result.initialText)"),
-            selection: .init(location: 0, length: 0)
+            selection: .init(location: 0, length: 0),
+            in: self
           )
         }
       }
@@ -493,19 +425,9 @@ extension StatusEditor {
 
     // MARK: - Embeds
 
-    private func checkEmbed() {
-      if let url = embeddedStatusURL,
-        currentInstance?.isQuoteSupported == false,
-        !textState.statusText.string.contains(url.absoluteString)
-      {
-        embeddedStatus = nil
-        mode = .new(text: nil, visibility: visibility)
-      }
-    }
-
     // MARK: - Autocomplete
 
-    private func loadAutoCompleteResults(query: String) {
+    func loadAutoCompleteResults(query: String) {
       guard let client else { return }
       suggestedTask?.cancel()
       suggestedTask = Task {
@@ -535,7 +457,7 @@ extension StatusEditor {
       }
     }
 
-    private func resetAutoCompletion() {
+    func resetAutoCompletion() {
       if !tagsSuggestions.isEmpty || !mentionsSuggestions.isEmpty
         || textState.currentSuggestionRange != nil
         || showRecentsTagsInline
