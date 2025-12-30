@@ -21,6 +21,9 @@ extension StatusEditor {
       @Environment(\.dismiss) private var dismiss
     #endif
 
+    let assignedFocusState: EditorFocusState
+    let isMain: Bool
+
     @Namespace private var transition
 
     @Bindable var store: EditorStore
@@ -31,10 +34,25 @@ extension StatusEditor {
     @FocusState<UUID?> var isSpoilerTextFocused: UUID?
     @FocusState<EditorFocusState?>.Binding var editorFocusState: EditorFocusState?
 
-    let assignedFocusState: EditorFocusState
-    let isMain: Bool
-
     @State private var hasInitialized = false
+
+    init(
+      store: EditorStore,
+      followUpStores: Binding<[EditorStore]>,
+      editingMediaContainer: Binding<MediaContainer?>,
+      presentationDetent: Binding<PresentationDetent>,
+      editorFocusState: FocusState<EditorFocusState?>.Binding,
+      assignedFocusState: EditorFocusState,
+      isMain: Bool
+    ) {
+      self.store = store
+      _followUpStores = followUpStores
+      _editingMediaContainer = editingMediaContainer
+      _presentationDetent = presentationDetent
+      _editorFocusState = editorFocusState
+      self.assignedFocusState = assignedFocusState
+      self.isMain = isMain
+    }
 
     var body: some View {
       HStack(spacing: 0) {
