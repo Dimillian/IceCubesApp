@@ -9,7 +9,7 @@ extension StatusEditor.AutoCompleteView {
   struct RecentTagsView: View {
     @Environment(Theme.self) private var theme
 
-    var viewModel: StatusEditor.ViewModel
+    var store: StatusEditor.EditorStore
     @Binding var isTagSuggestionExpanded: Bool
 
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
@@ -19,7 +19,7 @@ extension StatusEditor.AutoCompleteView {
         Button {
           withAnimation {
             isTagSuggestionExpanded = false
-            viewModel.selectHashtagSuggestion(tag: tag.title)
+            store.selectHashtagSuggestion(tag: tag.title)
           }
           tag.lastUse = Date()
         } label: {

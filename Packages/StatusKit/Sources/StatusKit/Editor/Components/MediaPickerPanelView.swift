@@ -13,7 +13,7 @@
       @Environment(Theme.self) private var theme
       @Environment(CurrentInstance.self) private var currentInstance
 
-      @Bindable var viewModel: ViewModel
+      @Bindable var store: EditorStore
 
       @State private var isPhotosPickerPresented: Bool = false
       @State private var isFileImporterPresented: Bool = false
@@ -51,7 +51,7 @@
         }
         .photosPicker(
           isPresented: $isPhotosPickerPresented,
-          selection: $viewModel.mediaPickers,
+          selection: $store.mediaPickers,
           maxSelectionCount: currentInstance.instance?.configuration?.statuses.maxMediaAttachments
             ?? 4,
           matching: .any(of: [.images, .videos]),
@@ -63,7 +63,7 @@
           allowsMultipleSelection: true
         ) { result in
           if let urls = try? result.get() {
-            viewModel.processURLs(urls: urls)
+            store.processURLs(urls: urls)
           }
         }
         .fullScreenCover(
@@ -76,7 +76,7 @@
                 },
                 set: { image in
                   if let image {
-                    viewModel.processCameraPhoto(image: image)
+                    store.processCameraPhoto(image: image)
                   }
                 })
             )
@@ -113,7 +113,7 @@
             }
             .accessibilityLabel("status.editor.browse-file")
           }
-          .disabled(viewModel.showPoll)
+          .disabled(store.showPoll)
         }
         .padding(.top, 8)
         .padding(.bottom, 16)
@@ -147,10 +147,10 @@
         guard asset.mediaType == .image else { return }
 
         let limit = currentInstance.instance?.configuration?.statuses.maxMediaAttachments ?? 4
-        guard viewModel.mediaContainers.count < limit else { return }
+        guard store.mediaContainers.count < limit else { return }
 
-        viewModel.isMediasLoading = true
-        defer { viewModel.isMediasLoading = false }
+        store.isMediasLoading = true
+        defer { store.isMediasLoading = false }
 
         let options = PHImageRequestOptions()
         options.isNetworkAccessAllowed = true
@@ -173,7 +173,7 @@
           if let compressedData = await compressor.compressImageFrom(url: tempURL),
             let image = UIImage(data: compressedData)
           {
-            viewModel.processCameraPhoto(image: image)
+            store.processCameraPhoto(image: image)
             return
           }
         }

@@ -11,7 +11,7 @@ extension StatusEditor {
   struct MediaView: View {
     @Environment(Theme.self) private var theme
     @Environment(CurrentInstance.self) private var currentInstance
-    var viewModel: ViewModel
+    var store: EditorStore
     @Binding var editingMediaContainer: MediaContainer?
 
     @State private var isErrorDisplayed: Bool = false
@@ -26,9 +26,9 @@ extension StatusEditor {
       .scrollPosition(id: $scrollID, anchor: .trailing)
       .scrollClipDisabled()
       .padding(.horizontal, .layoutPadding)
-      .frame(height: viewModel.mediaContainers.count > 0 ? containerHeight : 0)
-      .animation(.spring(duration: 0.3), value: viewModel.mediaContainers.count)
-      .onChange(of: viewModel.mediaPickers.count) { oldValue, newValue in
+      .frame(height: store.mediaContainers.count > 0 ? containerHeight : 0)
+      .animation(.spring(duration: 0.3), value: store.mediaContainers.count)
+      .onChange(of: store.mediaPickers.count) { oldValue, newValue in
         if oldValue < newValue {
           Task {
             try? await Task.sleep(for: .seconds(0.5))
@@ -40,7 +40,7 @@ extension StatusEditor {
       }
     }
 
-    private var containers: [MediaContainer] { viewModel.mediaContainers }
+    private var containers: [MediaContainer] { store.mediaContainers }
     private let containerHeight: CGFloat = 300
     private var containerWidth: CGFloat { containerHeight / 1.5 }
 
@@ -52,17 +52,17 @@ extension StatusEditor {
     
     private var showsScrollIndicators: Bool = false
 
-    init(viewModel: ViewModel, editingMediaContainer: Binding<StatusEditor.MediaContainer?>) {
-      self.viewModel = viewModel
+    init(store: EditorStore, editingMediaContainer: Binding<StatusEditor.MediaContainer?>) {
+      self.store = store
       _editingMediaContainer = editingMediaContainer
     }
 
     private var mediaLayout: some View {
       HStack(alignment: .center, spacing: 8) {
-        ForEach(Array(viewModel.mediaContainers.enumerated()), id: \.offset) { index, container in
+        ForEach(Array(store.mediaContainers.enumerated()), id: \.offset) { index, container in
           makeMediaItem(container)
             .containerRelativeFrame(.horizontal,
-                                    count: viewModel.mediaContainers.count == 1 ? 1 : 2,
+                                    count: store.mediaContainers.count == 1 ? 1 : 2,
                                     span: 1,
                                     spacing: 0,
                                     alignment: .leading)
@@ -182,7 +182,7 @@ extension StatusEditor {
       switch container.state {
       case .uploaded(let attachment, _):
         if attachment.url != nil {
-          if currentInstance.isEditAltTextSupported || !viewModel.mode.isEditing {
+          if currentInstance.isEditAltTextSupported || !store.mode.isEditing {
             Button {
               editingMediaContainer = container
             } label: {
@@ -202,7 +202,7 @@ extension StatusEditor {
       case .pending:
         Button {
           Task {
-            await viewModel.upload(container: container)
+            await store.upload(container: container)
           }
         } label: {
           Label("Retry Upload", systemImage: "arrow.clockwise")
@@ -292,13 +292,13 @@ extension StatusEditor {
     }
 
     private func deleteAction(container: MediaContainer) {
-      viewModel.mediaPickers.removeAll(where: {
+      store.mediaPickers.removeAll(where: {
         if let id = $0.itemIdentifier {
           return id == container.id
         }
         return false
       })
-      viewModel.mediaContainers.removeAll {
+      store.mediaContainers.removeAll {
         $0.id == container.id
       }
     }

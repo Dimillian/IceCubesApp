@@ -16,7 +16,7 @@ extension StatusEditor {
     @Environment(Theme.self) private var theme
     @Environment(CurrentInstance.self) private var currentInstance
 
-    var viewModel: ViewModel
+    var store: EditorStore
 
     @Binding var showPoll: Bool
 
@@ -37,13 +37,13 @@ extension StatusEditor {
     
     @ViewBuilder
     private var contentView: some View {
-      @Bindable var viewModel = viewModel
-      let count = viewModel.pollOptions.count
+      @Bindable var store = store
+      let count = store.pollOptions.count
       VStack {
         ForEach(0..<count, id: \.self) { index in
           VStack {
             HStack(spacing: 16) {
-              TextField("status.poll.option-n \(index + 1)", text: $viewModel.pollOptions[index])
+              TextField("status.poll.option-n \(index + 1)", text: $store.pollOptions[index])
                 .textFieldStyle(.roundedBorder)
                 .focused($focused, equals: .option(index))
                 .onTapGesture {
@@ -80,7 +80,7 @@ extension StatusEditor {
         }
 
         HStack {
-          Picker("status.poll.frequency", selection: $viewModel.pollVotingFrequency) {
+          Picker("status.poll.frequency", selection: $store.pollVotingFrequency) {
             ForEach(PollVotingFrequency.allCases, id: \.rawValue) {
               Text($0.displayString)
                 .tag($0)
@@ -90,7 +90,7 @@ extension StatusEditor {
 
           Spacer()
 
-          Picker("status.poll.duration", selection: $viewModel.pollDuration) {
+          Picker("status.poll.duration", selection: $store.pollDuration) {
             ForEach(Duration.pollDurations(), id: \.rawValue) {
               Text($0.description)
                 .tag($0)
@@ -104,16 +104,16 @@ extension StatusEditor {
     }
 
     private func addChoice(at index: Int) {
-      viewModel.pollOptions.append("")
+      store.pollOptions.append("")
       currentFocusIndex = index + 1
       moveFocus()
     }
 
     private func removeChoice(at index: Int) {
-      viewModel.pollOptions.remove(at: index)
+      store.pollOptions.remove(at: index)
 
-      if viewModel.pollOptions.count == 1 {
-        viewModel.resetPollDefaults()
+      if store.pollOptions.count == 1 {
+        store.resetPollDefaults()
 
         withAnimation {
           showPoll = false
@@ -128,7 +128,7 @@ extension StatusEditor {
     }
 
     private func canAddMoreAt(_ index: Int) -> Bool {
-      let count = viewModel.pollOptions.count
+      let count = store.pollOptions.count
       let maxEntries: Int = currentInstance.instance?.configuration?.polls.maxOptions ?? 4
 
       return index == count - 1 && count < maxEntries

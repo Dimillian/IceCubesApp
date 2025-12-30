@@ -9,8 +9,8 @@ extension StatusEditor {
     @Environment(Theme.self) private var theme
     @Environment(\.colorScheme) private var colorScheme
 
-    let focusedSEVM: ViewModel
-    @Binding var followUpSEVMs: [ViewModel]
+    let focusedStore: EditorStore
+    @Binding var followUpStores: [EditorStore]
     @Binding var isMediaPanelPresented: Bool
 
     @State private var isCustomEmojisSheetDisplay: Bool = false
@@ -21,7 +21,7 @@ extension StatusEditor {
       @State private var isCameraPickerPresented: Bool = false
     #endif
     var body: some View {
-      @Bindable var viewModel = focusedSEVM
+      @Bindable var store = focusedStore
       #if os(visionOS)
         HStack {
           contentView
@@ -76,7 +76,7 @@ extension StatusEditor {
 
     @ViewBuilder
     private var actionsView: some View {
-      @Bindable var viewModel = focusedSEVM
+      @Bindable var store = focusedStore
       #if os(visionOS)
         Menu {
           Button {
@@ -97,7 +97,7 @@ extension StatusEditor {
             Label("status.editor.browse-file", systemImage: "folder")
           }
         } label: {
-          if viewModel.isMediasLoading {
+          if store.isMediasLoading {
             ProgressView()
           } else {
             Image(systemName: "photo.on.rectangle.angled")
@@ -109,7 +109,7 @@ extension StatusEditor {
         .buttonStyle(.plain)
         .photosPicker(
           isPresented: $isPhotosPickerPresented,
-          selection: $viewModel.mediaPickers,
+          selection: $store.mediaPickers,
           maxSelectionCount: currentInstance.instance?.configuration?.statuses.maxMediaAttachments
             ?? 4,
           matching: .any(of: [.images, .videos]),
@@ -121,7 +121,7 @@ extension StatusEditor {
           allowsMultipleSelection: true
         ) { result in
           if let urls = try? result.get() {
-            viewModel.processURLs(urls: urls)
+            store.processURLs(urls: urls)
           }
         }
         .fullScreenCover(
@@ -134,7 +134,7 @@ extension StatusEditor {
                 },
                 set: { image in
                   if let image {
-                    viewModel.processCameraPhoto(image: image)
+                    store.processCameraPhoto(image: image)
                   }
                 })
             )
@@ -142,12 +142,12 @@ extension StatusEditor {
           }
         )
         .accessibilityLabel("accessibility.editor.button.attach-photo")
-        .disabled(viewModel.showPoll)
+        .disabled(store.showPoll)
       #else
         Button {
           isMediaPanelPresented.toggle()
         } label: {
-          if viewModel.isMediasLoading {
+          if store.isMediasLoading {
             ProgressView()
           } else {
             Image(systemName: isMediaPanelPresented ? "xmark" : "photo.on.rectangle.angled")
@@ -158,20 +158,20 @@ extension StatusEditor {
         }
         .buttonStyle(.plain)
         .accessibilityLabel("accessibility.editor.button.attach-photo")
-        .disabled(viewModel.showPoll)
+        .disabled(store.showPoll)
       #endif
 
       Button {
-        // all SEVM have the same visibility value
-        followUpSEVMs.append(ViewModel(mode: .new(text: nil, visibility: focusedSEVM.visibility)))
+        // all stores have the same visibility value
+        followUpStores.append(focusedStore.makeFollowUpStore())
       } label: {
         Image(systemName: "arrowshape.turn.up.left.circle.fill")
           .frame(width: 25, height: 25)
           .contentShape(Rectangle())
       }
-      .disabled(!canAddNewSEVM)
+      .disabled(!canAddNewStore)
 
-      if !viewModel.customEmojiContainer.isEmpty {
+      if !store.customEmojiContainer.isEmpty {
         Button {
           isCustomEmojisSheetDisplay = true
         } label: {
@@ -185,19 +185,19 @@ extension StatusEditor {
         }
         .accessibilityLabel("accessibility.editor.button.custom-emojis")
         .sheet(isPresented: $isCustomEmojisSheetDisplay) {
-          CustomEmojisView(viewModel: focusedSEVM)
+          CustomEmojisView(store: focusedStore)
             .environment(theme)
         }
       }
 
       if #available(iOS 26, *), Assistant.isAvailable {
-        AssistantMenu.disabled(!viewModel.canPost)
+        AssistantMenu.disabled(!store.canPost)
       }
 
       Spacer()
 
       Button {
-        viewModel.insertStatusText(text: "@")
+        store.insertStatusText(text: "@")
       } label: {
         Image(systemName: "at")
           .frame(width: 25, height: 25)
@@ -205,7 +205,7 @@ extension StatusEditor {
       }
 
       Button {
-        viewModel.insertStatusText(text: "#")
+        store.insertStatusText(text: "#")
       } label: {
         Image(systemName: "number")
           .frame(width: 25, height: 25)
@@ -213,17 +213,17 @@ extension StatusEditor {
       }
     }
 
-    private var canAddNewSEVM: Bool {
-      guard followUpSEVMs.count < 5 else { return false }
+    private var canAddNewStore: Bool {
+      guard followUpStores.count < 5 else { return false }
 
-      if followUpSEVMs.isEmpty,  // there is only mainSEVM on the editor
-        !focusedSEVM.statusText.string.isEmpty  // focusedSEVM is also mainSEVM
+      if followUpStores.isEmpty,  // there is only the main store in the editor
+        !focusedStore.statusText.string.isEmpty  // focusedStore is also mainStore
       {
         return true
       }
 
-      if let lastSEVMs = followUpSEVMs.last,
-        !lastSEVMs.statusText.string.isEmpty
+      if let lastStore = followUpStores.last,
+        !lastStore.statusText.string.isEmpty
       {
         return true
       }
@@ -241,7 +241,7 @@ extension StatusEditor {
                 Button {
                   isLoadingAIRequest = true
                   Task {
-                    await focusedSEVM.runAssistant(prompt: prompt)
+                    await focusedStore.runAssistant(prompt: prompt)
                     isLoadingAIRequest = false
                   }
                 } label: {
@@ -255,7 +255,7 @@ extension StatusEditor {
             Button {
               isLoadingAIRequest = true
               Task {
-                await focusedSEVM.runAssistant(prompt: prompt)
+                await focusedStore.runAssistant(prompt: prompt)
                 isLoadingAIRequest = false
               }
             } label: {
@@ -263,10 +263,10 @@ extension StatusEditor {
             }
           }
         }
-        if let backup = focusedSEVM.backupStatusText {
+        if let backup = focusedStore.backupStatusText {
           Button {
-            focusedSEVM.replaceTextWith(text: backup.string)
-            focusedSEVM.backupStatusText = nil
+            focusedStore.replaceTextWith(text: backup.string)
+            focusedStore.backupStatusText = nil
           } label: {
             Label("status.editor.restore-previous", systemImage: "arrow.uturn.right")
           }
@@ -277,7 +277,7 @@ extension StatusEditor {
         } else {
           Image(systemName: "faxmachine")
             .accessibilityLabel("accessibility.editor.button.ai-prompt")
-            .foregroundStyle(focusedSEVM.canPost ? theme.tintColor : .secondary)
+            .foregroundStyle(focusedStore.canPost ? theme.tintColor : .secondary)
             .frame(width: 25, height: 25)
             .contentShape(Rectangle())
         }

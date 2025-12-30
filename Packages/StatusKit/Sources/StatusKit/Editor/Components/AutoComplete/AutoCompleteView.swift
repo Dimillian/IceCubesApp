@@ -12,7 +12,7 @@ extension StatusEditor {
 
     @Environment(Theme.self) var theme
 
-    var viewModel: ViewModel
+    var store: EditorStore
 
     @State private var isTagSuggestionExpanded: Bool = false
 
@@ -35,33 +35,33 @@ extension StatusEditor {
 
     @ViewBuilder
     var contentView: some View {
-      if !viewModel.mentionsSuggestions.isEmpty ||
-          !viewModel.tagsSuggestions.isEmpty ||
-          viewModel.showRecentsTagsInline
+      if !store.mentionsSuggestions.isEmpty ||
+          !store.tagsSuggestions.isEmpty ||
+          store.showRecentsTagsInline
       {
         VStack {
           HStack {
             ScrollView(.horizontal, showsIndicators: false) {
               LazyHStack {
-                if !viewModel.mentionsSuggestions.isEmpty {
-                  Self.MentionsView(viewModel: viewModel)
+                if !store.mentionsSuggestions.isEmpty {
+                  Self.MentionsView(store: store)
                 } else {
-                  if #available(iOS 26, *), Assistant.isAvailable, viewModel.tagsSuggestions.isEmpty {
-                    Self.SuggestedTagsView(viewModel: viewModel,
+                  if #available(iOS 26, *), Assistant.isAvailable, store.tagsSuggestions.isEmpty {
+                    Self.SuggestedTagsView(store: store,
                                            isTagSuggestionExpanded: $isTagSuggestionExpanded)
-                  } else if viewModel.showRecentsTagsInline {
+                  } else if store.showRecentsTagsInline {
                     Self.RecentTagsView(
-                      viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                      store: store, isTagSuggestionExpanded: $isTagSuggestionExpanded)
                   } else {
                     Self.RemoteTagsView(
-                      viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+                      store: store, isTagSuggestionExpanded: $isTagSuggestionExpanded)
                   }
                 }
               }
               .padding(.horizontal, .layoutPadding)
             }
             .scrollContentBackground(.hidden)
-            if viewModel.mentionsSuggestions.isEmpty {
+            if store.mentionsSuggestions.isEmpty {
               Spacer()
               Button {
                 withAnimation {
@@ -78,7 +78,7 @@ extension StatusEditor {
           .frame(height: 40)
           if isTagSuggestionExpanded {
             Self.ExpandedView(
-              viewModel: viewModel, isTagSuggestionExpanded: $isTagSuggestionExpanded)
+              store: store, isTagSuggestionExpanded: $isTagSuggestionExpanded)
           }
         }
       }

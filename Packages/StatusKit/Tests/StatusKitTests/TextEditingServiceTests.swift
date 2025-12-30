@@ -7,34 +7,34 @@ import XCTest
 final class TextEditingServiceTests: XCTestCase {
   func testInsertStatusTextUpdatesString() {
     let service = StatusEditor.TextEditingService()
-    let viewModel = StatusEditor.ViewModel(mode: .new(text: nil, visibility: .pub))
+    let store = StatusEditor.EditorStore(mode: .new(text: nil, visibility: .pub))
     let textView = UITextView()
     textView.text = "Hi"
     textView.selectedRange = NSRange(location: 2, length: 0)
-    viewModel.textView = textView
-    viewModel.textState.statusText = NSMutableAttributedString(string: "Hi")
+    store.textView = textView
+    store.textState.statusText = NSMutableAttributedString(string: "Hi")
 
-    service.insertStatusText("!", in: viewModel)
+    service.insertStatusText("!", in: store)
 
-    XCTAssertEqual(viewModel.textState.statusText.string, "Hi!")
+    XCTAssertEqual(store.textState.statusText.string, "Hi!")
   }
 
   func testReplaceTextUpdatesString() {
     let service = StatusEditor.TextEditingService()
-    let viewModel = StatusEditor.ViewModel(mode: .new(text: nil, visibility: .pub))
+    let store = StatusEditor.EditorStore(mode: .new(text: nil, visibility: .pub))
     let textView = UITextView()
     textView.selectedRange = NSRange(location: 0, length: 0)
-    viewModel.textView = textView
-    viewModel.textState.statusText = NSMutableAttributedString(string: "Hello")
+    store.textView = textView
+    store.textState.statusText = NSMutableAttributedString(string: "Hello")
 
-    service.replaceText("Hi", in: NSRange(location: 0, length: 5), in: viewModel)
+    service.replaceText("Hi", in: NSRange(location: 0, length: 5), in: store)
 
-    XCTAssertEqual(viewModel.textState.statusText.string, "Hi")
+    XCTAssertEqual(store.textState.statusText.string, "Hi")
   }
 
   func testApplyTextChangesSetsStatusText() {
     let service = StatusEditor.TextEditingService()
-    let viewModel = StatusEditor.ViewModel(mode: .new(text: nil, visibility: .pub))
+    let store = StatusEditor.EditorStore(mode: .new(text: nil, visibility: .pub))
     let changes = StatusEditor.TextService.InitialTextChanges(
       statusText: .init(string: "Draft"),
       selectedRange: NSRange(location: 5, length: 0),
@@ -46,8 +46,8 @@ final class TextEditingServiceTests: XCTestCase {
       embeddedStatus: nil
     )
 
-    service.applyTextChanges(changes, in: viewModel)
+    service.applyTextChanges(changes, in: store)
 
-    XCTAssertEqual(viewModel.textState.statusText.string, "Draft")
+    XCTAssertEqual(store.textState.statusText.string, "Draft")
   }
 }

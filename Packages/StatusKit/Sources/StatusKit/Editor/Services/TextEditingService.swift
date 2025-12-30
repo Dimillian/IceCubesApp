@@ -9,62 +9,62 @@ extension StatusEditor {
   struct TextEditingService {
     private let textService = TextService()
 
-    func insertStatusText(_ text: String, in viewModel: StatusEditor.ViewModel) {
+    func insertStatusText(_ text: String, in store: StatusEditor.EditorStore) {
       let update = textService.insertText(
         text,
-        into: viewModel.textState.statusText,
-        selection: viewModel.selectedRange
+        into: store.textState.statusText,
+        selection: store.selectedRange
       )
-      updateStatusText(update.text, selection: update.selection, in: viewModel)
+      updateStatusText(update.text, selection: update.selection, in: store)
     }
 
-    func replaceText(_ text: String, in range: NSRange, in viewModel: StatusEditor.ViewModel) {
+    func replaceText(_ text: String, in range: NSRange, in store: StatusEditor.EditorStore) {
       let update = textService.replaceText(
         with: text,
-        in: viewModel.textState.statusText,
+        in: store.textState.statusText,
         range: range
       )
-      updateStatusText(update.text, selection: update.selection, in: viewModel)
-      if let textView = viewModel.textView {
+      updateStatusText(update.text, selection: update.selection, in: store)
+      if let textView = store.textView {
         textView.delegate?.textViewDidChange?(textView)
       }
     }
 
-    func replaceText(_ text: String, in viewModel: StatusEditor.ViewModel) {
+    func replaceText(_ text: String, in store: StatusEditor.EditorStore) {
       let update = textService.replaceText(with: text)
-      updateStatusText(update.text, selection: update.selection, in: viewModel)
+      updateStatusText(update.text, selection: update.selection, in: store)
     }
 
     func applyTextChanges(
       _ changes: TextService.InitialTextChanges,
-      in viewModel: StatusEditor.ViewModel
+      in store: StatusEditor.EditorStore
     ) {
       if let visibility = changes.visibility {
-        viewModel.visibility = visibility
+        store.visibility = visibility
       }
       if let replyToStatus = changes.replyToStatus {
-        viewModel.replyToStatus = replyToStatus
+        store.replyToStatus = replyToStatus
       }
       if let embeddedStatus = changes.embeddedStatus {
-        viewModel.embeddedStatus = embeddedStatus
+        store.embeddedStatus = embeddedStatus
       }
       if let spoilerOn = changes.spoilerOn {
-        viewModel.spoilerOn = spoilerOn
+        store.spoilerOn = spoilerOn
       }
       if let spoilerText = changes.spoilerText {
-        viewModel.spoilerText = spoilerText
+        store.spoilerText = spoilerText
       }
-      viewModel.textState.mentionString = changes.mentionString
+      store.textState.mentionString = changes.mentionString
 
       if let statusText = changes.statusText {
-        updateStatusText(statusText, selection: changes.selectedRange, in: viewModel)
+        updateStatusText(statusText, selection: changes.selectedRange, in: store)
       } else if let selection = changes.selectedRange {
-        viewModel.selectedRange = selection
+        store.selectedRange = selection
       }
     }
 
     func initialTextChanges(
-      for mode: StatusEditor.ViewModel.Mode,
+      for mode: StatusEditor.EditorStore.Mode,
       currentAccount: Account?,
       currentInstance: CurrentInstance?,
       preferences: UserPreferences?
@@ -80,46 +80,46 @@ extension StatusEditor {
     func updateStatusText(
       _ text: NSMutableAttributedString,
       selection: NSRange? = nil,
-      in viewModel: StatusEditor.ViewModel
+      in store: StatusEditor.EditorStore
     ) {
-      let resolvedSelection = selection ?? viewModel.selectedRange
-      viewModel.textState.statusText = text
-      processText(selection: resolvedSelection, in: viewModel)
-      checkEmbed(in: viewModel)
-      viewModel.textView?.attributedText = viewModel.textState.statusText
-      viewModel.selectedRange = resolvedSelection
+      let resolvedSelection = selection ?? store.selectedRange
+      store.textState.statusText = text
+      processText(selection: resolvedSelection, in: store)
+      checkEmbed(in: store)
+      store.textView?.attributedText = store.textState.statusText
+      store.selectedRange = resolvedSelection
     }
 
-    private func processText(selection: NSRange, in viewModel: StatusEditor.ViewModel) {
+    private func processText(selection: NSRange, in store: StatusEditor.EditorStore) {
       let result = textService.processText(
-        viewModel.textState.statusText,
-        theme: viewModel.theme,
+        store.textState.statusText,
+        theme: store.theme,
         selectedRange: selection,
-        hasMarkedText: viewModel.markedTextRange != nil,
-        previousUrlLengthAdjustments: viewModel.textState.urlLengthAdjustments
+        hasMarkedText: store.markedTextRange != nil,
+        previousUrlLengthAdjustments: store.textState.urlLengthAdjustments
       )
       guard result.didProcess else { return }
 
-      viewModel.textState.urlLengthAdjustments = result.urlLengthAdjustments
-      viewModel.textState.currentSuggestionRange = result.suggestionRange
+      store.textState.urlLengthAdjustments = result.urlLengthAdjustments
+      store.textState.currentSuggestionRange = result.suggestionRange
 
       switch result.action {
       case .suggest(let query):
-        viewModel.loadAutoCompleteResults(query: query)
+        store.loadAutoCompleteResults(query: query)
       case .reset:
-        viewModel.resetAutoCompletion()
+        store.resetAutoCompletion()
       case .none:
         break
       }
     }
 
-    private func checkEmbed(in viewModel: StatusEditor.ViewModel) {
-      if let url = viewModel.embeddedStatusURL,
-        viewModel.currentInstance?.isQuoteSupported == false,
-        !viewModel.textState.statusText.string.contains(url.absoluteString)
+    private func checkEmbed(in store: StatusEditor.EditorStore) {
+      if let url = store.embeddedStatusURL,
+        store.currentInstance?.isQuoteSupported == false,
+        !store.textState.statusText.string.contains(url.absoluteString)
       {
-        viewModel.embeddedStatus = nil
-        viewModel.mode = .new(text: nil, visibility: viewModel.visibility)
+        store.embeddedStatus = nil
+        store.mode = .new(text: nil, visibility: store.visibility)
       }
     }
   }

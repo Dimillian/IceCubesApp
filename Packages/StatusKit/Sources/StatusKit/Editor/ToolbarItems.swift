@@ -11,9 +11,9 @@ extension StatusEditor {
     @State private var isDismissAlertPresented: Bool = false
     @State private var isDraftsSheetDisplayed: Bool = false
 
-    let mainSEVM: ViewModel
-    let focusedSEVM: ViewModel
-    let followUpSEVMs: [ViewModel]
+    let mainStore: EditorStore
+    let focusedStore: EditorStore
+    let followUpStores: [EditorStore]
 
     @Environment(\.modelContext) private var context
     @Environment(UserPreferences.self) private var preferences
@@ -26,7 +26,7 @@ extension StatusEditor {
     #endif
 
     var isSendingDisabled: Bool {
-      !mainSEVM.canPost || mainSEVM.isPosting
+      !mainStore.canPost || mainStore.isPosting
     }
 
     var body: some ToolbarContent {
@@ -64,7 +64,7 @@ extension StatusEditor {
 
       ToolbarItem(placement: .navigationBarLeading) {
         Button {
-          if mainSEVM.shouldDisplayDismissWarning {
+          if mainStore.shouldDisplayDismissWarning {
             isDismissAlertPresented = true
           } else {
             close()
@@ -88,7 +88,7 @@ extension StatusEditor {
                 object: nil)
             }
             Button("status.draft.save") {
-              context.insert(Draft(content: mainSEVM.statusText.string))
+              context.insert(Draft(content: mainStore.statusText.string))
               close()
               NotificationCenter.default.post(
                 name: .shareSheetClose,
@@ -104,9 +104,9 @@ extension StatusEditor {
       Button {
         Task {
           guard !isSendingDisabled else { return }
-          mainSEVM.evaluateLanguages()
+          mainStore.evaluateLanguages()
           if preferences.autoDetectPostLanguage,
-            mainSEVM.languageConfirmationDialogLanguages != nil
+            mainStore.languageConfirmationDialogLanguages != nil
           {
             isLanguageConfirmPresented = true
           } else {
@@ -129,14 +129,14 @@ extension StatusEditor {
     }
 
     @discardableResult
-    private func postStatus(with model: ViewModel, isMainPost: Bool) async -> Status? {
+    private func postStatus(with model: EditorStore, isMainPost: Bool) async -> Status? {
       let status = await model.postStatus()
       if status != nil, isMainPost {
         close()
         SoundEffectManager.shared.playSound(.tootSent)
         NotificationCenter.default.post(name: .shareSheetClose, object: nil)
         #if !targetEnvironment(macCatalyst)
-          if !mainSEVM.mode.isInShareExtension, !preferences.requestedReview {
+          if !mainStore.mode.isInShareExtension, !preferences.requestedReview {
             if let scene = UIApplication.shared.connectedScenes.first(where: {
               $0.activationState == .foregroundActive
             }) as? UIWindowScene {
@@ -151,8 +151,8 @@ extension StatusEditor {
     }
 
     private func postAllStatus() async {
-      guard var latestPost = await postStatus(with: mainSEVM, isMainPost: true) else { return }
-      for p in followUpSEVMs {
+      guard var latestPost = await postStatus(with: mainStore, isMainPost: true) else { return }
+      for p in followUpStores {
         p.mode = .replyTo(status: latestPost)
         guard let post = await postStatus(with: p, isMainPost: false) else {
           break
@@ -169,21 +169,21 @@ extension StatusEditor {
 
     @ViewBuilder
     private var languageConfirmationDialog: some View {
-      if let (detected: detected, selected: selected) = mainSEVM
+      if let (detected: detected, selected: selected) = mainStore
         .languageConfirmationDialogLanguages,
         let detectedLong = Locale.current.localizedString(forLanguageCode: detected),
         let selectedLong = Locale.current.localizedString(forLanguageCode: selected)
       {
         Button("status.editor.language-select.confirmation.detected-\(detectedLong)") {
-          mainSEVM.selectedLanguage = detected
+          mainStore.selectedLanguage = detected
           Task { await postAllStatus() }
         }
         Button("status.editor.language-select.confirmation.selected-\(selectedLong)") {
-          mainSEVM.selectedLanguage = selected
+          mainStore.selectedLanguage = selected
           Task { await postAllStatus() }
         }
         Button("action.cancel", role: .cancel) {
-          mainSEVM.languageConfirmationDialogLanguages = nil
+          mainStore.languageConfirmationDialogLanguages = nil
         }
       } else {
         EmptyView()
@@ -198,7 +198,7 @@ extension StatusEditor {
           },
           set: { draft in
             if let draft {
-              focusedSEVM.insertStatusText(text: draft.content)
+              focusedStore.insertStatusText(text: draft.content)
             }
           }))
     }

@@ -18,8 +18,8 @@ extension StatusEditor {
     @Environment(Theme.self) private var theme
 
     @State private var presentationDetent: PresentationDetent = .large
-    @State private var mainSEVM: ViewModel
-    @State private var followUpSEVMs: [ViewModel] = []
+    @State private var mainStore: EditorStore
+    @State private var followUpStores: [EditorStore] = []
     @State private var editingMediaContainer: MediaContainer?
     @State private var scrollID: UUID?
     @State private var isMediaPanelPresented: Bool = false
@@ -27,14 +27,14 @@ extension StatusEditor {
 
     @FocusState private var editorFocusState: EditorFocusState?
 
-    private var focusedSEVM: ViewModel {
+    private var focusedStore: EditorStore {
       if case .followUp(let id) = editorFocusState,
-        let sevm = followUpSEVMs.first(where: { $0.id == id })
+        let store = followUpStores.first(where: { $0.id == id })
       {
-        return sevm
+        return store
       }
 
-      return mainSEVM
+      return mainStore
     }
 
     @ViewBuilder
@@ -45,56 +45,56 @@ extension StatusEditor {
       Color.clear
     }
 
-    public init(mode: ViewModel.Mode) {
-      _mainSEVM = State(initialValue: ViewModel(mode: mode))
+    public init(mode: EditorStore.Mode) {
+      _mainStore = State(initialValue: EditorStore(mode: mode))
     }
 
     public var body: some View {
-      @Bindable var focusedSEVM = focusedSEVM
+      @Bindable var focusedStore = focusedStore
 
       NavigationStack {
         ZStack(alignment: .top) {
           ScrollView {
             VStackLayout(spacing: 0) {
               EditorView(
-                viewModel: mainSEVM,
-                followUpSEVMs: $followUpSEVMs,
+                store: mainStore,
+                followUpStores: $followUpStores,
                 editingMediaContainer: $editingMediaContainer,
                 presentationDetent: $presentationDetent,
                 editorFocusState: $editorFocusState,
                 assignedFocusState: .main,
                 isMain: true
               )
-              .id(mainSEVM.id)
+              .id(mainStore.id)
 
-              ForEach(followUpSEVMs) { sevm in
-                @Bindable var sevm: ViewModel = sevm
+              ForEach(followUpStores) { store in
+                @Bindable var store: EditorStore = store
 
                 EditorView(
-                  viewModel: sevm,
-                  followUpSEVMs: $followUpSEVMs,
+                  store: store,
+                  followUpStores: $followUpStores,
                   editingMediaContainer: $editingMediaContainer,
                   presentationDetent: $presentationDetent,
                   editorFocusState: $editorFocusState,
-                  assignedFocusState: .followUp(index: sevm.id),
+                  assignedFocusState: .followUp(index: store.id),
                   isMain: false
                 )
-                .id(sevm.id)
+                .id(store.id)
               }
             }
             .scrollTargetLayout()
           }
           .scrollPosition(id: $scrollID, anchor: .top)
           .animation(.bouncy(duration: 0.3), value: editorFocusState)
-          .animation(.bouncy(duration: 0.3), value: followUpSEVMs)
+          .animation(.bouncy(duration: 0.3), value: followUpStores)
           #if !os(visionOS)
             .background(backgroundColor)
           #endif
           #if os(visionOS)
             .ornament(attachmentAnchor: .scene(.leading)) {
               AccessoryView(
-                focusedSEVM: focusedSEVM,
-                followUpSEVMs: $followUpSEVMs,
+                focusedStore: focusedStore,
+                followUpStores: $followUpStores,
                 isMediaPanelPresented: $isMediaPanelPresented)
             }
           #else
@@ -103,31 +103,31 @@ extension StatusEditor {
                 if #available(iOS 26.0, *) {
                   GlassEffectContainer(spacing: 10) {
                     VStack(spacing: 10) {
-                      AutoCompleteView(viewModel: focusedSEVM)
+                      AutoCompleteView(store: focusedStore)
 
                       AccessoryView(
-                        focusedSEVM: focusedSEVM,
-                        followUpSEVMs: $followUpSEVMs,
+                        focusedStore: focusedStore,
+                        followUpStores: $followUpStores,
                         isMediaPanelPresented: $isMediaPanelPresented
                       )
                       .padding(.bottom, isMediaPanelPresented ? 0 : 8)
 
                       if isMediaPanelPresented {
-                        MediaPickerPanelView(viewModel: focusedSEVM)
+                        MediaPickerPanelView(store: focusedStore)
                       }
                     }
                   }
                 } else {
                   VStack(spacing: 0) {
-                    AutoCompleteView(viewModel: focusedSEVM)
+                    AutoCompleteView(store: focusedStore)
 
                     AccessoryView(
-                      focusedSEVM: focusedSEVM,
-                      followUpSEVMs: $followUpSEVMs,
+                      focusedStore: focusedStore,
+                      followUpStores: $followUpStores,
                       isMediaPanelPresented: $isMediaPanelPresented)
 
                     if isMediaPanelPresented {
-                      MediaPickerPanelView(viewModel: focusedSEVM)
+                      MediaPickerPanelView(store: focusedStore)
                     }
                   }
                 }
@@ -135,42 +135,42 @@ extension StatusEditor {
             }
           #endif
           .accessibilitySortPriority(1)  // Ensure that all elements inside the `ScrollView` occur earlier than the accessory views
-          .navigationTitle(focusedSEVM.mode.title)
+          .navigationTitle(focusedStore.mode.title)
           .navigationBarTitleDisplayMode(.inline)
           .toolbar {
             ToolbarItems(
-              mainSEVM: mainSEVM,
-              focusedSEVM: focusedSEVM,
-              followUpSEVMs: followUpSEVMs)
+              mainStore: mainStore,
+              focusedStore: focusedStore,
+              followUpStores: followUpStores)
           }
           .alert(
             "status.error.posting.title",
-            isPresented: $focusedSEVM.showPostingErrorAlert,
+            isPresented: $focusedStore.showPostingErrorAlert,
             actions: {
               Button("OK") {}
             },
             message: {
-              Text(mainSEVM.postingError ?? "")
+              Text(mainStore.postingError ?? "")
             }
           )
-          .interactiveDismissDisabled(mainSEVM.shouldDisplayDismissWarning)
+          .interactiveDismissDisabled(mainStore.shouldDisplayDismissWarning)
           .onChange(of: appAccounts.currentClient) { _, newValue in
-            if mainSEVM.mode.isInShareExtension {
+            if mainStore.mode.isInShareExtension {
               currentAccount.setClient(client: newValue)
-              mainSEVM.client = newValue
-              for post in followUpSEVMs {
+              mainStore.client = newValue
+              for post in followUpStores {
                 post.client = newValue
               }
             }
           }
           .onDrop(
             of: [.image, .video, .gif, .mpeg4Movie, .quickTimeMovie, .movie],
-            delegate: focusedSEVM
+            delegate: focusedStore
           )
           .onChange(of: currentAccount.account?.id) {
-            mainSEVM.currentAccount = currentAccount.account
-            for p in followUpSEVMs {
-              p.currentAccount = mainSEVM.currentAccount
+            mainStore.currentAccount = currentAccount.account
+            for p in followUpStores {
+              p.currentAccount = mainStore.currentAccount
             }
           }
           .onChange(of: editorFocusState) { _, newValue in
@@ -189,28 +189,28 @@ extension StatusEditor {
               editorFocusState = lastEditorFocusState ?? .main
             }
           }
-          .onChange(of: mainSEVM.visibility) {
-            for p in followUpSEVMs {
-              p.visibility = mainSEVM.visibility
+          .onChange(of: mainStore.visibility) {
+            for p in followUpStores {
+              p.visibility = mainStore.visibility
             }
           }
-          .onChange(of: followUpSEVMs.count) { oldValue, newValue in
+          .onChange(of: followUpStores.count) { oldValue, newValue in
             if oldValue < newValue {
               Task {
                 try? await Task.sleep(for: .seconds(0.1))
                 withAnimation(.bouncy(duration: 0.5)) {
-                  scrollID = followUpSEVMs.last?.id
+                  scrollID = followUpStores.last?.id
                 }
               }
             }
           }
-          if mainSEVM.isPosting {
-            ProgressView(value: mainSEVM.postingProgress, total: 100.0)
+          if mainStore.isPosting {
+            ProgressView(value: mainStore.postingProgress, total: 100.0)
           }
         }
       }
       .sheet(item: $editingMediaContainer) { container in
-        StatusEditor.MediaEditView(viewModel: focusedSEVM, container: container)
+        StatusEditor.MediaEditView(store: focusedStore, container: container)
       }
       .presentationDetents([.large, .height(230)], selection: $presentationDetent)
       .presentationBackgroundInteraction(.enabled)

@@ -13,7 +13,7 @@ extension StatusEditor.AutoCompleteView {
     @Environment(Theme.self) private var theme
     @Environment(CurrentAccount.self) private var currentAccount
 
-    var viewModel: StatusEditor.ViewModel
+    var store: StatusEditor.EditorStore
     @Binding var isTagSuggestionExpanded: Bool
 
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
@@ -40,7 +40,7 @@ extension StatusEditor.AutoCompleteView {
                 tag.lastUse = Date()
                 withAnimation {
                   isTagSuggestionExpanded = false
-                  viewModel.selectHashtagSuggestion(tag: tag.title)
+                  store.selectHashtagSuggestion(tag: tag.title)
                 }
               } label: {
                 VStack(alignment: .leading) {
@@ -80,7 +80,7 @@ extension StatusEditor.AutoCompleteView {
                 }
                 withAnimation {
                   isTagSuggestionExpanded = false
-                  viewModel.selectHashtagSuggestion(tag: tag.name)
+                  store.selectHashtagSuggestion(tag: tag.name)
                 }
               } label: {
                 VStack(alignment: .leading) {

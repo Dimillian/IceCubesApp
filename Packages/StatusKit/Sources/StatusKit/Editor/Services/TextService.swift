@@ -7,7 +7,7 @@ import UIKit
 extension StatusEditor {
   @MainActor
   struct TextService {
-    typealias Mode = StatusEditor.ViewModel.Mode
+    typealias Mode = StatusEditor.EditorStore.Mode
 
     struct InitialTextChanges {
       var statusText: NSMutableAttributedString?

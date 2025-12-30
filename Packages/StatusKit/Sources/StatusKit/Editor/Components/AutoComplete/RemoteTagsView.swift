@@ -10,17 +10,17 @@ extension StatusEditor.AutoCompleteView {
     @Environment(\.modelContext) private var context
     @Environment(Theme.self) private var theme
 
-    var viewModel: StatusEditor.ViewModel
+    var store: StatusEditor.EditorStore
     @Binding var isTagSuggestionExpanded: Bool
 
     @Query(sort: \RecentTag.lastUse, order: .reverse) var recentTags: [RecentTag]
 
     var body: some View {
-      ForEach(viewModel.tagsSuggestions) { tag in
+      ForEach(store.tagsSuggestions) { tag in
         Button {
           withAnimation {
             isTagSuggestionExpanded = false
-            viewModel.selectHashtagSuggestion(tag: tag.name)
+            store.selectHashtagSuggestion(tag: tag.name)
           }
           if let index = recentTags.firstIndex(where: {
             $0.title.lowercased() == tag.name.lowercased()

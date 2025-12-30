@@ -107,7 +107,8 @@ final class TextServiceTests: XCTestCase {
     let changes = service.initialTextChanges(
       for: .replyTo(status: status),
       currentAccount: makeAccount(acct: "current", username: "current"),
-      currentInstance: nil
+      currentInstance: nil,
+      preferences: nil
     )
 
     XCTAssertEqual(changes.statusText?.string, "@alice @bob ")
@@ -133,7 +134,8 @@ final class TextServiceTests: XCTestCase {
     let changes = service.initialTextChanges(
       for: .edit(status: status),
       currentAccount: nil,
-      currentInstance: nil
+      currentInstance: nil,
+      preferences: nil
     )
 
     XCTAssertEqual(changes.statusText?.string, "Hello @bob@server")
@@ -151,7 +153,8 @@ final class TextServiceTests: XCTestCase {
     let changes = service.initialTextChanges(
       for: .quote(status: status),
       currentAccount: nil,
-      currentInstance: nil
+      currentInstance: nil,
+      preferences: nil
     )
 
     XCTAssertEqual(
@@ -165,18 +168,18 @@ final class TextServiceTests: XCTestCase {
       item: "Hello" as NSString,
       typeIdentifier: UTType.plainText.identifier
     )
-    let viewModel = await MainActor.run {
-      StatusEditor.ViewModel(mode: .shareExtension(items: [item]))
+    let store = await MainActor.run {
+      StatusEditor.EditorStore(mode: .shareExtension(items: [item]))
     }
 
     await MainActor.run {
-      viewModel.prepareStatusText()
+      store.prepareStatusText()
     }
 
     let expectation = XCTestExpectation(description: "Wait for share text")
     Task {
       for _ in 0..<20 {
-        let text = await MainActor.run { viewModel.statusText.string }
+        let text = await MainActor.run { store.statusText.string }
         if text == "\n\nHello " {
           expectation.fulfill()
           return

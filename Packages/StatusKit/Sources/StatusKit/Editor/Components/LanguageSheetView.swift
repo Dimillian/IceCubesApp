@@ -11,7 +11,7 @@ extension StatusEditor {
 
     @State private var languageSearch: String = ""
 
-    var viewModel: ViewModel
+    var store: EditorStore
     @Binding var isPresented: Bool
 
     var body: some View {
@@ -63,15 +63,15 @@ extension StatusEditor {
             name: language.localizedName
           ).tag(language.isoCode)
           Spacer()
-          if language.isoCode == viewModel.selectedLanguage {
+          if language.isoCode == store.selectedLanguage {
             Image(systemName: "checkmark")
           }
         }
         .listRowBackground(theme.primaryBackgroundColor)
         .contentShape(Rectangle())
         .onTapGesture {
-          viewModel.selectedLanguage = language.isoCode
-          viewModel.hasExplicitlySelectedLanguage = true
+          store.selectedLanguage = language.isoCode
+          store.hasExplicitlySelectedLanguage = true
           close()
         }
       }

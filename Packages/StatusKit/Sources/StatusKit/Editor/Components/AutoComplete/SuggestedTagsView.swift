@@ -17,7 +17,7 @@ extension StatusEditor.AutoCompleteView {
     
     private let assistant = StatusEditor.Assistant()
     
-    var viewModel: StatusEditor.ViewModel
+    var store: StatusEditor.EditorStore
     @Binding var isTagSuggestionExpanded: Bool
     
     @State var viewState: ViewState = .loading
@@ -29,14 +29,14 @@ extension StatusEditor.AutoCompleteView {
       case .loading:
         ProgressView()
           .task {
-            viewState = .loaded(tags: await assistant.generateTags(from: viewModel.statusText.string).values)
+            viewState = .loaded(tags: await assistant.generateTags(from: store.statusText.string).values)
           }
       case .loaded(let tags):
         ForEach(tags, id: \.self ) { tag in
           Button {
             withAnimation {
               isTagSuggestionExpanded = false
-              viewModel.selectHashtagSuggestion(tag: tag)
+              store.selectHashtagSuggestion(tag: tag)
             }
             
             if let index = recentTags.firstIndex(where: {

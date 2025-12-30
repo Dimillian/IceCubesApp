@@ -12,7 +12,7 @@ extension StatusEditor {
     @Environment(CurrentInstance.self) private var currentInstance
     @Environment(UserPreferences.self) private var preferences
 
-    var viewModel: ViewModel
+    var store: EditorStore
     let container: StatusEditor.MediaContainer
 
     @State private var imageDescription: String = ""
@@ -95,16 +95,16 @@ extension StatusEditor {
             Button {
               if !imageDescription.isEmpty {
                 isUpdating = true
-                if currentInstance.isEditAltTextSupported, viewModel.mode.isEditing {
+                if currentInstance.isEditAltTextSupported, store.mode.isEditing {
                   Task {
-                    await viewModel.editDescription(
+                    await store.editDescription(
                       container: container, description: imageDescription)
                     dismiss()
                     isUpdating = false
                   }
                 } else {
                   Task {
-                    await viewModel.addDescription(
+                    await store.addDescription(
                       container: container, description: imageDescription)
                     dismiss()
                     isUpdating = false

@@ -11,13 +11,13 @@ extension StatusEditor {
 
     @Environment(Theme.self) private var theme
 
-    var viewModel: ViewModel
+    var store: EditorStore
 
     var body: some View {
       NavigationStack {
         ScrollView {
           LazyVGrid(columns: [GridItem(.adaptive(minimum: 40, maximum: 40))], spacing: 9) {
-            ForEach(viewModel.customEmojiContainer) { container in
+            ForEach(store.customEmojiContainer) { container in
               Section {
                 ForEach(container.emojis) { emoji in
                   LazyImage(url: emoji.url) { state in
@@ -38,7 +38,7 @@ extension StatusEditor {
                     }
                   }
                   .onTapGesture {
-                    viewModel.insertStatusText(text: " :\(emoji.shortcode): ")
+                    store.insertStatusText(text: " :\(emoji.shortcode): ")
                   }
                 }
                 .padding(.horizontal, 16)

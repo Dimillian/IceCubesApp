@@ -12,7 +12,7 @@ extension StatusEditor {
     }
 
     struct Input {
-      var mode: StatusEditor.ViewModel.Mode
+      var mode: StatusEditor.EditorStore.Mode
       var statusText: String
       var visibility: Models.Visibility
       var spoilerOn: Bool

@@ -10,7 +10,7 @@ extension StatusEditor {
 
     @State private var isLanguageSheetDisplayed: Bool = false
 
-    var viewModel: ViewModel
+    var store: EditorStore
 
     var body: some View {
       Button {
@@ -18,7 +18,7 @@ extension StatusEditor {
       } label: {
         HStack(alignment: .center) {
           Image(systemName: "text.bubble")
-          if let language = viewModel.selectedLanguage {
+          if let language = store.selectedLanguage {
             Text(language.uppercased())
           } else {
             Image(systemName: "globe")
@@ -28,14 +28,14 @@ extension StatusEditor {
       }
       .buttonStyle(.bordered)
       .onAppear {
-        viewModel.setInitialLanguageSelection(
+        store.setInitialLanguageSelection(
           preference: preferences.recentlyUsedLanguages.first
             ?? preferences.serverPreferences?.postLanguage)
       }
       .accessibilityLabel("accessibility.editor.button.language")
       .sheet(isPresented: $isLanguageSheetDisplayed) {
         LanguageSheetView(
-          viewModel: viewModel,
+          store: store,
           isPresented: $isLanguageSheetDisplayed
         )
       }

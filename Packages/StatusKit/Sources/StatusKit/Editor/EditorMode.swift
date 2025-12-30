@@ -2,7 +2,7 @@ import Models
 import SwiftUI
 import UIKit
 
-extension StatusEditor.ViewModel {
+extension StatusEditor.EditorStore {
   public enum Mode {
     case replyTo(status: Status)
     case new(text: String?, visibility: Models.Visibility)

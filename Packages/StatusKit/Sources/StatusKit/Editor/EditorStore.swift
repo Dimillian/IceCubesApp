@@ -13,7 +13,7 @@ import SwiftUI
 
 extension StatusEditor {
   @MainActor
-  @Observable public class ViewModel: NSObject, Identifiable {
+  @Observable public class EditorStore: NSObject, Identifiable {
     public let id = UUID()
 
     var mode: Mode
@@ -71,6 +71,7 @@ extension StatusEditor {
     private let postingService = PostingService()
     private let customEmojiService = CustomEmojiService()
     private var suggestedTask: Task<Void, Never>?
+    private var hasConfigured = false
     private var mediaUploadPolicy: MediaUploadService.UploadPolicy {
       MediaUploadService.UploadPolicy(
         maxConcurrentUploads: 2,
@@ -208,6 +209,46 @@ extension StatusEditor {
           Assistant.prewarm()
         }
       #endif
+    }
+
+    func configureIfNeeded(
+      client: any EditorClient,
+      currentAccount: Account?,
+      theme: Theme,
+      preferences: UserPreferences,
+      currentInstance: CurrentInstance
+    ) {
+      guard !hasConfigured else { return }
+
+      self.client = client
+      self.currentAccount = currentAccount
+      self.theme = theme
+      self.preferences = preferences
+      self.currentInstance = currentInstance
+      prepareStatusText()
+      Task { await fetchCustomEmojis() }
+
+      hasConfigured = true
+    }
+
+    func makeFollowUpStore() -> EditorStore {
+      let store = EditorStore(mode: .new(text: nil, visibility: visibility))
+
+      if let client,
+        let theme,
+        let preferences,
+        let currentInstance
+      {
+        store.configureIfNeeded(
+          client: client,
+          currentAccount: currentAccount,
+          theme: theme,
+          preferences: preferences,
+          currentInstance: currentInstance
+        )
+      }
+
+      return store
     }
 
     func setInitialLanguageSelection(preference: String?) {
@@ -899,7 +940,7 @@ extension StatusEditor {
 
 // MARK: - DropDelegate
 
-extension StatusEditor.ViewModel: DropDelegate {
+extension StatusEditor.EditorStore: DropDelegate {
   public func performDrop(info: DropInfo) -> Bool {
     let item = info.itemProviders(for: [.image, .video, .gif, .mpeg4Movie, .quickTimeMovie, .movie])
     processItemsProvider(items: item)
@@ -909,7 +950,7 @@ extension StatusEditor.ViewModel: DropDelegate {
 
 // MARK: - UITextPasteDelegate
 
-extension StatusEditor.ViewModel: UITextPasteDelegate {
+extension StatusEditor.EditorStore: UITextPasteDelegate {
   public func textPasteConfigurationSupporting(
     _: UITextPasteConfigurationSupporting,
     transform item: UITextPasteItem

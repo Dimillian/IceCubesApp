@@ -9,12 +9,12 @@ extension StatusEditor.AutoCompleteView {
   struct MentionsView: View {
     @Environment(Theme.self) private var theme
 
-    var viewModel: StatusEditor.ViewModel
+    var store: StatusEditor.EditorStore
 
     var body: some View {
-      ForEach(viewModel.mentionsSuggestions) { account in
+      ForEach(store.mentionsSuggestions) { account in
         Button {
-          viewModel.selectMentionSuggestion(account: account)
+          store.selectMentionSuggestion(account: account)
         } label: {
           HStack {
             AvatarView(account.avatar, config: AvatarView.FrameConfig.badge)
