@@ -17,18 +17,16 @@ public struct TimelineView: View {
   @Environment(MastodonClient.self) private var client
   @Environment(RouterPath.self) private var routerPath
 
-  @State private var viewModel = TimelineViewModel()
-  @State private var contentFilter = TimelineContentFilter.shared
-
-  @State private var scrollToIdAnimated: String? = nil
-
-  @State private var wasBackgrounded: Bool = false
+  private let canFilterTimeline: Bool
 
   @Binding var timeline: TimelineFilter
   @Binding var pinnedFilters: [TimelineFilter]
   @Binding var selectedTagGroup: TagGroup?
 
-  private let canFilterTimeline: Bool
+  @State private var viewModel = TimelineViewModel()
+  @State private var contentFilter = TimelineContentFilter.shared
+  @State private var scrollToIdAnimated: String?
+  @State private var wasBackgrounded = false
 
   private var toolbarBackgroundVisibility: SwiftUI.Visibility {
     if canFilterTimeline, !pinnedFilters.isEmpty {
@@ -181,16 +179,16 @@ public struct TimelineView: View {
       timeline = newValue
     }
     .onChange(of: contentFilter.showReplies) { _, _ in
-      Task { await viewModel.refreshTimelineContentFilter() }
+      refreshContentFilter()
     }
     .onChange(of: contentFilter.showBoosts) { _, _ in
-      Task { await viewModel.refreshTimelineContentFilter() }
+      refreshContentFilter()
     }
     .onChange(of: contentFilter.showThreads) { _, _ in
-      Task { await viewModel.refreshTimelineContentFilter() }
+      refreshContentFilter()
     }
     .onChange(of: contentFilter.showQuotePosts) { _, _ in
-      Task { await viewModel.refreshTimelineContentFilter() }
+      refreshContentFilter()
     }
     .onChange(of: scenePhase) { _, newValue in
       switch newValue {
@@ -207,5 +205,9 @@ public struct TimelineView: View {
         break
       }
     }
+  }
+
+  private func refreshContentFilter() {
+    Task { await viewModel.refreshTimelineContentFilter() }
   }
 }
