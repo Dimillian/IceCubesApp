@@ -64,6 +64,7 @@ extension StatusEditor {
     private let mediaUploadService = MediaUploadService()
     private let mediaDescriptionService = MediaDescriptionService()
     private let postingService = PostingService()
+    private let customEmojiService = CustomEmojiService()
     private var suggestedTask: Task<Void, Never>?
     private var mediaUploadPolicy: MediaUploadService.UploadPolicy {
       MediaUploadService.UploadPolicy(
@@ -960,37 +961,9 @@ extension StatusEditor {
     // MARK: - Custom emojis
 
     func fetchCustomEmojis() async {
-      typealias EmojiContainer = CategorizedEmojiContainer
-
       guard let client else { return }
       do {
-        let customEmojis: [Emoji] = try await client.get(endpoint: CustomEmojis.customEmojis) ?? []
-        var emojiContainers: [EmojiContainer] = []
-
-        customEmojis.reduce([String: [Emoji]]()) { currentDict, emoji in
-          var dict = currentDict
-          let category = emoji.category ?? "Custom"
-
-          if let emojis = dict[category] {
-            dict[category] = emojis + [emoji]
-          } else {
-            dict[category] = [emoji]
-          }
-
-          return dict
-        }.sorted(by: { lhs, rhs in
-          if rhs.key == "Custom" {
-            false
-          } else if lhs.key == "Custom" {
-            true
-          } else {
-            lhs.key < rhs.key
-          }
-        }).forEach { key, value in
-          emojiContainers.append(.init(categoryName: key, emojis: value))
-        }
-
-        customEmojiContainer = emojiContainers
+        customEmojiContainer = try await customEmojiService.fetchContainers(client: client)
       } catch {}
     }
   }
