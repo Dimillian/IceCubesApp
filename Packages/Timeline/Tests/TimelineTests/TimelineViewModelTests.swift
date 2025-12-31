@@ -136,12 +136,6 @@ struct Tests {
 
   @Test
   func hideQuotePostsFiltersLegacyAndNativeQuotes() async throws {
-    let contentFilter = TimelineContentFilter.shared
-    contentFilter.showBoosts = true
-    contentFilter.showReplies = true
-    contentFilter.showThreads = true
-    contentFilter.showQuotePosts = false
-
     let normalStatus = makeStatus(id: "normal", hidden: false)
     let legacyQuoteStatus = makeStatus(
       id: "legacy-quote",
@@ -157,7 +151,13 @@ struct Tests {
     let datasource = TimelineDatasource()
     await datasource.set([normalStatus, legacyQuoteStatus, nativeQuoteStatus])
 
-    let filtered = await datasource.getFiltered()
+    let snapshot = TimelineContentFilter.Snapshot(
+      showBoosts: true,
+      showReplies: true,
+      showThreads: true,
+      showQuotePosts: false
+    )
+    let filtered = await datasource.getFiltered(using: snapshot)
     #expect(filtered.map(\.id) == ["normal"])
   }
 }

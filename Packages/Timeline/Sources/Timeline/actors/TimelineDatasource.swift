@@ -24,10 +24,11 @@ actor TimelineDatasource {
 
   func getFiltered() async -> [Status] {
     let contentFilter = await TimelineContentFilter.shared
+    let snapshot = await contentFilter.snapshot()
     var filtered: [Status] = []
     for item in items {
       guard case .status(let status) = item else { continue }
-      if await shouldShowStatus(status, filter: contentFilter) {
+      if shouldShowStatus(status, filter: snapshot) {
         filtered.append(status)
       }
     }
@@ -36,15 +37,27 @@ actor TimelineDatasource {
 
   func getFilteredItems() async -> [TimelineItem] {
     let contentFilter = await TimelineContentFilter.shared
+    let snapshot = await contentFilter.snapshot()
     var filtered: [TimelineItem] = []
     for item in items {
       switch item {
       case .gap:
         filtered.append(item)
       case .status(let status):
-        if await shouldShowStatus(status, filter: contentFilter) {
+        if shouldShowStatus(status, filter: snapshot) {
           filtered.append(item)
         }
+      }
+    }
+    return filtered
+  }
+
+  func getFiltered(using snapshot: TimelineContentFilter.Snapshot) -> [Status] {
+    var filtered: [Status] = []
+    for item in items {
+      guard case .status(let status) = item else { continue }
+      if shouldShowStatus(status, filter: snapshot) {
+        filtered.append(status)
       }
     }
     return filtered
@@ -155,11 +168,11 @@ actor TimelineDatasource {
 
   // MARK: - Private Helpers
 
-  private func shouldShowStatus(_ status: Status, filter: TimelineContentFilter) async -> Bool {
-    let showReplies = await filter.showReplies
-    let showBoosts = await filter.showBoosts
-    let showThreads = await filter.showThreads
-    let showQuotePosts = await filter.showQuotePosts
+  private func shouldShowStatus(_ status: Status, filter: TimelineContentFilter.Snapshot) -> Bool {
+    let showReplies = filter.showReplies
+    let showBoosts = filter.showBoosts
+    let showThreads = filter.showThreads
+    let showQuotePosts = filter.showQuotePosts
     let hasQuote = status.quote?.quotedStatusId != nil
       || status.quote?.quotedStatus != nil
       || status.reblog?.quote?.quotedStatusId != nil

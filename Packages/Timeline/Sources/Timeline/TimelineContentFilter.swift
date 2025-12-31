@@ -3,6 +3,25 @@ import SwiftUI
 
 @MainActor
 @Observable public class TimelineContentFilter {
+  public struct Snapshot: Sendable {
+    public let showBoosts: Bool
+    public let showReplies: Bool
+    public let showThreads: Bool
+    public let showQuotePosts: Bool
+
+    public init(
+      showBoosts: Bool,
+      showReplies: Bool,
+      showThreads: Bool,
+      showQuotePosts: Bool
+    ) {
+      self.showBoosts = showBoosts
+      self.showReplies = showReplies
+      self.showThreads = showThreads
+      self.showQuotePosts = showQuotePosts
+    }
+  }
+
   class Storage {
     @AppStorage("timeline_show_boosts") var showBoosts: Bool = true
     @AppStorage("timeline_show_replies") var showReplies: Bool = true
@@ -42,5 +61,14 @@ import SwiftUI
     showReplies = storage.showReplies
     showThreads = storage.showThreads
     showQuotePosts = storage.showQuotePosts
+  }
+
+  public func snapshot() -> Snapshot {
+    Snapshot(
+      showBoosts: showBoosts,
+      showReplies: showReplies,
+      showThreads: showThreads,
+      showQuotePosts: showQuotePosts
+    )
   }
 }
