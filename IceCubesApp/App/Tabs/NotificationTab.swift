@@ -29,7 +29,10 @@ struct NotificationsTab: View {
     NavigationStack(path: $routerPath.path) {
       NotificationsListView(lockedType: lockedType)
         .withAppRouter()
-        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+        .withSheetDestinations(
+          sheetDestinations: $routerPath.presentedSheet,
+          routerPath: routerPath
+        )
         .toolbar {
           ToolbarItem(placement: .topBarTrailing) {
             Button {

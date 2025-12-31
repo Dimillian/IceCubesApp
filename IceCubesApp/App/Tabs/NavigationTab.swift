@@ -27,7 +27,10 @@ struct NavigationTab<Content: View>: View {
       content()
         .withEnvironments()
         .withAppRouter()
-        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+        .withSheetDestinations(
+          sheetDestinations: $routerPath.presentedSheet,
+          routerPath: routerPath
+        )
         .withSafariRouter()
         .toolbar {
           ToolbarTab(routerPath: $routerPath)

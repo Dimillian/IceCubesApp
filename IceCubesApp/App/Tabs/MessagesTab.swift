@@ -20,7 +20,10 @@ struct MessagesTab: View {
     NavigationStack(path: $routerPath.path) {
       ConversationsListView()
         .withAppRouter()
-        .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+        .withSheetDestinations(
+          sheetDestinations: $routerPath.presentedSheet,
+          routerPath: routerPath
+        )
         .toolbar {
           ToolbarTab(routerPath: $routerPath)
         }

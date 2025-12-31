@@ -50,7 +50,10 @@ struct TimelineTab: View {
         canFilterTimeline: canFilterTimeline
       )
       .withAppRouter()
-      .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+      .withSheetDestinations(
+        sheetDestinations: $routerPath.presentedSheet,
+        routerPath: routerPath
+      )
       .toolbar {
         toolbarView
       }

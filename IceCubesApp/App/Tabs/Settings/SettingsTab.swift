@@ -64,7 +64,10 @@ struct SettingsTabs: View {
         }
       }
       .withAppRouter()
-      .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+      .withSheetDestinations(
+        sheetDestinations: $routerPath.presentedSheet,
+        routerPath: routerPath
+      )
       .onAppear {
         startingPoint = RouterPath.settingsStartingPoint
         RouterPath.settingsStartingPoint = nil

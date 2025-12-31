@@ -130,7 +130,10 @@ struct AppView: View {
       }
     }
     .id(appAccountsManager.currentClient.id)
-    .withSheetDestinations(sheetDestinations: $appRouterPath.presentedSheet)
+    .withSheetDestinations(
+      sheetDestinations: $appRouterPath.presentedSheet,
+      routerPath: appRouterPath
+    )
     .environment(\.selectedTabScrollToTop, selectedTabScrollToTop)
   }
 

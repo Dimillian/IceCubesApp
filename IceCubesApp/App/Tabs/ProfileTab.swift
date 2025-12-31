@@ -20,7 +20,10 @@ struct ProfileTab: View {
       if let account = currentAccount.account {
         AccountDetailView(account: account)
           .withAppRouter()
-          .withSheetDestinations(sheetDestinations: $routerPath.presentedSheet)
+          .withSheetDestinations(
+            sheetDestinations: $routerPath.presentedSheet,
+            routerPath: routerPath
+          )
           .id(account.id)
       } else {
         AccountDetailView(account: .placeholder())

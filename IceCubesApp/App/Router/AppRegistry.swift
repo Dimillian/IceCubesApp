@@ -96,9 +96,13 @@ extension View {
     }
   }
 
-  func withSheetDestinations(sheetDestinations: Binding<SheetDestination?>) -> some View {
+  func withSheetDestinations(
+    sheetDestinations: Binding<SheetDestination?>,
+    routerPath: RouterPath
+  ) -> some View {
     sheet(item: sheetDestinations) { destination in
-      switch destination {
+      Group {
+        switch destination {
       case .replyToStatusEditor(let status):
         StatusEditor.MainView(mode: .replyTo(status: status))
           .withEnvironments()
@@ -183,7 +187,9 @@ extension View {
       case .accountFiltersList:
         FiltersListView()
           .withEnvironments()
+        }
       }
+      .environment(routerPath)
     }
   }
 
