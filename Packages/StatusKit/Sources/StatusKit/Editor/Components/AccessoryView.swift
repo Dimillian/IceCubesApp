@@ -20,8 +20,26 @@ extension StatusEditor {
       @State private var isFileImporterPresented: Bool = false
       @State private var isCameraPickerPresented: Bool = false
     #endif
+
+    private var canAddNewStore: Bool {
+      guard followUpStores.count < 5 else { return false }
+
+      if followUpStores.isEmpty,  // there is only the main store in the editor
+        !focusedStore.statusText.string.isEmpty  // focusedStore is also mainStore
+      {
+        return true
+      }
+
+      if let lastStore = followUpStores.last,
+        !lastStore.statusText.string.isEmpty
+      {
+        return true
+      }
+
+      return false
+    }
+
     var body: some View {
-      @Bindable var store = focusedStore
       #if os(visionOS)
         HStack {
           contentView
@@ -211,24 +229,6 @@ extension StatusEditor {
           .frame(width: 25, height: 25)
           .contentShape(Rectangle())
       }
-    }
-
-    private var canAddNewStore: Bool {
-      guard followUpStores.count < 5 else { return false }
-
-      if followUpStores.isEmpty,  // there is only the main store in the editor
-        !focusedStore.statusText.string.isEmpty  // focusedStore is also mainStore
-      {
-        return true
-      }
-
-      if let lastStore = followUpStores.last,
-        !lastStore.statusText.string.isEmpty
-      {
-        return true
-      }
-
-      return false
     }
 
     @available(iOS 26, *)
