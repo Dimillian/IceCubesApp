@@ -141,6 +141,29 @@ final class TextServiceTests: XCTestCase {
     XCTAssertEqual(changes.statusText?.string, "Hello @bob@server")
   }
 
+  func testInitialTextChangesForEditRestoresTrailingTags() throws {
+    let service = StatusEditor.TextService()
+    let author = makeAccount(acct: "alice", username: "alice")
+    let hashtagContent =
+      "\"<p>This is a test post</p><p><a href=\\\"https://example.com/tags/swift\\\" class=\\\"mention hashtag\\\" rel=\\\"tag\\\">#<span>swift</span></a> <a href=\\\"https://example.com/tags/ios\\\" class=\\\"mention hashtag\\\" rel=\\\"tag\\\">#<span>ios</span></a></p>\""
+    let htmlString = try JSONDecoder().decode(HTMLString.self, from: Data(hashtagContent.utf8))
+    let status = makeStatus(
+      account: author,
+      mentions: [],
+      content: htmlString,
+      tags: [makeTag(name: "swift"), makeTag(name: "ios")]
+    )
+
+    let changes = service.initialTextChanges(
+      for: .edit(status: status),
+      currentAccount: nil,
+      currentInstance: nil,
+      preferences: nil
+    )
+
+    XCTAssertEqual(changes.statusText?.string, "This is a test post\n\n#swift #ios")
+  }
+
   func testInitialTextChangesForLegacyQuoteIncludesAuthorAndURL() {
     let service = StatusEditor.TextService()
     let author = makeAccount(acct: "alice", username: "alice")
@@ -215,10 +238,17 @@ private func makeAccount(acct: String, username: String) -> Account {
   )
 }
 
+private func makeTag(name: String) -> Tag {
+  let json =
+    "{\"name\":\"\(name)\",\"url\":\"https://example.com/tags/\(name)\",\"following\":false,\"history\":[]}"
+  return try! JSONDecoder().decode(Tag.self, from: Data(json.utf8))
+}
+
 private func makeStatus(
   account: Account,
   mentions: [Mention],
   content: HTMLString = HTMLString(stringValue: "Hello"),
+  tags: [Tag] = [],
   url: URL? = nil
 ) -> Status {
   Status(
@@ -249,7 +279,7 @@ private func makeStatus(
     filtered: nil,
     sensitive: false,
     language: nil,
-    tags: [],
+    tags: tags,
     quote: nil,
     quotesCount: nil,
     quoteApproval: nil

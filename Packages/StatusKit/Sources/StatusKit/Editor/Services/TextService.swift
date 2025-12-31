@@ -389,6 +389,12 @@ extension StatusEditor {
       for mention in status.mentions {
         rawText = rawText.replacingOccurrences(of: "@\(mention.username)", with: "@\(mention.acct)")
       }
+      if status.content.hadTrailingTags {
+        let tagLine = status.tags.map { "#\($0.name)" }.joined(separator: " ")
+        if !tagLine.isEmpty {
+          rawText = rawText.isEmpty ? tagLine : "\(rawText)\n\n\(tagLine)"
+        }
+      }
       return rawText
     }
 
