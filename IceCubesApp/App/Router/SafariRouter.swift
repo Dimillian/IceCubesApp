@@ -92,8 +92,6 @@ private struct SafariRouter: ViewModifier {
     func open(_ url: URL) -> OpenURLAction.Result {
       guard let windowScene else { return .systemAction }
 
-      window = setupWindow(windowScene: windowScene)
-
       let configuration = SFSafariViewController.Configuration()
       configuration.entersReaderIfAvailable = UserPreferences.shared.inAppBrowserReaderView
 
@@ -103,7 +101,13 @@ private struct SafariRouter: ViewModifier {
       safari.delegate = self
 
       DispatchQueue.main.async { [weak self] in
-        self?.viewController.present(safari, animated: true)
+        if let presenter = self?.bestPresenter(in: windowScene) {
+          self?.window = nil
+          presenter.present(safari, animated: true)
+        } else {
+          self?.window = self?.setupWindow(windowScene: windowScene)
+          self?.viewController.present(safari, animated: true)
+        }
       }
 
       return .handled
@@ -111,9 +115,11 @@ private struct SafariRouter: ViewModifier {
 
     func dismiss() {
       viewController.presentedViewController?.dismiss(animated: true)
-      window?.resignKey()
-      window?.isHidden = false
-      window = nil
+      if let window {
+        window.resignKey()
+        window.isHidden = false
+        self.window = nil
+      }
     }
 
     func setupWindow(windowScene: UIWindowScene) -> UIWindow {
@@ -135,10 +141,35 @@ private struct SafariRouter: ViewModifier {
 
     nonisolated func safariViewControllerDidFinish(_: SFSafariViewController) {
       Task { @MainActor in
-        window?.resignKey()
-        window?.isHidden = false
-        window = nil
+        if let window {
+          window.resignKey()
+          window.isHidden = false
+          self.window = nil
+        }
       }
+    }
+
+    private func bestPresenter(in windowScene: UIWindowScene) -> UIViewController? {
+      let keyWindow = windowScene.windows.first(where: \.isKeyWindow)
+      guard let root = keyWindow?.rootViewController else { return nil }
+      return topViewController(from: root)
+    }
+
+    private func topViewController(from root: UIViewController) -> UIViewController {
+      if let presented = root.presentedViewController {
+        return topViewController(from: presented)
+      }
+      if let navigation = root as? UINavigationController,
+        let visible = navigation.visibleViewController
+      {
+        return topViewController(from: visible)
+      }
+      if let tab = root as? UITabBarController,
+        let selected = tab.selectedViewController
+      {
+        return topViewController(from: selected)
+      }
+      return root
     }
   }
 #endif
