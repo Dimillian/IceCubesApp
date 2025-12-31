@@ -133,4 +133,37 @@ struct Tests {
     #expect(!filteredItems.isEmpty)
     #expect(await fetcher.nextPageCallCount() >= 2)
   }
+
+  @Test
+  func hideQuotePostsFiltersLegacyAndNativeQuotes() async throws {
+    let contentFilter = TimelineContentFilter.shared
+    contentFilter.showBoosts = true
+    contentFilter.showReplies = true
+    contentFilter.showThreads = true
+    contentFilter.showQuotePosts = false
+
+    let normalStatus = makeStatus(id: "normal", hidden: false)
+    let legacyQuoteStatus = makeStatus(
+      id: "legacy-quote",
+      content: try makeHTMLStringWithStatusLink(),
+      quote: nil
+    )
+    let nativeQuoteStatus = makeStatus(
+      id: "native-quote",
+      content: Status.placeholder().content,
+      quote: try makeQuote(quotedStatusId: "123")
+    )
+
+    let datasource = TimelineDatasource()
+    await datasource.set([normalStatus, legacyQuoteStatus, nativeQuoteStatus])
+
+    let filtered = await datasource.getFiltered()
+    #expect(filtered.map(\.id) == ["normal"])
+  }
+}
+
+private func makeHTMLStringWithStatusLink() throws -> HTMLString {
+  let html =
+    "\"<p>Quoted <a href=\\\"https://example.com/@bob/123\\\">link</a></p>\""
+  return try JSONDecoder().decode(HTMLString.self, from: Data(html.utf8))
 }

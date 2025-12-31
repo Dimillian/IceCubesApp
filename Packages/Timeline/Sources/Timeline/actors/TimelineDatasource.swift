@@ -160,12 +160,18 @@ actor TimelineDatasource {
     let showBoosts = await filter.showBoosts
     let showThreads = await filter.showThreads
     let showQuotePosts = await filter.showQuotePosts
+    let hasQuote = status.quote?.quotedStatusId != nil
+      || status.quote?.quotedStatus != nil
+      || status.reblog?.quote?.quotedStatusId != nil
+      || status.reblog?.quote?.quotedStatus != nil
+    let hasLegacyQuoteLink = !status.content.statusesURLs.isEmpty
+      || !(status.reblog?.content.statusesURLs.isEmpty ?? true)
 
     return !status.isHidden
       && (showReplies || status.inReplyToId == nil
         || status.inReplyToAccountId == status.account.id)
       && (showBoosts || status.reblog == nil)
       && (showThreads || status.inReplyToAccountId != status.account.id)
-      && (showQuotePosts || status.content.statusesURLs.isEmpty)
+      && (showQuotePosts || (!hasQuote && !hasLegacyQuoteLink))
   }
 }
