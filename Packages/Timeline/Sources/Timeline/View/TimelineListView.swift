@@ -14,7 +14,8 @@ struct TimelineListView: View {
   @Environment(MastodonClient.self) private var client
   @Environment(RouterPath.self) private var routerPath
   @Environment(Theme.self) private var theme
-
+  @Environment(UserPreferences.self) private var userPreferences
+  
   var viewModel: TimelineViewModel
   @Binding var timeline: TimelineFilter
   @Binding var pinnedFilters: [TimelineFilter]
@@ -71,6 +72,9 @@ struct TimelineListView: View {
             proxy.scrollTo(ScrollToView.Constants.scrollToTop, anchor: .top)
           }
         }
+      }
+      .onChange(of: userPreferences.hidePostsWithMedia) { _, _ in
+          Task { await viewModel.refreshTimelineContentFilter() }
       }
     }
   }
