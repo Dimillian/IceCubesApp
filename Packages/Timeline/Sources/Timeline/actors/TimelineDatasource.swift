@@ -46,9 +46,9 @@ actor TimelineDatasource {
         filtered.append(item)
       case .status(let status):
         if shouldShowStatus(status, filter: snapshot) {
-            if !hideMedia || status.mediaAttachments.isEmpty {
-                filtered.append(item)
-            }
+          if !hideMedia || status.mediaAttachments.isEmpty {
+           filtered.append(item)
+          }
         }
       }
     }
