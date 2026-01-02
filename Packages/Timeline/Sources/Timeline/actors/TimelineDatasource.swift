@@ -39,13 +39,16 @@ actor TimelineDatasource {
     let contentFilter = await TimelineContentFilter.shared
     let snapshot = await contentFilter.snapshot()
     var filtered: [TimelineItem] = []
+    let hideMedia = await UserPreferences.shared.hidePostsWithMedia
     for item in items {
       switch item {
       case .gap:
         filtered.append(item)
       case .status(let status):
         if shouldShowStatus(status, filter: snapshot) {
-          filtered.append(item)
+            if !hideMedia || status.mediaAttachments.isEmpty {
+                filtered.append(item)
+            }
         }
       }
     }
