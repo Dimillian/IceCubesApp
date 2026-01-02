@@ -51,6 +51,12 @@ public struct ListCreateView: View {
                   title: title,
                   repliesPolicy: repliesPolicy,
                   exclusive: isExclusive))
+              Telemetry.signal(
+                "list.created",
+                parameters: [
+                  "replies_policy": repliesPolicy.rawValue,
+                  "exclusive": isExclusive ? "true" : "false",
+                ])
               await currentAccount.fetchLists()
               isSaving = false
               dismiss()
