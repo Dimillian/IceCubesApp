@@ -29,10 +29,10 @@ struct ContentSettingsView: View {
           Text("settings.content.media.show.alt")
         }
         Toggle(isOn: $userPreferences.animateEmojis) {
-          Text("settings.other.animate-emojis")
+            Text("settings.other.animate-emojis")
         }
         Toggle(isOn: $userPreferences.hidePostsWithMedia) {
-          Text("settings.content.media.hide-posts-with-media")
+            Text("settings.content.media.hide-posts-with-media")
         }
       }
       #if !os(visionOS)
