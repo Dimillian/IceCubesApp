@@ -64,12 +64,7 @@ extension StatusEditor {
 
     @ViewBuilder
     private func mainContent(focusedStore: EditorStore) -> some View {
-      ZStack(alignment: .top) {
-        editorScrollView(focusedStore: focusedStore)
-        if mainStore.isPosting {
-          ProgressView(value: mainStore.postingProgress, total: 100.0)
-        }
-      }
+      editorScrollView(focusedStore: focusedStore)
     }
 
     @ViewBuilder

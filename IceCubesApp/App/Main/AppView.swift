@@ -40,7 +40,7 @@ struct AppView: View {
   var body: some View {
     HStack(spacing: 0) {
       tabBarView
-          .tabViewStyle(.sidebarAdaptable)
+        .tabViewStyle(.sidebarAdaptable)
       if horizontalSizeClass == .regular
         && (UIDevice.current.userInterfaceIdiom == .pad
           || UIDevice.current.userInterfaceIdiom == .mac),
@@ -91,8 +91,7 @@ struct AppView: View {
               let tab = AppTab.anyTimelineFilter(
                 filter: .remoteLocal(server: timeline.instance, filter: .local))
               Tab(value: tab) {
-                tab.makeContentView(
-                  homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+                makeTabContent(for: tab)
               } label: {
                 tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
               }
@@ -106,8 +105,7 @@ struct AppView: View {
                   tags: tagGroup.tags,
                   symbolName: tagGroup.symbolName))
               Tab(value: tab) {
-                tab.makeContentView(
-                  homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+                makeTabContent(for: tab)
               } label: {
                 tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
               }
@@ -116,8 +114,7 @@ struct AppView: View {
           } else {
             ForEach(section.tabs) { tab in
               Tab(value: tab, role: tab == .explore ? .search : .none) {
-                tab.makeContentView(
-                  homeTimeline: $timeline, selectedTab: $selectedTab, pinnedFilters: $pinnedFilters)
+                makeTabContent(for: tab)
               } label: {
                 tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
               }
@@ -135,6 +132,18 @@ struct AppView: View {
       routerPath: appRouterPath
     )
     .environment(\.selectedTabScrollToTop, selectedTabScrollToTop)
+  }
+
+  @ViewBuilder
+  private func makeTabContent(for tab: AppTab) -> some View {
+    tab.makeContentView(
+      homeTimeline: $timeline,
+      selectedTab: $selectedTab,
+      pinnedFilters: $pinnedFilters
+    )
+    .overlay(alignment: .top) {
+      ToastOverlayView()
+    }
   }
 
   private func updateTab(with newTab: AppTab) {

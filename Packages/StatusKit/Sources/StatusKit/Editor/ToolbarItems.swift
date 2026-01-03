@@ -18,6 +18,7 @@ extension StatusEditor {
     @Environment(\.modelContext) private var context
     @Environment(UserPreferences.self) private var preferences
     @Environment(Theme.self) private var theme
+    @Environment(ToastCenter.self) private var toastCenter
 
     #if targetEnvironment(macCatalyst)
       @Environment(\.dismissWindow) private var dismissWindow
@@ -102,16 +103,14 @@ extension StatusEditor {
 
     private var sendButton: some View {
       Button {
-        Task {
-          guard !isSendingDisabled else { return }
-          mainStore.evaluateLanguages()
-          if preferences.autoDetectPostLanguage,
-            mainStore.languageConfirmationDialogLanguages != nil
-          {
-            isLanguageConfirmPresented = true
-          } else {
-            await postAllStatus()
-          }
+        guard !isSendingDisabled else { return }
+        mainStore.evaluateLanguages()
+        if preferences.autoDetectPostLanguage,
+          mainStore.languageConfirmationDialogLanguages != nil
+        {
+          isLanguageConfirmPresented = true
+        } else {
+          startPosting()
         }
       } label: {
         Image(systemName: "paperplane")
@@ -128,13 +127,69 @@ extension StatusEditor {
         })
     }
 
+    private func startPosting() {
+      let toastID = toastCenter.showProgress(
+        title: String(localized: "toast.posting.title"),
+        systemImage: "paperplane.fill",
+        tint: theme.tintColor,
+        progress: 0
+      )
+      mainStore.postingToastID = toastID
+      close()
+      NotificationCenter.default.post(name: .shareSheetClose, object: nil)
+
+      Task { @MainActor in
+        let (status, errorMessage) = await postAllStatus()
+        handlePostingResult(status: status, errorMessage: errorMessage, toastID: toastID)
+      }
+    }
+
+    private func handlePostingResult(status: Status?, errorMessage: String?, toastID: UUID) {
+      defer {
+        mainStore.postingToastID = nil
+      }
+
+      if status != nil {
+        let successToast = ToastCenter.Toast(
+          id: toastID,
+          title: String(localized: "toast.posting.success.title"),
+          systemImage: "checkmark.circle.fill",
+          tint: theme.tintColor,
+          kind: .message
+        )
+        toastCenter.update(id: toastID, toast: successToast, autoDismissAfter: .seconds(3))
+      } else {
+        saveDraftIfNeeded()
+        let savedMessage = String(localized: "toast.posting.failure.saved-to-drafts")
+        let message: String
+        if let errorMessage, !errorMessage.isEmpty {
+          message = "\(errorMessage)\n\(savedMessage)"
+        } else {
+          message = savedMessage
+        }
+        let errorToast = ToastCenter.Toast(
+          id: toastID,
+          title: String(localized: "status.error.posting.title"),
+          message: message,
+          systemImage: "exclamationmark.triangle.fill",
+          tint: .red,
+          kind: .message
+        )
+        toastCenter.update(id: toastID, toast: errorToast, autoDismissAfter: .seconds(4))
+      }
+    }
+
+    private func saveDraftIfNeeded() {
+      let content = mainStore.statusText.string.trimmingCharacters(in: .whitespacesAndNewlines)
+      guard !content.isEmpty else { return }
+      context.insert(Draft(content: content))
+    }
+
     @discardableResult
     private func postStatus(with model: EditorStore, isMainPost: Bool) async -> Status? {
       let status = await model.postStatus()
       if status != nil, isMainPost {
-        close()
         SoundEffectManager.shared.playSound(.tootSent)
-        NotificationCenter.default.post(name: .shareSheetClose, object: nil)
         #if !targetEnvironment(macCatalyst)
           if !mainStore.mode.isInShareExtension, !preferences.requestedReview {
             if let scene = UIApplication.shared.connectedScenes.first(where: {
@@ -150,15 +205,18 @@ extension StatusEditor {
       return status
     }
 
-    private func postAllStatus() async {
-      guard var latestPost = await postStatus(with: mainStore, isMainPost: true) else { return }
+    private func postAllStatus() async -> (Status?, String?) {
+      guard var latestPost = await postStatus(with: mainStore, isMainPost: true) else {
+        return (nil, mainStore.postingError)
+      }
       for p in followUpStores {
         p.mode = .replyTo(status: latestPost)
         guard let post = await postStatus(with: p, isMainPost: false) else {
-          break
+          return (nil, p.postingError)
         }
         latestPost = post
       }
+      return (latestPost, nil)
     }
 
     #if targetEnvironment(macCatalyst)
@@ -176,11 +234,11 @@ extension StatusEditor {
       {
         Button("status.editor.language-select.confirmation.detected-\(detectedLong)") {
           mainStore.selectedLanguage = detected
-          Task { await postAllStatus() }
+          startPosting()
         }
         Button("status.editor.language-select.confirmation.selected-\(selectedLong)") {
           mainStore.selectedLanguage = selected
-          Task { await postAllStatus() }
+          startPosting()
         }
         Button("action.cancel", role: .cancel) {
           mainStore.languageConfirmationDialogLanguages = nil

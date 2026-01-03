@@ -122,6 +122,7 @@ extension StatusEditor {
     var postingProgress: Double = 0.0
     var postingTimer: Timer?
     var isPosting: Bool = false
+    var postingToastID: UUID?
 
     var mediaPickers: [PhotosPickerItem] = [] {
       didSet {
@@ -277,11 +278,18 @@ extension StatusEditor {
     func postStatus() async -> Status? {
       guard let client else { return nil }
       do {
+        postingProgress = 0
+        if let postingToastID {
+          ToastCenter.shared.updateProgress(id: postingToastID, progress: postingProgress)
+        }
         if postingTimer == nil {
           Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
             Task { @MainActor in
               if self.postingProgress < 100 {
                 self.postingProgress += 0.5
+                if let postingToastID = self.postingToastID {
+                  ToastCenter.shared.updateProgress(id: postingToastID, progress: self.postingProgress)
+                }
               }
               if self.postingProgress >= 100 {
                 self.postingTimer?.invalidate()
@@ -326,7 +334,10 @@ extension StatusEditor {
         postingTimer = nil
 
         withAnimation {
-          postingProgress = 99.0
+          postingProgress = 100.0
+        }
+        if let postingToastID {
+          ToastCenter.shared.updateProgress(id: postingToastID, progress: postingProgress)
         }
         try await Task.sleep(for: .seconds(0.5))
         HapticManager.shared.fireHaptic(.notification(.success))

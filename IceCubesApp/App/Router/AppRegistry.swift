@@ -202,6 +202,7 @@ extension View {
       .environment(PushNotificationsService.shared)
       .environment(AppAccountsManager.shared.currentClient)
       .environment(QuickLook.shared)
+      .environment(ToastCenter.shared)
   }
 
   func withModelContainer() -> some View {

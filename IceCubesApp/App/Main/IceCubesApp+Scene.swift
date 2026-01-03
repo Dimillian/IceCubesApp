@@ -24,6 +24,7 @@ extension IceCubesApp {
         .environment(watcher)
         .environment(pushNotificationsService)
         .environment(appIntentService)
+        .environment(toastCenter)
         .environment(\.isSupporter, isSupporter)
         .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
           if let namespace = quickLook.namespace {
