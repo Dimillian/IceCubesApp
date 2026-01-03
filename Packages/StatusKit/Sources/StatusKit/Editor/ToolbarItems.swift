@@ -18,6 +18,7 @@ extension StatusEditor {
     @Environment(\.modelContext) private var context
     @Environment(UserPreferences.self) private var preferences
     @Environment(Theme.self) private var theme
+    @Environment(RouterPath.self) private var routerPath
     @Environment(ToastCenter.self) private var toastCenter
 
     #if targetEnvironment(macCatalyst)
@@ -149,13 +150,16 @@ extension StatusEditor {
         mainStore.postingToastID = nil
       }
 
-      if status != nil {
+      if let status {
         let successToast = ToastCenter.Toast(
           id: toastID,
           title: String(localized: "toast.posting.success.title"),
           systemImage: "checkmark.circle.fill",
           tint: theme.tintColor,
-          kind: .message
+          kind: .message,
+          action: .init { [routerPath] in
+            routerPath.navigate(to: .statusDetailWithStatus(status: status))
+          }
         )
         toastCenter.update(id: toastID, toast: successToast, autoDismissAfter: .seconds(3))
       } else {

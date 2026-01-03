@@ -14,6 +14,9 @@ public struct ToastOverlayView: View {
           .padding(.top, 12)
           .transition(.move(edge: .top).combined(with: .opacity))
           .onTapGesture {
+            if let action = toast.action {
+              action.handler()
+            }
             toastCenter.dismiss(id: toast.id)
           }
       }
