@@ -18,6 +18,7 @@ struct IceCubesApp: App {
 
   @Environment(\.scenePhase) var scenePhase
   @Environment(\.openWindow) var openWindow
+  @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
   @State var appAccountsManager = AppAccountsManager.shared
   @State var currentInstance = CurrentInstance.shared
