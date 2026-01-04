@@ -46,6 +46,9 @@ public struct InstanceInfoSection: View {
         LabeledContent("Monthly Active Users", value: format(activeMonth))
       }
     }
+    #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+    #endif
 
     Section("Instance Administrator") {
       LabeledContent("instance.info.email", value: instance.contact.email)
