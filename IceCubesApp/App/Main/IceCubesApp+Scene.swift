@@ -9,6 +9,11 @@ extension IceCubesApp {
     WindowGroup(id: "MainWindow") {
       AppView(selectedTab: $selectedTab, appRouterPath: $appRouterPath)
         .applyTheme(theme)
+        .transaction { transaction in
+          if reduceMotion {
+            transaction.disablesAnimations = true
+          }
+        }
         .onAppear {
           setNewClientsInEnv(client: appAccountsManager.currentClient)
           setupRevenueCat()
