@@ -4,6 +4,20 @@ import SwiftUI
 @Observable
 public final class ToastCenter {
   public struct Toast: Identifiable, Equatable {
+    public struct Action: Identifiable, Equatable {
+      public let id: UUID
+      public let handler: () -> Void
+
+      public init(id: UUID = UUID(), handler: @escaping () -> Void) {
+        self.id = id
+        self.handler = handler
+      }
+
+      public static func == (lhs: Action, rhs: Action) -> Bool {
+        lhs.id == rhs.id
+      }
+    }
+
     public enum Kind: Equatable {
       case message
       case progress
@@ -16,6 +30,7 @@ public final class ToastCenter {
     public var tint: Color
     public var kind: Kind
     public var progress: Double?
+    public var action: Action?
 
     public init(
       id: UUID = UUID(),
@@ -24,7 +39,8 @@ public final class ToastCenter {
       systemImage: String? = nil,
       tint: Color = .accentColor,
       kind: Kind = .message,
-      progress: Double? = nil
+      progress: Double? = nil,
+      action: Action? = nil
     ) {
       self.id = id
       self.title = title
@@ -33,6 +49,18 @@ public final class ToastCenter {
       self.tint = tint
       self.kind = kind
       self.progress = progress
+      self.action = action
+    }
+
+    public static func == (lhs: Toast, rhs: Toast) -> Bool {
+      lhs.id == rhs.id &&
+        lhs.title == rhs.title &&
+        lhs.message == rhs.message &&
+        lhs.systemImage == rhs.systemImage &&
+        lhs.tint == rhs.tint &&
+        lhs.kind == rhs.kind &&
+        lhs.progress == rhs.progress &&
+        lhs.action?.id == rhs.action?.id
     }
   }
 
