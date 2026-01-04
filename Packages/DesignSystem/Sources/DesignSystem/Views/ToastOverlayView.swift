@@ -12,6 +12,7 @@ public struct ToastOverlayView: View {
         ToastView(toast: toast)
           .padding(.horizontal, .layoutPadding)
           .padding(.top, 12)
+          .contentShape(Rectangle())
           .transition(.move(edge: .top).combined(with: .opacity))
           .onTapGesture {
             if let action = toast.action {
