@@ -1,4 +1,3 @@
-import DesignSystem
 import Models
 import NetworkClient
 import SwiftUI
@@ -8,7 +7,6 @@ struct NotificationsPolicyView: View {
   @Environment(\.dismiss) private var dismiss
 
   @Environment(MastodonClient.self) private var client
-  @Environment(Theme.self) private var theme
 
   @State private var policy: NotificationsPolicy?
   @State private var isUpdating: Bool = false
@@ -104,23 +102,26 @@ struct NotificationsPolicyView: View {
             }
           }
         }
-        #if !os(visionOS)
-          .listRowBackground(theme.primaryBackgroundColor.opacity(0.3))
-        #endif
       }
-      .formStyle(.grouped)
       .navigationTitle("notifications.content-filter.title")
       .navigationBarTitleDisplayMode(.inline)
       .scrollContentBackground(.hidden)
-      .toolbar { CloseToolbarItem() }
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
+          Button {
+            dismiss()
+          } label: {
+            Text("action.done").bold()
+          }
+        }
+      }
       .disabled(policy == nil || isUpdating)
       .task {
         await getPolicy()
       }
       .redacted(reason: policy == nil ? .placeholder : [])
     }
-    .presentationDetents([.height(500)])
-    .presentationBackground(.thinMaterial)
+    .presentationDetents([.medium])
   }
 
   private var pickerMenu: some View {
