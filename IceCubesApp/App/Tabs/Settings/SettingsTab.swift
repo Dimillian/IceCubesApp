@@ -38,6 +38,9 @@ struct SettingsTabs: View {
         appSection
         accountsSection
         generalSection
+        socialKeyboardSection
+        streamHomeTimelineSection
+        timelineFetchSection
         otherSections
         cacheSection
       }
@@ -228,22 +231,55 @@ struct SettingsTabs: View {
         }
         .disabled(preferences.preferredBrowser != PreferredBrowser.inAppSafari)
       #endif
-      Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
-        Label("settings.other.social-keyboard", systemImage: "keyboard")
-      }
       Toggle(isOn: $preferences.soundEffectEnabled) {
         Label("settings.other.sound-effect", systemImage: "hifispeaker")
       }
+    } header: {
+      Text("settings.section.other")
+    }
+    #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+    #endif
+  }
+
+  private var socialKeyboardSection: some View {
+    @Bindable var preferences = preferences
+    return Section {
+      Toggle(isOn: $preferences.isSocialKeyboardEnabled) {
+        Label("settings.other.social-keyboard", systemImage: "keyboard")
+      }
+    } footer: {
+      Text("Adds a social keyboard row to quickly insert mentions, hashtags, and emojis.")
+    }
+    #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+    #endif
+  }
+
+  private var streamHomeTimelineSection: some View {
+    @Bindable var preferences = preferences
+    return Section {
       Toggle(isOn: $preferences.streamHomeTimeline) {
         Label("Stream home timeline", systemImage: "antenna.radiowaves.left.and.right")
           .symbolVariant(preferences.streamHomeTimeline ? .none : .slash)
       }
+    } footer: {
+      Text("Keeps your home timeline up to date in real time using streaming when available.")
+    }
+    #if !os(visionOS)
+      .listRowBackground(theme.primaryBackgroundColor)
+    #endif
+  }
+
+  private var timelineFetchSection: some View {
+    @Bindable var preferences = preferences
+    return Section {
       Toggle(isOn: $preferences.fullTimelineFetch) {
         Label("Full timeline fetch", systemImage: "arrow.triangle.2.circlepath")
           .symbolVariant(preferences.fullTimelineFetch ? .none : .slash)
       }
-    } header: {
-      Text("settings.section.other")
+    } footer: {
+      Text("Fetches additional posts on refresh so you can catch up beyond the most recent page.")
     }
     #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
