@@ -249,7 +249,7 @@ struct SettingsTabs: View {
         Label("settings.other.social-keyboard", systemImage: "keyboard")
       }
     } footer: {
-      Text("Adds a social keyboard row to quickly insert mentions, hashtags, and emojis.")
+      Text("Adds @ and # keys directly on the keyboard for faster mentions and hashtags.")
     }
     #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
@@ -264,7 +264,7 @@ struct SettingsTabs: View {
           .symbolVariant(preferences.streamHomeTimeline ? .none : .slash)
       }
     } footer: {
-      Text("Keeps your home timeline up to date in real time using streaming when available.")
+      Text("Keeps your home timeline up to date in real time using streaming when available. Disable in case of performance issues.")
     }
     #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
@@ -279,7 +279,7 @@ struct SettingsTabs: View {
           .symbolVariant(preferences.fullTimelineFetch ? .none : .slash)
       }
     } footer: {
-      Text("Fetches additional posts on refresh so you can catch up beyond the most recent page.")
+      Text("Fetches all new timeline posts (up to 800) instead of only the latest 40 + manually loading the gap.")
     }
     #if !os(visionOS)
       .listRowBackground(theme.primaryBackgroundColor)
