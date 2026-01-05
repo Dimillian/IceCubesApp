@@ -14,6 +14,7 @@ struct MetricsChartCard: View {
   @Binding var chartStyle: MetricChartStyle
   let maxValue: Int
   let onSelectMetric: (MetricType) -> Void
+  @State private var selectedDate: Date?
 
   var body: some View {
     VStack(alignment: .leading, spacing: 24) {
@@ -54,26 +55,35 @@ struct MetricsChartCard: View {
         .frame(width: 96)
       }
 
-      Chart(chartStyle == .bars ? animatedDailyData : dailyData) { data in
-        switch chartStyle {
-        case .bars:
-          let halfWidth = barWidthSeconds / 2
-          RectangleMark(
-            xStart: .value("DayStart", data.dayStart.addingTimeInterval(-halfWidth)),
-            xEnd: .value("DayEnd", data.dayStart.addingTimeInterval(halfWidth)),
-            yStart: .value("Base", 0),
-            yEnd: .value("Count", data.count)
-          )
-          .foregroundStyle(selectedMetric.tintColor)
-        case .line:
-          LineMark(
-            x: .value("Day", data.dayStart),
-            y: .value("Count", data.count)
-          )
-          .foregroundStyle(selectedMetric.tintColor)
-          .symbol(.circle)
+      Chart {
+        ForEach(chartStyle == .bars ? animatedDailyData : dailyData) { data in
+          switch chartStyle {
+          case .bars:
+            let halfWidth = barWidthSeconds / 2
+            RectangleMark(
+              xStart: .value("DayStart", data.dayStart.addingTimeInterval(-halfWidth)),
+              xEnd: .value("DayEnd", data.dayStart.addingTimeInterval(halfWidth)),
+              yStart: .value("Base", 0),
+              yEnd: .value("Count", data.count)
+            )
+            .foregroundStyle(selectedMetric.tintColor)
+          case .line:
+            LineMark(
+              x: .value("Day", data.dayStart),
+              y: .value("Count", data.count)
+            )
+            .foregroundStyle(selectedMetric.tintColor)
+            .symbol(.circle)
+          }
+        }
+
+        if let selectedData, !isLoading {
+          RuleMark(x: .value("Selected", selectedData.dayStart))
+            .foregroundStyle(theme.labelColor.opacity(0.35))
+            .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 4]))
         }
       }
+      .chartXSelection(value: $selectedDate)
       .chartXScale(range: .plotDimension(startPadding: 12, endPadding: 12))
       .chartYScale(domain: 0...max(maxValue, 1))
       .chartXAxis {
@@ -87,13 +97,20 @@ struct MetricsChartCard: View {
       .chartYAxis {
         AxisMarks(position: .leading)
       }
+      .chartOverlay { proxy in
+        MetricsChartSelectionOverlay(
+          proxy: proxy,
+          selectedData: selectedData,
+          isLoading: isLoading
+        )
+      }
       .frame(height: 220)
       .redacted(reason: isLoading ? .placeholder : [])
       .animation(.easeInOut(duration: 0.25), value: animatedDailyData)
       .animation(.easeInOut(duration: 0.25), value: chartStyle)
     }
     .padding(12)
-    .background(theme.secondaryBackgroundColor, in: RoundedRectangle(cornerRadius: 16))
+    .withCardBackground(cornerRadius: 16)
   }
 
   private var axisDates: [Date] {
@@ -123,6 +140,11 @@ struct MetricsChartCard: View {
       }
       return dates
     }
+  }
+
+  private var selectedData: DailyMetric? {
+    guard let selectedDate else { return nil }
+    return dailyData.first { calendar.isDate($0.dayStart, inSameDayAs: selectedDate) }
   }
 
   private var barWidthSeconds: TimeInterval {
@@ -162,7 +184,7 @@ struct MetricSummaryCard: View {
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(12)
-    .background(theme.secondaryBackgroundColor, in: RoundedRectangle(cornerRadius: 14))
+    .withCardBackground(cornerRadius: 14)
     .redacted(reason: isLoading ? .placeholder : [])
   }
 }
