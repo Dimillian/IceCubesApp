@@ -127,7 +127,7 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
   ) -> some View {
     switch self {
     case let .anyTimelineFilter(filter):
-      TimelineTab(timeline: .constant(filter))
+      TimelineFilterTab(initialFilter: filter)
     case .timeline:
       TimelineTab(canFilterTimeline: true, timeline: homeTimeline, pinedFilters: pinnedFilters)
     case .trending:
@@ -277,6 +277,18 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
     case .other:
       ""
     }
+  }
+}
+
+private struct TimelineFilterTab: View {
+  @State private var timeline: TimelineFilter
+
+  init(initialFilter: TimelineFilter) {
+    _timeline = State(initialValue: initialFilter)
+  }
+
+  var body: some View {
+    TimelineTab(timeline: $timeline)
   }
 }
 
