@@ -12,7 +12,7 @@ struct AccountMetricsStore {
   ) {
     var calendar = Calendar.current
     calendar.timeZone = TimeZone(secondsFromGMT: 0) ?? calendar.timeZone
-    let allowedTypes = Set(MetricType.allCases.map(\.rawValue))
+    let allowedTypes = Set(MetricType.allCases.map(\.rawValue)).union(["quote"])
 
     for group in groups where allowedTypes.contains(group.type) {
       let storageKey = metricsGroupKey(
@@ -37,6 +37,7 @@ struct AccountMetricsStore {
         existing.latestPageNotificationAt = group.latestPageNotificationAt.asDate
         existing.dayStart = dayStart
         existing.type = group.type
+        existing.statusId = group.statusId ?? ""
       } else {
         let newGroup = MetricsNotificationGroup(
           groupKey: storageKey,
@@ -45,6 +46,7 @@ struct AccountMetricsStore {
           mostRecentNotificationId: group.mostRecentNotificationId,
           latestPageNotificationAt: group.latestPageNotificationAt.asDate,
           dayStart: dayStart,
+          statusId: group.statusId ?? "",
           accountId: accountId,
           server: server
         )

@@ -3,6 +3,7 @@ import DesignSystem
 import Env
 import Models
 import NetworkClient
+import StatusKit
 import SwiftData
 import SwiftUI
 
@@ -10,6 +11,7 @@ public struct AccountMetricsView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(MastodonClient.self) private var client
   @Environment(Theme.self) private var theme
+  @Environment(RouterPath.self) private var routerPath
   @Environment(\.modelContext) private var modelContext
   @Environment(\.calendar) private var calendar
 
@@ -21,6 +23,10 @@ public struct AccountMetricsView: View {
   @State private var dailyData: [DailyMetric] = []
   @State private var animatedDailyData: [DailyMetric] = []
   @State private var totals: [MetricType: Int] = [:]
+  @State private var deltas: [MetricType: Double?] = [:]
+  @State private var topStatusIds: [String] = []
+  @State private var topStatuses: [Status] = []
+  @State private var isLoadingTopStatuses = false
   @State private var isLoading = false
 
   private var taskId: String {
@@ -59,8 +65,34 @@ public struct AccountMetricsView: View {
             MetricSummaryCard(
               title: metric.title,
               value: totals[metric] ?? 0,
+              delta: deltas[metric] ?? nil,
               isLoading: isLoading
             )
+          }
+        }
+
+        if isLoadingTopStatuses || !topStatuses.isEmpty {
+          VStack(alignment: .leading, spacing: 8) {
+            Text("Top posts")
+              .font(.headline)
+              .foregroundStyle(theme.labelColor)
+            if isLoadingTopStatuses && topStatuses.isEmpty {
+              VStack(spacing: 8) {
+                ForEach(0..<3, id: \.self) { _ in
+                  StatusEmbeddedView(
+                    status: .placeholder(),
+                    client: client,
+                    routerPath: routerPath
+                  )
+                }
+              }
+              .redacted(reason: .placeholder)
+              .frame(maxWidth: .infinity, alignment: .center)
+            } else {
+              ForEach(topStatuses) { status in
+                StatusEmbeddedView(status: status, client: client, routerPath: routerPath)
+              }
+            }
           }
         }
 
@@ -84,6 +116,9 @@ public struct AccountMetricsView: View {
     .refreshable {
       await refreshMetrics(forceBackfill: false)
     }
+    .task(id: topStatusIds) {
+      await loadTopStatuses()
+    }
   }
 
   @MainActor
@@ -96,13 +131,17 @@ public struct AccountMetricsView: View {
 
     let startDate = rangeStartDate()
     let endDate = calendar.startOfDay(for: Date())
+    let previousStartDate =
+      calendar.date(byAdding: .day, value: -range.rawValue, to: startDate) ?? startDate
+    let previousEndDate =
+      calendar.date(byAdding: .day, value: -1, to: startDate) ?? startDate
     let server = client.server
 
     let descriptor = FetchDescriptor<MetricsNotificationGroup>(
       predicate: #Predicate {
         $0.accountId == accountId
           && $0.server == server
-          && $0.dayStart >= startDate
+          && $0.dayStart >= previousStartDate
           && $0.dayStart <= endDate
       },
       sortBy: [SortDescriptor(\.dayStart, order: .forward)]
@@ -116,19 +155,41 @@ public struct AccountMetricsView: View {
       let dayGroups = groupedByDay[dayStart] ?? []
       let count =
         dayGroups
-        .filter { $0.type == selectedMetric.rawValue }
+        .filter { metricTypes(for: selectedMetric).contains($0.type) }
         .reduce(0) { $0 + $1.notificationsCount }
       return DailyMetric(dayStart: dayStart, count: count)
     }
 
     let updatedTotals = Dictionary(
       uniqueKeysWithValues: MetricType.allCases.map { metric in
-        let count =
-          groups
-          .filter { $0.type == metric.rawValue }
+        let count = groups
+          .filter { metricTypes(for: metric).contains($0.type) }
+          .filter { $0.dayStart >= startDate && $0.dayStart <= endDate }
           .reduce(0) { $0 + $1.notificationsCount }
         return (metric, count)
       })
+
+    let updatedDeltas: [MetricType: Double?] = Dictionary(
+      uniqueKeysWithValues: MetricType.allCases.map { metric in
+        let current = updatedTotals[metric] ?? 0
+        let previous = groups
+          .filter { metricTypes(for: metric).contains($0.type) }
+          .filter { $0.dayStart >= previousStartDate && $0.dayStart <= previousEndDate }
+          .reduce(0) { $0 + $1.notificationsCount }
+
+        guard previous > 0 else {
+          return (metric, nil)
+        }
+
+        let delta = (Double(current) - Double(previous)) / Double(previous)
+        return (metric, delta)
+      })
+
+    let updatedTopStatusIds = topStatusIds(
+      groups: groups,
+      startDate: startDate,
+      endDate: endDate
+    )
 
     if updatedDailyData.isEmpty {
       dailyData = []
@@ -143,6 +204,8 @@ public struct AccountMetricsView: View {
 
     withAnimation(.snappy) {
       totals = updatedTotals
+      deltas = updatedDeltas
+      topStatusIds = updatedTopStatusIds
     }
   }
 
@@ -158,6 +221,33 @@ public struct AccountMetricsView: View {
     }
   }
 
+  private func metricTypes(for metric: MetricType) -> [String] {
+    switch metric {
+    case .reblog:
+      return ["reblog", "quote"]
+    default:
+      return [metric.rawValue]
+    }
+  }
+
+  private func topStatusIds(
+    groups: [MetricsNotificationGroup],
+    startDate: Date,
+    endDate: Date
+  ) -> [String] {
+    let counts = groups
+      .filter { !$0.statusId.isEmpty }
+      .filter { $0.dayStart >= startDate && $0.dayStart <= endDate }
+      .reduce(into: [String: Int]()) { result, group in
+        result[group.statusId, default: 0] += group.notificationsCount
+      }
+
+    return counts
+      .sorted { $0.value > $1.value }
+      .prefix(3)
+      .map(\.key)
+  }
+
 }
 
 extension AccountMetricsView {
@@ -169,9 +259,11 @@ extension AccountMetricsView {
 
     do {
       try await syncLatestGroups(accountId: accountId, server: client.server)
-      if forceBackfill {
-        try await backfillGroupsIfNeeded(accountId: accountId, server: client.server)
-      }
+      try await backfillGroupsIfNeeded(
+        accountId: accountId,
+        server: client.server,
+        force: forceBackfill
+      )
       metricsStore.pruneOldGroups(
         accountId: accountId,
         server: client.server,
@@ -204,7 +296,11 @@ extension AccountMetricsView {
   }
 
   @MainActor
-  private func backfillGroupsIfNeeded(accountId: String, server: String) async throws {
+  private func backfillGroupsIfNeeded(
+    accountId: String,
+    server: String,
+    force: Bool
+  ) async throws {
     let startDate = rangeStartDate()
     let groupedTypes = Set(MetricType.allCases.map(\.rawValue))
     var oldestDayStart = metricsStore.earliestStoredDayStart(
@@ -213,7 +309,9 @@ extension AccountMetricsView {
       modelContext: modelContext
     )
 
-    guard oldestDayStart == nil || oldestDayStart! > startDate else { return }
+    if !force {
+      guard oldestDayStart == nil || oldestDayStart! > startDate else { return }
+    }
 
     var remainingPages = 12
     var maxId = metricsStore.oldestStoredNotificationId(
@@ -258,7 +356,7 @@ extension AccountMetricsView {
     sinceId: String?,
     maxId: String?
   ) async throws -> [NotificationGroup] {
-    let types = MetricType.allCases.map(\.rawValue)
+    let types = MetricType.allCases.map(\.rawValue) + ["quote"]
     let groupedTypes = ["favourite", "follow", "reblog"]
 
     let results: GroupedNotificationsResults = try await client.get(
@@ -275,5 +373,36 @@ extension AccountMetricsView {
     )
 
     return results.notificationGroups
+  }
+
+  @MainActor
+  private func loadTopStatuses() async {
+    let ids = topStatusIds
+    guard !ids.isEmpty else {
+      topStatuses = []
+      return
+    }
+
+    isLoadingTopStatuses = true
+    defer { isLoadingTopStatuses = false }
+
+    let statuses = await withTaskGroup(of: (String, Status?).self) { group in
+      for id in ids {
+        group.addTask {
+          let status: Status? = try? await client.get(endpoint: Statuses.status(id: id))
+          return (id, status)
+        }
+      }
+
+      var results: [String: Status] = [:]
+      for await (id, status) in group {
+        if let status {
+          results[id] = status
+        }
+      }
+      return ids.compactMap { results[$0] }
+    }
+
+    topStatuses = statuses
   }
 }

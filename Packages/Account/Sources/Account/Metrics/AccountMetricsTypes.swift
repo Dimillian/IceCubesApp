@@ -31,7 +31,6 @@ enum MetricType: String, CaseIterable, Identifiable {
   case favourite
   case reblog
   case mention
-  case quote
 
   var id: String { rawValue }
 
@@ -41,7 +40,6 @@ enum MetricType: String, CaseIterable, Identifiable {
     case .favourite: "Favorites"
     case .reblog: "Boosts"
     case .mention: "Replies"
-    case .quote: "Quotes"
     }
   }
 
@@ -55,8 +53,6 @@ enum MetricType: String, CaseIterable, Identifiable {
       Image("Rocket.Fill")
     case .mention:
       Image(systemName: "at")
-    case .quote:
-      Image(systemName: "quote.bubble.fill")
     }
   }
 
@@ -65,7 +61,7 @@ enum MetricType: String, CaseIterable, Identifiable {
     switch self {
     case .mention:
       Theme.shared.tintColor.opacity(0.80)
-    case .reblog, .quote:
+    case .reblog:
       Color.teal.opacity(0.80)
     case .follow:
       Color.cyan.opacity(0.80)

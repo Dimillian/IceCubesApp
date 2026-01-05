@@ -8,6 +8,7 @@ import SwiftData
   public var mostRecentNotificationId: Int = 0
   public var latestPageNotificationAt: Date = Date()
   public var dayStart: Date = Date()
+  public var statusId: String = ""
   public var accountId: String = ""
   public var server: String = ""
 
@@ -18,6 +19,7 @@ import SwiftData
     mostRecentNotificationId: Int,
     latestPageNotificationAt: Date,
     dayStart: Date,
+    statusId: String,
     accountId: String,
     server: String
   ) {
@@ -27,6 +29,7 @@ import SwiftData
     self.mostRecentNotificationId = mostRecentNotificationId
     self.latestPageNotificationAt = latestPageNotificationAt
     self.dayStart = dayStart
+    self.statusId = statusId
     self.accountId = accountId
     self.server = server
   }

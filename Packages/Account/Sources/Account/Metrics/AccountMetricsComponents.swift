@@ -142,6 +142,7 @@ struct MetricSummaryCard: View {
   @Environment(Theme.self) private var theme
   let title: String
   let value: Int
+  let delta: Double?
   let isLoading: Bool
 
   var body: some View {
@@ -149,8 +150,15 @@ struct MetricSummaryCard: View {
       Text(title)
         .font(.subheadline)
         .foregroundStyle(.secondary)
-      Text(value, format: .number)
-        .font(.title2.bold())
+      HStack(alignment: .firstTextBaseline, spacing: 8) {
+        Text(value, format: .number)
+          .font(.title2.bold())
+        if let delta {
+          Text(delta, format: .percent.precision(.fractionLength(0)))
+            .font(.subheadline.weight(.semibold))
+            .foregroundStyle(delta >= 0 ? Color.green : Color.red)
+        }
+      }
     }
     .frame(maxWidth: .infinity, alignment: .leading)
     .padding(12)
