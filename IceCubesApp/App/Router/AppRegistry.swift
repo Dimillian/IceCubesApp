@@ -92,6 +92,8 @@ extension View {
         ConversationsListView()
       case .instanceInfo(let instance):
         InstanceInfoView(instance: instance)
+      case .metrics:
+        AccountMetricsView()
       }
     }
   }
@@ -211,6 +213,7 @@ extension View {
       LocalTimeline.self,
       TagGroup.self,
       RecentTag.self,
+      MetricsNotificationGroup.self,
     ])
   }
 }

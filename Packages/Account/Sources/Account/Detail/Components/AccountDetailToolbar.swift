@@ -151,6 +151,14 @@ private struct CurrentUserMenuItems: View {
       Divider()
 
       Button {
+        routerPath.navigate(to: .metrics)
+      } label: {
+        Label("Metrics", systemImage: "chart.bar")
+      }
+
+      Divider()
+
+      Button {
         routerPath.navigate(to: .blockedAccounts)
       } label: {
         Label("account.blocked", systemImage: "person.crop.circle.badge.xmark")

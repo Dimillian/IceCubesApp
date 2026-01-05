@@ -32,6 +32,7 @@ public enum RouterDestination: Hashable {
   case mutedAccounts
   case conversations
   case instanceInfo(instance: Instance)
+  case metrics
 }
 
 public enum WindowDestinationEditor: Hashable, Codable {

@@ -39,6 +39,7 @@ class ShareViewController: UIViewController {
             LocalTimeline.self,
             TagGroup.self,
             RecentTag.self,
+            MetricsNotificationGroup.self,
           ])
           .tint(theme.tintColor)
           .preferredColorScheme(colorScheme == .light ? .light : .dark)

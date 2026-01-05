@@ -15,6 +15,7 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
   case profile
   case bookmarks
   case favorites
+  case metrics
   case post
   case followedTags
   case lists
@@ -40,6 +41,7 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
     case .followedTags: 14
     case .lists: 15
     case .links: 16
+    case .metrics: 17
     case .anyTimelineFilter(let filter):
       filter.hashValue
     }
@@ -59,6 +61,7 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
       .profile,
       .bookmarks,
       .favorites,
+      .metrics,
       .post,
       .followedTags,
       .lists,
@@ -101,6 +104,8 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
       self = .lists
     case 16:
       self = .links
+    case 17:
+      self = .metrics
     default:
       self = .other
     }
@@ -150,6 +155,10 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
     case .favorites:
       NavigationTab {
         AccountStatusesListView(mode: .favorites)
+      }
+    case .metrics:
+      NavigationTab {
+        AccountMetricsView()
       }
     case .followedTags:
       NavigationTab {
@@ -212,6 +221,8 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
       "accessibility.tabs.profile.picker.bookmarks"
     case .favorites:
       "accessibility.tabs.profile.picker.favorites"
+    case .metrics:
+      "Metrics"
     case .post:
       "menu.new-post"
     case .followedTags:
@@ -253,6 +264,8 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
       "bookmark"
     case .favorites:
       "star"
+    case .metrics:
+      "chart.bar"
     case .post:
       "square.and.pencil"
     case .followedTags:
@@ -309,7 +322,7 @@ enum SidebarSections: Int, Identifiable {
     case .activities:
       return [.notifications, .mentions, .messages]
     case .account:
-      return [.profile, .bookmarks, .favorites]
+      return [.profile, .bookmarks, .favorites, .metrics]
     case .app:
       return [.settings]
     case .loggedOutTabs:
