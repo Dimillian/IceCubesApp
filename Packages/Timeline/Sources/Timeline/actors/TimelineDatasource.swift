@@ -39,16 +39,13 @@ actor TimelineDatasource {
     let contentFilter = await TimelineContentFilter.shared
     let snapshot = await contentFilter.snapshot()
     var filtered: [TimelineItem] = []
-    let hideMedia = await UserPreferences.shared.hidePostsWithMedia
     for item in items {
       switch item {
       case .gap:
         filtered.append(item)
       case .status(let status):
         if shouldShowStatus(status, filter: snapshot) {
-          if !hideMedia || status.mediaAttachments.isEmpty {
-           filtered.append(item)
-          }
+          filtered.append(item)
         }
       }
     }
@@ -189,5 +186,6 @@ actor TimelineDatasource {
       && (showBoosts || status.reblog == nil)
       && (showThreads || status.inReplyToAccountId != status.account.id)
       && (showQuotePosts || (!hasQuote && !hasLegacyQuoteLink))
+      && (!filter.hidePostsWithMedia || status.mediaAttachments.isEmpty)
   }
 }

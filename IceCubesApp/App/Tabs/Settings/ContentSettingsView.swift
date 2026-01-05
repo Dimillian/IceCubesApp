@@ -31,9 +31,6 @@ struct ContentSettingsView: View {
         Toggle(isOn: $userPreferences.animateEmojis) {
             Text("settings.other.animate-emojis")
         }
-        Toggle(isOn: $userPreferences.hidePostsWithMedia) {
-            Text("settings.content.media.hide-posts-with-media")
-        }
       }
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
@@ -149,6 +146,9 @@ struct ContentSettingsView: View {
         }
         Toggle(isOn: $contentFilter.showQuotePosts) {
           Label("timeline.filter.show-quote", systemImage: "quote.bubble")
+        }
+        Toggle(isOn: $contentFilter.hidePostsWithMedia) {
+          Label("timeline.filter.hide-posts-with-media", systemImage: "photo.on.rectangle.angled")
         }
       }
       #if !os(visionOS)

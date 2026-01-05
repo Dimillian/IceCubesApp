@@ -79,9 +79,6 @@ import SwiftUI
     // Notifications
     @AppStorage("notifications-truncate-status-content")
     public var notificationsTruncateStatusContent: Bool = true
-      
-    @AppStorage("hide-posts-with-media")
-    public var hidePostsWithMedia: Bool = false
 
     init() {
       prepareTranslationType()
@@ -392,12 +389,6 @@ import SwiftUI
       storage.notificationsTruncateStatusContent = notificationsTruncateStatusContent
     }
   }
-    
-    public var hidePostsWithMedia: Bool {
-        didSet {
-            storage.hidePostsWithMedia = hidePostsWithMedia
-        }
-    }
 
   public func getRealMaxIndent() -> UInt {
     showReplyIndentation ? maxReplyIndentation : 0
@@ -579,7 +570,6 @@ import SwiftUI
     notificationsTruncateStatusContent = storage.notificationsTruncateStatusContent
     streamHomeTimeline = storage.streamHomeTimeline
     fullTimelineFetch = storage.fullTimelineFetch
-    hidePostsWithMedia = storage.hidePostsWithMedia
   }
 }
 
