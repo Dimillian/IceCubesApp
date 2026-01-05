@@ -50,7 +50,7 @@ final class AccountMetricsStoreTests: XCTestCase {
 
   func testUpsertUpdatesExistingGroup() throws {
     let context = try makeContext()
-    let calendar = makeCalendar()
+    let calendar = Calendar.current
     let store = AccountMetricsStore()
     let accountId = "account-1"
     let server = "example.com"
@@ -98,7 +98,7 @@ final class AccountMetricsStoreTests: XCTestCase {
 
   func testPruneOldGroupsRemovesEntriesBeforeRetention() throws {
     let context = try makeContext()
-    let calendar = makeCalendar()
+    let calendar = Calendar.current
     let store = AccountMetricsStore()
     let accountId = "account-1"
     let server = "example.com"
@@ -148,12 +148,6 @@ final class AccountMetricsStoreTests: XCTestCase {
       configurations: config
     )
     return ModelContext(container)
-  }
-
-  private func makeCalendar() -> Calendar {
-    var calendar = Calendar(identifier: .gregorian)
-    calendar.timeZone = TimeZone(secondsFromGMT: 0) ?? TimeZone.current
-    return calendar
   }
 
   private func makeDate(_ value: String) -> Date {

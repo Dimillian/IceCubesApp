@@ -10,8 +10,7 @@ struct AccountMetricsStore {
     server: String,
     modelContext: ModelContext
   ) {
-    var calendar = Calendar.current
-    calendar.timeZone = TimeZone(secondsFromGMT: 0) ?? calendar.timeZone
+    let calendar = Calendar.current
     let allowedTypes = Set(MetricType.allCases.map(\.rawValue)).union(["quote"])
 
     for group in groups where allowedTypes.contains(group.type) {
@@ -62,8 +61,7 @@ struct AccountMetricsStore {
     keepingDays: Int,
     modelContext: ModelContext
   ) {
-    var calendar = Calendar.current
-    calendar.timeZone = TimeZone(secondsFromGMT: 0) ?? calendar.timeZone
+    let calendar = Calendar.current
     let cutoff = calendar.date(byAdding: .day, value: -keepingDays, to: Date()) ?? Date()
     let descriptor = FetchDescriptor<MetricsNotificationGroup>(
       predicate: #Predicate {
