@@ -98,7 +98,6 @@ It has a dedicated UI with a sidebar on macOS and iPadOS.
 * Rich profile support.
 * Fully access & tweak your privacy settings.
 * Edit your profile, from your bio to your custom fields.
-* Easy access to Mastometrics.
 * Add a custom server-side note visible only to you for any profile.
 * Translate the bio of any profile to your language.
 * Easy access to edit your server-side timeline filters.

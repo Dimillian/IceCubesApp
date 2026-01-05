@@ -147,7 +147,7 @@ private struct CurrentUserMenuItems: View {
       Label("settings.push.navigation-title", systemImage: "bell")
     }
 
-    if let account = account {
+    if account != nil {
       Divider()
 
       Button {
@@ -162,20 +162,6 @@ private struct CurrentUserMenuItems: View {
         Label("account.muted", systemImage: "person.crop.circle.badge.moon")
       }
 
-      Divider()
-
-      Button {
-        if let url = URL(
-          string:
-            "https://mastometrics.com/auth/login?username=\(account.acct)@\(client.server)&instance=\(client.server)&auto=true"
-        ) {
-          openURL(url)
-        }
-      } label: {
-        Label("Mastometrics", systemImage: "chart.xyaxis.line")
-      }
-
-      Divider()
     }
 
     Button {
