@@ -85452,7 +85452,7 @@
         }
       }
     },
-    "settings.content.media.hide-posts-with-media" : {
+    "timeline.filter.hide-posts-with-media" : {
       "localizations" : {
         "be" : {
           "stringUnit" : {
