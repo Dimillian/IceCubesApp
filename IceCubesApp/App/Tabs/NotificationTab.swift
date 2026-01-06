@@ -14,7 +14,6 @@ struct NotificationsTab: View {
 
   @Environment(Theme.self) private var theme
   @Environment(MastodonClient.self) private var client
-  @Environment(StreamWatcher.self) private var watcher
   @Environment(AppAccountsManager.self) private var appAccount
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(UserPreferences.self) private var userPreferences
@@ -94,9 +93,6 @@ struct NotificationsTab: View {
         userPreferences.notificationsCount[token] ?? 0 > 0
       {
         userPreferences.notificationsCount[token] = 0
-      }
-      if watcher.unreadNotificationsCount > 0 {
-        watcher.unreadNotificationsCount = 0
       }
     }
   }

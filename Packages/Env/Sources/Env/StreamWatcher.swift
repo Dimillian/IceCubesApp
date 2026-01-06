@@ -25,7 +25,6 @@ import Observation
   }
 
   public var events: [any StreamEvent] = []
-  public var unreadNotificationsCount: Int = 0
   public var latestEvent: (any StreamEvent)?
 
   private let logger = Logger(subsystem: "com.icecubesapp", category: "stream")
@@ -103,11 +102,6 @@ import Observation
               if let event = self.rawEventToEvent(rawEvent: rawEvent) {
                 self.events.append(event)
                 self.latestEvent = event
-                if let event = event as? StreamEventNotification,
-                  event.notification.status?.visibility != .direct
-                {
-                  self.unreadNotificationsCount += 1
-                }
               }
             }
           } catch {

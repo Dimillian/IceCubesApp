@@ -22,7 +22,6 @@ struct AppView: View {
   @Environment(AppAccountsManager.self) private var appAccountsManager
   @Environment(UserPreferences.self) private var userPreferences
   @Environment(Theme.self) private var theme
-  @Environment(StreamWatcher.self) private var watcher
   @Environment(CurrentAccount.self) private var currentAccount
 
   @Binding var selectedTab: AppTab
@@ -177,7 +176,7 @@ struct AppView: View {
     if tab == .notifications, selectedTab != tab,
       let token = appAccountsManager.currentAccount.oauthToken
     {
-      return watcher.unreadNotificationsCount + (userPreferences.notificationsCount[token] ?? 0)
+      return userPreferences.notificationsCount[token] ?? 0
     }
     return 0
   }

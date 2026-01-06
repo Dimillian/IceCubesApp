@@ -62,6 +62,7 @@ struct IceCubesApp: App {
         client: client, instanceStreamingURL: currentInstance.instance?.urls?.streamingApi)
       watcher.watch(streams: [.user, .direct])
     }
+    pushNotificationsService.tokens = appAccountsManager.pushAccounts.map{ $0.token }
   }
 
   func handleScenePhase(scenePhase: ScenePhase) {
@@ -126,10 +127,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_: UIApplication, didReceiveRemoteNotification _: [AnyHashable: Any]) async
     -> UIBackgroundFetchResult
   {
-    UserPreferences.shared.reloadNotificationsCount(
-      tokens: AppAccountsManager.shared.availableAccounts.compactMap(\.oauthToken))
     return .noData
   }
+  
 
   func application(
     _: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession,

@@ -109,6 +109,8 @@ public struct HandledNotification: Equatable {
   public var pushToken: Data?
 
   public var handledNotification: HandledNotification?
+  
+  public var tokens: [OauthToken] = []
 
   override init() {
     super.init()
@@ -182,6 +184,7 @@ extension PushNotificationsService: UNUserNotificationCenterDelegate {
     _ center: UNUserNotificationCenter,
     willPresent notification: UNNotification
   ) async -> UNNotificationPresentationOptions {
+    UserPreferences.shared.reloadNotificationsCount(tokens: tokens)
     return [.banner, .sound]
   }
 }
