@@ -318,6 +318,7 @@ public final class NotificationsListDataSource {
     if let status = event.notification.status,
       status.isHidden(in: .notifications)
     {
+      latestNotificationIdForMarker = event.notification.id
       return
     }
     if event.notification.isConsolidable(selectedType: selectedType),
@@ -356,6 +357,7 @@ public final class NotificationsListDataSource {
     if let status = event.notification.status,
       status.isHidden(in: .notifications)
     {
+      latestNotificationIdForMarker = event.notification.id
       return
     }
     guard let groupKey = event.notification.groupKey else { return }
