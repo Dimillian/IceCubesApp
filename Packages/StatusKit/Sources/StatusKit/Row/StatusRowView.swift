@@ -21,6 +21,7 @@ public struct StatusRowView: View {
   @Environment(QuickLook.self) private var quickLook
   @Environment(Theme.self) private var theme
   @Environment(MastodonClient.self) private var client
+  @Environment(ToastCenter.self) private var toastCenter
 
   @State private var showSelectableText: Bool = false
   @State private var isShareAsImageSheetPresented: Bool = false
@@ -206,9 +207,7 @@ public struct StatusRowView: View {
           primaryButton: .destructive(
             Text("status.action.delete")
           ) {
-            Task {
-              await viewModel.delete()
-            }
+            handleDelete()
           },
           secondaryButton: .cancel()
         )
@@ -266,6 +265,38 @@ public struct StatusRowView: View {
       .addTranslateView(
         isPresented: $viewModel.showAppleTranslation, text: viewModel.finalStatus.content.asRawText)
     #endif
+  }
+
+  private func handleDelete() {
+    let toastID = toastCenter.showProgress(
+      title: String(localized: "toast.status.delete.title"),
+      systemImage: "trash",
+      tint: .red
+    )
+
+    Task {
+      do {
+        try await viewModel.delete()
+        let successToast = ToastCenter.Toast(
+          id: toastID,
+          title: String(localized: "toast.status.delete.success.title"),
+          systemImage: "checkmark.circle.fill",
+          tint: theme.tintColor,
+          kind: .message
+        )
+        toastCenter.update(id: toastID, toast: successToast, autoDismissAfter: .seconds(3))
+      } catch {
+        let errorToast = ToastCenter.Toast(
+          id: toastID,
+          title: String(localized: "toast.status.delete.failure.title"),
+          message: error.localizedDescription,
+          systemImage: "exclamationmark.triangle.fill",
+          tint: .red,
+          kind: .message
+        )
+        toastCenter.update(id: toastID, toast: errorToast, autoDismissAfter: .seconds(4))
+      }
+    }
   }
 
   @ViewBuilder

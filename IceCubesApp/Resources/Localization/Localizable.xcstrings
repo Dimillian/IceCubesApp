@@ -85452,6 +85452,57 @@
         }
       }
     },
+    "toast.status.delete.failure.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't delete post"
+          }
+        },
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't delete post"
+          }
+        }
+      }
+    },
+    "toast.status.delete.success.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Post deleted"
+          }
+        },
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Post deleted"
+          }
+        }
+      }
+    },
+    "toast.status.delete.title": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deleting post"
+          }
+        },
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deleting post"
+          }
+        }
+      }
+    },
     "timeline.filter.hide-posts-with-media" : {
       "localizations" : {
         "be" : {

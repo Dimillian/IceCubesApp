@@ -343,11 +343,9 @@ import SwiftUI
     }
   }
 
-  func delete() async {
-    do {
-      StreamWatcher.shared.emmitDeleteEvent(for: status.id)
-      _ = try await client.delete(endpoint: Statuses.status(id: status.id))
-    } catch {}
+  func delete() async throws {
+    StreamWatcher.shared.emmitDeleteEvent(for: status.id)
+    _ = try await client.delete(endpoint: Statuses.status(id: status.id))
   }
 
   func fetchActionsAccounts() async {
