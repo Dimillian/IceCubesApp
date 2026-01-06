@@ -142,7 +142,11 @@ private struct StatusesTabView: View {
 
     ForEach(fetcher.pinned) { status in
       StatusRowExternalView(
-        viewModel: .init(status: status, client: client, routerPath: routerPath)
+        viewModel: .init(
+          status: status,
+          client: client,
+          routerPath: routerPath,
+          filterContext: .account)
       )
     }
 

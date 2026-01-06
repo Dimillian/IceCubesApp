@@ -121,7 +121,8 @@ public struct StatusDetailView: View {
         status: status,
         client: client,
         routerPath: routerPath,
-        scrollToId: $viewModel.scrollToId)
+        scrollToId: $viewModel.scrollToId,
+        filterContext: .thread)
       let isFocused = self.viewModel.statusId == status.id
 
       StatusRowView(viewModel: viewModel, context: .detail)
@@ -159,7 +160,12 @@ public struct StatusDetailView: View {
   private var loadingDetailView: some View {
     ForEach(Status.placeholders()) { status in
       StatusRowView(
-        viewModel: .init(status: status, client: client, routerPath: routerPath), context: .timeline
+        viewModel: .init(
+          status: status,
+          client: client,
+          routerPath: routerPath,
+          filterContext: .thread),
+        context: .timeline
       )
       .redacted(reason: .placeholder)
       .allowsHitTesting(false)

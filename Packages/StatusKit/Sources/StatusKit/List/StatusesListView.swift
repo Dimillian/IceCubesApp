@@ -13,17 +13,20 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   private let isRemote: Bool
   private let routerPath: RouterPath
   private let client: MastodonClient
+  private let filterContext: Filter.Context?
 
   public init(
     fetcher: Fetcher,
     client: MastodonClient,
     routerPath: RouterPath,
-    isRemote: Bool = false
+    isRemote: Bool = false,
+    filterContext: Filter.Context? = nil
   ) {
     _fetcher = .init(initialValue: fetcher)
     self.isRemote = isRemote
     self.client = client
     self.routerPath = routerPath
+    self.filterContext = filterContext
   }
 
   public var body: some View {
@@ -31,7 +34,11 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     case .loading:
       ForEach(Status.placeholders()) { status in
         StatusRowView(
-          viewModel: .init(status: status, client: client, routerPath: routerPath),
+          viewModel: .init(
+            status: status,
+            client: client,
+            routerPath: routerPath,
+            filterContext: filterContext),
           context: .timeline
         )
         .redacted(reason: .placeholder)
@@ -55,7 +62,8 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
             status: status,
             client: client,
             routerPath: routerPath,
-            isRemote: isRemote),
+            isRemote: isRemote,
+            filterContext: filterContext),
           context: .timeline
         )
         .onAppear {
@@ -77,7 +85,8 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
                 status: status,
                 client: client,
                 routerPath: routerPath,
-                isRemote: isRemote),
+                isRemote: isRemote,
+                filterContext: filterContext),
               context: .timeline
             )
             .onAppear {

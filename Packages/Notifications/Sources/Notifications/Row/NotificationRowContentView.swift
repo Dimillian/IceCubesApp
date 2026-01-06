@@ -22,7 +22,8 @@ struct NotificationRowContentView: View {
                 status: status,
                 client: client,
                 routerPath: routerPath,
-                showActions: true)
+                showActions: true,
+                filterContext: .notifications)
             )
             .environment(\.isNotificationsTab, false)
             .environment(\.isMediaCompact, false)
@@ -33,7 +34,8 @@ struct NotificationRowContentView: View {
                 client: client,
                 routerPath: routerPath,
                 showActions: false,
-                textDisabled: notification.type != .quote)
+                textDisabled: notification.type != .quote,
+                filterContext: .notifications)
             )
             .environment(\.isMediaCompact, true)
           }

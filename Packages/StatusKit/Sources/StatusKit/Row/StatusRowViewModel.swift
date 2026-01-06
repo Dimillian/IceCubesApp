@@ -15,6 +15,7 @@ import SwiftUI
   let showActions: Bool
   let textDisabled: Bool
   let finalStatus: AnyStatus
+  let filterContext: Filter.Context?
 
   let client: MastodonClient
   let routerPath: RouterPath
@@ -100,7 +101,10 @@ import SwiftUI
   }
 
   var filter: Filtered? {
-    finalStatus.filtered?.first
+    if let filterContext {
+      return finalStatus.filteredEntry(matching: filterContext)
+    }
+    return finalStatus.filtered?.first
   }
 
   var isThread: Bool {
@@ -143,7 +147,8 @@ import SwiftUI
     isRemote: Bool = false,
     showActions: Bool = true,
     textDisabled: Bool = false,
-    scrollToId: Binding<String?>? = nil
+    scrollToId: Binding<String?>? = nil,
+    filterContext: Filter.Context? = nil
   ) {
     self.status = status
     finalStatus = status.reblog ?? status
@@ -153,6 +158,7 @@ import SwiftUI
     self.showActions = showActions
     self.textDisabled = textDisabled
     self.scrollToId = scrollToId
+    self.filterContext = filterContext
     if let reblog = status.reblog {
       isPinned = reblog.pinned == true
     } else {

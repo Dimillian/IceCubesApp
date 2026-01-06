@@ -218,6 +218,16 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   }
 }
 
+public extension AnyStatus {
+  func filteredEntry(matching context: Filter.Context) -> Filtered? {
+    filtered?.first(where: { $0.filter.context.contains(context.rawValue) })
+  }
+
+  func isHidden(in context: Filter.Context) -> Bool {
+    filteredEntry(matching: context)?.filter.filterAction == .hide
+  }
+}
+
 public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Hashable {
   public static func == (lhs: ReblogStatus, rhs: ReblogStatus) -> Bool {
     lhs.id == rhs.id

@@ -112,6 +112,13 @@ public struct NotificationsListView: View {
         .environment(client)
         .environment(theme)
     }
+    .onChange(of: isNotificationsPolicyPresented) { _, isPresented in
+      guard !isPresented else { return }
+      Task {
+        policy = await dataSource.fetchPolicy(client: client)
+        await fetchNotifications()
+      }
+    }
     .navigationBarTitleDisplayMode(.inline)
     #if !os(visionOS)
       .scrollContentBackground(.hidden)

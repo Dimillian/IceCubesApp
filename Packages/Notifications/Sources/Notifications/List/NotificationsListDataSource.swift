@@ -12,6 +12,7 @@ public final class NotificationsListDataSource {
   // Internal state
   private var consolidatedNotifications: [ConsolidatedNotification] = []
   private var lastNotificationGroup: Models.NotificationGroup?
+  private var latestNotificationIdForMarker: String?
 
   public init() {}
 
@@ -20,6 +21,7 @@ public final class NotificationsListDataSource {
   public func reset() {
     consolidatedNotifications = []
     lastNotificationGroup = nil
+    latestNotificationIdForMarker = nil
   }
 
   public struct FetchResult {
@@ -131,7 +133,9 @@ public final class NotificationsListDataSource {
           types: queryTypes,
           limit: Constants.notificationLimit))
     }
-    consolidatedNotifications = await notifications.consolidated(selectedType: selectedType)
+    latestNotificationIdForMarker = notifications.first?.id
+    consolidatedNotifications = filterHiddenNotifications(
+      await notifications.consolidated(selectedType: selectedType))
   }
 
   private func refreshNotificationsV1(
@@ -151,9 +155,11 @@ public final class NotificationsListDataSource {
     newNotifications = newNotifications.filter { notification in
       !consolidatedNotifications.contains(where: { $0.id == notification.id })
     }
+    latestNotificationIdForMarker = newNotifications.first?.id ?? latestNotificationIdForMarker
 
     consolidatedNotifications.insert(
-      contentsOf: await newNotifications.consolidated(selectedType: selectedType),
+      contentsOf: filterHiddenNotifications(
+        await newNotifications.consolidated(selectedType: selectedType)),
       at: 0
     )
   }
@@ -182,7 +188,8 @@ public final class NotificationsListDataSource {
     }
 
     consolidatedNotifications.append(
-      contentsOf: await newNotifications.consolidated(selectedType: selectedType))
+      contentsOf: filterHiddenNotifications(
+        await newNotifications.consolidated(selectedType: selectedType)))
   }
 
   private func fetchNewPages(
@@ -232,7 +239,8 @@ public final class NotificationsListDataSource {
       maxId: nil,
       selectedType: selectedType
     )
-    consolidatedNotifications = results.consolidated
+    latestNotificationIdForMarker = results.latestNotificationId
+    consolidatedNotifications = filterHiddenNotifications(results.consolidated)
     lastNotificationGroup = results.lastGroup
   }
 
@@ -247,8 +255,9 @@ public final class NotificationsListDataSource {
       maxId: nil,
       selectedType: selectedType
     )
+    latestNotificationIdForMarker = results.latestNotificationId ?? latestNotificationIdForMarker
 
-    mergeV2Notifications(results.consolidated)
+    mergeV2Notifications(filterHiddenNotifications(results.consolidated))
   }
 
   private func fetchNextPageV2(
@@ -264,7 +273,7 @@ public final class NotificationsListDataSource {
       selectedType: selectedType
     )
 
-    consolidatedNotifications.append(contentsOf: results.consolidated)
+    consolidatedNotifications.append(contentsOf: filterHiddenNotifications(results.consolidated))
     lastNotificationGroup = results.lastGroup
   }
 
@@ -306,6 +315,12 @@ public final class NotificationsListDataSource {
     event: StreamEventNotification,
     selectedType: Models.Notification.NotificationType?
   ) async {
+    if let status = event.notification.status,
+      status.isHidden(in: .notifications)
+    {
+      latestNotificationIdForMarker = event.notification.id
+      return
+    }
     if event.notification.isConsolidable(selectedType: selectedType),
       !consolidatedNotifications.isEmpty
     {
@@ -339,6 +354,12 @@ public final class NotificationsListDataSource {
     event: StreamEventNotification,
     selectedType: Models.Notification.NotificationType?
   ) async {
+    if let status = event.notification.status,
+      status.isHidden(in: .notifications)
+    {
+      latestNotificationIdForMarker = event.notification.id
+      return
+    }
     guard let groupKey = event.notification.groupKey else { return }
 
     let newGroup = ConsolidatedNotification(
@@ -366,7 +387,9 @@ public final class NotificationsListDataSource {
   }
 
   private func markAsRead(client: MastodonClient) {
-    guard let id = consolidatedNotifications.first?.mostRecentNotificationId else { return }
+    let id = latestNotificationIdForMarker
+      ?? consolidatedNotifications.first?.mostRecentNotificationId
+    guard let id else { return }
     Task {
       do {
         let _: Marker = try await client.post(endpoint: Markers.markNotifications(lastReadId: id))
@@ -414,6 +437,7 @@ public final class NotificationsListDataSource {
     let consolidated: [ConsolidatedNotification]
     let lastGroup: Models.NotificationGroup?
     let hasMore: Bool
+    let latestNotificationId: String?
   }
 
   private func fetchGroupedNotifications(
@@ -467,7 +491,19 @@ public final class NotificationsListDataSource {
     return GroupedNotificationsFetchResult(
       consolidated: consolidated,
       lastGroup: results.notificationGroups.last,
-      hasMore: results.notificationGroups.count >= 40
+      hasMore: results.notificationGroups.count >= 40,
+      latestNotificationId: results.notificationGroups.first.map {
+        String($0.mostRecentNotificationId)
+      }
     )
+  }
+
+  private func filterHiddenNotifications(_ notifications: [ConsolidatedNotification])
+    -> [ConsolidatedNotification]
+  {
+    notifications.filter { notification in
+      guard let status = notification.status else { return true }
+      return !status.isHidden(in: .notifications)
+    }
   }
 }

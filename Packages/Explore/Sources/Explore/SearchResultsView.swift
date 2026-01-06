@@ -78,7 +78,11 @@ struct SearchResultsView: View {
         Section("explore.section.posts") {
           ForEach(results.statuses) { status in
             StatusRowExternalView(
-              viewModel: .init(status: status, client: client, routerPath: routerPath)
+              viewModel: .init(
+                status: status,
+                client: client,
+                routerPath: routerPath,
+                filterContext: .pub)
             )
             #if !os(visionOS)
               .listRowBackground(theme.primaryBackgroundColor)
