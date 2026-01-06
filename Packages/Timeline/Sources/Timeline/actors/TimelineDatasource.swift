@@ -197,5 +197,6 @@ actor TimelineDatasource {
       && (showThreads || status.inReplyToAccountId != status.account.id)
       && (showQuotePosts || (!hasQuote && !hasLegacyQuoteLink))
       && (!filter.hidePostsWithMedia || status.mediaAttachments.isEmpty)
+      && !(filter.hidePostsFromBots && status.account.bot)
   }
 }
