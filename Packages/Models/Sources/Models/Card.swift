@@ -20,6 +20,7 @@ public struct Card: Codable, Identifiable, Equatable, Hashable {
   public let authorName: String?
   public let description: String?
   public let providerName: String?
+  public let providerUrl: String?
   public let type: String
   public let image: URL?
   public let width: CGFloat?

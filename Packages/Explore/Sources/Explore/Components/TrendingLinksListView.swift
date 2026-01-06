@@ -22,12 +22,14 @@ public struct TrendingLinksListView: View {
           #if !os(visionOS)
             .listRowBackground(theme.primaryBackgroundColor)
           #endif
+          .listRowSeparator(.hidden)
           .padding(.vertical, 8)
       }
       NextPageView {
         let nextPage: [Card] = try await client.get(endpoint: Trends.links(offset: links.count))
         links.append(contentsOf: nextPage)
       }
+      .listRowSeparator(.hidden)
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
       #endif

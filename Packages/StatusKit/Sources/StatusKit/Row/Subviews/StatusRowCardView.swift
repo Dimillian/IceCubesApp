@@ -35,6 +35,13 @@ public struct StatusRowCardView: View {
     return proxy.frame(in: .local).width
   }
 
+  private func faviconURL(for url: URL) -> URL? {
+    let providerHost = card.providerUrl.flatMap { URL(string: $0)?.host }
+    let host = providerHost ?? url.host()
+    guard let host else { return nil }
+    return URL(string: "https://icons.duckduckgo.com/ip3/\(host).ico")
+  }
+
   private var imageHeight: CGFloat {
     if theme.statusDisplayStyle == .medium || isCompact {
       return 100
@@ -161,10 +168,24 @@ public struct StatusRowCardView: View {
         .frame(width: imageHeight, height: imageHeight)
       }
       VStack(alignment: .leading, spacing: 6) {
-        Text(card.providerName ?? url.host() ?? url.absoluteString)
-          .font(.scaledFootnote)
-          .foregroundColor(theme.tintColor)
-          .lineLimit(1)
+        HStack(spacing: 6) {
+          if let faviconURL = faviconURL(for: url) {
+            LazyImage(url: faviconURL) { state in
+              if let image = state.image {
+                image
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+              }
+            }
+            .frame(width: 14, height: 14)
+            .clipShape(RoundedRectangle(cornerRadius: 3))
+            .accessibilityHidden(true)
+          }
+          Text(card.providerName ?? url.host() ?? url.absoluteString)
+            .font(.scaledFootnote)
+            .foregroundColor(theme.tintColor)
+            .lineLimit(1)
+        }
         Text(title)
           .font(.scaledHeadline)
           .lineLimit(3)
