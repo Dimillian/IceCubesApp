@@ -79,13 +79,7 @@ import SwiftUI
 
   private var isFullTimelineFetchEnabled: Bool {
     guard UserPreferences.shared.fullTimelineFetch else { return false }
-
-    switch timeline {
-    case .local, .federated:
-      return false
-    default:
-      return true
-    }
+    return true
   }
 
   private var isCacheEnabled: Bool {
