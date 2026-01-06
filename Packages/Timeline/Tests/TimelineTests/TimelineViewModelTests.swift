@@ -155,7 +155,8 @@ struct Tests {
       showBoosts: true,
       showReplies: true,
       showThreads: true,
-      showQuotePosts: false
+      showQuotePosts: false,
+      hidePostsWithMedia: false
     )
     let filtered = await datasource.getFiltered(using: snapshot)
     #expect(filtered.map(\.id) == ["normal"])

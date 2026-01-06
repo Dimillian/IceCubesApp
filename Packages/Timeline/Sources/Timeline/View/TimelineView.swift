@@ -190,6 +190,9 @@ public struct TimelineView: View {
     .onChange(of: contentFilter.showQuotePosts) { _, _ in
       refreshContentFilter()
     }
+    .onChange(of: contentFilter.hidePostsWithMedia) { _, _ in
+      refreshContentFilter()
+    }
     .onChange(of: scenePhase) { _, newValue in
       switch newValue {
       case .active:
