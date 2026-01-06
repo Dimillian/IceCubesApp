@@ -135,6 +135,9 @@ import SwiftUI
 
   init(statusFetcher: TimelineStatusFetching = TimelineStatusFetcher()) {
     self.statusFetcher = statusFetcher
+    Task {
+      await datasource.setFilterContext(timeline.filterContext)
+    }
   }
 
   private func fetchTag(id: String) async {
