@@ -19,7 +19,11 @@ struct TrendingPostsSection: View {
           .prefix(upTo: trendingStatuses.count > 3 ? 3 : trendingStatuses.count)
       ) { status in
         StatusRowExternalView(
-          viewModel: .init(status: status, client: client, routerPath: routerPath)
+          viewModel: .init(
+            status: status,
+            client: client,
+            routerPath: routerPath,
+            filterContext: .pub)
         )
         #if !os(visionOS)
           .listRowBackground(theme.primaryBackgroundColor)

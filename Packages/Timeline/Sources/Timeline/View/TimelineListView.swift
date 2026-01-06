@@ -38,9 +38,17 @@ struct TimelineListView: View {
         switch viewModel.timeline {
         case .remoteLocal:
           StatusesListView(
-            fetcher: viewModel, client: client, routerPath: routerPath, isRemote: true)
+            fetcher: viewModel,
+            client: client,
+            routerPath: routerPath,
+            isRemote: true,
+            filterContext: timeline.filterContext)
         default:
-          StatusesListView(fetcher: viewModel, client: client, routerPath: routerPath)
+          StatusesListView(
+            fetcher: viewModel,
+            client: client,
+            routerPath: routerPath,
+            filterContext: timeline.filterContext)
             .environment(\.isHomeTimeline, timeline == .home)
         }
       }

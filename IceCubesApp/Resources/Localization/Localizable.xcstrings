@@ -38247,6 +38247,142 @@
         }
       }
     },
+    "notifications.content-filter.peopleYouDontFollow.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Until you manually approve them"
+          }
+        },
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Until you manually approve them"
+          }
+        }
+      }
+    },
+    "notifications.content-filter.peopleNotFollowingYou.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "And following you for less than 3 days"
+          }
+        },
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "And following you for less than 3 days"
+          }
+        }
+      }
+    },
+    "notifications.content-filter.newAccounts.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Created within the past 30 days"
+          }
+        },
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Created within the past 30 days"
+          }
+        }
+      }
+    },
+    "notifications.content-filter.privateMentions.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unless it's in reply to your own mention or if you follow the sender"
+          }
+        },
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unless it's in reply to your own mention or if you follow the sender"
+          }
+        }
+      }
+    },
+    "notifications.content-filter.moderatedAccounts": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moderated accounts"
+          }
+        },
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moderated accounts"
+          }
+        }
+      }
+    },
+    "notifications.content-filter.moderatedAccounts.subtitle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limited by server moderators"
+          }
+        },
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Limited by server moderators"
+          }
+        }
+      }
+    },
+    "notifications.content-filter.select": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select"
+          }
+        },
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select"
+          }
+        }
+      }
+    },
+    "notifications.content-filter.select-all": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select all"
+          }
+        },
+        "en-GB": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select all"
+          }
+        }
+      }
+    },
     "notifications.content-filter.title": {
       "extractionState": "manual",
       "localizations": {

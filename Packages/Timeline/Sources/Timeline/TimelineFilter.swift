@@ -27,6 +27,7 @@ public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable, Sen
       "chart.line.uptrend.xyaxis"
     }
   }
+
 }
 
 public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
@@ -167,6 +168,17 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
       "link"
     case .quotes:
       "quote.bubble"
+    }
+  }
+
+  public var filterContext: Filter.Context? {
+    switch self {
+    case .home, .latest, .resume, .list:
+      return .home
+    case .hashtag(_, let accountId):
+      return accountId == nil ? .pub : .account
+    case .local, .federated, .trending, .tagGroup, .remoteLocal, .link, .quotes:
+      return .pub
     }
   }
 

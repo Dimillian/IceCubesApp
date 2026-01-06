@@ -4,6 +4,7 @@ import Models
 
 actor TimelineDatasource {
   private var items: [TimelineItem] = []
+  private var filterContext: Filter.Context?
 
   var isEmpty: Bool {
     items.isEmpty
@@ -69,6 +70,10 @@ actor TimelineDatasource {
 
   func reset() {
     items = []
+  }
+
+  func setFilterContext(_ context: Filter.Context?) {
+    filterContext = context
   }
 
   // MARK: - Status Finding Helpers
@@ -169,6 +174,11 @@ actor TimelineDatasource {
   // MARK: - Private Helpers
 
   private func shouldShowStatus(_ status: Status, filter: TimelineContentFilter.Snapshot) -> Bool {
+    let isHidden = if let filterContext {
+      status.isHidden(in: filterContext)
+    } else {
+      status.isHidden
+    }
     let showReplies = filter.showReplies
     let showBoosts = filter.showBoosts
     let showThreads = filter.showThreads
@@ -180,7 +190,7 @@ actor TimelineDatasource {
     let hasLegacyQuoteLink = !status.content.statusesURLs.isEmpty
       || !(status.reblog?.content.statusesURLs.isEmpty ?? true)
 
-    return !status.isHidden
+    return !isHidden
       && (showReplies || status.inReplyToId == nil
         || status.inReplyToAccountId == status.account.id)
       && (showBoosts || status.reblog == nil)

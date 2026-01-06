@@ -68,7 +68,7 @@ public struct NotificationsRequestsListView: View {
             }
           }
         } label: {
-          Text(isInSelectMode ? "Cancel" : "Select")
+          Text(isInSelectMode ? "action.cancel" : "notifications.content-filter.select")
         }
       }
     }
@@ -88,7 +88,7 @@ public struct NotificationsRequestsListView: View {
             selectedRequests = data
           }
         } label: {
-          Text("Select all")
+          Text("notifications.content-filter.select-all")
         }
         .buttonStyle(.bordered)
         Button {
@@ -98,7 +98,7 @@ public struct NotificationsRequestsListView: View {
             selectedRequests.removeAll()
           }
         } label: {
-          Text("Accept")
+          Text("account.follow-request.accept")
         }
         .disabled(isProcessingRequests)
         .buttonStyle(.borderedProminent)
@@ -110,7 +110,7 @@ public struct NotificationsRequestsListView: View {
             selectedRequests.removeAll()
           }
         } label: {
-          Text("Reject")
+          Text("account.follow-request.reject")
         }
         .disabled(isProcessingRequests)
         .buttonStyle(.bordered)

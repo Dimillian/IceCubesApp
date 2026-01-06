@@ -19,6 +19,9 @@ import SwiftUI
       }
     }
     didSet {
+      Task {
+        await datasource.setFilterContext(timeline.filterContext)
+      }
       timelineTask?.cancel()
 
       // Stop streaming when leaving streamable timeline

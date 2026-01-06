@@ -17,7 +17,11 @@ struct AnyStatusesListView: View {
     case .loading:
       ForEach(Status.placeholders()) { status in
         StatusRowExternalView(
-          viewModel: .init(status: status, client: client, routerPath: routerPath)
+          viewModel: .init(
+            status: status,
+            client: client,
+            routerPath: routerPath,
+            filterContext: .account)
         )
         .redacted(reason: .placeholder)
         .allowsHitTesting(false)
@@ -25,7 +29,11 @@ struct AnyStatusesListView: View {
     case let .display(statuses, nextPageState):
       ForEach(statuses) { status in
         StatusRowExternalView(
-          viewModel: .init(status: status, client: client, routerPath: routerPath)
+          viewModel: .init(
+            status: status,
+            client: client,
+            routerPath: routerPath,
+            filterContext: .account)
         )
       }
       

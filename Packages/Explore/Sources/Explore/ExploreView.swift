@@ -147,7 +147,11 @@ public struct ExploreView: View {
   private var loadingView: some View {
     ForEach(Status.placeholders()) { status in
       StatusRowExternalView(
-        viewModel: .init(status: status, client: client, routerPath: routerPath)
+        viewModel: .init(
+          status: status,
+          client: client,
+          routerPath: routerPath,
+          filterContext: .pub)
       )
       .padding(.vertical, 8)
       .redacted(reason: .placeholder)
