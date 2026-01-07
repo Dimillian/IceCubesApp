@@ -6,17 +6,6 @@ import SwiftUI
 public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable, Sendable {
   case local, federated, trending
 
-  public nonisolated var stableId: String {
-    switch self {
-    case .local:
-      "local"
-    case .federated:
-      "federated"
-    case .trending:
-      "trending"
-    }
-  }
-
   public func localizedTitle() -> LocalizedStringKey {
     switch self {
     case .federated:
@@ -59,7 +48,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
   public nonisolated var id: String {
     switch self {
     case let .remoteLocal(server, filter):
-      return server + filter.stableId
+      return server + filter.rawValue
     case let .list(list):
       return list.id
     case let .tagGroup(title, tags, _):
