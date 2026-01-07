@@ -144,7 +144,7 @@ extension StatusEditor {
 }
 
 extension ReceivedTransferredFile {
-  public var localURL: URL {
+  public nonisolated var localURL: URL {
     if isOriginalFile {
       return file
     }

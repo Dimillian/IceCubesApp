@@ -6,6 +6,17 @@ import SwiftUI
 public enum RemoteTimelineFilter: String, CaseIterable, Hashable, Equatable, Sendable {
   case local, federated, trending
 
+  public nonisolated var stableId: String {
+    switch self {
+    case .local:
+      "local"
+    case .federated:
+      "federated"
+    case .trending:
+      "trending"
+    }
+  }
+
   public func localizedTitle() -> LocalizedStringKey {
     switch self {
     case .federated:
@@ -41,14 +52,14 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
   case latest
   case resume
 
-  public static func == (lhs: TimelineFilter, rhs: TimelineFilter) -> Bool {
+  public nonisolated static func == (lhs: TimelineFilter, rhs: TimelineFilter) -> Bool {
     lhs.id == rhs.id
   }
 
-  public var id: String {
+  public nonisolated var id: String {
     switch self {
     case let .remoteLocal(server, filter):
-      return server + filter.rawValue
+      return server + filter.stableId
     case let .list(list):
       return list.id
     case let .tagGroup(title, tags, _):
@@ -62,7 +73,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
     }
   }
 
-  public func hash(into hasher: inout Hasher) {
+  public nonisolated func hash(into hasher: inout Hasher) {
     hasher.combine(id)
   }
 
@@ -84,7 +95,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
     }
   }
 
-  public var title: String {
+  public nonisolated var title: String {
     switch self {
     case .latest:
       "Latest"
@@ -256,7 +267,7 @@ extension TimelineFilter: Codable {
     case quotes
   }
 
-  public init(from decoder: Decoder) throws {
+  public nonisolated init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let key = container.allKeys.first
     switch key {
@@ -323,7 +334,7 @@ extension TimelineFilter: Codable {
     }
   }
 
-  public func encode(to encoder: Encoder) throws {
+  public nonisolated func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     switch self {
     case .home:
@@ -364,7 +375,7 @@ extension TimelineFilter: Codable {
 }
 
 extension TimelineFilter: RawRepresentable {
-  public init?(rawValue: String) {
+  public nonisolated init?(rawValue: String) {
     guard let data = rawValue.data(using: .utf8),
       let result = try? JSONDecoder().decode(TimelineFilter.self, from: data)
     else {
@@ -373,7 +384,7 @@ extension TimelineFilter: RawRepresentable {
     self = result
   }
 
-  public var rawValue: String {
+  public nonisolated var rawValue: String {
     guard let data = try? JSONEncoder().encode(self),
       let result = String(data: data, encoding: .utf8)
     else {
@@ -390,7 +401,7 @@ extension RemoteTimelineFilter: Codable {
     case trending
   }
 
-  public init(from decoder: Decoder) throws {
+  public nonisolated init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     let key = container.allKeys.first
     switch key {
@@ -410,7 +421,7 @@ extension RemoteTimelineFilter: Codable {
     }
   }
 
-  public func encode(to encoder: Encoder) throws {
+  public nonisolated func encode(to encoder: Encoder) throws {
     var container = encoder.container(keyedBy: CodingKeys.self)
     switch self {
     case .local:
@@ -424,7 +435,7 @@ extension RemoteTimelineFilter: Codable {
 }
 
 extension RemoteTimelineFilter: RawRepresentable {
-  public init?(rawValue: String) {
+  public nonisolated init?(rawValue: String) {
     guard let data = rawValue.data(using: .utf8),
       let result = try? JSONDecoder().decode(RemoteTimelineFilter.self, from: data)
     else {
@@ -433,7 +444,7 @@ extension RemoteTimelineFilter: RawRepresentable {
     self = result
   }
 
-  public var rawValue: String {
+  public nonisolated var rawValue: String {
     guard let data = try? JSONEncoder().encode(self),
       let result = String(data: data, encoding: .utf8)
     else {

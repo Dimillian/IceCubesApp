@@ -138,7 +138,9 @@ extension StatusEditor {
           do {
             let refreshed: MediaAttachment = try await client.fetchMedia(id: attachment.id)
             if refreshed.url != nil {
-              await onUpdate(refreshed)
+              await MainActor.run {
+                onUpdate(refreshed)
+              }
               return
             }
             currentAttachment = refreshed

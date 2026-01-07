@@ -7,7 +7,7 @@ import NetworkClient
 import Timeline
 
 public struct TimelineFilterEntity: Identifiable, AppEntity {
-  public var id: String { timeline.id }
+  public nonisolated var id: String { timeline.id }
 
   public let timeline: TimelineFilter
 
@@ -15,7 +15,7 @@ public struct TimelineFilterEntity: Identifiable, AppEntity {
 
   public static let typeDisplayRepresentation: TypeDisplayRepresentation = "TimelineFilter"
 
-  public var displayRepresentation: DisplayRepresentation {
+  public nonisolated var displayRepresentation: DisplayRepresentation {
     DisplayRepresentation(title: "\(timeline.title)")
   }
 }

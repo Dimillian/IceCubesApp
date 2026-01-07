@@ -4,7 +4,7 @@ import NetworkClient
 import StatusKit
 import SwiftUI
 
-struct BoostsTab: AccountTabProtocol {
+struct BoostsTab {
   let id = "boosts"
   let iconName = "arrow.2.squarepath"
   let accessibilityLabel: LocalizedStringKey = "accessibility.tabs.profile.picker.boosts"
@@ -27,6 +27,8 @@ struct BoostsTab: AccountTabProtocol {
     )
   }
 }
+
+extension BoostsTab: @MainActor AccountTabProtocol {}
 
 @MainActor
 @Observable
