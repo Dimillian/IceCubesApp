@@ -13,6 +13,7 @@ import Observation
   private var instanceStreamingURL: URL?
 
   private let encoder = JSONEncoder()
+  private let streamEventDecoder = StreamEventDecoder()
 
   private var retryDelay: Int = 10
 
@@ -97,21 +98,18 @@ import Observation
           Task { [weak self] in
             guard let self else { return }
             do {
-              let rawEvent = try await Self.decodeRawEvent(from: data)
-              logger.info("Stream update: \(rawEvent.event)")
-              do {
-                let event = try await Self.decodeEvent(from: rawEvent)
-                await MainActor.run {
-                  if let event {
-                    self.events.append(event)
-                    self.latestEvent = event
-                  }
+              let decodedEvent = try await streamEventDecoder.decode(data: data)
+              logger.info("Stream update: \(decodedEvent.rawEvent.event)")
+              await MainActor.run {
+                if let event = decodedEvent.event {
+                  self.events.append(event)
+                  self.latestEvent = event
                 }
-              } catch {
-                logger.error("Error decoding streaming event to final event: \(error.localizedDescription)")
-                logger.error("Raw data: \(rawEvent.payload)")
               }
-            } catch {
+            } catch let StreamDecodeError.event(rawEvent, error) {
+              logger.error("Error decoding streaming event to final event: \(error.localizedDescription)")
+              logger.error("Raw data: \(rawEvent.payload)")
+            } catch let StreamDecodeError.rawEvent(error) {
               logger.error("Error decoding streaming event: \(error.localizedDescription)")
             }
           }
@@ -136,22 +134,74 @@ import Observation
     })
   }
 
-  @concurrent
-  nonisolated private static func decodeRawEvent(from data: Data) async throws -> RawStreamEvent {
-    let decoder = JSONDecoder()
-    decoder.keyDecodingStrategy = .convertFromSnakeCase
-    return try decoder.decode(RawStreamEvent.self, from: data)
+  public func emmitDeleteEvent(for status: String) {
+    let event = StreamEventDelete(status: status)
+    events.append(event)
+    latestEvent = event
   }
 
-  @concurrent
-  nonisolated private static func decodeEvent(from rawEvent: RawStreamEvent) async throws
-    -> (any StreamEvent)?
-  {
+  public func emmitEditEvent(for status: Status) {
+    let event = StreamEventStatusUpdate(status: status)
+    events.append(event)
+    latestEvent = event
+  }
+
+  public func emmitPostEvent(for status: Status) {
+    let event = StreamEventUpdate(status: status)
+    events.append(event)
+    latestEvent = event
+  }
+}
+
+fileprivate enum StreamDecodeError: Error {
+  case rawEvent(Error)
+  case event(rawEvent: RawStreamEvent, error: Error)
+}
+
+private actor StreamEventDecoder {
+  struct DecodedEvent {
+    let rawEvent: RawStreamEvent
+    let event: (any StreamEvent)?
+  }
+
+  private var lastTask: Task<DecodedEvent, Error>?
+
+  func decode(data: Data) async throws -> DecodedEvent {
+    let previousTask = lastTask
+    let task = Task {
+      if let previousTask {
+        _ = try? await previousTask.value
+      }
+      return try decodeSequentially(data: data)
+    }
+    lastTask = task
+    return try await task.value
+  }
+
+  private nonisolated func decodeSequentially(data: Data) throws -> DecodedEvent {
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    let rawEvent: RawStreamEvent
+    do {
+      rawEvent = try decoder.decode(RawStreamEvent.self, from: data)
+    } catch {
+      throw StreamDecodeError.rawEvent(error)
+    }
+    do {
+      let event = try decodeEvent(rawEvent: rawEvent, decoder: decoder)
+      return DecodedEvent(rawEvent: rawEvent, event: event)
+    } catch {
+      throw StreamDecodeError.event(rawEvent: rawEvent, error: error)
+    }
+  }
+
+  private nonisolated func decodeEvent(
+    rawEvent: RawStreamEvent,
+    decoder: JSONDecoder
+  ) throws -> (any StreamEvent)? {
     guard let payloadData = rawEvent.payload.data(using: .utf8) else {
       return nil
     }
-    let decoder = JSONDecoder()
-    decoder.keyDecodingStrategy = .convertFromSnakeCase
     switch rawEvent.event {
     case "update":
       let status = try decoder.decode(Status.self, from: payloadData)
@@ -170,23 +220,5 @@ import Observation
     default:
       return nil
     }
-  }
-
-  public func emmitDeleteEvent(for status: String) {
-    let event = StreamEventDelete(status: status)
-    events.append(event)
-    latestEvent = event
-  }
-
-  public func emmitEditEvent(for status: Status) {
-    let event = StreamEventStatusUpdate(status: status)
-    events.append(event)
-    latestEvent = event
-  }
-
-  public func emmitPostEvent(for status: Status) {
-    let event = StreamEventUpdate(status: status)
-    events.append(event)
-    latestEvent = event
   }
 }
