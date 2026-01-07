@@ -10,7 +10,9 @@ struct PostIntent: AppIntent {
   var content: String?
 
   func perform() async throws -> some IntentResult {
-    AppIntentService.shared.handledIntent = .init(intent: self)
+    await MainActor.run {
+      AppIntentService.shared.handledIntent = .init(intent: self)
+    }
     return .result()
   }
 }

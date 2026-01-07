@@ -35,7 +35,8 @@ let package = Package(
         .product(name: "Gifu", package: "Gifu"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6)
+        .swiftLanguageMode(.v6),
+        .defaultIsolation(MainActor.self)
       ]
     )
   ]

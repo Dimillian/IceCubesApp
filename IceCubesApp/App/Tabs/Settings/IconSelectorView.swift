@@ -118,13 +118,14 @@ struct IconSelectorView: View {
     LazyVGrid(columns: columns, spacing: 6) {
       ForEach(icons) { icon in
         Button {
-          currentIcon = icon.appIconName
+          let appIconName = icon.appIconName
+          currentIcon = appIconName
           if icon.rawValue == Icon.primary.rawValue {
             UIApplication.shared.setAlternateIconName(nil)
           } else {
-            UIApplication.shared.setAlternateIconName(icon.appIconName) { err in
+            UIApplication.shared.setAlternateIconName(appIconName) { err in
               guard let err else { return }
-              assertionFailure("\(err.localizedDescription) - Icon name: \(icon.appIconName)")
+              assertionFailure("\(err.localizedDescription) - Icon name: \(appIconName)")
             }
           }
         } label: {

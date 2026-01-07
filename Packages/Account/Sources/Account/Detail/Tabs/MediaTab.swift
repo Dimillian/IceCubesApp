@@ -5,7 +5,7 @@ import NetworkClient
 import StatusKit
 import SwiftUI
 
-struct MediaTab: AccountTabProtocol {
+struct MediaTab {
   let id = "media"
   let iconName = "photo.on.rectangle.angled"
   let accessibilityLabel: LocalizedStringKey = "accessibility.tabs.profile.picker.media"
@@ -25,6 +25,8 @@ struct MediaTab: AccountTabProtocol {
     )
   }
 }
+
+extension MediaTab: @MainActor AccountTabProtocol {}
 
 @MainActor
 @Observable

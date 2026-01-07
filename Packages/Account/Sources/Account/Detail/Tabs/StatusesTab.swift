@@ -5,7 +5,7 @@ import NetworkClient
 import StatusKit
 import SwiftUI
 
-struct StatusesTab: AccountTabProtocol {
+struct StatusesTab {
   let id = "statuses"
   let iconName = "bubble.right"
   let accessibilityLabel: LocalizedStringKey = "accessibility.tabs.profile.picker.statuses"
@@ -24,6 +24,8 @@ struct StatusesTab: AccountTabProtocol {
       fetcher: fetcher as! StatusesTabFetcher, client: client, routerPath: routerPath)
   }
 }
+
+extension StatusesTab: @MainActor AccountTabProtocol {}
 
 @MainActor
 @Observable

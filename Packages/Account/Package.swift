@@ -38,7 +38,8 @@ let package = Package(
         .product(name: "WrappingHStack", package: "WrappingHStack"),
       ],
       swiftSettings: [
-        .swiftLanguageMode(.v6)
+        .swiftLanguageMode(.v6),
+        .defaultIsolation(MainActor.self)
       ]
     ),
     .testTarget(

@@ -4,7 +4,7 @@ import NetworkClient
 import StatusKit
 import SwiftUI
 
-struct FavoritesTab: AccountTabProtocol {
+struct FavoritesTab {
   let id = "favorites"
   let iconName = "star"
   let accessibilityLabel: LocalizedStringKey = "accessibility.tabs.profile.picker.favorites"
@@ -26,6 +26,8 @@ struct FavoritesTab: AccountTabProtocol {
     )
   }
 }
+
+extension FavoritesTab: @MainActor AccountTabProtocol {}
 
 @MainActor
 @Observable

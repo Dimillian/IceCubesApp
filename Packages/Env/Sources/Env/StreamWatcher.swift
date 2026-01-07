@@ -12,8 +12,8 @@ import Observation
   private var watchedStreams: [Stream] = []
   private var instanceStreamingURL: URL?
 
-  private let decoder = JSONDecoder()
   private let encoder = JSONEncoder()
+  private let streamEventDecoder = StreamEventDecoder()
 
   private var retryDelay: Int = 10
 
@@ -32,7 +32,6 @@ import Observation
   public static let shared = StreamWatcher()
 
   private init() {
-    decoder.keyDecodingStrategy = .convertFromSnakeCase
   }
 
   public func setClient(client: MastodonClient, instanceStreamingURL: URL?) {
@@ -91,21 +90,28 @@ import Observation
       case let .success(message):
         switch message {
         case let .string(string):
-          do {
-            guard let data = string.data(using: .utf8) else {
-              logger.error("Error decoding streaming event string")
-              return
-            }
-            let rawEvent = try decoder.decode(RawStreamEvent.self, from: data)
-            logger.info("Stream update: \(rawEvent.event)")
-            Task { @MainActor in
-              if let event = self.rawEventToEvent(rawEvent: rawEvent) {
-                self.events.append(event)
-                self.latestEvent = event
+          guard let data = string.data(using: .utf8) else {
+            logger.error("Error decoding streaming event string")
+            return
+          }
+          let logger = self.logger
+          Task { [weak self] in
+            guard let self else { return }
+            do {
+              let decodedEvent = try await streamEventDecoder.decode(data: data)
+              logger.info("Stream update: \(decodedEvent.rawEvent.event)")
+              await MainActor.run {
+                if let event = decodedEvent.event {
+                  self.events.append(event)
+                  self.latestEvent = event
+                }
               }
+            } catch let StreamDecodeError.event(rawEvent, error) {
+              logger.error("Error decoding streaming event to final event: \(error.localizedDescription)")
+              logger.error("Raw data: \(rawEvent.payload)")
+            } catch let StreamDecodeError.rawEvent(error) {
+              logger.error("Error decoding streaming event: \(error.localizedDescription)")
             }
-          } catch {
-            logger.error("Error decoding streaming event: \(error.localizedDescription)")
           }
 
         default:
@@ -128,36 +134,6 @@ import Observation
     })
   }
 
-  private func rawEventToEvent(rawEvent: RawStreamEvent) -> (any StreamEvent)? {
-    guard let payloadData = rawEvent.payload.data(using: .utf8) else {
-      return nil
-    }
-    do {
-      switch rawEvent.event {
-      case "update":
-        let status = try decoder.decode(Status.self, from: payloadData)
-        return StreamEventUpdate(status: status)
-      case "status.update":
-        let status = try decoder.decode(Status.self, from: payloadData)
-        return StreamEventStatusUpdate(status: status)
-      case "delete":
-        return StreamEventDelete(status: rawEvent.payload)
-      case "notification":
-        let notification = try decoder.decode(Notification.self, from: payloadData)
-        return StreamEventNotification(notification: notification)
-      case "conversation":
-        let conversation = try decoder.decode(Conversation.self, from: payloadData)
-        return StreamEventConversation(conversation: conversation)
-      default:
-        return nil
-      }
-    } catch {
-      logger.error("Error decoding streaming event to final event: \(error.localizedDescription)")
-      logger.error("Raw data: \(rawEvent.payload)")
-      return nil
-    }
-  }
-
   public func emmitDeleteEvent(for status: String) {
     let event = StreamEventDelete(status: status)
     events.append(event)
@@ -174,5 +150,75 @@ import Observation
     let event = StreamEventUpdate(status: status)
     events.append(event)
     latestEvent = event
+  }
+}
+
+fileprivate enum StreamDecodeError: Error {
+  case rawEvent(Error)
+  case event(rawEvent: RawStreamEvent, error: Error)
+}
+
+private actor StreamEventDecoder {
+  struct DecodedEvent {
+    let rawEvent: RawStreamEvent
+    let event: (any StreamEvent)?
+  }
+
+  private var lastTask: Task<DecodedEvent, Error>?
+
+  func decode(data: Data) async throws -> DecodedEvent {
+    let previousTask = lastTask
+    let task = Task {
+      if let previousTask {
+        _ = try? await previousTask.value
+      }
+      return try decodeSequentially(data: data)
+    }
+    lastTask = task
+    return try await task.value
+  }
+
+  private nonisolated func decodeSequentially(data: Data) throws -> DecodedEvent {
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    let rawEvent: RawStreamEvent
+    do {
+      rawEvent = try decoder.decode(RawStreamEvent.self, from: data)
+    } catch {
+      throw StreamDecodeError.rawEvent(error)
+    }
+    do {
+      let event = try decodeEvent(rawEvent: rawEvent, decoder: decoder)
+      return DecodedEvent(rawEvent: rawEvent, event: event)
+    } catch {
+      throw StreamDecodeError.event(rawEvent: rawEvent, error: error)
+    }
+  }
+
+  private nonisolated func decodeEvent(
+    rawEvent: RawStreamEvent,
+    decoder: JSONDecoder
+  ) throws -> (any StreamEvent)? {
+    guard let payloadData = rawEvent.payload.data(using: .utf8) else {
+      return nil
+    }
+    switch rawEvent.event {
+    case "update":
+      let status = try decoder.decode(Status.self, from: payloadData)
+      return StreamEventUpdate(status: status)
+    case "status.update":
+      let status = try decoder.decode(Status.self, from: payloadData)
+      return StreamEventStatusUpdate(status: status)
+    case "delete":
+      return StreamEventDelete(status: rawEvent.payload)
+    case "notification":
+      let notification = try decoder.decode(Notification.self, from: payloadData)
+      return StreamEventNotification(notification: notification)
+    case "conversation":
+      let conversation = try decoder.decode(Conversation.self, from: payloadData)
+      return StreamEventConversation(conversation: conversation)
+    default:
+      return nil
+    }
   }
 }
