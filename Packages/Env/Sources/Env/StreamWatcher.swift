@@ -12,7 +12,6 @@ import Observation
   private var watchedStreams: [Stream] = []
   private var instanceStreamingURL: URL?
 
-  private let decoder = JSONDecoder()
   private let encoder = JSONEncoder()
 
   private var retryDelay: Int = 10
@@ -32,7 +31,6 @@ import Observation
   public static let shared = StreamWatcher()
 
   private init() {
-    decoder.keyDecodingStrategy = .convertFromSnakeCase
   }
 
   public func setClient(client: MastodonClient, instanceStreamingURL: URL?) {
@@ -91,21 +89,31 @@ import Observation
       case let .success(message):
         switch message {
         case let .string(string):
-          do {
-            guard let data = string.data(using: .utf8) else {
-              logger.error("Error decoding streaming event string")
-              return
-            }
-            let rawEvent = try decoder.decode(RawStreamEvent.self, from: data)
-            logger.info("Stream update: \(rawEvent.event)")
-            Task { @MainActor in
-              if let event = self.rawEventToEvent(rawEvent: rawEvent) {
-                self.events.append(event)
-                self.latestEvent = event
+          guard let data = string.data(using: .utf8) else {
+            logger.error("Error decoding streaming event string")
+            return
+          }
+          let logger = self.logger
+          Task { [weak self] in
+            guard let self else { return }
+            do {
+              let rawEvent = try await Self.decodeRawEvent(from: data)
+              logger.info("Stream update: \(rawEvent.event)")
+              do {
+                let event = try await Self.decodeEvent(from: rawEvent)
+                await MainActor.run {
+                  if let event {
+                    self.events.append(event)
+                    self.latestEvent = event
+                  }
+                }
+              } catch {
+                logger.error("Error decoding streaming event to final event: \(error.localizedDescription)")
+                logger.error("Raw data: \(rawEvent.payload)")
               }
+            } catch {
+              logger.error("Error decoding streaming event: \(error.localizedDescription)")
             }
-          } catch {
-            logger.error("Error decoding streaming event: \(error.localizedDescription)")
           }
 
         default:
@@ -128,32 +136,38 @@ import Observation
     })
   }
 
-  private func rawEventToEvent(rawEvent: RawStreamEvent) -> (any StreamEvent)? {
+  @concurrent
+  nonisolated private static func decodeRawEvent(from data: Data) async throws -> RawStreamEvent {
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    return try decoder.decode(RawStreamEvent.self, from: data)
+  }
+
+  @concurrent
+  nonisolated private static func decodeEvent(from rawEvent: RawStreamEvent) async throws
+    -> (any StreamEvent)?
+  {
     guard let payloadData = rawEvent.payload.data(using: .utf8) else {
       return nil
     }
-    do {
-      switch rawEvent.event {
-      case "update":
-        let status = try decoder.decode(Status.self, from: payloadData)
-        return StreamEventUpdate(status: status)
-      case "status.update":
-        let status = try decoder.decode(Status.self, from: payloadData)
-        return StreamEventStatusUpdate(status: status)
-      case "delete":
-        return StreamEventDelete(status: rawEvent.payload)
-      case "notification":
-        let notification = try decoder.decode(Notification.self, from: payloadData)
-        return StreamEventNotification(notification: notification)
-      case "conversation":
-        let conversation = try decoder.decode(Conversation.self, from: payloadData)
-        return StreamEventConversation(conversation: conversation)
-      default:
-        return nil
-      }
-    } catch {
-      logger.error("Error decoding streaming event to final event: \(error.localizedDescription)")
-      logger.error("Raw data: \(rawEvent.payload)")
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    switch rawEvent.event {
+    case "update":
+      let status = try decoder.decode(Status.self, from: payloadData)
+      return StreamEventUpdate(status: status)
+    case "status.update":
+      let status = try decoder.decode(Status.self, from: payloadData)
+      return StreamEventStatusUpdate(status: status)
+    case "delete":
+      return StreamEventDelete(status: rawEvent.payload)
+    case "notification":
+      let notification = try decoder.decode(Notification.self, from: payloadData)
+      return StreamEventNotification(notification: notification)
+    case "conversation":
+      let conversation = try decoder.decode(Conversation.self, from: payloadData)
+      return StreamEventConversation(conversation: conversation)
+    default:
       return nil
     }
   }
