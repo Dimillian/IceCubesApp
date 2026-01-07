@@ -12,7 +12,11 @@ import UserNotifications
 extension UNMutableNotificationContent: @unchecked @retroactive Sendable {}
 
 class NotificationService: UNNotificationServiceExtension {
-  override func didReceive(
+  nonisolated override init() {
+    super.init()
+  }
+
+  nonisolated override func didReceive(
     _ request: UNNotificationRequest,
     withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void
   ) {

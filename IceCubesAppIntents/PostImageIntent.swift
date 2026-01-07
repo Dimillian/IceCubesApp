@@ -25,7 +25,9 @@ struct PostImageIntent: AppIntent {
   var altText: String?
 
   func perform() async throws -> some IntentResult {
-    AppIntentService.shared.handledIntent = .init(intent: self)
+    await MainActor.run {
+      AppIntentService.shared.handledIntent = .init(intent: self)
+    }
     return .result()
   }
 }
