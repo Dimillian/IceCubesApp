@@ -51,20 +51,6 @@ struct IceCubesApp: App {
     otherScenes
   }
 
-  func setNewClientsInEnv(client: MastodonClient) {
-    quickLook.namespace = namespace
-    currentAccount.setClient(client: client)
-    currentInstance.setClient(client: client)
-    userPreferences.setClient(client: client)
-    Task {
-      await currentInstance.fetchCurrentInstance()
-      watcher.setClient(
-        client: client, instanceStreamingURL: currentInstance.instance?.urls?.streamingApi)
-      watcher.watch(streams: [.user, .direct])
-    }
-    pushNotificationsService.tokens = appAccountsManager.pushAccounts.map{ $0.token }
-  }
-
   func handleScenePhase(scenePhase: ScenePhase) {
     switch scenePhase {
     case .background:
