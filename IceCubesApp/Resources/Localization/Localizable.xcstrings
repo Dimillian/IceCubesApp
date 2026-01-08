@@ -20551,7 +20551,14 @@
       }
     },
     "Adds @ and # keys directly on the keyboard for faster mentions and hashtags." : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiunge i tasti @ e # alla tastiera per scrivere menzioni e hashtag più velocemente."
+          }
+        }
+      }
     },
     "alert.button.ok" : {
       "localizations" : {
@@ -29880,7 +29887,14 @@
       }
     },
     "Fetches all new timeline posts (up to 800) instead of only the latest 40 + manually loading the gap." : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carica tutti i nuovi post delle timeline (fino a 800) invece che solo gli ultimi 40 + i restanti manualmente."
+          }
+        }
+      }
     },
     "filter.action.hide" : {
       "extractionState" : "manual",
@@ -32285,7 +32299,14 @@
       }
     },
     "Full timeline fetch" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento completo timeline"
+          }
+        }
+      }
     },
     "Home Timeline" : {
       "localizations" : {
@@ -34336,7 +34357,14 @@
       }
     },
     "Keeps your home timeline up to date in real time using streaming when available. Disable in case of performance issues." : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mantiene la home aggiornata in tempo reale utilizzando lo streaming quando disponibile. Disattiva in caso di problemi di prestazioni."
+          }
+        }
+      }
     },
     "Key" : {
       "extractionState" : "manual",
@@ -37115,7 +37143,14 @@
       }
     },
     "Metrics" : {
-
+      "localizations" : {
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistiche"
+          }
+        }
+      }
     },
     "Monthly Active Users" : {
       "localizations" : {
@@ -37680,6 +37715,12 @@
             "state" : "translated",
             "value" : "Moderated accounts"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account moderati"
+          }
         }
       }
     },
@@ -37696,6 +37737,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limited by server moderators"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limitati dai moderatori dei server"
           }
         }
       }
@@ -37833,6 +37880,12 @@
             "state" : "translated",
             "value" : "Created within the past 30 days"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creati negli ultimi 30 giorni"
+          }
         }
       }
     },
@@ -37968,6 +38021,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "And following you for less than 3 days"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E che ti seguono da meno di 3 giorni"
           }
         }
       }
@@ -38105,6 +38164,12 @@
             "state" : "translated",
             "value" : "Until you manually approve them"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finché non li approvi manualmente"
+          }
         }
       }
     },
@@ -38240,6 +38305,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unless it's in reply to your own mention or if you follow the sender"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A meno che non sia una risposta a una tua menzione o se segui il mittente"
           }
         }
       }
@@ -38377,6 +38448,12 @@
             "state" : "translated",
             "value" : "Select"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleziona"
+          }
         }
       }
     },
@@ -38393,6 +38470,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Select all"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleziona tutto"
           }
         }
       }
@@ -48702,6 +48785,12 @@
             "state" : "translated",
             "value" : "Animated Avatars and Headers"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatar e copertine animati"
+          }
         }
       }
     },
@@ -55078,6 +55167,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enable Animated Emojis"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abilita emoji animate"
           }
         }
       }
@@ -82222,8 +82317,8 @@
         },
         "it" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide posts with media"
+            "state" : "translated",
+            "value" : "Nascondi post con contenuti multimediali"
           }
         },
         "ja" : {
@@ -84828,6 +84923,12 @@
             "state" : "translated",
             "value" : "Saved to drafts"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvato nelle bozze"
+          }
         }
       }
     },
@@ -84844,6 +84945,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Post sent"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post inviato"
           }
         }
       }
@@ -84862,6 +84969,12 @@
             "state" : "translated",
             "value" : "Posting"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pubblicazione"
+          }
         }
       }
     },
@@ -84878,6 +84991,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Couldn't delete post"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile eliminare il post"
           }
         }
       }
@@ -84896,6 +85015,12 @@
             "state" : "translated",
             "value" : "Post deleted"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post eliminato"
+          }
         }
       }
     },
@@ -84912,6 +85037,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deleting post"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimino post"
           }
         }
       }
