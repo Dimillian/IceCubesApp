@@ -5,6 +5,7 @@ import Testing
 
 @testable import Timeline
 
+@MainActor
 @Suite("Timeline Filter Tests")
 struct TimelineFilterTests {
   @Test(
