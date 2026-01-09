@@ -82170,6 +82170,28 @@
         }
       }
     },
+    "timeline.filter.hide-posts-from-bots" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide posts from bots"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide posts from bots"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verberg posts van bots"
+          }
+        }
+      }
+    },
     "timeline.filter.hide-posts-with-media" : {
       "localizations" : {
         "be" : {
