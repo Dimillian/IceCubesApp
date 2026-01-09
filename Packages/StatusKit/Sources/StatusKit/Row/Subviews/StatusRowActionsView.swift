@@ -303,6 +303,7 @@ struct StatusRowActionsView: View {
     .environment(CurrentAccount.shared)
     .environment(CurrentInstance.shared)
     .environment(statusDataController)
+    .environment(ToastCenter.shared)
     .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
     .foregroundColor(theme.labelColor)
     .background(theme.primaryBackgroundColor)
