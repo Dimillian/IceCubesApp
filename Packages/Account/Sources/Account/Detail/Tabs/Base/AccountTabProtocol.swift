@@ -4,6 +4,7 @@ import NetworkClient
 import StatusKit
 import SwiftUI
 
+@MainActor
 public protocol AccountTabProtocol: Identifiable, Hashable {
   associatedtype TabView: View
 

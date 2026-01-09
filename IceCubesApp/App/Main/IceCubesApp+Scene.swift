@@ -10,22 +10,22 @@ extension IceCubesApp {
       AppView(selectedTab: $selectedTab, appRouterPath: $appRouterPath)
         .applyTheme(theme)
         .onAppear {
-          setNewClientsInEnv(client: appAccountsManager.currentClient)
           setupRevenueCat()
           refreshPushSubs()
         }
-        .environment(appAccountsManager)
-        .environment(appAccountsManager.currentClient)
-        .environment(quickLook)
-        .environment(currentAccount)
-        .environment(currentInstance)
-        .environment(userPreferences)
-        .environment(theme)
-        .environment(watcher)
-        .environment(pushNotificationsService)
-        .environment(appIntentService)
-        .environment(toastCenter)
-        .environment(\.isSupporter, isSupporter)
+        .withAppDependencyGraph(
+          appAccountsManager: appAccountsManager,
+          currentAccount: currentAccount,
+          currentInstance: currentInstance,
+          userPreferences: userPreferences,
+          theme: theme,
+          watcher: watcher,
+          pushNotificationsService: pushNotificationsService,
+          appIntentService: appIntentService,
+          quickLook: quickLook,
+          toastCenter: toastCenter,
+          namespace: namespace,
+          isSupporter: isSupporter)
         .sheet(item: $quickLook.selectedMediaAttachment) { selectedMediaAttachment in
           if let namespace = quickLook.namespace {
             MediaUIView(
@@ -73,12 +73,6 @@ extension IceCubesApp {
     }
     .onChange(of: scenePhase) { _, newValue in
       handleScenePhase(scenePhase: newValue)
-    }
-    .onChange(of: appAccountsManager.currentClient) { _, newValue in
-      setNewClientsInEnv(client: newValue)
-      if newValue.isAuth {
-        watcher.watch(streams: [.user, .direct])
-      }
     }
     #if targetEnvironment(macCatalyst)
       .windowResize()

@@ -1,7 +1,7 @@
 import Models
 import SwiftUI
 
-nonisolated func NotificationRowAppendTextView(notification: ConsolidatedNotification) -> Text {
+func NotificationRowAppendTextView(notification: ConsolidatedNotification) -> Text {
   if notification.accounts.count > 1 {
     let othersCount: Int
     // For favorites and reblogs, use the actual count from the status

@@ -76,10 +76,12 @@ extension StatusEditor {
         let widthFactor = image.size.width / maxWidth
         let maxFactor = max(heightFactor, widthFactor)
 
-        image = image.resized(
-          to: .init(
-            width: image.size.width / maxFactor,
-            height: image.size.height / maxFactor))
+        let targetSize = CGSize(
+          width: image.size.width / maxFactor,
+          height: image.size.height / maxFactor)
+        image = await MainActor.run {
+          image.resized(to: targetSize)
+        }
       }
 
       guard var imageData = image.jpegData(compressionQuality: 0.8) else {

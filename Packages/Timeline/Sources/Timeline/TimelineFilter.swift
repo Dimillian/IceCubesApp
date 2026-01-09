@@ -45,10 +45,19 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
     lhs.id == rhs.id
   }
 
-  public var id: String {
+  public nonisolated var id: String {
     switch self {
     case let .remoteLocal(server, filter):
-      return server + filter.rawValue
+      let filterId: String
+      switch filter {
+      case .local:
+        filterId = "local"
+      case .federated:
+        filterId = "federated"
+      case .trending:
+        filterId = "trending"
+      }
+      return server + filterId
     case let .list(list):
       return list.id
     case let .tagGroup(title, tags, _):
@@ -84,7 +93,7 @@ public enum TimelineFilter: Hashable, Equatable, Identifiable, Sendable {
     }
   }
 
-  public var title: String {
+  public nonisolated var title: String {
     switch self {
     case .latest:
       "Latest"

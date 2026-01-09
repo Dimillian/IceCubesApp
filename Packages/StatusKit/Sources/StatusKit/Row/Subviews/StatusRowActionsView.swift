@@ -41,15 +41,6 @@ struct StatusRowActionsView: View {
       && viewModel.status.account.id == currentAccount.account?.id
   }
 
-  var actions: [Action] {
-    switch theme.statusActionSecondary {
-    case .share:
-      return [.respond, .boost, .favorite, .share, .menu]
-    case .bookmark:
-      return [.respond, .boost, .favorite, .bookmark, .menu]
-    }
-  }
-
   @MainActor
   enum Action {
     case respond, boost, quote, favorite, bookmark, share, menu
@@ -160,36 +151,48 @@ struct StatusRowActionsView: View {
 
   private var actionsRow: some View {
     HStack {
-      ForEach(actions, id: \.self) { action in
-        actionView(for: action)
-      }
-    }
-  }
-
-  @ViewBuilder
-  private func actionView(for action: Action) -> some View {
-    switch action {
-    case .share:
-      shareActionView(for: action)
-    case .menu:
+      actionButton(action: .respond)
+      actionButton(action: .boost)
+      actionButton(action: .favorite)
+      secondaryActionSlot
       menuActionView()
-    default:
-      actionButton(action: action)
     }
   }
 
   @ViewBuilder
-  private func shareActionView(for action: Action) -> some View {
+  private var secondaryActionSlot: some View {
+    switch theme.statusActionSecondary {
+    case .share:
+      shareActionSlot
+    case .bookmark:
+      actionButton(action: .bookmark)
+    }
+  }
+
+  @ViewBuilder
+  private var shareActionSlot: some View {
+    HStack {
+      shareSlotContent
+      Spacer()
+    }
+  }
+
+  @ViewBuilder
+  private var shareSlotContent: some View {
     if let urlString = viewModel.finalStatus.url,
       let url = URL(string: urlString)
     {
-      HStack {
-        shareLink(for: url, action: action)
-        Spacer()
-      }
+      shareLink(for: url, action: .share)
     } else {
-      EmptyView()
+      shareSlotPlaceholder
     }
+  }
+
+  private var shareSlotPlaceholder: some View {
+    shareLinkView(shareButtonLabel(for: .share))
+      .opacity(0)
+      .accessibilityHidden(true)
+      .allowsHitTesting(false)
   }
 
   @ViewBuilder
@@ -300,6 +303,7 @@ struct StatusRowActionsView: View {
     .environment(CurrentAccount.shared)
     .environment(CurrentInstance.shared)
     .environment(statusDataController)
+    .environment(ToastCenter.shared)
     .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
     .foregroundColor(theme.labelColor)
     .background(theme.primaryBackgroundColor)

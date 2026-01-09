@@ -22,7 +22,7 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
   case links
   case anyTimelineFilter(filter: TimelineFilter)
   
-  nonisolated var id: Int {
+  var id: Int {
     return switch self {
     case .timeline: 0
     case .notifications: 1
@@ -47,7 +47,7 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
     }
   }
   
-  nonisolated static var allCases: [AppTab] {
+  static var allCases: [AppTab] {
     [.timeline,
       .notifications,
       .mentions,

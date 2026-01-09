@@ -4,7 +4,7 @@ import NetworkClient
 import StatusKit
 import SwiftUI
 
-struct RepliesTab: AccountTabProtocol {
+struct RepliesTab {
   let id = "replies"
   let iconName = "bubble.left.and.bubble.right"
   let accessibilityLabel: LocalizedStringKey = "accessibility.tabs.profile.picker.posts-and-replies"
@@ -26,6 +26,8 @@ struct RepliesTab: AccountTabProtocol {
     )
   }
 }
+
+extension RepliesTab: @MainActor AccountTabProtocol {}
 
 @MainActor
 @Observable
