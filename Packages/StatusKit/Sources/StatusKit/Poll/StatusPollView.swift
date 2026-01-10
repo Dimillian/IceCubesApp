@@ -177,7 +177,7 @@ public struct StatusPollView: View {
       .background(alignment: .leading) {
         if viewModel.showResults || status.account.id == currentAccount.account?.id {
           _PercentWidthLayout(percent: relativePercent(for: option.votesCount ?? 0)) {
-            RoundedRectangle(cornerRadius: 10).foregroundColor(theme.tintColor)
+            RoundedRectangle(cornerRadius: 10).foregroundColor(theme.tintColor.opacity(0.6))
               .transition(
                 .asymmetric(
                   insertion: .push(from: .leading),
