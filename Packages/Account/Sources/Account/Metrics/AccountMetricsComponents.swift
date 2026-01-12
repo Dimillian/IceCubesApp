@@ -1,5 +1,6 @@
 import Charts
 import DesignSystem
+import Env
 import SwiftUI
 
 struct MetricsChartCard: View {
@@ -15,6 +16,7 @@ struct MetricsChartCard: View {
   let maxValue: Int
   let onSelectMetric: (MetricType) -> Void
   @State private var selectedDate: Date?
+  @State private var lastHapticDayStart: Date?
 
   var body: some View {
     VStack(alignment: .leading, spacing: 24) {
@@ -108,6 +110,25 @@ struct MetricsChartCard: View {
       .redacted(reason: isLoading ? .placeholder : [])
       .animation(.easeInOut(duration: 0.25), value: animatedDailyData)
       .animation(.easeInOut(duration: 0.25), value: chartStyle)
+      .onChange(of: selectedDate) { _, newValue in
+        guard let newValue else {
+          lastHapticDayStart = nil
+          return
+        }
+
+        guard let dayStart = dailyData.first(where: {
+          calendar.isDate($0.dayStart, inSameDayAs: newValue)
+        })?.dayStart else {
+          return
+        }
+
+        if let lastHapticDayStart, calendar.isDate(lastHapticDayStart, inSameDayAs: dayStart) {
+          return
+        }
+
+        lastHapticDayStart = dayStart
+        HapticManager.shared.fireHaptic(.timeline)
+      }
     }
     .padding(12)
     .withCardBackground(cornerRadius: 16)
