@@ -20551,7 +20551,14 @@
       }
     },
     "Adds @ and # keys directly on the keyboard for faster mentions and hashtags." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir @ y # directamente al teclado para menciones y hashtags más rápidos"
+          }
+        }
+      }
     },
     "alert.button.ok" : {
       "localizations" : {
@@ -21193,6 +21200,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verhalten der Boostschaltfläche"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comportamiento del botón de Republicar"
           }
         },
         "it" : {
@@ -29880,7 +29893,14 @@
       }
     },
     "Fetches all new timeline posts (up to 800) instead of only the latest 40 + manually loading the gap." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obtiene todas las nuevas publicaciones de la cronología (hasta 800) en lugar de las últimas 40, permitiendo rellenar los huecos"
+          }
+        }
+      }
     },
     "filter.action.hide" : {
       "extractionState" : "manual",
@@ -32285,7 +32305,14 @@
       }
     },
     "Full timeline fetch" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obtener toda la cronología"
+          }
+        }
+      }
     },
     "Home Timeline" : {
       "localizations" : {
@@ -34336,7 +34363,14 @@
       }
     },
     "Keeps your home timeline up to date in real time using streaming when available. Disable in case of performance issues." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mantiene tu cronología de inicio en tiempo real usando streaming cuando esté disponible. Deshabilitar en caso de problemas de rendimiento."
+          }
+        }
+      }
     },
     "Key" : {
       "extractionState" : "manual",
@@ -37115,7 +37149,14 @@
       }
     },
     "Metrics" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métricas"
+          }
+        }
+      }
     },
     "Monthly Active Users" : {
       "localizations" : {
@@ -37680,6 +37721,12 @@
             "state" : "translated",
             "value" : "Moderated accounts"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuentas moderadas"
+          }
         }
       }
     },
@@ -37696,6 +37743,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limited by server moderators"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limitado por los moderadores del servidor"
           }
         }
       }
@@ -37833,6 +37886,12 @@
             "state" : "translated",
             "value" : "Created within the past 30 days"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creado durante los últimos 30 días"
+          }
         }
       }
     },
@@ -37968,6 +38027,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "And following you for less than 3 days"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Y siguiéndote desde hace menos de tres días"
           }
         }
       }
@@ -38105,6 +38170,12 @@
             "state" : "translated",
             "value" : "Until you manually approve them"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hasta tu aprobación manual"
+          }
         }
       }
     },
@@ -38240,6 +38311,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Unless it's in reply to your own mention or if you follow the sender"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvo si estás respondiendo a tu propia mención o si sigues al remitente"
           }
         }
       }
@@ -38377,6 +38454,12 @@
             "state" : "translated",
             "value" : "Select"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccionar"
+          }
         }
       }
     },
@@ -38393,6 +38476,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Select all"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccionar todo"
           }
         }
       }
@@ -43190,8 +43279,7 @@
             "value" : "發表內容"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "Post visibility" : {
       "localizations" : {
@@ -48701,6 +48789,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Animated Avatars and Headers"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatares y encabezados animados"
           }
         }
       }
@@ -55078,6 +55172,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enable Animated Emojis"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habilitar emojis animados"
           }
         }
       }
@@ -82204,8 +82304,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide posts with media"
+            "state" : "translated",
+            "value" : "Ocultar publicaciones con contenido multimedia"
           }
         },
         "eu" : {
@@ -84828,6 +84928,12 @@
             "state" : "translated",
             "value" : "Saved to drafts"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardado como borrador"
+          }
         }
       }
     },
@@ -84844,6 +84950,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Post sent"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicación enviada"
           }
         }
       }
@@ -84862,6 +84974,12 @@
             "state" : "translated",
             "value" : "Posting"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicando"
+          }
         }
       }
     },
@@ -84878,6 +84996,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Couldn't delete post"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No fue posible eliminar la publicación"
           }
         }
       }
@@ -84896,6 +85020,12 @@
             "state" : "translated",
             "value" : "Post deleted"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicación eliminada"
+          }
         }
       }
     },
@@ -84912,6 +85042,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Deleting post"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminando publicación"
           }
         }
       }
@@ -85640,8 +85776,7 @@
             "value" : "用 Ice Cubes 在 Mastodon 上發表圖像"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "Visibility" : {
       "localizations" : {
