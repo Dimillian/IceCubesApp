@@ -52,6 +52,16 @@ public struct PushKeys: Sendable {
     }
   }
 
+  public var notificationsPrivateKeyIfPresent: P256.KeyAgreement.PrivateKey? {
+    guard let key = keychain.get(Constants.keychainPrivateKey),
+      let data = Data(base64Encoded: key)
+    else {
+      return nil
+    }
+
+    return try? P256.KeyAgreement.PrivateKey(rawRepresentation: data)
+  }
+
   public var notificationsAuthKeyAsKey: Data {
     if let key = keychain.get(Constants.keychainAuthKey),
       let data = Data(base64Encoded: key)
@@ -65,6 +75,16 @@ public struct PushKeys: Sendable {
         withAccess: .accessibleAfterFirstUnlock)
       return key
     }
+  }
+
+  public var notificationsAuthKeyIfPresent: Data? {
+    guard let key = keychain.get(Constants.keychainAuthKey),
+      let data = Data(base64Encoded: key)
+    else {
+      return nil
+    }
+
+    return data
   }
 
   private static func makeRandomNotificationsAuthKey() -> Data {

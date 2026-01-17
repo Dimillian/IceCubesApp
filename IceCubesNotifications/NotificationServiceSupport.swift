@@ -42,7 +42,7 @@ extension NotificationService {
 
     let paddingLength = Int(plaintext[0]) * 256 + Int(plaintext[1])
     guard plaintext.count >= 2 + paddingLength else {
-      fatalError()
+      return nil
     }
     let unpadded = plaintext.suffix(from: paddingLength + 2)
 
