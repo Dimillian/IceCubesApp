@@ -150,6 +150,9 @@ struct ContentSettingsView: View {
         Toggle(isOn: $contentFilter.hidePostsWithMedia) {
           Label("timeline.filter.hide-posts-with-media", systemImage: "photo.on.rectangle.angled")
         }
+        Toggle(isOn: $contentFilter.hidePostsFromBots) {
+          Label("timeline.filter.hide-posts-from-bots", systemImage: "poweroutlet.type.b")
+        }
       }
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
