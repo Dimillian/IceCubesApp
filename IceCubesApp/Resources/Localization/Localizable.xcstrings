@@ -70364,6 +70364,23 @@
         }
       }
     },
+    "status.editor.media.copy-text" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🤖 Copy text from image"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "🤖 Copy text from image"
+          }
+        }
+      }
+    },
     "status.editor.media.edit-image" : {
       "extractionState" : "manual",
       "localizations" : {
