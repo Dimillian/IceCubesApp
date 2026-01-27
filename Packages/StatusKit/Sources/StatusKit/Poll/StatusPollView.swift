@@ -95,6 +95,7 @@ public struct StatusPollView: View {
           if !viewModel.votes.isEmpty {
             Button("status.poll.send") { Task { await viewModel.postVotes() } }
               .buttonStyle(.borderedProminent)
+              .tint(theme.tintColor.opacity(0.8))
           }
           Button(viewModel.showResults ? "status.poll.hide-results" : "status.poll.show-results") {
             withAnimation {
@@ -177,7 +178,7 @@ public struct StatusPollView: View {
       .background(alignment: .leading) {
         if viewModel.showResults || status.account.id == currentAccount.account?.id {
           _PercentWidthLayout(percent: relativePercent(for: option.votesCount ?? 0)) {
-            RoundedRectangle(cornerRadius: 10).foregroundColor(theme.tintColor)
+            RoundedRectangle(cornerRadius: 10).foregroundColor(theme.tintColor.opacity(0.6))
               .transition(
                 .asymmetric(
                   insertion: .push(from: .leading),
