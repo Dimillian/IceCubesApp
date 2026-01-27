@@ -51,7 +51,7 @@ extension IceCubesApp {
               })
             {
               appAccountsManager.currentAccount = account
-              DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+              Task { @MainActor in
                 selectedTab = .notifications
                 pushNotificationsService.handledNotification = newValue
               }

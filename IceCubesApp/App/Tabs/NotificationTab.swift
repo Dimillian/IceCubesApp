@@ -50,9 +50,7 @@ struct NotificationsTab: View {
     }
     .onAppear {
       routerPath.client = client
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-        clearNotifications()
-      }
+      clearNotifications()
     }
     .withSafariRouter()
     .environment(routerPath)
@@ -61,7 +59,7 @@ struct NotificationsTab: View {
     }
     .onChange(of: pushNotificationsService.handledNotification) { _, newValue in
       if let newValue, let type = newValue.notification.supportedType {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        Task { @MainActor in
           switch type {
           case .follow, .follow_request:
             routerPath.navigate(

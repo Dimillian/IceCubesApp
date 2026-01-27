@@ -162,7 +162,8 @@ struct AppView: View {
 
     if selectedTab == newTab {
       selectedTabScrollToTop = newTab.id
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+      Task { @MainActor in
+        // Reset scroll to top flag after view update
         selectedTabScrollToTop = -1
       }
     } else {
