@@ -20557,6 +20557,12 @@
             "state" : "translated",
             "value" : "Aggiunge i tasti @ e # alla tastiera per scrivere menzioni e hashtag più velocemente."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir @ y # directamente al teclado para menciones y hashtags más rápidos"
+          }
         }
       }
     },
@@ -21200,6 +21206,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verhalten der Boostschaltfläche"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comportamiento del botón de Republicar"
           }
         },
         "it" : {
@@ -29893,6 +29905,12 @@
             "state" : "translated",
             "value" : "Carica tutti i nuovi post delle timeline (fino a 800) invece che solo gli ultimi 40 + i restanti manualmente."
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obtiene todas las nuevas publicaciones de la cronología (hasta 800) en lugar de las últimas 40, permitiendo rellenar los huecos"
+          }
         }
       }
     },
@@ -32305,6 +32323,12 @@
             "state" : "translated",
             "value" : "Caricamento completo timeline"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obtener toda la cronología"
+          }
         }
       }
     },
@@ -34362,6 +34386,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mantiene la home aggiornata in tempo reale utilizzando lo streaming quando disponibile. Disattiva in caso di problemi di prestazioni."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mantiene tu cronología de inicio en tiempo real usando streaming cuando esté disponible. Deshabilitar en caso de problemas de rendimiento."
           }
         }
       }
@@ -37149,6 +37179,12 @@
             "state" : "translated",
             "value" : "Statistiche"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métricas"
+          }
         }
       }
     },
@@ -37721,6 +37757,12 @@
             "state" : "translated",
             "value" : "Account moderati"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuentas moderadas"
+          }
         }
       }
     },
@@ -37743,6 +37785,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limitati dai moderatori dei server"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limitado por los moderadores del servidor"
           }
         }
       }
@@ -37886,6 +37934,12 @@
             "state" : "translated",
             "value" : "Creati negli ultimi 30 giorni"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creado durante los últimos 30 días"
+          }
         }
       }
     },
@@ -38027,6 +38081,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "E che ti seguono da meno di 3 giorni"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Y siguiéndote desde hace menos de tres días"
           }
         }
       }
@@ -38170,6 +38230,12 @@
             "state" : "translated",
             "value" : "Finché non li approvi manualmente"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hasta tu aprobación manual"
+          }
         }
       }
     },
@@ -38311,6 +38377,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "A meno che non sia una risposta a una tua menzione o se segui il mittente"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvo si estás respondiendo a tu propia mención o si sigues al remitente"
           }
         }
       }
@@ -38454,6 +38526,12 @@
             "state" : "translated",
             "value" : "Seleziona"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccionar"
+          }
         }
       }
     },
@@ -38476,6 +38554,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seleziona tutto"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccionar todo"
           }
         }
       }
@@ -43273,8 +43357,7 @@
             "value" : "發表內容"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "Post visibility" : {
       "localizations" : {
@@ -48790,6 +48873,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avatar e copertine animati"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatares y encabezados animados"
           }
         }
       }
@@ -55173,6 +55262,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abilita emoji animate"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habilitar emojis animados"
           }
         }
       }
@@ -82299,8 +82394,8 @@
         },
         "es" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide posts with media"
+            "state" : "translated",
+            "value" : "Ocultar publicaciones con contenido multimedia"
           }
         },
         "eu" : {
@@ -84929,6 +85024,12 @@
             "state" : "translated",
             "value" : "Salvato nelle bozze"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardado como borrador"
+          }
         }
       }
     },
@@ -84951,6 +85052,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Post inviato"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicación enviada"
           }
         }
       }
@@ -84975,6 +85082,12 @@
             "state" : "translated",
             "value" : "Pubblicazione"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicando"
+          }
         }
       }
     },
@@ -84997,6 +85110,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile eliminare il post"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No fue posible eliminar la publicación"
           }
         }
       }
@@ -85021,6 +85140,12 @@
             "state" : "translated",
             "value" : "Post eliminato"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicación eliminada"
+          }
         }
       }
     },
@@ -85043,6 +85168,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Elimino post"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminando publicación"
           }
         }
       }
@@ -85771,8 +85902,7 @@
             "value" : "用 Ice Cubes 在 Mastodon 上發表圖像"
           }
         }
-      },
-      "shouldTranslate" : false
+      }
     },
     "Visibility" : {
       "localizations" : {
