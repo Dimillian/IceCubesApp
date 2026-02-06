@@ -9,19 +9,22 @@ import SwiftUI
     public let showThreads: Bool
     public let showQuotePosts: Bool
     public let hidePostsWithMedia: Bool
+    public let hidePostsFromBots: Bool
 
     public init(
       showBoosts: Bool,
       showReplies: Bool,
       showThreads: Bool,
       showQuotePosts: Bool,
-      hidePostsWithMedia: Bool
+      hidePostsWithMedia: Bool,
+      hidePostsFromBots: Bool
     ) {
       self.showBoosts = showBoosts
       self.showReplies = showReplies
       self.showThreads = showThreads
       self.showQuotePosts = showQuotePosts
       self.hidePostsWithMedia = hidePostsWithMedia
+      self.hidePostsFromBots = hidePostsFromBots
     }
   }
 
@@ -31,6 +34,7 @@ import SwiftUI
     @AppStorage("timeline_show_threads") var showThreads: Bool = true
     @AppStorage("timeline_quote_posts") var showQuotePosts: Bool = true
     @AppStorage("timeline_hide_posts_with_media") var hidePostsWithMedia: Bool = false
+    @AppStorage("timeline_hide_posts_from_bots") var hidePostsFromBots: Bool = false
   }
 
   public static let shared = TimelineContentFilter()
@@ -66,12 +70,19 @@ import SwiftUI
     }
   }
     
+  public var hidePostsFromBots: Bool {
+    didSet {
+      storage.hidePostsFromBots = hidePostsFromBots
+    }
+  }
+    
   private init() {
     showBoosts = storage.showBoosts
     showReplies = storage.showReplies
     showThreads = storage.showThreads
     showQuotePosts = storage.showQuotePosts
     hidePostsWithMedia = storage.hidePostsWithMedia
+    hidePostsFromBots = storage.hidePostsFromBots
   }
 
   public func snapshot() -> Snapshot {
@@ -80,7 +91,8 @@ import SwiftUI
       showReplies: showReplies,
       showThreads: showThreads,
       showQuotePosts: showQuotePosts,
-      hidePostsWithMedia: hidePostsWithMedia
+      hidePostsWithMedia: hidePostsWithMedia,
+      hidePostsFromBots: hidePostsFromBots
     )
   }
 }
