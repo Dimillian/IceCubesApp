@@ -190,6 +190,8 @@ actor TimelineDatasource {
     let hasLegacyQuoteLink = !status.content.statusesURLs.isEmpty
       || !(status.reblog?.content.statusesURLs.isEmpty ?? true)
 
+    let isBotAuthored = status.reblog?.account.bot ?? status.account.bot
+
     return !isHidden
       && (showReplies || status.inReplyToId == nil
         || status.inReplyToAccountId == status.account.id)
@@ -197,6 +199,6 @@ actor TimelineDatasource {
       && (showThreads || status.inReplyToAccountId != status.account.id)
       && (showQuotePosts || (!hasQuote && !hasLegacyQuoteLink))
       && (!filter.hidePostsWithMedia || status.mediaAttachments.isEmpty)
-      && !(filter.hidePostsFromBots && status.account.bot)
+      && !(filter.hidePostsFromBots && isBotAuthored)
   }
 }
