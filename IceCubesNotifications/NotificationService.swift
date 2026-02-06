@@ -46,8 +46,11 @@ actor NotificationServiceContentProvider {
 
   func buildContent() async -> UNMutableNotificationContent? {
     if var bestAttemptContent {
-      let privateKey = pushKeys.notificationsPrivateKeyAsKey
-      let auth = pushKeys.notificationsAuthKeyAsKey
+      guard let privateKey = pushKeys.notificationsPrivateKeyIfPresent,
+        let auth = pushKeys.notificationsAuthKeyIfPresent
+      else {
+        return bestAttemptContent
+      }
 
       guard let encodedPayload = bestAttemptContent.userInfo["m"] as? String,
         let payload = Data(base64Encoded: encodedPayload.URLSafeBase64ToBase64())
