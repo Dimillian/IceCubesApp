@@ -20552,16 +20552,16 @@
     },
     "Adds @ and # keys directly on the keyboard for faster mentions and hashtags." : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aggiunge i tasti @ e # alla tastiera per scrivere menzioni e hashtag più velocemente."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Añadir @ y # directamente al teclado para menciones y hashtags más rápidos"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aggiunge i tasti @ e # alla tastiera per scrivere menzioni e hashtag più velocemente."
           }
         }
       }
@@ -29900,16 +29900,16 @@
     },
     "Fetches all new timeline posts (up to 800) instead of only the latest 40 + manually loading the gap." : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Carica tutti i nuovi post delle timeline (fino a 800) invece che solo gli ultimi 40 + i restanti manualmente."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obtiene todas las nuevas publicaciones de la cronología (hasta 800) en lugar de las últimas 40, permitiendo rellenar los huecos"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Carica tutti i nuovi post delle timeline (fino a 800) invece che solo gli ultimi 40 + i restanti manualmente."
           }
         }
       }
@@ -32318,16 +32318,16 @@
     },
     "Full timeline fetch" : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Caricamento completo timeline"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obtener toda la cronología"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Caricamento completo timeline"
           }
         }
       }
@@ -34382,16 +34382,16 @@
     },
     "Keeps your home timeline up to date in real time using streaming when available. Disable in case of performance issues." : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mantiene la home aggiornata in tempo reale utilizzando lo streaming quando disponibile. Disattiva in caso di problemi di prestazioni."
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mantiene tu cronología de inicio en tiempo real usando streaming cuando esté disponible. Deshabilitar en caso de problemas de rendimiento."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mantiene la home aggiornata in tempo reale utilizzando lo streaming quando disponibile. Disattiva in caso di problemi di prestazioni."
           }
         }
       }
@@ -37174,16 +37174,16 @@
     },
     "Metrics" : {
       "localizations" : {
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Statistiche"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Métricas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistiche"
           }
         }
       }
@@ -37752,16 +37752,16 @@
             "value" : "Moderated accounts"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Account moderati"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cuentas moderadas"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account moderati"
           }
         }
       }
@@ -37781,16 +37781,16 @@
             "value" : "Limited by server moderators"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Limitati dai moderatori dei server"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limitado por los moderadores del servidor"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limitati dai moderatori dei server"
           }
         }
       }
@@ -37929,16 +37929,16 @@
             "value" : "Created within the past 30 days"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Creati negli ultimi 30 giorni"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Creado durante los últimos 30 días"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creati negli ultimi 30 giorni"
           }
         }
       }
@@ -38077,16 +38077,16 @@
             "value" : "And following you for less than 3 days"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "E che ti seguono da meno di 3 giorni"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Y siguiéndote desde hace menos de tres días"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "E che ti seguono da meno di 3 giorni"
           }
         }
       }
@@ -38225,16 +38225,16 @@
             "value" : "Until you manually approve them"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Finché non li approvi manualmente"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hasta tu aprobación manual"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finché non li approvi manualmente"
           }
         }
       }
@@ -38373,16 +38373,16 @@
             "value" : "Unless it's in reply to your own mention or if you follow the sender"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "A meno che non sia una risposta a una tua menzione o se segui il mittente"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Salvo si estás respondiendo a tu propia mención o si sigues al remitente"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A meno che non sia una risposta a una tua menzione o se segui il mittente"
           }
         }
       }
@@ -38521,16 +38521,16 @@
             "value" : "Select"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seleziona"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seleccionar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleziona"
           }
         }
       }
@@ -38550,16 +38550,16 @@
             "value" : "Select all"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Seleziona tutto"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seleccionar todo"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleziona tutto"
           }
         }
       }
@@ -48869,16 +48869,16 @@
             "value" : "Animated Avatars and Headers"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Avatar e copertine animati"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avatares y encabezados animados"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatar e copertine animati"
           }
         }
       }
@@ -55258,16 +55258,16 @@
             "value" : "Enable Animated Emojis"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Abilita emoji animate"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Habilitar emojis animados"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abilita emoji animate"
           }
         }
       }
@@ -85029,6 +85029,12 @@
     "toast.posting.failure.saved-to-drafts" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In Entwürfen gespeichert"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -85039,12 +85045,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Saved to drafts"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Salvato nelle bozze"
           }
         },
         "es" : {
@@ -85052,12 +85052,24 @@
             "state" : "translated",
             "value" : "Guardado como borrador"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salvato nelle bozze"
+          }
         }
       }
     },
     "toast.posting.success.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitrag gepostet"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -85068,12 +85080,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Post sent"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Post inviato"
           }
         },
         "es" : {
@@ -85081,12 +85087,24 @@
             "state" : "translated",
             "value" : "Publicación enviada"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post inviato"
+          }
         }
       }
     },
     "toast.posting.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poste Beitrag"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -85097,12 +85115,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Posting"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pubblicazione"
           }
         },
         "es" : {
@@ -85110,12 +85122,24 @@
             "state" : "translated",
             "value" : "Publicando"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pubblicazione"
+          }
         }
       }
     },
     "toast.status.delete.failure.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitrag konnte nicht gelöscht werden"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -85126,12 +85150,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Couldn't delete post"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Impossibile eliminare il post"
           }
         },
         "es" : {
@@ -85139,12 +85157,24 @@
             "state" : "translated",
             "value" : "No fue posible eliminar la publicación"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossibile eliminare il post"
+          }
         }
       }
     },
     "toast.status.delete.success.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitrag gelöscht"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -85155,12 +85185,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Post deleted"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Post eliminato"
           }
         },
         "es" : {
@@ -85168,12 +85192,24 @@
             "state" : "translated",
             "value" : "Publicación eliminada"
           }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post eliminato"
+          }
         }
       }
     },
     "toast.status.delete.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beitrag wird gelöscht"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -85186,16 +85222,16 @@
             "value" : "Deleting post"
           }
         },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Elimino post"
-          }
-        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eliminando publicación"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimino post"
           }
         }
       }
