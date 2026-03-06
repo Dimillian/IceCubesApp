@@ -100,7 +100,7 @@ private struct DismissToolbarItem: ToolbarContent {
       Button {
         dismiss()
       } label: {
-        Image(systemName: "xmark.circle")
+        Image(systemName: "xmark")
       }
       .keyboardShortcut(.cancelAction)
     }
