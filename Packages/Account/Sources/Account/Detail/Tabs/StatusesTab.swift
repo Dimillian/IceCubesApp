@@ -125,7 +125,7 @@ private struct StatusesTabView: View {
 
   @ViewBuilder
   private var pinnedPostsView: some View {
-    Label("account.post.pinned", systemImage: "pin.fill")
+    Label("account.post.pinned \(fetcher.pinned.count)", systemImage: "pin.fill")
       .accessibilityAddTraits(.isHeader)
       .font(.scaledFootnote)
       .foregroundStyle(.secondary)
