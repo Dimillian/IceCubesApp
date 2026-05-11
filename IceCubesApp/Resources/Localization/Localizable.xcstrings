@@ -27,6 +27,12 @@
             "value" : ""
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -919,6 +925,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld."
           }
         },
         "it" : {
@@ -20558,6 +20570,12 @@
             "value" : "Añadir @ y # directamente al teclado para menciones y hashtags más rápidos"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoute les touches @ et # directement sur le clavier pour faire plus rapidement des mentions et des hashtags."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20816,6 +20834,12 @@
             "value" : "Texto ALT para la imagen"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texte alternatif pour les images"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20918,6 +20942,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Versiones de la API"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versions des API"
           }
         },
         "it" : {
@@ -21214,6 +21244,12 @@
             "value" : "Comportamiento del botón de Republicar"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comportement du bouton de boost"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21248,6 +21284,12 @@
             "value" : "Leyenda"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Légende"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21280,6 +21322,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Leyenda para tu publicación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Légende pour votre publication"
           }
         },
         "it" : {
@@ -23175,6 +23223,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descripciones (ALT) para tus imágenes en orden"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descriptions (ALT) pour vos images"
           }
         },
         "it" : {
@@ -27586,6 +27640,12 @@
             "value" : "Error: %@"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur : %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29271,8 +29331,8 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Liens tendance"
+            "state" : "translated",
+            "value" : "Nouveautés"
           }
         },
         "it" : {
@@ -29904,6 +29964,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Obtiene todas las nuevas publicaciones de la cronología (hasta 800) en lugar de las últimas 40, permitiendo rellenar los huecos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Récupère toutes les nouveaux fils d’actualités (jusque 800) plutôt qu’uniquement les 40 derniers, et charge manuellement la différence."
           }
         },
         "it" : {
@@ -32324,6 +32390,12 @@
             "value" : "Obtener toda la cronología"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Récupération de tout le fil d’actualité"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32486,6 +32558,12 @@
             "value" : "Descripción de la imagen"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description de l’image"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32518,6 +32596,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descripciones de las imágenes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descriptions de l’image"
           }
         },
         "it" : {
@@ -32618,6 +32702,12 @@
             "value" : "Imagen(es) para publicar en Mastodon"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image(s) à publier sur Mastodon"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32650,6 +32740,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Imágenes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Images"
           }
         },
         "it" : {
@@ -32755,6 +32851,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Administrador de la Instancia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Administrateur de l’instance"
           }
         },
         "it" : {
@@ -34386,6 +34488,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mantiene tu cronología de inicio en tiempo real usando streaming cuando esté disponible. Deshabilitar en caso de problemas de rendimiento."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maintient votre fil d'actualité personnel à jour en temps réel grâce au streaming (lorsqu'il est disponible). Désactivez cette fonction en cas de problèmes de performance."
           }
         },
         "it" : {
@@ -37180,6 +37288,12 @@
             "value" : "Métricas"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métriques"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37200,6 +37314,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usuarios Activos Mensuales"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilisateurs mensuels actifs"
           }
         },
         "it" : {
@@ -37304,6 +37424,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ninguna imagen proporcionada para publicar."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas d’image fournies à publier"
           }
         },
         "it" : {
@@ -37758,6 +37884,12 @@
             "value" : "Cuentas moderadas"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comptes modérés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37785,6 +37917,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limitado por los moderadores del servidor"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limité par les modérateurs du serveur"
           }
         },
         "it" : {
@@ -37935,6 +38073,12 @@
             "value" : "Creado durante los últimos 30 días"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crées ces 30 derniers jours"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38081,6 +38225,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Y siguiéndote desde hace menos de tres días"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Et vous suivant depuis moins de 3 jours"
           }
         },
         "it" : {
@@ -38231,6 +38381,12 @@
             "value" : "Hasta tu aprobación manual"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jusque ce que vous les approuvez manuellement"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38377,6 +38533,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Salvo si estás respondiendo a tu propia mención o si sigues al remitente"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sauf si c'est en réponse à votre propre mention ou si vous suivez l'expéditeur."
           }
         },
         "it" : {
@@ -38527,6 +38689,12 @@
             "value" : "Seleccionar"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sélectionner"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38554,6 +38722,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seleccionar todo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout sélectionner"
           }
         },
         "it" : {
@@ -41995,6 +42169,244 @@
         }
       }
     },
+    "notifications.menu-title.quote" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Citation"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        }
+      }
+    },
+    "notifications.menu-title.quote-updated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Citation mise à jour"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        }
+      }
+    },
     "notifications.menu-title.reblog" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -43443,6 +43855,12 @@
             "value" : "%lld imagen(es) publicada(s) en Mastodon"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publier %lld image(s) sur Mastodon"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44621,6 +45039,12 @@
             "value" : "Envía una imagen o múltiples imágenes a Mastodon con Ice Cubes sin abrir la aplicación"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoyez une ou plusieurs images à Mastodon avec Ice Cubes sans ouvrir l'application."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44655,6 +45079,12 @@
             "value" : "Enviar imagen(es) (segundo plano)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoyer les images (en arrière plan)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44687,6 +45117,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enviar imagen(es) a Mastodon"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoyer les images sur Mastodon"
           }
         },
         "it" : {
@@ -48873,6 +49309,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avatares y encabezados animados"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatars animés et en-têtes"
           }
         },
         "it" : {
@@ -55262,6 +55704,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Habilitar emojis animados"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activer les emojis animés"
           }
         },
         "it" : {
@@ -77946,6 +78394,24 @@
             }
           }
         },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld citation"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld citations"
+                }
+              }
+            }
+          }
+        },
         "it" : {
           "variations" : {
             "plural" : {
@@ -78831,6 +79297,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Actualizar cronología principal en tiempo real"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streaming du file d’actualité principal"
           }
         },
         "it" : {
@@ -82374,6 +82846,12 @@
             "value" : "Hide posts from bots"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cacher les publications des robots"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -82428,8 +82906,8 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide posts with media"
+            "state" : "translated",
+            "value" : "Cacher les publications avec des médias"
           }
         },
         "it" : {
@@ -83022,7 +83500,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afficher les Réponses"
+            "value" : "Afficher les réponses"
           }
         },
         "it" : {
@@ -83141,7 +83619,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afficher Threads"
+            "value" : "Afficher les fils"
           }
         },
         "it" : {
@@ -85053,6 +85531,12 @@
             "value" : "Guardado como borrador"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sauvegardé dans les brouillons"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -85086,6 +85570,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Publicación enviada"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publication envoyée"
           }
         },
         "it" : {
@@ -85123,6 +85613,12 @@
             "value" : "Publicando"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoi de la publication"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -85156,6 +85652,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No fue posible eliminar la publicación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de supprimer la publication"
           }
         },
         "it" : {
@@ -85193,6 +85695,12 @@
             "value" : "Publicación eliminada"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publication supprimée"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -85226,6 +85734,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eliminando publicación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suppression de la publication"
           }
         },
         "it" : {
@@ -85818,6 +86332,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Truncar contenido del estado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tronquer le contenu des publications"
           }
         },
         "it" : {
