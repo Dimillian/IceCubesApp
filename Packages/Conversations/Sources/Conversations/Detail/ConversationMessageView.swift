@@ -176,7 +176,7 @@ struct ConversationMessageView: View {
         Button(role: .destructive) {
           routerPath.presentedSheet = .report(status: message.reblogAsAsStatus ?? message)
         } label: {
-          Label("status.action.report", systemImage: "exclamationmark.bubble")
+          Label("status.action.report", systemImage: "exclamationmark.bubble").tint(.red)
         }
       }
     }
