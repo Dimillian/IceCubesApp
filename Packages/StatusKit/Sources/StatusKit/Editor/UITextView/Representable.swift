@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension TextView {
-  struct Representable: UIViewRepresentable {
+  struct Representable: UIViewControllerRepresentable {
     @Binding var text: NSMutableAttributedString
     @Binding var calculatedHeight: CGFloat
     @Environment(\.sizeCategory) var sizeCategory
@@ -9,16 +9,17 @@ extension TextView {
     let keyboard: UIKeyboardType
     var getTextView: ((UITextView) -> Void)?
 
-    func makeUIView(context: Context) -> UIKitTextView {
-      context.coordinator.textView
+    func makeUIViewController(context: Context) -> TextViewController {
+      TextViewController(textView: context.coordinator.textView)
     }
 
-    func updateUIView(_: UIKitTextView, context: Context) {
+    func updateUIViewController(_: TextViewController, context: Context) {
       context.coordinator.update(representable: self)
-      if !context.coordinator.didBecomeFirstResponder {
-        context.coordinator.textView.becomeFirstResponder()
-        context.coordinator.didBecomeFirstResponder = true
-      }
+      // Deliberately no automatic becomeFirstResponder here: on iOS 26/27 a
+      // focused UITextView in this sheet deadlocks SwiftUI's AttributeGraph
+      // when the device rotates ("cycle detected" spam until the system kills
+      // the app). Tap the field to start typing; TextViewController drops focus
+      // in viewWillTransition, *before* the rotation begins.
     }
 
     @discardableResult func makeCoordinator() -> Coordinator {

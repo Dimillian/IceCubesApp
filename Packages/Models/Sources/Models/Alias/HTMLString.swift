@@ -52,7 +52,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
 
       asMarkdown = ""
       do {
-        let document: Document = try SwiftSoup.parse(htmlValue)
+        let document: SwiftSoup.Document = try SwiftSoup.parse(htmlValue)
         var listCounters: [Int] = []
         handleNode(node: document, listCounters: &listCounters)
 
@@ -136,7 +136,7 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
     try container.encode(hadTrailingTags, forKey: .hadTrailingTags)
   }
 
-  private mutating func removeTrailingTags(doc: Document) {
+  private mutating func removeTrailingTags(doc: SwiftSoup.Document) {
     // Fast bail-outs
     if !asMarkdown.contains("#") { return }
 
