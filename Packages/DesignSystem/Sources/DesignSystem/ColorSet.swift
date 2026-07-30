@@ -214,8 +214,6 @@ public struct BlueskyDark: ColorSet {
   public var primaryBackgroundColor: Color = .init(hex: 0x151D28)
   public var secondaryBackgroundColor: Color = .init(hex: 0x151D28)
   public var labelColor: Color = .white
-}
-
 
   public init() {}
 }
