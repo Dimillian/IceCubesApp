@@ -9,6 +9,7 @@ public let availableColorsSets: [ColorSetCouple] =
     .init(light: MediumLight(), dark: MediumDark()),
     .init(light: ConstellationLight(), dark: ConstellationDark()),
     .init(light: ThreadsLight(), dark: ThreadsDark()),
+    .init(light: BlueskyLight(), dark: BlueskyDark()),
   ]
 
 public protocol ColorSet: Sendable {
@@ -39,6 +40,8 @@ public enum ColorSetName: String, Sendable {
   case constellationDark = "Constellation - Dark"
   case threadsLight = "Threads - Light"
   case threadsDark = "Threads - Dark"
+  case blueskyLight = "Bluesky - Light"
+  case blueskyDark = "Bluesky - Dark"
 }
 
 public struct ColorSetCouple: Identifiable, Sendable {
@@ -197,6 +200,30 @@ public struct ThreadsLight: ColorSet {
   public var name: ColorSetName = .threadsLight
   public var scheme: ColorScheme = .light
   public var tintColor: Color = .init(hex: 0x0095F6)
+  public var primaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
+  public var secondaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
+  public var labelColor: Color = .black
+
+  public init() {}
+}
+
+public struct BlueskyDark: ColorSet {
+  public var name: ColorSetName = .blueskyDark
+  public var scheme: ColorScheme = .dark
+  public var tintColor: Color = .init(hex: 0x4D97FF)
+  public var primaryBackgroundColor: Color = .init(hex: 0x151D28)
+  public var secondaryBackgroundColor: Color = .init(hex: 0x151D28)
+  public var labelColor: Color = .white
+}
+
+
+  public init() {}
+}
+
+public struct BlueskyLight: ColorSet {
+  public var name: ColorSetName = .blueskyLight
+  public var scheme: ColorScheme = .light
+  public var tintColor: Color = .init(hex: 0x006AFF)
   public var primaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
   public var secondaryBackgroundColor: Color = .init(hex: 0xFFFFFF)
   public var labelColor: Color = .black
