@@ -25,6 +25,7 @@ public struct AccountDetailView: View {
   @State private var viewState: AccountDetailState = .loading
   @State private var relationship: Relationship?
   @State private var familiarFollowers: [Account] = []
+  @State private var collections: [AccountCollection] = []
   @State private var followButtonViewModel: FollowButtonViewModel?
   @State private var translation: Translation?
   @State private var isLoadingTranslation = false
@@ -65,6 +66,8 @@ public struct AccountDetailView: View {
           FamiliarFollowersView(familiarFollowers: familiarFollowers)
             .applyAccountDetailsRowStyle(theme: theme)
           FeaturedTagsView(featuredTags: featuredTags, accountId: accountId)
+            .applyAccountDetailsRowStyle(theme: theme)
+          AccountCollectionsView(collections: collections)
             .applyAccountDetailsRowStyle(theme: theme)
           if let tabManager {
             makeTabPicker(tabManager: tabManager)
@@ -122,6 +125,9 @@ public struct AccountDetailView: View {
               group.addTask {
                 await fetchFamiliarFollowers()
               }
+            }
+            group.addTask {
+              await fetchCollections()
             }
           }
         }
@@ -336,6 +342,14 @@ extension AccountDetailView {
       account: account,
       featuredTags: featuredTags,
       relationships: [])
+  }
+
+  private func fetchCollections() async {
+    // Collections only exist on Mastodon >= 4.6; on older servers the request
+    // fails and the row simply stays hidden.
+    let response: AccountCollectionsResponse? = try? await client.get(
+      endpoint: Collections.accountCollections(id: accountId))
+    collections = response?.collections ?? []
   }
 
   private func fetchFamiliarFollowers() async {
