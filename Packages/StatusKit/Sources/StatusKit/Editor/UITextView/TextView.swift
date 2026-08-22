@@ -60,11 +60,42 @@ public struct TextView: View {
   }
 }
 
+/// Hosts the text view so it can dismiss the keyboard before interface rotation.
+final class TextViewController: UIViewController {
+  private let textView: UIKitTextView
+
+  init(textView: UIKitTextView) {
+    self.textView = textView
+    super.init(nibName: nil, bundle: nil)
+  }
+
+  @available(*, unavailable)
+  required init?(coder _: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+
+  override func loadView() {
+    view = textView
+  }
+
+  override func viewWillTransition(
+    to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator
+  ) {
+    if textView.isFirstResponder {
+      textView.resignFirstResponder()
+    }
+    super.viewWillTransition(to: size, with: coordinator)
+  }
+}
+
 final class UIKitTextView: UITextView {
   override var keyCommands: [UIKeyCommand]? {
     (super.keyCommands ?? []) + [
       UIKeyCommand(
-        input: UIKeyCommand.inputEscape, modifierFlags: [], action: #selector(escape(_:)))
+        input: UIKeyCommand.inputEscape,
+        modifierFlags: [],
+        action: #selector(escape(_:))
+      ),
     ]
   }
 

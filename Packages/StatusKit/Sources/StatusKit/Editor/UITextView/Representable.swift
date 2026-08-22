@@ -1,7 +1,7 @@
 import SwiftUI
 
 extension TextView {
-  struct Representable: UIViewRepresentable {
+  struct Representable: UIViewControllerRepresentable {
     @Binding var text: NSMutableAttributedString
     @Binding var calculatedHeight: CGFloat
     @Environment(\.sizeCategory) var sizeCategory
@@ -9,11 +9,11 @@ extension TextView {
     let keyboard: UIKeyboardType
     var getTextView: ((UITextView) -> Void)?
 
-    func makeUIView(context: Context) -> UIKitTextView {
-      context.coordinator.textView
+    func makeUIViewController(context: Context) -> TextViewController {
+      TextViewController(textView: context.coordinator.textView)
     }
 
-    func updateUIView(_: UIKitTextView, context: Context) {
+    func updateUIViewController(_: TextViewController, context: Context) {
       context.coordinator.update(representable: self)
       if !context.coordinator.didBecomeFirstResponder {
         context.coordinator.textView.becomeFirstResponder()
