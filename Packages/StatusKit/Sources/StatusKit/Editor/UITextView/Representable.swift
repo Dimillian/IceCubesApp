@@ -15,11 +15,10 @@ extension TextView {
 
     func updateUIViewController(_: TextViewController, context: Context) {
       context.coordinator.update(representable: self)
-      // Deliberately no automatic becomeFirstResponder here: on iOS 26/27 a
-      // focused UITextView in this sheet deadlocks SwiftUI's AttributeGraph
-      // when the device rotates ("cycle detected" spam until the system kills
-      // the app). Tap the field to start typing; TextViewController drops focus
-      // in viewWillTransition, *before* the rotation begins.
+      if !context.coordinator.didBecomeFirstResponder {
+        context.coordinator.textView.becomeFirstResponder()
+        context.coordinator.didBecomeFirstResponder = true
+      }
     }
 
     @discardableResult func makeCoordinator() -> Coordinator {
