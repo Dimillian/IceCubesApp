@@ -60,21 +60,7 @@ extension StatusEditor {
           .listRowBackground(theme.primaryBackgroundColor)
           Section {
             if let url = container.mediaAttachment?.url {
-              AsyncImage(
-                url: url,
-                content: { image in
-                  image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .cornerRadius(8)
-                    .padding(8)
-                },
-                placeholder: {
-                  RoundedRectangle(cornerRadius: 8)
-                    .fill(Color.gray)
-                    .frame(height: 200)
-                }
-              )
+              mediaPreview(url: url)
             }
           }
           .listRowBackground(theme.primaryBackgroundColor)
@@ -124,6 +110,33 @@ extension StatusEditor {
         }
         .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
       }
+    }
+
+    private func mediaPreview(url: URL) -> some View {
+      AsyncImage(url: url) { phase in
+        ZStack {
+          RoundedRectangle(cornerRadius: 8)
+            .fill(Color.gray.opacity(0.2))
+
+          switch phase {
+          case .empty:
+            ProgressView()
+          case .success(let image):
+            image
+              .resizable()
+              .scaledToFit()
+          case .failure:
+            Image(systemName: "photo")
+              .foregroundStyle(.secondary)
+          @unknown default:
+            EmptyView()
+          }
+        }
+      }
+      .frame(maxWidth: .infinity)
+      .frame(height: 200)
+      .clipShape(RoundedRectangle(cornerRadius: 8))
+      .padding(8)
     }
 
     @ViewBuilder
