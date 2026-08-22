@@ -17,12 +17,16 @@ struct AccountCollectionsView: View {
               routerPath.navigate(to: .collectionDetail(collection: collection))
             } label: {
               VStack(alignment: .leading, spacing: 0) {
-                Label(collection.name, systemImage: "person.2.crop.square.stack")
+                Text(collection.name)
                   .font(.scaledCallout)
+                  .lineLimit(1)
+                  .truncationMode(.tail)
                 Text("account.detail.collections-n-accounts \(collection.itemCount)")
                   .font(.caption2)
               }
-            }.buttonStyle(.bordered)
+            }
+            .buttonStyle(.bordered)
+            .frame(maxWidth: 180)
           }
         }
         .padding(.leading, .layoutPadding)
