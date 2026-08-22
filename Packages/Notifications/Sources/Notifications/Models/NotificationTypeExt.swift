@@ -3,7 +3,7 @@ import Models
 import SwiftUI
 
 extension Models.Notification.NotificationType {
-  public func label(count: Int) -> LocalizedStringKey {
+  public nonisolated func label(count: Int) -> LocalizedStringKey {
     switch self {
     case .status:
       "notifications.label.status"
@@ -99,25 +99,25 @@ extension Models.Notification.NotificationType {
   func menuTitle() -> LocalizedStringKey {
     switch self {
     case .status:
-      "notifications.menu-title.status"
+        "notifications.menu-title.status"
     case .mention:
-      "notifications.menu-title.mention"
+        "notifications.menu-title.mention"
     case .reblog:
-      "notifications.menu-title.reblog"
+        "notifications.menu-title.reblog"
     case .follow:
-      "notifications.menu-title.follow"
+        "notifications.menu-title.follow"
     case .follow_request:
-      "notifications.menu-title.follow-request"
+        "notifications.menu-title.follow-request"
     case .favourite:
-      "notifications.menu-title.favorite"
+        "notifications.menu-title.favorite"
     case .poll:
-      "notifications.menu-title.poll"
+        "notifications.menu-title.poll"
     case .update:
-      "notifications.menu-title.update"
+        "notifications.menu-title.update"
     case .quote:
-      "Quote"
+        "notifications.menu-title.quote"
     case .quoted_update:
-      "Quote updated"
+        "notifications.menu-title.quote-updated"
     }
   }
 }

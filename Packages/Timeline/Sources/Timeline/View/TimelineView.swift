@@ -56,6 +56,7 @@ public struct TimelineView: View {
               .padding(.horizontal, .layoutPadding)
           }
         }
+        .scrollEdgeEffectStyle(.soft, for: .top)
     } else {
       timelineView
         .toolbarBackground(toolbarBackgroundVisibility, for: .navigationBar)

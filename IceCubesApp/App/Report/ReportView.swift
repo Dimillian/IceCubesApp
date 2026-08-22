@@ -15,10 +15,6 @@ public struct ReportView: View {
   @State private var commentText: String = ""
   @State private var isSendingReport: Bool = false
 
-  struct ReportSent: Decodable {
-    let id: String
-  }
-
   public var body: some View {
     NavigationStack {
       Form {
@@ -47,12 +43,11 @@ public struct ReportView: View {
             isSendingReport = true
             Task {
               do {
-                let _: ReportSent =
-                  try await client.post(
-                    endpoint: Statuses.report(
-                      accountId: status.account.id,
-                      statusId: status.id,
-                      comment: commentText))
+                _ = try await client.post(
+                  endpoint: Statuses.report(
+                    accountId: status.account.id,
+                    statusId: status.id,
+                    comment: commentText))
                 dismiss()
                 isSendingReport = false
               } catch {

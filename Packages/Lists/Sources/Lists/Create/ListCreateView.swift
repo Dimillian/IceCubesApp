@@ -11,6 +11,7 @@ public struct ListCreateView: View {
   @Environment(Theme.self) private var theme
   @Environment(MastodonClient.self) private var client
   @Environment(CurrentAccount.self) private var currentAccount
+  @Environment(ToastCenter.self) private var toastCenter
 
   @State private var title = ""
   @State private var repliesPolicy: Models.List.RepliesPolicy = .list
@@ -42,20 +43,7 @@ public struct ListCreateView: View {
       .toolbar {
         CancelToolbarItem()
         ToolbarItem {
-          Button {
-            let client = client
-            Task {
-              isSaving = true
-              let _: Models.List = try await client.post(
-                endpoint: Lists.createList(
-                  title: title,
-                  repliesPolicy: repliesPolicy,
-                  exclusive: isExclusive))
-              await currentAccount.fetchLists()
-              isSaving = false
-              dismiss()
-            }
-          } label: {
+          Button(action: createList) {
             if isSaving {
               ProgressView()
             } else {
@@ -66,6 +54,34 @@ public struct ListCreateView: View {
       }
       .navigationTitle(title)
       .navigationBarTitleDisplayMode(.inline)
+    }
+  }
+
+  private func createList() {
+    let client = client
+    Task {
+      isSaving = true
+      defer { isSaving = false }
+
+      do {
+        let _: Models.List = try await client.post(
+          endpoint: Lists.createList(
+            title: title,
+            repliesPolicy: repliesPolicy,
+            exclusive: isExclusive))
+        await currentAccount.fetchLists()
+        dismiss()
+      } catch {
+        toastCenter.show(
+          .init(
+            title: String(localized: "lists.create"),
+            message: error.localizedDescription,
+            systemImage: "exclamationmark.triangle.fill",
+            tint: .red
+          ),
+          autoDismissAfter: .seconds(4)
+        )
+      }
     }
   }
 }

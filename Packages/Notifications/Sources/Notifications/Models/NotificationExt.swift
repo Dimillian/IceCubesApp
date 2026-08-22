@@ -8,7 +8,7 @@
 import Models
 
 extension Notification {
-  func consolidationId(selectedType: Models.Notification.NotificationType?) -> String? {
+  nonisolated func consolidationId(selectedType: Models.Notification.NotificationType?) -> String? {
     guard let supportedType else { return nil }
 
     switch supportedType {
@@ -24,7 +24,7 @@ extension Notification {
     }
   }
 
-  func isConsolidable(selectedType: Models.Notification.NotificationType?) -> Bool {
+  nonisolated func isConsolidable(selectedType: Models.Notification.NotificationType?) -> Bool {
     // Notification is consolidable onlt if the consolidation id is not the notication id (unique) itself
     consolidationId(selectedType: selectedType) != id
   }

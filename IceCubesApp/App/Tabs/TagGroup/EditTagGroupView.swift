@@ -205,6 +205,15 @@ private struct TagsInputView: View {
   @FocusState.Binding var focusedField: EditTagGroupView.Focus?
 
   var body: some View {
+    var warningText: LocalizedStringKey {
+      if tags.contains(newTag) {
+        return "add-tag-groups.edit.tags.field.warning.duplicated-tag"
+      } else if case let .invalid(description) = tagsValidationStatus {
+        return description
+      }
+      return ""
+    }
+
     ForEach(tags, id: \.self) { tag in
       HStack {
         Text(tag)
@@ -252,15 +261,6 @@ private struct TagsInputView: View {
       if focusedField == .new, warningText != "" {
         Text(warningText).warningLabel()
       }
-    }
-
-    var warningText: LocalizedStringKey {
-      if tags.contains(newTag) {
-        return "add-tag-groups.edit.tags.field.warning.duplicated-tag"
-      } else if case let .invalid(description) = tagsValidationStatus {
-        return description
-      }
-      return ""
     }
   }
 

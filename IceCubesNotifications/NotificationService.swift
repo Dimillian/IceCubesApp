@@ -129,7 +129,7 @@ actor NotificationServiceContentProvider {
                   bestAttemptContent.body = notification.body.escape()
                 } else {
                   let newBody =
-                    "\(NSLocalizedString(type.notificationKey(), bundle: .main, comment: ""))\(notification.body.escape())"
+                  "\(await NSLocalizedString(type.notificationKey(), bundle: .main, comment: ""))\(notification.body.escape())"
                   bestAttemptContent.body = newBody
                 }
                 return bestAttemptContent
@@ -181,10 +181,13 @@ actor NotificationServiceContentProvider {
   ) -> INSendMessageIntent {
     let handle = INPersonHandle(value: remoteNotification.account.id, type: .unknown)
     let avatar = INImage(url: avatarURL)
+    let senderDisplayName = remoteNotification.account.displayName.flatMap { displayName in
+      displayName.isEmpty ? nil : displayName
+    } ?? "@\(remoteNotification.account.username)"
     let sender = INPerson(
       personHandle: handle,
       nameComponents: nil,
-      displayName: remoteNotification.account.safeDisplayName,
+      displayName: senderDisplayName,
       image: avatar,
       contactIdentifier: nil,
       customIdentifier: nil)

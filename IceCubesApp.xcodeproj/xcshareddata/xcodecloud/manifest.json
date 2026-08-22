@@ -1,0 +1,9 @@
+{
+  "id" : "08f32957-b2f8-431b-b92e-d3cb1afc7531",
+  "targets" : [
+    {
+      "id" : "122821D0-194A-4065-8FDF-BA956E496FCD",
+      "name" : "IceCubesApp"
+    }
+  ]
+}

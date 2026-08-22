@@ -138,16 +138,19 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
       TimelineTab(timeline: .constant(.federated))
     case .notifications:
       NotificationsTab(selectedTab: selectedTab, lockedType: nil)
+        .rootTabSoftScrollEdgeEffect()
     case .mentions:
       NotificationsTab(selectedTab: selectedTab, lockedType: .mention)
     case .explore:
       ExploreTab()
+        .rootTabSoftScrollEdgeEffect()
     case .messages:
       MessagesTab()
     case .settings:
       SettingsTabs(isModal: false)
     case .profile:
       ProfileTab()
+        .rootTabSoftScrollEdgeEffect()
     case .bookmarks:
       NavigationTab {
         AccountStatusesListView(mode: .bookmarks)
@@ -170,6 +173,7 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
       }
     case .links:
       NavigationTab { TrendingLinksListView(cards: []) }
+        .rootTabSoftScrollEdgeEffect()
     case .post:
       VStack {}
     case .other:
@@ -289,6 +293,21 @@ private struct TimelineFilterTab: View {
 
   var body: some View {
     TimelineTab(timeline: $timeline)
+  }
+}
+
+private extension View {
+  @ViewBuilder
+  func rootTabSoftScrollEdgeEffect() -> some View {
+    #if os(visionOS)
+      self
+    #else
+      if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
+        scrollEdgeEffectStyle(.soft, for: .top)
+      } else {
+        self
+      }
+    #endif
   }
 }
 

@@ -2,7 +2,7 @@ import Foundation
 import Models
 import NetworkClient
 
-protocol TimelineStatusFetching: Sendable {
+nonisolated protocol TimelineStatusFetching: Sendable {
   func fetchFirstPage(
     client: MastodonClient?,
     timeline: TimelineFilter

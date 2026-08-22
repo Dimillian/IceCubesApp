@@ -27,6 +27,12 @@
             "value" : ""
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -346,6 +352,12 @@
           }
         },
         "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%@"
@@ -775,6 +787,12 @@
             "value" : "%@ is geplaatst op Mastodon"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ został opublikowany na Mastodonie"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -921,6 +939,12 @@
             "value" : "%lld"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -928,6 +952,12 @@
           }
         },
         "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld."
+          }
+        },
+        "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld."
@@ -8521,7 +8551,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Napisz post"
+            "value" : "Napisz"
           }
         },
         "pt-BR" : {
@@ -9070,6 +9100,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Account"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konto"
           }
         },
         "pt-BR" : {
@@ -11794,8 +11830,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Blocked accounts"
+            "state" : "translated",
+            "value" : "Konta zablokowane"
           }
         },
         "pt-BR" : {
@@ -12064,6 +12100,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "其他跟隨者"
+          }
+        }
+      }
+    },
+    "account.detail.collections-n-accounts %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld account"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld accounts"
+                }
+              }
+            }
           }
         }
       }
@@ -13658,6 +13717,12 @@
             "value" : "Verwijder profielfoto"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń awatar"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14209,6 +14274,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verwijder omslagfoto"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń nagłówek"
           }
         },
         "pt-BR" : {
@@ -17792,8 +17863,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Muted accounts"
+            "state" : "translated",
+            "value" : "Konta wyciszone"
           }
         },
         "pt-BR" : {
@@ -17828,121 +17899,343 @@
         }
       }
     },
-    "account.post.pinned" : {
+    "account.post.pinned %lld" : {
       "extractionState" : "manual",
       "localizations" : {
         "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Замацаваны допіс"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Замацаваны допіс"
+                }
+              },
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld замацаваныя допісы"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld замацаваных допісаў"
+                }
+              }
+            }
           }
         },
         "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Publicació fixada"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Publicació fixada"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld publicacions fixades"
+                }
+              }
+            }
           }
         },
         "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Angehefteter Beitrag"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Angehefteter Beitrag"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld angeheftete Beiträge"
+                }
+              }
+            }
           }
         },
         "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pinned post"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Pinned post"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld pinned posts"
+                }
+              }
+            }
           }
         },
         "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Pinned post"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Pinned post"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld pinned posts"
+                }
+              }
+            }
           }
         },
         "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Publicación fijada"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Publicación fijada"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld publicaciones fijadas"
+                }
+              }
+            }
           }
         },
         "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Finkatutako bidalketa"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Finkatutako bidalketa"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld finkatutako bidalketa"
+                }
+              }
+            }
           }
         },
         "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Publication épinglée"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Publication épinglée"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld publications épinglées"
+                }
+              }
+            }
           }
         },
         "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Post fissato"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Post fissato"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld post fissati"
+                }
+              }
+            }
           }
         },
         "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "固定した投稿"
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld件の固定した投稿"
+                }
+              }
+            }
           }
         },
         "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "고정된 글"
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld개의 고정된 글"
+                }
+              }
+            }
           }
         },
         "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Festet innlegg"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Festet innlegg"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld festede innlegg"
+                }
+              }
+            }
           }
         },
         "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Vastgezette post"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Vastgezette post"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld vastgezette posts"
+                }
+              }
+            }
           }
         },
         "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Przypięty post"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Przypięty post"
+                }
+              },
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld przypięte posty"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld przypiętych postów"
+                }
+              }
+            }
           }
         },
         "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Postagem fixada"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Postagem fixada"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld postagens fixadas"
+                }
+              }
+            }
           }
         },
         "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sabitlenmiş Gösteri"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Sabitlenmiş gönderi"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld sabitlenmiş gönderi"
+                }
+              }
+            }
           }
         },
         "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Закріплений допис"
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Закріплений допис"
+                }
+              },
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld закріплені дописи"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld закріплених дописів"
+                }
+              }
+            }
           }
         },
         "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "置顶嘟文"
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld条置顶嘟文"
+                }
+              }
+            }
           }
         },
         "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "釘選嘟文"
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld則釘選嘟文"
+                }
+              }
+            }
           }
         }
       }
@@ -20564,10 +20857,22 @@
             "value" : "Añadir @ y # directamente al teclado para menciones y hashtags más rápidos"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajoute les touches @ et # directement sur le clavier pour faire plus rapidement des mentions et des hashtags."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Aggiunge i tasti @ e # alla tastiera per scrivere menzioni e hashtag più velocemente."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodaje @ oraz # bezpośrednio na klawiaturze dla szybszych wzmianek i hasztagów."
           }
         },
         "zh-Hant" : {
@@ -20828,6 +21133,12 @@
             "value" : "Texto ALT para la imagen"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Texte alternatif pour les images"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20838,6 +21149,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "첨부될 이미지에 대한 설명"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tekst alternatywny dla obrazka"
           }
         },
         "pt-BR" : {
@@ -20898,6 +21215,12 @@
             "value" : "Er is een fout opgetreden tijdens het plaatsen van het bericht op Mastodon, probeer het nogmaals."
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wystąpił błąd podczas publikowania na Mastodonie, spróbuj ponownie."
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20938,6 +21261,12 @@
             "value" : "Versiones de la API"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versions des API"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -20948,6 +21277,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "API 버전"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wersje API"
           }
         },
         "pt-BR" : {
@@ -21128,6 +21463,12 @@
             "value" : "AppAccount"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konto aplikacji"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21198,6 +21539,12 @@
             "value" : "Bladwijzers"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zakładki"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21238,6 +21585,12 @@
             "value" : "Comportamiento del botón de Republicar"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comportement du bouton de boost"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21248,6 +21601,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "부스트 버튼 동작"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Działanie przycisku podbicia"
           }
         },
         "pt-BR" : {
@@ -21278,6 +21637,12 @@
             "value" : "Leyenda"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Légende"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21288,6 +21653,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "본문"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opis"
           }
         },
         "pt-BR" : {
@@ -21318,6 +21689,12 @@
             "value" : "Leyenda para tu publicación"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Légende pour votre publication"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21328,6 +21705,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "글 본문"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opis twojego postu"
           }
         },
         "pt-BR" : {
@@ -21374,6 +21757,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "여백 넓게 표시"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Układ pomniejszony"
           }
         },
         "pt-BR" : {
@@ -21440,6 +21829,12 @@
             "value" : "글 작성 화면 열기"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Napisz post"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21504,6 +21899,12 @@
             "value" : "글 작성 화면 열기"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Napisz post na Mastodonie"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21566,6 +21967,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "게시할 글 내용"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zawartość postu do wysłania na Mastodon"
           }
         },
         "pt-BR" : {
@@ -23179,6 +23586,12 @@
             "value" : "DeepL kan niet worden bereikt. Klopt de API-sleutel? "
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się nawiązać połączenia z DeepL!\nCzy klucz API jest poprawny?"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23219,6 +23632,12 @@
             "value" : "Descripciones (ALT) para tus imágenes en orden"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descriptions (ALT) pour vos images"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23229,6 +23648,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "게시될 이미지에 대한 설명 (순서대로)"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alternatywne opisy dla twoich obrazków w kolejności"
           }
         },
         "pt-BR" : {
@@ -27634,6 +28059,12 @@
             "value" : "Error: %@"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erreur : %@"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -27644,6 +28075,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "오류: %@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Błąd: %@"
           }
         },
         "pt-BR" : {
@@ -27702,6 +28139,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ondekken en nieuws"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odkrywaj i popularne"
           }
         },
         "pt-BR" : {
@@ -29325,8 +29768,8 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Liens tendance"
+            "state" : "translated",
+            "value" : "Nouveautés"
           }
         },
         "it" : {
@@ -29361,7 +29804,7 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Popularne linki"
           }
         },
@@ -29798,6 +30241,12 @@
             "value" : "Favorieten"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Polubione"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29854,6 +30303,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "기능 추가 요청"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Propozycje nowych funkcji"
           }
         },
         "pt-BR" : {
@@ -29926,6 +30381,12 @@
             "value" : "Gefedereerde tijdlijn"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strumień globalny"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -29960,10 +30421,22 @@
             "value" : "Obtiene todas las nuevas publicaciones de la cronología (hasta 800) en lugar de las últimas 40, permitiendo rellenar los huecos"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Récupère toutes les nouveaux fils d’actualités (jusque 800) plutôt qu’uniquement les 40 derniers, et charge manuellement la différence."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Carica tutti i nuovi post delle timeline (fino a 800) invece che solo gli ultimi 40 + i restanti manualmente."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pobiera wszystkie nowe posty strumienia (do 800) zamiast tylko ostatnich 40 + ręczne uzupełnianie przerw."
           }
         },
         "zh-Hant" : {
@@ -32280,6 +32753,12 @@
             "value" : "Gevolgde tags"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obserwowane hasztagi"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32350,6 +32829,12 @@
             "value" : "Alleen volgers"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tylko obserwowani"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32384,10 +32869,22 @@
             "value" : "Obtener toda la cronología"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Récupération de tout le fil d’actualité"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Caricamento completo timeline"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pobierz pełny strumień"
           }
         },
         "zh-Hant" : {
@@ -32440,6 +32937,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Start"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strumień strony głównej"
           }
         },
         "pt-BR" : {
@@ -32512,6 +33015,12 @@
             "value" : "Afbeelding"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obrazek"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32552,6 +33061,12 @@
             "value" : "Descripción de la imagen"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Description de l’image"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32562,6 +33077,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "이미지 설명"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opis obrazka"
           }
         },
         "pt-BR" : {
@@ -32592,6 +33113,12 @@
             "value" : "Descripciones de las imágenes"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descriptions de l’image"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32602,6 +33129,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "이미지 설명"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opisy obrazków"
           }
         },
         "pt-BR" : {
@@ -32656,6 +33189,12 @@
             "value" : "첨부할 이미지"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obrazek do publikacji na Mastodonie"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32696,6 +33235,12 @@
             "value" : "Imagen(es) para publicar en Mastodon"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Image(s) à publier sur Mastodon"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32706,6 +33251,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "게시할 이미지"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obraz(ki) do publikacji na mastodonie"
           }
         },
         "pt-BR" : {
@@ -32736,6 +33287,12 @@
             "value" : "Imágenes"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Images"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32746,6 +33303,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "이미지"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obrazki"
           }
         },
         "pt-BR" : {
@@ -32807,6 +33370,12 @@
             "value" : "Instance"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serwer"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32847,6 +33416,12 @@
             "value" : "Administrador de la Instancia"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Administrateur de l’instance"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32857,6 +33432,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "서버 관리자"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Administrator serwera"
           }
         },
         "pt-BR" : {
@@ -34450,6 +35031,12 @@
             "value" : "DeepL API 키를 삭제하지 않으면, 마스토돈 서버의 번역 서비스를 사용할 수 없을 때 DeepL을 사용합니다."
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Można go jednak nadal używać jako rozwiązanie awaryjne dla tłumacza Twojej instancji."
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34484,10 +35071,22 @@
             "value" : "Mantiene tu cronología de inicio en tiempo real usando streaming cuando esté disponible. Deshabilitar en caso de problemas de rendimiento."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maintient votre fil d'actualité personnel à jour en temps réel grâce au streaming (lorsqu'il est disponible). Désactivez cette fonction en cas de problèmes de performance."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Mantiene la home aggiornata in tempo reale utilizzando lo streaming quando disponibile. Disattiva in caso di problemi di prestazioni."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utrzymuje twój strumień strony domowej w czasie rzeczywistym korzystając ze strumieniowania gdy jest dostępne. Wyłącz w przypadku problemów wydajnościowych."
           }
         },
         "zh-Hant" : {
@@ -34541,6 +35140,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sleutel"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klucz"
           }
         },
         "pt-BR" : {
@@ -35325,6 +35930,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Lijsten"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listy"
           }
         },
         "pt-BR" : {
@@ -36350,6 +36961,12 @@
             "value" : "Lokale tijdlijn"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strumień lokalny"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36418,6 +37035,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vermeldingen"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wzmianki"
           }
         },
         "pt-BR" : {
@@ -37282,10 +37905,22 @@
             "value" : "Métricas"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Métriques"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Statistiche"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statystyki"
           }
         },
         "zh-Hant" : {
@@ -37310,6 +37945,12 @@
             "value" : "Usuarios Activos Mensuales"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilisateurs mensuels actifs"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37320,6 +37961,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "월간 활성 사용자 수"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miesięczna liczba aktywnych osób"
           }
         },
         "pt-BR" : {
@@ -37380,6 +38027,12 @@
             "value" : "Nieuw bericht"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nowy post"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37420,6 +38073,12 @@
             "value" : "Ninguna imagen proporcionada para publicar."
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas d’image fournies à publier"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37430,6 +38089,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "제공된 이미지가 없습니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie dostarczono obrazków do opublikowania."
           }
         },
         "pt-BR" : {
@@ -37488,6 +38153,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Meldingen"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Powiadomienia"
           }
         },
         "pt-BR" : {
@@ -37878,10 +38549,22 @@
             "value" : "Cuentas moderadas"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comptes modérés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Account moderati"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Konta moderowane"
           }
         },
         "zh-Hant" : {
@@ -37913,10 +38596,22 @@
             "value" : "Limitado por los moderadores del servidor"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limité par les modérateurs du serveur"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limitati dai moderatori dei server"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ograniczone przez moderatorów serwera"
           }
         },
         "zh-Hant" : {
@@ -38067,10 +38762,22 @@
             "value" : "Creado durante los últimos 30 días"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Crées ces 30 derniers jours"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Creati negli ultimi 30 giorni"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utworzone w ciągu ostatnich 30 dni"
           }
         },
         "zh-Hant" : {
@@ -38221,10 +38928,22 @@
             "value" : "Y siguiéndote desde hace menos de tres días"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Et vous suivant depuis moins de 3 jours"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "E che ti seguono da meno di 3 giorni"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I obserwuję cię od niecałych 3 dni"
           }
         },
         "zh-Hant" : {
@@ -38375,10 +39094,22 @@
             "value" : "Hasta tu aprobación manual"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jusque ce que vous les approuvez manuellement"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Finché non li approvi manualmente"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dopóki ich ręcznie nie zatwierdzisz"
           }
         },
         "zh-Hant" : {
@@ -38529,10 +39260,22 @@
             "value" : "Salvo si estás respondiendo a tu propia mención o si sigues al remitente"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sauf si c'est en réponse à votre propre mention ou si vous suivez l'expéditeur."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "A meno che non sia una risposta a una tua menzione o se segui il mittente"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chyba że jest to odpowiedź na własną wzmiankę lub jeśli obserwujesz nadawcę"
           }
         },
         "zh-Hant" : {
@@ -38683,10 +39426,22 @@
             "value" : "Seleccionar"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sélectionner"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seleziona"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz"
           }
         },
         "zh-Hant" : {
@@ -38718,10 +39473,22 @@
             "value" : "Seleccionar todo"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tout sélectionner"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seleziona tutto"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz wszystkie"
           }
         },
         "zh-Hant" : {
@@ -42163,6 +42930,244 @@
         }
       }
     },
+    "notifications.menu-title.quote" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Citation"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quote"
+          }
+        }
+      }
+    },
+    "notifications.menu-title.quote-updated" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "be" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "en-GB" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "eu" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Citation mise à jour"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "nb" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Updated quote"
+          }
+        }
+      }
+    },
     "notifications.menu-title.reblog" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -42921,6 +43926,12 @@
             "value" : "Open Ice Cubes"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otwórz Ice Cubes"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -42991,6 +44002,12 @@
             "value" : "Open op een tab"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otwórz w zakładce"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43059,6 +44076,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Open de app op een specifieke tab"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otwórz aplikację w określonej zakładce"
           }
         },
         "pt-BR" : {
@@ -43367,6 +44390,12 @@
             "value" : "Plaats een bericht met een afbeelding"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opublikuj status z obrazkiem"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43435,6 +44464,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Plaats een afbeelding op Mastodon"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opublikuj obrazek na Mastodonie"
           }
         },
         "pt-BR" : {
@@ -43507,6 +44542,12 @@
             "value" : "Plaats materiaal"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zawartość postu"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43571,6 +44612,12 @@
             "value" : "Zichtbaarheid"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widoczność postu"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43611,6 +44658,12 @@
             "value" : "%lld imagen(es) publicada(s) en Mastodon"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publier %lld image(s) sur Mastodon"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43621,6 +44674,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld개 이미지 게시됨"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opublikowano %lld obraz(ów) na Mastodonie"
           }
         },
         "pt-BR" : {
@@ -43667,6 +44726,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "개인정보 처리방침"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Polityka prywatności"
           }
         },
         "pt-BR" : {
@@ -43739,6 +44804,12 @@
             "value" : "Privé"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prywatne"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43807,6 +44878,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privéberichten"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prywatne wiadomości"
           }
         },
         "pt-BR" : {
@@ -43879,6 +44956,12 @@
             "value" : "Profiel"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43947,6 +45030,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Openbaar"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publiczne"
           }
         },
         "pt-BR" : {
@@ -44019,6 +45108,12 @@
             "value" : "Minder openbaar"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Publiczny niewyróżniony"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44075,6 +45170,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "캐시 데이터로 저장된 모든 미디어를 삭제합니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń wszystkie obrazki i filmy z bufora"
           }
         },
         "pt-BR" : {
@@ -44621,6 +45722,12 @@
             "value" : "Geselecteerde tab"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybrana zakładka"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44691,6 +45798,12 @@
             "value" : "Verstuur bericht"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyślij post"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44755,6 +45868,12 @@
             "value" : "Ice Cubes로 마스토돈에 글을 작성합니다."
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyślij post tekstowy na Mastodon przez Ice Cubes"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44795,6 +45914,12 @@
             "value" : "Envía una imagen o múltiples imágenes a Mastodon con Ice Cubes sin abrir la aplicación"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoyez une ou plusieurs images à Mastodon avec Ice Cubes sans ouvrir l'application."
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44805,6 +45930,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "글과 이미지를 게시합니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyślij jeden lub kilka obrazków na  Mastodon przez Ice Cubes bez otwierania aplikacji"
           }
         },
         "pt-BR" : {
@@ -44835,6 +45966,12 @@
             "value" : "Enviar imagen(es) (segundo plano)"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoyer les images (en arrière plan)"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44845,6 +45982,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "글과 이미지 게시하기"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyślij obraz(ki) (w tle)"
           }
         },
         "pt-BR" : {
@@ -44875,6 +46018,12 @@
             "value" : "Enviar imagen(es) a Mastodon"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoyer les images sur Mastodon"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44885,6 +46034,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "글과 이미지 게시하기"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyślij obraz(ki) na Mastodon"
           }
         },
         "pt-BR" : {
@@ -44937,6 +46092,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "글 게시하기"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyślij post na Mastodon"
           }
         },
         "pt-BR" : {
@@ -45007,6 +46168,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Instellingen"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia"
           }
         },
         "pt-BR" : {
@@ -49067,10 +50234,22 @@
             "value" : "Avatares y encabezados animados"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatars animés et en-têtes"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avatar e copertine animati"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Animowane awatary i nagłówki"
           }
         },
         "zh-Hant" : {
@@ -49433,125 +50612,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "時間軸字體"
-          }
-        }
-      }
-    },
-    "settings.display.font.custom" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "be" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Уласны"
-          }
-        },
-        "ca" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personalitzada"
-          }
-        },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eigene"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Custom"
-          }
-        },
-        "en-GB" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Custom"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personalizada"
-          }
-        },
-        "eu" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Norberak ezarritakoa"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personnalisée"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personalizzato"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "カスタム"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "직접 설정"
-          }
-        },
-        "nb" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tilpasset"
-          }
-        },
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Aangepast"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Własna"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Personalizada"
-          }
-        },
-        "tr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Özel"
-          }
-        },
-        "uk" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Власний"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "自定义"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "自定"
           }
         }
       }
@@ -55462,10 +56522,22 @@
             "value" : "Habilitar emojis animados"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activer les emojis animés"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abilita emoji animate"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Włącz animowane emoji"
           }
         },
         "zh-Hant" : {
@@ -62410,7 +63482,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Akcje przeciągania palcem są dostępne po przesunięciu posta w lewo lub w prawo. Akcja dodatkowa jest dostępna tylko wtedy, gdy ustawiona jest akcja podstawowa."
+            "value" : "Akcje przeciągania palcem są dostępne po przesunięciu postu w lewo lub w prawo. Akcja dodatkowa jest dostępna tylko wtedy, gdy ustawiona jest akcja podstawowa."
           }
         },
         "pt-BR" : {
@@ -64415,7 +65487,7 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Ta funkcja wymaga klucza DeepL API"
           }
         },
@@ -78150,6 +79222,24 @@
             }
           }
         },
+        "fr" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld citation"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld citations"
+                }
+              }
+            }
+          }
+        },
         "it" : {
           "variations" : {
             "plural" : {
@@ -78175,6 +79265,36 @@
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "인용 %lld회"
+                }
+              }
+            }
+          }
+        },
+        "pl" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld cytaty"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld cytatów"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld cytat"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "needs_review",
+                  "value" : "%lld cytatów"
                 }
               }
             }
@@ -79049,6 +80169,12 @@
             "value" : "Actualizar cronología principal en tiempo real"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Streaming du file d’actualité principal"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -79059,6 +80185,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "홈에서 글 자동 새로고침"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strumień strony głównej na bieżąco"
           }
         },
         "pt-BR" : {
@@ -79117,6 +80249,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tab"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zakładka"
           }
         },
         "pt-BR" : {
@@ -80830,6 +81968,12 @@
             "value" : "사용 정보 수집"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetria"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -80886,6 +82030,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "TelemetryDeck을 통해 사용 정보 수집됨"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetria TelemetryDeck"
           }
         },
         "pt-BR" : {
@@ -80959,6 +82109,12 @@
             "value" : "De DeepL API-sleutel is nog steeds opgeslagen!"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klucz DeepL API jest nadal zapisany!"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -81028,6 +82184,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "De Vertaalservice van deze server is onbereikbaar!"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się nawiązać połączenia z usługą tłumacza Twojego serwera!"
           }
         },
         "pt-BR" : {
@@ -82596,10 +83758,22 @@
             "value" : "Hide posts from bots"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cacher les publications des robots"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Verberg posts van bots"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ukryj posty przed botami"
           }
         },
         "zh-Hant" : {
@@ -82656,8 +83830,8 @@
         },
         "fr" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide posts with media"
+            "state" : "translated",
+            "value" : "Cacher les publications avec des médias"
           }
         },
         "it" : {
@@ -82692,8 +83866,8 @@
         },
         "pl" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide posts with media"
+            "state" : "translated",
+            "value" : "Ukryj posty z mediami"
           }
         },
         "pt-BR" : {
@@ -83250,7 +84424,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afficher les Réponses"
+            "value" : "Afficher les réponses"
           }
         },
         "it" : {
@@ -83369,7 +84543,7 @@
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Afficher Threads"
+            "value" : "Afficher les fils"
           }
         },
         "it" : {
@@ -85228,6 +86402,12 @@
             "value" : "TimelineFilter"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtr strumienia"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -85281,10 +86461,22 @@
             "value" : "Guardado como borrador"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sauvegardé dans les brouillons"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Salvato nelle bozze"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zachowano w wersjach roboczych"
           }
         },
         "zh-Hant" : {
@@ -85322,10 +86514,22 @@
             "value" : "Publicación enviada"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publication envoyée"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Post inviato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post wysłany"
           }
         },
         "zh-Hant" : {
@@ -85363,10 +86567,22 @@
             "value" : "Publicando"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envoi de la publication"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pubblicazione"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publikowanie"
           }
         },
         "zh-Hant" : {
@@ -85404,10 +86620,22 @@
             "value" : "No fue posible eliminar la publicación"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impossible de supprimer la publication"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile eliminare il post"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się usunąć postu"
           }
         },
         "zh-Hant" : {
@@ -85445,10 +86673,22 @@
             "value" : "Publicación eliminada"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publication supprimée"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Post eliminato"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post usunięty"
           }
         },
         "zh-Hant" : {
@@ -85486,10 +86726,22 @@
             "value" : "Eliminando publicación"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suppression de la publication"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Elimino post"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuwanie postu"
           }
         },
         "zh-Hant" : {
@@ -85549,6 +86801,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Vertaalservice"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usługa tłumacza"
           }
         },
         "pt-BR" : {
@@ -85621,6 +86879,12 @@
             "value" : "Trending Links"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Popularne linki"
+          }
+        },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "translated",
@@ -85683,6 +86947,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "뜨고 있는"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Strumień popularności"
           }
         },
         "pt-BR" : {
@@ -86084,6 +87354,12 @@
             "value" : "Truncar contenido del estado"
           }
         },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tronquer le contenu des publications"
+          }
+        },
         "it" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86094,6 +87370,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "긴 글 본문을 일부만 표시"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wymaż treść statusu"
           }
         },
         "pt-BR" : {
@@ -86146,6 +87428,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "글 작성 화면을 엽니다."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Użyj Ice Cubes do pisania postów na Mastodonie"
           }
         },
         "pt-BR" : {
@@ -86212,6 +87500,12 @@
             "value" : "글 작성 화면을 열고 이미지를 첨부합니다."
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Użyj Ice Cubes do pisania postów z obrazkami na Mastodonie"
+          }
+        },
         "tr" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86274,6 +87568,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zichtbaarheid"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widoczność"
           }
         },
         "pt-BR" : {
@@ -86344,6 +87644,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zichtbaarheid van je bericht"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widoczność Twojego postu"
           }
         },
         "pt-BR" : {

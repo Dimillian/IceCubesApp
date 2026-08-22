@@ -57,34 +57,7 @@ struct MetricsChartCard: View {
         .frame(width: 96)
       }
 
-      Chart {
-        ForEach(chartStyle == .bars ? animatedDailyData : dailyData) { data in
-          switch chartStyle {
-          case .bars:
-            let halfWidth = barWidthSeconds / 2
-            RectangleMark(
-              xStart: .value("DayStart", data.dayStart.addingTimeInterval(-halfWidth)),
-              xEnd: .value("DayEnd", data.dayStart.addingTimeInterval(halfWidth)),
-              yStart: .value("Base", 0),
-              yEnd: .value("Count", data.count)
-            )
-            .foregroundStyle(selectedMetric.tintColor)
-          case .line:
-            LineMark(
-              x: .value("Day", data.dayStart),
-              y: .value("Count", data.count)
-            )
-            .foregroundStyle(selectedMetric.tintColor)
-            .symbol(.circle)
-          }
-        }
-
-        if let selectedData, !isLoading {
-          RuleMark(x: .value("Selected", selectedData.dayStart))
-            .foregroundStyle(theme.labelColor.opacity(0.35))
-            .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 4]))
-        }
-      }
+      chart
       .chartXSelection(value: $selectedDate)
       .chartXScale(range: .plotDimension(startPadding: 12, endPadding: 12))
       .chartYScale(domain: 0...max(maxValue, 1))
@@ -132,6 +105,54 @@ struct MetricsChartCard: View {
     }
     .padding(12)
     .withCardBackground(cornerRadius: 16)
+  }
+
+  @ViewBuilder
+  private var chart: some View {
+    switch chartStyle {
+    case .bars:
+      Chart {
+        ForEach(animatedDailyData) { data in
+          let halfWidth = barWidthSeconds / 2
+          RectangleMark(
+            xStart: .value("DayStart", data.dayStart.addingTimeInterval(-halfWidth)),
+            xEnd: .value("DayEnd", data.dayStart.addingTimeInterval(halfWidth)),
+            yStart: .value("Base", 0),
+            yEnd: .value("Count", data.count)
+          )
+          .foregroundStyle(selectedMetric.tintColor)
+        }
+
+        selectedRuleMark
+      }
+    case .line:
+      Chart {
+        ForEach(dailyData) { data in
+          LineMark(
+            x: .value("Day", data.dayStart),
+            y: .value("Count", data.count)
+          )
+          .foregroundStyle(selectedMetric.tintColor)
+          .symbol(.circle)
+        }
+
+        selectedRuleMark
+      }
+    }
+  }
+
+  @ChartContentBuilder
+  private var selectedRuleMark: some ChartContent {
+    ForEach(selectedRuleData) { data in
+      RuleMark(x: .value("Selected", data.dayStart))
+        .foregroundStyle(theme.labelColor.opacity(0.35))
+        .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 4]))
+    }
+  }
+
+  private var selectedRuleData: [DailyMetric] {
+    guard let selectedData, !isLoading else { return [] }
+    return [selectedData]
   }
 
   private var axisDates: [Date] {

@@ -52,7 +52,6 @@ public final class Theme {
     case openDyslexic
     case hyperLegible
     case SFRounded
-    case custom
 
     public var title: LocalizedStringKey {
       switch self {
@@ -64,8 +63,6 @@ public final class Theme {
         "Hyper Legible"
       case .SFRounded:
         "SF Rounded"
-      case .custom:
-        "settings.display.font.custom"
       }
     }
   }
@@ -139,6 +136,12 @@ public final class Theme {
     }
   }
 
+  private static let supportedFontNames: Set<String> = [
+    "OpenDyslexic-Regular",
+    "AtkinsonHyperlegible-Regular",
+    ".AppleSystemUIFontRounded-Regular",
+  ]
+
   private var _cachedChoosenFont: UIFont?
   public var chosenFont: UIFont? {
     get {
@@ -155,6 +158,7 @@ public final class Theme {
     }
     set {
       if let font = newValue,
+        Self.supportedFontNames.contains(font.fontName),
         let data = try? NSKeyedArchiver.archivedData(
           withRootObject: font, requiringSecureCoding: false)
       {
@@ -302,7 +306,7 @@ public final class Theme {
       themeStorage.compactLayoutPadding = compactLayoutPadding
     }
   }
-    
+
   public var avatarAnimated: Bool {
     didSet {
       themeStorage.avatarAnimated = avatarAnimated
@@ -346,11 +350,24 @@ public final class Theme {
     displayFullUsername = themeStorage.displayFullUsername
     lineSpacing = themeStorage.lineSpacing
     fontSizeScale = themeStorage.fontSizeScale
-    chosenFontData = themeStorage.chosenFontData
+    let storedChosenFontData = themeStorage.chosenFontData
+    if let storedChosenFontData,
+      let storedFont = try? NSKeyedUnarchiver.unarchivedObject(
+        ofClass: UIFont.self, from: storedChosenFontData),
+      Self.supportedFontNames.contains(storedFont.fontName)
+    {
+      chosenFontData = storedChosenFontData
+    } else {
+      chosenFontData = nil
+    }
     statusActionSecondary = themeStorage.statusActionSecondary
     compactLayoutPadding = themeStorage.compactLayoutPadding
     avatarAnimated = themeStorage.avatarAnimated
     selectedSet = storedSet
+
+    if storedChosenFontData != chosenFontData {
+      themeStorage.chosenFontData = chosenFontData
+    }
 
     computeContrastingTintColor()
   }
@@ -371,6 +388,8 @@ public final class Theme {
       ConstellationDark(),
       ThreadsLight(),
       ThreadsDark(),
+      BlueskyLight(),
+      BlueskyDark(),
     ]
   }
 

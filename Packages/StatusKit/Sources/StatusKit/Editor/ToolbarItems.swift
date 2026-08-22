@@ -2,6 +2,7 @@ import DesignSystem
 import Env
 import Models
 import StoreKit
+import SwiftData
 import SwiftUI
 
 extension StatusEditor {
