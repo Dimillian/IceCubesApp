@@ -136,7 +136,8 @@ extension StatusEditor {
           if progress > 0 && progress < 1 {
             ProgressView(value: progress)
               .progressViewStyle(.linear)
-              .padding(.horizontal)
+              .padding(.horizontal, 24)
+              .frame(maxWidth: .infinity)
           } else  {
             ProgressView()
                 .progressViewStyle(.circular)
