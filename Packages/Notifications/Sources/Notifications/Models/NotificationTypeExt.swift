@@ -3,7 +3,7 @@ import Models
 import SwiftUI
 
 extension Models.Notification.NotificationType {
-  public func label(count: Int) -> LocalizedStringKey {
+  public nonisolated func label(count: Int) -> LocalizedStringKey {
     switch self {
     case .status:
       "notifications.label.status"
