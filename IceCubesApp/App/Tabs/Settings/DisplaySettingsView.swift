@@ -27,8 +27,6 @@ struct DisplaySettingsView: View {
 
   @State private var localValues = DisplaySettingsLocalValues()
 
-  @State private var isFontSelectorPresented = false
-
   private let previewStatusViewModel = StatusRowViewModel(
     status: Status.placeholder(forSettings: true, language: "la"),
     client: MastodonClient(server: ""),
@@ -152,7 +150,7 @@ struct DisplaySettingsView: View {
             } else if theme.chosenFont?.fontName == ".AppleSystemUIFontRounded-Regular" {
               return FontState.SFRounded
             }
-            return theme.chosenFontData != nil ? FontState.custom : FontState.system
+            return FontState.system
           },
           set: { newValue in
             switch newValue {
@@ -164,8 +162,6 @@ struct DisplaySettingsView: View {
               theme.chosenFont = UIFont(name: "Atkinson Hyperlegible", size: 1)
             case .SFRounded:
               theme.chosenFont = UIFont.systemFont(ofSize: 1).rounded()
-            case .custom:
-              isFontSelectorPresented = true
             }
           })
       ) {
@@ -173,8 +169,6 @@ struct DisplaySettingsView: View {
           Text(fontState.title).tag(fontState)
         }
       }
-      .navigationDestination(isPresented: $isFontSelectorPresented, destination: { FontPicker() })
-
       VStack {
         Slider(value: $localValues.fontSizeScale, in: 0.5...1.5, step: 0.1)
         Text("settings.display.font.scaling-\(String(format: "%.1f", localValues.fontSizeScale))")
