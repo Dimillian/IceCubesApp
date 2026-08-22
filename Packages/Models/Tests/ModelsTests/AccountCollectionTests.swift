@@ -134,3 +134,55 @@ func testAccountCollectionDecodingWithoutOptionalFields() throws {
   #expect(collection.items.isEmpty)
   #expect(collection.acceptedAccountIds.isEmpty)
 }
+
+@Test
+func testAccountCollectionItemDecodingWithoutAccount() throws {
+  let decoder = JSONDecoder()
+  decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+  let json = """
+    {
+      "id": "1",
+      "account_id": null,
+      "state": "revoked",
+      "created_at": "2026-02-25T11:35:01.394Z"
+    }
+    """
+
+  let item = try decoder.decode(AccountCollection.Item.self, from: Data(json.utf8))
+  #expect(item.accountId == nil)
+  #expect(item.state == "revoked")
+}
+
+@Test
+func testAccountCollectionResponseDecoding() throws {
+  let decoder = JSONDecoder()
+  decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+  let json = """
+    {
+      "collection": {
+        "id": "1",
+        "account_id": "2",
+        "uri": "https://example.com/ap/2/collections/1",
+        "url": "https://example.com/collections/1",
+        "name": "People",
+        "description": "",
+        "language": null,
+        "local": true,
+        "sensitive": false,
+        "discoverable": true,
+        "tag": null,
+        "item_count": 0,
+        "items": [],
+        "created_at": "2026-02-25T11:35:01.394Z",
+        "updated_at": "2026-02-25T11:35:01.394Z"
+      },
+      "accounts": []
+    }
+    """
+
+  let response = try decoder.decode(AccountCollectionResponse.self, from: Data(json.utf8))
+  #expect(response.collection.name == "People")
+  #expect(response.accounts.isEmpty)
+}

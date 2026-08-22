@@ -11,8 +11,8 @@ public struct AccountCollection: Codable, Identifiable, Equatable, Hashable {
 
   public struct Item: Codable, Identifiable, Equatable, Hashable, Sendable {
     public let id: String
-    public let accountId: String
-    /// `accepted` or `pending`; pending items are only visible to the curator.
+    public let accountId: String?
+    /// `pending`, `accepted`, `rejected`, or `revoked`.
     public let state: String
     public let createdAt: ServerDate
   }
@@ -34,7 +34,9 @@ public struct AccountCollection: Codable, Identifiable, Equatable, Hashable {
   public let items: [Item]
 
   public var acceptedAccountIds: [String] {
-    items.filter { $0.state == "accepted" }.map(\.accountId)
+    items.compactMap { item in
+      item.state == "accepted" ? item.accountId : nil
+    }
   }
 }
 

@@ -138,6 +138,7 @@ public struct AccountDetailView: View {
         SoundEffectManager.shared.playSound(.pull)
         HapticManager.shared.fireHaptic(.dataRefresh(intensity: 0.3))
         await fetchAccount()
+        await fetchCollections()
         if let tabManager {
           await tabManager.refreshCurrentTab()
         }
@@ -160,6 +161,7 @@ public struct AccountDetailView: View {
       if oldValue == .accountEditInfo || newValue == .accountEditInfo {
         Task {
           await fetchAccount()
+          await fetchCollections()
           await preferences.refreshServerPreferences()
         }
       }
@@ -345,11 +347,14 @@ extension AccountDetailView {
   }
 
   private func fetchCollections() async {
-    // Collections only exist on Mastodon >= 4.6; on older servers the request
-    // fails and the row simply stays hidden.
-    let response: AccountCollectionsResponse? = try? await client.get(
+    if let apiVersion = currentInstance.instance?.apiVersions?.mastodon, apiVersion < 10 {
+      collections = []
+      return
+    }
+    guard let response: AccountCollectionsResponse = try? await client.get(
       endpoint: Collections.accountCollections(id: accountId))
-    collections = response?.collections ?? []
+    else { return }
+    collections = response.collections.filter(\.discoverable)
   }
 
   private func fetchFamiliarFollowers() async {
