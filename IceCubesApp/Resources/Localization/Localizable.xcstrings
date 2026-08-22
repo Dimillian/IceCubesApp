@@ -12074,6 +12074,29 @@
         }
       }
     },
+    "account.detail.collections-n-accounts %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld account"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld accounts"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "account.detail.featured-tags-n-posts %lld" : {
       "extractionState" : "manual",
       "localizations" : {

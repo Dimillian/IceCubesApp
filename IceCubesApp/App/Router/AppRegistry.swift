@@ -93,6 +93,8 @@ extension View {
           pinnedFilters: .constant([]),
           selectedTagGroup: .constant(nil),
           canFilterTimeline: false)
+      case .collectionDetail(let collection):
+        CollectionDetailView(collection: collection)
       case .linkTimeline(let url, let title):
         TimelineView(
           timeline: .constant(.link(url: url, title: title)),
