@@ -14,6 +14,7 @@ struct ConversationMessageView: View {
   @Environment(CurrentAccount.self) private var currentAccount
   @Environment(MastodonClient.self) private var client
   @Environment(Theme.self) private var theme
+  @Environment(ToastCenter.self) private var toastCenter
 
   let message: Status
   let conversation: Conversation
@@ -158,11 +159,7 @@ struct ConversationMessageView: View {
     }
     Divider()
     if message.account.id == currentAccount.account?.id {
-      Button("status.action.delete", role: .destructive) {
-        Task {
-          _ = try await client.delete(endpoint: Statuses.status(id: message.id))
-        }
-      }
+      Button("status.action.delete", role: .destructive, action: deleteMessage)
     } else {
       Section(message.reblog?.account.acct ?? message.account.acct) {
         Button {
@@ -176,8 +173,40 @@ struct ConversationMessageView: View {
         Button(role: .destructive) {
           routerPath.presentedSheet = .report(status: message.reblogAsAsStatus ?? message)
         } label: {
-          Label("status.action.report", systemImage: "exclamationmark.bubble")
+          Label("status.action.report", systemImage: "exclamationmark.bubble").tint(.red)
         }
+      }
+    }
+  }
+
+  private func deleteMessage() {
+    let toastID = toastCenter.showProgress(
+      title: String(localized: "toast.status.delete.title"),
+      systemImage: "trash",
+      tint: .red
+    )
+
+    Task {
+      do {
+        _ = try await client.delete(endpoint: Statuses.status(id: message.id))
+        let successToast = ToastCenter.Toast(
+          id: toastID,
+          title: String(localized: "toast.status.delete.success.title"),
+          systemImage: "checkmark.circle.fill",
+          tint: theme.tintColor,
+          kind: .message
+        )
+        toastCenter.update(id: toastID, toast: successToast, autoDismissAfter: .seconds(3))
+      } catch {
+        let errorToast = ToastCenter.Toast(
+          id: toastID,
+          title: String(localized: "toast.status.delete.failure.title"),
+          message: error.localizedDescription,
+          systemImage: "exclamationmark.triangle.fill",
+          tint: .red,
+          kind: .message
+        )
+        toastCenter.update(id: toastID, toast: errorToast, autoDismissAfter: .seconds(4))
       }
     }
   }

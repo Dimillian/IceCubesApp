@@ -111,6 +111,8 @@ import Observation
               logger.error("Raw data: \(rawEvent.payload)")
             } catch let StreamDecodeError.rawEvent(error) {
               logger.error("Error decoding streaming event: \(error.localizedDescription)")
+            } catch {
+              logger.error("Unexpected error decoding streaming event: \(error.localizedDescription)")
             }
           }
 

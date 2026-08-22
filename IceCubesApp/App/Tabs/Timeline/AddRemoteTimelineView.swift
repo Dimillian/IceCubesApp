@@ -4,6 +4,7 @@ import Env
 import Models
 import NetworkClient
 import NukeUI
+import SwiftData
 import SwiftUI
 
 @MainActor

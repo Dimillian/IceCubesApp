@@ -21,6 +21,7 @@ extension StatusEditor {
     @State private var mainStore: EditorStore
     @State private var followUpStores: [EditorStore] = []
     @State private var editingMediaContainer: MediaContainer?
+    @State private var pendingEditingMediaContainer: MediaContainer?
     @State private var scrollID: UUID?
     @State private var isMediaPanelPresented: Bool = false
     @State private var lastEditorFocusState: EditorFocusState?
@@ -47,7 +48,7 @@ extension StatusEditor {
       NavigationStack {
         mainContent(focusedStore: focusedStore)
       }
-      .sheet(item: $editingMediaContainer) { container in
+      .sheet(item: $editingMediaContainer, onDismiss: restoreEditorFocus) { container in
         StatusEditor.MediaEditView(store: focusedStore, container: container)
       }
       .presentationDetents([.large, .height(230)], selection: $presentationDetent)
@@ -143,7 +144,7 @@ extension StatusEditor {
         if newValue {
           lastEditorFocusState = editorFocusState
           editorFocusState = nil
-        } else if editorFocusState == nil {
+        } else if pendingEditingMediaContainer == nil, editorFocusState == nil {
           editorFocusState = lastEditorFocusState ?? .main
         }
       }
@@ -169,7 +170,7 @@ extension StatusEditor {
         EditorView(
           store: mainStore,
           followUpStores: $followUpStores,
-          editingMediaContainer: $editingMediaContainer,
+          editingMediaContainer: mediaEditingRequest,
           presentationDetent: $presentationDetent,
           editorFocusState: $editorFocusState,
           assignedFocusState: .main,
@@ -183,7 +184,7 @@ extension StatusEditor {
           EditorView(
             store: store,
             followUpStores: $followUpStores,
-            editingMediaContainer: $editingMediaContainer,
+            editingMediaContainer: mediaEditingRequest,
             presentationDetent: $presentationDetent,
             editorFocusState: $editorFocusState,
             assignedFocusState: .followUp(index: store.id),
@@ -212,6 +213,7 @@ extension StatusEditor {
 
               if isMediaPanelPresented {
                 MediaPickerPanelView(store: focusedStore)
+                  .onDisappear(perform: presentPendingMediaEditor)
               }
             }
           }
@@ -226,9 +228,41 @@ extension StatusEditor {
 
             if isMediaPanelPresented {
               MediaPickerPanelView(store: focusedStore)
+                .onDisappear(perform: presentPendingMediaEditor)
             }
           }
         }
+      }
+    }
+
+    private var mediaEditingRequest: Binding<MediaContainer?> {
+      Binding {
+        editingMediaContainer
+      } set: { container in
+        guard let container else {
+          pendingEditingMediaContainer = nil
+          editingMediaContainer = nil
+          return
+        }
+
+        if isMediaPanelPresented {
+          pendingEditingMediaContainer = container
+          isMediaPanelPresented = false
+        } else {
+          editingMediaContainer = container
+        }
+      }
+    }
+
+    private func presentPendingMediaEditor() {
+      guard let container = pendingEditingMediaContainer else { return }
+      pendingEditingMediaContainer = nil
+      editingMediaContainer = container
+    }
+
+    private func restoreEditorFocus() {
+      if editorFocusState == nil {
+        editorFocusState = lastEditorFocusState ?? .main
       }
     }
   }
