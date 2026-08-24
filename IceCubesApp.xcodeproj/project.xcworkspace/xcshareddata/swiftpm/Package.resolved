@@ -150,8 +150,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wishkit/wishkit-ios.git",
       "state" : {
-        "revision" : "951b17b6b683c72d36627de77e8e26afcfbde6ae",
-        "version" : "4.7.0"
+        "revision" : "1adab95b4c45dfe84d5282e4d7d551617800c22c",
+        "version" : "5.1.2"
       }
     },
     {
