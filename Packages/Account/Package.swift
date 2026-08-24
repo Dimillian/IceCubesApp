@@ -22,7 +22,7 @@ let package = Package(
     .package(name: "StatusKit", path: "../StatusKit"),
     .package(name: "Env", path: "../Env"),
     .package(name: "DesignSystem", path: "../DesignSystem"),
-    .package(url: "https://github.com/Dean151/ButtonKit", from: "0.6.1"),
+    .package(url: "https://github.com/Dean151/ButtonKit", from: "0.8.1"),
     .package(url: "https://github.com/dkk/WrappingHStack", from: "2.2.11"),
   ],
   targets: [

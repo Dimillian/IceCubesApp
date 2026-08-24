@@ -17,7 +17,7 @@ let package = Package(
     )
   ],
   dependencies: [
-    .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.4.3")
+    .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.13.7")
   ],
   targets: [
     .target(

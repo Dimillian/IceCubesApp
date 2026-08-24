@@ -19,8 +19,8 @@ let package = Package(
   dependencies: [
     .package(name: "Models", path: "../Models"),
     .package(name: "NetworkClient", path: "../NetworkClient"),
-    .package(url: "https://github.com/evgenyneu/keychain-swift", branch: "master"),
-    .package(url: "https://github.com/TelemetryDeck/SwiftSDK", from: "2.3.0"),
+    .package(url: "https://github.com/evgenyneu/keychain-swift", from: "24.0.0"),
+    .package(url: "https://github.com/TelemetryDeck/SwiftSDK", from: "2.14.2"),
   ],
   targets: [
     .target(
