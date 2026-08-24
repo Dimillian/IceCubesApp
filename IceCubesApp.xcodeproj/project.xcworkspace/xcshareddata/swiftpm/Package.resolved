@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Dean151/ButtonKit",
       "state" : {
-        "revision" : "5d049dec3ec474ea2ad79eb4acd066edeacb9953",
-        "version" : "0.6.1"
+        "revision" : "8ea442e22cc396960aba246bf03d967842aeedb9",
+        "version" : "0.8.1"
       }
     },
     {
