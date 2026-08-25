@@ -333,11 +333,13 @@ struct SettingsTabs: View {
         Label("settings.app.about", systemImage: "info.circle")
       }
 
-      NavigationLink {
-        WishlistView()
-      } label: {
-        Label("Feature Requests", systemImage: "list.bullet.rectangle.portrait")
-      }
+      #if !targetEnvironment(macCatalyst)
+        NavigationLink {
+          WishlistView()
+        } label: {
+          Label("Feature Requests", systemImage: "list.bullet.rectangle.portrait")
+        }
+      #endif
 
     } header: {
       Text("settings.section.app")

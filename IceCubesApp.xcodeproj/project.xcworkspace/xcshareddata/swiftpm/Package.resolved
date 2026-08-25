@@ -1,5 +1,5 @@
 {
-  "originHash" : "95e07ea2caeef497bba7391e6b1a42cf03603536ac065c31a8810d81f5b980a4",
+  "originHash" : "a385044d9d2ed200355221b2fa134ff82734976d25fc828f4bf68e8eb32555c0",
   "pins" : [
     {
       "identity" : "bodega",
@@ -60,8 +60,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "63a8fcbd6621340a2410bc3e9575ac97058615f4",
-        "version" : "13.0.6"
+        "revision" : "30f7a7e72e0607d304fbf69c799474bd5fb6d1ce",
+        "version" : "13.2.0"
       }
     },
     {
@@ -69,8 +69,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/RevenueCat/purchases-ios-spm",
       "state" : {
-        "revision" : "1af9d1bf28df81af57a1958237c98bb562b8cc6b",
-        "version" : "5.85.0"
+        "revision" : "57043e7e0173c48d64e171944ac76a34d2467fa1",
+        "version" : "5.86.0"
       }
     },
     {

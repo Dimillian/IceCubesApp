@@ -10,7 +10,10 @@ import RevenueCat
 import StatusKit
 import SwiftUI
 import Timeline
-import WishKit
+
+#if !targetEnvironment(macCatalyst)
+  import WishKit
+#endif
 
 @main
 struct IceCubesApp: App {
@@ -93,7 +96,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     PushNotificationsService.shared.setAccounts(accounts: AppAccountsManager.shared.pushAccounts)
     Telemetry.setup()
     Telemetry.signal("app.launched")
-    WishKit.configure(with: "AF21AE07-3BA9-4FE2-BFB1-59A3B3941730")
+    #if !targetEnvironment(macCatalyst)
+      WishKit.configure(with: "AF21AE07-3BA9-4FE2-BFB1-59A3B3941730")
+    #endif
     return true
   }
 

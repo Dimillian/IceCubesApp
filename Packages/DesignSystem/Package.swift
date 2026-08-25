@@ -19,7 +19,7 @@ let package = Package(
   dependencies: [
     .package(name: "Models", path: "../Models"),
     .package(name: "Env", path: "../Env"),
-    .package(url: "https://github.com/kean/Nuke", exact: "13.0.6"),
+    .package(url: "https://github.com/kean/Nuke", exact: "13.2.0"),
     .package(url: "https://github.com/Dimillian/EmojiText", branch: "fix-ios26"),
     .package(url: "https://github.com/kaishin/Gifu.git", from: "4.0.1"),
   ],
