@@ -106,6 +106,10 @@ public struct TimelineView: View {
                 ? "antenna.radiowaves.left.and.right" : "antenna.radiowaves.left.and.right.slash")
           }
           .tint(theme.labelColor)
+          .accessibilityLabel("accessibility.timeline.streaming.label")
+          .accessibilityValue(
+            viewModel.isStreamingTimeline
+              ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
         }
       }
       TimelineToolbarTagGroupButton(timeline: $timeline)
