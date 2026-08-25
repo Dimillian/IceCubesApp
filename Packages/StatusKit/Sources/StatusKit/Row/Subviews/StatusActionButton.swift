@@ -101,7 +101,7 @@ struct StatusActionButton: View {
         .font(.scaledBody)
       #else
         .font(.body)
-        .dynamicTypeSize(.large)
+        .dynamicTypeSize(...DynamicTypeSize.accessibility3)
       #endif
   }
 
@@ -123,7 +123,7 @@ struct StatusActionButton: View {
         .font(.scaledFootnote)
       #else
         .font(.footnote)
-        .dynamicTypeSize(.medium)
+        .dynamicTypeSize(...DynamicTypeSize.accessibility2)
       #endif
       .monospacedDigit()
       .opacity(count > 0 ? 1 : 0)
