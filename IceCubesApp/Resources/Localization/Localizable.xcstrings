@@ -1327,6 +1327,17 @@
         }
       }
     },
+    "accessibility.conversations.send.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send message"
+          }
+        }
+      }
+    },
     "accessibility.editor.button.ai-prompt" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -9054,6 +9065,39 @@
                 }
               }
             }
+          }
+        }
+      }
+    },
+    "accessibility.timeline.pill.move-left" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move left"
+          }
+        }
+      }
+    },
+    "accessibility.timeline.pill.move-right" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Move right"
+          }
+        }
+      }
+    },
+    "accessibility.timeline.streaming.label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stream new posts"
           }
         }
       }
@@ -19189,6 +19233,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "取消"
+          }
+        }
+      }
+    },
+    "action.close" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
           }
         }
       }
