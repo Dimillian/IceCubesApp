@@ -88,12 +88,7 @@ private struct MediaTabView: View {
 
   var body: some View {
     Group {
-      HStack {
-        Label("Media Grid", systemImage: "square.grid.2x2")
-        Spacer()
-        Image(systemName: "chevron.right")
-      }
-      .onTapGesture {
+      Button {
         if let account {
           routerPath.navigate(
             to: .accountMediaGridView(
@@ -102,7 +97,15 @@ private struct MediaTabView: View {
             )
           )
         }
+      } label: {
+        HStack {
+          Label("Media Grid", systemImage: "square.grid.2x2")
+          Spacer()
+          Image(systemName: "chevron.right")
+            .accessibilityHidden(true)
+        }
       }
+      .buttonStyle(.plain)
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)
       #endif
