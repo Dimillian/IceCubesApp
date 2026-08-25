@@ -76,6 +76,7 @@ public struct AccountMetricsView: View {
             Text("Top posts")
               .font(.headline)
               .foregroundStyle(theme.labelColor)
+              .accessibilityAddTraits(.isHeader)
             if isLoadingTopStatuses && topStatuses.isEmpty {
               VStack(spacing: 8) {
                 ForEach(0..<3, id: \.self) { _ in

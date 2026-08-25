@@ -186,6 +186,7 @@ struct BlurOverLay: View {
   @Environment(\.isInCaptureMode) private var isInCaptureMode: Bool
   @Environment(UserPreferences.self) private var preferences
   @Environment(\.isMediaCompact) private var isCompact: Bool
+  @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
   @Namespace var buttonSpace
 
@@ -201,7 +202,7 @@ struct BlurOverLay: View {
           )
         if !isCompact {
           Button {
-            withAnimation(.spring) {
+            withAnimation(reduceMotion ? nil : .spring) {
               isFrameExpanded.toggle()
             }
           } label: {

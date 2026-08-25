@@ -14,6 +14,7 @@ public struct TimelineQuickAccessPills: View {
   @Binding var timeline: TimelineFilter
 
   @State private var draggedFilter: TimelineFilter?
+  @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
   public init(pinnedFilters: Binding<[TimelineFilter]>, timeline: Binding<TimelineFilter>) {
     _pinnedFilters = pinnedFilters
@@ -101,11 +102,44 @@ public struct TimelineQuickAccessPills: View {
       delegate: PillDropDelegate(
         destinationItem: filter,
         items: $pinnedFilters,
-        draggedItem: $draggedFilter)
+        draggedItem: $draggedFilter,
+        reduceMotion: reduceMotion)
     )
     .buttonBorderShape(.capsule)
     .controlSize(.mini)
+    .accessibilityActions {
+      let visible = pinnedFilters.filter(isFilterSupported)
+      if let index = visible.firstIndex(of: filter) {
+        if index > 0 {
+          Button("accessibility.timeline.pill.move-left") { movePill(filter, by: -1) }
+        }
+        if index < visible.count - 1 {
+          Button("accessibility.timeline.pill.move-right") { movePill(filter, by: 1) }
+        }
+      }
+    }
+  }
 
+  private func movePill(_ filter: TimelineFilter, by offset: Int) {
+    guard let from = pinnedFilters.firstIndex(of: filter) else { return }
+    // Hidden pills (unsupported list filters) still occupy slots in
+    // pinnedFilters, so step past them to the next visible neighbour.
+    let stride = offset < 0 ? -1 : 1
+    var to = from + stride
+    while pinnedFilters.indices.contains(to), !isFilterSupported(pinnedFilters[to]) {
+      to += stride
+    }
+    guard pinnedFilters.indices.contains(to) else { return }
+    let perform = {
+      pinnedFilters.move(
+        fromOffsets: IndexSet(integer: from),
+        toOffset: to > from ? to + 1 : to)
+    }
+    if reduceMotion {
+      perform()
+    } else {
+      withAnimation { perform() }
+    }
   }
 
   private func isFilterSupported(_ filter: TimelineFilter) -> Bool {
@@ -122,6 +156,7 @@ struct PillDropDelegate: DropDelegate {
   let destinationItem: TimelineFilter
   @Binding var items: [TimelineFilter]
   @Binding var draggedItem: TimelineFilter?
+  let reduceMotion: Bool
 
   func dropUpdated(info _: DropInfo) -> DropProposal? {
     return DropProposal(operation: .move)
@@ -138,10 +173,15 @@ struct PillDropDelegate: DropDelegate {
       if let fromIndex {
         let toIndex = items.firstIndex(of: destinationItem)
         if let toIndex, fromIndex != toIndex {
-          withAnimation {
+          let move = {
             self.items.move(
               fromOffsets: IndexSet(integer: fromIndex),
               toOffset: toIndex > fromIndex ? (toIndex + 1) : toIndex)
+          }
+          if reduceMotion {
+            move()
+          } else {
+            withAnimation { move() }
           }
         }
       }
