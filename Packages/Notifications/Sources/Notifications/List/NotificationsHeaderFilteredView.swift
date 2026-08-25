@@ -11,24 +11,27 @@ struct NotificationsHeaderFilteredView: View {
 
   var body: some View {
     if filteredNotifications.pendingNotificationsCount > 0 {
-      HStack {
-        Label("notifications.content-filter.requests.title", systemImage: "archivebox")
-          .foregroundStyle(.secondary)
-        Spacer()
-        Text("\(filteredNotifications.pendingNotificationsCount)")
-          .font(.footnote)
-          .fontWeight(.semibold)
-          .monospacedDigit()
-          .foregroundStyle(theme.primaryBackgroundColor)
-          .padding(8)
-          .background(.secondary)
-          .clipShape(Circle())
-        Image(systemName: "chevron.right")
-          .foregroundStyle(.secondary)
-      }
-      .onTapGesture {
+      Button {
         routerPath.navigate(to: .notificationsRequests)
+      } label: {
+        HStack {
+          Label("notifications.content-filter.requests.title", systemImage: "archivebox")
+            .foregroundStyle(.secondary)
+          Spacer()
+          Text("\(filteredNotifications.pendingNotificationsCount)")
+            .font(.footnote)
+            .fontWeight(.semibold)
+            .monospacedDigit()
+            .foregroundStyle(theme.primaryBackgroundColor)
+            .padding(8)
+            .background(.secondary)
+            .clipShape(Circle())
+          Image(systemName: "chevron.right")
+            .foregroundStyle(.secondary)
+            .accessibilityHidden(true)
+        }
       }
+      .buttonStyle(.plain)
       .listRowBackground(theme.secondaryBackgroundColor)
       .listRowInsets(
         .init(

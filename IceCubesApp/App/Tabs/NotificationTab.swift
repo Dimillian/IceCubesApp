@@ -40,6 +40,7 @@ struct NotificationsTab: View {
               Image(systemName: "bell")
             }
             .tint(.label)
+            .accessibilityLabel("settings.push.navigation-title")
           }
           if #available(iOS 26.0, *) {
             ToolbarSpacer(placement: .topBarTrailing)
