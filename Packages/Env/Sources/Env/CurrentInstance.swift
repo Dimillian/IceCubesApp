@@ -47,8 +47,9 @@ import Observation
     version >= 4.3
   }
 
+  /// Collections shipped in Mastodon 4.6, which bumped the Mastodon API version to 10.
   public var isCollectionsSupported: Bool {
-    version >= 4.6
+    instance?.apiVersions?.mastodon ?? 0 >= 10
   }
 
   public var isQuoteSupported: Bool {
