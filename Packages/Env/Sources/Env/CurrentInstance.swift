@@ -47,6 +47,10 @@ import Observation
     version >= 4.3
   }
 
+  public var isCollectionsSupported: Bool {
+    version >= 4.6
+  }
+
   public var isQuoteSupported: Bool {
     instance?.apiVersions?.mastodon ?? 0 >= 7
   }

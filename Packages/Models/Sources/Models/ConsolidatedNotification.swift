@@ -13,6 +13,8 @@ public struct ConsolidatedNotification: Identifiable {
   public let createdAt: ServerDate
   public let accounts: [Account]
   public let status: Status?
+  /// Set for `added_to_collection` and `collection_update` notifications (Mastodon 4.6+).
+  public let collection: AccountCollection?
   public let mostRecentNotificationId: String
 
   public var id: String { groupKey ?? mostRecentNotificationId }
@@ -27,6 +29,7 @@ public struct ConsolidatedNotification: Identifiable {
     createdAt: ServerDate,
     accounts: [Account],
     status: Status?,
+    collection: AccountCollection? = nil,
     groupKey: String? = nil
   ) {
     self.notifications = notifications
@@ -34,6 +37,7 @@ public struct ConsolidatedNotification: Identifiable {
     self.createdAt = createdAt
     self.accounts = accounts
     self.status = status ?? nil
+    self.collection = collection
     self.groupKey = groupKey
     self.mostRecentNotificationId = mostRecentNotificationId
   }

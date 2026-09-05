@@ -66,6 +66,10 @@ struct NotificationsTab: View {
           case .follow, .follow_request:
             routerPath.navigate(
               to: .accountDetailWithAccount(account: newValue.notification.account))
+          case .added_to_collection, .collection_update:
+            if let collection = newValue.notification.collection {
+              routerPath.navigate(to: .collectionDetail(collection: collection))
+            }
           default:
             if let status = newValue.notification.status {
               routerPath.navigate(to: .statusDetailWithStatus(status: status))
