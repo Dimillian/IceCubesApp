@@ -28,7 +28,8 @@ extension [Models.Notification] {
               type: supportedType,
               createdAt: notification.createdAt,
               accounts: notifications.map(\.account),
-              status: notification.status)
+              status: notification.status,
+              collection: notification.collection)
           }
           .sorted {
             $0.createdAt.asDate > $1.createdAt.asDate

@@ -10,6 +10,8 @@ public struct NotificationGroup: Codable, Identifiable, Sendable {
   public let latestPageNotificationAt: ServerDate
   public let sampleAccountIds: [String]
   public let statusId: String?
+  /// Attached when `type` is `added_to_collection` or `collection_update` (Mastodon 4.6+).
+  public let collection: AccountCollection?
   
   public var id: String { groupKey }
 }

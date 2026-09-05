@@ -76,7 +76,7 @@ public struct NotificationsListView: View {
               .tint(theme.labelColor)
           }
           Divider()
-          ForEach(Notification.NotificationType.allCases, id: \.self) { type in
+          ForEach(filterableTypes, id: \.self) { type in
             Button {
               applyFilter(type: type)
             } label: {
@@ -163,6 +163,17 @@ public struct NotificationsListView: View {
       Task {
         await fetchNotifications()
         policy = await dataSource.fetchPolicy(client: client)
+      }
+    }
+  }
+
+  private var filterableTypes: [Models.Notification.NotificationType] {
+    Models.Notification.NotificationType.allCases.filter { type in
+      switch type {
+      case .added_to_collection, .collection_update:
+        currentInstance.isCollectionsSupported
+      default:
+        true
       }
     }
   }
