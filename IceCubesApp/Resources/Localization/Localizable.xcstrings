@@ -315,6 +315,12 @@
     },
     "%@" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -400,7 +406,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is already selected"
+            "value" : "%@ ja està seleccionat"
           }
         },
         "de" : {
@@ -518,7 +524,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ already exists"
+            "value" : "%@ ja existeix"
           }
         },
         "de" : {
@@ -636,7 +642,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is an invalid SFSymbol name"
+            "value" : "%@ és un nom SFSymbol no vàlid"
           }
         },
         "de" : {
@@ -745,6 +751,12 @@
     },
     "%@ was posted on Mastodon" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ s'ha publicat a Mastodon"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -933,6 +945,12 @@
     },
     "%lld. " : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld. "
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1101,7 +1119,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Accounts"
+            "value" : "Comptes"
           }
         },
         "de" : {
@@ -1220,7 +1238,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Opens options sheet."
+            "value" : "Obre el full d'opcions."
           }
         },
         "de" : {
@@ -1339,7 +1357,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "AI prompt"
+            "value" : "Indicació per a la IA"
           }
         },
         "de" : {
@@ -1458,7 +1476,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Attach photo"
+            "value" : "Adjunta una foto"
           }
         },
         "de" : {
@@ -1577,7 +1595,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Characters remaining"
+            "value" : "Caràcters restants"
           }
         },
         "de" : {
@@ -1696,7 +1714,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Custom emojis"
+            "value" : "Emojis personalitzats"
           }
         },
         "de" : {
@@ -1815,7 +1833,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Drafts"
+            "value" : "Esborranys"
           }
         },
         "de" : {
@@ -1934,7 +1952,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Language"
+            "value" : "Llengua"
           }
         },
         "de" : {
@@ -2053,7 +2071,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poll"
+            "value" : "Enquesta"
           }
         },
         "de" : {
@@ -2171,8 +2189,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Spoiler warning"
+            "state" : "translated",
+            "value" : "Avís de contingut"
           }
         },
         "de" : {
@@ -2291,7 +2309,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Changes post audience."
+            "value" : "Canvia l'audiència de la publicació."
           }
         },
         "de" : {
@@ -2410,7 +2428,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visibility"
+            "value" : "Visibilitat"
           }
         },
         "de" : {
@@ -2529,7 +2547,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Off"
+            "value" : "Desactivat"
           }
         },
         "de" : {
@@ -2649,7 +2667,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "On"
+            "value" : "Activat"
           }
         },
         "de" : {
@@ -2768,7 +2786,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Image alt text: %@"
+            "value" : "Text alternatiu de la imatge: %@"
           }
         },
         "de" : {
@@ -2887,7 +2905,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "More alt text available"
+            "value" : "Hi ha més text alternatiu disponible"
           }
         },
         "de" : {
@@ -3006,7 +3024,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Audio"
+            "value" : "Àudio"
           }
         },
         "de" : {
@@ -3125,7 +3143,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Animated Gif"
+            "value" : "GIF animat"
           }
         },
         "de" : {
@@ -3244,7 +3262,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Image"
+            "value" : "Imatge"
           }
         },
         "de" : {
@@ -3363,7 +3381,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Video"
+            "value" : "Vídeo"
           }
         },
         "de" : {
@@ -3482,7 +3500,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ boosted %@"
+            "value" : "%@ ha impulsat %@"
           }
         },
         "de" : {
@@ -3601,7 +3619,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ replied to"
+            "value" : "%@ ha respost a"
           }
         },
         "de" : {
@@ -3720,7 +3738,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "App"
+            "value" : "Aplicació"
           }
         },
         "de" : {
@@ -3839,7 +3857,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Contains %@"
+            "value" : "Conté %@"
           }
         },
         "de" : {
@@ -3958,7 +3976,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Open media viewer"
+            "value" : "Obre el visualitzador multimèdia"
           }
         },
         "de" : {
@@ -4077,7 +4095,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Active poll"
+            "value" : "Enquesta activa"
           }
         },
         "de" : {
@@ -4196,7 +4214,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poll results"
+            "value" : "Resultats"
           }
         },
         "de" : {
@@ -4315,7 +4333,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Option %lld of %lld"
+            "value" : "Opció %lld de %lld"
           }
         },
         "de" : {
@@ -4434,7 +4452,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Selected"
+            "value" : "Seleccionada"
           }
         },
         "de" : {
@@ -4553,7 +4571,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Full Content"
+            "value" : "Contingut complet"
           }
         },
         "de" : {
@@ -4672,7 +4690,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Unread"
+            "value" : "Per llegir"
           }
         },
         "de" : {
@@ -4791,7 +4809,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "User-defined fields"
+            "value" : "Camps definits per l'usuari"
           }
         },
         "de" : {
@@ -4910,7 +4928,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Verified"
+            "value" : "Verificat"
           }
         },
         "de" : {
@@ -5029,7 +5047,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Navigates to list."
+            "value" : "Navega a la llista."
           }
         },
         "de" : {
@@ -5148,7 +5166,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Navigates to list."
+            "value" : "Navega a la llista."
           }
         },
         "de" : {
@@ -5267,7 +5285,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Displays a larger version."
+            "value" : "Mostra una versió més gran."
           }
         },
         "de" : {
@@ -5386,7 +5404,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Header image"
+            "value" : "Imatge de capçalera"
           }
         },
         "de" : {
@@ -5505,7 +5523,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Settings"
+            "value" : "Configuració"
           }
         },
         "de" : {
@@ -5624,7 +5642,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "More"
+            "value" : "Més"
           }
         },
         "de" : {
@@ -5743,7 +5761,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Options"
+            "value" : "Opcions"
           }
         },
         "de" : {
@@ -5862,7 +5880,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bookmarks"
+            "value" : "Marcadors"
           }
         },
         "de" : {
@@ -5981,7 +5999,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Favorites"
+            "value" : "Preferits"
           }
         },
         "de" : {
@@ -6100,7 +6118,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tags"
+            "value" : "Etiquetes"
           }
         },
         "de" : {
@@ -6219,7 +6237,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Lists"
+            "value" : "Llistes"
           }
         },
         "de" : {
@@ -6338,7 +6356,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Media"
+            "value" : "Fitxers multimèdia"
           }
         },
         "de" : {
@@ -6457,7 +6475,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posts and replies"
+            "value" : "Publicacions i respostes"
           }
         },
         "de" : {
@@ -6576,7 +6594,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posts"
+            "value" : "Publicacions"
           }
         },
         "de" : {
@@ -6695,7 +6713,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scrolls to list."
+            "value" : "Desplaça a la llista."
           }
         },
         "de" : {
@@ -6814,7 +6832,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Displays a larger version."
+            "value" : "Mostra una versió més gran."
           }
         },
         "de" : {
@@ -6933,7 +6951,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Profile photo"
+            "value" : "Foto de perfil"
           }
         },
         "de" : {
@@ -7052,7 +7070,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Supporter"
+            "value" : "Patrocinador"
           }
         },
         "de" : {
@@ -7171,7 +7189,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Receive notifications"
+            "value" : "Rep notificacions"
           }
         },
         "de" : {
@@ -7290,7 +7308,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Display boosts"
+            "value" : "Mostra els impulsos"
           }
         },
         "de" : {
@@ -7409,7 +7427,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Blocked"
+            "value" : "Blocat"
           }
         },
         "de" : {
@@ -7528,7 +7546,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bot account"
+            "value" : "Compte d'un bot"
           }
         },
         "de" : {
@@ -7647,7 +7665,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Muted"
+            "value" : "Silenciat"
           }
         },
         "de" : {
@@ -7766,7 +7784,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Private account"
+            "value" : "Compte privat"
           }
         },
         "de" : {
@@ -7884,7 +7902,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add Account"
+            "value" : "Afegeix un compte"
           }
         },
         "de" : {
@@ -8003,7 +8021,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hashtag %@"
+            "value" : "Etiqueta %@"
           }
         },
         "de" : {
@@ -8122,7 +8140,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Visit %@"
+            "value" : "Visita %@"
           }
         },
         "de" : {
@@ -8241,7 +8259,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New"
+            "value" : "Nou"
           }
         },
         "de" : {
@@ -8360,7 +8378,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Create"
+            "value" : "Crea"
           }
         },
         "de" : {
@@ -8479,7 +8497,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Compose"
+            "value" : "Redacta"
           }
         },
         "de" : {
@@ -8598,7 +8616,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Scrolls the timeline."
+            "value" : "Desplaça la línia de temps."
           }
         },
         "de" : {
@@ -8731,14 +8749,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld new posts"
+                  "state" : "translated",
+                  "value" : "%lld publicació nova"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld new posts"
+                  "value" : "%lld publicacions noves"
                 }
               }
             }
@@ -9060,6 +9078,12 @@
     },
     "Account" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compte"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -9385,7 +9409,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Block %@"
+            "value" : "Bloca %@"
           }
         },
         "de" : {
@@ -9504,7 +9528,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Do you want to block this user?"
+            "value" : "Voleu blocar aquest usuari?"
           }
         },
         "de" : {
@@ -10214,7 +10238,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "More Settings"
+            "value" : "Més opcions"
           }
         },
         "de" : {
@@ -10690,7 +10714,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Settings"
+            "value" : "Configuració de privadesa"
           }
         },
         "de" : {
@@ -11047,7 +11071,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share this account"
+            "value" : "Comparteix aquest compte"
           }
         },
         "de" : {
@@ -11521,7 +11545,7 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Afegeix un compte"
           }
         },
@@ -11758,8 +11782,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Blocked accounts"
+            "state" : "translated",
+            "value" : "Comptes blocats"
           }
         },
         "de" : {
@@ -12107,6 +12131,24 @@
     "account.detail.collections-n-accounts %lld" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld compte"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld comptes"
+                }
+              }
+            }
+          }
+        },
         "en" : {
           "variations" : {
             "plural" : {
@@ -12153,8 +12195,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld publicacions"
+                  "state" : "translated",
+                  "value" : "%lld publicació"
                 }
               },
               "other" : {
@@ -12506,8 +12548,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld camps"
+                  "state" : "translated",
+                  "value" : "%lld camp"
                 }
               },
               "other" : {
@@ -13440,7 +13482,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add a new metadata"
+            "value" : "Afegeix més metadades"
           }
         },
         "de" : {
@@ -13558,8 +13600,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit avatar"
+            "state" : "translated",
+            "value" : "Edita l'avatar"
           }
         },
         "de" : {
@@ -13669,6 +13711,12 @@
     "account.edit.avatar.delete" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suprimeix l'avatar"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14117,8 +14165,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Edit header"
+            "state" : "translated",
+            "value" : "Edita la capçalera"
           }
         },
         "de" : {
@@ -14228,6 +14276,12 @@
     "account.edit.header.delete" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suprimeix la capçalera"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14320,7 +14374,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Label"
+            "value" : "Etiqueta"
           }
         },
         "de" : {
@@ -14439,7 +14493,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Profile Metadata"
+            "value" : "Metadades del perfil"
           }
         },
         "de" : {
@@ -14558,7 +14612,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Content"
+            "value" : "Contingut"
           }
         },
         "de" : {
@@ -14796,7 +14850,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Warning: These settings are overwritten by the global content settings"
+            "value" : "Avís: la configuració global del contingut ha sobreescrit aquestes opcions"
           }
         },
         "de" : {
@@ -14915,7 +14969,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Privadesa per defecte"
+            "value" : "Privadesa per defecte"
           }
         },
         "de" : {
@@ -15153,7 +15207,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Contingut sensible"
+            "value" : "Contingut delicat"
           }
         },
         "de" : {
@@ -16105,7 +16159,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Seguint"
+            "value" : "Sol·licitat"
           }
         },
         "de" : {
@@ -16343,7 +16397,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Seguits"
+            "value" : "Seguint"
           }
         },
         "de" : {
@@ -16612,13 +16666,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ follower"
+                      "value" : "%2$@ seguidor"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%2$@ followers"
+                      "value" : "%2$@ seguidors"
                     }
                   }
                 }
@@ -17672,8 +17726,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Moved To %@"
+            "state" : "translated",
+            "value" : "S'ha mogut a %@"
           }
         },
         "de" : {
@@ -17791,8 +17845,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Muted accounts"
+            "state" : "translated",
+            "value" : "Comptes silenciats"
           }
         },
         "de" : {
@@ -18490,7 +18544,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit Note"
+            "value" : "Edita la nota"
           }
         },
         "de" : {
@@ -18609,7 +18663,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while saving your note, please try again."
+            "value" : "S'ha produït un error en desar la nota. Torneu-ho a provar."
           }
         },
         "de" : {
@@ -18728,7 +18782,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while saving your note"
+            "value" : "S'ha produït un error en desar la nota"
           }
         },
         "de" : {
@@ -18847,7 +18901,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enter Note text"
+            "value" : "Introduïu el text de la nota"
           }
         },
         "de" : {
@@ -18966,7 +19020,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Note:"
+            "value" : "Nota:"
           }
         },
         "de" : {
@@ -19797,7 +19851,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Icona del Grup d'Etiquetes (SFSymbol)"
+            "value" : "Icona del grup d'etiquetes (nom SFSymbol)"
           }
         },
         "de" : {
@@ -20151,7 +20205,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duplicated tag"
+            "value" : "Etiqueta duplicada"
           }
         },
         "de" : {
@@ -20269,7 +20323,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Number of tags is less than 2"
+            "value" : "El nombre d'etiquetes és inferior a 2"
           }
         },
         "de" : {
@@ -20387,7 +20441,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No Symbol Found"
+            "value" : "No s'ha trobat cap símbol"
           }
         },
         "de" : {
@@ -20624,7 +20678,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Empty title"
+            "value" : "Títol buit"
           }
         },
         "de" : {
@@ -20742,7 +20796,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No symbol is selected"
+            "value" : "No s'ha seleccionat cap símbol"
           }
         },
         "de" : {
@@ -20851,6 +20905,12 @@
     },
     "Adds @ and # keys directly on the keyboard for faster mentions and hashtags." : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afegeix les tecles @ i # directament al teclat per a fer mencions i etiquetes més ràpidament."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21121,6 +21181,12 @@
     },
     "ALT text for the image" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Text ALT per a la imatge"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21173,6 +21239,12 @@
     },
     "An error occured while posting to Mastodon, please try again." : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'ha produït un error en publicar a Mastodon. Torneu-ho a provar."
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21249,6 +21321,12 @@
     },
     "API Versions" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versions de l'API"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21421,6 +21499,12 @@
     },
     "AppAccount" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppAccount"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21497,6 +21581,12 @@
     },
     "Bookmarks" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcadors"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21573,6 +21663,12 @@
     },
     "Boost Button Behavior" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comportament del botó d'impuls"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21625,6 +21721,12 @@
     },
     "Caption" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Llegenda"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21677,6 +21779,12 @@
     },
     "Caption for your post" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Llegenda de la publicació"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21729,6 +21837,12 @@
     },
     "Compact Layout" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disposició compacta"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21793,6 +21907,12 @@
     },
     "Compose a post" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redacta una publicació"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21863,6 +21983,12 @@
     },
     "Compose a post to Mastodon" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Redacteu una publicació per a Mastodon"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21933,6 +22059,12 @@
     },
     "Content of the post to be sent to Mastodon" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contingut de la publicació que s'enviarà a Mastodon"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -22252,7 +22384,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "View detail"
+            "value" : "Mostra el detall"
           }
         },
         "de" : {
@@ -22966,7 +23098,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Latest Message"
+            "value" : "Últim missatge"
           }
         },
         "de" : {
@@ -23322,7 +23454,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DeepL API Free"
+            "value" : "API DeepL de franc"
           }
         },
         "de" : {
@@ -23434,7 +23566,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DeepL API Pro"
+            "value" : "API DeepL Pro"
           }
         },
         "de" : {
@@ -23538,6 +23670,12 @@
     "DeepL couldn't be reached!\nIs the API Key correct?" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'ha pogut contactar amb el DeepL!\nÉs correcta la clau API?"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23620,6 +23758,12 @@
     },
     "Descriptions (ALT) for your images in order" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripcions (ALT) per a les imatges en ordre"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23760,13 +23904,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg participants"
+                      "value" : "%arg"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg participants"
+                      "value" : "%arg"
                     }
                   }
                 }
@@ -23780,13 +23924,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg publicacions "
+                      "value" : "%arg"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg publicacions "
+                      "value" : "%arg"
                     }
                   }
                 }
@@ -24723,7 +24867,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Toots preview"
+            "value" : "Previsualització dels bramuls"
           }
         },
         "de" : {
@@ -25319,7 +25463,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "custom"
+            "value" : "personalitzat"
           }
         },
         "de" : {
@@ -25438,7 +25582,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "5 minutes"
+            "value" : "5 minuts"
           }
         },
         "de" : {
@@ -25557,7 +25701,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "infinite"
+            "value" : "infinit"
           }
         },
         "de" : {
@@ -26152,7 +26296,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "30 minutes"
+            "value" : "30 minuts"
           }
         },
         "de" : {
@@ -26628,7 +26772,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Amaga el contingut sensible"
+            "value" : "Amaga el contingut delicat"
           }
         },
         "de" : {
@@ -27461,7 +27605,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Medium"
+            "value" : "Mitjana"
           }
         },
         "de" : {
@@ -27580,7 +27724,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Icon only"
+            "value" : "Només la icona"
           }
         },
         "de" : {
@@ -27699,7 +27843,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Icon with text"
+            "value" : "Icona amb text"
           }
         },
         "de" : {
@@ -28047,6 +28191,12 @@
     },
     "Error: %@" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error: %@"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28099,6 +28249,12 @@
     },
     "Explore & Trending" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exploració i tendències"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28186,7 +28342,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Explora"
+            "value" : "Exploreu"
           }
         },
         "de" : {
@@ -28305,7 +28461,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "All"
+            "value" : "Tots"
           }
         },
         "de" : {
@@ -28424,7 +28580,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hashtags"
+            "value" : "Etiquetes"
           }
         },
         "de" : {
@@ -28543,7 +28699,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "People"
+            "value" : "Gent"
           }
         },
         "de" : {
@@ -28662,7 +28818,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Posts"
+            "value" : "Publicacions"
           }
         },
         "de" : {
@@ -29732,8 +29888,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Enllaços populars"
+            "state" : "translated",
+            "value" : "Notícies"
           }
         },
         "de" : {
@@ -30199,6 +30355,12 @@
     },
     "Favorites" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preferits"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30275,6 +30437,12 @@
     },
     "Feature Requests" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sol·licituds de funcionalitats"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30339,6 +30507,12 @@
     },
     "Federated Timeline" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Línia de temps federada"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30415,6 +30589,12 @@
     },
     "Fetches all new timeline posts (up to 800) instead of only the latest 40 + manually loading the gap." : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Agafa tots els missatges nous de la línia de temps (fins a 800) en lloc de només els últims 40 + carregar manualment el buit."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -31530,7 +31710,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Expiry"
+            "value" : "Caducitat"
           }
         },
         "de" : {
@@ -31649,7 +31829,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Date/Time"
+            "value" : "Data/hora"
           }
         },
         "de" : {
@@ -31768,7 +31948,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Duration"
+            "value" : "Durada"
           }
         },
         "de" : {
@@ -32244,7 +32424,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Expired"
+            "value" : "Caducitat"
           }
         },
         "de" : {
@@ -32363,7 +32543,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Expiry: %@"
+            "value" : "Caducitat: %@"
           }
         },
         "de" : {
@@ -32711,6 +32891,12 @@
     },
     "Followed Tags" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etiquetes seguides"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32787,6 +32973,12 @@
     },
     "Followers Only" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Només seguidors"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32863,6 +33055,12 @@
     },
     "Full timeline fetch" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recuperació completa de la línia de temps"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32897,6 +33095,12 @@
     },
     "Home Timeline" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Línia de temps d'inici"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32973,6 +33177,12 @@
     },
     "Image" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imatge"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33049,6 +33259,12 @@
     },
     "Image description" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripció de la imatge"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33101,6 +33317,12 @@
     },
     "Image descriptions" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Descripcions de les imatges"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33153,6 +33375,12 @@
     },
     "Image to post on Mastodon" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imatge a publicar a Mastodon"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33223,6 +33451,12 @@
     },
     "Image(s) to post on Mastodon" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imatges a publicar a Mastodon"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33275,6 +33509,12 @@
     },
     "Images" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imatges"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33328,6 +33568,12 @@
     "Instance" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instància"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33404,6 +33650,12 @@
     },
     "Instance Administrator" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Administrador d'instàncies"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -34531,7 +34783,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "% publicacions"
+            "value" : "%@ publicacions"
           }
         },
         "de" : {
@@ -34995,6 +35247,12 @@
     "It can however still be used as a fallback for your instance's translation service." : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tanmateix, encara es pot utilitzar com a alternativa per al servei de traducció de la vostra instància."
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35065,6 +35323,12 @@
     },
     "Keeps your home timeline up to date in real time using streaming when available. Disable in case of performance issues." : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manté actualitzada la línia de temps d'inici en temps real utilitzant streaming quan estigui disponible. Desactiveu-ho en cas de problemes de rendiment."
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35100,6 +35364,12 @@
     "Key" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clau"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35186,7 +35456,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "Amaga aquestes publicacions de l'inici"
           }
         },
         "de" : {
@@ -35305,7 +35575,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show replies to"
+            "value" : "Mostra les respostes a"
           }
         },
         "de" : {
@@ -35424,7 +35694,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
+            "value" : "Títol"
           }
         },
         "de" : {
@@ -35543,7 +35813,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any followed user"
+            "value" : "Qualsevol usuari seguit"
           }
         },
         "de" : {
@@ -35662,7 +35932,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Members of the list"
+            "value" : "Membres de la llista"
           }
         },
         "de" : {
@@ -35781,7 +36051,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one"
+            "value" : "Ningú"
           }
         },
         "de" : {
@@ -35890,6 +36160,12 @@
     },
     "Lists" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Llistes"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36334,7 +36610,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "List settings"
+            "value" : "Configuració de la llista"
           }
         },
         "de" : {
@@ -36572,7 +36848,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search users"
+            "value" : "Cerqueu usuaris"
           }
         },
         "de" : {
@@ -36919,6 +37195,12 @@
     },
     "Local Timeline" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Línia de temps local"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36995,6 +37277,12 @@
     },
     "Mentions" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mencions"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37671,7 +37959,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "New Window"
+            "value" : "Finestra nova"
           }
         },
         "de" : {
@@ -37899,6 +38187,12 @@
     },
     "Metrics" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mètriques"
+          }
+        },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37933,6 +38227,12 @@
     },
     "Monthly Active Users" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuaris actius mensualment"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37985,6 +38285,12 @@
     },
     "New post" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicació nova"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38061,6 +38367,12 @@
     },
     "No images provided to post." : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'han proporcionat imatges a publicar."
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38113,6 +38425,12 @@
     },
     "Notifications" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notificacions"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38531,6 +38849,12 @@
     "notifications.content-filter.moderatedAccounts" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comptes moderats"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38578,6 +38902,12 @@
     "notifications.content-filter.moderatedAccounts.subtitle" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limitat pels moderadors del servidor"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38633,8 +38963,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "Comptes nous"
           }
         },
         "de" : {
@@ -38744,6 +39074,12 @@
     "notifications.content-filter.newAccounts.subtitle" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Creat en els darrers 30 dies"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38799,8 +39135,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "Persones que no us segueixen"
           }
         },
         "de" : {
@@ -38910,6 +39246,12 @@
     "notifications.content-filter.peopleNotFollowingYou.subtitle" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I que us segueixen de fa menys de 3 dies"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38965,8 +39307,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "Persones que no seguiu"
           }
         },
         "de" : {
@@ -39076,6 +39418,12 @@
     "notifications.content-filter.peopleYouDontFollow.subtitle" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fins que les aproveu manualment"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39131,8 +39479,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "Mencions privades no sol·licitades"
           }
         },
         "de" : {
@@ -39242,6 +39590,12 @@
     "notifications.content-filter.privateMentions.subtitle" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Llevat que sigui en resposta a la vostra pròpia menció o si seguiu el remitent"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39297,8 +39651,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "Notificacions filtrades"
           }
         },
         "de" : {
@@ -39408,6 +39762,12 @@
     "notifications.content-filter.select" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecciona"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39455,6 +39815,12 @@
     "notifications.content-filter.select-all" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecciona-ho tot"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39510,8 +39876,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "Filtre de notificacions"
           }
         },
         "de" : {
@@ -39629,8 +39995,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "Filtra les notificacions de..."
           }
         },
         "de" : {
@@ -39750,7 +40116,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifications? What notifications? Your notification inbox is looking so empty. Keep on being awesome! 📱😎"
+            "value" : "Notificacions? Quines notificacions? La vostra safata de notificacions està ben buida. Seguiu sent impressionant! 📱😎"
           }
         },
         "de" : {
@@ -40429,7 +40795,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "⭐️ Starred: "
+            "value" : "⭐️ Destacat: "
           }
         },
         "de" : {
@@ -40870,7 +41236,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🔒 Requested to follow you: "
+            "value" : "🔒 Ha sol·licitat seguir-vos: "
           }
         },
         "de" : {
@@ -40989,7 +41355,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "👋 Followed you: "
+            "value" : "👋 Us ha seguit: "
           }
         },
         "de" : {
@@ -41430,7 +41796,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "📈 Poll ended: "
+            "value" : "📈 Enquesta finalitzada: "
           }
         },
         "de" : {
@@ -41752,7 +42118,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🚀 Boosted: "
+            "value" : "🚀 Impulsat: "
           }
         },
         "de" : {
@@ -41990,7 +42356,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "🖊️ Posted: "
+            "value" : "🖊️ Publicat: "
           }
         },
         "de" : {
@@ -42228,7 +42594,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Updated: "
+            "value" : "Actualització: "
           }
         },
         "de" : {
@@ -42704,7 +43070,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mencions"
+            "value" : "Menció"
           }
         },
         "de" : {
@@ -42942,7 +43308,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quote"
+            "value" : "Cita"
           }
         },
         "de" : {
@@ -43061,7 +43427,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Updated quote"
+            "value" : "Cita actualitzada"
           }
         },
         "de" : {
@@ -43299,7 +43665,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Publicacions"
+            "value" : "Publicació"
           }
         },
         "de" : {
@@ -43884,6 +44250,12 @@
     },
     "Open Ice Cubes" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obre Ice Cubes"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -43960,6 +44332,12 @@
     },
     "Open on a tab" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obre en una pestanya"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44036,6 +44414,12 @@
     },
     "Open the app on a specific tab" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Obre l'aplicació en una pestanya específica"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44348,6 +44732,12 @@
     },
     "Post a status with an image" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publica un estat amb una imatge"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44424,6 +44814,12 @@
     },
     "Post an image to Mastodon" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publica una imatge a Mastodon"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44500,6 +44896,12 @@
     },
     "Post content" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contingut de la publicació"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44570,6 +44972,12 @@
     },
     "Post visibility" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibilitat de la publicació"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44646,6 +45054,12 @@
     },
     "Posted %lld image(s) on Mastodon" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'han publicat %lld imatges a Mastodon"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44698,6 +45112,12 @@
     },
     "Privacy Policy" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Política de privadesa"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44762,6 +45182,12 @@
     },
     "Private" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privat"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44838,6 +45264,12 @@
     },
     "Private Messages" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Missatges privats"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44914,6 +45346,12 @@
     },
     "Profile" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Perfil"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44990,6 +45428,12 @@
     },
     "Public" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Públic"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45066,6 +45510,12 @@
     },
     "Quiet Public" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pública silenciosa"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45142,6 +45592,12 @@
     },
     "Remove all cached images and videos" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elimina totes les imatges i vídeos a la memòria cau"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45215,7 +45671,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Send"
+            "value" : "Envia"
           }
         },
         "de" : {
@@ -45334,7 +45790,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Additional Info"
+            "value" : "Informació addicional"
           }
         },
         "de" : {
@@ -45452,7 +45908,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Report Post"
+            "value" : "Denuncia la publicació"
           }
         },
         "de" : {
@@ -45680,6 +46136,12 @@
     },
     "Selected tab" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pestanya seleccionada"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45756,6 +46218,12 @@
     },
     "Send a post" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envia una publicació"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45832,6 +46300,12 @@
     },
     "Send a text post to Mastodon with Ice Cubes" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envieu una publicació de text a Mastodon amb Ice Cubes"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45902,6 +46376,12 @@
     },
     "Send an image or multiple images to Mastodon with Ice Cubes without opening the app" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envieu una o diverses imatges a Mastodon amb Ices Cubes sense obrir l'aplicació"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45954,6 +46434,12 @@
     },
     "Send image(s) (background)" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envia imatges (fons)"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -46006,6 +46492,12 @@
     },
     "Send image(s) to Mastodon" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envia imatges a Mastodon"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -46058,6 +46550,12 @@
     },
     "Send post to Mastodon" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Envia una publicació a Mastodon"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -46128,6 +46626,12 @@
     },
     "Settings" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuració"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -46213,7 +46717,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes is built with the following Open Source software:"
+            "value" : "Ice Cubes està construït amb el següent programari de codi obert:"
           }
         },
         "de" : {
@@ -46567,7 +47071,7 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Afegeix un compte"
           }
         },
@@ -47041,7 +47545,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Icons by"
+            "value" : "Icones per"
           }
         },
         "de" : {
@@ -47278,7 +47782,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Official icons"
+            "value" : "Icones oficials"
           }
         },
         "de" : {
@@ -47632,7 +48136,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clear Media Cache"
+            "value" : "Buida la memòria cau"
           }
         },
         "de" : {
@@ -47750,7 +48254,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Collapse long posts"
+            "value" : "Redueix les publicacions llargues"
           }
         },
         "de" : {
@@ -47868,7 +48372,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Collapsed posts only display a limited number of lines together with a button to show the full post"
+            "value" : "Les publicacions reduïdes només mostren un nombre limitat de línies juntament amb un botó per a mostrar el missatge complet"
           }
         },
         "de" : {
@@ -47986,7 +48490,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reply Visibility"
+            "value" : "Visibilitat de la resposta"
           }
         },
         "de" : {
@@ -48576,7 +49080,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Server Content Settings"
+            "value" : "Configuració del servidor sobre el contingut"
           }
         },
         "de" : {
@@ -48694,7 +49198,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Media"
+            "value" : "Fitxers multimèdia"
           }
         },
         "de" : {
@@ -48930,7 +49434,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Configuració del contacte"
+            "value" : "Configuració del contingut"
           }
         },
         "de" : {
@@ -49284,7 +49788,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Require Alt Text to Post"
+            "value" : "Requereix text ALT per a publicar"
           }
         },
         "de" : {
@@ -49402,7 +49906,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sharing"
+            "value" : "Compartició"
           }
         },
         "de" : {
@@ -49521,7 +50025,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Link and Text"
+            "value" : "Enllaç i text"
           }
         },
         "de" : {
@@ -49640,7 +50144,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Link Only"
+            "value" : "Només enllaç"
           }
         },
         "de" : {
@@ -49758,7 +50262,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share Button Behavior"
+            "value" : "Comportament del botó de compartició"
           }
         },
         "de" : {
@@ -50222,6 +50726,12 @@
     "settings.display.avatarAnimated" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avatars i capçaleres animats"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -50272,7 +50782,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Apply custom colors"
+            "value" : "Aplica colors personalitzats"
           }
         },
         "de" : {
@@ -50627,7 +51137,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Line Spacing: %@"
+            "value" : "Interlineat: %@"
           }
         },
         "de" : {
@@ -51100,8 +51610,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Max reply indentation: %@"
+            "state" : "translated",
+            "value" : "Sagnat màxim de resposta: %@"
           }
         },
         "de" : {
@@ -51456,7 +51966,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DeepL API Pro"
+            "value" : "Mostra el botó de pendents a l'esquerra"
           }
         },
         "de" : {
@@ -51810,7 +52320,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Font"
+            "value" : "Lletra tipogràfica"
           }
         },
         "de" : {
@@ -52738,8 +53248,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Account on Hover"
+            "state" : "translated",
+            "value" : "Mostra el compte en passar per sobre"
           }
         },
         "de" : {
@@ -52857,7 +53367,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Habilitar columna secondària"
+            "value" : "Habilita una columna secundaria"
           }
         },
         "de" : {
@@ -52975,8 +53485,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show reply indentation"
+            "state" : "translated",
+            "value" : "Mostra el sagnat de la resposta"
           }
         },
         "de" : {
@@ -53330,8 +53840,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Secondary status action"
+            "state" : "translated",
+            "value" : "Acció d'estat secundari"
           }
         },
         "de" : {
@@ -53803,7 +54313,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Sincronitza amb els colors del sistema"
+            "value" : "Fes coincidir amb els del sistema"
           }
         },
         "de" : {
@@ -53921,7 +54431,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Text Color"
+            "value" : "Color del text"
           }
         },
         "de" : {
@@ -54511,7 +55021,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "In-App Browser Reader View"
+            "value" : "Vista de lectura del navegador integrat"
           }
         },
         "de" : {
@@ -54865,7 +55375,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Configuració d'aparença"
+            "value" : "Configuració de l'aparença"
           }
         },
         "de" : {
@@ -55336,8 +55846,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Recently Used Tags"
+            "state" : "translated",
+            "value" : "Etiquetes usades recentment"
           }
         },
         "de" : {
@@ -55573,8 +56083,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Sidebar Customizations"
+            "state" : "translated",
+            "value" : "Personalitzacions de la barra lateral"
           }
         },
         "de" : {
@@ -55692,7 +56202,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe Actions"
+            "value" : "Accions en lliscar"
           }
         },
         "de" : {
@@ -55810,7 +56320,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Tabs Customizations"
+            "value" : "Personalitzacions de les pestanyes"
           }
         },
         "de" : {
@@ -55928,7 +56438,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Translation Settings"
+            "value" : "Paràmetres de la traducció"
           }
         },
         "de" : {
@@ -56510,6 +57020,12 @@
     "settings.other.animate-emojis" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activa els emojis animats"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -56676,8 +57192,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mute Videos"
+            "state" : "translated",
+            "value" : "Silencia els vídeos"
           }
         },
         "de" : {
@@ -56913,7 +57429,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enable Sound Effects"
+            "value" : "Activa els efectes de so"
           }
         },
         "de" : {
@@ -57739,7 +58255,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifications emergents"
+            "value" : "Notificacions emergents"
           }
         },
         "de" : {
@@ -58093,7 +58609,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Notifications emergents"
+            "value" : "Notificacions emergents"
           }
         },
         "de" : {
@@ -58919,7 +59435,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Cache"
+            "value" : "Memòria cau"
           }
         },
         "de" : {
@@ -59982,7 +60498,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hola! Em dic Thomas i m'encanta crear aplicacions de codi obert. Ice Cubes és sens dubte un dels meus projectes del qual més orgullós estic fins avui, i siguem sincers, és també el que requereix més manteniment a causa del món sempre canviant de Mastodon i les xarxes socials. Si estàs t'encisa Ice Cubes, considera fer-me una petita propina. M'alegrarà el  dia (i ajudarà a mantenir l'aplicació funcionant sense problemes). 🚀"
+            "value" : "Hola! Em diuen Thomas i m'encanta crear aplicacions de codi obert. Ice Cubes és sens dubte un dels projectes del qual em sento més orgullós, i sent sincers, és també el que requereix més manteniment a causa del món sempre canviant de Mastodon i les xarxes socials. Si estàs gaudint fent servir Ice Cubes, considera fer-me una petita propina. M'alegrarà el dia (i ajudarà a mantenir l'aplicació funcionant sense problemes). 🚀"
           }
         },
         "de" : {
@@ -60572,7 +61088,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Privacy Policy"
+            "value" : "Política de privadesa"
           }
         },
         "de" : {
@@ -60690,7 +61206,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Restore purchase"
+            "value" : "Restaura la compra"
           }
         },
         "de" : {
@@ -60808,7 +61324,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Restore your supporter subscription if it hasn't been synced automatically."
+            "value" : "Restaura la vostra subscripció si no s'ha sincronitzat automàticament."
           }
         },
         "de" : {
@@ -60926,7 +61442,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Thanks for being an Ice Cubes supporter!"
+            "value" : " Gràcies per ser col·laborador d'Ice Cubes!"
           }
         },
         "de" : {
@@ -61044,7 +61560,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The supporter subscription is a monthly auto renewable subscription giving you a verified badge only visible to you on your profile. Subscription are automatically renewed unless you cancel them a day before the next renewal cycle."
+            "value" : "La subscripció de col·laborador és una subscripció mensual autorenovable que us dona una insígnia verificada només visible per a vós en el vostre perfil. La subscripció es renova automàticament llevat que la cancel·leu un dia abans del següent cicle de renovació."
           }
         },
         "de" : {
@@ -61162,7 +61678,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "By giving a monthly tip to Ice Cubes, you become a supporter, you'll even get verified badge on your profile. For your 👀 only."
+            "value" : "En donar una aportació mensual a Ice Cubes, us convertiu en un col·laborador, fins i tot obtindreu una insígnia verificada en el vostre perfil. Només per als vostres 👀."
           }
         },
         "de" : {
@@ -61280,7 +61796,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : " Become a supporter!"
+            "value" : " Feu-vos col·laborador!"
           }
         },
         "de" : {
@@ -61398,7 +61914,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Terms"
+            "value" : "Termes"
           }
         },
         "de" : {
@@ -61516,7 +62032,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No estàs bé... Moltes gràcies!"
+            "value" : "Esteu malament del cap... Moltes gràcies!"
           }
         },
         "de" : {
@@ -61988,7 +62504,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Appearance"
+            "value" : "Aparença"
           }
         },
         "de" : {
@@ -62224,7 +62740,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe Actions"
+            "value" : "Accions en lliscar"
           }
         },
         "de" : {
@@ -62342,7 +62858,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Primary Action"
+            "value" : "Acció primària"
           }
         },
         "de" : {
@@ -62460,7 +62976,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Secondary Action"
+            "value" : "Acció secundària"
           }
         },
         "de" : {
@@ -62578,7 +63094,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Post"
+            "value" : "Publica"
           }
         },
         "de" : {
@@ -62697,7 +63213,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bookmark"
+            "value" : "Afegeix als marcadors"
           }
         },
         "de" : {
@@ -62816,7 +63332,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boost"
+            "value" : "Impulsa"
           }
         },
         "de" : {
@@ -62935,7 +63451,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Favorite"
+            "value" : "Marca com a preferit"
           }
         },
         "de" : {
@@ -63054,7 +63570,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "None"
+            "value" : "Cap"
           }
         },
         "de" : {
@@ -63173,7 +63689,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quote"
+            "value" : "Cita"
           }
         },
         "de" : {
@@ -63292,7 +63808,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Reply"
+            "value" : "Respon"
           }
         },
         "de" : {
@@ -63410,7 +63926,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Swipe actions are available upon swiping left or right on a post. The secondary action is only available if the primary action is set."
+            "value" : "Les accions de lliscament estan disponibles en lliscar a l'esquerra o a la dreta en una publicació. L'acció secundària només està disponible si s'estableix l'acció primària."
           }
         },
         "de" : {
@@ -63764,7 +64280,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Use Theme Colors"
+            "value" : "Usa els colors del tema"
           }
         },
         "de" : {
@@ -64118,7 +64634,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "Cinquena pestanya"
           }
         },
         "de" : {
@@ -64236,7 +64752,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "Primera pestanya"
           }
         },
         "de" : {
@@ -64354,7 +64870,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "Quarta pestanya"
           }
         },
         "de" : {
@@ -64472,7 +64988,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "Segona pestanya"
           }
         },
         "de" : {
@@ -64590,7 +65106,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "Tercera pestanya"
           }
         },
         "de" : {
@@ -64944,7 +65460,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Type of the Key"
+            "value" : "Tipus de la clau"
           }
         },
         "de" : {
@@ -65062,7 +65578,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Auto detect language"
+            "value" : "Detecta la llengua de manera automàtica"
           }
         },
         "de" : {
@@ -65180,7 +65696,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ice Cubes will try to automatically detect the language of the post you're about to post and will suggest to update your post language if necessary."
+            "value" : "Ice Cubes provarà de detectar automàticament la llengua de la publicació que esteu a punt d'enviar i us suggerirà actualitzar-ne la llengua si cal."
           }
         },
         "de" : {
@@ -65298,7 +65814,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Translation"
+            "value" : "Traducció"
           }
         },
         "de" : {
@@ -65415,8 +65931,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "This feature requires a DeepL API key"
+            "state" : "translated",
+            "value" : "Aquesta funció requereix una clau API del DeepL"
           }
         },
         "de" : {
@@ -65534,7 +66050,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "DeepL API Key"
+            "value" : "Clau API del DeepL"
           }
         },
         "de" : {
@@ -65891,7 +66407,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Boost to Followers"
+            "value" : "Impulsa als seguidors"
           }
         },
         "de" : {
@@ -66010,7 +66526,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Copy Link"
+            "value" : "Copia l'enllaç"
           }
         },
         "de" : {
@@ -66367,7 +66883,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Are you sure you want to delete this post?"
+            "value" : "Segur que voleu suprimir aquesta publicació?"
           }
         },
         "de" : {
@@ -66486,7 +67002,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Confirm"
+            "value" : "Confirma"
           }
         },
         "de" : {
@@ -67557,7 +68073,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Report Post"
+            "value" : "Denuncia la publicació"
           }
         },
         "de" : {
@@ -67794,8 +68310,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Select Text"
+            "state" : "translated",
+            "value" : "Seleccioneu text"
           }
         },
         "de" : {
@@ -68033,7 +68549,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share post as image"
+            "value" : "Comparteix la publicació com a imatge"
           }
         },
         "de" : {
@@ -68152,7 +68668,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share post link"
+            "value" : "Comparteix l'enllaç"
           }
         },
         "de" : {
@@ -68271,7 +68787,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Share"
+            "value" : "Comparteix"
           }
         },
         "de" : {
@@ -68629,7 +69145,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Translated from %@ using %@"
+            "value" : "Traduït de %@ utilitzant %@"
           }
         },
         "de" : {
@@ -69819,7 +70335,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add #Tags in place"
+            "value" : "Afegeix #etiquetes al lloc"
           }
         },
         "de" : {
@@ -70295,7 +70811,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add #Tags after my text"
+            "value" : "Afegeix #etiquetes després del meu text"
           }
         },
         "de" : {
@@ -70414,7 +70930,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Browse Files"
+            "value" : "Cerca fitxers"
           }
         },
         "de" : {
@@ -70533,7 +71049,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Take Photo"
+            "value" : "Fes una foto"
           }
         },
         "de" : {
@@ -71009,7 +71525,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Custom Emojis"
+            "value" : "Emojis personalitzats"
           }
         },
         "de" : {
@@ -71246,8 +71762,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Type your follow-up content here."
+            "state" : "translated",
+            "value" : "Escriviu aquí el vostre contingut de seguiment."
           }
         },
         "de" : {
@@ -71366,7 +71882,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Post in %@ (Detected language)"
+            "value" : "Publica en %@ (llengua detectada)"
           }
         },
         "de" : {
@@ -71485,7 +72001,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Post in %@ (Selected language)"
+            "value" : "Publica en %@ (llengua seleccionada)"
           }
         },
         "de" : {
@@ -71960,8 +72476,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "🤖 Generate description"
+            "state" : "translated",
+            "value" : "🤖 Genera una descripció"
           }
         },
         "de" : {
@@ -72675,7 +73191,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Photos Library"
+            "value" : "Biblioteca de fotos"
           }
         },
         "de" : {
@@ -72912,8 +73428,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Escriviu l'espòiler"
+            "state" : "translated",
+            "value" : "Avís de contingut"
           }
         },
         "de" : {
@@ -73508,7 +74024,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your settings require alt text on all media before posting"
+            "value" : "La vostra configuració requereix text alternatiu en tots els fitxers abans de publicar-los"
           }
         },
         "de" : {
@@ -73627,7 +74143,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Error while posting"
+            "value" : "S'ha produït un error en publicar"
           }
         },
         "de" : {
@@ -74817,7 +75333,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mostra el contingut sensible"
+            "value" : "Mostra el contingut delicat"
           }
         },
         "de" : {
@@ -75411,8 +75927,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide Results"
+            "state" : "translated",
+            "value" : "Amaga els resultats"
           }
         },
         "de" : {
@@ -75545,8 +76061,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld vots"
+                  "state" : "translated",
+                  "value" : "%lld vot"
                 }
               },
               "other" : {
@@ -75950,7 +76466,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%#@count_votes@ from %#@count_voters@"
+            "value" : "%#@count_votes@ vots de %#@count_voters@ votants"
           },
           "substitutions" : {
             "count_voters" : {
@@ -75961,13 +76477,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg voters"
+                      "value" : "%arg"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg voters"
+                      "value" : "%arg"
                     }
                   }
                 }
@@ -75981,13 +76497,13 @@
                   "one" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg votes"
+                      "value" : "%arg"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
                       "state" : "translated",
-                      "value" : "%arg votes"
+                      "value" : "%arg"
                     }
                   }
                 }
@@ -77042,8 +77558,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Results"
+            "state" : "translated",
+            "value" : "Mostra els resultats"
           }
         },
         "de" : {
@@ -77280,8 +77796,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Continues a thread"
+            "state" : "translated",
+            "value" : "Continua un fil"
           }
         },
         "de" : {
@@ -77757,7 +78273,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show full post"
+            "value" : "Mostra la publicació completa"
           }
         },
         "de" : {
@@ -78233,7 +78749,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit History"
+            "value" : "Edita l'historial"
           }
         },
         "de" : {
@@ -78485,8 +79001,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld impulsos"
+                  "state" : "translated",
+                  "value" : "%lld impuls"
                 }
               },
               "other" : {
@@ -78838,8 +79354,8 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld preferits"
+                  "state" : "translated",
+                  "value" : "%lld preferit"
                 }
               },
               "other" : {
@@ -79168,6 +79684,24 @@
     "status.summary.n-quotes %lld" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld cita"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld cies"
+                }
+              }
+            }
+          }
+        },
         "de" : {
           "variations" : {
             "plural" : {
@@ -79358,14 +79892,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld replies"
+                  "state" : "translated",
+                  "value" : "%lld resposta"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld replies"
+                  "value" : "%lld respostes"
                 }
               }
             }
@@ -80157,6 +80691,12 @@
     },
     "Stream home timeline" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tramet la línia de temps d'inici"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -80209,6 +80749,12 @@
     },
     "Tab" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pestanya"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -80413,7 +80959,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Federat"
+            "value" : "Federada"
           }
         },
         "de" : {
@@ -80649,7 +81195,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Mentions"
+            "value" : "Mencions"
           }
         },
         "de" : {
@@ -81476,7 +82022,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Add or remove tag from tag groups"
+            "value" : "Afegeix o elimina l'etiqueta dels grups d'etiquetes"
           }
         },
         "de" : {
@@ -81609,14 +82155,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld mentions"
+                  "state" : "translated",
+                  "value" : "%lld menció"
                 }
               },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
-                  "value" : "%lld mentions"
+                  "value" : "%lld mencions"
                 }
               }
             }
@@ -81938,6 +82484,12 @@
     },
     "Telemetry" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetria"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -82002,6 +82554,12 @@
     },
     "Telemetry by TelemetryDeck" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telemetria per TelemetryDeck"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -82067,6 +82625,12 @@
     "The DeepL API Key is still stored!" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La clau API del DeepL encara està emmagatzemada!"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -82144,6 +82708,12 @@
     "The Translation Service of your Instance couldn't be reached!" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'ha pogut connectar amb el servei de traducció de la vostra instància!"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -82572,7 +83142,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "%@ is a valid instance"
+            "value" : "%@ és una instància vàlida"
           }
         },
         "de" : {
@@ -83045,7 +83615,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Instance URL"
+            "value" : "URL de la instància"
           }
         },
         "de" : {
@@ -83162,8 +83732,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Content Filter"
+            "state" : "translated",
+            "value" : "Filtre de contingut"
           }
         },
         "de" : {
@@ -83637,7 +84207,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Edit tag group"
+            "value" : "Edita el grup d'etiquetes"
           }
         },
         "de" : {
@@ -83746,6 +84316,12 @@
     },
     "timeline.filter.hide-posts-from-bots" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amaga les publicacions als bots"
+          }
+        },
         "en" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83794,8 +84370,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide posts with media"
+            "state" : "translated",
+            "value" : "Amaga les publicacions amb fitxers"
           }
         },
         "de" : {
@@ -84149,8 +84725,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Boosts"
+            "state" : "translated",
+            "value" : "Mostra els impulsos"
           }
         },
         "de" : {
@@ -84268,8 +84844,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Quotes"
+            "state" : "translated",
+            "value" : "Mostra les cites"
           }
         },
         "de" : {
@@ -84387,8 +84963,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Replies"
+            "state" : "translated",
+            "value" : "Mostra les respostes"
           }
         },
         "de" : {
@@ -84506,8 +85082,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Show Threads"
+            "state" : "translated",
+            "value" : "Mostra els fils"
           }
         },
         "de" : {
@@ -84981,7 +85557,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Refresh"
+            "value" : "Refresca"
           }
         },
         "de" : {
@@ -85284,8 +85860,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "%#@arg1@ publicació recents de %#@arg2@ participants"
+            "state" : "translated",
+            "value" : "%#@arg1@ de %#@arg2@"
           },
           "substitutions" : {
             "arg1" : {
@@ -85295,14 +85871,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg publicació recent"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg publicacions recents"
                     }
                   }
                 }
@@ -85315,14 +85891,14 @@
                 "plural" : {
                   "one" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participant"
                     }
                   },
                   "other" : {
                     "stringUnit" : {
-                      "state" : "needs_review",
-                      "value" : "%arg"
+                      "state" : "translated",
+                      "value" : "%arg participants"
                     }
                   }
                 }
@@ -86137,8 +86713,8 @@
         },
         "ca" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Resume"
+            "state" : "translated",
+            "value" : "Reprèn"
           }
         },
         "de" : {
@@ -86366,6 +86942,12 @@
     },
     "TimelineFilter" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtre la de línia de temps"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86437,6 +87019,12 @@
     "toast.posting.failure.saved-to-drafts" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desat als esborranys"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86490,6 +87078,12 @@
     "toast.posting.success.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'ha enviat la publicació"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86543,6 +87137,12 @@
     "toast.posting.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'està publicant"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86596,6 +87196,12 @@
     "toast.status.delete.failure.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No s'ha pogut suprimir la publicació"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86649,6 +87255,12 @@
     "toast.status.delete.success.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'ha suprimit la publicació"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86702,6 +87314,12 @@
     "toast.status.delete.title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "S'està suprimint la publicació"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86755,6 +87373,12 @@
     "Translation Service" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Servei de traducció"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86837,6 +87461,12 @@
     },
     "Trending Links" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enllaços en tendència"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86913,6 +87543,12 @@
     },
     "Trending Timeline" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Línia de temps en tendència"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -87007,14 +87643,14 @@
             "plural" : {
               "one" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld people talking"
+                  "state" : "translated",
+                  "value" : "%lld publicació"
                 }
               },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld people talking"
+                  "state" : "translated",
+                  "value" : "%lld publicacions"
                 }
               }
             }
@@ -87342,6 +87978,12 @@
     },
     "Truncate status content" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trunca el contingut de l'estat"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -87394,6 +88036,12 @@
     },
     "Use Ice Cubes to compose a post for Mastodon" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feu servir Ice Cubes per a redactar una publicació per a Mastodon"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -87464,6 +88112,12 @@
     },
     "Use Ice Cubes to compose a post with an image to Mastodon" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feu servir Ice Cubes per a redactar una publicació amb una imatge per a Mastodon"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -87528,6 +88182,12 @@
     },
     "Visibility" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibilitat"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -87604,6 +88264,12 @@
     },
     "Visibility of your post" : {
       "localizations" : {
+        "ca" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Visibilitat de la vostra publicació"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
