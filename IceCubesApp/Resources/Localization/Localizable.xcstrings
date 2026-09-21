@@ -590,7 +590,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "już istnieje"
+            "value" : "%@ już istnieje"
           }
         },
         "pt-BR" : {
@@ -34531,7 +34531,7 @@
         "ca" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "% publicacions"
+            "value" : "%@ publicacions"
           }
         },
         "de" : {
