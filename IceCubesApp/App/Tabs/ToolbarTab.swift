@@ -20,21 +20,19 @@ struct ToolbarTab: ToolbarContent {
         routerPath: routerPath,
         visibility: userPreferences.postVisibility)
       if #available(iOS 26.0, *) {
-        ToolbarItem(placement: .navigationBarLeading) {
-          AppAccountsSelectorView(
-            transition: transition,
-            routerPath: routerPath,
-            avatarConfig: .embed)
-            .offset(x: -12)
-        }
-        .matchedTransitionSource(id: CurrentAccount.shared.account?.id ?? "", in: transition)
-        .sharedBackgroundVisibility(.hidden)
+        #if os(iOS) && !targetEnvironment(macCatalyst)
+          if #available(iOS 27.1, *) {
+            accountToolbarItem
+              .axisBehavior(.verticalPreferred)
+          } else {
+            accountToolbarItem
+          }
+        #else
+          accountToolbarItem
+        #endif
       } else {
         ToolbarItem(placement: .navigationBarLeading) {
-          AppAccountsSelectorView(
-            transition: transition,
-            routerPath: routerPath,
-            avatarConfig: .embed)
+          accountSelector
         }
       }
     }
@@ -44,4 +42,43 @@ struct ToolbarTab: ToolbarContent {
       }
     }
   }
+
+  @available(iOS 26.0, *)
+  private var accountToolbarItem: some ToolbarContent {
+    ToolbarItem(placement: .navigationBarLeading) {
+      #if os(iOS) && !targetEnvironment(macCatalyst)
+        if #available(iOS 27.1, *) {
+          accountSelector
+            .modifier(ToolbarAvatarAlignment())
+        } else {
+          accountSelector
+            .offset(x: -12)
+        }
+      #else
+        accountSelector
+          .offset(x: -12)
+      #endif
+    }
+    .matchedTransitionSource(id: CurrentAccount.shared.account?.id ?? "", in: transition)
+    .sharedBackgroundVisibility(.hidden)
+  }
+
+  private var accountSelector: some View {
+    AppAccountsSelectorView(
+      transition: transition,
+      routerPath: routerPath,
+      avatarConfig: .embed)
+  }
 }
+
+#if os(iOS) && !targetEnvironment(macCatalyst)
+@available(iOS 27.1, *)
+private struct ToolbarAvatarAlignment: ViewModifier {
+  @Environment(\.toolbarVerticalEdge) private var toolbarVerticalEdge
+
+  func body(content: Content) -> some View {
+    // The horizontal bar's inset correction would shift the avatar off-center in a vertical bar.
+    content.offset(x: toolbarVerticalEdge == nil ? -12 : 0)
+  }
+}
+#endif
