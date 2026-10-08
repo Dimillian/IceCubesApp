@@ -56,7 +56,14 @@ public struct TimelineView: View {
               .padding(.horizontal, .layoutPadding)
           }
         }
-        .scrollEdgeEffectStyle(.soft, for: .top)
+        #if targetEnvironment(macCatalyst)
+          .scrollEdgeEffectStyle(.hard, for: .top)
+          // Catalyst 27 loses the scroll-edge blur when the window becomes active.
+          .toolbarBackground(.regularMaterial, for: .navigationBar)
+          .toolbarBackgroundVisibility(.visible, for: .navigationBar)
+        #else
+          .scrollEdgeEffectStyle(.soft, for: .top)
+        #endif
     } else {
       timelineView
         .toolbarBackground(toolbarBackgroundVisibility, for: .navigationBar)

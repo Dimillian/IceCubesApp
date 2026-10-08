@@ -27,6 +27,7 @@ struct NotificationsTab: View {
   var body: some View {
     NavigationStack(path: $routerPath.path) {
       NotificationsListView(lockedType: lockedType)
+        .rootTabScrollEdgeEffect()
         .withAppRouter()
         .withSheetDestinations(
           sheetDestinations: $routerPath.presentedSheet,

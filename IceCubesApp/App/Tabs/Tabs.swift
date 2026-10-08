@@ -138,19 +138,18 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
       TimelineTab(timeline: .constant(.federated))
     case .notifications:
       NotificationsTab(selectedTab: selectedTab, lockedType: nil)
-        .rootTabSoftScrollEdgeEffect()
     case .mentions:
       NotificationsTab(selectedTab: selectedTab, lockedType: .mention)
     case .explore:
       ExploreTab()
-        .rootTabSoftScrollEdgeEffect()
+        .rootTabScrollEdgeEffect()
     case .messages:
       MessagesTab()
     case .settings:
       SettingsTabs(isModal: false)
     case .profile:
       ProfileTab()
-        .rootTabSoftScrollEdgeEffect()
+        .rootTabScrollEdgeEffect()
     case .bookmarks:
       NavigationTab {
         AccountStatusesListView(mode: .bookmarks)
@@ -173,7 +172,7 @@ enum AppTab: Identifiable, Hashable, CaseIterable, Codable {
       }
     case .links:
       NavigationTab { TrendingLinksListView(cards: []) }
-        .rootTabSoftScrollEdgeEffect()
+        .rootTabScrollEdgeEffect()
     case .post:
       VStack {}
     case .other:
@@ -296,14 +295,21 @@ private struct TimelineFilterTab: View {
   }
 }
 
-private extension View {
+extension View {
   @ViewBuilder
-  func rootTabSoftScrollEdgeEffect() -> some View {
+  func rootTabScrollEdgeEffect() -> some View {
     #if os(visionOS)
       self
     #else
       if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *) {
-        scrollEdgeEffectStyle(.soft, for: .top)
+        #if targetEnvironment(macCatalyst)
+          scrollEdgeEffectStyle(.hard, for: .top)
+            // Catalyst 27 loses the scroll-edge blur when the window becomes active.
+            .toolbarBackground(.regularMaterial, for: .navigationBar)
+            .toolbarBackgroundVisibility(.visible, for: .navigationBar)
+        #else
+          scrollEdgeEffectStyle(.soft, for: .top)
+        #endif
       } else {
         self
       }
