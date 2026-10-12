@@ -25,6 +25,10 @@ extension Models.Notification.NotificationType {
       "quoted your post"
     case .quoted_update:
       "updated a quoted status"
+    case .added_to_collection:
+      "notifications.label.added-to-collection"
+    case .collection_update:
+      "notifications.label.collection-update"
     }
   }
 
@@ -50,6 +54,10 @@ extension Models.Notification.NotificationType {
       "🔊 quoted"
     case .quoted_update:
       "🔊 updated a quoted status"
+    case .added_to_collection:
+      "notifications.label.added-to-collection.push"
+    case .collection_update:
+      "notifications.label.collection-update.push"
     }
   }
 
@@ -76,6 +84,10 @@ extension Models.Notification.NotificationType {
       return Image(systemName: "quote.bubble.fill")
     case .quoted_update:
       return Image(systemName: "exclamationmark.bubble.fill")
+    case .added_to_collection:
+      return Image(systemName: "rectangle.stack.badge.person.crop.fill")
+    case .collection_update:
+      return Image(systemName: "person.2.crop.square.stack.fill")
     }
   }
 
@@ -93,6 +105,8 @@ extension Models.Notification.NotificationType {
       return Color.cyan.opacity(0.80)
     case .favourite:
       return Color.yellow.opacity(0.80)
+    case .added_to_collection, .collection_update:
+      return Color.indigo.opacity(0.80)
     }
   }
 
@@ -118,6 +132,10 @@ extension Models.Notification.NotificationType {
         "notifications.menu-title.quote"
     case .quoted_update:
         "notifications.menu-title.quote-updated"
+    case .added_to_collection:
+        "notifications.menu-title.added-to-collection"
+    case .collection_update:
+        "notifications.menu-title.collection-update"
     }
   }
 }

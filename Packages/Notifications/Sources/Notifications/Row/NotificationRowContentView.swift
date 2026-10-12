@@ -55,6 +55,18 @@ struct NotificationRowContentView: View {
         Spacer()
       }
       .environment(\.isCompact, true)
+    } else if let collection = notification.collection {
+      VStack(alignment: .leading, spacing: 6) {
+        Text("@\(notification.accounts[0].acct)")
+          .font(.scaledCallout)
+          .foregroundStyle(.secondary)
+          .contentShape(Rectangle())
+          .onTapGesture {
+            routerPath.navigate(to: .accountDetailWithAccount(account: notification.accounts[0]))
+          }
+        NotificationRowCollectionView(collection: collection, routerPath: routerPath)
+      }
+      .frame(maxWidth: .infinity, alignment: .leading)
     } else {
       Group {
         Text("@\(notification.accounts[0].acct)")
