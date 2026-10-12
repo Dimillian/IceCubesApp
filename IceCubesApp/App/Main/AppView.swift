@@ -27,7 +27,7 @@ struct AppView: View {
   @Binding var selectedTab: AppTab
   @Binding var appRouterPath: RouterPath
 
-  @State var iosTabs = iOSTabs.shared
+  @State private var iosTabs = iOSTabs.shared
   @State var selectedTabScrollToTop: Int = -1
   @State var timeline: TimelineFilter = .home
 
@@ -91,45 +91,57 @@ struct AppView: View {
         })
     ) {
       ForEach(availableSections) { section in
-        TabSection(section.title) {
-          if section == .localTimeline {
-            ForEach(localTimelines) { timeline in
-              let tab = AppTab.anyTimelineFilter(
-                filter: .remoteLocal(server: timeline.instance, filter: .local))
-              Tab(value: tab) {
-                makeTabContent(for: tab)
-              } label: {
-                tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
-              }
-              .tabPlacement(tab.tabPlacement)
+        if section == .iosTabs {
+          // Sidebar placement and the search role can override the user's tab order.
+          ForEach(iosTabs.tabs) { tab in
+            Tab(value: tab) {
+              makeTabContent(for: tab)
+            } label: {
+              tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
             }
-          } else if section == .tagGroup {
-            ForEach(tagGroups) { tagGroup in
-              let tab = AppTab.anyTimelineFilter(
-                filter: TimelineFilter.tagGroup(
-                  title: tagGroup.title,
-                  tags: tagGroup.tags,
-                  symbolName: tagGroup.symbolName))
-              Tab(value: tab) {
-                makeTabContent(for: tab)
-              } label: {
-                tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+            .badge(badgeFor(tab: tab))
+          }
+        } else {
+          TabSection(section.title) {
+            if section == .localTimeline {
+              ForEach(localTimelines) { timeline in
+                let tab = AppTab.anyTimelineFilter(
+                  filter: .remoteLocal(server: timeline.instance, filter: .local))
+                Tab(value: tab) {
+                  makeTabContent(for: tab)
+                } label: {
+                  tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+                }
+                .tabPlacement(tab.tabPlacement)
               }
-              .tabPlacement(tab.tabPlacement)
-            }
-          } else {
-            ForEach(section.tabs) { tab in
-              Tab(value: tab, role: tab == .explore ? .search : .none) {
-                makeTabContent(for: tab)
-              } label: {
-                tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+            } else if section == .tagGroup {
+              ForEach(tagGroups) { tagGroup in
+                let tab = AppTab.anyTimelineFilter(
+                  filter: TimelineFilter.tagGroup(
+                    title: tagGroup.title,
+                    tags: tagGroup.tags,
+                    symbolName: tagGroup.symbolName))
+                Tab(value: tab) {
+                  makeTabContent(for: tab)
+                } label: {
+                  tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+                }
+                .tabPlacement(tab.tabPlacement)
               }
-              .tabPlacement(tab.tabPlacement)
-              .badge(badgeFor(tab: tab))
+            } else {
+              ForEach(section.tabs) { tab in
+                Tab(value: tab, role: tab == .explore ? .search : .none) {
+                  makeTabContent(for: tab)
+                } label: {
+                  tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+                }
+                .tabPlacement(tab.tabPlacement)
+                .badge(badgeFor(tab: tab))
+              }
             }
           }
+          .tabPlacement(.sidebarOnly)
         }
-        .tabPlacement(.sidebarOnly)
       }
     }
     .id(appAccountsManager.currentClient.id)
