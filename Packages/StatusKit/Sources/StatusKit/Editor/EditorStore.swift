@@ -283,7 +283,7 @@ extension StatusEditor {
           ToastCenter.shared.updateProgress(id: postingToastID, progress: postingProgress)
         }
         if postingTimer == nil {
-          Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
+          postingTimer = Timer.scheduledTimer(withTimeInterval: 0.05, repeats: true) { _ in
             Task { @MainActor in
               if self.postingProgress < 100 {
                 self.postingProgress += 0.5

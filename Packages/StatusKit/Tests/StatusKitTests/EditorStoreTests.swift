@@ -48,6 +48,50 @@ final class EditorStoreTests: XCTestCase {
     XCTAssertEqual(store.statusText.string, "Changed")
   }
 
+  func testPostStatusInvalidatesProgressTimerAfterSuccess() async throws {
+    let store = StatusEditor.EditorStore(mode: .new(text: "Hello", visibility: .pub))
+    let client = MockEditorClient()
+    store.client = client
+    var timer: Timer?
+    client.onPost = { [weak store] in
+      timer = store?.postingTimer
+      XCTAssertEqual(timer?.isValid, true)
+      return .placeholder()
+    }
+    let events = StreamWatcher.shared.events
+    let latestEvent = StreamWatcher.shared.latestEvent
+    defer {
+      timer?.invalidate()
+      StreamWatcher.shared.events = events
+      StreamWatcher.shared.latestEvent = latestEvent
+    }
+
+    let status = await store.postStatus()
+
+    XCTAssertNotNil(status)
+    XCTAssertFalse(try XCTUnwrap(timer).isValid)
+    XCTAssertNil(store.postingTimer)
+  }
+
+  func testPostStatusInvalidatesProgressTimerAfterFailure() async throws {
+    let store = StatusEditor.EditorStore(mode: .new(text: "Hello", visibility: .pub))
+    let client = MockEditorClient()
+    store.client = client
+    var timer: Timer?
+    client.onPost = { [weak store] in
+      timer = store?.postingTimer
+      XCTAssertEqual(timer?.isValid, true)
+      throw MockEditorClient.DummyError()
+    }
+    defer { timer?.invalidate() }
+
+    let status = await store.postStatus()
+
+    XCTAssertNil(status)
+    XCTAssertFalse(try XCTUnwrap(timer).isValid)
+    XCTAssertNil(store.postingTimer)
+  }
+
   func testMakeFollowUpStoreCopiesDependencies() {
     let store = StatusEditor.EditorStore(mode: .new(text: nil, visibility: .priv))
     let client = MockEditorClient()
@@ -79,6 +123,8 @@ private final class MockEditorClient: StatusEditor.AutocompleteService.Client,
 {
   struct DummyError: Error {}
 
+  var onPost: (() throws -> Status)?
+
   func searchHashtags(query: String) async throws -> [Tag] { [] }
 
   func searchAccounts(query: String) async throws -> [Account] { [] }
@@ -100,6 +146,9 @@ private final class MockEditorClient: StatusEditor.AutocompleteService.Client,
   }
 
   func postStatus(data: StatusData) async throws -> Status {
+    if let onPost {
+      return try onPost()
+    }
     throw DummyError()
   }
 
