@@ -75,7 +75,7 @@ extension StatusEditor {
           actionsView
         }
       #else
-        ViewThatFits {
+        ViewThatFits(in: .horizontal) {
           HStack(alignment: .center, spacing: 16) {
             actionsView
           }
