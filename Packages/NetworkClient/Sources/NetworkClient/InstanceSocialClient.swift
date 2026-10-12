@@ -31,15 +31,16 @@ public struct InstanceSocialClient: Sendable {
 
     guard let response = try? decoder.decode(Response.self, from: data) else { return [] }
 
-    let result = response.instances.sorted(by: keyword)
+    let result = response.instances.suggestions(matching: keyword)
     return result
   }
 }
 
 extension Array where Self.Element == InstanceSocial {
-  fileprivate func sorted(by keyword: String) -> Self {
+  func suggestions(matching keyword: String) -> Self {
     let keyword = keyword.trimmingCharacters(in: .whitespacesAndNewlines)
-    var newArray = self
+    // The directory can include trailing-dot aliases that the login flow rejects.
+    var newArray = filter { !$0.name.hasSuffix(".") }
 
     newArray.sort { (lhs: InstanceSocial, rhs: InstanceSocial) in
       guard
