@@ -33,8 +33,8 @@ public enum Accounts: Endpoint {
   case mute(id: String, json: MuteData)
   case unmute(id: String)
   case relationshipNote(id: String, json: RelationshipNoteData)
-  case blockList
-  case muteList
+  case blockList(maxId: String?)
+  case muteList(maxId: String?)
 
   public func path() -> String {
     switch self {
@@ -125,6 +125,8 @@ public enum Accounts: Endpoint {
       ]
     case let .familiarFollowers(withAccount):
       return [.init(name: "id[]", value: withAccount)]
+    case let .blockList(maxId), let .muteList(maxId):
+      return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .followers(_, maxId):
       return makePaginationParam(sinceId: nil, maxId: maxId, mindId: nil)
     case let .following(_, maxId):

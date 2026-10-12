@@ -102,10 +102,10 @@ public enum AccountsListMode {
         link = nil
 
       case .blocked:
-        (accounts, link) = try await client.getWithLink(endpoint: Accounts.blockList)
+        (accounts, link) = try await client.getWithLink(endpoint: Accounts.blockList(maxId: nil))
 
       case .muted:
-        (accounts, link) = try await client.getWithLink(endpoint: Accounts.muteList)
+        (accounts, link) = try await client.getWithLink(endpoint: Accounts.muteList(maxId: nil))
       }
       nextPageId = link?.maxId
       relationships = try await client.get(
@@ -148,10 +148,10 @@ public enum AccountsListMode {
       link = nil
 
     case .blocked:
-      (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.blockList)
+      (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.blockList(maxId: nextPageId))
 
     case .muted:
-      (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.muteList)
+      (newAccounts, link) = try await client.getWithLink(endpoint: Accounts.muteList(maxId: nextPageId))
     }
 
     accounts.append(contentsOf: newAccounts)
