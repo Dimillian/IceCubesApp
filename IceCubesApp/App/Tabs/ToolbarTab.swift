@@ -46,7 +46,9 @@ struct ToolbarTab: ToolbarContent {
   @available(iOS 26.0, *)
   private var accountToolbarItem: some ToolbarContent {
     ToolbarItem(placement: .navigationBarLeading) {
-      #if os(iOS) && !targetEnvironment(macCatalyst)
+      #if targetEnvironment(macCatalyst)
+        accountSelector
+      #elseif os(iOS)
         if #available(iOS 27.1, *) {
           accountSelector
             .modifier(ToolbarAvatarAlignment())
@@ -68,6 +70,9 @@ struct ToolbarTab: ToolbarContent {
       transition: transition,
       routerPath: routerPath,
       avatarConfig: .embed)
+      #if targetEnvironment(macCatalyst)
+        .buttonStyle(.plain)
+      #endif
   }
 }
 
