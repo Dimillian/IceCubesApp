@@ -1,4 +1,5 @@
 import DesignSystem
+import EmojiText
 import Env
 import Models
 import NetworkClient
@@ -25,7 +26,8 @@ struct AccountDetailToolbar: ToolbarContent {
     ToolbarItem(placement: .principal) {
       if let account = account, displayTitle {
         VStack {
-          Text(account.displayName ?? "").font(.headline)
+          EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
+            .font(.headline)
           Text("account.detail.featured-tags-n-posts \(account.statusesCount ?? 0)")
             .font(.footnote)
             .foregroundStyle(.secondary)

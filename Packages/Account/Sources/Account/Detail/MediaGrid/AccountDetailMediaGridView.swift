@@ -1,4 +1,5 @@
 import DesignSystem
+import EmojiText
 import Env
 import MediaUI
 import Models
@@ -100,7 +101,13 @@ public struct AccountDetailMediaGridView: View {
         }
       }
     }
-    .navigationTitle(account.displayName ?? "")
+    .navigationBarTitleDisplayMode(.inline)
+    .toolbar {
+      ToolbarItem(placement: .principal) {
+        EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
+          .font(.headline)
+      }
+    }
     #if !os(visionOS)
       .scrollContentBackground(.hidden)
       .background(theme.primaryBackgroundColor)
