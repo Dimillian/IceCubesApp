@@ -24,7 +24,6 @@ import Observation
     case direct
   }
 
-  public var events: [any StreamEvent] = []
   public var latestEvent: (any StreamEvent)?
 
   private let logger = Logger(subsystem: "com.icecubesapp", category: "stream")
@@ -102,7 +101,6 @@ import Observation
               logger.info("Stream update: \(decodedEvent.rawEvent.event)")
               await MainActor.run {
                 if let event = decodedEvent.event {
-                  self.events.append(event)
                   self.latestEvent = event
                 }
               }
@@ -138,19 +136,16 @@ import Observation
 
   public func emmitDeleteEvent(for status: String) {
     let event = StreamEventDelete(status: status)
-    events.append(event)
     latestEvent = event
   }
 
   public func emmitEditEvent(for status: Status) {
     let event = StreamEventStatusUpdate(status: status)
-    events.append(event)
     latestEvent = event
   }
 
   public func emmitPostEvent(for status: Status) {
     let event = StreamEventUpdate(status: status)
-    events.append(event)
     latestEvent = event
   }
 }

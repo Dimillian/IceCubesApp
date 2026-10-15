@@ -58,11 +58,9 @@ final class EditorStoreTests: XCTestCase {
       XCTAssertEqual(timer?.isValid, true)
       return .placeholder()
     }
-    let events = StreamWatcher.shared.events
     let latestEvent = StreamWatcher.shared.latestEvent
     defer {
       timer?.invalidate()
-      StreamWatcher.shared.events = events
       StreamWatcher.shared.latestEvent = latestEvent
     }
 
