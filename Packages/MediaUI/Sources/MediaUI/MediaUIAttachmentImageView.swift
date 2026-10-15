@@ -4,8 +4,21 @@ import SwiftUI
 
 public struct MediaUIAttachmentImageView: View {
   public let url: URL
+  public let description: String?
 
   @GestureState private var zoom = 1.0
+
+  private var accessibilityLabel: Text {
+    if let description, !description.isEmpty {
+      return Text(description)
+    }
+    return Text("accessibility.media.supported-type.image.label")
+  }
+
+  public init(url: URL, description: String? = nil) {
+    self.url = url
+    self.description = description
+  }
 
   public var body: some View {
     MediaUIZoomableContainer {
@@ -19,6 +32,7 @@ public struct MediaUIAttachmentImageView: View {
             .padding(.top, 44)
             .padding(.bottom, 32)
             .scaleEffect(zoom)
+            .accessibilityLabel(accessibilityLabel)
         } else if state.isLoading {
           ProgressView()
             .progressViewStyle(.circular)

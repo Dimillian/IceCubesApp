@@ -18,6 +18,7 @@ struct AccountWidgetView: View {
           .resizable()
           .frame(width: 64, height: 64)
           .clipShape(Circle())
+          .accessibilityHidden(true)
         Text("\(entry.account.followersCount ?? 0)")
           .font(.title)
           .fontDesign(.rounded)
@@ -28,6 +29,7 @@ struct AccountWidgetView: View {
           .foregroundStyle(.secondary)
       }
     }
+    .accessibilityElement(children: .combine)
     .frame(maxWidth: .infinity)
   }
 }

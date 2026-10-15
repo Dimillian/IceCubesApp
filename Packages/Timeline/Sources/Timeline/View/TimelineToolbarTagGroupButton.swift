@@ -34,6 +34,7 @@ struct TimelineToolbarTagGroupButton: ToolbarContent {
           } label: {
             Image(systemName: "ellipsis")
               .foregroundStyle(theme.labelColor)
+              .accessibilityLabel("tag-groups.edit.section.title")
           }
         }
       default:

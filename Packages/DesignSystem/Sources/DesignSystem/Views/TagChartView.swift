@@ -25,5 +25,6 @@ public struct TagChartView: View {
     .chartYAxis(.hidden)
     .frame(width: 70, height: 40)
     .clipShape(RoundedRectangle(cornerRadius: 4))
+    .accessibilityHidden(true)
   }
 }

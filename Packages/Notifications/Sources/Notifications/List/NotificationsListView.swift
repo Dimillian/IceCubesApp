@@ -101,7 +101,7 @@ public struct NotificationsListView: View {
           Button {
             routerPath.navigate(to: .conversations)
           } label: {
-            Label("Direct Messages", systemImage: "message")
+            Label("conversations.navigation-title", systemImage: "message")
           }
           .tint(theme.labelColor)
         }

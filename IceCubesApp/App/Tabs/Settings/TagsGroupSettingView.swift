@@ -15,10 +15,12 @@ struct TagsGroupSettingView: View {
   var body: some View {
     Form {
       ForEach(tagGroups) { group in
-        Label(group.title, systemImage: group.symbolName)
-          .onTapGesture {
-            routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: nil)
-          }
+        Button {
+          routerPath.presentedSheet = .editTagGroup(tagGroup: group, onSaved: nil)
+        } label: {
+          Label(group.title, systemImage: group.symbolName)
+        }
+        .tint(.primary)
       }
       .onDelete { indexes in
         if let index = indexes.first {

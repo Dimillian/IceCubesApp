@@ -32,6 +32,28 @@ struct ThemeBoxView: View {
   var color: ColorSet
 
   var body: some View {
+    Button {
+      let currentScheme = theme.selectedScheme
+      if color.scheme != currentScheme {
+        theme.followSystemColorScheme = false
+      }
+      theme.applySet(set: color.name)
+    } label: {
+      boxContent
+    }
+    .buttonStyle(.plain)
+    .accessibilityElement(children: .ignore)
+    .accessibilityLabel(color.name.rawValue)
+    .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
+    .onAppear {
+      isSelected = theme.selectedSet.rawValue == color.name.rawValue
+    }
+    .onChange(of: theme.selectedSet) { _, newValue in
+      isSelected = newValue.rawValue == color.name.rawValue
+    }
+  }
+
+  private var boxContent: some View {
     ZStack(alignment: .topTrailing) {
       Rectangle()
         .foregroundColor(.white)
@@ -77,19 +99,6 @@ struct ThemeBoxView: View {
       .background(color.secondaryBackgroundColor)
       .font(.system(size: 15))
       .cornerRadius(4)
-    }
-    .onAppear {
-      isSelected = theme.selectedSet.rawValue == color.name.rawValue
-    }
-    .onChange(of: theme.selectedSet) { _, newValue in
-      isSelected = newValue.rawValue == color.name.rawValue
-    }
-    .onTapGesture {
-      let currentScheme = theme.selectedScheme
-      if color.scheme != currentScheme {
-        theme.followSystemColorScheme = false
-      }
-      theme.applySet(set: color.name)
     }
   }
 }

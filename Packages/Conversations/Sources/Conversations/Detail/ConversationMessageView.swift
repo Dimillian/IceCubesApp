@@ -29,10 +29,13 @@ struct ConversationMessageView: View {
         if isOwnMessage {
           Spacer()
         } else {
-          AvatarView(message.account.avatar)
-            .onTapGesture {
-              routerPath.navigate(to: .accountDetailWithAccount(account: message.account))
-            }
+          Button {
+            routerPath.navigate(to: .accountDetailWithAccount(account: message.account))
+          } label: {
+            AvatarView(message.account.avatar)
+          }
+          .buttonStyle(.plain)
+          .accessibilityLabel(message.account.safeDisplayName)
         }
         if #available(iOS 26.0, *) {
           textView

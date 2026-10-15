@@ -12,6 +12,7 @@ struct ConversationInputView: View {
   var isSendingMessage: Bool
   var onSendMessage: () async -> Void
   @FocusState.Binding var isMessageFieldFocused: Bool
+  @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
   var body: some View {
     inputTextView
@@ -58,6 +59,7 @@ struct ConversationInputView: View {
           Image(systemName: "plus")
         }
       }
+      .accessibilityLabel("status.action.reply")
       .padding(.bottom, 7)
     }
   }
@@ -119,9 +121,10 @@ struct ConversationInputView: View {
             }
           }
         }
+        .accessibilityLabel("accessibility.conversations.send.label")
         .keyboardShortcut(.return, modifiers: .command)
         .padding(.bottom, 6)
-        .animation(.bouncy, value: isSendingMessage)
+        .animation(reduceMotion ? .easeInOut(duration: 0.15) : .bouncy, value: isSendingMessage)
         .transition(.move(edge: .trailing))
       }
     }

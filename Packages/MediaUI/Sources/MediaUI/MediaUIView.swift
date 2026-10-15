@@ -102,6 +102,7 @@ private struct DismissToolbarItem: ToolbarContent {
       } label: {
         Image(systemName: "xmark")
       }
+      .accessibilityLabel("action.close")
       .keyboardShortcut(.cancelAction)
     }
   }
@@ -231,7 +232,7 @@ private struct DisplayView: View {
   var body: some View {
     switch data.type {
     case .image:
-      MediaUIAttachmentImageView(url: data.url)
+      MediaUIAttachmentImageView(url: data.url, description: data.description)
     case .av:
       MediaUIAttachmentVideoView(viewModel: .init(url: data.url, forceAutoPlay: true))
         .ignoresSafeArea()

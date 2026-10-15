@@ -109,7 +109,7 @@ struct ConversationsListRow: View {
           #endif
         }
       } label: {
-        Label("Reply", systemImage: "arrowshape.turn.up.left.fill")
+        Label("status.action.reply", systemImage: "arrowshape.turn.up.left.fill")
       }
     }
     .swipeActions(edge: .trailing, allowsFullSwipe: false) {

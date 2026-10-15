@@ -3,28 +3,45 @@ import SwiftUI
 
 public struct ToastOverlayView: View {
   @Environment(ToastCenter.self) private var toastCenter
+  @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
   public init() {}
 
   public var body: some View {
     ZStack(alignment: .top) {
       if let toast = toastCenter.toast {
-        ToastView(toast: toast)
-          .padding(.horizontal, .layoutPadding)
-          .padding(.top, 12)
-          .contentShape(Rectangle())
+        toastContent(toast)
           .transition(.move(edge: .top).combined(with: .opacity))
-          .onTapGesture {
-            if let action = toast.action {
-              action.handler()
-            }
-            toastCenter.dismiss(id: toast.id)
-          }
       }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-    .animation(.bouncy(duration: 0.4), value: toastCenter.toast)
+    .animation(
+      reduceMotion ? .easeInOut(duration: 0.2) : .bouncy(duration: 0.4),
+      value: toastCenter.toast)
     .allowsHitTesting(toastCenter.toast != nil)
+  }
+
+  @ViewBuilder
+  private func toastContent(_ toast: ToastCenter.Toast) -> some View {
+    if toast.action != nil {
+      Button {
+        toast.action?.handler()
+        toastCenter.dismiss(id: toast.id)
+      } label: {
+        ToastView(toast: toast)
+          .padding(.horizontal, .layoutPadding)
+          .padding(.top, 12)
+      }
+      .buttonStyle(.plain)
+    } else {
+      ToastView(toast: toast)
+        .padding(.horizontal, .layoutPadding)
+        .padding(.top, 12)
+        .contentShape(Rectangle())
+        .onTapGesture {
+          toastCenter.dismiss(id: toast.id)
+        }
+    }
   }
 }
 
