@@ -534,13 +534,15 @@ extension TimelineViewModel: GapLoadingFetcher {
 
   private func updateStatusesState() async {
     let items = await datasource.getFilteredItems()
-    statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
+    let hasStatuses = await datasource.hasStatuses
+    statusesState = .displayWithGaps(items: items, nextPageState: hasStatuses ? .hasNextPage : .none)
   }
 
   private func updateStatusesStateWithAnimation() async {
     let items = await datasource.getFilteredItems()
+    let hasStatuses = await datasource.hasStatuses
     withAnimation {
-      statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
+      statusesState = .displayWithGaps(items: items, nextPageState: hasStatuses ? .hasNextPage : .none)
     }
   }
 

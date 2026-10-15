@@ -10,6 +10,10 @@ actor TimelineDatasource {
     items.isEmpty
   }
 
+  var hasStatuses: Bool {
+    items.contains(where: { $0.status != nil })
+  }
+
   func get() -> [Status] {
     items.compactMap { item in
       if case .status(let status) = item {

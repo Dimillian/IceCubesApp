@@ -6,15 +6,20 @@ import NetworkClient
 actor MockTimelineStatusFetcher: TimelineStatusFetching {
   private let firstPage: [Status]
   private let nextPages: [[Status]]
+  private let firstPageError: Error?
   private var nextPageCalls: Int = 0
 
-  init(firstPage: [Status], nextPages: [[Status]]) {
+  init(firstPage: [Status], nextPages: [[Status]], firstPageError: Error? = nil) {
     self.firstPage = firstPage
     self.nextPages = nextPages
+    self.firstPageError = firstPageError
   }
 
   func fetchFirstPage(client: MastodonClient?, timeline: TimelineFilter) async throws -> [Status] {
-    firstPage
+    if let firstPageError {
+      throw firstPageError
+    }
+    return firstPage
   }
 
   func fetchNewPages(
