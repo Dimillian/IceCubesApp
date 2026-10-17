@@ -79,6 +79,15 @@ struct AppView: View {
     return sections
   }
 
+  private func tabRole(for tab: AppTab) -> TabRole? {
+    if tab == .explore {
+      if iosTabs.tabs.last == .explore {
+        return .search
+      }
+    }
+    return .none
+  }
+
   @ViewBuilder
   var tabBarView: some View {
     TabView(
@@ -93,8 +102,9 @@ struct AppView: View {
       ForEach(availableSections) { section in
         if section == .iosTabs {
           // Sidebar placement and the search role can override the user's tab order.
+          // Detach Explore as a search role only when placed last, preserving custom order otherwise.
           ForEach(iosTabs.tabs) { tab in
-            Tab(value: tab) {
+            Tab(value: tab, role: tabRole(for: tab)) {
               makeTabContent(for: tab)
             } label: {
               tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
