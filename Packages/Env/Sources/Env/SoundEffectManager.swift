@@ -11,7 +11,7 @@ public class SoundEffectManager {
     case pull, refresh, tootSent, tabSelection, bookmark, boost, favorite, share
   }
 
-  private var systemSoundIDs: [SoundEffect: SystemSoundID] = [:]
+  private var players: [SoundEffect: AVAudioPlayer] = [:]
 
   private let userPreferences = UserPreferences.shared
 
@@ -21,27 +21,31 @@ public class SoundEffectManager {
 
   private func registerSounds() {
     SoundEffect.allCases.forEach { effect in
-      guard let url = Bundle.main.url(forResource: effect.rawValue, withExtension: "wav") else {
+      guard let url = Bundle.main.url(forResource: effect.rawValue, withExtension: "wav"),
+        let player = try? AVAudioPlayer(contentsOf: url)
+      else {
         return
       }
-      register(url: url, for: effect)
+      // Play through AVAudioPlayer so effects follow the media volume
+      // instead of the (often louder) ringer volume used by
+      // AudioServicesPlaySystemSound.
+      player.volume = 0.7
+      player.prepareToPlay()
+      players[effect] = player
     }
-  }
-
-  private func register(url: URL, for effect: SoundEffect) {
-    var soundId: SystemSoundID = .init()
-    AudioServicesCreateSystemSoundID(url as CFURL, &soundId)
-    systemSoundIDs[effect] = soundId
   }
 
   public func playSound(_ effect: SoundEffect) {
     guard
       userPreferences.soundEffectEnabled,
-      let soundId = systemSoundIDs[effect]
+      let player = players[effect]
     else {
       return
     }
 
-    AudioServicesPlaySystemSound(soundId)
+    if player.isPlaying {
+      player.currentTime = 0
+    }
+    player.play()
   }
 }
