@@ -18,9 +18,12 @@ import SwiftUI
     self.forceAutoPlay = forceAutoPlay
   }
 
-  func preparePlayer(autoPlay: Bool, isCompact: Bool) {
+  func preparePlayer(autoPlay: Bool, isCompact: Bool, isMuted: Bool) {
     player = .init(url: url)
     player?.audiovisualBackgroundPlaybackPolicy = .pauses
+    // Apply mute before any playback starts to avoid audible audio
+    // racing with the autoplay call.
+    player?.isMuted = isMuted
     #if !os(visionOS)
       player?.preventsDisplaySleepDuringVideoPlayback = false
     #endif
@@ -132,8 +135,8 @@ public struct MediaUIAttachmentVideoView: View {
       .onAppear {
         viewModel.preparePlayer(
           autoPlay: isFullScreen ? true : preferences.autoPlayVideo,
-          isCompact: isCompact)
-        viewModel.mute(preferences.muteVideo)
+          isCompact: isCompact,
+          isMuted: preferences.muteVideo)
       }
       .onDisappear {
         viewModel.stop()
