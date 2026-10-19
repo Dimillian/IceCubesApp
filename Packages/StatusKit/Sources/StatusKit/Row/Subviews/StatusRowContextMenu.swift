@@ -40,12 +40,12 @@ struct StatusRowContextMenu: View {
 
   var isBoostDisabled: Bool {
     switch viewModel.finalStatus.visibility {
-    case .pub:
+    case .pub, .unlisted:
       return false
     case .priv:
       guard let currentAccountId = account.account?.id else { return true }
       return viewModel.finalStatus.account.id != currentAccountId
-    case .unlisted, .direct:
+    case .direct:
       return true
     }
   }
