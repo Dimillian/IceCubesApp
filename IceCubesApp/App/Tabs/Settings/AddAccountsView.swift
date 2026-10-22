@@ -162,7 +162,11 @@ struct AddAccountView: View {
     Section {
       if #available(iOS 26.0, *) {
         signinButton
-          .buttonStyle(.glassProminent)
+          #if os(visionOS)
+            .buttonStyle(.borderedProminent)
+          #else
+            .buttonStyle(.glassProminent)
+          #endif
       } else {
         signinButton
           .buttonStyle(.borderedProminent)

@@ -23,8 +23,12 @@ extension StatusEditor {
     var body: some View {
       if #available(iOS 26.0, *) {
         contentView
-          .glassEffect(.regular.tint(theme.tintColor.opacity(0.1)),
-                       in: RoundedRectangle(cornerRadius: 6))
+          #if os(visionOS)
+            .glassBackgroundEffect(in: RoundedRectangle(cornerRadius: 6))
+          #else
+            .glassEffect(.regular.tint(theme.tintColor.opacity(0.1)),
+                         in: RoundedRectangle(cornerRadius: 6))
+          #endif
       } else {
         contentView
           .background(

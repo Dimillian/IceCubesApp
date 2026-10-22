@@ -20,7 +20,11 @@ extension StatusEditor {
         if #available(iOS 26.0, *) {
           makeMenuLabel(visibility: visibility)
             .padding(8)
-            .glassEffect()
+            #if os(visionOS)
+              .glassBackgroundEffect(in: .capsule)
+            #else
+              .glassEffect()
+            #endif
         } else {
           makeMenuLabel(visibility: visibility)
             .padding(4)

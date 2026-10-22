@@ -27,8 +27,12 @@ struct StatusRowContentView: View {
         if #available(iOS 26.0, *) {
           StatusPollView(poll: poll, status: viewModel.finalStatus)
             .padding()
-            .glassEffect(.regular.tint(theme.tintColor.opacity(0.1)),
-                         in: RoundedRectangle(cornerRadius: 8))
+            #if os(visionOS)
+              .glassBackgroundEffect(in: RoundedRectangle(cornerRadius: 8))
+            #else
+              .glassEffect(.regular.tint(theme.tintColor.opacity(0.1)),
+                           in: RoundedRectangle(cornerRadius: 8))
+            #endif
         } else {
           StatusPollView(poll: poll, status: viewModel.finalStatus)
             .padding(.vertical)

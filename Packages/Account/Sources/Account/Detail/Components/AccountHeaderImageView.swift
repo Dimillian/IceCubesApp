@@ -97,7 +97,11 @@ struct AccountHeaderImageView: View {
         .font(.scaledFootnote)
         .fontWeight(.semibold)
         .padding(8)
-        .glassEffect()
+        #if os(visionOS)
+          .glassBackgroundEffect(in: .capsule)
+        #else
+          .glassEffect()
+        #endif
         .cornerRadius(4)
         .padding(8)
     } else {

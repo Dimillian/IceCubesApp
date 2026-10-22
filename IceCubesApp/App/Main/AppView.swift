@@ -38,15 +38,20 @@ struct AppView: View {
 
   var body: some View {
     HStack(spacing: 0) {
-      Group {
-        if #available(iOS 27.0, visionOS 27.0, *) {
-          tabBarView
-            .defaultTabBarPlacement(horizontalSizeClass == .regular ? .sidebar : .automatic)
-        } else {
-          tabBarView
+      #if os(visionOS)
+        // Use the system tab bar ornament instead of the iPad / Mac sidebar.
+        tabBarView
+      #else
+        Group {
+          if #available(iOS 27.0, *) {
+            tabBarView
+              .defaultTabBarPlacement(horizontalSizeClass == .regular ? .sidebar : .automatic)
+          } else {
+            tabBarView
+          }
         }
-      }
-      .tabViewStyle(.sidebarAdaptable)
+        .tabViewStyle(.sidebarAdaptable)
+      #endif
       if horizontalSizeClass == .regular
         && (UIDevice.current.userInterfaceIdiom == .pad
           || UIDevice.current.userInterfaceIdiom == .mac),
@@ -94,6 +99,16 @@ struct AppView: View {
         if section == .iosTabs {
           // Sidebar placement and the search role can override the user's tab order.
           ForEach(iosTabs.tabs) { tab in
+            Tab(value: tab) {
+              makeTabContent(for: tab)
+            } label: {
+              tab.label.environment(\.symbolVariants, tab == selectedTab ? .fill : .none)
+            }
+            .badge(badgeFor(tab: tab))
+          }
+        } else if UIDevice.current.userInterfaceIdiom == .vision {
+          // Sections and sidebar placement would turn the visionOS tab bar into a sidebar.
+          ForEach(section.tabs) { tab in
             Tab(value: tab) {
               makeTabContent(for: tab)
             } label: {

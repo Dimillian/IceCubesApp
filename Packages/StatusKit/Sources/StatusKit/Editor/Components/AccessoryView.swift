@@ -16,6 +16,7 @@ extension StatusEditor {
     @State private var isCustomEmojisSheetDisplay: Bool = false
     @State private var isLoadingAIRequest: Bool = false
     #if os(visionOS)
+      @Environment(CurrentInstance.self) private var currentInstance
       @State private var isPhotosPickerPresented: Bool = false
       @State private var isFileImporterPresented: Bool = false
       @State private var isCameraPickerPresented: Bool = false

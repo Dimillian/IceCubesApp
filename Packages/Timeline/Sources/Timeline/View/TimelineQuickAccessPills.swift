@@ -57,7 +57,11 @@ public struct TimelineQuickAccessPills: View {
     } else if filter == timeline {
       if #available(iOS 26.0, *) {
         makeButton(filter)
-          .buttonStyle(.glassProminent)
+          #if os(visionOS)
+            .buttonStyle(.borderedProminent)
+          #else
+            .buttonStyle(.glassProminent)
+          #endif
       } else {
         makeButton(filter)
           .buttonStyle(.borderedProminent)
@@ -65,7 +69,11 @@ public struct TimelineQuickAccessPills: View {
     } else {
       if #available(iOS 26.0, *) {
         makeButton(filter)
-          .buttonStyle(.glass)
+          #if os(visionOS)
+            .buttonStyle(.bordered)
+          #else
+            .buttonStyle(.glass)
+          #endif
           .foregroundStyle(.primary)
       } else {
         makeButton(filter)

@@ -1,5 +1,6 @@
 import ButtonKit
 import Combine
+import DesignSystem
 import Foundation
 import Models
 import NetworkClient
@@ -102,7 +103,7 @@ public struct FollowButton: View {
 
   public var body: some View {
     if #available(iOS 26.0, *) {
-      GlassEffectContainer {
+      GlassContainer {
         VStack(alignment: .trailing) {
           AsyncButton {
             if viewModel.relationship.following || viewModel.relationship.requested {
@@ -125,7 +126,11 @@ public struct FollowButton: View {
                   ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off")
             }
           }
-          .glassEffect(.regular.interactive())
+          #if os(visionOS)
+            .glassBackgroundEffect(in: .capsule)
+          #else
+            .glassEffect(.regular.interactive())
+          #endif
           if viewModel.relationship.following,
             viewModel.shouldDisplayNotify
           {
@@ -140,7 +145,11 @@ public struct FollowButton: View {
                 viewModel.relationship.notifying
                   ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off"
               )
-              .glassEffect(.regular.interactive())
+              #if os(visionOS)
+                .glassBackgroundEffect(in: .capsule)
+              #else
+                .glassEffect(.regular.interactive())
+              #endif
               AsyncButton {
                 try await viewModel.toggleReboosts()
               } label: {
@@ -152,7 +161,11 @@ public struct FollowButton: View {
                 viewModel.relationship.showingReblogs
                   ? "accessibility.general.toggle.on" : "accessibility.general.toggle.off"
               )
-              .glassEffect(.regular.interactive())
+              #if os(visionOS)
+                .glassBackgroundEffect(in: .capsule)
+              #else
+                .glassEffect(.regular.interactive())
+              #endif
             }
             .asyncButtonStyle(.none)
             .disabledWhenLoading()

@@ -61,7 +61,7 @@ public struct TimelineView: View {
           // Catalyst 27 loses the scroll-edge blur when the window becomes active.
           .toolbarBackground(.regularMaterial, for: .navigationBar)
           .toolbarBackgroundVisibility(.visible, for: .navigationBar)
-        #else
+        #elseif !os(visionOS)
           .scrollEdgeEffectStyle(.soft, for: .top)
         #endif
     } else {
@@ -100,9 +100,11 @@ public struct TimelineView: View {
     }
     .toolbar {
       TimelineToolbarTitleView(timeline: $timeline, canFilterTimeline: canFilterTimeline)
-      if #available(iOS 26.0, *) {
-        ToolbarSpacer(placement: .topBarTrailing)
-      }
+      #if !os(visionOS)
+        if #available(iOS 26.0, *) {
+          ToolbarSpacer(placement: .topBarTrailing)
+        }
+      #endif
       if viewModel.canStreamTimeline(timeline) {
         ToolbarItem(placement: .navigationBarTrailing) {
           Button {

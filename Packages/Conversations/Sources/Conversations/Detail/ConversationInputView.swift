@@ -20,15 +20,23 @@ struct ConversationInputView: View {
   @ViewBuilder
   private var inputTextView: some View {
     if #available(iOS 26.0, *) {
-      GlassEffectContainer {
+      GlassContainer {
         HStack(alignment: .bottom, spacing: 8) {
           attachmentButton
             .buttonBorderShape(.circle)
-            .buttonStyle(.glass)
+            #if os(visionOS)
+              .buttonStyle(.bordered)
+            #else
+              .buttonStyle(.glass)
+            #endif
           textField
           sendButton
             .buttonBorderShape(.circle)
-            .buttonStyle(.glassProminent)
+            #if os(visionOS)
+              .buttonStyle(.borderedProminent)
+            #else
+              .buttonStyle(.glassProminent)
+            #endif
         }
         .padding(8)
       }
@@ -72,7 +80,11 @@ struct ConversationInputView: View {
       .focused($isMessageFieldFocused)
       .keyboardType(.default)
       .padding(12)
-      .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 18))
+      #if os(visionOS)
+        .glassBackgroundEffect(in: .rect(cornerRadius: 18))
+      #else
+        .glassEffect(.regular.interactive(), in: .rect(cornerRadius: 18))
+      #endif
       .padding(.bottom, 6)
     } else {
       TextField(

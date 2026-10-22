@@ -38,9 +38,13 @@ struct NotificationRowView: View {
             height: AvatarView.FrameConfig.status.height
           )
           .accessibilityHidden(true)
-          .glassEffect(
-            .regular.tint(
-              notification.type.tintColor(isPrivate: notification.status?.visibility == .direct)))
+          #if os(visionOS)
+            .glassBackgroundEffect(in: .capsule)
+          #else
+            .glassEffect(
+              .regular.tint(
+                notification.type.tintColor(isPrivate: notification.status?.visibility == .direct)))
+          #endif
         } else {
           NotificationRowIconView(
             type: notification.type,

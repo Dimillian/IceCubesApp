@@ -80,7 +80,11 @@ struct TimelineUnreadStatusesView: View {
           label
             .padding(.horizontal, 12)
             .padding(.vertical, 8)
-            .glassEffect(.regular.tint(theme.tintColor.opacity(0.4)).interactive(), in: .capsule)
+            #if os(visionOS)
+              .glassBackgroundEffect(in: .capsule)
+            #else
+              .glassEffect(.regular.tint(theme.tintColor.opacity(0.4)).interactive(), in: .capsule)
+            #endif
         } else {
           label
         }

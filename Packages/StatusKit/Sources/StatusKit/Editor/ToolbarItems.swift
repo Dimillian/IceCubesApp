@@ -50,20 +50,28 @@ extension StatusEditor {
         }
       }
 
-      if #available(iOS 26, *) {
-        ToolbarSpacer(placement: .topBarTrailing)
-        ToolbarItem(placement: .navigationBarTrailing) {
-          sendButton
-            .buttonStyle(.glassProminent)
-            .tint(theme.tintColor)
-        }
-      } else {
+      #if os(visionOS)
         ToolbarItem(placement: .navigationBarTrailing) {
           sendButton
             .buttonStyle(.borderedProminent)
             .tint(theme.tintColor)
         }
-      }
+      #else
+        if #available(iOS 26, *) {
+          ToolbarSpacer(placement: .topBarTrailing)
+          ToolbarItem(placement: .navigationBarTrailing) {
+            sendButton
+              .buttonStyle(.glassProminent)
+              .tint(theme.tintColor)
+          }
+        } else {
+          ToolbarItem(placement: .navigationBarTrailing) {
+            sendButton
+              .buttonStyle(.borderedProminent)
+              .tint(theme.tintColor)
+          }
+        }
+      #endif
 
       ToolbarItem(placement: .navigationBarLeading) {
         Button {

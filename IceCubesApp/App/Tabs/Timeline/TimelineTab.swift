@@ -157,9 +157,11 @@ struct TimelineTab: View {
     }
     switch timeline {
     case .list(let list):
-      if #available(iOS 26.0, *) {
-        ToolbarSpacer(placement: .topBarTrailing)
-      }
+      #if !os(visionOS)
+        if #available(iOS 26.0, *) {
+          ToolbarSpacer(placement: .topBarTrailing)
+        }
+      #endif
       ToolbarItem(placement: .topBarTrailing) {
         Button {
           routerPath.presentedSheet = .listEdit(list: list)
@@ -169,9 +171,11 @@ struct TimelineTab: View {
         }
       }
     case .remoteLocal(let server, _):
-      if #available(iOS 26.0, *) {
-        ToolbarSpacer(placement: .topBarTrailing)
-      }
+      #if !os(visionOS)
+        if #available(iOS 26.0, *) {
+          ToolbarSpacer(placement: .topBarTrailing)
+        }
+      #endif
       ToolbarItem(placement: .topBarTrailing) {
         Menu {
           ForEach(RemoteTimelineFilter.allCases, id: \.self) { filter in

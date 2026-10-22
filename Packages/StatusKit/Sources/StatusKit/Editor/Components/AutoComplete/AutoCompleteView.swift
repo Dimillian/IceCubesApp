@@ -22,10 +22,14 @@ extension StatusEditor {
       if #available(iOS 26, *) {
         contentView
           .padding(.vertical, 8)
-          .glassEffect(
-            .regular.tint(theme.primaryBackgroundColor.opacity(0.2)),
-            in: RoundedRectangle(cornerRadius: 8)
-          )
+          #if os(visionOS)
+            .glassBackgroundEffect(in: RoundedRectangle(cornerRadius: 8))
+          #else
+            .glassEffect(
+              .regular.tint(theme.primaryBackgroundColor.opacity(0.2)),
+              in: RoundedRectangle(cornerRadius: 8)
+            )
+          #endif
           .padding(.horizontal, 16)
       } else {
         contentView

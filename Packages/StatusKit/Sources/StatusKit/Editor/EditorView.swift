@@ -207,15 +207,31 @@ extension StatusEditor {
       HStack(alignment: .center) {
         if #available(iOS 26.0, *) {
           LangButton(store: store)
-            .glassEffect(.regular.interactive())
+            #if os(visionOS)
+              .glassBackgroundEffect(in: .capsule)
+            #else
+              .glassEffect(.regular.interactive())
+            #endif
           pollButton
-            .glassEffect(.regular.interactive())
+            #if os(visionOS)
+              .glassBackgroundEffect(in: .capsule)
+            #else
+              .glassEffect(.regular.interactive())
+            #endif
           spoilerButton
-            .glassEffect(.regular.interactive())
+            #if os(visionOS)
+              .glassBackgroundEffect(in: .capsule)
+            #else
+              .glassEffect(.regular.interactive())
+            #endif
           Spacer()
           characterCount
             .padding(8)
-            .glassEffect(.regular.interactive())
+            #if os(visionOS)
+              .glassBackgroundEffect(in: .capsule)
+            #else
+              .glassEffect(.regular.interactive())
+            #endif
         } else {
           LangButton(store: store)
           pollButton

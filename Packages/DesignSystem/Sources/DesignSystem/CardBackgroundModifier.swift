@@ -7,10 +7,14 @@ private struct CardBackgroundModifier: ViewModifier {
 
   func body(content: Content) -> some View {
     if #available(iOS 26.0, *) {
-      content.glassEffect(
-        .regular.tint(theme.secondaryBackgroundColor).interactive(),
-        in: RoundedRectangle(cornerRadius: cornerRadius)
-      )
+      #if os(visionOS)
+        content.glassBackgroundEffect(in: RoundedRectangle(cornerRadius: cornerRadius))
+      #else
+        content.glassEffect(
+          .regular.tint(theme.secondaryBackgroundColor).interactive(),
+          in: RoundedRectangle(cornerRadius: cornerRadius)
+        )
+      #endif
     } else {
       content
         .background(

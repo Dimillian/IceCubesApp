@@ -196,6 +196,7 @@ extension StatusEditor {
       .scrollTargetLayout()
     }
 
+    #if !os(visionOS)
     @ViewBuilder
     private func bottomInset(focusedStore: EditorStore) -> some View {
       if presentationDetent == .large || presentationDetent == .medium {
@@ -234,6 +235,7 @@ extension StatusEditor {
         }
       }
     }
+    #endif
 
     private var mediaEditingRequest: Binding<MediaContainer?> {
       Binding {

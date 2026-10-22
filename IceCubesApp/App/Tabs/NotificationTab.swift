@@ -42,9 +42,11 @@ struct NotificationsTab: View {
             }
             .tint(.label)
           }
-          if #available(iOS 26.0, *) {
-            ToolbarSpacer(placement: .topBarTrailing)
-          }
+          #if !os(visionOS)
+            if #available(iOS 26.0, *) {
+              ToolbarSpacer(placement: .topBarTrailing)
+            }
+          #endif
           ToolbarTab(routerPath: $routerPath)
         }
         .id(client.id)

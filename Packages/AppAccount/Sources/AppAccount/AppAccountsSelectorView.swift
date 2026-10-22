@@ -166,7 +166,11 @@ public struct AppAccountsSelectorView: View {
             } label: {
               Text("action.done").bold()
             }
-            .buttonStyle(.glass)
+            #if os(visionOS)
+              .buttonStyle(.bordered)
+            #else
+              .buttonStyle(.glass)
+            #endif
           } else {
             Button {
               isPresented.toggle()

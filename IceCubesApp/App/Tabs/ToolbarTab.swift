@@ -61,8 +61,10 @@ struct ToolbarTab: ToolbarContent {
           .offset(x: -12)
       #endif
     }
-    .matchedTransitionSource(id: CurrentAccount.shared.account?.id ?? "", in: transition)
-    .sharedBackgroundVisibility(.hidden)
+    #if !os(visionOS)
+      .matchedTransitionSource(id: CurrentAccount.shared.account?.id ?? "", in: transition)
+      .sharedBackgroundVisibility(.hidden)
+    #endif
   }
 
   private var accountSelector: some View {

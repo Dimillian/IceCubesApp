@@ -35,10 +35,14 @@ private struct ToastView: View {
     if #available(iOS 26.0, *) {
       content
         .padding(12)
-        .glassEffect(
-          .regular.tint(toast.tint.opacity(0.05)).interactive(),
-          in: .rect(cornerRadius: 18)
-        )
+        #if os(visionOS)
+          .glassBackgroundEffect(in: .rect(cornerRadius: 18))
+        #else
+          .glassEffect(
+            .regular.tint(toast.tint.opacity(0.05)).interactive(),
+            in: .rect(cornerRadius: 18)
+          )
+        #endif
     } else {
       content
         .padding(12)

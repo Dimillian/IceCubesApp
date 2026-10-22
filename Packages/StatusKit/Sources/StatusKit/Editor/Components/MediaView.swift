@@ -250,7 +250,11 @@ extension StatusEditor {
             .font(.caption2)
             .padding(4)
         }
-        .buttonStyle(.glass)
+        #if os(visionOS)
+          .buttonStyle(.bordered)
+        #else
+          .buttonStyle(.glass)
+        #endif
         .padding()
       } else {
         Button {
@@ -276,7 +280,11 @@ extension StatusEditor {
             .font(.caption2)
             .padding(4)
         }
-        .buttonStyle(.glass)
+        #if os(visionOS)
+          .buttonStyle(.bordered)
+        #else
+          .buttonStyle(.glass)
+        #endif
         .padding()
       } else {
         Button(role: .destructive) {
