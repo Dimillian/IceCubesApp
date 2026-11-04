@@ -44,6 +44,17 @@ import SwiftUI
     currentClient = .init(server: defaultAccount.server, oauthToken: defaultAccount.oauthToken)
   }
 
+  /// Reads the Keychain again when no account was found at launch, for example
+  /// when the app was started before the device was unlocked after a reboot.
+  public func reloadAccountsIfNeeded() {
+    guard availableAccounts.isEmpty else { return }
+    let keychainAccounts = AppAccount.retrieveAll()
+    guard let lastAccount = keychainAccounts.last else { return }
+    availableAccounts = keychainAccounts
+    currentAccount =
+      keychainAccounts.first(where: { $0.id == Self.latestCurrentAccountKey }) ?? lastAccount
+  }
+
   public func add(account: AppAccount) {
     do {
       try account.save()

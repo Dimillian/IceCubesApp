@@ -59,6 +59,7 @@ struct IceCubesApp: App {
     case .background:
       watcher.stopWatching()
     case .active:
+      appAccountsManager.reloadAccountsIfNeeded()
       watcher.watch(streams: [.user, .direct])
       UNUserNotificationCenter.current().setBadgeCount(0)
       userPreferences.reloadNotificationsCount(
