@@ -6,12 +6,20 @@ import KeychainSwift
 import Models
 import NetworkClient
 import Notifications
+import os
 import UIKit
 import UserNotifications
 
 extension UNMutableNotificationContent: @unchecked @retroactive Sendable {}
 
 class NotificationService: UNNotificationServiceExtension {
+  private struct Pending: Sendable {
+    let contentHandler: @Sendable (UNNotificationContent) -> Void
+    let bestAttemptContent: UNMutableNotificationContent?
+  }
+
+  private let pending = OSAllocatedUnfairLock<Pending?>(initialState: nil)
+
   nonisolated override init() {
     super.init()
   }
@@ -26,11 +34,32 @@ class NotificationService: UNNotificationServiceExtension {
     let casted = unsafeBitCast(
       contentHandler,
       to: (@Sendable (UNNotificationContent) -> Void).self)
+    pending.withLock {
+      $0 = Pending(contentHandler: casted, bestAttemptContent: bestAttemptContent)
+    }
     Task {
       if let content = await provider.buildContent() {
-        casted(content)
+        deliver(content)
       }
     }
+  }
+
+  /// The system calls this just before it stops the extension. Deliver what has been
+  /// decrypted so far, otherwise the system shows the unencrypted fallback text.
+  nonisolated override func serviceExtensionTimeWillExpire() {
+    let bestAttemptContent = pending.withLock { $0?.bestAttemptContent }
+    if let bestAttemptContent {
+      deliver(bestAttemptContent)
+    }
+  }
+
+  /// Calls the content handler at most once.
+  private nonisolated func deliver(_ content: UNNotificationContent) {
+    let contentHandler = pending.withLock { state in
+      defer { state = nil }
+      return state?.contentHandler
+    }
+    contentHandler?(content)
   }
 }
 
@@ -146,6 +175,7 @@ actor NotificationServiceContentProvider {
               }
             }
           }
+          return bestAttemptContent
         } else {
           return bestAttemptContent
         }
