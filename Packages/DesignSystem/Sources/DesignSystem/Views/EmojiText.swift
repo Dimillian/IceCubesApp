@@ -6,6 +6,13 @@ import SwiftUI
 
 @MainActor
 public struct EmojiTextApp: View {
+  /// Above this many custom emoji in one text, the emoji are shown as their shortcodes.
+  /// Every inline emoji image adds levels of Text concatenation that SwiftUI resolves
+  /// recursively, and a post with a few hundred emoji overflows the main thread stack
+  /// on device. The crash starts between 300 and 350 emoji with the 1 MB stack of an
+  /// iPhone, so this keeps a wide margin.
+  private static let maxInlineEmojis = 100
+
   private let markdown: HTMLString
   private let emojis: [any CustomEmoji]
   private let language: String?
@@ -17,7 +24,11 @@ public struct EmojiTextApp: View {
     append: (@Sendable () -> Text)? = nil
   ) {
     self.markdown = markdown
-    self.emojis = emojis.map { RemoteEmoji(shortcode: $0.shortcode, url: $0.url) }
+    if Self.emojiCount(in: markdown.asMarkdown, emojis: emojis) > Self.maxInlineEmojis {
+      self.emojis = []
+    } else {
+      self.emojis = emojis.map { RemoteEmoji(shortcode: $0.shortcode, url: $0.url) }
+    }
     self.language = language
     self.lineLimit = lineLimit
     self.append = append
@@ -39,6 +50,17 @@ public struct EmojiTextApp: View {
         .lineLimit(lineLimit)
         .environment(\.layoutDirection, isRTL() ? .rightToLeft : .leftToRight)
     }
+  }
+
+  private static func emojiCount(in markdown: String, emojis: [Emoji]) -> Int {
+    var count = 0
+    for emoji in emojis {
+      count += markdown.components(separatedBy: ":\(emoji.shortcode):").count - 1
+      if count > maxInlineEmojis {
+        break
+      }
+    }
+    return count
   }
 
   private func isRTL() -> Bool {
