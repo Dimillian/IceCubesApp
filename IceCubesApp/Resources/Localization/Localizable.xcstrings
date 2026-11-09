@@ -345,6 +345,12 @@
             "value" : "%@"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -775,6 +781,12 @@
             "value" : "%@ è stato pubblicato su Mastodon"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "「%@」をMastodonに投稿しました"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -949,6 +961,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "%lld."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld. "
           }
         },
         "ko" : {
@@ -8873,12 +8891,6 @@
         "ja" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld 件の新しい投稿"
-                }
-              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -9088,6 +9100,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Account"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アカウント"
           }
         },
         "ko" : {
@@ -11806,8 +11824,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Blocked accounts"
+            "state" : "translated",
+            "value" : "ブロックしたアカウント"
           }
         },
         "ko" : {
@@ -11985,6 +12003,41 @@
         }
       }
     },
+    "account.detail.collections-n-accounts %lld" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld account"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld accounts"
+                }
+              }
+            }
+          }
+        },
+        "ja" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld アカウント"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "account.detail.familiar-followers" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -12100,29 +12153,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "其他跟隨者"
-          }
-        }
-      }
-    },
-    "account.detail.collections-n-accounts %lld" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld account"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld accounts"
-                }
-              }
-            }
           }
         }
       }
@@ -12295,12 +12325,6 @@
         "ja" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld 投稿"
-                }
-              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -12648,12 +12672,6 @@
         "ja" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld カラム"
-                }
-              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -13705,6 +13723,12 @@
             "value" : "Elimina avatar"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アバターを削除"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14262,6 +14286,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Elimina copertina"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ヘッダーを削除"
           }
         },
         "ko" : {
@@ -17839,8 +17869,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Muted accounts"
+            "state" : "translated",
+            "value" : "ミュートしたアカウント"
           }
         },
         "ko" : {
@@ -17905,16 +17935,16 @@
         "be" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Замацаваны допіс"
-                }
-              },
               "few" : {
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld замацаваныя допісы"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Замацаваны допіс"
                 }
               },
               "other" : {
@@ -18133,16 +18163,16 @@
         "pl" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Przypięty post"
-                }
-              },
               "few" : {
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld przypięte posty"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Przypięty post"
                 }
               },
               "other" : {
@@ -18193,16 +18223,16 @@
         "uk" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "Закріплений допис"
-                }
-              },
               "few" : {
                 "stringUnit" : {
                   "state" : "translated",
                   "value" : "%lld закріплені дописи"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Закріплений допис"
                 }
               },
               "other" : {
@@ -20869,6 +20899,12 @@
             "value" : "Aggiunge i tasti @ e # alla tastiera per scrivere menzioni e hashtag più velocemente."
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画面上のキーボードに「@」キーと「#」キーを追加して、メンションやハッシュタグをすばやく入力できるようにします。"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21145,6 +21181,12 @@
             "value" : "Testo alternativo per l’immagine"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像の注釈"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21201,6 +21243,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Si è verificato un errore durante la pubblicazione su Mastodon, riprova."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonへの投稿中にエラーが発生しました。もう一度お試しください。"
           }
         },
         "ko" : {
@@ -21271,6 +21319,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Versioni API"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "APIバージョン"
           }
         },
         "ko" : {
@@ -21451,6 +21505,12 @@
             "value" : "AccountApp"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アカウント"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21527,6 +21587,12 @@
             "value" : "Segnalibri"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ブックマーク"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21597,6 +21663,12 @@
             "value" : "Comportamento tasto Reblog"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ブーストボタンの動作"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21647,6 +21719,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descrizione"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本文"
           }
         },
         "ko" : {
@@ -21701,6 +21779,12 @@
             "value" : "Descrizione del post"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投稿の本文"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21751,6 +21835,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Layout compatto"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コンパクト表示"
           }
         },
         "ko" : {
@@ -21823,6 +21913,12 @@
             "value" : "Componi un post"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投稿を作成する"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21893,6 +21989,12 @@
             "value" : "Componi un post per Mastodon"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonに投稿を作成する"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -21961,6 +22063,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Contenuto del post da inviare a Mastodon"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonに送信する投稿の本文"
           }
         },
         "ko" : {
@@ -23574,6 +23682,12 @@
             "value" : "Impossibile raggiungere DeepL! La chiave API è corretta?"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepLに接続できませんでした。\nAPIキーが正しいことを確認してください。"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -23642,6 +23756,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descrizioni (ALT) per l’immagine in ordine"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像の説明（注釈）を順番に記述してください"
           }
         },
         "ko" : {
@@ -28071,6 +28191,12 @@
             "value" : "Errore: %@"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "エラー：%@"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -28127,6 +28253,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Esplora e tendenze"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "探索"
           }
         },
         "ko" : {
@@ -30229,6 +30361,12 @@
             "value" : "Preferiti"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "お気に入り"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30297,6 +30435,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Richieste di funzionalità"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "機能リクエスト"
           }
         },
         "ko" : {
@@ -30369,6 +30513,12 @@
             "value" : "Timeline federata"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "連合タイムライン"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -30431,6 +30581,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Carica tutti i nuovi post delle timeline (fino a 800) invece che solo gli ultimi 40 + i restanti manualmente."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最新の40件だけを取得して、残りを手動で読み込む代わりに、すべての新着投稿(最大800件)を取得します。"
           }
         },
         "pl" : {
@@ -32741,6 +32897,12 @@
             "value" : "Tag seguiti"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フォローしたタグ"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32817,6 +32979,12 @@
             "value" : "Solo seguaci"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フォロワーのみ"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32881,6 +33049,12 @@
             "value" : "Caricamento completo timeline"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タイムライン全体を取得"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -32925,6 +33099,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Home"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ホームタイムライン"
           }
         },
         "ko" : {
@@ -33003,6 +33183,12 @@
             "value" : "Immagine"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33073,6 +33259,12 @@
             "value" : "Descrizione immagine"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像の説明"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33123,6 +33315,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Descrizioni immagine"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像の説明"
           }
         },
         "ko" : {
@@ -33181,6 +33379,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Immagine da pubblicare su Mastodon"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonに投稿する画像"
           }
         },
         "ko" : {
@@ -33247,6 +33451,12 @@
             "value" : "Immagine(i) da pubblicare su Mastodon"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonに投稿する画像"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -33297,6 +33507,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Immagini"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像"
           }
         },
         "ko" : {
@@ -33356,6 +33572,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Istanza"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "インスタンス"
           }
         },
         "ko" : {
@@ -33426,6 +33648,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Amministratore istanza"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "インスタンス管理者"
           }
         },
         "ko" : {
@@ -35025,6 +35253,12 @@
             "value" : "Può comunque essere usato come alternativa al servizio di traduzione della tua istanza."
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "インスタンスの翻訳サービスの代替手段としては、引き続き利用可能です。"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35083,6 +35317,12 @@
             "value" : "Mantiene la home aggiornata in tempo reale utilizzando lo streaming quando disponibile. Disattiva in caso di problemi di prestazioni."
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ストリーミング機能が利用可能なインスタンスの場合は、ホームタイムラインを最新の状態に保ちます。パフォーマンスに問題がある場合は、この機能を無効にしてください。"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -35128,6 +35368,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chiave"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キー"
           }
         },
         "ko" : {
@@ -35234,7 +35480,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hide these posts from home"
+            "value" : "これらの投稿をホームに表示しない"
           }
         },
         "ko" : {
@@ -35353,7 +35599,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Show replies to"
+            "value" : "返信の表示範囲"
           }
         },
         "ko" : {
@@ -35472,7 +35718,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Title"
+            "value" : "タイトル"
           }
         },
         "ko" : {
@@ -35591,7 +35837,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Any followed user"
+            "value" : "フォロー中のユーザー全員"
           }
         },
         "ko" : {
@@ -35710,7 +35956,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Members of the list"
+            "value" : "リストのメンバー"
           }
         },
         "ko" : {
@@ -35829,7 +36075,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No one"
+            "value" : "表示しない"
           }
         },
         "ko" : {
@@ -35918,6 +36164,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Liste"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "リスト"
           }
         },
         "ko" : {
@@ -36949,6 +37201,12 @@
             "value" : "Timeline locale"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ローカルタイムライン"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37023,6 +37281,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Menzioni"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "返信"
           }
         },
         "ko" : {
@@ -37917,6 +38181,12 @@
             "value" : "Statistiche"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "統計"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37955,6 +38225,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Utenti attivi mensili"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "月間アクティブユーザー数"
           }
         },
         "ko" : {
@@ -38013,6 +38289,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nuovo post"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新しい投稿"
           }
         },
         "ko" : {
@@ -38085,6 +38367,12 @@
             "value" : "Non è stata fornita un’immagine da pubblicare."
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投稿する画像がありません。"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38141,6 +38429,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Notifiche"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知"
           }
         },
         "ko" : {
@@ -38561,6 +38855,12 @@
             "value" : "Account moderati"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モデレーションされたアカウント"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38606,6 +38906,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Limitati dai moderatori dei server"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サーバーのモデレーターにより制限されています"
           }
         },
         "pl" : {
@@ -38681,8 +38987,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "New accounts"
+            "state" : "translated",
+            "value" : "新しいアカウント"
           }
         },
         "ko" : {
@@ -38774,6 +39080,12 @@
             "value" : "Creati negli ultimi 30 giorni"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "作成から30日以内のアカウント"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -38847,8 +39159,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People not following you"
+            "state" : "translated",
+            "value" : "フォローされていないアカウント"
           }
         },
         "ko" : {
@@ -38940,6 +39252,12 @@
             "value" : "E che ti seguono da meno di 3 giorni"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "および、フォローされてから3日未満のアカウント"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39013,8 +39331,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "People you don't follow"
+            "state" : "translated",
+            "value" : "フォローしていないアカウント"
           }
         },
         "ko" : {
@@ -39106,6 +39424,12 @@
             "value" : "Finché non li approvi manualmente"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知を手動で受け入れていないアカウント"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39179,8 +39503,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Unsolicited private mentions"
+            "state" : "translated",
+            "value" : "一方的な非公開メンション"
           }
         },
         "ko" : {
@@ -39272,6 +39596,12 @@
             "value" : "A meno che non sia una risposta a una tua menzione o se segui il mittente"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自分のメンションへの返信以外で、フォローしていない相手からのもの"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39345,8 +39675,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filtered notifications"
+            "state" : "translated",
+            "value" : "フィルターされた通知"
           }
         },
         "ko" : {
@@ -39438,6 +39768,12 @@
             "value" : "Seleziona"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "選択"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -39483,6 +39819,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Seleziona tutto"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全て選択"
           }
         },
         "pl" : {
@@ -39558,8 +39900,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Notifications Filter"
+            "state" : "translated",
+            "value" : "通知フィルター"
           }
         },
         "ko" : {
@@ -39677,8 +40019,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Filter out notifications from…"
+            "state" : "translated",
+            "value" : "通知のフィルター対象"
           }
         },
         "ko" : {
@@ -40222,6 +40564,12 @@
             "state" : "translated",
             "value" : "added you to a collection"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "あなたをコレクションに追加しました"
+          }
         }
       }
     },
@@ -40232,6 +40580,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "👥 Added you to a collection: "
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "👥 コレクションに追加しました："
           }
         }
       }
@@ -40244,6 +40598,12 @@
             "state" : "translated",
             "value" : "updated a collection you're in"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "あなたを含むコレクションを更新しました"
+          }
         }
       }
     },
@@ -40254,6 +40614,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "👥 Updated a collection: "
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "👥 コレクションを更新しました："
           }
         }
       }
@@ -42387,6 +42753,12 @@
             "state" : "translated",
             "value" : "Added to collection"
           }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コレクションに追加しました"
+          }
         }
       }
     },
@@ -42397,6 +42769,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Collection updated"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "コレクションが更新されました"
           }
         }
       }
@@ -43056,7 +43434,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Quote"
+            "value" : "引用"
           }
         },
         "ko" : {
@@ -43175,7 +43553,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Updated quote"
+            "value" : "更新された引用"
           }
         },
         "ko" : {
@@ -43980,6 +44358,12 @@
             "value" : "Apri Ice Cubes"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ice Cubesを開く"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44056,6 +44440,12 @@
             "value" : "Apri in un pannello"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タブを開く"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44130,6 +44520,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apri l'app in un pannello specifico"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アプリを特定のタブで開く"
           }
         },
         "ko" : {
@@ -44444,6 +44840,12 @@
             "value" : "Pubblica un post con un’immagine"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像付きの投稿を作成"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44518,6 +44920,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pubblica un'immagine su Mastodon"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonに画像付きの投稿を作成する"
           }
         },
         "ko" : {
@@ -44596,6 +45004,12 @@
             "value" : "Contenuto post"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投稿の本文"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44664,6 +45078,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visibilità post"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投稿の公開範囲"
           }
         },
         "ko" : {
@@ -44736,6 +45156,12 @@
             "value" : "%lld immagine(i) pubblicate su Mastodon"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonに%lld枚の画像を投稿しました"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -44786,6 +45212,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Politica sulla privacy"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライバシーポリシー"
           }
         },
         "ko" : {
@@ -44856,6 +45288,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Privato"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "指定された相手のみ"
           }
         },
         "ko" : {
@@ -44934,6 +45372,12 @@
             "value" : "Messaggi privati"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライベートメッセージ"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45008,6 +45452,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profilo"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プロフィール"
           }
         },
         "ko" : {
@@ -45086,6 +45536,12 @@
             "value" : "Pubblico"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "公開"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45162,6 +45618,12 @@
             "value" : "Pubblico silenzioso"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未収載"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45230,6 +45692,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rimuovi tutti i video e le immagini dalla cache"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キャッシュされた画像と動画をすべて削除する"
           }
         },
         "ko" : {
@@ -45776,6 +46244,12 @@
             "value" : "Pannello selezionato"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "選択するタブ"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45850,6 +46324,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Invia un post"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投稿する"
           }
         },
         "ko" : {
@@ -45928,6 +46408,12 @@
             "value" : "Invia un post di testo a Mastodon con Ice Cubes"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ice CubesでMastodonにテキストを投稿する"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -45992,6 +46478,12 @@
             "value" : "Invia una o più immagini a Mastodon con Ice Cubes senza aprire l’app"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アプリを開かずに、Ice CubesでMastodonに画像を投稿する"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -46044,6 +46536,12 @@
             "value" : "Invia immagine(i) (background)"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "画像を投稿する(バックグラウンド)"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -46094,6 +46592,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Invia immagine(i) a Mastodon"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonに画像を投稿する"
           }
         },
         "ko" : {
@@ -46152,6 +46656,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Invia post a Mastodon"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonに投稿する"
           }
         },
         "ko" : {
@@ -46222,6 +46732,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impostazione"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "設定"
           }
         },
         "ko" : {
@@ -46800,7 +47316,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "キャッシュしているポスト: %@"
+            "value" : "キャッシュしている投稿: %@"
           }
         },
         "ko" : {
@@ -49398,7 +49914,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Require Alt Text to Post"
+            "value" : "投稿に注釈の入力を必須とする"
           }
         },
         "ko" : {
@@ -50310,6 +50826,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Avatar e copertine animati"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アバターとヘッダーのアニメーション"
           }
         },
         "pl" : {
@@ -56598,6 +57120,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Abilita emoji animate"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アニメーション絵文字を有効にする"
           }
         },
         "pl" : {
@@ -64232,7 +64760,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fifth Tab"
+            "value" : "5番目のタブ"
           }
         },
         "ko" : {
@@ -64350,7 +64878,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "First Tab"
+            "value" : "1番目のタブ"
           }
         },
         "ko" : {
@@ -64468,7 +64996,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Fourth Tab"
+            "value" : "4番目のタブ"
           }
         },
         "ko" : {
@@ -64586,7 +65114,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Second Tab"
+            "value" : "2番目のタブ"
           }
         },
         "ko" : {
@@ -64704,7 +65232,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Third Tab"
+            "value" : "3番目のタブ"
           }
         },
         "ko" : {
@@ -73622,7 +74150,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Your settings require alt text on all media before posting"
+            "value" : "設定により、投稿前にすべてのメディアに注釈を指定する必要があります"
           }
         },
         "ko" : {
@@ -75753,12 +76281,6 @@
         "ja" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld 投票"
-                }
-              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -78693,12 +79215,6 @@
         "ja" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld ブースト"
-                }
-              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -79046,12 +79562,6 @@
         "ja" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld お気に入り"
-                }
-              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -79324,6 +79834,18 @@
             }
           }
         },
+        "ja" : {
+          "variations" : {
+            "plural" : {
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld 引用"
+                }
+              }
+            }
+          }
+        },
         "ko" : {
           "variations" : {
             "plural" : {
@@ -79566,12 +80088,6 @@
         "ja" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld 件の返信"
-                }
-              },
               "other" : {
                 "stringUnit" : {
                   "state" : "translated",
@@ -80247,6 +80763,12 @@
             "value" : "Streaming della Home"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ホームタイムラインをストリーミングする"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -80303,6 +80825,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Pannello"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タブ"
           }
         },
         "ko" : {
@@ -81817,15 +82345,9 @@
         "ja" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "返信：%lld"
-                }
-              },
               "other" : {
                 "stringUnit" : {
-                  "state" : "translated",
+                  "state" : "needs_review",
                   "value" : "返信：%lld"
                 }
               }
@@ -82028,6 +82550,12 @@
             "value" : "Telemetria"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "利用状況の収集"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -82090,6 +82618,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Telemetria di TelemetryDeck"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "TelemetryDeckによる利用状況データの収集"
           }
         },
         "ko" : {
@@ -82161,6 +82695,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "La chiave API DeepL è ancora salvata!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "DeepL APIキーがまだ保存されています。"
           }
         },
         "ko" : {
@@ -82238,6 +82778,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile raggiungere il servizio di traduzione della tua istanza!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "インスタンスの翻訳サービスに接続できませんでした。"
           }
         },
         "ko" : {
@@ -83830,6 +84376,12 @@
             "value" : "Cacher les publications des robots"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ボットからの投稿を非表示"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -83908,8 +84460,8 @@
         },
         "ja" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hide posts with media"
+            "state" : "translated",
+            "value" : "メディア付きの投稿を非表示"
           }
         },
         "ko" : {
@@ -86462,6 +87014,12 @@
             "value" : "FiltroTimeline"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "タイムラインフィルター"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86539,6 +87097,12 @@
             "value" : "Salvato nelle bozze"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下書きに保存しました"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86590,6 +87154,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Post inviato"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投稿を送信しました"
           }
         },
         "pl" : {
@@ -86645,6 +87215,12 @@
             "value" : "Pubblicazione"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投稿を送信中"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86696,6 +87272,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Impossibile eliminare il post"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投稿を削除できませんでした"
           }
         },
         "pl" : {
@@ -86751,6 +87333,12 @@
             "value" : "Post eliminato"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投稿を削除しました"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86804,6 +87392,12 @@
             "value" : "Elimino post"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投稿を削除中"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86855,6 +87449,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Servizio di traduzione"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "翻訳サービス"
           }
         },
         "ko" : {
@@ -86933,6 +87533,12 @@
             "value" : "Link in tendenza"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "人気のリンク"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -87007,6 +87613,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Timeline in tendenza"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "トレンドタイムライン"
           }
         },
         "ko" : {
@@ -87215,16 +87827,10 @@
         "ja" : {
           "variations" : {
             "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld people talking"
-                }
-              },
               "other" : {
                 "stringUnit" : {
-                  "state" : "needs_review",
-                  "value" : "%lld people talking"
+                  "state" : "translated",
+                  "value" : "%lld人が投稿"
                 }
               }
             }
@@ -87432,6 +88038,12 @@
             "value" : "Tronca contenuto post"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ステータスの内容を切り詰める"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -87488,6 +88100,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Usa Ice Cubes per comporre un post per Mastodon"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonの投稿を作成する際、Ice Cubesを使用する"
           }
         },
         "ko" : {
@@ -87560,6 +88178,12 @@
             "value" : "Usa Ice Cubes per comporre un post con un'immagine per Mastodon"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mastodonの画像付きの投稿を作成する際、Ice Cubesを使用する"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -87622,6 +88246,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Visibilità"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "可視性"
           }
         },
         "ko" : {
@@ -87700,6 +88330,12 @@
             "value" : "Visibilità del post"
           }
         },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "投稿の可視性"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -87745,5 +88381,5 @@
       }
     }
   },
-  "version" : "1.0"
+  "version" : "1.3"
 }
