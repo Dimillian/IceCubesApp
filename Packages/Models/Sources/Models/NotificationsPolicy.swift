@@ -1,8 +1,20 @@
 import Foundation
+import SwiftUI
 
 public struct NotificationsPolicy: Codable, Sendable {
   public enum Policy: String, Codable, Sendable, CaseIterable, Hashable {
     case accept, filter, drop
+
+    public var localized: LocalizedStringKey {
+      switch self {
+      case .accept:
+        "Accept"
+      case .filter:
+        "Filter"
+      case .drop:
+        "Drop"
+      }
+    }
   }
 
   public var forNotFollowing: Policy

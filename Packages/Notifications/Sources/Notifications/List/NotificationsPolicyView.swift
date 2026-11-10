@@ -126,7 +126,7 @@ struct NotificationsPolicyView: View {
 
   private var pickerMenu: some View {
     ForEach(NotificationsPolicy.Policy.allCases, id: \.self) { policy in
-      Text(policy.rawValue.capitalized)
+      Text(policy.localized)
     }
   }
 
