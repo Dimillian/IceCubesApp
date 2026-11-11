@@ -14,7 +14,9 @@ import UniformTypeIdentifiers
 // Sample code was sending this from a thread to another, let asume @Sendable for this
 extension NSExtensionContext: @unchecked @retroactive Sendable {}
 
-final class ActionRequestHandler: NSObject, NSExtensionRequestHandling, Sendable {
+// The system creates the handler off the main thread, so it must not inherit the
+// target's default main actor isolation.
+nonisolated final class ActionRequestHandler: NSObject, NSExtensionRequestHandling, Sendable {
   enum Error: Swift.Error {
     case inputProviderNotFound
     case loadedItemHasWrongType
