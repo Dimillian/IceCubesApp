@@ -20,7 +20,7 @@ struct AccountFieldsView: View {
         .accessibilityLabel("accessibility.tabs.profile.fields.container.label")
         #if os(visionOS)
           .background(Material.thick)
-          .cornerRadius(4)
+          .clipShape(RoundedRectangle(cornerRadius: 4))
           .overlay(
             RoundedRectangle(cornerRadius: 4)
               .stroke(.gray.opacity(0.35), lineWidth: 1)
@@ -39,7 +39,7 @@ struct AccountFieldsView: View {
         #else
           .background(theme.secondaryBackgroundColor)
         #endif
-        .cornerRadius(4)
+        .clipShape(RoundedRectangle(cornerRadius: 4))
         .overlay(
           RoundedRectangle(cornerRadius: 4)
             .stroke(.gray.opacity(0.35), lineWidth: 1)
@@ -60,13 +60,13 @@ struct AccountFieldsView: View {
             HStack {
               if field.verifiedAt != nil {
                 Image(systemName: "checkmark.seal")
-                  .foregroundColor(Color.green.opacity(0.80))
+                  .foregroundStyle(Color.green.opacity(0.80))
                   .accessibilityHidden(true)
               }
               EmojiTextApp(field.value, emojis: account.emojis)
                 .emojiText.size(Font.scaledBodyFont.emojiSize)
                 .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
-                .foregroundColor(theme.tintColor)
+                .foregroundStyle(theme.tintColor)
                 .environment(
                   \.openURL,
                   OpenURLAction { url in

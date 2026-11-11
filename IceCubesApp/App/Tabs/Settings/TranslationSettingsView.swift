@@ -26,7 +26,7 @@ struct TranslationSettingsView: View {
           Section {
             Link(destination: URL(string: "https://www.deepl.com/pro-api")!) {
               Text("settings.translation.needed-message")
-                .foregroundColor(.red)
+                .foregroundStyle(.red)
             }
           }
           #if !os(visionOS)

@@ -43,7 +43,7 @@ struct AccountInfoView: View {
     HStack(alignment: .center, spacing: 2) {
       EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
         .font(.scaledHeadline)
-        .foregroundColor(theme.labelColor)
+        .foregroundStyle(theme.labelColor)
         .emojiText.size(Font.scaledHeadlineFont.emojiSize)
         .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
         .accessibilityAddTraits(.isHeader)
@@ -91,7 +91,7 @@ struct AccountInfoView: View {
         routerPath.navigate(to: .accountDetailWithAccount(account: movedTo))
       }
       .font(.scaledCallout)
-      .foregroundColor(.accentColor)
+      .foregroundStyle(Color.accentColor)
     }
   }
   
@@ -133,7 +133,7 @@ struct AccountInfoView: View {
           #if !os(visionOS)
             .background(theme.secondaryBackgroundColor)
           #endif
-          .cornerRadius(4)
+          .clipShape(RoundedRectangle(cornerRadius: 4))
           .overlay(
             RoundedRectangle(cornerRadius: 4)
               .stroke(.gray.opacity(0.35), lineWidth: 1)
@@ -145,7 +145,7 @@ struct AccountInfoView: View {
   private var accountBioView: some View {
     EmojiTextApp(account.note, emojis: account.emojis)
       .font(.scaledBody)
-      .foregroundColor(theme.labelColor)
+      .foregroundStyle(theme.labelColor)
       .emojiText.size(Font.scaledBodyFont.emojiSize)
       .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
       .padding(.top, 8)

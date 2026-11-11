@@ -48,7 +48,7 @@ extension StatusEditor {
         .frame(width: 32)
         .padding(16)
         .glassBackgroundEffect()
-        .cornerRadius(8)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
         .padding(.trailing, 78)
       #else
         if #available(iOS 26, *) {

@@ -33,7 +33,7 @@ extension StatusEditor {
     }
 
     var body: some ToolbarContent {
-      ToolbarItem(placement: .navigationBarTrailing) {
+      ToolbarItem(placement: .topBarTrailing) {
         Button {
           isDraftsSheetDisplayed = true
         } label: {
@@ -52,20 +52,20 @@ extension StatusEditor {
 
       if #available(iOS 26, *) {
         ToolbarSpacer(placement: .topBarTrailing)
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .topBarTrailing) {
           sendButton
             .buttonStyle(.glassProminent)
             .tint(theme.tintColor)
         }
       } else {
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .topBarTrailing) {
           sendButton
             .buttonStyle(.borderedProminent)
             .tint(theme.tintColor)
         }
       }
 
-      ToolbarItem(placement: .navigationBarLeading) {
+      ToolbarItem(placement: .topBarLeading) {
         Button {
           if mainStore.shouldDisplayDismissWarning {
             isDismissAlertPresented = true

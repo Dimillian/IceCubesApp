@@ -13,7 +13,7 @@ extension TextView {
   ///
   ///     TextView($text)
   ///         .placeholder("placeholder") { view in
-  ///             view.foregroundColor(.red)
+  ///             view.foregroundStyle(.red)
   ///         }
   public func placeholder(_ placeholder: String, _ configure: (Text) -> some View) -> TextView {
     var view = self

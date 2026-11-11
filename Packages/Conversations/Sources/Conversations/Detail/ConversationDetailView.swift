@@ -88,7 +88,7 @@ public struct ConversationDetailView: View {
           {
             EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
               .font(.scaledHeadline)
-              .foregroundColor(theme.labelColor)
+              .foregroundStyle(theme.labelColor)
               .emojiText.size(Font.scaledHeadlineFont.emojiSize)
               .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
           } else {

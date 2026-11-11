@@ -39,7 +39,7 @@ struct StatusRowShareAsImageView: View {
       }
       .scrollContentBackground(.hidden)
       .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .topBarTrailing) {
           Button {
             dismiss()
           } label: {

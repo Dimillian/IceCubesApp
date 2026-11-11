@@ -165,7 +165,7 @@ private struct MediaPreview: View {
         height: imageMaxHeight
       )
       .clipped()
-      .cornerRadius(10)
+      .clipShape(RoundedRectangle(cornerRadius: 10))
       // #965: do not create overlapping tappable areas, when multiple images are shown
       .contentShape(Rectangle())
       .accessibilityElement(children: .ignore)
@@ -193,7 +193,7 @@ struct BlurOverLay: View {
     if hasOverlay {
       ZStack {
         Rectangle()
-          .foregroundColor(.clear)
+          .foregroundStyle(.clear)
           .background(.ultraThinMaterial)
           .frame(
             width: isFrameExpanded ? nil : 0,
@@ -221,14 +221,14 @@ struct BlurOverLay: View {
                   .matchedGeometryEffect(id: "eye", in: buttonSpace)
               }
               .lineLimit(1)
-              .foregroundColor(theme.contrastingTintColor)
+              .foregroundStyle(theme.contrastingTintColor)
             } else {
               Image(systemName: "eye.slash")
                 .transition(.opacity)
                 .matchedGeometryEffect(id: "eye", in: buttonSpace)
             }
           }
-          .foregroundColor(theme.labelColor)
+          .foregroundStyle(theme.labelColor)
           .buttonStyle(.borderedProminent)
           .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
         }
@@ -294,7 +294,7 @@ struct AltTextButton: View {
       #if os(visionOS)
         .clipShape(Capsule())
       #endif
-      .cornerRadius(4)
+      .clipShape(RoundedRectangle(cornerRadius: 4))
       .padding(theme.statusDisplayStyle == .compact ? 0 : 10)
       .alert(
         "status.editor.media.image-description",
@@ -475,7 +475,7 @@ private struct FeaturedImagePreView: View {
         )
       }
       .clipped()
-      .cornerRadius(10)
+      .clipShape(RoundedRectangle(cornerRadius: 10))
     }
   }
 

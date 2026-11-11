@@ -34,7 +34,7 @@ extension StatusEditor {
                       Rectangle()
                         .fill(Color.gray)
                         .frame(width: 40, height: 40)
-                        .accessibility(hidden: true)
+                        .accessibilityHidden(true)
                     }
                   }
                   .onTapGesture {

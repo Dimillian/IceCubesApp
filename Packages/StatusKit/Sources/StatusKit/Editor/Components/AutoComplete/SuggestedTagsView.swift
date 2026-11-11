@@ -54,7 +54,7 @@ extension StatusEditor.AutoCompleteView {
             Text(tag)
               .font(.scaledFootnote)
               .fontWeight(.bold)
-              .foregroundColor(theme.labelColor)
+              .foregroundStyle(theme.labelColor)
           }
         }
       case .error:

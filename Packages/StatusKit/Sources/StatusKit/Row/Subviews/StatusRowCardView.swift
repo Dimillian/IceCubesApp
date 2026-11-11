@@ -85,7 +85,7 @@ public struct StatusRowCardView: View {
         #else
           .background(isCompact ? .clear : theme.secondaryBackgroundColor)
         #endif
-        .cornerRadius(isCompact ? 0 : 10)
+        .clipShape(RoundedRectangle(cornerRadius: isCompact ? 0 : 10))
         .overlay {
           if !isCompact {
             RoundedRectangle(cornerRadius: 10)
@@ -136,7 +136,7 @@ public struct StatusRowCardView: View {
       }
       Text(url.host() ?? url.absoluteString)
         .font(.scaledFootnote)
-        .foregroundColor(theme.tintColor)
+        .foregroundStyle(theme.tintColor)
         .lineLimit(1)
       if let account = card.authors?.first?.account {
         moreFromAccountView(account)
@@ -183,7 +183,7 @@ public struct StatusRowCardView: View {
           }
           Text(card.providerName ?? url.host() ?? url.absoluteString)
             .font(.scaledFootnote)
-            .foregroundColor(theme.tintColor)
+            .foregroundStyle(theme.tintColor)
             .lineLimit(1)
         }
         Text(title)
@@ -271,7 +271,7 @@ public struct StatusRowCardView: View {
         }
         Text(url.host() ?? url.absoluteString)
           .font(.scaledFootnote)
-          .foregroundColor(theme.tintColor)
+          .foregroundStyle(theme.tintColor)
           .lineLimit(1)
       }.padding(16)
     }

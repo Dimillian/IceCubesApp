@@ -35,7 +35,7 @@ struct SuggestedAccountsSection: View {
       }
       NavigationLink(value: RouterDestination.accountsList(accounts: suggestedAccounts)) {
         Text("see-more")
-          .foregroundColor(theme.tintColor)
+          .foregroundStyle(theme.tintColor)
       }
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)

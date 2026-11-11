@@ -4,7 +4,7 @@ extension TextView {
   struct Representable: UIViewControllerRepresentable {
     @Binding var text: NSMutableAttributedString
     @Binding var calculatedHeight: CGFloat
-    @Environment(\.sizeCategory) var sizeCategory
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
 
     let keyboard: UIKeyboardType
     var getTextView: ((UITextView) -> Void)?
@@ -25,7 +25,7 @@ extension TextView {
       Coordinator(
         text: $text,
         calculatedHeight: $calculatedHeight,
-        sizeCategory: sizeCategory,
+        dynamicTypeSize: dynamicTypeSize,
         getTextView: getTextView
       )
     }

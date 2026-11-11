@@ -38,7 +38,7 @@ public struct ReportView: View {
         .scrollDismissesKeyboard(.immediately)
       #endif
       .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .topBarTrailing) {
           Button {
             isSendingReport = true
             Task {

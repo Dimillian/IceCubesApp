@@ -180,7 +180,7 @@ public struct AccountDetailView: View {
         )
       }
     )
-    .edgesIgnoringSafeArea(.top)
+    .ignoresSafeArea(edges: .top)
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       switch viewState {

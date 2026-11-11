@@ -53,7 +53,7 @@ struct AppView: View {
         appAccountsManager.currentClient.isAuth,
         userPreferences.showiPadSecondaryColumn
       {
-        Divider().edgesIgnoringSafeArea(.all)
+        Divider().ignoresSafeArea(edges: .all)
         notificationsSecondaryColumn
       }
     }

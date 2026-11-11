@@ -85,7 +85,7 @@ public struct AppAccountView: View {
                 Circle()
                   .fill(.red)
                 Text(notificationsCount > 99 ? "99+" : String(notificationsCount))
-                  .foregroundColor(.white)
+                  .foregroundStyle(.white)
                   .font(.system(size: 9))
               }
               .frame(width: 20, height: 20)
@@ -102,7 +102,7 @@ public struct AppAccountView: View {
         VStack(alignment: .leading) {
           if let account = viewModel.account {
             EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
-              .foregroundColor(theme.labelColor)
+              .foregroundStyle(theme.labelColor)
             Text("\(account.username)@\(viewModel.appAccount.server)")
               .font(.scaledSubheadline)
               .emojiText.size(Font.scaledSubheadlineFont.emojiSize)

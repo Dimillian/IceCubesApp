@@ -15,7 +15,7 @@ struct StatusActionButtonStyle: ButtonStyle {
 
   func makeBody(configuration: Configuration) -> some View {
     configuration.label
-      .foregroundColor(isOn ? tintColor : Color(UIColor.secondaryLabel))
+      .foregroundStyle(isOn ? tintColor ?? Color.primary : Color(UIColor.secondaryLabel))
       .animation(nil, value: isOn)
       .brightness(brightness(configuration: configuration))
       .animation(configuration.isPressed ? nil : .default, value: isOn)

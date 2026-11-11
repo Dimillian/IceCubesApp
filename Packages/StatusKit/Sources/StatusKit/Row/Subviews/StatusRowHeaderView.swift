@@ -55,7 +55,7 @@ struct StatusRowHeaderView: View {
             )
             .fixedSize(horizontal: false, vertical: true)
             .font(.scaledSubheadline)
-            .foregroundColor(theme.labelColor)
+            .foregroundStyle(theme.labelColor)
             .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
             .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
             .fontWeight(.semibold)

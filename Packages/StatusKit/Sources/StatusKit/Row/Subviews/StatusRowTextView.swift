@@ -28,7 +28,7 @@ struct StatusRowTextView: View {
         .fixedSize(horizontal: false, vertical: true)
         .font(isFocused ? .scaledBodyFocused : .scaledBody)
         .lineSpacing(CGFloat(theme.lineSpacing))
-        .foregroundColor(viewModel.textDisabled ? .gray : theme.labelColor)
+        .foregroundStyle(viewModel.textDisabled ? .gray : theme.labelColor)
         .emojiText.size(
           isFocused ? Font.scaledBodyFocusedFont.emojiSize : Font.scaledBodyFont.emojiSize
         )
@@ -54,7 +54,7 @@ struct StatusRowTextView: View {
       HStack(alignment: .top) {
         Text("status.show-full-post")
           .font(.system(.subheadline, weight: .bold))
-          .foregroundColor(.secondary)
+          .foregroundStyle(.secondary)
         Spacer()
         Button {
           withAnimation {
@@ -64,7 +64,7 @@ struct StatusRowTextView: View {
           Image(systemName: "chevron.down")
         }
         .buttonStyle(.bordered)
-        .accessibility(label: Text("status.show-full-post"))
+        .accessibilityLabel(Text("status.show-full-post"))
         .accessibilityHidden(true)
       }
       .contentShape(Rectangle())

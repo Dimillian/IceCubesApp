@@ -35,7 +35,7 @@ struct AccountDetailToolbar: ToolbarContent {
       }
     }
 
-    ToolbarItemGroup(placement: .navigationBarTrailing) {
+    ToolbarItemGroup(placement: .topBarTrailing) {
       if !isCurrentUser {
         Button {
           if let account = account {

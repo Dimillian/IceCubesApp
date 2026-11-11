@@ -57,7 +57,7 @@ struct TimelineUnreadStatusesView: View {
           .buttonStyle(.bordered)
           .background(Material.ultraThick)
         #endif
-        .cornerRadius(8)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
         #if !os(visionOS)
           .foregroundStyle(.secondary)
           .overlay(

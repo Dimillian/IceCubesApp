@@ -44,7 +44,7 @@ public struct StatusEmbeddedView: View {
     #else
       .background(theme.secondaryBackgroundColor)
     #endif
-    .cornerRadius(4)
+    .clipShape(RoundedRectangle(cornerRadius: 4))
     .overlay(
       RoundedRectangle(cornerRadius: 4)
         .stroke(.gray.opacity(0.35), lineWidth: 1)

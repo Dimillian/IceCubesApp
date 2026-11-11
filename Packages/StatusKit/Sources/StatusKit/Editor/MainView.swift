@@ -58,7 +58,7 @@ extension StatusEditor {
     @ViewBuilder
     private var backgroundColor: some View {
       if presentationDetent == .large {
-        theme.primaryBackgroundColor.edgesIgnoringSafeArea(.all)
+        theme.primaryBackgroundColor.ignoresSafeArea(edges: .all)
       }
       Color.clear
     }

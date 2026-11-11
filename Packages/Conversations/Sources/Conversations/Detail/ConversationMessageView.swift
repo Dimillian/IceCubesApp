@@ -59,7 +59,7 @@ struct ConversationMessageView: View {
           #else
             .background(isOwnMessage ? theme.tintColor.opacity(0.2) : theme.secondaryBackgroundColor)
           #endif
-          .cornerRadius(8)
+          .clipShape(RoundedRectangle(cornerRadius: 8))
           .padding(.leading, isOwnMessage ? 24 : 0)
           .padding(.trailing, isOwnMessage ? 0 : 24)
           .overlay {
@@ -216,7 +216,7 @@ struct ConversationMessageView: View {
       Spacer()
       VStack {
         Image(systemName: "star.fill")
-          .foregroundColor(.yellow)
+          .foregroundStyle(.yellow)
           .offset(x: -16, y: -7)
         Spacer()
       }
@@ -228,7 +228,7 @@ struct ConversationMessageView: View {
     VStack(alignment: .leading) {
       EmojiTextApp(message.content, emojis: message.emojis)
         .font(.scaledBody)
-        .foregroundColor(theme.labelColor)
+        .foregroundStyle(theme.labelColor)
         .emojiText.size(Font.scaledBodyFont.emojiSize)
         .emojiText.baselineOffset(Font.scaledBodyFont.emojiBaselineOffset)
         .padding(6)

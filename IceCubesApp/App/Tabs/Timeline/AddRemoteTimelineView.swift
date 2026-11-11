@@ -35,12 +35,12 @@ struct AddRemoteTimelineView: View {
           .focused($isInstanceURLFieldFocused)
         if let instance {
           Label("timeline.\(instance.title)-is-valid", systemImage: "checkmark.seal.fill")
-            .foregroundColor(.green)
+            .foregroundStyle(.green)
             .listRowBackground(theme.primaryBackgroundColor)
         }
         if !instanceName.isEmpty && instance == nil {
           Label("timeline.\(instanceName)-not-valid", systemImage: "xmark.seal.fill")
-            .foregroundColor(.red)
+            .foregroundStyle(.red)
             .listRowBackground(theme.primaryBackgroundColor)
         }
         Button {
@@ -104,7 +104,7 @@ struct AddRemoteTimelineView: View {
             VStack(alignment: .leading, spacing: 4) {
               Text(instance.name)
                 .font(.scaledHeadline)
-                .foregroundColor(.primary)
+                .foregroundStyle(.primary)
               Text(instance.info?.shortDescription ?? "")
                 .font(.scaledBody)
                 .foregroundStyle(Color.secondary)

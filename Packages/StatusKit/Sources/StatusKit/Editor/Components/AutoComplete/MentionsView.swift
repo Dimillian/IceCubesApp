@@ -27,7 +27,7 @@ extension StatusEditor.AutoCompleteView {
               .emojiText.baselineOffset(Font.scaledFootnoteFont.emojiBaselineOffset)
               .font(.scaledFootnote)
               .fontWeight(.bold)
-              .foregroundColor(theme.labelColor)
+              .foregroundStyle(theme.labelColor)
               Text("@\(account.acct)")
                 .font(.scaledFootnote)
                 .foregroundStyle(theme.tintColor)

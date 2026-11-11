@@ -299,7 +299,7 @@ struct SettingsTabs: View {
               Image(uiImage: image)
                 .resizable()
                 .frame(width: 25, height: 25)
-                .cornerRadius(4)
+                .clipShape(RoundedRectangle(cornerRadius: 4))
             } else {
               EmptyView()
             }

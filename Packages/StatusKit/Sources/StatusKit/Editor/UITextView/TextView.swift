@@ -48,7 +48,7 @@ public struct TextView: View {
     )
     .background(
       placeholderView?
-        .foregroundColor(Color(.placeholderText))
+        .foregroundStyle(Color(.placeholderText))
         .multilineTextAlignment(.leading)
         .font(.scaledBody)
         .padding(.horizontal, 0)

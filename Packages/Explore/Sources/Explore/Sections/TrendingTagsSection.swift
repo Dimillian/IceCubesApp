@@ -29,7 +29,7 @@ struct TrendingTagsSection: View {
       }
       NavigationLink(value: RouterDestination.tagsList(tags: trendingTags)) {
         Text("see-more")
-          .foregroundColor(theme.tintColor)
+          .foregroundStyle(theme.tintColor)
       }
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)

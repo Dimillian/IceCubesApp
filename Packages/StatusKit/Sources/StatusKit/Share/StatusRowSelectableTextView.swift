@@ -12,7 +12,7 @@ struct StatusRowSelectableTextView: View {
       SelectableText(content: content)
         .padding()
         .toolbar {
-          ToolbarItem(placement: .navigationBarTrailing) {
+          ToolbarItem(placement: .topBarTrailing) {
             Button {
               dismiss()
             } label: {

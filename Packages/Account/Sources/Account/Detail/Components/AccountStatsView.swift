@@ -53,7 +53,7 @@ struct AccountStatsView: View {
     VStack {
       Text(count, format: .number.notation(.compactName))
         .font(.scaledHeadline)
-        .foregroundColor(theme.tintColor)
+        .foregroundStyle(theme.tintColor)
         .overlay(alignment: .trailing) {
           if needsBadge {
             Circle()

@@ -67,7 +67,7 @@ struct EditTagGroupView: View {
       #endif
       .toolbar {
         CancelToolbarItem()
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .topBarTrailing) {
           Button("action.save", action: { save() })
             .disabled(!tagGroup.isValid)
         }

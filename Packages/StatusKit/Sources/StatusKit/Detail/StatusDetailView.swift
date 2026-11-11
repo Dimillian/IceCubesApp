@@ -56,7 +56,7 @@ public struct StatusDetailView: View {
 
             #if !os(visionOS)
               Rectangle()
-                .foregroundColor(theme.secondaryBackgroundColor)
+                .foregroundStyle(theme.secondaryBackgroundColor)
                 .frame(minHeight: reader.frame(in: .local).size.height - statusHeight)
                 .listRowSeparator(.hidden)
                 .listRowBackground(theme.secondaryBackgroundColor)

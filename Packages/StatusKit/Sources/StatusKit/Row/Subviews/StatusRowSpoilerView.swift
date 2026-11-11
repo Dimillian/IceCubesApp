@@ -10,12 +10,12 @@ struct StatusRowSpoilerView: View {
     HStack(alignment: .top) {
       Text("⚠︎")
         .font(.system(.subheadline, weight: .bold))
-        .foregroundColor(.secondary)
+        .foregroundStyle(.secondary)
       EmojiTextApp(status.spoilerText, emojis: status.emojis, language: status.language)
         .font(.system(.subheadline, weight: .bold))
         .emojiText.size(Font.scaledSubheadlineFont.emojiSize)
         .emojiText.baselineOffset(Font.scaledSubheadlineFont.emojiBaselineOffset)
-        .foregroundColor(.secondary)
+        .foregroundStyle(.secondary)
         .multilineTextAlignment(.leading)
       Spacer()
       Button {
@@ -27,7 +27,7 @@ struct StatusRowSpoilerView: View {
           .rotationEffect(Angle(degrees: displaySpoiler ? 0 : 180))
       }
       .buttonStyle(.bordered)
-      .accessibility(label: displaySpoiler ? Text("status.show-more") : Text("status.show-less"))
+      .accessibilityLabel(displaySpoiler ? Text("status.show-more") : Text("status.show-less"))
       .accessibilityHidden(true)
     }
     .contentShape(Rectangle())

@@ -141,7 +141,7 @@ public struct MediaUIAttachmentVideoView: View {
       .fullScreenCover(isPresented: $isFullScreen) {
         modalPreview
       }
-      .cornerRadius(4)
+      .clipShape(RoundedRectangle(cornerRadius: 4))
       .onChange(of: scenePhase) { _, newValue in
         switch newValue {
         case .background, .inactive:
@@ -217,7 +217,7 @@ public struct MediaUIAttachmentVideoView: View {
             label: {
               Image(systemName: "play.fill")
                 .font(isCompact ? .body : .largeTitle)
-                .foregroundColor(theme.tintColor)
+                .foregroundStyle(theme.tintColor)
                 .padding(.all, isCompact ? 6 : nil)
                 .background(Circle().fill(.thinMaterial))
                 .padding(theme.statusDisplayStyle == .compact ? 0 : 10)

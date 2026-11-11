@@ -81,7 +81,7 @@ public struct StatusRowView: View {
               theme.avatarPosition == .leading
             {
               AvatarView(viewModel.finalStatus.account.avatar)
-                .accessibility(addTraits: .isButton)
+                .accessibilityAddTraits(.isButton)
                 .contentShape(Circle())
                 .hoverEffect()
                 .onTapGesture {
@@ -198,21 +198,9 @@ public struct StatusRowView: View {
         remoteContentLoadingView
       }
     }
-    .alert(
-      isPresented: $viewModel.showDeleteAlert,
-      content: {
-        Alert(
-          title: Text("status.action.delete.confirm.title"),
-          message: Text("status.action.delete.confirm.message"),
-          primaryButton: .destructive(
-            Text("status.action.delete")
-          ) {
-            handleDelete()
-          },
-          secondaryButton: .cancel()
-        )
-      }
-    )
+    .deleteAlert(isPresented: $viewModel.showDeleteAlert) {
+      handleDelete()
+    }
     .confirmationDialog(
       "",
       isPresented: $isBlockConfirmationPresented
@@ -410,6 +398,46 @@ public struct StatusRowView: View {
     }
     .background(Color.black.opacity(0.40))
     .transition(.opacity)
+  }
+}
+
+extension View {
+  @ViewBuilder
+  fileprivate func deleteAlert(
+    isPresented: Binding<Bool>,
+    onDelete: @escaping () -> Void
+  ) -> some View {
+    if #available(anyAppleOS 26, *) {
+      alert(
+        Text("status.action.delete.confirm.title"),
+        isPresented: isPresented
+      ) {
+        Button(role: .destructive) {
+          onDelete()
+        } label: {
+          Text("status.action.delete")
+        }
+        Button(role: .cancel) {}
+      } message: {
+        Text("status.action.delete.confirm.message")
+      }
+    } else {
+      alert(
+        isPresented: isPresented,
+        content: {
+          Alert(
+            title: Text("status.action.delete.confirm.title"),
+            message: Text("status.action.delete.confirm.message"),
+            primaryButton: .destructive(
+              Text("status.action.delete")
+            ) {
+              onDelete()
+            },
+            secondaryButton: .cancel()
+          )
+        }
+      )
+    }
   }
 }
 
