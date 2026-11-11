@@ -83,7 +83,7 @@ struct EditFilterView: View {
       }
     }
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
+      ToolbarItem(placement: .topBarTrailing) {
         saveButton
       }
     }

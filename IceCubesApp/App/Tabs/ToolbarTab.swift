@@ -31,7 +31,7 @@ struct ToolbarTab: ToolbarContent {
           accountToolbarItem
         #endif
       } else {
-        ToolbarItem(placement: .navigationBarLeading) {
+        ToolbarItem(placement: .topBarLeading) {
           accountSelector
         }
       }
@@ -45,7 +45,7 @@ struct ToolbarTab: ToolbarContent {
 
   @available(iOS 26.0, *)
   private var accountToolbarItem: some ToolbarContent {
-    ToolbarItem(placement: .navigationBarLeading) {
+    ToolbarItem(placement: .topBarLeading) {
       #if targetEnvironment(macCatalyst)
         accountSelector
       #elseif os(iOS)

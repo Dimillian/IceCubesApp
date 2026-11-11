@@ -106,7 +106,7 @@ public struct AccountsListView: View {
           header: Text("account.follow-requests.pending-requests"),
           footer: Text("account.follow-requests.instructions")
             .font(.scaledFootnote)
-            .foregroundColor(.secondary)
+            .foregroundStyle(.secondary)
             .offset(y: -8)
         ) {
           ForEach(currentAccount.followRequests) { account in

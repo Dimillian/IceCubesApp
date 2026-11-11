@@ -34,33 +34,33 @@ struct ThemeBoxView: View {
   var body: some View {
     ZStack(alignment: .topTrailing) {
       Rectangle()
-        .foregroundColor(.white)
+        .foregroundStyle(.white)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .cornerRadius(4)
+        .clipShape(RoundedRectangle(cornerRadius: 4))
         .shadow(radius: 2, x: 2, y: 4)
         .accessibilityHidden(true)
 
       VStack(spacing: gutterSpace) {
         Text(color.name.rawValue)
-          .foregroundColor(color.tintColor)
+          .foregroundStyle(color.tintColor)
           .font(.system(size: 20))
           .fontWeight(.bold)
 
         Text("design.theme.toots-preview")
-          .foregroundColor(color.labelColor)
+          .foregroundStyle(color.labelColor)
           .frame(maxWidth: .infinity, maxHeight: .infinity)
           .padding()
           .background(color.primaryBackgroundColor)
 
         Text("#icecube, #techhub")
-          .foregroundColor(color.tintColor)
+          .foregroundStyle(color.tintColor)
         if isSelected {
           HStack {
             Spacer()
             Image(systemName: "checkmark.seal.fill")
               .resizable()
               .frame(width: 20, height: 20)
-              .foregroundColor(.green)
+              .foregroundStyle(.green)
           }
         } else {
           HStack {
@@ -76,7 +76,7 @@ struct ThemeBoxView: View {
       .padding()
       .background(color.secondaryBackgroundColor)
       .font(.system(size: 15))
-      .cornerRadius(4)
+      .clipShape(RoundedRectangle(cornerRadius: 4))
     }
     .onAppear {
       isSelected = theme.selectedSet.rawValue == color.name.rawValue

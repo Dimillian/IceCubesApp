@@ -59,7 +59,7 @@ public struct NotificationsRequestsListView: View {
     .navigationTitle("notifications.content-filter.requests.title")
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
-      ToolbarItem(placement: .navigationBarTrailing) {
+      ToolbarItem(placement: .topBarTrailing) {
         Button {
           withAnimation {
             isInSelectMode.toggle()

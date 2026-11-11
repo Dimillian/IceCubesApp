@@ -58,7 +58,7 @@ public struct ListAddAccountView: View {
       .navigationTitle("lists.add-remove-\(viewModel.account.safeDisplayName)")
       .navigationBarTitleDisplayMode(.inline)
       .toolbar {
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .topBarTrailing) {
           Button("action.done") {
             dismiss()
           }

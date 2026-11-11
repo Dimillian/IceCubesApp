@@ -123,7 +123,7 @@ public struct ExploreView: View {
       .listStyle(.grouped)
       #if !os(visionOS)
         .scrollContentBackground(.hidden)
-        .background(theme.secondaryBackgroundColor.edgesIgnoringSafeArea(.all))
+        .background(theme.secondaryBackgroundColor.ignoresSafeArea(edges: .all))
       #endif
       .navigationTitle("explore.navigation-title")
       .navigationBarTitleDisplayMode(.inline)

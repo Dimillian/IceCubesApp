@@ -34,7 +34,7 @@ public struct StatusEditorToolbarItem: ToolbarContent {
   }
 
   public var body: some ToolbarContent {
-    ToolbarItem(placement: .navigationBarTrailing) {
+    ToolbarItem(placement: .topBarTrailing) {
       Button {
         Task { @MainActor in
           #if targetEnvironment(macCatalyst) || os(visionOS)
@@ -67,7 +67,7 @@ public struct SecondaryColumnToolbarItem: ToolbarContent {
   public init() {}
 
   public var body: some ToolbarContent {
-    ToolbarItem(placement: isSecondaryColumn ? .navigationBarLeading : .navigationBarTrailing) {
+    ToolbarItem(placement: isSecondaryColumn ? .topBarLeading : .topBarTrailing) {
       Button {
         withAnimation {
           preferences.showiPadSecondaryColumn.toggle()

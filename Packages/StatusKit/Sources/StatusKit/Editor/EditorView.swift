@@ -266,7 +266,7 @@ extension StatusEditor {
         + store.statusTextCharacterLength
       Text("\(value)")
         .contentTransition(.numericText(value: Double(value)))
-        .foregroundColor(value < 0 ? .red : .secondary)
+        .foregroundStyle(value < 0 ? .red : .secondary)
         .font(.callout.monospacedDigit())
         .accessibilityLabel("accessibility.editor.button.characters-remaining")
         .accessibilityValue("\(value)")

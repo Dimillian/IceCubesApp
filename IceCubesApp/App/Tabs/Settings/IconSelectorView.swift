@@ -134,7 +134,7 @@ struct IconSelectorView: View {
               .resizable()
               .aspectRatio(contentMode: .fit)
               .frame(minHeight: 125, maxHeight: 1024)
-              .cornerRadius(6)
+              .clipShape(RoundedRectangle(cornerRadius: 6))
               .shadow(radius: 3)
             if icon.appIconName == currentIcon {
               Image(systemName: "checkmark.seal.fill")

@@ -160,11 +160,11 @@ struct SupportAppView: View {
           Image("avatar")
             .resizable()
             .frame(width: 50, height: 50)
-            .cornerRadius(4)
+            .clipShape(RoundedRectangle(cornerRadius: 4))
           Image("icon0")
             .resizable()
             .frame(width: 50, height: 50)
-            .cornerRadius(4)
+            .clipShape(RoundedRectangle(cornerRadius: 4))
         }
         Text("settings.support.message-from-dev")
       }
@@ -182,14 +182,14 @@ struct SupportAppView: View {
         HStack {
           if customerInfo?.entitlements["Supporter"]?.isActive == true {
             Text(Image(systemName: "checkmark.seal.fill"))
-              .foregroundColor(theme.tintColor)
+              .foregroundStyle(theme.tintColor)
               .baselineOffset(-1)
               + Text("settings.support.supporter.subscribed")
               .font(.scaledSubheadline)
           } else {
             VStack(alignment: .leading) {
               Text(Image(systemName: "checkmark.seal.fill"))
-                .foregroundColor(theme.tintColor)
+                .foregroundStyle(theme.tintColor)
                 .baselineOffset(-1)
                 + Text(Tip.supporter.title)
                 .font(.scaledSubheadline)

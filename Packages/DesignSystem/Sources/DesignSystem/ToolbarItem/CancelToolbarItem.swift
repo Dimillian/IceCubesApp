@@ -6,7 +6,7 @@ public struct CancelToolbarItem: ToolbarContent {
   public init() {}
 
   public var body: some ToolbarContent {
-    ToolbarItem(placement: .navigationBarLeading) {
+    ToolbarItem(placement: .topBarLeading) {
       Button(role: .cancel) {
         dismiss()
       } label: {

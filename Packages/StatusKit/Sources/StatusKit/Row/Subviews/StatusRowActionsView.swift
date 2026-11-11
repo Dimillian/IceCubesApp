@@ -257,7 +257,7 @@ struct StatusRowActionsView: View {
   private func shareButtonLabel(for action: Action) -> some View {
     action
       .image(dataController: statusDataController)
-      .foregroundColor(Color(UIColor.secondaryLabel))
+      .foregroundStyle(Color(UIColor.secondaryLabel))
       .padding(.vertical, 6)
       .padding(.horizontal, 8)
       .contentShape(Rectangle())
@@ -305,7 +305,7 @@ struct StatusRowActionsView: View {
     .environment(statusDataController)
     .environment(ToastCenter.shared)
     .preferredColorScheme(theme.selectedScheme == .dark ? .dark : .light)
-    .foregroundColor(theme.labelColor)
+    .foregroundStyle(theme.labelColor)
     .background(theme.primaryBackgroundColor)
     .frame(width: sceneDelegate.windowWidth - 12)
     .tint(theme.tintColor)

@@ -25,7 +25,7 @@ struct StatusActionButton: View {
     actionView
       #if os(visionOS)
         .buttonStyle(.borderless)
-        .foregroundColor(Color(UIColor.secondaryLabel))
+        .foregroundStyle(Color(UIColor.secondaryLabel))
       #else
         .buttonStyle(
           .statusAction(
@@ -118,7 +118,7 @@ struct StatusActionButton: View {
       .lineLimit(1)
       .minimumScaleFactor(0.6)
       .contentTransition(.numericText(value: Double(count)))
-      .foregroundColor(Color(UIColor.secondaryLabel))
+      .foregroundStyle(Color(UIColor.secondaryLabel))
       #if targetEnvironment(macCatalyst)
         .font(.scaledFootnote)
       #else

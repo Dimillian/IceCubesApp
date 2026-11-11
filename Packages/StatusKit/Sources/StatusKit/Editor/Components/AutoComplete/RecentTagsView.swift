@@ -27,7 +27,7 @@ extension StatusEditor.AutoCompleteView {
             Text("#\(tag.title)")
               .font(.scaledFootnote)
               .fontWeight(.bold)
-              .foregroundColor(theme.labelColor)
+              .foregroundStyle(theme.labelColor)
             Text(tag.formattedDate)
               .font(.scaledFootnote)
               .foregroundStyle(theme.tintColor)

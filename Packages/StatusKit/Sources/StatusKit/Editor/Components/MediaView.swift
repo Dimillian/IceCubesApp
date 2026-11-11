@@ -113,7 +113,7 @@ extension StatusEditor {
             .resizable()
             .blur(radius: 20)
             .scaledToFill()
-            .cornerRadius(8)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
         } else {
           placeholderView
         }
@@ -128,7 +128,7 @@ extension StatusEditor {
             .resizable()
             .blur(radius: 10)
             .scaledToFill()
-            .cornerRadius(8)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
         } else {
           placeholderView
         }
@@ -175,7 +175,7 @@ extension StatusEditor {
           EmptyView()
         }
       }
-      .cornerRadius(8)
+      .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 
     @ViewBuilder
@@ -226,7 +226,7 @@ extension StatusEditor {
             .resizable()
             .blur(radius: 5)
             .scaledToFill()
-            .cornerRadius(8)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
             .opacity(0.5)
         } else {
           placeholderView
@@ -261,7 +261,7 @@ extension StatusEditor {
         }
         .padding(8)
         .background(.thinMaterial)
-        .cornerRadius(8)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
         .padding(4)
       }
     }
@@ -307,11 +307,11 @@ extension StatusEditor {
     private var placeholderView: some View {
       ZStack(alignment: .center) {
         Rectangle()
-          .foregroundColor(theme.secondaryBackgroundColor)
+          .foregroundStyle(theme.secondaryBackgroundColor)
           .accessibilityHidden(true)
         ProgressView()
       }
-      .cornerRadius(8)
+      .clipShape(RoundedRectangle(cornerRadius: 8))
     }
   }
 }

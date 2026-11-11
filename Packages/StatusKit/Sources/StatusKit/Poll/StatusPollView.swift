@@ -59,7 +59,7 @@ public struct StatusPollView: View {
       }
     }
     return Image(systemName: imageName)
-      .foregroundColor(theme.labelColor)
+      .foregroundStyle(theme.labelColor)
   }
 
   public var body: some View {
@@ -168,7 +168,7 @@ public struct StatusPollView: View {
       HStack {
         Text(option.title)
           .multilineTextAlignment(.leading)
-          .foregroundColor(theme.labelColor)
+          .foregroundStyle(theme.labelColor)
           .font(.scaledBody)
           .lineLimit(3)
           .minimumScaleFactor(0.7)
@@ -178,7 +178,7 @@ public struct StatusPollView: View {
       .background(alignment: .leading) {
         if viewModel.showResults || status.account.id == currentAccount.account?.id {
           _PercentWidthLayout(percent: relativePercent(for: option.votesCount ?? 0)) {
-            RoundedRectangle(cornerRadius: 10).foregroundColor(theme.tintColor.opacity(0.6))
+            RoundedRectangle(cornerRadius: 10).foregroundStyle(theme.tintColor.opacity(0.6))
               .transition(
                 .asymmetric(
                   insertion: .push(from: .leading),

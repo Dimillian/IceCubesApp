@@ -151,7 +151,7 @@ struct TimelineTab: View {
     if client.isAuth {
       ToolbarTab(routerPath: $routerPath)
     } else {
-      ToolbarItem(placement: .navigationBarTrailing) {
+      ToolbarItem(placement: .topBarTrailing) {
         addAccountButton
       }
     }

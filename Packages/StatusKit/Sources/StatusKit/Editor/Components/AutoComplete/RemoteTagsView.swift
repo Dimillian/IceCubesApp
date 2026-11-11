@@ -34,7 +34,7 @@ extension StatusEditor.AutoCompleteView {
             Text("#\(tag.name)")
               .font(.scaledFootnote)
               .fontWeight(.bold)
-              .foregroundColor(theme.labelColor)
+              .foregroundStyle(theme.labelColor)
             Text("tag.suggested.mentions-\(tag.totalUses)")
               .font(.scaledFootnote)
               .foregroundStyle(theme.tintColor)

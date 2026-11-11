@@ -18,7 +18,7 @@ struct RecenTagsSettingView: View {
         VStack(alignment: .leading) {
           Text("#\(tag.title)")
             .font(.scaledBody)
-            .foregroundColor(.primary)
+            .foregroundStyle(.primary)
           Text(tag.formattedDate)
             .font(.scaledFootnote)
             .foregroundStyle(.secondary)

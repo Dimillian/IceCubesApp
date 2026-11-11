@@ -106,7 +106,7 @@ public struct FiltersListView: View {
 
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
-    ToolbarItem(placement: .navigationBarTrailing) {
+    ToolbarItem(placement: .topBarTrailing) {
       Button {
         dismiss()
       } label: {

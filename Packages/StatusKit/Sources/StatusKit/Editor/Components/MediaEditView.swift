@@ -77,7 +77,7 @@ extension StatusEditor {
         .navigationTitle("status.editor.media.edit-image")
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-          ToolbarItem(placement: .navigationBarTrailing) {
+          ToolbarItem(placement: .topBarTrailing) {
             Button {
               if !imageDescription.isEmpty {
                 isUpdating = true

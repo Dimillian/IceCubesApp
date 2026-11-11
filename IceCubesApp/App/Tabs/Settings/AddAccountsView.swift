@@ -223,7 +223,7 @@ struct AddAccountView: View {
                 HStack {
                   Text(instance.name)
                     .font(.scaledHeadline)
-                    .foregroundColor(.primary)
+                    .foregroundStyle(.primary)
                   Spacer()
                   (Text("instance.list.users-\(formatAsNumber(instance.users))")
                     + Text("  ⸱  ")
@@ -267,7 +267,7 @@ struct AddAccountView: View {
     VStack(alignment: .leading, spacing: 4) {
       Text("placeholder.loading.short")
         .font(.scaledHeadline)
-        .foregroundColor(.primary)
+        .foregroundStyle(.primary)
       Text("placeholder.loading.long")
         .font(.scaledBody)
         .foregroundStyle(.secondary)

@@ -54,13 +54,13 @@ public struct EditRelationshipNoteView: View {
 
   @ToolbarContentBuilder
   private var toolbarContent: some ToolbarContent {
-    ToolbarItem(placement: .navigationBarLeading) {
+    ToolbarItem(placement: .topBarLeading) {
       Button("action.cancel") {
         dismiss()
       }
     }
 
-    ToolbarItem(placement: .navigationBarTrailing) {
+    ToolbarItem(placement: .topBarTrailing) {
       Button {
         Task {
           await save()

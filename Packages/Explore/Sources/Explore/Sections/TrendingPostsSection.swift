@@ -39,7 +39,7 @@ struct TrendingPostsSection: View {
       
       NavigationLink(value: RouterDestination.trendingTimeline) {
         Text("see-more")
-          .foregroundColor(theme.tintColor)
+          .foregroundStyle(theme.tintColor)
       }
       #if !os(visionOS)
         .listRowBackground(theme.primaryBackgroundColor)

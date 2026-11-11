@@ -46,7 +46,7 @@ struct AccountPopoverView: View {
 
         EmojiTextApp(.init(stringValue: account.safeDisplayName), emojis: account.emojis)
           .font(.headline)
-          .foregroundColor(theme.labelColor)
+          .foregroundStyle(theme.labelColor)
           .emojiText.size(Font.scaledHeadlineFont.emojiSize)
           .emojiText.baselineOffset(Font.scaledHeadlineFont.emojiBaselineOffset)
           .accessibilityAddTraits(.isHeader)
@@ -110,7 +110,7 @@ struct AccountPopoverView: View {
     VStack {
       Text(count, format: .number.notation(.compactName))
         .font(.scaledHeadline)
-        .foregroundColor(theme.tintColor)
+        .foregroundStyle(theme.tintColor)
         .overlay(alignment: .trailing) {
           if needsBadge {
             Circle()

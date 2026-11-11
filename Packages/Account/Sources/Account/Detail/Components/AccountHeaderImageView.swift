@@ -36,7 +36,7 @@ struct AccountHeaderImageView: View {
     ZStack(alignment: .bottomTrailing) {
       if reasons.contains(.placeholder) {
         Rectangle()
-          .foregroundColor(theme.secondaryBackgroundColor)
+          .foregroundStyle(theme.secondaryBackgroundColor)
           .frame(height: Constants.headerHeight)
           .accessibilityHidden(true)
       } else {
@@ -98,7 +98,7 @@ struct AccountHeaderImageView: View {
         .fontWeight(.semibold)
         .padding(8)
         .glassEffect()
-        .cornerRadius(4)
+        .clipShape(RoundedRectangle(cornerRadius: 4))
         .padding(8)
     } else {
       Text("account.relation.follows-you")
@@ -106,7 +106,7 @@ struct AccountHeaderImageView: View {
         .fontWeight(.semibold)
         .padding(4)
         .background(.ultraThinMaterial)
-        .cornerRadius(4)
+        .clipShape(RoundedRectangle(cornerRadius: 4))
         .padding(8)
     }
   }

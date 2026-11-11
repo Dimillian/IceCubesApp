@@ -104,7 +104,7 @@ public struct TimelineView: View {
         ToolbarSpacer(placement: .topBarTrailing)
       }
       if viewModel.canStreamTimeline(timeline) {
-        ToolbarItem(placement: .navigationBarTrailing) {
+        ToolbarItem(placement: .topBarTrailing) {
           Button {
             viewModel.isStreamingTimeline.toggle()
           } label: {

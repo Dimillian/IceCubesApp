@@ -88,7 +88,7 @@ struct DisplaySettingsView: View {
         .allowsHitTesting(false)
         .padding(.layoutPadding)
         .background(theme.primaryBackgroundColor)
-        .cornerRadius(8)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
         .padding(.horizontal, .layoutPadding)
         .padding(.top, .layoutPadding)
         .background(theme.secondaryBackgroundColor)

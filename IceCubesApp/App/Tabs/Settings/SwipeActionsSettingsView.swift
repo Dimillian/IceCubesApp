@@ -12,7 +12,7 @@ struct SwipeActionsSettingsView: View {
     Form {
       Section {
         Label("settings.swipeactions.status.leading", systemImage: "arrow.right")
-          .foregroundColor(.secondary)
+          .foregroundStyle(.secondary)
 
         createStatusActionPicker(
           selection: $userPreferences.swipeActionsStatusLeadingLeft,
@@ -31,7 +31,7 @@ struct SwipeActionsSettingsView: View {
         .disabled(userPreferences.swipeActionsStatusLeadingLeft == .none)
 
         Label("settings.swipeactions.status.trailing", systemImage: "arrow.left")
-          .foregroundColor(.secondary)
+          .foregroundStyle(.secondary)
 
         createStatusActionPicker(
           selection: $userPreferences.swipeActionsStatusTrailingRight,
