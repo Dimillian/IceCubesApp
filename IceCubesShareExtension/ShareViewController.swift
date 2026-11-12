@@ -71,13 +71,27 @@ class ShareViewController: UIViewController {
     }
   }
 
+  private var hasAppeared = false
+  private var isClosePending = false
+
   nonisolated func close() {
     Task { @MainActor in
+      // Completing the request while the sheet is still being presented drops the
+      // extension context but leaves the sheet on screen, so wait until it has appeared.
+      guard hasAppeared else {
+        isClosePending = true
+        return
+      }
       extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
     }
   }
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+    hasAppeared = true
+    if isClosePending {
+      isClosePending = false
+      extensionContext?.completeRequest(returningItems: [], completionHandler: nil)
+    }
   }
 }
