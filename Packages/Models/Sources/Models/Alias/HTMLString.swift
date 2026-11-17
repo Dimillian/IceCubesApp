@@ -151,48 +151,81 @@ public struct HTMLString: Codable, Equatable, Hashable, @unchecked Sendable {
       return
     }
 
-    // Inspect original HTML last paragraph to ensure it is hashtags-only
-    // and not a quote-inline. This avoids regex backtracking on large inputs.
-    let isLastParagraphTagsOnly: Bool = {
+    // Inspect original HTML last paragraph to find trailing hashtags: either the whole paragraph
+    // or only its last line, when the hashtags follow a line break instead of a new paragraph.
+    // Not a quote-inline. This avoids regex backtracking on large inputs.
+    let trailingTags: TrailingTags = {
       do {
         let paras = try doc.select("p:not(.quote-inline)")
-        guard let lastP = paras.array().last else { return false }
-        var hasAtLeastOneHashtag = false
+        guard let lastP = paras.array().last else { return .none }
+        var isEveryLineTagsOnly = true
+        var isLastLineTagsOnly = true
+        var lastLineHasHashtag = false
         for child in lastP.getChildNodes() {
           let name = child.nodeName()
-          if name == "#text" {
+          var isTagOrWhitespace = false
+          if name == "br" {
+            // A new line starts, only what follows can be trailing hashtags
+            isLastLineTagsOnly = true
+            lastLineHasHashtag = false
+            continue
+          } else if name == "#text" {
             // Allow whitespace-only text
             let txt = child.description.trimmingCharacters(in: .whitespacesAndNewlines)
-            if !txt.isEmpty { return false }
+            isTagOrWhitespace = txt.isEmpty
           } else if name == "a" {
             // Accept only anchors that look like hashtag links
             let cls = (try? child.attr("class")) ?? ""
-            if !cls.contains("hashtag") { return false }
-            hasAtLeastOneHashtag = true
-          } else {
-            // Any other element means mixed content
-            return false
+            isTagOrWhitespace = cls.contains("hashtag")
+            if isTagOrWhitespace { lastLineHasHashtag = true }
+          }
+          // Any other element means mixed content
+          if !isTagOrWhitespace {
+            isEveryLineTagsOnly = false
+            isLastLineTagsOnly = false
           }
         }
-        return hasAtLeastOneHashtag
+        guard isLastLineTagsOnly, lastLineHasHashtag else { return .none }
+        return isEveryLineTagsOnly ? .paragraph : .lastLine
       } catch {
-        return false
+        return .none
       }
     }()
 
-    guard isLastParagraphTagsOnly else { return }
+    switch trailingTags {
+    case .none:
+      return
+    case .paragraph:
+      // Remove the last non-empty paragraph from both markdown and raw text
+      hadTrailingTags = true
+      let updatedMarkdownParagraphs = Array(paragraphs.prefix(lastIndex))
+      asMarkdown = updatedMarkdownParagraphs.joined(separator: "\n\n")
 
-    // Remove the last non-empty paragraph from both markdown and raw text
-    hadTrailingTags = true
-    let updatedMarkdownParagraphs = Array(paragraphs.prefix(lastIndex))
-    asMarkdown = updatedMarkdownParagraphs.joined(separator: "\n\n")
-
-    let rawParagraphs = asRawText.split(separator: "\n\n", omittingEmptySubsequences: false).map(
-      String.init)
-    if lastIndex < rawParagraphs.count {
-      let updatedRawParagraphs = Array(rawParagraphs.prefix(lastIndex))
-      asRawText = updatedRawParagraphs.joined(separator: "\n\n")
+      let rawParagraphs = asRawText.split(separator: "\n\n", omittingEmptySubsequences: false).map(
+        String.init)
+      if lastIndex < rawParagraphs.count {
+        let updatedRawParagraphs = Array(rawParagraphs.prefix(lastIndex))
+        asRawText = updatedRawParagraphs.joined(separator: "\n\n")
+      }
+    case .lastLine:
+      // Remove only the last line, the text above it stays
+      guard let markdown = Self.removingLastLine(from: asMarkdown),
+        let rawText = Self.removingLastLine(from: asRawText)
+      else { return }
+      hadTrailingTags = true
+      asMarkdown = markdown
+      asRawText = rawText
     }
+  }
+
+  private enum TrailingTags {
+    case none, paragraph, lastLine
+  }
+
+  private static func removingLastLine(from text: String) -> String? {
+    let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+    guard let lineBreak = trimmed.lastIndex(of: "\n") else { return nil }
+    return String(trimmed[..<lineBreak]).trimmingCharacters(in: .whitespacesAndNewlines)
   }
 
   private mutating func handleNode(
