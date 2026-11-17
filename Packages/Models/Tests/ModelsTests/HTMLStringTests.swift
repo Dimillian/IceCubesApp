@@ -158,3 +158,35 @@ func testHTMLStringInit_trailingHashtags() throws {
   #expect("This is a test\n\nCheck out [this link](https://example.com) and [#swift](https://mastodon.social/tags/swift)" == htmlString4.asMarkdown)
   #expect(2 == htmlString4.links.count)
 }
+
+@Test
+func testHTMLStringInit_trailingHashtagsAfterLineBreak() throws {
+  let decoder = JSONDecoder()
+
+  // Test that hashtags on the last line, after a single line break, are detected and removed
+  let lineBreakContent = "\"<p>Check out <a href=\\\"https://example.com\\\">this link</a><br /><a href=\\\"https://mastodon.social/tags/swift\\\" class=\\\"mention hashtag\\\" rel=\\\"tag\\\">#<span>swift</span></a> <a href=\\\"https://mastodon.social/tags/ios\\\" class=\\\"mention hashtag\\\" rel=\\\"tag\\\">#<span>ios</span></a></p>\""
+  let htmlString = try decoder.decode(HTMLString.self, from: Data(lineBreakContent.utf8))
+  #expect("Check out this link" == htmlString.asRawText)
+  #expect(true == htmlString.hadTrailingTags)
+  #expect("Check out [this link](https://example.com)" == htmlString.asMarkdown)
+  #expect(3 == htmlString.links.count)
+
+  // Test that only the last line is removed and earlier paragraphs and lines are kept
+  let multipleLinesContent = "\"<p>First paragraph</p><p>Second paragraph<br />Another line<br /><a href=\\\"https://mastodon.social/tags/swift\\\" class=\\\"mention hashtag\\\" rel=\\\"tag\\\">#<span>swift</span></a></p>\""
+  let htmlString2 = try decoder.decode(HTMLString.self, from: Data(multipleLinesContent.utf8))
+  #expect("First paragraph\n\nSecond paragraph\nAnother line" == htmlString2.asRawText)
+  #expect(true == htmlString2.hadTrailingTags)
+  #expect("First paragraph\n\nSecond paragraph\nAnother line" == htmlString2.asMarkdown)
+
+  // Test that a last line mixing text and hashtags is NOT removed
+  let mixedLastLineContent = "\"<p>This is a test<br /><a href=\\\"https://mastodon.social/tags/swift\\\" class=\\\"mention hashtag\\\" rel=\\\"tag\\\">#<span>swift</span></a> is great</p>\""
+  let htmlString3 = try decoder.decode(HTMLString.self, from: Data(mixedLastLineContent.utf8))
+  #expect("This is a test\n#swift is great" == htmlString3.asRawText)
+  #expect(false == htmlString3.hadTrailingTags)
+
+  // Test that hashtags followed by another line are NOT removed
+  let hashtagsThenTextContent = "\"<p><a href=\\\"https://mastodon.social/tags/swift\\\" class=\\\"mention hashtag\\\" rel=\\\"tag\\\">#<span>swift</span></a><br />This is a test</p>\""
+  let htmlString4 = try decoder.decode(HTMLString.self, from: Data(hashtagsThenTextContent.utf8))
+  #expect("#swift\nThis is a test" == htmlString4.asRawText)
+  #expect(false == htmlString4.hadTrailingTags)
+}
