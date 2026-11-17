@@ -180,41 +180,7 @@ public final class Status: AnyStatus, Codable, Identifiable, Equatable, Hashable
   }
 
   public var reblogAsAsStatus: Status? {
-    if let reblog {
-      return .init(
-        id: reblog.id,
-        content: reblog.content,
-        account: reblog.account,
-        createdAt: reblog.createdAt,
-        editedAt: reblog.editedAt,
-        reblog: nil,
-        mediaAttachments: reblog.mediaAttachments,
-        mentions: reblog.mentions,
-        repliesCount: reblog.repliesCount,
-        reblogsCount: reblog.reblogsCount,
-        favouritesCount: reblog.favouritesCount,
-        card: reblog.card,
-        favourited: reblog.favourited,
-        reblogged: reblog.reblogged,
-        pinned: reblog.pinned,
-        bookmarked: reblog.bookmarked,
-        emojis: reblog.emojis,
-        url: reblog.url,
-        application: reblog.application,
-        inReplyToId: reblog.inReplyToId,
-        inReplyToAccountId: reblog.inReplyToAccountId,
-        visibility: reblog.visibility,
-        poll: reblog.poll,
-        spoilerText: reblog.spoilerText,
-        filtered: reblog.filtered,
-        sensitive: reblog.sensitive,
-        language: reblog.language,
-        tags: reblog.tags,
-        quote: reblog.quote,
-        quotesCount: reblog.quotesCount,
-        quoteApproval: reblog.quoteApproval)
-    }
-    return nil
+    reblog?.asStatus
   }
 }
 
@@ -311,6 +277,43 @@ public final class ReblogStatus: AnyStatus, Codable, Identifiable, Equatable, Ha
     self.quote = quote
     self.quotesCount = quotesCount
     self.quoteApproval = quoteApproval
+  }
+}
+
+extension ReblogStatus {
+  public var asStatus: Status {
+    .init(
+      id: id,
+      content: content,
+      account: account,
+      createdAt: createdAt,
+      editedAt: editedAt,
+      reblog: nil,
+      mediaAttachments: mediaAttachments,
+      mentions: mentions,
+      repliesCount: repliesCount,
+      reblogsCount: reblogsCount,
+      favouritesCount: favouritesCount,
+      card: card,
+      favourited: favourited,
+      reblogged: reblogged,
+      pinned: pinned,
+      bookmarked: bookmarked,
+      emojis: emojis,
+      url: url,
+      application: application,
+      inReplyToId: inReplyToId,
+      inReplyToAccountId: inReplyToAccountId,
+      visibility: visibility,
+      poll: poll,
+      spoilerText: spoilerText,
+      filtered: filtered,
+      sensitive: sensitive,
+      language: language,
+      tags: tags,
+      quote: quote,
+      quotesCount: quotesCount,
+      quoteApproval: quoteApproval)
   }
 }
 

@@ -1,6 +1,7 @@
 import DesignSystem
 import Env
 import Foundation
+import Models
 import NetworkClient
 import SwiftUI
 
@@ -31,6 +32,20 @@ struct StatusRowContextMenu: View {
     }
 
     return Label("status.action.boost", systemImage: "arrow.2.squarepath")
+  }
+
+  // The row keeps the post it was created with, so an earlier edit only shows up in the data
+  // controller. Editing from the row's copy would bring back the old text.
+  private var statusToEdit: Status {
+    let rowStatus = viewModel.status.reblogAsAsStatus ?? viewModel.status
+    switch statusDataController.status {
+    case let latest as Status where latest.id == rowStatus.id:
+      return latest
+    case let latest as ReblogStatus where latest.id == rowStatus.id:
+      return latest.asStatus
+    default:
+      return rowStatus
+    }
   }
 
   var isQuoteDisabled: Bool {
@@ -201,11 +216,9 @@ struct StatusRowContextMenu: View {
           Button {
             #if targetEnvironment(macCatalyst) || os(visionOS)
               openWindow(
-                value: WindowDestinationEditor.editStatusEditor(
-                  status: viewModel.status.reblogAsAsStatus ?? viewModel.status))
+                value: WindowDestinationEditor.editStatusEditor(status: statusToEdit))
             #else
-              viewModel.routerPath.presentedSheet = .editStatusEditor(
-                status: viewModel.status.reblogAsAsStatus ?? viewModel.status)
+              viewModel.routerPath.presentedSheet = .editStatusEditor(status: statusToEdit)
             #endif
           } label: {
             Label("status.action.edit", systemImage: "pencil")
