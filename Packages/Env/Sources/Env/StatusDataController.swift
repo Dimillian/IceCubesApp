@@ -53,7 +53,7 @@ public final class StatusDataControllerProvider {
 
 @MainActor
 @Observable public final class StatusDataController: StatusDataControlling {
-  private let status: AnyStatus
+  public private(set) var status: AnyStatus
   private let client: MastodonClient
 
   public var isReblogged: Bool
@@ -82,6 +82,10 @@ public final class StatusDataControllerProvider {
   }
 
   public func updateFrom(status: AnyStatus) {
+    // Favoriting through a remote instance returns that instance's copy, which has another id.
+    if status.id == self.status.id {
+      self.status = status
+    }
     isReblogged = status.reblogged == true
     isBookmarked = status.bookmarked == true
     isFavorited = status.favourited == true
