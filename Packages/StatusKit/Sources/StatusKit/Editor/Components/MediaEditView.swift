@@ -179,7 +179,8 @@ extension StatusEditor {
     private func generateDescription(url: URL) async -> String? {
       isGeneratingDescription = true
       let client = OpenAIClient()
-      let response = try? await client.request(.imageDescription(image: url))
+      let response = try? await client.request(
+        .imageDescription(image: url, languageCode: store.selectedLanguage))
       isGeneratingDescription = false
       return response?.trimmedText
     }
