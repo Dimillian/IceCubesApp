@@ -37,26 +37,36 @@ public struct OpenAIClient {
 
     let model = "gpt-4o-mini"
     let messages: [Message]
-    let maxTokens = 50
+    let maxTokens = 150
   }
 
   public enum Prompt {
-    case imageDescription(image: URL)
+    case imageDescription(image: URL, languageCode: String?)
 
     var request: OpenAIRequest {
       switch self {
-      case let .imageDescription(image):
+      case let .imageDescription(image, languageCode):
         VisionRequest(messages: [
           .init(content: [
             .init(
               type: "text",
-              text:
-                "What’s in this image? Be brief, it's for image alt description on a social network. Don't write in the first person.",
+              text: Self.imageDescriptionText(languageCode: languageCode),
               imageUrl: nil),
             .init(type: "image_url", text: nil, imageUrl: .init(url: image)),
           ])
         ])
       }
+    }
+
+    static func imageDescriptionText(languageCode: String?) -> String {
+      var text =
+        "What’s in this image? Be brief, it's for image alt description on a social network. Don't write in the first person."
+      if let languageCode,
+        let language = Locale(identifier: "en").localizedString(forLanguageCode: languageCode)
+      {
+        text += " Write the description in \(language)."
+      }
+      return text
     }
   }
 
