@@ -320,7 +320,9 @@ struct StatusRowActionsView: View {
       || finalStatus.quoteApproval?.currentUser == .denied
     let shouldDisableAction =
       (configuration.trigger == .boost
-        && (finalStatus.visibility == .priv || finalStatus.visibility == .direct))
+        && (finalStatus.visibility == .direct
+          || finalStatus.visibility == .priv
+            && finalStatus.account.id != currentAccount.account?.id))
       || (configuration.trigger == .quote && isQuoteUnavailable)
 
     StatusActionButton(
