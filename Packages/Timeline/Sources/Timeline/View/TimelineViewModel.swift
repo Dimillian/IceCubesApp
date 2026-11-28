@@ -74,6 +74,8 @@ import SwiftUI
     static let fullTimelineFetchMaxPages = fullTimelineFetchLimit / 40
     static let initialPageLimit = 50
     static let nextPageLimit = 40
+    /// Mastodon caps timeline pages at 40, so a page of 40 means there may be more.
+    static let gapPageLimit = 40
     static let emptyFilterAutoPageLimit = 3
   }
 
@@ -458,8 +460,10 @@ extension TimelineViewModel: GapLoadingFetcher {
     visibleStatuses.removeAll(where: { $0.id == status.id })
   }
 
-  func loadGap(gap: TimelineGap) async {
+  func loadGap(gap: TimelineGap, direction: GapFillDirection) async {
     guard let client else { return }
+    // An open-ended gap has no older bound to start from.
+    let direction: GapFillDirection = gap.isOpenEnded ? .fromNewer : direction
 
     // Update gap loading state
     await datasource.updateGapLoadingState(id: gap.id, isLoading: true)
@@ -468,49 +472,98 @@ extension TimelineViewModel: GapLoadingFetcher {
     await updateStatusesState()
 
     do {
-      // Fetch statuses within the gap
-      let statuses: [Status] = try await client.get(
-        endpoint: timeline.endpoint(
-          sinceId: gap.sinceId.isEmpty ? nil : gap.sinceId,
-          maxId: gap.maxId,
-          minId: nil,
-          offset: 0,
-          limit: 50))
+      let fetched = try await statusFetcher.fetchGap(
+        client: client,
+        timeline: timeline,
+        gap: gap,
+        direction: direction,
+        limit: Constants.gapPageLimit)
+
+      // Guard against duplicate ids, which would break the List.
+      let knownIds = Set(await datasource.get().map(\.id))
+      let statuses = fetched.filter { !knownIds.contains($0.id) }
 
       StatusDataControllerProvider.shared.updateDataControllers(for: statuses, client: client)
 
-      // Get the original gap index before replacing
       let items = await datasource.getItems()
-      let gapIndex = items.firstIndex(where: { item in
-        if case .gap(let g) = item {
-          return g.id == gap.id
-        }
-        return false
-      })
+      guard let gapIndex = items.firstIndex(where: { $0.id == gap.id }) else { return }
 
-      // Replace the gap with the fetched statuses
+      // For `.fromOlder` the reader is below the gap: keep the first visible row under it in place.
+      let anchorId: String? =
+        if direction == .fromOlder {
+          await firstFilteredStatusId(below: gap.id)
+        } else {
+          nil
+        }
+
       await datasource.replaceGap(id: gap.id, with: statuses)
 
-      // If we fetched 40 or more statuses, there might be more older statuses
-      // Lower threshold because some instances might not return exactly 50
-      if statuses.count >= 40, let oldestLoadedStatus = statuses.last,
-        let originalGapIndex = gapIndex
+      // A full page means the gap isn't closed yet: keep what's left of it on the far side
+      // of the loaded posts, so the next tap continues in the same direction.
+      if fetched.count >= Constants.gapPageLimit,
+        let newest = statuses.first,
+        let oldest = statuses.last
       {
-        // Create a new gap from the original gap's sinceId to the oldest status we just loaded
-        await createGapForOlderStatuses(
-          sinceId: gap.sinceId.isEmpty ? nil : gap.sinceId,
-          maxId: oldestLoadedStatus.id,
-          at: originalGapIndex + statuses.count
-        )
+        switch direction {
+        case .fromNewer:
+          await createGapForOlderStatuses(
+            sinceId: gap.isOpenEnded ? nil : gap.sinceId,
+            maxId: oldest.id,
+            at: gapIndex + statuses.count)
+        case .fromOlder:
+          await createGapForOlderStatuses(sinceId: newest.id, maxId: gap.maxId, at: gapIndex)
+        }
       }
 
-      // Update the display
-      await updateStatusesStateWithAnimation()
+      await cache()
+
+      if let anchorId {
+        // Posts loaded above the reader haven't been seen yet.
+        let visibleIds = Set(await datasource.getFiltered().map(\.id))
+        addPendingStatuses(statuses.map(\.id).filter { visibleIds.contains($0) })
+        // Same pattern as `updateTimelineWithNewStatuses`: no animation, and the new rows and the
+        // scroll back to the anchor land in the same update.
+        let items = await datasource.getFilteredItems()
+        // While the list jumps back to the anchor, rows that flash by must not mark posts as
+        // read. `gapFillScrollDidSettle()` turns this back on.
+        pendingStatusesObserver.disableUpdate = true
+        scrollToId = anchorId
+        statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
+      } else {
+        await updateStatusesStateWithAnimation()
+      }
     } catch {
       // If loading fails, reset the gap loading state
       await datasource.updateGapLoadingState(id: gap.id, isLoading: false)
       await refreshTimelineContentFilter()
     }
+  }
+
+  /// Call once the list has scrolled back to the anchor after a `.fromOlder` fill.
+  func gapFillScrollDidSettle() {
+    guard pendingStatusesObserver.disableUpdate else { return }
+    pendingStatusesObserver.disableUpdate = false
+    // Rows that are really on screen now were ignored while the list moved.
+    for status in visibleStatuses {
+      pendingStatusesObserver.removeStatus(status: status)
+    }
+  }
+
+  /// The first status row (after content filters) below the gap with `gapId`.
+  private func firstFilteredStatusId(below gapId: String) async -> String? {
+    let items = await datasource.getFilteredItems()
+    guard let gapIndex = items.firstIndex(where: { $0.id == gapId }) else { return nil }
+    return items[(gapIndex + 1)...].lazy.compactMap(\.status).first?.id
+  }
+
+  /// Merges `ids` into the unread list, which is kept newest first.
+  private func addPendingStatuses(_ ids: [String]) {
+    guard !ids.isEmpty else { return }
+    var merged = pendingStatusesObserver.pendingStatuses
+    let existing = Set(merged)
+    merged.append(contentsOf: ids.filter { !existing.contains($0) })
+    merged.sort { $0.compare($1, options: .numeric) == .orderedDescending }
+    pendingStatusesObserver.pendingStatuses = merged
   }
 
   // MARK: - Helper Methods

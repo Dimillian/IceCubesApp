@@ -7,6 +7,7 @@ import SwiftUI
 @MainActor
 public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
   @Environment(Theme.self) private var theme
+  @Environment(TimelineGapScrollState.self) private var gapScrollState: TimelineGapScrollState?
 
   @State private var fetcher: Fetcher
   // Whether this status is on a remote local timeline (many actions are unavailable if so)
@@ -76,6 +77,7 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       makeNextPageRow(nextPageState: nextPageState)
 
     case .displayWithGaps(let items, let nextPageState):
+      let rowsBelowGaps = Self.rowIdsBelowGaps(in: items)
       ForEach(items) { item in
         ZStack {
           switch item {
@@ -95,12 +97,26 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
             .onDisappear {
               fetcher.statusDidDisappear(status: status)
             }
+            .background {
+              if let gapScrollState, rowsBelowGaps.contains(status.id) {
+                GapAnchorGeometryReader(id: status.id, state: gapScrollState)
+              }
+            }
 
           case .gap(let gap):
             ZStack {
               if let gapLoader = fetcher as? GapLoadingFetcher {
-                TimelineGapView(gap: gap) {
-                  await gapLoader.loadGap(gap: gap)
+                let direction = gapScrollState?.fillDirection(for: gap) ?? .fromNewer
+                TimelineGapView(gap: gap, direction: direction) {
+                  if direction == .fromOlder {
+                    gapScrollState?.beginFill(anchorId: Self.rowIdBelow(gapId: gap.id, in: items))
+                  }
+                  await gapLoader.loadGap(gap: gap, direction: direction)
+                }
+                .background {
+                  if let gapScrollState {
+                    GapGeometryReader(id: gap.id, state: gapScrollState)
+                  }
                 }
               }
             }
@@ -131,6 +147,22 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
       }
       makeNextPageRow(nextPageState: nextPageState)
     }
+  }
+
+  /// Ids of the first status row under each gap.
+  private static func rowIdsBelowGaps(in items: [TimelineItem]) -> Set<String> {
+    var ids: Set<String> = []
+    for (item, next) in zip(items, items.dropFirst()) {
+      if case .gap = item, case .status(let status) = next {
+        ids.insert(status.id)
+      }
+    }
+    return ids
+  }
+
+  private static func rowIdBelow(gapId: String, in items: [TimelineItem]) -> String? {
+    guard let index = items.firstIndex(where: { $0.id == gapId }) else { return nil }
+    return items[(index + 1)...].lazy.compactMap(\.status).first?.id
   }
 
   @ViewBuilder
@@ -170,5 +202,34 @@ public struct StatusesListView<Fetcher>: View where Fetcher: StatusesFetcher {
     } else {
       theme.primaryBackgroundColor
     }
+  }
+}
+
+/// Reports the frame of a gap row to the scroll state.
+private struct GapGeometryReader: View {
+  let id: String
+  let state: TimelineGapScrollState
+
+  var body: some View {
+    Color.clear
+      .onGeometryChange(for: CGRect.self) { $0.frame(in: .scrollView) } action: { frame in
+        state.gapFrameChanged(id: id, frame: frame)
+      }
+      .onDisappear {
+        state.gapDisappeared(id: id)
+      }
+  }
+}
+
+/// Reports the frame of the row under a gap, the one to keep in place on a `.fromOlder` fill.
+private struct GapAnchorGeometryReader: View {
+  let id: String
+  let state: TimelineGapScrollState
+
+  var body: some View {
+    Color.clear
+      .onGeometryChange(for: CGRect.self) { $0.frame(in: .scrollView) } action: { frame in
+        state.anchorFrameChanged(id: id, frame: frame)
+      }
   }
 }
