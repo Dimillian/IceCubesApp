@@ -6,6 +6,7 @@ struct TimelineGapView: View {
   @Environment(Theme.self) private var theme
 
   let gap: TimelineGap
+  let direction: GapFillDirection
   let onLoadMore: () async -> Void
 
   var body: some View {
@@ -23,7 +24,8 @@ struct TimelineGapView: View {
             }
           } label: {
             HStack(spacing: 8) {
-              Image(systemName: "arrow.down.circle")
+              Image(systemName: direction == .fromOlder ? "arrow.up.circle" : "arrow.down.circle")
+                .contentTransition(.symbolEffect(.replace))
               Text("Load more")
             }
             .font(.callout)

@@ -29,5 +29,5 @@ public protocol StatusesFetcher: Sendable {
 
 @MainActor
 public protocol GapLoadingFetcher: StatusesFetcher {
-  func loadGap(gap: TimelineGap) async
+  func loadGap(gap: TimelineGap, direction: GapFillDirection) async
 }

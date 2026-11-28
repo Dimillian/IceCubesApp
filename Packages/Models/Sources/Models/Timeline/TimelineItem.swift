@@ -36,3 +36,18 @@ public struct TimelineGap: Identifiable, Equatable, Sendable {
     self.maxId = maxId
   }
 }
+
+/// Which end of a ``TimelineGap`` to fill first.
+public enum GapFillDirection: Sendable, Equatable {
+  /// Load the newest posts of the gap, right below the post above it.
+  /// The rest of the gap stays below the loaded posts.
+  case fromNewer
+  /// Load the oldest posts of the gap, right above the post below it.
+  /// The rest of the gap stays above the loaded posts.
+  case fromOlder
+}
+
+extension TimelineGap {
+  /// `true` when the gap has no older bound ("older posts"), which can only be filled from newer.
+  public var isOpenEnded: Bool { sinceId.isEmpty }
+}
