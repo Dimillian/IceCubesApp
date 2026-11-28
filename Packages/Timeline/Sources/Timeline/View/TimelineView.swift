@@ -116,6 +116,11 @@ public struct TimelineView: View {
         }
       }
       TimelineToolbarTagGroupButton(timeline: $timeline)
+      #if DEBUG
+        ToolbarItem(placement: .navigationBarTrailing) {
+          TimelineDebugGapMenu(viewModel: viewModel)
+        }
+      #endif
     }
     .navigationBarTitleDisplayMode(.inline)
     .onAppear {
