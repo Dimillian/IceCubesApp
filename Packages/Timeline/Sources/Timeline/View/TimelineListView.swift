@@ -78,6 +78,12 @@ struct TimelineListView: View {
           } else {
             proxy.scrollTo(newValue, anchor: .top)
           }
+          if viewModel.pendingStatusesObserver.disableUpdate {
+            // Give the list time to finish moving and report the rows that stay on screen.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+              viewModel.gapFillScrollDidSettle()
+            }
+          }
           viewModel.scrollToId = nil
         }
       }

@@ -64,6 +64,17 @@ struct TimelineGapLoadingTests {
     // Loaded posts sit above the reader, so they count as unread.
     #expect(
       subject.pendingStatusesObserver.pendingStatuses == (11...50).reversed().map(String.init))
+    // Rows passing by while the list jumps back don't mark posts as read...
+    #expect(subject.pendingStatusesObserver.disableUpdate)
+    subject.statusDidAppear(status: status("50"))
+    #expect(subject.pendingStatusesObserver.pendingStatuses.count == 40)
+    subject.statusDidDisappear(status: status("50"))
+    // ...but rows still on screen once it settles do.
+    subject.statusDidAppear(status: status("12"))
+    subject.gapFillScrollDidSettle()
+    #expect(!subject.pendingStatusesObserver.disableUpdate)
+    #expect(
+      subject.pendingStatusesObserver.pendingStatuses == (13...50).reversed().map(String.init))
   }
 
   @Test

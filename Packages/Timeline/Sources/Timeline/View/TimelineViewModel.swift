@@ -524,6 +524,9 @@ extension TimelineViewModel: GapLoadingFetcher {
         // Same pattern as `updateTimelineWithNewStatuses`: no animation, and the new rows and the
         // scroll back to the anchor land in the same update.
         let items = await datasource.getFilteredItems()
+        // While the list jumps back to the anchor, rows that flash by must not mark posts as
+        // read. `gapFillScrollDidSettle()` turns this back on.
+        pendingStatusesObserver.disableUpdate = true
         scrollToId = anchorId
         statusesState = .displayWithGaps(items: items, nextPageState: .hasNextPage)
       } else {
@@ -533,6 +536,16 @@ extension TimelineViewModel: GapLoadingFetcher {
       // If loading fails, reset the gap loading state
       await datasource.updateGapLoadingState(id: gap.id, isLoading: false)
       await refreshTimelineContentFilter()
+    }
+  }
+
+  /// Call once the list has scrolled back to the anchor after a `.fromOlder` fill.
+  func gapFillScrollDidSettle() {
+    guard pendingStatusesObserver.disableUpdate else { return }
+    pendingStatusesObserver.disableUpdate = false
+    // Rows that are really on screen now were ignored while the list moved.
+    for status in visibleStatuses {
+      pendingStatusesObserver.removeStatus(status: status)
     }
   }
 
